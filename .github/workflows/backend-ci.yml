@@ -1,0 +1,53 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  test:
+    name: Lint, Type Check & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodu indir
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: uv kur
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: 'latest'
+
+      - name: Bağımlılıkları yükle
+        run: uv sync --extra dev
+
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      - name: Ruff format kontrolü
+        run: uv run ruff format --check .
+
+      - name: Mypy tip kontrolü
+        run: uv run mypy app/ --ignore-missing-imports
+
+      - name: Testleri çalıştır
+        run: uv run pytest --cov=app --cov-report=term-missing --cov-fail-under=50
+        env:
+          APP_ENV: test
+          DATABASE_URL: postgresql+asyncpg://test:test@localhost:5432/test_db
+          JWT_SECRET_KEY: test-secret-key-for-ci-only

@@ -1,0 +1,81 @@
+[project]
+name = "studyos-backend"
+version = "0.1.0"
+description = "StudyOS REST API — FastAPI backend"
+requires-python = ">=3.12"
+
+dependencies = [
+    # ── Web Framework ────────────────────────────────────────
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+
+    # ── ORM ve Veritabanı ────────────────────────────────────
+    "sqlalchemy>=2.0",
+    "alembic>=1.14",
+    "asyncpg>=0.30",
+
+    # ── Veri Doğrulama ve Konfigürasyon ─────────────────────
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+
+    # ── Kimlik Doğrulama ─────────────────────────────────────
+    "python-jose[cryptography]>=3.3",
+    "passlib[bcrypt]>=1.7",
+
+    # ── E-posta ──────────────────────────────────────────────
+    "fastapi-mail>=1.4",
+
+    # ── Depolama ─────────────────────────────────────────────
+    "boto3>=1.35",
+
+    # ── AI ───────────────────────────────────────────────────
+    "google-generativeai>=0.8",
+
+    # ── Firebase / FCM ───────────────────────────────────────
+    "firebase-admin>=6.5",
+
+    # ── Rate Limiting ────────────────────────────────────────
+    "slowapi>=0.1",
+
+    # ── Monitoring ───────────────────────────────────────────
+    "sentry-sdk[fastapi]>=2.0",
+
+    # ── Yardımcılar ──────────────────────────────────────────
+    "python-multipart>=0.0.9",
+    "httpx>=0.28",
+]
+
+[project.optional-dependencies]
+dev = [
+    # Test
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    # Linting ve Formatlama
+    "ruff>=0.8",
+    "mypy>=1.13",
+    # Tip Stub'ları
+    "types-passlib",
+    "boto3-stubs[s3]",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["*/tests/*", "*/migrations/*"]

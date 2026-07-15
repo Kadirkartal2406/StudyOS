@@ -1,0 +1,76 @@
+name: studyos_mobile
+description: "StudyOS — AI destekli öğrenci çalışma uygulaması (iOS + Android)"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ── State Management ──────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ── Networking ────────────────────────────────────────────
+  dio: ^5.7.0
+  # retrofit: Sprint-1.2'de API client yazılınca eklenecek
+
+  # ── Local Database ────────────────────────────────────────
+  drift: ^2.21.0
+  sqlite3_flutter_libs: ^0.5.24
+
+  # ── Navigation ────────────────────────────────────────────
+  go_router: ^14.6.2
+
+  # ── Secure Storage ────────────────────────────────────────
+  flutter_secure_storage: ^9.2.4
+
+  # ── Firebase / Notifications ──────────────────────────────
+  firebase_core: ^3.9.0
+  firebase_messaging: ^15.1.6
+  firebase_analytics: ^11.3.6
+
+  # ── Monitoring ────────────────────────────────────────────
+  sentry_flutter: ^8.12.0
+
+  # ── UI Yardımcıları ───────────────────────────────────────
+  cached_network_image: ^3.4.1
+  fl_chart: ^0.69.0
+  intl: ^0.19.0
+  gap: ^3.0.1
+
+  # ── Utilities ─────────────────────────────────────────────
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  uuid: ^4.5.1
+  logger: ^2.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # ── Kod Üretimi ───────────────────────────────────────────
+  build_runner: ^2.4.14
+  riverpod_generator: ^2.4.4
+  drift_dev: ^2.21.0
+  freezed: ^2.5.7
+  json_serializable: ^6.9.0
+  # retrofit_generator: Sprint-1.2'de eklenecek
+
+  # ── Test ──────────────────────────────────────────────────
+  mocktail: ^1.0.4
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  # fonts: []  # Google Fonts paketi ile yönetilecek

@@ -1,0 +1,77 @@
+# ─────────────────────────────────────────────
+#  StudyOS — Root .gitignore
+# ─────────────────────────────────────────────
+
+# ── Ortam Değişkenleri (ASLA commit edilmez) ──
+.env
+.env.*
+!.env.example
+
+# ── İşletim Sistemi ──────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── Editör / IDE ──────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*~
+.cursor/
+
+# ── Python / FastAPI ──────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+.uv/
+venv/
+.venv/
+env/
+
+# ── Flutter / Dart ────────────────────────────
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/pubspec.lock
+!backend/uv.lock
+
+# ── Android ──────────────────────────────────
+mobile/android/.gradle/
+mobile/android/captures/
+mobile/android/local.properties
+mobile/android/key.properties
+mobile/android/**/*.keystore
+mobile/android/**/*.jks
+
+# ── iOS / macOS ──────────────────────────────
+mobile/ios/.symlinks/
+mobile/ios/Pods/
+*.ipa
+
+# ── Docker ───────────────────────────────────
+docker-compose.override.yml
+
+# ── Geçici Dosyalar ───────────────────────────
+*.tmp
+*.temp
+*.bak

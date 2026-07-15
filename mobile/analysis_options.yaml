@@ -1,0 +1,17 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # ── Zorunlu Kurallar ──────────────────────────────────
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_fields: true
+    avoid_print: true
+    always_declare_return_types: true
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    use_super_parameters: true
+    # ── Import Düzeni ─────────────────────────────────────
+    directives_ordering: true
+    # ── Null Safety ───────────────────────────────────────
+    avoid_null_checks_in_equality_operators: true
