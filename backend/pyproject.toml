@@ -13,6 +13,7 @@ dependencies = [
     "sqlalchemy>=2.0",
     "alembic>=1.14",
     "asyncpg>=0.30",
+    "psycopg2-binary>=2.9",  # Alembic senkron migration için gereken sürücü
 
     # ── Veri Doğrulama ve Konfigürasyon ─────────────────────
     "pydantic>=2.9",
@@ -21,6 +22,7 @@ dependencies = [
     # ── Kimlik Doğrulama ─────────────────────────────────────
     "python-jose[cryptography]>=3.3",
     "passlib[bcrypt]>=1.7",
+    "bcrypt==4.0.1",  # passlib 1.7.4, bcrypt>=4.1 ile uyumsuz (detect_wrap_bug hatası)
 
     # ── E-posta ──────────────────────────────────────────────
     "fastapi-mail>=1.4",
@@ -74,6 +76,11 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+# Tüm testler aynı event loop'ta çalışır; SQLAlchemy async engine'in
+# asyncpg connection pool'u bir event loop'a bağlıdır ve loop'lar arası
+# paylaşılamaz (bkz. "another operation is in progress" hatası).
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
 testpaths = ["tests"]
 
 [tool.coverage.run]
