@@ -1,0 +1,57 @@
+{
+  "cluster_sizes": {
+    "calculation_heavy": 19,
+    "knowledge_recall": 12,
+    "language_rules": 10,
+    "mixed_general": 11,
+    "reading_heavy": 105,
+    "reasoning_heavy": 37,
+    "spatial_geometry": 6
+  },
+  "checks": [
+    {
+      "cluster": "reading_heavy",
+      "expected_topic": "kpss_turkce__paragraf",
+      "found_in_cluster": true,
+      "actual_cluster": "reading_heavy"
+    },
+    {
+      "cluster": "reading_heavy",
+      "expected_topic": "yds_ingilizce__reading",
+      "found_in_cluster": true,
+      "actual_cluster": "reading_heavy"
+    },
+    {
+      "cluster": "reading_heavy",
+      "expected_topic": "yokdil_ingilizce",
+      "found_in_cluster": true,
+      "actual_cluster": "reading_heavy"
+    },
+    {
+      "cluster": "reading_heavy",
+      "expected_topic": "ydt_ingilizce__reading",
+      "found_in_cluster": true,
+      "actual_cluster": "reading_heavy"
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "expected_topic": "ales_matematik__problemler",
+      "found_in_cluster": true,
+      "actual_cluster": "calculation_heavy"
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "expected_topic": "tyt_matematik__problemler",
+      "found_in_cluster": true,
+      "actual_cluster": "reasoning_heavy"
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "expected_topic": "dgs_matematik__problemler",
+      "found_in_cluster": true,
+      "actual_cluster": "reasoning_heavy"
+    }
+  ],
+  "issues": [],
+  "passed": true
+}

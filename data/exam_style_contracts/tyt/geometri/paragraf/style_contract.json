@@ -1,0 +1,170 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_geometri",
+  "topic_code": "tyt_turkce__paragraf",
+  "subject_slug": "geometri",
+  "topic_slug": "paragraf",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 91.0,
+    "sentence_count": 5.0,
+    "average_reading_time_sec": 48.0,
+    "visual_density": 0.075,
+    "information_density": 0.591,
+    "text_complexity": "medium",
+    "load_band": "very_high",
+    "option_length_avg": 29.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 65.0,
+    "band": "high",
+    "curve_summary": [
+      "medium_easy",
+      "easy",
+      "easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri",
+      "yaklasik_deger",
+      "yakin_anlam",
+      "abarti",
+      "ters_ifade",
+      "eksik_bilgi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "ana_fikir",
+    "intents": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam",
+      "genel_anlama",
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi"
+    ],
+    "exam_defaults": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "cikarim"
+    ],
+    "topic_slug": "paragraf",
+    "subject_slug": "geometri"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "eleme",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.037,
+      "iki_adim": 0.259,
+      "cok_adim": 0.037,
+      "eleme": 0.185,
+      "karsilastirma": 0.148,
+      "hipotez": 0.037,
+      "neden_sonuc": 0.037,
+      "kosul_zinciri": 0.037,
+      "soyutlama": 0.111,
+      "analojik": 0.111
+    },
+    "multi_step_ratio": 0.075,
+    "reasoning_intensity": 0.323
+  },
+  "bloom": {
+    "remember": 0.088,
+    "understand": 0.198,
+    "apply": 0.351,
+    "analyze": 0.254,
+    "evaluate": 0.088,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:ana_fikir",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:birim_hatasi",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 48.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.591
+  },
+  "paragraph_ratio": 0.758,
+  "expected_thinking": "ana_fikir via iki_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 17,
+      "difficulty_avg": 41.1,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 18,
+      "q_to": 34,
+      "difficulty_avg": 39.2,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 35,
+      "q_to": 51,
+      "difficulty_avg": 39.8,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 52,
+      "q_to": 68,
+      "difficulty_avg": 45.4,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 69,
+      "q_to": 88,
+      "difficulty_avg": 49.8,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

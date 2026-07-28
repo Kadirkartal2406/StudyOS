@@ -1,0 +1,18 @@
+{
+  "exam_code": "ags",
+  "subject_code": "ags_turkce",
+  "topic_code": "ags_turkce__paragraf",
+  "sample_size": 40,
+  "paragraph_avg": 0.0,
+  "sentence_avg": 0.0,
+  "difficulty_avg": 48.0,
+  "reading_avg": 18.0,
+  "option_length": 0.0,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "inference",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

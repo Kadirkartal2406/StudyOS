@@ -30,6 +30,25 @@ class LogoutRequest(BaseModel):
     refresh_token: str
 
 
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ForgotPasswordResponse(BaseModel):
+    """Her zaman başarılı görünür (email enumeration önleme)."""
+
+    message: str = "E-posta kayıtlıysa sıfırlama bağlantısı gönderildi"
+    email_sent: bool = False
+    # Yalnızca DEBUG / SMTP yokken — üretimde null
+    dev_reset_token: str | None = None
+    reset_url: str | None = None
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str = Field(min_length=20, max_length=512)
+    new_password: str = Field(min_length=8, max_length=128)
+
+
 class AuthResponse(BaseModel):
     """Register/login başarı yanıtı — Flutter AuthResponseModel ile eşleşir."""
 

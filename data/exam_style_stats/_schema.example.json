@@ -1,0 +1,19 @@
+{
+  "$schema_note": "M26 example — statistical only, no stems/choices.",
+  "exam_code": "kpss",
+  "subject_code": "turkce",
+  "topic_code": "paragraf",
+  "skill_type": "paragraph_inference",
+  "paragraph_avg": 180,
+  "sentence_count_avg": 8,
+  "difficulty_band": "high",
+  "difficulty_distribution": { "easy": 0.15, "medium": 0.4, "hard": 0.45 },
+  "reasoning": "inference",
+  "reading_time_sec_avg": 90,
+  "option_distribution": { "avg_words": 12, "spread": "tight" },
+  "distractor_pattern": "meaning_shift",
+  "vocabulary_level": "formal",
+  "sample_size": 0,
+  "source": "estimated_skeleton",
+  "style_version": "m26_skeleton_v1"
+}

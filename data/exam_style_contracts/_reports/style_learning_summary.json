@@ -1,0 +1,71 @@
+{
+  "contracts_written": 200,
+  "exams": [
+    "ags",
+    "ales",
+    "ayt",
+    "dgs",
+    "kpss",
+    "lgs",
+    "tyt",
+    "yds",
+    "ydt",
+    "yokdil"
+  ],
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 105
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 37
+    },
+    {
+      "cluster": "calculation_heavy",
+      "size": 19
+    },
+    {
+      "cluster": "knowledge_recall",
+      "size": 12
+    },
+    {
+      "cluster": "mixed_general",
+      "size": 11
+    },
+    {
+      "cluster": "language_rules",
+      "size": 10
+    },
+    {
+      "cluster": "spatial_geometry",
+      "size": 6
+    }
+  ],
+  "validation_failures": 0,
+  "validation_issues": [],
+  "similarity_samples": [
+    {
+      "a": "kpss_turkce__paragraf",
+      "b": "yds_ingilizce__reading",
+      "similarity": 0.812
+    },
+    {
+      "a": "kpss_turkce__paragraf",
+      "b": "yokdil_ingilizce__fen",
+      "similarity": 0.784
+    },
+    {
+      "a": "tyt_matematik__problemler",
+      "b": "ales_matematik__problemler",
+      "similarity": 0.689
+    },
+    {
+      "a": "tyt_matematik__problemler",
+      "b": "dgs_matematik__problemler",
+      "similarity": 0.848
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "notes": "No question text stored. Contracts are LLM-facing thinking specs."
+}

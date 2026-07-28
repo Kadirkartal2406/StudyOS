@@ -1,62 +1,147 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/constants/app_config.dart';
 import '../features/auth/domain/entities/auth_user.dart';
 
-/// flutter_secure_storage wrapper.
-/// Access token in-memory (kısa ömürlü, 15 dk), refresh token secure storage'da.
+/// Oturum saklama.
+/// - Mobil: refresh + user → secure storage; access → bellek (+ opsiyonel persist)
+/// - Web: SharedPreferences (secure storage web'de yenilemede düşüyor)
 class LocalStorageService {
   LocalStorageService(this._storage);
 
   final FlutterSecureStorage _storage;
 
-  // ── Access Token (in-memory) ──────────────────────────────
   String? _accessToken;
 
   String? get accessToken => _accessToken;
 
-  void setAccessToken(String token) => _accessToken = token;
+  Future<void> setAccessToken(String token) async {
+    _accessToken = token;
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(AppConfig.accessTokenKey, token);
+    }
+  }
 
-  void clearAccessToken() => _accessToken = null;
+  void clearAccessToken() {
+    _accessToken = null;
+  }
 
-  // ── Refresh Token (secure storage) ───────────────────────
-  Future<void> saveRefreshToken(String token) =>
-      _storage.write(key: AppConfig.refreshTokenKey, value: token);
+  Future<void> restoreAccessToken() async {
+    if (_accessToken != null) return;
+    if (!kIsWeb) return;
+    final prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString(AppConfig.accessTokenKey);
+  }
 
-  Future<String?> getRefreshToken() =>
-      _storage.read(key: AppConfig.refreshTokenKey);
+  Future<void> saveRefreshToken(String token) async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(AppConfig.refreshTokenKey, token);
+      return;
+    }
+    await _storage.write(key: AppConfig.refreshTokenKey, value: token);
+  }
 
-  Future<void> deleteRefreshToken() =>
-      _storage.delete(key: AppConfig.refreshTokenKey);
+  Future<String?> getRefreshToken() async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getString(AppConfig.refreshTokenKey);
+    }
+    return _storage.read(key: AppConfig.refreshTokenKey);
+  }
 
-  // ── Current User (secure storage) ────────────────────────
-  Future<void> saveUser(AuthUser user) => _storage.write(
-        key: AppConfig.currentUserKey,
-        value: jsonEncode(user.toJson()),
-      );
+  Future<void> deleteRefreshToken() async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(AppConfig.refreshTokenKey);
+      return;
+    }
+    await _storage.delete(key: AppConfig.refreshTokenKey);
+  }
+
+  Future<void> saveUser(AuthUser user) async {
+    final raw = jsonEncode(user.toJson());
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(AppConfig.currentUserKey, raw);
+      return;
+    }
+    await _storage.write(key: AppConfig.currentUserKey, value: raw);
+  }
 
   Future<AuthUser?> getUser() async {
-    final raw = await _storage.read(key: AppConfig.currentUserKey);
+    final String? raw;
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      raw = prefs.getString(AppConfig.currentUserKey);
+    } else {
+      raw = await _storage.read(key: AppConfig.currentUserKey);
+    }
     if (raw == null) return null;
     return AuthUser.fromJson(jsonDecode(raw) as Map<String, dynamic>);
   }
 
-  Future<void> deleteUser() =>
-      _storage.delete(key: AppConfig.currentUserKey);
+  Future<void> deleteUser() async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(AppConfig.currentUserKey);
+      return;
+    }
+    await _storage.delete(key: AppConfig.currentUserKey);
+  }
 
-  // ── Oturum Temizleme ──────────────────────────────────────
+  static const firstRunPhaseKey = 'studyos_first_run_phase';
+
+  Future<void> setFirstRunPhase(String phase) async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(firstRunPhaseKey, phase);
+      return;
+    }
+    await _storage.write(key: firstRunPhaseKey, value: phase);
+  }
+
+  Future<String?> getFirstRunPhase() async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getString(firstRunPhaseKey);
+    }
+    return _storage.read(key: firstRunPhaseKey);
+  }
+
+  Future<void> clearFirstRunPhase() async {
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(firstRunPhaseKey);
+      return;
+    }
+    await _storage.delete(key: firstRunPhaseKey);
+  }
+
   Future<void> clearAll() async {
     clearAccessToken();
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(AppConfig.accessTokenKey);
+      await prefs.remove(AppConfig.refreshTokenKey);
+      await prefs.remove(AppConfig.currentUserKey);
+      await prefs.remove(firstRunPhaseKey);
+      return;
+    }
     await deleteRefreshToken();
     await deleteUser();
+    await clearFirstRunPhase();
   }
 
   Future<bool> hasSession() async {
     final token = await getRefreshToken();
-    return token != null;
+    return token != null && token.isNotEmpty;
   }
 }
 

@@ -1,0 +1,170 @@
+{
+  "exam_code": "lgs",
+  "name": "LGS",
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "topic_count": 14,
+  "reading_profile": {
+    "paragraph_length": 76.0,
+    "sentence_count": 3.0,
+    "average_reading_time_sec": 35.4,
+    "visual_density": 0.2,
+    "information_density": 0.435,
+    "text_complexity": "medium",
+    "load_band": "high",
+    "option_length_avg": 1.28,
+    "page_layout": "single_column_or_sparse"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "trap_patterns": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "distractor_style": "plausible_heuristic",
+    "trap_density": "medium"
+  },
+  "bloom": {
+    "remember": 0.104,
+    "understand": 0.653,
+    "apply": 0.121,
+    "analyze": 0.085,
+    "evaluate": 0.01,
+    "create": 0.026
+  },
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 24,
+      "difficulty_avg": 35.2,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 25,
+      "q_to": 48,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 49,
+      "q_to": 72,
+      "difficulty_avg": 33.5,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 73,
+      "q_to": 96,
+      "difficulty_avg": 33.5,
+      "band": "easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 97,
+      "q_to": 120,
+      "difficulty_avg": 57.7,
+      "band": "medium"
+    }
+  ],
+  "intents": {
+    "lgs_cografya__iklim": [
+      "yorumlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "lgs_fen__genel": [
+      "genel_anlama",
+      "uygulama"
+    ],
+    "lgs_kimya__general": [
+      "genel_anlama"
+    ],
+    "lgs_kimya__mol": [
+      "islem",
+      "modelleme",
+      "genel_anlama"
+    ],
+    "lgs_turkce__paragraf": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam"
+    ],
+    "lgs_matematik__problemler": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "lgs_tarih__general": [
+      "genel_anlama"
+    ],
+    "lgs_turkce__dil_bilgisi": [
+      "dil_bilgisi",
+      "yapı",
+      "kural_uygulama",
+      "yazim",
+      "noktalama"
+    ],
+    "lgs_turkce__general": [
+      "genel_anlama"
+    ],
+    "lgs_turkce__noktalama": [
+      "noktalama",
+      "kural_uygulama",
+      "dil_bilgisi",
+      "yazim"
+    ],
+    "unknown__general": [
+      "genel_anlama"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 7
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 3
+    },
+    {
+      "cluster": "mixed_general",
+      "size": 2
+    },
+    {
+      "cluster": "language_rules",
+      "size": 2
+    }
+  ],
+  "notes": "Learned exam thinking profile. No question text."
+}

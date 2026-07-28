@@ -1,0 +1,165 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_turkce",
+  "topic_code": "ales_turkce__paragraf",
+  "subject_slug": "turkce",
+  "topic_slug": "paragraf",
+  "sample_size": 17,
+  "reading_load": {
+    "paragraph_length": 17.2,
+    "sentence_count": 2.65,
+    "average_reading_time_sec": 17.2,
+    "visual_density": 0.03,
+    "information_density": 0.197,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 11.19,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 39.9,
+    "band": "medium",
+    "curve_summary": [
+      "easy",
+      "easy",
+      "medium_easy",
+      "medium_easy",
+      "easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski",
+      "yakin_anlam",
+      "abarti",
+      "ters_ifade",
+      "eksik_bilgi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "ana_fikir",
+    "intents": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "paragraf",
+    "subject_slug": "turkce"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "karsilastirma",
+      "eleme",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.031,
+      "iki_adim": 0.215,
+      "cok_adim": 0.031,
+      "eleme": 0.153,
+      "karsilastirma": 0.184,
+      "hipotez": 0.031,
+      "neden_sonuc": 0.031,
+      "kosul_zinciri": 0.031,
+      "soyutlama": 0.153,
+      "analojik": 0.141
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 1.0
+  },
+  "bloom": {
+    "remember": 0.096,
+    "understand": 0.253,
+    "apply": 0.168,
+    "analyze": 0.406,
+    "evaluate": 0.061,
+    "create": 0.015
+  },
+  "thinking_pattern": [
+    "intent:ana_fikir",
+    "reasoning:iki_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:karsilastirma"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "inference",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 17.2,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.197
+  },
+  "paragraph_ratio": 0.143,
+  "expected_thinking": "ana_fikir via iki_adim under low reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 19,
+      "difficulty_avg": 33.9,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 20,
+      "q_to": 38,
+      "difficulty_avg": 38.3,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 39,
+      "q_to": 57,
+      "difficulty_avg": 40.6,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 58,
+      "q_to": 76,
+      "difficulty_avg": 43.4,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 77,
+      "q_to": 97,
+      "difficulty_avg": 35.2,
+      "band": "easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

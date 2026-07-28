@@ -1,0 +1,10 @@
+? YOKDIL (sosyal)
+80 question
+80 answer key
+3 subjects
+2 topics
+Difficulty avg 46.9
+Paragraph avg 40.9 words
+Reading avg 26.1 sec
+Style Profile Generated
+Metadata OK

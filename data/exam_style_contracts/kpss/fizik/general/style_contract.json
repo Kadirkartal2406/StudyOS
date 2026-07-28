@@ -1,0 +1,150 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_fizik",
+  "topic_code": "kpss_fizik__general",
+  "subject_slug": "fizik",
+  "topic_slug": "general",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 87.0,
+    "sentence_count": 6.0,
+    "average_reading_time_sec": 52.0,
+    "visual_density": 0.033,
+    "information_density": 0.626,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 42.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 75.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "medium",
+      "hard",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade",
+      "kapsam_disi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "ana_fikir",
+      "cikarim",
+      "anlatim",
+      "dil_bilgisi",
+      "hatirlama"
+    ],
+    "topic_slug": "general",
+    "subject_slug": "fizik"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri"
+    ],
+    "distribution": {
+      "tek_adim": 0.05,
+      "iki_adim": 0.05,
+      "cok_adim": 0.4,
+      "eleme": 0.05,
+      "karsilastirma": 0.05,
+      "hipotez": 0.05,
+      "neden_sonuc": 0.05,
+      "kosul_zinciri": 0.2,
+      "soyutlama": 0.05,
+      "analojik": 0.05
+    },
+    "multi_step_ratio": 0.263,
+    "reasoning_intensity": 0.526
+  },
+  "bloom": {
+    "remember": 0.083,
+    "understand": 0.188,
+    "apply": 0.229,
+    "analyze": 0.27,
+    "evaluate": 0.208,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:cok_adim",
+    "trap:yakin_anlam",
+    "trap:abarti",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 52.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.626
+  },
+  "paragraph_ratio": 0.725,
+  "expected_thinking": "genel_anlama via cok_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "band": "easy",
+      "weight": 0.25,
+      "difficulty_avg": 35.0
+    },
+    {
+      "segment": 2,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 55.0
+    },
+    {
+      "segment": 3,
+      "band": "hard",
+      "weight": 0.18,
+      "difficulty_avg": 72.0
+    },
+    {
+      "segment": 4,
+      "band": "very_hard",
+      "weight": 0.12,
+      "difficulty_avg": 85.0
+    },
+    {
+      "segment": 5,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 58.0
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

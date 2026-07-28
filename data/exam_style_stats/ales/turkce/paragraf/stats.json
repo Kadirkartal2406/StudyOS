@@ -1,0 +1,18 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_turkce",
+  "topic_code": "ales_turkce__paragraf",
+  "sample_size": 17,
+  "paragraph_avg": 17.2,
+  "sentence_avg": 2.65,
+  "difficulty_avg": 39.9,
+  "reading_avg": 17.2,
+  "option_length": 11.19,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "inference",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

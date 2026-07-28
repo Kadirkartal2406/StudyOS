@@ -1,0 +1,30 @@
+{
+  "style_version": "m27_6_v1",
+  "contracts_checked": 200,
+  "contract_failures": 0,
+  "hard_failures": 0,
+  "m28_ready": true,
+  "mean_quality_score": 100.0,
+  "exams_present": [
+    "ags",
+    "ales",
+    "ayt",
+    "dgs",
+    "kpss",
+    "lgs",
+    "tyt",
+    "yds",
+    "ydt",
+    "yokdil"
+  ],
+  "exams_missing": [],
+  "artifacts": {
+    "summary": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\summary.json",
+    "quality_scores": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\quality_scores.json",
+    "cluster_report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\cluster_report.json",
+    "similarity_report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\similarity_report.json",
+    "difficulty_report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\difficulty_report.json",
+    "warnings": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\warnings.json",
+    "validation_md": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\style_validation\\validation.md"
+  }
+}

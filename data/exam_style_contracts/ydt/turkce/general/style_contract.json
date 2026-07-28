@@ -1,0 +1,156 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_turkce",
+  "topic_code": "ydt_turkce__general",
+  "subject_slug": "turkce",
+  "topic_slug": "general",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 36.0,
+    "sentence_count": 9.0,
+    "average_reading_time_sec": 26.0,
+    "visual_density": 0.025,
+    "information_density": 0.585,
+    "text_complexity": "high",
+    "load_band": "low",
+    "option_length_avg": 6.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 48.0,
+    "band": "medium",
+    "curve_summary": [
+      "easy",
+      "medium",
+      "hard",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi",
+      "islem_hatasi",
+      "eksik_veri"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "problem",
+    "intents": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "exam_defaults": [
+      "reading",
+      "cikarim",
+      "kelime",
+      "baglam"
+    ],
+    "topic_slug": "general",
+    "subject_slug": "turkce"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim",
+      "eleme",
+      "neden_sonuc",
+      "kosul_zinciri",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.276,
+      "iki_adim": 0.034,
+      "cok_adim": 0.034,
+      "eleme": 0.138,
+      "karsilastirma": 0.034,
+      "hipotez": 0.069,
+      "neden_sonuc": 0.138,
+      "kosul_zinciri": 0.138,
+      "soyutlama": 0.034,
+      "analojik": 0.103
+    },
+    "multi_step_ratio": 0.037,
+    "reasoning_intensity": 1.0
+  },
+  "bloom": {
+    "remember": 0.066,
+    "understand": 0.232,
+    "apply": 0.265,
+    "analyze": 0.353,
+    "evaluate": 0.066,
+    "create": 0.017
+  },
+  "thinking_pattern": [
+    "intent:problem",
+    "reasoning:tek_adim",
+    "trap:yakin_anlam",
+    "trap:ters_ifade",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "academic_en",
+    "skill_type": "problem_solving",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 26.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.585
+  },
+  "paragraph_ratio": 0.3,
+  "expected_thinking": "problem via tek_adim under low reading load",
+  "cluster": "reasoning_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "band": "easy",
+      "weight": 0.25,
+      "difficulty_avg": 35.0
+    },
+    {
+      "segment": 2,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 55.0
+    },
+    {
+      "segment": 3,
+      "band": "hard",
+      "weight": 0.18,
+      "difficulty_avg": 72.0
+    },
+    {
+      "segment": 4,
+      "band": "very_hard",
+      "weight": 0.12,
+      "difficulty_avg": 85.0
+    },
+    {
+      "segment": 5,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 58.0
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

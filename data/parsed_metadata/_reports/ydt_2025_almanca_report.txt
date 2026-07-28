@@ -1,0 +1,10 @@
+2025 YDT (ydt)
+80 question
+80 answer key
+4 subjects
+2 topics
+Difficulty avg 48.7
+Paragraph avg 40.8 words
+Reading avg 27.4 sec
+Style Profile Generated
+Metadata OK

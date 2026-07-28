@@ -1,0 +1,165 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_edebiyat",
+  "topic_code": "ales_matematik__problemler",
+  "subject_slug": "edebiyat",
+  "topic_slug": "problemler",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 70.0,
+    "sentence_count": 3.0,
+    "average_reading_time_sec": 39.0,
+    "visual_density": 0.03,
+    "information_density": 0.413,
+    "text_complexity": "medium",
+    "load_band": "high",
+    "option_length_avg": 12.8,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 55.0,
+    "band": "medium_high",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski",
+      "islem_hatasi",
+      "birim_hatasi",
+      "eksik_veri"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "problem",
+    "intents": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "problemler",
+    "subject_slug": "edebiyat"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "neden_sonuc",
+      "kosul_zinciri",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.035,
+      "iki_adim": 0.245,
+      "cok_adim": 0.035,
+      "eleme": 0.035,
+      "karsilastirma": 0.105,
+      "hipotez": 0.07,
+      "neden_sonuc": 0.14,
+      "kosul_zinciri": 0.14,
+      "soyutlama": 0.105,
+      "analojik": 0.091
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.086,
+    "understand": 0.194,
+    "apply": 0.344,
+    "analyze": 0.269,
+    "evaluate": 0.086,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:problem",
+    "reasoning:iki_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:neden_sonuc"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 39.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.413
+  },
+  "paragraph_ratio": 0.583,
+  "expected_thinking": "problem via iki_adim under high reading load",
+  "cluster": "calculation_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 35,
+      "difficulty_avg": 43.2,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 36,
+      "q_to": 70,
+      "difficulty_avg": 43.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 71,
+      "q_to": 105,
+      "difficulty_avg": 46.1,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 106,
+      "q_to": 140,
+      "difficulty_avg": 49.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 141,
+      "q_to": 178,
+      "difficulty_avg": 55.1,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

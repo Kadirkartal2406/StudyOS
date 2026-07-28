@@ -1,0 +1,18 @@
+{
+  "exam_code": "yokdil",
+  "subject_code": "yokdil_ingilizce",
+  "topic_code": "yokdil_ingilizce__saglik",
+  "sample_size": 77,
+  "paragraph_avg": 38.9,
+  "sentence_avg": 2.52,
+  "difficulty_avg": 45.7,
+  "reading_avg": 25.2,
+  "option_length": 7.89,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "reading_comprehension",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

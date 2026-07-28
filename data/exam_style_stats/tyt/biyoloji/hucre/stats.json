@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_biyoloji",
+  "topic_code": "tyt_biyoloji__hucre",
+  "sample_size": 7,
+  "paragraph_avg": 10.7,
+  "sentence_avg": 1.14,
+  "difficulty_avg": 51.0,
+  "reading_avg": 17.0,
+  "option_length": 1.97,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "recall",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

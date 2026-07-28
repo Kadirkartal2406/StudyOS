@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_kimya",
+  "topic_code": "tyt_kimya__mol",
+  "sample_size": 8,
+  "paragraph_avg": 10.2,
+  "sentence_avg": 1.12,
+  "difficulty_avg": 56.0,
+  "reading_avg": 15.0,
+  "option_length": 4.94,
+  "reasoning_avg": 0.875,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

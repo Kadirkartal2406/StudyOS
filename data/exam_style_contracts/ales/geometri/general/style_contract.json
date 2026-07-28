@@ -1,0 +1,155 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_geometri",
+  "topic_code": "ales_geometri__general",
+  "subject_slug": "geometri",
+  "topic_slug": "general",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 64.0,
+    "sentence_count": 8.0,
+    "average_reading_time_sec": 40.0,
+    "visual_density": 0.03,
+    "information_density": 0.64,
+    "text_complexity": "high",
+    "load_band": "high",
+    "option_length_avg": 62.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 73.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "medium",
+      "hard",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama",
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "general",
+    "subject_slug": "geometri"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.039,
+      "iki_adim": 0.039,
+      "cok_adim": 0.312,
+      "eleme": 0.039,
+      "karsilastirma": 0.117,
+      "hipotez": 0.039,
+      "neden_sonuc": 0.039,
+      "kosul_zinciri": 0.156,
+      "soyutlama": 0.117,
+      "analojik": 0.102
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.084,
+    "understand": 0.189,
+    "apply": 0.232,
+    "analyze": 0.263,
+    "evaluate": 0.21,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:cok_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 40.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.64
+  },
+  "paragraph_ratio": 0.533,
+  "expected_thinking": "genel_anlama via cok_adim under high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "band": "easy",
+      "weight": 0.25,
+      "difficulty_avg": 35.0
+    },
+    {
+      "segment": 2,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 55.0
+    },
+    {
+      "segment": 3,
+      "band": "hard",
+      "weight": 0.18,
+      "difficulty_avg": 72.0
+    },
+    {
+      "segment": 4,
+      "band": "very_hard",
+      "weight": 0.12,
+      "difficulty_avg": 85.0
+    },
+    {
+      "segment": 5,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 58.0
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

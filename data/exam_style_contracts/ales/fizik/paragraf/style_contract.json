@@ -1,0 +1,167 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_fizik",
+  "topic_code": "ales_turkce__paragraf",
+  "subject_slug": "fizik",
+  "topic_slug": "paragraf",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 124.0,
+    "sentence_count": 7.0,
+    "average_reading_time_sec": 57.0,
+    "visual_density": 0.03,
+    "information_density": 0.815,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 122.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 79.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "easy",
+      "medium_easy",
+      "medium_easy",
+      "easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski",
+      "yakin_anlam",
+      "abarti",
+      "ters_ifade",
+      "eksik_bilgi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "ana_fikir",
+    "intents": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "paragraf",
+    "subject_slug": "fizik"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "karsilastirma",
+      "eleme",
+      "soyutlama",
+      "analojik",
+      "kosul_zinciri"
+    ],
+    "distribution": {
+      "tek_adim": 0.027,
+      "iki_adim": 0.027,
+      "cok_adim": 0.219,
+      "eleme": 0.137,
+      "karsilastirma": 0.164,
+      "hipotez": 0.027,
+      "neden_sonuc": 0.027,
+      "kosul_zinciri": 0.109,
+      "soyutlama": 0.137,
+      "analojik": 0.126
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.084,
+    "understand": 0.189,
+    "apply": 0.232,
+    "analyze": 0.263,
+    "evaluate": 0.21,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:ana_fikir",
+    "reasoning:cok_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:karsilastirma"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 57.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.815
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "ana_fikir via cok_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 19,
+      "difficulty_avg": 33.9,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 20,
+      "q_to": 38,
+      "difficulty_avg": 38.3,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 39,
+      "q_to": 57,
+      "difficulty_avg": 40.6,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 58,
+      "q_to": 76,
+      "difficulty_avg": 43.4,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 77,
+      "q_to": 97,
+      "difficulty_avg": 35.2,
+      "band": "easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

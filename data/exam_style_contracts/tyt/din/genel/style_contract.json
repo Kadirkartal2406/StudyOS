@@ -1,0 +1,156 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_din",
+  "topic_code": "tyt_din__genel",
+  "subject_slug": "din",
+  "topic_slug": "genel",
+  "sample_size": 5,
+  "reading_load": {
+    "paragraph_length": 18.9,
+    "sentence_count": 2.12,
+    "average_reading_time_sec": 12.0,
+    "visual_density": 0.075,
+    "information_density": 0.177,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 10.04,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 48.0,
+    "band": "medium",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri",
+      "yaklasik_deger"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama",
+      "uygulama",
+      "hatirlama",
+      "tanim"
+    ],
+    "exam_defaults": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "cikarim"
+    ],
+    "topic_slug": "genel",
+    "subject_slug": "din"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.471,
+      "iki_adim": 0.059,
+      "cok_adim": 0.059,
+      "eleme": 0.059,
+      "karsilastirma": 0.059,
+      "hipotez": 0.059,
+      "neden_sonuc": 0.059,
+      "kosul_zinciri": 0.059,
+      "soyutlama": 0.059,
+      "analojik": 0.059
+    },
+    "multi_step_ratio": 0.075,
+    "reasoning_intensity": 0.323
+  },
+  "bloom": {
+    "remember": 0.162,
+    "understand": 0.252,
+    "apply": 0.288,
+    "analyze": 0.208,
+    "evaluate": 0.072,
+    "create": 0.018
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:tek_adim",
+    "trap:islem_hatasi",
+    "trap:birim_hatasi"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "recall",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 12.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.177
+  },
+  "paragraph_ratio": 0.111,
+  "expected_thinking": "genel_anlama via tek_adim under low reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 3,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 4,
+      "q_to": 6,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 7,
+      "q_to": 9,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 10,
+      "q_to": 12,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 13,
+      "q_to": 15,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

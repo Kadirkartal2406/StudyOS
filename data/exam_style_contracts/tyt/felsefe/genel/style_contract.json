@@ -1,0 +1,164 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_felsefe",
+  "topic_code": "tyt_felsefe__genel",
+  "subject_slug": "felsefe",
+  "topic_slug": "genel",
+  "sample_size": 5,
+  "reading_load": {
+    "paragraph_length": 18.9,
+    "sentence_count": 2.12,
+    "average_reading_time_sec": 12.0,
+    "visual_density": 0.075,
+    "information_density": 0.177,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 10.04,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 48.0,
+    "band": "medium",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri",
+      "yaklasik_deger",
+      "yanlis_cikarim",
+      "abarti"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama",
+      "uygulama",
+      "cikarim",
+      "ana_fikir",
+      "baglam"
+    ],
+    "exam_defaults": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "cikarim"
+    ],
+    "topic_slug": "genel",
+    "subject_slug": "felsefe"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim",
+      "eleme",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.286,
+      "iki_adim": 0.036,
+      "cok_adim": 0.036,
+      "eleme": 0.179,
+      "karsilastirma": 0.143,
+      "hipotez": 0.036,
+      "neden_sonuc": 0.036,
+      "kosul_zinciri": 0.036,
+      "soyutlama": 0.107,
+      "analojik": 0.107
+    },
+    "multi_step_ratio": 0.075,
+    "reasoning_intensity": 1.0
+  },
+  "bloom": {
+    "remember": 0.043,
+    "understand": 0.251,
+    "apply": 0.243,
+    "analyze": 0.388,
+    "evaluate": 0.061,
+    "create": 0.015
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:tek_adim",
+    "trap:islem_hatasi",
+    "trap:birim_hatasi",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "inference",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 12.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.177
+  },
+  "paragraph_ratio": 0.111,
+  "expected_thinking": "genel_anlama via tek_adim under low reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 3,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 4,
+      "q_to": 6,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 7,
+      "q_to": 9,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 10,
+      "q_to": 12,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 13,
+      "q_to": 15,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -5,7 +5,7 @@
 **Oluşturuldu:** 2026-07-06 — Meeting-007  
 **Güncelleme Tarihi:** 2026-07-06 — Meeting-007 açık sorular kapatıldı  
 **Dil:** Türkçe  
-**Kaynak Belgeler:** `docs/architecture/technology-decisions.md`, `docs/planning/feature-matrix.md`
+**Kaynak Belgeler:** `docs/architecture/technology-decisions.md`, `docs/planning/feature-matrix.md`, `docs/product/product-vision.md`
 
 > Bu belge geliştirme başlamadan önceki nihai mimari tasarımı içerir.  
 > Değişiklik için yeni bir toplantı ve proje sahibi onayı gerekir.
@@ -151,8 +151,15 @@ studyos_mobile/
 │   │   │       ├── screens/         # login_screen.dart, register_screen.dart
 │   │   │       └── widgets/         # login_form.dart, auth_button.dart
 │   │   │
-│   │   ├── dashboard/               # Ana sayfa ve genel görünüm
+│   │   ├── dashboard/               # Journey Hub (S-37, Sprint-3.1.B) — Hero + LayoutStrategy
+│   │   ├── subjects/                # Subject Hub (S-38) + Topic List (Sprint-3.2.A)
 │   │   ├── study_plan/              # Günlük çalışma planı (S-06)
+│   │   ├── study_resources/         # Öğrenme kaynakları (S-31, Sprint-2.5)
+│   │   ├── exam_tracking/           # Deneme sınavı takibi (S-13, Sprint-2.6)
+│   │   ├── adaptive_planner/        # Adaptive Study Planner (S-07, Sprint-2.7)
+│   │   ├── revision/                # Yanlış defteri + SRS (S-11/S-12, Sprint-2.8)
+│   │   ├── achievements/            # Achievement Engine (S-33, Sprint-2.9)
+│   │   ├── onboarding/              # Learning Profile + Onboarding (S-34, Sprint-3.0)
 │   │   ├── subject_tracker/         # Konu ve soru takibi (S-08, S-09)
 │   │   ├── pomodoro/                # Pomodoro zamanlayıcı (S-10)
 │   │   ├── statistics/              # İstatistik ve grafikler (S-14)
@@ -229,6 +236,8 @@ studyos_backend/
 │   │   ├── teacher.py
 │   │   ├── class_.py
 │   │   ├── study_plan.py
+│   │   ├── study_resource.py        # Öğrenme kaynakları (Sprint-2.5)
+│   │   ├── exam.py                  # Deneme takibi (Sprint-2.6)
 │   │   ├── subject.py
 │   │   ├── exam.py
 │   │   ├── question_stat.py
@@ -242,6 +251,7 @@ studyos_backend/
 │   │   ├── student.py
 │   │   ├── institution.py
 │   │   ├── study_plan.py
+│   │   ├── study_resource.py
 │   │   ├── subject.py
 │   │   ├── exam.py
 │   │   ├── notification.py
@@ -253,6 +263,7 @@ studyos_backend/
 │   │   ├── student_repository.py
 │   │   ├── institution_repository.py
 │   │   ├── study_plan_repository.py
+│   │   ├── study_resource_repository.py
 │   │   ├── exam_repository.py
 │   │   └── notification_repository.py
 │   │
@@ -262,6 +273,7 @@ studyos_backend/
 │   │   ├── student_service.py
 │   │   ├── institution_service.py
 │   │   ├── study_plan_service.py
+│   │   ├── study_resource_service.py
 │   │   ├── exam_service.py
 │   │   ├── notification_service.py
 │   │   ├── storage_service.py       # S3 presigned URL üretimi
@@ -275,6 +287,12 @@ studyos_backend/
 │   │       ├── students.py          # /api/v1/students/*
 │   │       ├── institutions.py      # /api/v1/institutions/*
 │   │       ├── study_plans.py       # /api/v1/study-plans/*
+│   │       ├── resources.py         # /api/v1/resources/* (Sprint-2.5)
+│   │       ├── exams.py             # /api/v1/exams/* (Sprint-2.6 S-13)
+│   │       ├── planner.py           # /api/v1/planner/* (Sprint-2.7 S-07)
+│   │       ├── revisions.py         # /api/v1/revisions/* (Sprint-2.8 S-11/S-12)
+│   │       ├── achievements.py      # /api/v1/achievements/* (Sprint-2.9 S-33)
+│   │       ├── learning_profile.py  # /api/v1/learning-profile/* (Sprint-3.0 S-34)
 │   │       ├── subjects.py          # /api/v1/subjects/*
 │   │       ├── exams.py             # /api/v1/exams/*
 │   │       ├── statistics.py        # /api/v1/statistics/*
@@ -290,9 +308,13 @@ studyos_backend/
 │   │
 │   └── providers/                   # Dış servis adaptörleri
 │       ├── ai/
-│       │   ├── base.py              # AIProvider abstract sınıfı
-│       │   ├── gemini_provider.py   # GeminiProvider implementasyonu
-│       │   └── openai_provider.py   # OpenAIProvider implementasyonu (ileride)
+│       │   ├── base.py              # AIProvider + NullAIProvider + factory
+│       │   ├── gemini_provider.py   # GeminiProvider httpx (Sprint-2.4)
+│       │   ├── openai_provider.py   # OpenAIProvider httpx
+│       │   ├── claude_provider.py   # ClaudeProvider httpx
+│       │   └── http_transport.py    # timeout/retry (key log yok)
+│       # services/ai/: ContextBuilder v2 (+ achievements Sprint-2.9), PromptBuilder,
+│       # Memory*, ConversationSummary (J1 pasif); achievement_rule_engine + catalog (S-33)
 │       ├── storage/
 │       │   └── s3_provider.py       # AWS S3 boto3 işlemleri
 │       └── notification/
@@ -548,3 +570,5 @@ Yapısal değişiklikler:
 | Sürüm | Tarih | Değişiklik |
 |-------|-------|-----------|
 | 1.0 | 2026-07-06 | İlk sürüm — Meeting-007 |
+| 1.2 | 2026-07-18 | Sprint-3.1.B — Dashboard = Journey Hub; Layout Strategy; Primary≠Active; AI tip reason (LLM Explain 3.1.D) |
+| 1.3 | 2026-07-19 | Product Vision Reset — `docs/product/product-vision.md` SSOT; Topic-first / Today OS roadmap |

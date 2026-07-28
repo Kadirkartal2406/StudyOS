@@ -1,0 +1,10 @@
+? YOKDIL (saglik)
+80 question
+80 answer key
+3 subjects
+2 topics
+Difficulty avg 46.8
+Paragraph avg 44.2 words
+Reading avg 27.3 sec
+Style Profile Generated
+Metadata OK

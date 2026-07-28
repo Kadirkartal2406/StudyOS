@@ -45,6 +45,10 @@ dependencies = [
     # ── Yardımcılar ──────────────────────────────────────────
     "python-multipart>=0.0.9",
     "httpx>=0.28",
+    "reportlab>=4.2",
+
+    # ── Official Exam Intelligence (M27) — heuristic PDF stats only ──
+    "pypdf>=5.0",
 ]
 
 [project.optional-dependencies]

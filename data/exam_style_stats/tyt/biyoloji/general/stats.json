@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_biyoloji",
+  "topic_code": "tyt_biyoloji__general",
+  "sample_size": 1,
+  "paragraph_avg": 104.0,
+  "sentence_avg": 11.0,
+  "difficulty_avg": 73.0,
+  "reading_avg": 60.0,
+  "option_length": 19.6,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

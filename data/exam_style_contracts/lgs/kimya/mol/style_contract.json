@@ -1,0 +1,123 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_kimya",
+  "topic_code": "lgs_kimya__mol",
+  "subject_slug": "kimya",
+  "topic_slug": "mol",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 124.0,
+    "sentence_count": 9.0,
+    "average_reading_time_sec": 62.0,
+    "visual_density": 0.2,
+    "information_density": 0.915,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 8.5,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 74.0,
+    "band": "high",
+    "curve_summary": [
+      "hard"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma",
+      "oran_hatasi"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma",
+      "oran_hatasi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "islem",
+    "intents": [
+      "islem",
+      "modelleme",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "mol",
+    "subject_slug": "kimya"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri",
+      "neden_sonuc"
+    ],
+    "distribution": {
+      "tek_adim": 0.037,
+      "iki_adim": 0.037,
+      "cok_adim": 0.296,
+      "eleme": 0.037,
+      "karsilastirma": 0.037,
+      "hipotez": 0.074,
+      "neden_sonuc": 0.148,
+      "kosul_zinciri": 0.259,
+      "soyutlama": 0.037,
+      "analojik": 0.037
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "bloom": {
+    "remember": 0.087,
+    "understand": 0.196,
+    "apply": 0.239,
+    "analyze": 0.239,
+    "evaluate": 0.217,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:islem",
+    "reasoning:cok_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 62.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.915
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "islem via cok_adim under very_high reading load",
+  "cluster": "reasoning_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 74.0,
+      "band": "hard"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_kimya",
+  "topic_code": "ayt_kimya__mol",
+  "sample_size": 5,
+  "paragraph_avg": 31.2,
+  "sentence_avg": 5.6,
+  "difficulty_avg": 41.0,
+  "reading_avg": 22.2,
+  "option_length": 7.02,
+  "reasoning_avg": 0.8,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

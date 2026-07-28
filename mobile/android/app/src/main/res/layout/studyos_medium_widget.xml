@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_background">
+
+    <TextView
+        android:id="@+id/widget_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="StudyOS" />
+
+    <TextView
+        android:id="@+id/widget_study_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#E0E7FF"
+        android:textSize="13sp"
+        tools:text="Bugün: 45 dk / Hedef: 120 dk (38%)" />
+
+    <TextView
+        android:id="@+id/widget_plan_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="#C7D2FE"
+        android:textSize="12sp"
+        tools:text="Matematik — Türev" />
+
+    <TextView
+        android:id="@+id/widget_pomodoro_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#A5B4FC"
+        android:textSize="12sp"
+        tools:text="Pomodoro yok" />
+
+    <TextView
+        android:id="@+id/widget_goal_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#A5B4FC"
+        android:textSize="12sp"
+        tools:text="Hedef: 42%" />
+</LinearLayout>

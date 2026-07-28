@@ -1,0 +1,161 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_turkce",
+  "topic_code": "ales_turkce__dil_bilgisi",
+  "subject_slug": "turkce",
+  "topic_slug": "dil_bilgisi",
+  "sample_size": 3,
+  "reading_load": {
+    "paragraph_length": 133.3,
+    "sentence_count": 7.33,
+    "average_reading_time_sec": 70.0,
+    "visual_density": 0.03,
+    "information_density": 0.866,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 25.47,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 72.3,
+    "band": "high",
+    "curve_summary": [
+      "medium",
+      "medium",
+      "medium",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "dil_bilgisi",
+    "intents": [
+      "dil_bilgisi",
+      "yapı",
+      "kural_uygulama",
+      "yazim",
+      "noktalama"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "dil_bilgisi",
+    "subject_slug": "turkce"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.039,
+      "iki_adim": 0.039,
+      "cok_adim": 0.312,
+      "eleme": 0.039,
+      "karsilastirma": 0.117,
+      "hipotez": 0.039,
+      "neden_sonuc": 0.039,
+      "kosul_zinciri": 0.156,
+      "soyutlama": 0.117,
+      "analojik": 0.102
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.084,
+    "understand": 0.189,
+    "apply": 0.232,
+    "analyze": 0.263,
+    "evaluate": 0.21,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:dil_bilgisi",
+    "reasoning:cok_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "language_rules",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 70.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.866
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "dil_bilgisi via cok_adim under very_high reading load",
+  "cluster": "language_rules",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 59.0,
+      "band": "medium"
+    },
+    {
+      "segment": 2,
+      "q_from": 2,
+      "q_to": 2,
+      "difficulty_avg": 69.0,
+      "band": "medium"
+    },
+    {
+      "segment": 3,
+      "q_from": 3,
+      "q_to": 3,
+      "difficulty_avg": 63.0,
+      "band": "medium"
+    },
+    {
+      "segment": 4,
+      "q_from": 4,
+      "q_to": 4,
+      "difficulty_avg": 85.0,
+      "band": "very_hard"
+    },
+    {
+      "segment": 5,
+      "q_from": 5,
+      "q_to": 6,
+      "difficulty_avg": 59.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

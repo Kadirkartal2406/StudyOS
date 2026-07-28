@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_geometri",
+  "topic_code": "ayt_fizik__hareket",
+  "sample_size": 1,
+  "paragraph_avg": 114.0,
+  "sentence_avg": 8.0,
+  "difficulty_avg": 83.0,
+  "reading_avg": 59.0,
+  "option_length": 112.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

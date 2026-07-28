@@ -1,0 +1,18 @@
+{
+  "exam_code": "yds",
+  "subject_code": "yds_matematik",
+  "topic_code": "yds_matematik__problemler",
+  "sample_size": 4,
+  "paragraph_avg": 98.0,
+  "sentence_avg": 4.0,
+  "difficulty_avg": 62.5,
+  "reading_avg": 52.5,
+  "option_length": 14.6,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

@@ -1,7 +1,7 @@
 name: studyos_mobile
 description: "StudyOS — AI destekli öğrenci çalışma uygulaması (iOS + Android)"
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.23.0+23
 
 environment:
   sdk: '>=3.6.0 <4.0.0'
@@ -32,6 +32,8 @@ dependencies:
   firebase_core: ^3.9.0
   firebase_messaging: ^15.1.6
   firebase_analytics: ^11.3.6
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
 
   # ── Monitoring ────────────────────────────────────────────
   sentry_flutter: ^8.12.0
@@ -41,12 +43,18 @@ dependencies:
   fl_chart: ^0.69.0
   intl: ^0.19.0
   gap: ^3.0.1
+  google_fonts: ^6.2.1
 
   # ── Utilities ─────────────────────────────────────────────
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   uuid: ^4.5.1
   logger: ^2.5.0
+  home_widget: ^0.9.2+1
+  permission_handler: ^12.0.3
+  quick_actions: ^1.1.0
+  shared_preferences: ^2.5.3
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

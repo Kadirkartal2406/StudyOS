@@ -1,0 +1,143 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "unknown",
+  "topic_code": "unknown__general",
+  "subject_slug": "unknown",
+  "topic_slug": "general",
+  "sample_size": 19,
+  "reading_load": {
+    "paragraph_length": 2.2,
+    "sentence_count": 2.0,
+    "average_reading_time_sec": 5.0,
+    "visual_density": 0.2,
+    "information_density": 0.108,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 1.28,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 32.0,
+    "band": "medium",
+    "curve_summary": [
+      "easy",
+      "medium",
+      "hard",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "medium"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "general",
+    "subject_slug": "unknown"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.471,
+      "iki_adim": 0.059,
+      "cok_adim": 0.059,
+      "eleme": 0.059,
+      "karsilastirma": 0.059,
+      "hipotez": 0.059,
+      "neden_sonuc": 0.059,
+      "kosul_zinciri": 0.059,
+      "soyutlama": 0.059,
+      "analojik": 0.059
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "bloom": {
+    "remember": 0.18,
+    "understand": 0.28,
+    "apply": 0.22,
+    "analyze": 0.22,
+    "evaluate": 0.08,
+    "create": 0.02
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:tek_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 5.0,
+  "option_balance": "short",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.108
+  },
+  "paragraph_ratio": 0.018,
+  "expected_thinking": "genel_anlama via tek_adim under low reading load",
+  "cluster": "mixed_general",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "band": "easy",
+      "weight": 0.25,
+      "difficulty_avg": 35.0
+    },
+    {
+      "segment": 2,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 55.0
+    },
+    {
+      "segment": 3,
+      "band": "hard",
+      "weight": 0.18,
+      "difficulty_avg": 72.0
+    },
+    {
+      "segment": 4,
+      "band": "very_hard",
+      "weight": 0.12,
+      "difficulty_avg": 85.0
+    },
+    {
+      "segment": 5,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 58.0
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "tested": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped_missing_topics": [],
+  "results": [
+    {
+      "a": "kpss_turkce__paragraf",
+      "b": "yds_ingilizce__reading",
+      "expectation": "high",
+      "score": 0.812,
+      "allowed_range": [
+        0.55,
+        1.0
+      ],
+      "passed": true,
+      "gate": "absolute"
+    },
+    {
+      "a": "kpss_turkce__paragraf",
+      "b": "tyt_geometri__ucgenler",
+      "expectation": "low",
+      "score": 0.691,
+      "allowed_range": [
+        0.0,
+        0.75
+      ],
+      "passed": true,
+      "gate": "absolute"
+    },
+    {
+      "a": "ales_matematik__problemler",
+      "b": "tyt_matematik__problemler",
+      "expectation": "high",
+      "score": 0.689,
+      "allowed_range": [
+        0.55,
+        1.0
+      ],
+      "passed": true,
+      "gate": "absolute"
+    },
+    {
+      "a": "yds_ingilizce__reading",
+      "b": "ayt_fizik__hareket",
+      "expectation": "very_low",
+      "score": 0.667,
+      "allowed_range": [
+        0.0,
+        0.72
+      ],
+      "passed": true,
+      "gate": "absolute"
+    },
+    {
+      "a": "kpss_turkce__paragraf",
+      "b": "yokdil_ingilizce__fen",
+      "expectation": "high",
+      "score": 0.784,
+      "allowed_range": [
+        0.5,
+        1.0
+      ],
+      "passed": true,
+      "gate": "absolute"
+    },
+    {
+      "a": "tyt_matematik__problemler",
+      "b": "dgs_matematik__problemler",
+      "expectation": "high",
+      "score": 0.848,
+      "allowed_range": [
+        0.55,
+        1.0
+      ],
+      "passed": true,
+      "gate": "absolute"
+    }
+  ],
+  "unexpected": [],
+  "relative_results": [
+    {
+      "higher_pair": [
+        "kpss_turkce__paragraf",
+        "yds_ingilizce__reading"
+      ],
+      "lower_pair": [
+        "kpss_turkce__paragraf",
+        "tyt_geometri__ucgenler"
+      ],
+      "higher_score": 0.812,
+      "lower_score": 0.691,
+      "margin_required": 0.05,
+      "delta": 0.121,
+      "passed": true,
+      "gate": "relative"
+    },
+    {
+      "higher_pair": [
+        "ales_matematik__problemler",
+        "tyt_matematik__problemler"
+      ],
+      "lower_pair": [
+        "yds_ingilizce__reading",
+        "ayt_fizik__hareket"
+      ],
+      "higher_score": 0.689,
+      "lower_score": 0.667,
+      "margin_required": 0.0,
+      "delta": 0.022,
+      "passed": true,
+      "gate": "relative"
+    },
+    {
+      "higher_pair": [
+        "tyt_matematik__problemler",
+        "dgs_matematik__problemler"
+      ],
+      "lower_pair": [
+        "kpss_turkce__paragraf",
+        "tyt_geometri__ucgenler"
+      ],
+      "higher_score": 0.848,
+      "lower_score": 0.691,
+      "margin_required": 0.05,
+      "delta": 0.157,
+      "passed": true,
+      "gate": "relative"
+    }
+  ],
+  "relative_failures": [],
+  "passed_all": true,
+  "notes": "Absolute bands are advisory; relative ranking is the M28 hard gate."
+}

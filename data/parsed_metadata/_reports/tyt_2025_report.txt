@@ -1,0 +1,11 @@
+2025 TYT (tyt)
+120 question
+40 answer key
+10 subjects
+11 topics
+Difficulty avg 51.6
+Paragraph avg 16.9 words
+Reading avg 17.9 sec
+Style Profile Generated
+Metadata OK
+Issues: answer_key_mismatch_q=120_key=40

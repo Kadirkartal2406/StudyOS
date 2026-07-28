@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_fizik",
+  "topic_code": "tyt_fizik__hareket",
+  "sample_size": 8,
+  "paragraph_avg": 15.5,
+  "sentence_avg": 0.88,
+  "difficulty_avg": 58.0,
+  "reading_avg": 17.6,
+  "option_length": 15.25,
+  "reasoning_avg": 0.875,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

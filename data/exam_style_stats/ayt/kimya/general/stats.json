@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_kimya",
+  "topic_code": "ayt_kimya__general",
+  "sample_size": 2,
+  "paragraph_avg": 54.5,
+  "sentence_avg": 8.5,
+  "difficulty_avg": 58.5,
+  "reading_avg": 32.0,
+  "option_length": 16.84,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

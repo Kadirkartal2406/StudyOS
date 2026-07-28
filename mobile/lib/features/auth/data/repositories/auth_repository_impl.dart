@@ -47,6 +47,22 @@ class AuthRepositoryImpl implements AuthRepository {
       _datasource.logout(refreshToken);
 
   @override
-  Future<void> forgotPassword(String email) =>
-      _datasource.forgotPassword(email);
+  Future<ForgotPasswordResult> forgotPassword(String email) async {
+    final data = await _datasource.forgotPassword(email);
+    return ForgotPasswordResult(
+      message: (data['message'] as String?) ??
+          'E-posta kayıtlıysa sıfırlama bağlantısı gönderildi',
+      emailSent: data['email_sent'] as bool? ?? false,
+      resetUrl: data['reset_url'] as String?,
+      devResetToken: data['dev_reset_token'] as String?,
+    );
+  }
+
+  @override
+  Future<void> resetPassword({
+    required String token,
+    required String newPassword,
+  }) {
+    return _datasource.resetPassword(token: token, newPassword: newPassword);
+  }
 }

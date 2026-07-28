@@ -1,0 +1,157 @@
+{
+  "exam_code": "yokdil",
+  "subject_code": "yokdil_ingilizce",
+  "topic_code": "yokdil_ingilizce__fen",
+  "subject_slug": "ingilizce",
+  "topic_slug": "fen",
+  "sample_size": 78,
+  "reading_load": {
+    "paragraph_length": 39.6,
+    "sentence_count": 2.77,
+    "average_reading_time_sec": 25.3,
+    "visual_density": 0.013,
+    "information_density": 0.287,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 11.33,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 45.8,
+    "band": "medium",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "alan_kelime_tuzagi",
+      "yakin_anlam",
+      "yanlis_cikarim"
+    ],
+    "patterns": [
+      "alan_kelime_tuzagi",
+      "yakin_anlam",
+      "yanlis_cikarim"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "medium"
+  },
+  "intent": {
+    "primary": "yorumlama",
+    "intents": [
+      "yorumlama",
+      "islem",
+      "cikarim",
+      "reading",
+      "kelime"
+    ],
+    "exam_defaults": [
+      "reading",
+      "alan_kelime",
+      "cikarim"
+    ],
+    "topic_slug": "fen",
+    "subject_slug": "ingilizce"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim",
+      "eleme",
+      "analojik",
+      "karsilastirma",
+      "soyutlama"
+    ],
+    "distribution": {
+      "tek_adim": 0.242,
+      "iki_adim": 0.03,
+      "cok_adim": 0.03,
+      "eleme": 0.242,
+      "karsilastirma": 0.121,
+      "hipotez": 0.03,
+      "neden_sonuc": 0.03,
+      "kosul_zinciri": 0.03,
+      "soyutlama": 0.091,
+      "analojik": 0.152
+    },
+    "multi_step_ratio": 0.013,
+    "reasoning_intensity": 0.006
+  },
+  "bloom": {
+    "remember": 0.068,
+    "understand": 0.322,
+    "apply": 0.271,
+    "analyze": 0.255,
+    "evaluate": 0.068,
+    "create": 0.017
+  },
+  "thinking_pattern": [
+    "intent:yorumlama",
+    "reasoning:tek_adim",
+    "trap:alan_kelime_tuzagi",
+    "trap:yakin_anlam",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "academic_en",
+    "skill_type": "reading_comprehension",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 25.3,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.287
+  },
+  "paragraph_ratio": 0.33,
+  "expected_thinking": "yorumlama via tek_adim under low reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 15,
+      "difficulty_avg": 47.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 16,
+      "q_to": 30,
+      "difficulty_avg": 40.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 31,
+      "q_to": 45,
+      "difficulty_avg": 45.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 46,
+      "q_to": 60,
+      "difficulty_avg": 49.8,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 61,
+      "q_to": 78,
+      "difficulty_avg": 46.1,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

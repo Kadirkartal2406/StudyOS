@@ -1,0 +1,156 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_tarih",
+  "topic_code": "kpss_tarih__osmanli",
+  "subject_slug": "tarih",
+  "topic_slug": "osmanli",
+  "sample_size": 2,
+  "reading_load": {
+    "paragraph_length": 70.5,
+    "sentence_count": 4.5,
+    "average_reading_time_sec": 47.0,
+    "visual_density": 0.033,
+    "information_density": 0.489,
+    "text_complexity": "medium",
+    "load_band": "very_high",
+    "option_length_avg": 12.9,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 62.0,
+    "band": "medium_high",
+    "curve_summary": [
+      "hard",
+      "medium",
+      "medium",
+      "hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade",
+      "kapsam_disi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "hatirlama",
+    "intents": [
+      "hatirlama",
+      "neden_sonuc",
+      "karsilastirma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "ana_fikir",
+      "cikarim",
+      "anlatim",
+      "dil_bilgisi",
+      "hatirlama"
+    ],
+    "topic_slug": "osmanli",
+    "subject_slug": "tarih"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.263,
+    "reasoning_intensity": 0.526
+  },
+  "bloom": {
+    "remember": 0.085,
+    "understand": 0.192,
+    "apply": 0.341,
+    "analyze": 0.276,
+    "evaluate": 0.085,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:hatirlama",
+    "reasoning:iki_adim",
+    "trap:yakin_anlam",
+    "trap:abarti"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 47.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.489
+  },
+  "paragraph_ratio": 0.588,
+  "expected_thinking": "hatirlama via iki_adim under very_high reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 2,
+      "difficulty_avg": 71.0,
+      "band": "hard"
+    },
+    {
+      "segment": 2,
+      "q_from": 3,
+      "q_to": 4,
+      "difficulty_avg": 64.5,
+      "band": "medium"
+    },
+    {
+      "segment": 3,
+      "q_from": 5,
+      "q_to": 6,
+      "difficulty_avg": 69.0,
+      "band": "medium"
+    },
+    {
+      "segment": 4,
+      "q_from": 7,
+      "q_to": 8,
+      "difficulty_avg": 74.0,
+      "band": "hard"
+    },
+    {
+      "segment": 5,
+      "q_from": 9,
+      "q_to": 13,
+      "difficulty_avg": 68.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

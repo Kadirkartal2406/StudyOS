@@ -1,0 +1,158 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_matematik",
+  "topic_code": "ayt_matematik__fonksiyonlar",
+  "subject_slug": "matematik",
+  "topic_slug": "fonksiyonlar",
+  "sample_size": 12,
+  "reading_load": {
+    "paragraph_length": 31.0,
+    "sentence_count": 4.33,
+    "average_reading_time_sec": 18.5,
+    "visual_density": 0.283,
+    "information_density": 0.333,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 21.01,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 45.5,
+    "band": "medium",
+    "curve_summary": [
+      "easy",
+      "medium_easy",
+      "easy",
+      "medium",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim",
+      "eksik_veri"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "modelleme",
+    "intents": [
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "problem"
+    ],
+    "exam_defaults": [
+      "derin_uygulama",
+      "ispat_yaklasimi",
+      "modelleme"
+    ],
+    "topic_slug": "fonksiyonlar",
+    "subject_slug": "matematik"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "neden_sonuc",
+      "kosul_zinciri",
+      "hipotez"
+    ],
+    "distribution": {
+      "tek_adim": 0.043,
+      "iki_adim": 0.304,
+      "cok_adim": 0.043,
+      "eleme": 0.043,
+      "karsilastirma": 0.043,
+      "hipotez": 0.087,
+      "neden_sonuc": 0.174,
+      "kosul_zinciri": 0.174,
+      "soyutlama": 0.043,
+      "analojik": 0.043
+    },
+    "multi_step_ratio": 0.348,
+    "reasoning_intensity": 0.841
+  },
+  "bloom": {
+    "remember": 0.067,
+    "understand": 0.236,
+    "apply": 0.27,
+    "analyze": 0.342,
+    "evaluate": 0.067,
+    "create": 0.017
+  },
+  "thinking_pattern": [
+    "intent:modelleme",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:formül_karistirma",
+    "reasoning:neden_sonuc"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "problem_solving",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 18.5,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.333
+  },
+  "paragraph_ratio": 0.258,
+  "expected_thinking": "modelleme via iki_adim under low reading load",
+  "cluster": "reasoning_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 6,
+      "difficulty_avg": 32.7,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 7,
+      "q_to": 12,
+      "difficulty_avg": 49.8,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 13,
+      "q_to": 18,
+      "difficulty_avg": 32.7,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 19,
+      "q_to": 24,
+      "difficulty_avg": 61.7,
+      "band": "medium"
+    },
+    {
+      "segment": 5,
+      "q_from": 25,
+      "q_to": 32,
+      "difficulty_avg": 57.4,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_geometri",
+  "topic_code": "tyt_geometri__general",
+  "subject_slug": "geometri",
+  "topic_slug": "general",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 91.0,
+    "sentence_count": 5.0,
+    "average_reading_time_sec": 48.0,
+    "visual_density": 0.075,
+    "information_density": 0.591,
+    "text_complexity": "medium",
+    "load_band": "very_high",
+    "option_length_avg": 29.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 65.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "medium",
+      "hard",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri",
+      "yaklasik_deger"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama",
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi"
+    ],
+    "exam_defaults": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "cikarim"
+    ],
+    "topic_slug": "general",
+    "subject_slug": "geometri"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.075,
+    "reasoning_intensity": 0.323
+  },
+  "bloom": {
+    "remember": 0.088,
+    "understand": 0.198,
+    "apply": 0.351,
+    "analyze": 0.254,
+    "evaluate": 0.088,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:birim_hatasi"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 48.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.591
+  },
+  "paragraph_ratio": 0.758,
+  "expected_thinking": "genel_anlama via iki_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "band": "easy",
+      "weight": 0.25,
+      "difficulty_avg": 35.0
+    },
+    {
+      "segment": 2,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 55.0
+    },
+    {
+      "segment": 3,
+      "band": "hard",
+      "weight": 0.18,
+      "difficulty_avg": 72.0
+    },
+    {
+      "segment": 4,
+      "band": "very_hard",
+      "weight": 0.12,
+      "difficulty_avg": 85.0
+    },
+    {
+      "segment": 5,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 58.0
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_kimya",
+  "topic_code": "ayt_biyoloji__hucre",
+  "sample_size": 1,
+  "paragraph_avg": 30.0,
+  "sentence_avg": 7.0,
+  "difficulty_avg": 44.0,
+  "reading_avg": 19.0,
+  "option_length": 8.67,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

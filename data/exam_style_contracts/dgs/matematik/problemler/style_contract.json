@@ -1,0 +1,160 @@
+{
+  "exam_code": "dgs",
+  "subject_code": "dgs_matematik",
+  "topic_code": "dgs_matematik__problemler",
+  "subject_slug": "matematik",
+  "topic_slug": "problemler",
+  "sample_size": 26,
+  "reading_load": {
+    "paragraph_length": 41.5,
+    "sentence_count": 4.23,
+    "average_reading_time_sec": 27.4,
+    "visual_density": 0.083,
+    "information_density": 0.367,
+    "text_complexity": "low",
+    "load_band": "medium",
+    "option_length_avg": 15.82,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 45.8,
+    "band": "medium",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "easy",
+      "easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "yanlis_cikarim",
+      "eksik_oncul",
+      "birim_hatasi"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "yanlis_cikarim",
+      "eksik_oncul",
+      "birim_hatasi",
+      "eksik_veri"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "problem",
+    "intents": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "exam_defaults": [
+      "problem",
+      "mantik",
+      "cikarim"
+    ],
+    "topic_slug": "problemler",
+    "subject_slug": "matematik"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "neden_sonuc",
+      "kosul_zinciri",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.035,
+      "iki_adim": 0.245,
+      "cok_adim": 0.035,
+      "eleme": 0.035,
+      "karsilastirma": 0.105,
+      "hipotez": 0.07,
+      "neden_sonuc": 0.14,
+      "kosul_zinciri": 0.14,
+      "soyutlama": 0.105,
+      "analojik": 0.091
+    },
+    "multi_step_ratio": 0.25,
+    "reasoning_intensity": 1.0
+  },
+  "bloom": {
+    "remember": 0.065,
+    "understand": 0.226,
+    "apply": 0.259,
+    "analyze": 0.37,
+    "evaluate": 0.065,
+    "create": 0.016
+  },
+  "thinking_pattern": [
+    "intent:problem",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:yanlis_cikarim",
+    "reasoning:neden_sonuc"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "problem_solving",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 27.4,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.367
+  },
+  "paragraph_ratio": 0.346,
+  "expected_thinking": "problem via iki_adim under medium reading load",
+  "cluster": "reasoning_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 9,
+      "difficulty_avg": 49.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 10,
+      "q_to": 18,
+      "difficulty_avg": 47.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 19,
+      "q_to": 27,
+      "difficulty_avg": 35.2,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 28,
+      "q_to": 36,
+      "difficulty_avg": 38.7,
+      "band": "easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 37,
+      "q_to": 49,
+      "difficulty_avg": 47.3,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

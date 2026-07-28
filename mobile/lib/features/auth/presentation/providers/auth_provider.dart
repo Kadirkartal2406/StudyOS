@@ -33,13 +33,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> checkSession() async {
     state = const AuthLoading();
     try {
+      await _storage.restoreAccessToken();
+
       final hasSession = await _storage.hasSession();
       if (!hasSession) {
         state = const AuthUnauthenticated();
         return;
       }
 
-      // Kaydedilmiş kullanıcıyı yükle
       final user = await _storage.getUser();
       if (user == null) {
         await _storage.clearAll();
@@ -47,7 +48,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
         return;
       }
 
-      // Refresh token ile access token yenile
       final refreshToken = await _storage.getRefreshToken();
       if (refreshToken == null) {
         await _storage.clearAll();
@@ -58,11 +58,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       try {
         final (newAccess, newRefresh) =
             await _repository.refreshToken(refreshToken);
-        _storage.setAccessToken(newAccess);
+        await _storage.setAccessToken(newAccess);
         await _storage.saveRefreshToken(newRefresh);
         state = AuthAuthenticated(user);
       } on AppException {
-        // Token geçersiz — oturumu temizle
+        // Access hâlâ varsa kısa süre idame etmeyi deneme — token invalid
         await _storage.clearAll();
         state = const AuthUnauthenticated();
       }
@@ -83,7 +83,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
         email: email,
         password: password,
       );
-      _storage.setAccessToken(accessToken);
+      await _storage.setAccessToken(accessToken);
       await _storage.saveRefreshToken(refreshToken);
       await _storage.saveUser(user);
       state = AuthAuthenticated(user);
@@ -138,10 +138,25 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   // ── Forgot Password ────────────────────────────────────────
 
-  Future<bool> forgotPassword(String email) async {
+  Future<ForgotPasswordResult?> forgotPassword(String email) async {
     state = const AuthLoading();
     try {
-      await _repository.forgotPassword(email);
+      final result = await _repository.forgotPassword(email);
+      state = const AuthUnauthenticated();
+      return result;
+    } on AppException catch (e) {
+      state = AuthError(e.message);
+      return null;
+    }
+  }
+
+  Future<bool> resetPassword({
+    required String token,
+    required String newPassword,
+  }) async {
+    state = const AuthLoading();
+    try {
+      await _repository.resetPassword(token: token, newPassword: newPassword);
       state = const AuthUnauthenticated();
       return true;
     } on AppException catch (e) {

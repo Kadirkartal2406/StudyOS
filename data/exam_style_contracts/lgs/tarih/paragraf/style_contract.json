@@ -1,0 +1,163 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_tarih",
+  "topic_code": "lgs_turkce__paragraf",
+  "subject_slug": "tarih",
+  "topic_slug": "paragraf",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 91.0,
+    "sentence_count": 8.0,
+    "average_reading_time_sec": 44.0,
+    "visual_density": 0.2,
+    "information_density": 0.741,
+    "text_complexity": "high",
+    "load_band": "high",
+    "option_length_avg": 10.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 67.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma",
+      "yakin_anlam"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma",
+      "yakin_anlam",
+      "abarti",
+      "ters_ifade",
+      "eksik_bilgi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "ana_fikir",
+    "intents": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "paragraf",
+    "subject_slug": "tarih"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "eleme",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.037,
+      "iki_adim": 0.259,
+      "cok_adim": 0.037,
+      "eleme": 0.185,
+      "karsilastirma": 0.148,
+      "hipotez": 0.037,
+      "neden_sonuc": 0.037,
+      "kosul_zinciri": 0.037,
+      "soyutlama": 0.111,
+      "analojik": 0.111
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "bloom": {
+    "remember": 0.089,
+    "understand": 0.2,
+    "apply": 0.356,
+    "analyze": 0.244,
+    "evaluate": 0.089,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:ana_fikir",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 44.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.741
+  },
+  "paragraph_ratio": 0.758,
+  "expected_thinking": "ana_fikir via iki_adim under high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 11,
+      "difficulty_avg": 33.5,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 12,
+      "q_to": 22,
+      "difficulty_avg": 34.0,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 23,
+      "q_to": 33,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 34,
+      "q_to": 44,
+      "difficulty_avg": 35.3,
+      "band": "easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 45,
+      "q_to": 55,
+      "difficulty_avg": 42.5,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

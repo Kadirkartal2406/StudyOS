@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_felsefe",
+  "topic_code": "tyt_felsefe__genel",
+  "sample_size": 5,
+  "paragraph_avg": 0.0,
+  "sentence_avg": 0.0,
+  "difficulty_avg": 48.0,
+  "reading_avg": 12.0,
+  "option_length": 0.0,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "inference",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

@@ -1,0 +1,123 @@
+{
+  "exam_code": "ags",
+  "name": "AGS",
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "topic_count": 2,
+  "reading_profile": {
+    "paragraph_length": 0.0,
+    "sentence_count": 0.0,
+    "average_reading_time_sec": 15.0,
+    "visual_density": 0.0,
+    "information_density": 0.0,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 0.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.471,
+      "iki_adim": 0.059,
+      "cok_adim": 0.059,
+      "eleme": 0.059,
+      "karsilastirma": 0.059,
+      "hipotez": 0.059,
+      "neden_sonuc": 0.059,
+      "kosul_zinciri": 0.059,
+      "soyutlama": 0.059,
+      "analojik": 0.059
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.5
+  },
+  "trap_patterns": {
+    "primary": [
+      "yakin_anlam",
+      "eksik_bilgi",
+      "islem_hatasi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "eksik_bilgi",
+      "islem_hatasi"
+    ],
+    "distractor_style": "plausible_heuristic",
+    "trap_density": "medium"
+  },
+  "bloom": {
+    "remember": 0.073,
+    "understand": 0.0,
+    "apply": 0.636,
+    "analyze": 0.273,
+    "evaluate": 0.0,
+    "create": 0.018
+  },
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 32,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 33,
+      "q_to": 64,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 65,
+      "q_to": 96,
+      "difficulty_avg": 51.5,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 97,
+      "q_to": 128,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    },
+    {
+      "segment": 5,
+      "q_from": 129,
+      "q_to": 160,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    }
+  ],
+  "intents": {
+    "ags_matematik__problemler": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "ags_turkce__paragraf": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 1
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 1
+    }
+  ],
+  "notes": "Learned exam thinking profile. No question text."
+}

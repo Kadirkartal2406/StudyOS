@@ -1,0 +1,125 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_biyoloji",
+  "topic_code": "kpss_biyoloji__hucre",
+  "subject_slug": "biyoloji",
+  "topic_slug": "hucre",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 117.0,
+    "sentence_count": 8.0,
+    "average_reading_time_sec": 60.0,
+    "visual_density": 0.033,
+    "information_density": 0.839,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 115.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 83.0,
+    "band": "high",
+    "curve_summary": [
+      "hard"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade",
+      "kapsam_disi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "hatirlama",
+    "intents": [
+      "hatirlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "ana_fikir",
+      "cikarim",
+      "anlatim",
+      "dil_bilgisi",
+      "hatirlama"
+    ],
+    "topic_slug": "hucre",
+    "subject_slug": "biyoloji"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri"
+    ],
+    "distribution": {
+      "tek_adim": 0.05,
+      "iki_adim": 0.05,
+      "cok_adim": 0.4,
+      "eleme": 0.05,
+      "karsilastirma": 0.05,
+      "hipotez": 0.05,
+      "neden_sonuc": 0.05,
+      "kosul_zinciri": 0.2,
+      "soyutlama": 0.05,
+      "analojik": 0.05
+    },
+    "multi_step_ratio": 0.263,
+    "reasoning_intensity": 0.526
+  },
+  "bloom": {
+    "remember": 0.083,
+    "understand": 0.188,
+    "apply": 0.229,
+    "analyze": 0.27,
+    "evaluate": 0.208,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:hatirlama",
+    "reasoning:cok_adim",
+    "trap:yakin_anlam",
+    "trap:abarti",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 60.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.839
+  },
+  "paragraph_ratio": 0.975,
+  "expected_thinking": "hatirlama via cok_adim under very_high reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 83.0,
+      "band": "hard"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

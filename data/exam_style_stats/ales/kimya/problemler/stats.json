@@ -1,0 +1,18 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_kimya",
+  "topic_code": "ales_matematik__problemler",
+  "sample_size": 1,
+  "paragraph_avg": 111.0,
+  "sentence_avg": 4.0,
+  "difficulty_avg": 65.0,
+  "reading_avg": 62.0,
+  "option_length": 21.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

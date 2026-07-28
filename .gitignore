@@ -62,6 +62,8 @@ mobile/android/local.properties
 mobile/android/key.properties
 mobile/android/**/*.keystore
 mobile/android/**/*.jks
+mobile/android/app/google-services.json
+mobile/ios/Runner/GoogleService-Info.plist
 
 # ── iOS / macOS ──────────────────────────────
 mobile/ios/.symlinks/

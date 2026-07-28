@@ -1,0 +1,18 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_matematik",
+  "topic_code": "kpss_matematik__problemler",
+  "sample_size": 23,
+  "paragraph_avg": 12.8,
+  "sentence_avg": 2.48,
+  "difficulty_avg": 45.3,
+  "reading_avg": 13.5,
+  "option_length": 7.92,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

@@ -1,0 +1,18 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_kimya",
+  "topic_code": "kpss_kimya__general",
+  "sample_size": 2,
+  "paragraph_avg": 84.5,
+  "sentence_avg": 6.5,
+  "difficulty_avg": 75.0,
+  "reading_avg": 49.0,
+  "option_length": 33.66,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

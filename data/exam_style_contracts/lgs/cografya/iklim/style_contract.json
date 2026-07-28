@@ -1,0 +1,118 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_cografya",
+  "topic_code": "lgs_cografya__iklim",
+  "subject_slug": "cografya",
+  "topic_slug": "iklim",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 95.0,
+    "sentence_count": 10.0,
+    "average_reading_time_sec": 38.0,
+    "visual_density": 0.2,
+    "information_density": 0.856,
+    "text_complexity": "high",
+    "load_band": "high",
+    "option_length_avg": 18.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 67.0,
+    "band": "high",
+    "curve_summary": [
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "medium"
+  },
+  "intent": {
+    "primary": "yorumlama",
+    "intents": [
+      "yorumlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "iklim",
+    "subject_slug": "cografya"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "bloom": {
+    "remember": 0.089,
+    "understand": 0.2,
+    "apply": 0.356,
+    "analyze": 0.244,
+    "evaluate": 0.089,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:yorumlama",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 38.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.856
+  },
+  "paragraph_ratio": 0.792,
+  "expected_thinking": "yorumlama via iki_adim under high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 67.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

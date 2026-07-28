@@ -1,0 +1,18 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_turkce",
+  "topic_code": "lgs_turkce__noktalama",
+  "sample_size": 1,
+  "paragraph_avg": 76.0,
+  "sentence_avg": 8.0,
+  "difficulty_avg": 62.0,
+  "reading_avg": 34.0,
+  "option_length": 7.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "language_rules",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

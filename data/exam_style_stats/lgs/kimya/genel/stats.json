@@ -1,0 +1,18 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_kimya",
+  "topic_code": "lgs_fen__genel",
+  "sample_size": 1,
+  "paragraph_avg": 141.0,
+  "sentence_avg": 18.0,
+  "difficulty_avg": 79.0,
+  "reading_avg": 61.0,
+  "option_length": 14.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

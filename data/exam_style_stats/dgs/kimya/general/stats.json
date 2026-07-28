@@ -1,0 +1,18 @@
+{
+  "exam_code": "dgs",
+  "subject_code": "dgs_kimya",
+  "topic_code": "dgs_kimya__general",
+  "sample_size": 1,
+  "paragraph_avg": 144.0,
+  "sentence_avg": 7.0,
+  "difficulty_avg": 81.0,
+  "reading_avg": 80.0,
+  "option_length": 27.6,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

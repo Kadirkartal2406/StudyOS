@@ -1,0 +1,18 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_kimya",
+  "topic_code": "ales_turkce__paragraf",
+  "sample_size": 1,
+  "paragraph_avg": 142.0,
+  "sentence_avg": 8.0,
+  "difficulty_avg": 69.0,
+  "reading_avg": 66.0,
+  "option_length": 27.2,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

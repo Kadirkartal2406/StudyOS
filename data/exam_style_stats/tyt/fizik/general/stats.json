@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_fizik",
+  "topic_code": "tyt_fizik__general",
+  "sample_size": 1,
+  "paragraph_avg": 140.0,
+  "sentence_avg": 15.0,
+  "difficulty_avg": 79.0,
+  "reading_avg": 66.0,
+  "option_length": 68.5,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

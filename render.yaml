@@ -1,0 +1,59 @@
+# StudyOS — Render Blueprint (API) + Neon Postgres (external)
+#
+# 1) Neon'da proje oluştur → Connection string kopyala
+# 2) Bu repo'yu GitHub'a push et
+# 3) Render Dashboard → New → Blueprint → bu repo
+#    veya: New Web Service → Docker → rootDir backend
+#
+# Neon DATABASE_URL Render Environment'a elle yapıştırılır (Blueprint secret).
+
+services:
+  - type: web
+    name: studyos-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: APP_NAME
+        value: StudyOS
+      - key: APP_ENV
+        value: beta
+      - key: DEBUG
+        value: "false"
+      - key: AI_PROVIDER
+        value: "null"
+      - key: ENABLE_AUTO_BOOKLET
+        value: "false"
+      - key: ENABLE_BACKGROUND_AI
+        value: "false"
+      - key: ENABLE_MIDNIGHT_SCHEDULER
+        value: "false"
+      - key: ENABLE_CATCHUP
+        value: "false"
+      - key: ENABLE_AI_WARMUP
+        value: "false"
+      - key: ASSESSMENT_BOOKLET_SYNTHETIC
+        value: "true"
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: APP_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_BOOTSTRAP_EMAIL
+        value: kadirkartal4921@icloud.com
+      - key: ADMIN_BOOTSTRAP_PASSWORD
+        sync: false
+      - key: PUBLIC_APP_URL
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: AWS_S3_ENDPOINT_URL
+        value: ""

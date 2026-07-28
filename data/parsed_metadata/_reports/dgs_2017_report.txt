@@ -1,0 +1,10 @@
+2017 DGS (dgs)
+60 question
+60 answer key
+7 subjects
+4 topics
+Difficulty avg 50.4
+Paragraph avg 47.1 words
+Reading avg 29.5 sec
+Style Profile Generated
+Metadata OK

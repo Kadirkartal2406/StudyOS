@@ -1,0 +1,164 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_fizik",
+  "topic_code": "ales_fizik__hareket",
+  "subject_slug": "fizik",
+  "topic_slug": "hareket",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 232.0,
+    "sentence_count": 25.0,
+    "average_reading_time_sec": 98.0,
+    "visual_density": 0.03,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 230.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 89.0,
+    "band": "high",
+    "curve_summary": [
+      "hard",
+      "hard",
+      "hard",
+      "medium_easy",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski",
+      "birim_hatasi",
+      "yon_hatasi",
+      "formül_karistirma"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "modelleme",
+    "intents": [
+      "modelleme",
+      "islem",
+      "neden_sonuc",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "hareket",
+    "subject_slug": "fizik"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri",
+      "neden_sonuc",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.031,
+      "iki_adim": 0.031,
+      "cok_adim": 0.245,
+      "eleme": 0.031,
+      "karsilastirma": 0.092,
+      "hipotez": 0.061,
+      "neden_sonuc": 0.123,
+      "kosul_zinciri": 0.215,
+      "soyutlama": 0.092,
+      "analojik": 0.08
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.084,
+    "understand": 0.189,
+    "apply": 0.232,
+    "analyze": 0.263,
+    "evaluate": 0.21,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:modelleme",
+    "reasoning:cok_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 98.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "modelleme via cok_adim under very_high reading load",
+  "cluster": "calculation_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 2,
+      "difficulty_avg": 75.0,
+      "band": "hard"
+    },
+    {
+      "segment": 2,
+      "q_from": 3,
+      "q_to": 4,
+      "difficulty_avg": 84.0,
+      "band": "hard"
+    },
+    {
+      "segment": 3,
+      "q_from": 5,
+      "q_to": 6,
+      "difficulty_avg": 82.0,
+      "band": "hard"
+    },
+    {
+      "segment": 4,
+      "q_from": 7,
+      "q_to": 8,
+      "difficulty_avg": 54.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 9,
+      "q_to": 14,
+      "difficulty_avg": 67.5,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

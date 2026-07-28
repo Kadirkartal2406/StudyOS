@@ -1,0 +1,18 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_felsefe",
+  "topic_code": "kpss_felsefe__general",
+  "sample_size": 1,
+  "paragraph_avg": 100.0,
+  "sentence_avg": 6.0,
+  "difficulty_avg": 69.0,
+  "reading_avg": 58.0,
+  "option_length": 18.8,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

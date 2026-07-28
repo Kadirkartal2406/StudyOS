@@ -1,0 +1,119 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_turkce",
+  "topic_code": "lgs_turkce__noktalama",
+  "subject_slug": "turkce",
+  "topic_slug": "noktalama",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 76.0,
+    "sentence_count": 8.0,
+    "average_reading_time_sec": 34.0,
+    "visual_density": 0.2,
+    "information_density": 0.685,
+    "text_complexity": "high",
+    "load_band": "high",
+    "option_length_avg": 7.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 62.0,
+    "band": "medium_high",
+    "curve_summary": [
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "medium"
+  },
+  "intent": {
+    "primary": "noktalama",
+    "intents": [
+      "noktalama",
+      "kural_uygulama",
+      "dil_bilgisi",
+      "yazim"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "noktalama",
+    "subject_slug": "turkce"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "bloom": {
+    "remember": 0.089,
+    "understand": 0.2,
+    "apply": 0.356,
+    "analyze": 0.244,
+    "evaluate": 0.089,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:noktalama",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "language_rules",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 34.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.685
+  },
+  "paragraph_ratio": 0.633,
+  "expected_thinking": "noktalama via iki_adim under high reading load",
+  "cluster": "language_rules",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 62.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

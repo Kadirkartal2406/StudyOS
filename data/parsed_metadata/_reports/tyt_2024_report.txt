@@ -1,0 +1,11 @@
+2024 TYT (tyt)
+120 question
+40 answer key
+10 subjects
+10 topics
+Difficulty avg 52.7
+Paragraph avg 19.6 words
+Reading avg 18.3 sec
+Style Profile Generated
+Metadata OK
+Issues: answer_key_mismatch_q=120_key=40

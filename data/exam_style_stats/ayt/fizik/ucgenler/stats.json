@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_fizik",
+  "topic_code": "ayt_geometri__ucgenler",
+  "sample_size": 2,
+  "paragraph_avg": 124.5,
+  "sentence_avg": 11.5,
+  "difficulty_avg": 78.0,
+  "reading_avg": 58.5,
+  "option_length": 93.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

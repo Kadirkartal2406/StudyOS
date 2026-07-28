@@ -58,7 +58,7 @@ class _AuthInterceptor extends Interceptor {
         final newAccess = data['access_token'] as String;
         final newRefresh = data['refresh_token'] as String;
 
-        _storage.setAccessToken(newAccess);
+        await _storage.setAccessToken(newAccess);
         await _storage.saveRefreshToken(newRefresh);
 
         // Orijinal isteği yeni token ile tekrarla

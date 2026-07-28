@@ -27,7 +27,25 @@ abstract interface class AuthRepository {
   Future<void> logout(String refreshToken);
 
   /// Şifre sıfırlama e-postası gönder.
-  Future<void> forgotPassword(String email);
+  /// Dönüş: sunucu mesajı + isteğe bağlı geliştirme reset_url.
+  Future<ForgotPasswordResult> forgotPassword(String email);
+
+  /// Token ile yeni şifre belirle.
+  Future<void> resetPassword({required String token, required String newPassword});
+}
+
+class ForgotPasswordResult {
+  const ForgotPasswordResult({
+    required this.message,
+    this.emailSent = false,
+    this.resetUrl,
+    this.devResetToken,
+  });
+
+  final String message;
+  final bool emailSent;
+  final String? resetUrl;
+  final String? devResetToken;
 }
 
 /// Result type alias for clarity

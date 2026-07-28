@@ -1,0 +1,18 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_matematik",
+  "topic_code": "lgs_matematik__problemler",
+  "sample_size": 10,
+  "paragraph_avg": 20.4,
+  "sentence_avg": 2.5,
+  "difficulty_avg": 34.2,
+  "reading_avg": 8.7,
+  "option_length": 0.0,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

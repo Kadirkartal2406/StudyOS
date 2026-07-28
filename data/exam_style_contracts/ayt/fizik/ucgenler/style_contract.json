@@ -1,0 +1,157 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_fizik",
+  "topic_code": "ayt_geometri__ucgenler",
+  "subject_slug": "fizik",
+  "topic_slug": "ucgenler",
+  "sample_size": 2,
+  "reading_load": {
+    "paragraph_length": 124.5,
+    "sentence_count": 11.5,
+    "average_reading_time_sec": 58.5,
+    "visual_density": 0.283,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 93.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 78.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "easy",
+      "easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim",
+      "sekil_yanilgisi",
+      "ozellik_karistirma"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "sekil",
+    "intents": [
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "derin_uygulama",
+      "ispat_yaklasimi",
+      "modelleme"
+    ],
+    "topic_slug": "ucgenler",
+    "subject_slug": "fizik"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri"
+    ],
+    "distribution": {
+      "tek_adim": 0.05,
+      "iki_adim": 0.05,
+      "cok_adim": 0.4,
+      "eleme": 0.05,
+      "karsilastirma": 0.05,
+      "hipotez": 0.05,
+      "neden_sonuc": 0.05,
+      "kosul_zinciri": 0.2,
+      "soyutlama": 0.05,
+      "analojik": 0.05
+    },
+    "multi_step_ratio": 0.348,
+    "reasoning_intensity": 0.174
+  },
+  "bloom": {
+    "remember": 0.082,
+    "understand": 0.185,
+    "apply": 0.226,
+    "analyze": 0.28,
+    "evaluate": 0.206,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:sekil",
+    "reasoning:cok_adim",
+    "trap:islem_hatasi",
+    "trap:formül_karistirma",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 58.5,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "sekil via cok_adim under very_high reading load",
+  "cluster": "spatial_geometry",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 3,
+      "difficulty_avg": 36.0,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 4,
+      "q_to": 6,
+      "difficulty_avg": 33.3,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 7,
+      "q_to": 9,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 10,
+      "q_to": 12,
+      "difficulty_avg": 51.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 13,
+      "q_to": 17,
+      "difficulty_avg": 43.4,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

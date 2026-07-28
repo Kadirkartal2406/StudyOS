@@ -1,0 +1,233 @@
+{
+  "exam_code": "ales",
+  "name": "ALES",
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "topic_count": 35,
+  "reading_profile": {
+    "paragraph_length": 115.3,
+    "sentence_count": 3.05,
+    "average_reading_time_sec": 56.9,
+    "visual_density": 0.03,
+    "information_density": 0.585,
+    "text_complexity": "medium",
+    "load_band": "very_high",
+    "option_length_avg": 18.25,
+    "page_layout": "single_column_or_sparse"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.046,
+      "iki_adim": 0.324,
+      "cok_adim": 0.046,
+      "eleme": 0.046,
+      "karsilastirma": 0.139,
+      "hipotez": 0.046,
+      "neden_sonuc": 0.046,
+      "kosul_zinciri": 0.046,
+      "soyutlama": 0.139,
+      "analojik": 0.12
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "trap_patterns": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski"
+    ],
+    "distractor_style": "plausible_heuristic",
+    "trap_density": "high"
+  },
+  "bloom": {
+    "remember": 0.087,
+    "understand": 0.301,
+    "apply": 0.263,
+    "analyze": 0.273,
+    "evaluate": 0.053,
+    "create": 0.022
+  },
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 69,
+      "difficulty_avg": 50.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 70,
+      "q_to": 138,
+      "difficulty_avg": 52.6,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 139,
+      "q_to": 207,
+      "difficulty_avg": 45.1,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 208,
+      "q_to": 276,
+      "difficulty_avg": 49.9,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 277,
+      "q_to": 348,
+      "difficulty_avg": 52.9,
+      "band": "medium_easy"
+    }
+  ],
+  "intents": {
+    "ales_biyoloji__general": [
+      "genel_anlama"
+    ],
+    "ales_biyoloji__hucre": [
+      "hatirlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "ales_turkce__paragraf": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam"
+    ],
+    "ales_cografya__general": [
+      "genel_anlama"
+    ],
+    "ales_cografya__iklim": [
+      "yorumlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "ales_edebiyat__general": [
+      "genel_anlama"
+    ],
+    "ales_matematik__problemler": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "genel_anlama"
+    ],
+    "ales_felsefe__general": [
+      "genel_anlama"
+    ],
+    "ales_fizik__general": [
+      "genel_anlama"
+    ],
+    "ales_fizik__hareket": [
+      "modelleme",
+      "islem",
+      "neden_sonuc",
+      "genel_anlama"
+    ],
+    "ales_geometri__general": [
+      "genel_anlama",
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi"
+    ],
+    "ales_geometri__ucgenler": [
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi",
+      "genel_anlama"
+    ],
+    "ales_kimya__general": [
+      "genel_anlama"
+    ],
+    "ales_matematik__fonksiyonlar": [
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "genel_anlama"
+    ],
+    "ales_matematik__general": [
+      "genel_anlama"
+    ],
+    "ales_tarih__general": [
+      "genel_anlama"
+    ],
+    "ales_tarih__osmanli": [
+      "hatirlama",
+      "neden_sonuc",
+      "karsilastirma",
+      "genel_anlama"
+    ],
+    "ales_turkce__dil_bilgisi": [
+      "dil_bilgisi",
+      "yapı",
+      "kural_uygulama",
+      "yazim",
+      "noktalama"
+    ],
+    "ales_turkce__general": [
+      "genel_anlama"
+    ],
+    "ales_turkce__yazim": [
+      "yazim",
+      "kural_uygulama",
+      "dil_bilgisi",
+      "noktalama"
+    ],
+    "unknown__general": [
+      "genel_anlama"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 19
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 1
+    },
+    {
+      "cluster": "calculation_heavy",
+      "size": 8
+    },
+    {
+      "cluster": "knowledge_recall",
+      "size": 2
+    },
+    {
+      "cluster": "mixed_general",
+      "size": 2
+    },
+    {
+      "cluster": "language_rules",
+      "size": 2
+    },
+    {
+      "cluster": "spatial_geometry",
+      "size": 1
+    }
+  ],
+  "notes": "Learned exam thinking profile. No question text."
+}

@@ -1,0 +1,18 @@
+{
+  "exam_code": "dgs",
+  "subject_code": "dgs_matematik",
+  "topic_code": "dgs_matematik__problemler",
+  "sample_size": 26,
+  "paragraph_avg": 41.5,
+  "sentence_avg": 4.23,
+  "difficulty_avg": 45.8,
+  "reading_avg": 27.4,
+  "option_length": 15.82,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

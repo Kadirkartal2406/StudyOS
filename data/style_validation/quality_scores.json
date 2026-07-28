@@ -1,0 +1,3175 @@
+{
+  "mean_score": 100.0,
+  "best_contract": {
+    "topic_code": "ags_matematik__problemler",
+    "exam_code": "ags",
+    "breakdown": {
+      "completeness": 25.0,
+      "reasoning": 20.0,
+      "reading": 15.0,
+      "trap": 10.0,
+      "difficulty": 10.0,
+      "bloom": 10.0,
+      "similarity": 10.0
+    },
+    "score": 100.0
+  },
+  "worst_contract": {
+    "topic_code": "unknown__general",
+    "exam_code": "yokdil",
+    "breakdown": {
+      "completeness": 25.0,
+      "reasoning": 20.0,
+      "reading": 15.0,
+      "trap": 10.0,
+      "difficulty": 10.0,
+      "bloom": 10.0,
+      "similarity": 10.0
+    },
+    "score": 100.0
+  },
+  "by_exam": {
+    "kpss": {
+      "mean_score": 100.0,
+      "count": 37,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "kpss_biyoloji__hucre",
+        "exam_code": "kpss",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "kpss_biyoloji__hucre",
+        "exam_code": "kpss",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "tyt": {
+      "mean_score": 100.0,
+      "count": 25,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "tyt_biyoloji__general",
+        "exam_code": "tyt",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "tyt_biyoloji__general",
+        "exam_code": "tyt",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "ayt": {
+      "mean_score": 100.0,
+      "count": 26,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "ayt_biyoloji__general",
+        "exam_code": "ayt",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "ayt_biyoloji__general",
+        "exam_code": "ayt",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "ales": {
+      "mean_score": 100.0,
+      "count": 35,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "ales_biyoloji__general",
+        "exam_code": "ales",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "ales_biyoloji__general",
+        "exam_code": "ales",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "yds": {
+      "mean_score": 100.0,
+      "count": 9,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "yds_edebiyat__general",
+        "exam_code": "yds",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "yds_edebiyat__general",
+        "exam_code": "yds",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "yokdil": {
+      "mean_score": 100.0,
+      "count": 12,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "yokdil_felsefe__general",
+        "exam_code": "yokdil",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "yokdil_felsefe__general",
+        "exam_code": "yokdil",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "lgs": {
+      "mean_score": 100.0,
+      "count": 14,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "lgs_cografya__iklim",
+        "exam_code": "lgs",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "lgs_cografya__iklim",
+        "exam_code": "lgs",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "ags": {
+      "mean_score": 100.0,
+      "count": 2,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "ags_matematik__problemler",
+        "exam_code": "ags",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "ags_matematik__problemler",
+        "exam_code": "ags",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "dgs": {
+      "mean_score": 100.0,
+      "count": 18,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "dgs_biyoloji__hucre",
+        "exam_code": "dgs",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "dgs_biyoloji__hucre",
+        "exam_code": "dgs",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    },
+    "ydt": {
+      "mean_score": 100.0,
+      "count": 22,
+      "warnings": 0,
+      "present": true,
+      "best": {
+        "topic_code": "ydt_biyoloji__general",
+        "exam_code": "ydt",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      },
+      "worst": {
+        "topic_code": "ydt_biyoloji__general",
+        "exam_code": "ydt",
+        "breakdown": {
+          "completeness": 25.0,
+          "reasoning": 20.0,
+          "reading": 15.0,
+          "trap": 10.0,
+          "difficulty": 10.0,
+          "bloom": 10.0,
+          "similarity": 10.0
+        },
+        "score": 100.0
+      }
+    }
+  },
+  "contracts": [
+    {
+      "topic_code": "ags_matematik__problemler",
+      "exam_code": "ags",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ags_turkce__paragraf",
+      "exam_code": "ags",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_biyoloji__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_biyoloji__hucre",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_cografya__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_cografya__iklim",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_edebiyat__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_felsefe__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_fizik__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_fizik__hareket",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_geometri__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_geometri__ucgenler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_kimya__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__fonksiyonlar",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_tarih__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_tarih__osmanli",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__dil_bilgisi",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__paragraf",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_matematik__problemler",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ales_turkce__yazim",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "ales",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_biyoloji__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_fizik__hareket",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_biyoloji__hucre",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_felsefe__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_kimya__mol",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_geometri__ucgenler",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_matematik__fonksiyonlar",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_fizik__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_fizik__hareket",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_kimya__mol",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_geometri__ucgenler",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_matematik__fonksiyonlar",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_geometri__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_fizik__hareket",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_geometri__ucgenler",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_kimya__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_fizik__hareket",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_biyoloji__hucre",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_kimya__mol",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_geometri__ucgenler",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_matematik__fonksiyonlar",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_matematik__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_fizik__hareket",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_matematik__problemler",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ayt_geometri__ucgenler",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "ayt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_biyoloji__hucre",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_edebiyat__general",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_turkce__paragraf",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_matematik__problemler",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_felsefe__general",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_turkce__paragraf",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_fizik__general",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_fizik__hareket",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_turkce__paragraf",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_matematik__problemler",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_geometri__general",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_matematik__problemler",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_kimya__general",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_turkce__paragraf",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_matematik__problemler",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_matematik__problemler",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "dgs_turkce__paragraf",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "dgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_biyoloji__hucre",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_cografya__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_cografya__iklim",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_edebiyat__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_felsefe__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_fizik__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_fizik__hareket",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_geometri__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_kimya__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_kimya__mol",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__fonksiyonlar",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_tarih__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_tarih__osmanli",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__dil_bilgisi",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__noktalama",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__yazim",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_vatandaslik__general",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_turkce__paragraf",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "kpss_matematik__problemler",
+      "exam_code": "kpss",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_cografya__iklim",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_fen__genel",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_fen__genel",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_kimya__general",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_kimya__mol",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_turkce__paragraf",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_matematik__problemler",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_tarih__general",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_turkce__paragraf",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_turkce__dil_bilgisi",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_turkce__general",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_turkce__noktalama",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "lgs_turkce__paragraf",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "lgs",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_biyoloji__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_biyoloji__hucre",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_cografya__genel",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_din__genel",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_felsefe__genel",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_felsefe__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_fizik__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_fizik__hareket",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_geometri__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_geometri__ucgenler",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_kimya__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_kimya__mol",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_matematik__fonksiyonlar",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_matematik__problemler",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_tarih__genel",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_tarih__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__dil_bilgisi",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "tyt_turkce__paragraf",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "tyt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_edebiyat__general",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_ingilizce__reading",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_ingilizce__general",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_ingilizce__reading",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_matematik__problemler",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_turkce__dil_bilgisi",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_turkce__general",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yds_ingilizce__reading",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "yds",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_biyoloji__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_cografya__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_cografya__iklim",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_edebiyat__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_fizik__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_fizik__hareket",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_kimya__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_kimya__mol",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_matematik__problemler",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_tarih__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_tarih__osmanli",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_turkce__dil_bilgisi",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_turkce__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "ydt_ingilizce__reading",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "ydt",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_felsefe__general",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__sosyal",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__fen",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_fizik__general",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__saglik",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__fen",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__saglik",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__sosyal",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_ingilizce__fen",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_kimya__general",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "yokdil_matematik__problemler",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    },
+    {
+      "topic_code": "unknown__general",
+      "exam_code": "yokdil",
+      "breakdown": {
+        "completeness": 25.0,
+        "reasoning": 20.0,
+        "reading": 15.0,
+        "trap": 10.0,
+        "difficulty": 10.0,
+        "bloom": 10.0,
+        "similarity": 10.0
+      },
+      "score": 100.0
+    }
+  ]
+}

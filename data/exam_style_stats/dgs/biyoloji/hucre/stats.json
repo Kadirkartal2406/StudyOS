@@ -1,0 +1,18 @@
+{
+  "exam_code": "dgs",
+  "subject_code": "dgs_biyoloji",
+  "topic_code": "dgs_biyoloji__hucre",
+  "sample_size": 1,
+  "paragraph_avg": 38.0,
+  "sentence_avg": 5.0,
+  "difficulty_avg": 69.0,
+  "reading_avg": 31.0,
+  "option_length": 36.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

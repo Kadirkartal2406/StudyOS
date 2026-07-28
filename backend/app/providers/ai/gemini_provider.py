@@ -1,0 +1,124 @@
+"""
+GeminiProvider — Sprint-2.4 gerçek HTTP (httpx / Generative Language API).
+"""
+
+from __future__ import annotations
+
+import logging
+
+from app.core.config import settings
+from app.core.constants import AI_DEFAULT_MODELS, AI_GEMINI_MODEL_FALLBACKS
+from app.core.exceptions import AIProviderError, AIQuotaExceededError, AIUnavailableError
+from app.providers.ai.base import AIProvider, ChatMessageDTO, GenerateRequest
+from app.providers.ai.http_transport import post_json
+
+logger = logging.getLogger("studyos.ai.gemini")
+
+
+def _to_gemini_contents(messages: list[ChatMessageDTO]) -> tuple[str | None, list[dict]]:
+    system_parts: list[str] = []
+    contents: list[dict] = []
+    for msg in messages:
+        if msg.role == "system":
+            system_parts.append(msg.content)
+            continue
+        role = "model" if msg.role == "assistant" else "user"
+        contents.append({"role": role, "parts": [{"text": msg.content}]})
+    system = " ".join(system_parts) if system_parts else None
+    return system, contents
+
+
+class GeminiProvider(AIProvider):
+    def __init__(self, model: str | None = None) -> None:
+        self._model = model or settings.AI_MODEL or AI_DEFAULT_MODELS["gemini"]
+
+    @property
+    def provider_name(self) -> str:
+        return "gemini"
+
+    @property
+    def model_name(self) -> str:
+        return self._model
+
+    def _candidate_models(self) -> list[str]:
+        ordered: list[str] = []
+        for name in (self._model, *AI_GEMINI_MODEL_FALLBACKS):
+            n = (name or "").strip()
+            if n and n not in ordered:
+                ordered.append(n)
+        # M32 P4: primary + en fazla N fallback
+        max_fallbacks = max(0, int(getattr(settings, "AI_GEMINI_MAX_FALLBACKS", 1)))
+        return ordered[: 1 + max_fallbacks]
+
+    async def generate(self, request: GenerateRequest) -> str:
+        key = (settings.GEMINI_API_KEY or "").strip()
+        if not key:
+            raise AIUnavailableError("Gemini API anahtarı yapılandırılmamış")
+
+        system, contents = _to_gemini_contents(request.messages)
+        if not contents:
+            raise AIProviderError("Gemini için mesaj listesi boş")
+
+        ctx = request.context or {}
+        max_tokens = int(ctx.get("max_output_tokens") or settings.AI_MAX_TOKENS)
+        timeout_seconds = ctx.get("timeout_seconds")
+
+        last_exc: Exception | None = None
+        for model in self._candidate_models():
+            url = (
+                f"https://generativelanguage.googleapis.com/v1beta/models/"
+                f"{model}:generateContent"
+            )
+            payload: dict = {
+                "contents": contents,
+                "generationConfig": {
+                    "temperature": settings.AI_TEMPERATURE,
+                    "maxOutputTokens": max_tokens,
+                },
+            }
+            if system:
+                payload["systemInstruction"] = {"parts": [{"text": system}]}
+
+            try:
+                data = await post_json(
+                    url,
+                    headers={
+                        "Content-Type": "application/json",
+                        "x-goog-api-key": key,
+                    },
+                    payload=payload,
+                    provider_label="gemini",
+                    timeout_seconds=(
+                        float(timeout_seconds) if timeout_seconds else None
+                    ),
+                )
+                try:
+                    candidates = data["candidates"]
+                    parts = candidates[0]["content"]["parts"]
+                    texts = [p.get("text", "") for p in parts if isinstance(p, dict)]
+                    text = "".join(texts).strip()
+                except (KeyError, IndexError, TypeError) as exc:
+                    raise AIProviderError("Gemini yanıtı parse edilemedi") from exc
+                if not text:
+                    raise AIProviderError("Gemini boş yanıt döndü")
+                if model != self._model:
+                    self._model = model
+                    if settings.DEBUG:
+                        logger.debug("gemini_model_fallback used=%s", model)
+                return text
+            except AIQuotaExceededError as exc:
+                last_exc = exc
+                if settings.DEBUG:
+                    logger.debug("gemini_quota model=%s — next fallback", model)
+                continue
+            except AIProviderError as exc:
+                # 404 / model not found → try next; diğerleri yükselt
+                msg = (exc.message or "").lower()
+                if "404" in msg or "not found" in msg or "no longer" in msg:
+                    last_exc = exc
+                    continue
+                raise
+
+        if isinstance(last_exc, AIProviderError):
+            raise last_exc
+        raise AIUnavailableError("Gemini modelleri kullanılamıyor")

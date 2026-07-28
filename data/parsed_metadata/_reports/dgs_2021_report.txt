@@ -1,0 +1,10 @@
+2021 DGS (dgs)
+60 question
+60 answer key
+7 subjects
+3 topics
+Difficulty avg 50.7
+Paragraph avg 52.5 words
+Reading avg 33.2 sec
+Style Profile Generated
+Metadata OK

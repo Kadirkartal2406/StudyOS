@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../domain/repositories/auth_repository.dart';
 import '../providers/auth_provider.dart';
 import '../providers/auth_state.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/auth_text_field.dart';
 
-/// Şifre sıfırlama ekranı — placeholder.
-/// Sprint-1.3'te e-posta gönderme akışı tam implementasyona kavuşacak.
+/// Şifre sıfırlama — e-posta + geliştirme modunda reset linki.
 class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({super.key});
 
@@ -21,6 +22,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   bool _sent = false;
+  ForgotPasswordResult? _result;
 
   @override
   void dispose() {
@@ -30,11 +32,14 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    final success = await ref
+    final result = await ref
         .read(authProvider.notifier)
         .forgotPassword(_emailCtrl.text.trim());
-    if (success && mounted) {
-      setState(() => _sent = true);
+    if (result != null && mounted) {
+      setState(() {
+        _sent = true;
+        _result = result;
+      });
     }
   }
 
@@ -137,6 +142,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   }
 
   Widget _successView(BuildContext context) {
+    final result = _result;
+    final hasDevLink =
+        result?.resetUrl != null && result!.resetUrl!.isNotEmpty;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -156,7 +164,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           ),
           const SizedBox(height: 24),
           const Text(
-            'E-posta Gönderildi',
+            'İstek alındı',
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -165,11 +173,45 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'Gelen kutunu kontrol et.\nBağlantı 15 dakika geçerlidir.',
+            result?.message ??
+                'Gelen kutunu kontrol et.\nBağlantı 15 dakika geçerlidir.',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white.withAlpha(160), height: 1.6),
           ),
-          const SizedBox(height: 40),
+          if (hasDevLink) ...[
+            const SizedBox(height: 16),
+            Text(
+              'SMTP yapılandırılmadığı için geliştirme bağlantısı:',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.amber.withAlpha(200)),
+            ),
+            const SizedBox(height: 8),
+            SelectableText(
+              result!.resetUrl!,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white70, fontSize: 12),
+            ),
+            const SizedBox(height: 12),
+            AuthButton(
+              label: 'Şifreyi şimdi sıfırla',
+              onPressed: () {
+                final token = result.devResetToken;
+                if (token != null && token.isNotEmpty) {
+                  context.push('/reset-password?token=$token');
+                }
+              },
+            ),
+            TextButton(
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: result.resetUrl!));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Bağlantı kopyalandı')),
+                );
+              },
+              child: const Text('Bağlantıyı kopyala'),
+            ),
+          ],
+          const SizedBox(height: 24),
           AuthButton(
             label: 'Giriş Ekranına Dön',
             onPressed: () => context.go('/login'),

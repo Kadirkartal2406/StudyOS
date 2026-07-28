@@ -1,0 +1,160 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_edebiyat",
+  "topic_code": "ydt_ingilizce__reading",
+  "subject_slug": "edebiyat",
+  "topic_slug": "reading",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 131.0,
+    "sentence_count": 7.0,
+    "average_reading_time_sec": 62.0,
+    "visual_density": 0.025,
+    "information_density": 0.841,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 25.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 65.0,
+    "band": "high",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "cikarim",
+    "intents": [
+      "cikarim",
+      "ana_fikir",
+      "kelime",
+      "baglam",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "reading",
+      "cikarim",
+      "kelime",
+      "baglam"
+    ],
+    "topic_slug": "reading",
+    "subject_slug": "edebiyat"
+  },
+  "reasoning": {
+    "dominant": "eleme",
+    "patterns": [
+      "eleme",
+      "iki_adim",
+      "analojik",
+      "karsilastirma",
+      "soyutlama"
+    ],
+    "distribution": {
+      "tek_adim": 0.031,
+      "iki_adim": 0.219,
+      "cok_adim": 0.031,
+      "eleme": 0.25,
+      "karsilastirma": 0.125,
+      "hipotez": 0.031,
+      "neden_sonuc": 0.031,
+      "kosul_zinciri": 0.031,
+      "soyutlama": 0.094,
+      "analojik": 0.156
+    },
+    "multi_step_ratio": 0.037,
+    "reasoning_intensity": 0.018
+  },
+  "bloom": {
+    "remember": 0.088,
+    "understand": 0.199,
+    "apply": 0.353,
+    "analyze": 0.249,
+    "evaluate": 0.088,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:cikarim",
+    "reasoning:eleme",
+    "trap:yakin_anlam",
+    "trap:ters_ifade",
+    "reasoning:iki_adim"
+  ],
+  "language_style": {
+    "tone": "academic_en",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 62.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.841
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "cikarim via eleme under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 229,
+      "difficulty_avg": 43.6,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 230,
+      "q_to": 458,
+      "difficulty_avg": 43.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 459,
+      "q_to": 687,
+      "difficulty_avg": 44.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 688,
+      "q_to": 916,
+      "difficulty_avg": 46.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 917,
+      "q_to": 1148,
+      "difficulty_avg": 44.1,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

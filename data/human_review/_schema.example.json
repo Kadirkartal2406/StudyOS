@@ -1,0 +1,17 @@
+{
+  "$schema_note": "M26 human review example.",
+  "review_id": "example-hr-0001",
+  "question_ref_type": "generated_or_assessment",
+  "question_ref_id": null,
+  "labels": ["kotu_soru"],
+  "ratings": {
+    "exam_feel": null,
+    "language": null,
+    "difficulty": null,
+    "option_quality": null,
+    "overall": null
+  },
+  "notes": null,
+  "rater_id": null,
+  "created_at": null
+}

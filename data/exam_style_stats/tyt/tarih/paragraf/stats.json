@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_tarih",
+  "topic_code": "tyt_turkce__paragraf",
+  "sample_size": 4,
+  "paragraph_avg": 138.2,
+  "sentence_avg": 10.5,
+  "difficulty_avg": 74.5,
+  "reading_avg": 68.2,
+  "option_length": 40.65,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

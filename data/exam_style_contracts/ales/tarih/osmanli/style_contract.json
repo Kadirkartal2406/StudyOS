@@ -1,0 +1,128 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_tarih",
+  "topic_code": "ales_tarih__osmanli",
+  "subject_slug": "tarih",
+  "topic_slug": "osmanli",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 201.0,
+    "sentence_count": 19.0,
+    "average_reading_time_sec": 88.0,
+    "visual_density": 0.03,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 39.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 75.0,
+    "band": "high",
+    "curve_summary": [
+      "hard"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "hatirlama",
+    "intents": [
+      "hatirlama",
+      "neden_sonuc",
+      "karsilastirma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "osmanli",
+    "subject_slug": "tarih"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.039,
+      "iki_adim": 0.039,
+      "cok_adim": 0.312,
+      "eleme": 0.039,
+      "karsilastirma": 0.117,
+      "hipotez": 0.039,
+      "neden_sonuc": 0.039,
+      "kosul_zinciri": 0.156,
+      "soyutlama": 0.117,
+      "analojik": 0.102
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.084,
+    "understand": 0.189,
+    "apply": 0.232,
+    "analyze": 0.263,
+    "evaluate": 0.21,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:hatirlama",
+    "reasoning:cok_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 88.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "hatirlama via cok_adim under very_high reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 75.0,
+      "band": "hard"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

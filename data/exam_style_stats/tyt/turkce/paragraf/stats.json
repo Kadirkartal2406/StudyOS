@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_turkce",
+  "topic_code": "tyt_turkce__paragraf",
+  "sample_size": 30,
+  "paragraph_avg": 36.2,
+  "sentence_avg": 4.8,
+  "difficulty_avg": 45.6,
+  "reading_avg": 22.1,
+  "option_length": 21.56,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "inference",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

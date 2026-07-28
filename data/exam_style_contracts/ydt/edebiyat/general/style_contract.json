@@ -1,0 +1,149 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_edebiyat",
+  "topic_code": "ydt_edebiyat__general",
+  "subject_slug": "edebiyat",
+  "topic_slug": "general",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 131.0,
+    "sentence_count": 7.0,
+    "average_reading_time_sec": 62.0,
+    "visual_density": 0.025,
+    "information_density": 0.841,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 25.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 65.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "medium",
+      "hard",
+      "very_hard",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "reading",
+      "cikarim",
+      "kelime",
+      "baglam"
+    ],
+    "topic_slug": "general",
+    "subject_slug": "edebiyat"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "eleme",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.048,
+      "iki_adim": 0.333,
+      "cok_adim": 0.048,
+      "eleme": 0.19,
+      "karsilastirma": 0.048,
+      "hipotez": 0.048,
+      "neden_sonuc": 0.048,
+      "kosul_zinciri": 0.048,
+      "soyutlama": 0.048,
+      "analojik": 0.143
+    },
+    "multi_step_ratio": 0.037,
+    "reasoning_intensity": 0.018
+  },
+  "bloom": {
+    "remember": 0.088,
+    "understand": 0.199,
+    "apply": 0.353,
+    "analyze": 0.249,
+    "evaluate": 0.088,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:iki_adim",
+    "trap:yakin_anlam",
+    "trap:ters_ifade",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "academic_en",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 62.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.841
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "genel_anlama via iki_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "band": "easy",
+      "weight": 0.25,
+      "difficulty_avg": 35.0
+    },
+    {
+      "segment": 2,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 55.0
+    },
+    {
+      "segment": 3,
+      "band": "hard",
+      "weight": 0.18,
+      "difficulty_avg": 72.0
+    },
+    {
+      "segment": 4,
+      "band": "very_hard",
+      "weight": 0.12,
+      "difficulty_avg": 85.0
+    },
+    {
+      "segment": 5,
+      "band": "medium",
+      "weight": 0.225,
+      "difficulty_avg": 58.0
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

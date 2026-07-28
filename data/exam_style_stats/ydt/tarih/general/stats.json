@@ -1,0 +1,18 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_tarih",
+  "topic_code": "ydt_tarih__general",
+  "sample_size": 1,
+  "paragraph_avg": 197.0,
+  "sentence_avg": 13.0,
+  "difficulty_avg": 75.0,
+  "reading_avg": 86.0,
+  "option_length": 38.2,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

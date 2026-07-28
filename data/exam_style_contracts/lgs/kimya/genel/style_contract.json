@@ -1,0 +1,151 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_kimya",
+  "topic_code": "lgs_fen__genel",
+  "subject_slug": "kimya",
+  "topic_slug": "genel",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 141.0,
+    "sentence_count": 18.0,
+    "average_reading_time_sec": 61.0,
+    "visual_density": 0.2,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 14.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 79.0,
+    "band": "high",
+    "curve_summary": [
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "medium"
+  },
+  "intent": {
+    "primary": "genel_anlama",
+    "intents": [
+      "genel_anlama",
+      "uygulama"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "genel",
+    "subject_slug": "kimya"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri"
+    ],
+    "distribution": {
+      "tek_adim": 0.05,
+      "iki_adim": 0.05,
+      "cok_adim": 0.4,
+      "eleme": 0.05,
+      "karsilastirma": 0.05,
+      "hipotez": 0.05,
+      "neden_sonuc": 0.05,
+      "kosul_zinciri": 0.2,
+      "soyutlama": 0.05,
+      "analojik": 0.05
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 0.45
+  },
+  "bloom": {
+    "remember": 0.087,
+    "understand": 0.196,
+    "apply": 0.239,
+    "analyze": 0.239,
+    "evaluate": 0.217,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:genel_anlama",
+    "reasoning:cok_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 61.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "genel_anlama via cok_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 5,
+      "difficulty_avg": 34.4,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 6,
+      "q_to": 10,
+      "difficulty_avg": 33.2,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 11,
+      "q_to": 15,
+      "difficulty_avg": 35.6,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 16,
+      "q_to": 20,
+      "difficulty_avg": 34.4,
+      "band": "easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 21,
+      "q_to": 25,
+      "difficulty_avg": 56.8,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

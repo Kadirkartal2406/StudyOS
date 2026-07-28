@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_fizik",
+  "topic_code": "ayt_fizik__hareket",
+  "sample_size": 9,
+  "paragraph_avg": 54.7,
+  "sentence_avg": 6.67,
+  "difficulty_avg": 49.9,
+  "reading_avg": 30.3,
+  "option_length": 37.6,
+  "reasoning_avg": 0.667,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

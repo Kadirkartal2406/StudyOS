@@ -1,0 +1,18 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_edebiyat",
+  "topic_code": "ales_edebiyat__general",
+  "sample_size": 3,
+  "paragraph_avg": 151.3,
+  "sentence_avg": 12.33,
+  "difficulty_avg": 66.3,
+  "reading_avg": 66.7,
+  "option_length": 51.47,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

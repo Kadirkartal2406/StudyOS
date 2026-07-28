@@ -1,0 +1,154 @@
+{
+  "exam_code": "yds",
+  "name": "YDS",
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "topic_count": 9,
+  "reading_profile": {
+    "paragraph_length": 69.9,
+    "sentence_count": 1.88,
+    "average_reading_time_sec": 37.2,
+    "visual_density": 0.025,
+    "information_density": 0.356,
+    "text_complexity": "medium",
+    "load_band": "high",
+    "option_length_avg": 3.72,
+    "page_layout": "single_column_or_sparse"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim",
+      "eleme",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.364,
+      "iki_adim": 0.045,
+      "cok_adim": 0.045,
+      "eleme": 0.182,
+      "karsilastirma": 0.045,
+      "hipotez": 0.045,
+      "neden_sonuc": 0.045,
+      "kosul_zinciri": 0.045,
+      "soyutlama": 0.045,
+      "analojik": 0.136
+    },
+    "multi_step_ratio": 0.037,
+    "reasoning_intensity": 0.018
+  },
+  "trap_patterns": {
+    "primary": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "distractor_style": "plausible_heuristic",
+    "trap_density": "high"
+  },
+  "bloom": {
+    "remember": 0.083,
+    "understand": 0.201,
+    "apply": 0.46,
+    "analyze": 0.226,
+    "evaluate": 0.009,
+    "create": 0.021
+  },
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 16,
+      "difficulty_avg": 44.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 17,
+      "q_to": 32,
+      "difficulty_avg": 42.2,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 33,
+      "q_to": 48,
+      "difficulty_avg": 54.8,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 49,
+      "q_to": 64,
+      "difficulty_avg": 48.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 65,
+      "q_to": 80,
+      "difficulty_avg": 46.0,
+      "band": "medium_easy"
+    }
+  ],
+  "intents": {
+    "yds_edebiyat__general": [
+      "genel_anlama"
+    ],
+    "yds_ingilizce__reading": [
+      "cikarim",
+      "ana_fikir",
+      "kelime",
+      "baglam",
+      "genel_anlama"
+    ],
+    "yds_ingilizce__general": [
+      "genel_anlama"
+    ],
+    "yds_matematik__problemler": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "yds_turkce__dil_bilgisi": [
+      "dil_bilgisi",
+      "yapı",
+      "kural_uygulama",
+      "yazim",
+      "noktalama"
+    ],
+    "yds_turkce__general": [
+      "genel_anlama"
+    ],
+    "unknown__general": [
+      "genel_anlama"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 6
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 1
+    },
+    {
+      "cluster": "mixed_general",
+      "size": 1
+    },
+    {
+      "cluster": "language_rules",
+      "size": 1
+    }
+  ],
+  "notes": "Learned exam thinking profile. No question text."
+}

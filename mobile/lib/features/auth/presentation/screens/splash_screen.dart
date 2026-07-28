@@ -32,10 +32,15 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     );
     _controller.forward();
 
-    // Oturum kontrolü
-    Future.microtask(
-      () => ref.read(authProvider.notifier).checkSession(),
-    );
+    // Oturum kontrolü — yalnızca ilk açılışta (AuthInitial).
+    // Login sırasında AuthLoading ile buraya düşülürse checkSession
+    // yarışını bozmasın diye tekrar çağırma.
+    Future.microtask(() {
+      if (!mounted) return;
+      if (ref.read(authProvider) is AuthInitial) {
+        ref.read(authProvider.notifier).checkSession();
+      }
+    });
   }
 
   @override

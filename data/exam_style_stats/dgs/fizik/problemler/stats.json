@@ -1,0 +1,18 @@
+{
+  "exam_code": "dgs",
+  "subject_code": "dgs_fizik",
+  "topic_code": "dgs_matematik__problemler",
+  "sample_size": 3,
+  "paragraph_avg": 182.7,
+  "sentence_avg": 13.0,
+  "difficulty_avg": 79.7,
+  "reading_avg": 88.3,
+  "option_length": 35.33,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

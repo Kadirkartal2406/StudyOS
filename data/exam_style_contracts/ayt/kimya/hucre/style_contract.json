@@ -1,0 +1,152 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_kimya",
+  "topic_code": "ayt_biyoloji__hucre",
+  "subject_slug": "kimya",
+  "topic_slug": "hucre",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 30.0,
+    "sentence_count": 7.0,
+    "average_reading_time_sec": 19.0,
+    "visual_density": 0.283,
+    "information_density": 0.463,
+    "text_complexity": "high",
+    "load_band": "low",
+    "option_length_avg": 8.67,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 44.0,
+    "band": "medium",
+    "curve_summary": [
+      "medium",
+      "medium",
+      "medium_easy",
+      "easy",
+      "easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "hatirlama",
+    "intents": [
+      "hatirlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "derin_uygulama",
+      "ispat_yaklasimi",
+      "modelleme"
+    ],
+    "topic_slug": "hucre",
+    "subject_slug": "kimya"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.348,
+    "reasoning_intensity": 0.174
+  },
+  "bloom": {
+    "remember": 0.084,
+    "understand": 0.294,
+    "apply": 0.231,
+    "analyze": 0.286,
+    "evaluate": 0.084,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:hatirlama",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:formül_karistirma"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 19.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.463
+  },
+  "paragraph_ratio": 0.25,
+  "expected_thinking": "hatirlama via iki_adim under low reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 2,
+      "difficulty_avg": 61.0,
+      "band": "medium"
+    },
+    {
+      "segment": 2,
+      "q_from": 3,
+      "q_to": 4,
+      "difficulty_avg": 66.5,
+      "band": "medium"
+    },
+    {
+      "segment": 3,
+      "q_from": 5,
+      "q_to": 6,
+      "difficulty_avg": 40.0,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 7,
+      "q_to": 8,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 9,
+      "q_to": 11,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

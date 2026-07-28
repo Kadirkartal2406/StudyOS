@@ -1,0 +1,125 @@
+{
+  "exam_code": "yds",
+  "subject_code": "yds_turkce",
+  "topic_code": "yds_turkce__dil_bilgisi",
+  "subject_slug": "turkce",
+  "topic_slug": "dil_bilgisi",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 166.0,
+    "sentence_count": 12.0,
+    "average_reading_time_sec": 62.0,
+    "visual_density": 0.025,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 3.72,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 64.0,
+    "band": "medium_high",
+    "curve_summary": [
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "dil_bilgisi",
+    "intents": [
+      "dil_bilgisi",
+      "yapı",
+      "kural_uygulama",
+      "yazim",
+      "noktalama"
+    ],
+    "exam_defaults": [
+      "reading",
+      "cikarim",
+      "kelime"
+    ],
+    "topic_slug": "dil_bilgisi",
+    "subject_slug": "turkce"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "eleme",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.048,
+      "iki_adim": 0.333,
+      "cok_adim": 0.048,
+      "eleme": 0.19,
+      "karsilastirma": 0.048,
+      "hipotez": 0.048,
+      "neden_sonuc": 0.048,
+      "kosul_zinciri": 0.048,
+      "soyutlama": 0.048,
+      "analojik": 0.143
+    },
+    "multi_step_ratio": 0.037,
+    "reasoning_intensity": 0.018
+  },
+  "bloom": {
+    "remember": 0.088,
+    "understand": 0.199,
+    "apply": 0.353,
+    "analyze": 0.249,
+    "evaluate": 0.088,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:dil_bilgisi",
+    "reasoning:iki_adim",
+    "trap:yakin_anlam",
+    "trap:ters_ifade",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "academic_en",
+    "skill_type": "language_rules",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 62.0,
+  "option_balance": "short",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "dil_bilgisi via iki_adim under very_high reading load",
+  "cluster": "language_rules",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 64.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

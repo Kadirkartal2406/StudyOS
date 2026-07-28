@@ -209,10 +209,14 @@ AWS_REGION=eu-central-1
 AWS_S3_BUCKET_NAME=studyos-dev
 AWS_S3_ENDPOINT_URL=          # Geliştirmede: http://localhost:9000 | Prod: boş bırak
 
-# ─── AI ─────────────────────────────────────────────────
-GEMINI_API_KEY=               # Google AI Studio'dan alınır
-OPENAI_API_KEY=               # İleride kullanılacak; şimdilik boş
-AI_PROVIDER=gemini            # gemini | openai
+# ─── AI (Sprint-2.4) ────────────────────────────────────
+GEMINI_API_KEY=
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+AI_PROVIDER=null              # null | gemini | openai | claude
+AI_MODEL=
+AI_FALLBACK_PROVIDER=null
+# Ayrıntı: docs/deployment.md
 
 # ─── Firebase (FCM) ─────────────────────────────────────
 FIREBASE_PROJECT_ID=
@@ -475,3 +479,4 @@ flutter run -d chrome
 | Sürüm | Tarih | Değişiklik |
 |-------|-------|-----------|
 | 1.0 | 2026-07-06 | İlk sürüm — Meeting-008 |
+| 1.1 | 2026-07-17 | Sprint-2.9 — Achievement seed migration `h4c5d6e7f8a9`; Flutter `features/achievements` |

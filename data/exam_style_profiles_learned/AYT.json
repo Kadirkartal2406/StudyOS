@@ -1,0 +1,187 @@
+{
+  "exam_code": "ayt",
+  "name": "AYT",
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "topic_count": 26,
+  "reading_profile": {
+    "paragraph_length": 93.6,
+    "sentence_count": 6.46,
+    "average_reading_time_sec": 48.6,
+    "visual_density": 0.283,
+    "information_density": 0.674,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 27.15,
+    "page_layout": "single_column_or_sparse"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.348,
+    "reasoning_intensity": 0.174
+  },
+  "trap_patterns": {
+    "primary": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "distractor_style": "plausible_heuristic",
+    "trap_density": "high"
+  },
+  "bloom": {
+    "remember": 0.09,
+    "understand": 0.352,
+    "apply": 0.119,
+    "analyze": 0.325,
+    "evaluate": 0.091,
+    "create": 0.022
+  },
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 26,
+      "difficulty_avg": 53.5,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 27,
+      "q_to": 52,
+      "difficulty_avg": 58.7,
+      "band": "medium"
+    },
+    {
+      "segment": 3,
+      "q_from": 53,
+      "q_to": 78,
+      "difficulty_avg": 52.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 79,
+      "q_to": 104,
+      "difficulty_avg": 51.8,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 105,
+      "q_to": 132,
+      "difficulty_avg": 48.5,
+      "band": "medium_easy"
+    }
+  ],
+  "intents": {
+    "ayt_biyoloji__general": [
+      "genel_anlama"
+    ],
+    "ayt_fizik__hareket": [
+      "modelleme",
+      "islem",
+      "neden_sonuc",
+      "genel_anlama"
+    ],
+    "ayt_biyoloji__hucre": [
+      "hatirlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "ayt_felsefe__general": [
+      "genel_anlama"
+    ],
+    "ayt_kimya__mol": [
+      "islem",
+      "modelleme",
+      "problem",
+      "akil_yurutme"
+    ],
+    "ayt_geometri__ucgenler": [
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi",
+      "genel_anlama"
+    ],
+    "ayt_matematik__fonksiyonlar": [
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "problem"
+    ],
+    "ayt_fizik__general": [
+      "genel_anlama"
+    ],
+    "ayt_geometri__general": [
+      "genel_anlama",
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi"
+    ],
+    "ayt_kimya__general": [
+      "genel_anlama"
+    ],
+    "ayt_matematik__general": [
+      "genel_anlama"
+    ],
+    "ayt_matematik__problemler": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "unknown__general": [
+      "genel_anlama"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 6
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 5
+    },
+    {
+      "cluster": "calculation_heavy",
+      "size": 8
+    },
+    {
+      "cluster": "knowledge_recall",
+      "size": 2
+    },
+    {
+      "cluster": "mixed_general",
+      "size": 1
+    },
+    {
+      "cluster": "spatial_geometry",
+      "size": 4
+    }
+  ],
+  "notes": "Learned exam thinking profile. No question text."
+}

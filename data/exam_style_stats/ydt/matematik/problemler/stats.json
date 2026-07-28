@@ -1,0 +1,18 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_matematik",
+  "topic_code": "ydt_matematik__problemler",
+  "sample_size": 3,
+  "paragraph_avg": 157.3,
+  "sentence_avg": 6.33,
+  "difficulty_avg": 70.3,
+  "reading_avg": 74.0,
+  "option_length": 30.27,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

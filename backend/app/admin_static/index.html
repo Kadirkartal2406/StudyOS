@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StudyOS Admin</title>
+  <link rel="stylesheet" href="/admin/styles.css" />
+</head>
+<body>
+  <div id="login-view" class="auth-wrap">
+    <form id="login-form" class="auth-card">
+      <h1>StudyOS Admin</h1>
+      <p class="muted">Sistem yönetimi</p>
+      <label>E-posta<input id="login-email" type="email" required autocomplete="username" /></label>
+      <label>Şifre<input id="login-password" type="password" required autocomplete="current-password" /></label>
+      <button type="submit">Giriş yap</button>
+      <p id="login-error" class="error" hidden></p>
+    </form>
+  </div>
+
+  <div id="app-view" class="app" hidden>
+    <aside class="sidebar">
+      <div class="brand">StudyOS Admin</div>
+      <nav>
+        <button data-tab="overview" class="nav active">Özet</button>
+        <button data-tab="users" class="nav">Kullanıcılar</button>
+        <button data-tab="questions" class="nav">Sorular</button>
+      </nav>
+      <button id="logout-btn" class="ghost">Çıkış</button>
+    </aside>
+    <main>
+      <header class="top">
+        <h2 id="page-title">Özet</h2>
+        <div id="admin-email" class="muted"></div>
+      </header>
+
+      <section id="tab-overview" class="tab">
+        <div id="overview-grid" class="cards"></div>
+      </section>
+
+      <section id="tab-users" class="tab" hidden>
+        <div class="toolbar">
+          <input id="user-search" placeholder="E-posta veya isim ara…" />
+          <button id="user-search-btn">Ara</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Ad</th><th>E-posta</th><th>Rol</th><th>Durum</th>
+                <th>Plan</th><th>Oturum</th><th>Soru</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="users-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-questions" class="tab" hidden>
+        <div class="toolbar">
+          <select id="q-source">
+            <option value="all">Tümü</option>
+            <option value="pool">Havuz</option>
+            <option value="generated">Üretilmiş</option>
+            <option value="record">Kullanıcı kayıtları</option>
+          </select>
+          <input id="q-search" placeholder="Metin / ders / konu…" />
+          <button id="q-search-btn">Ara</button>
+        </div>
+        <div id="questions-list" class="q-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="user-dialog">
+    <form method="dialog" id="user-form" class="dialog-body">
+      <h3>Kullanıcı düzenle</h3>
+      <input type="hidden" id="u-id" />
+      <label>Ad<input id="u-first" required /></label>
+      <label>Soyad<input id="u-last" required /></label>
+      <label>E-posta<input id="u-email" type="email" required /></label>
+      <label>Rol
+        <select id="u-role">
+          <option value="student">student</option>
+          <option value="teacher">teacher</option>
+          <option value="institution_admin">institution_admin</option>
+          <option value="system_admin">system_admin</option>
+        </select>
+      </label>
+      <label>Durum
+        <select id="u-status">
+          <option value="active">active</option>
+          <option value="inactive">inactive</option>
+          <option value="pending_deletion">pending_deletion</option>
+          <option value="anonymized">anonymized</option>
+        </select>
+      </label>
+      <label><input id="u-verified" type="checkbox" /> E-posta doğrulandı</label>
+      <label>Yeni şifre (opsiyonel)<input id="u-password" type="password" minlength="8" /></label>
+      <p id="user-form-error" class="error" hidden></p>
+      <div class="row">
+        <button type="submit" value="save">Kaydet</button>
+        <button type="button" id="u-export" class="secondary">Veriyi indir</button>
+        <button type="button" id="u-soft-delete" class="danger">Pasife al</button>
+        <button type="button" id="u-hard-delete" class="danger">Kalıcı sil</button>
+        <button type="button" id="u-close" class="ghost">Kapat</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/admin/app.js"></script>
+</body>
+</html>

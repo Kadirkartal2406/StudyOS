@@ -1,0 +1,153 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_fizik",
+  "topic_code": "ayt_matematik__fonksiyonlar",
+  "subject_slug": "fizik",
+  "topic_slug": "fonksiyonlar",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 19.0,
+    "sentence_count": 2.0,
+    "average_reading_time_sec": 7.0,
+    "visual_density": 0.283,
+    "information_density": 0.171,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 27.15,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 32.0,
+    "band": "medium",
+    "curve_summary": [
+      "easy",
+      "medium_easy",
+      "easy",
+      "medium",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "formül_karistirma",
+      "sinir_kosulu",
+      "yanlis_cikarim"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "modelleme",
+    "intents": [
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "derin_uygulama",
+      "ispat_yaklasimi",
+      "modelleme"
+    ],
+    "topic_slug": "fonksiyonlar",
+    "subject_slug": "fizik"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.348,
+    "reasoning_intensity": 0.174
+  },
+  "bloom": {
+    "remember": 0.171,
+    "understand": 0.266,
+    "apply": 0.209,
+    "analyze": 0.259,
+    "evaluate": 0.076,
+    "create": 0.019
+  },
+  "thinking_pattern": [
+    "intent:modelleme",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:formül_karistirma"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 7.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.171
+  },
+  "paragraph_ratio": 0.158,
+  "expected_thinking": "modelleme via iki_adim under low reading load",
+  "cluster": "calculation_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 6,
+      "difficulty_avg": 32.7,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 7,
+      "q_to": 12,
+      "difficulty_avg": 49.8,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 13,
+      "q_to": 18,
+      "difficulty_avg": 32.7,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 19,
+      "q_to": 24,
+      "difficulty_avg": 61.7,
+      "band": "medium"
+    },
+    {
+      "segment": 5,
+      "q_from": 25,
+      "q_to": 32,
+      "difficulty_avg": 57.4,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

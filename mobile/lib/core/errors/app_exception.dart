@@ -36,6 +36,11 @@ final class ConflictException extends AppException {
   const ConflictException({required super.message}) : super(code: 'CONFLICT');
 }
 
+/// Girdi doğrulama hatası (422) — örn. zayıf şifre, geçersiz e-posta formatı.
+final class ValidationException extends AppException {
+  const ValidationException({required super.message}) : super(code: 'VALIDATION_ERROR');
+}
+
 /// Sunucu hatası (5xx).
 final class ServerException extends AppException {
   const ServerException({super.message = 'Sunucu hatası, lütfen tekrar deneyin'})
@@ -46,4 +51,18 @@ final class ServerException extends AppException {
 final class UnknownException extends AppException {
   const UnknownException({super.message = 'Beklenmeyen bir hata oluştu'})
       : super(code: 'UNKNOWN');
+}
+
+/// AI sağlayıcı hatası (timeout / kota / unavailable).
+final class AiProviderException extends AppException {
+  const AiProviderException({
+    required super.message,
+    super.code = 'AI_PROVIDER_ERROR',
+  });
+}
+
+/// İstek iptal edildi.
+final class CancelledException extends AppException {
+  const CancelledException({super.message = 'İstek iptal edildi'})
+      : super(code: 'CANCELLED');
 }

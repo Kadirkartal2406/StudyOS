@@ -1,0 +1,126 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_turkce",
+  "topic_code": "kpss_turkce__noktalama",
+  "subject_slug": "turkce",
+  "topic_slug": "noktalama",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 121.0,
+    "sentence_count": 11.0,
+    "average_reading_time_sec": 66.0,
+    "visual_density": 0.033,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 23.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 79.0,
+    "band": "high",
+    "curve_summary": [
+      "hard"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade",
+      "kapsam_disi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "noktalama",
+    "intents": [
+      "noktalama",
+      "kural_uygulama",
+      "dil_bilgisi",
+      "yazim"
+    ],
+    "exam_defaults": [
+      "ana_fikir",
+      "cikarim",
+      "anlatim",
+      "dil_bilgisi",
+      "hatirlama"
+    ],
+    "topic_slug": "noktalama",
+    "subject_slug": "turkce"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri"
+    ],
+    "distribution": {
+      "tek_adim": 0.05,
+      "iki_adim": 0.05,
+      "cok_adim": 0.4,
+      "eleme": 0.05,
+      "karsilastirma": 0.05,
+      "hipotez": 0.05,
+      "neden_sonuc": 0.05,
+      "kosul_zinciri": 0.2,
+      "soyutlama": 0.05,
+      "analojik": 0.05
+    },
+    "multi_step_ratio": 0.263,
+    "reasoning_intensity": 0.526
+  },
+  "bloom": {
+    "remember": 0.083,
+    "understand": 0.188,
+    "apply": 0.229,
+    "analyze": 0.27,
+    "evaluate": 0.208,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:noktalama",
+    "reasoning:cok_adim",
+    "trap:yakin_anlam",
+    "trap:abarti",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "language_rules",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 66.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "noktalama via cok_adim under very_high reading load",
+  "cluster": "language_rules",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 79.0,
+      "band": "hard"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

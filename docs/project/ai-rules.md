@@ -1,4 +1,4 @@
-﻿# StudyOS — Yapay Zeka Geliştirme Anayasası
+# StudyOS — Yapay Zeka Geliştirme Anayasası
 
 **Belge Durumu:** Resmi — Kalıcı  
 **Sürüm:** 1.0  
@@ -8,7 +8,11 @@
 
 > Bu belge, StudyOS projesinde görev yapan her yapay zeka asistanı için bağlayıcı bir anayasadır.  
 > Buradaki kurallar, bir model tercihine değil; projenin uzun vadeli sağlığına hizmet eder.  
-> Her AI oturumu bu belgeyi referans alarak başlamalıdır.
+> Her AI oturumu bu belgeyi referans alarak başlamalıdır.  
+> **Ürün vizyonu SSOT:** `docs/product/product-vision.md`  
+> **Tasarım prensipleri (11 kural):** `docs/product/design-principles.md`  
+> **Learning Operating System:** `docs/product/learning-operating-system.md` (v2.0)  
+> (Complexity belongs to the system; kullanıcı modül yönetmez; Dashboard=Today; Topic=Work Surface; RuleEngine karar / LLM Explain Only.)
 
 ---
 

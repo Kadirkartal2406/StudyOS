@@ -12,10 +12,13 @@ from app.database.base import get_db
 from app.middleware.rate_limit import AUTH_RATE_LIMIT, limiter
 from app.schemas.auth import (
     AuthResponse,
+    ForgotPasswordRequest,
+    ForgotPasswordResponse,
     LoginRequest,
     LogoutRequest,
     RefreshRequest,
     RegisterRequest,
+    ResetPasswordRequest,
     TokenRefreshResponse,
 )
 from app.schemas.common import SuccessResponse
@@ -85,3 +88,32 @@ async def logout_user(
 ) -> None:
     """Refresh token'ı geçersiz kılar."""
     await AuthService(db).logout(body.refresh_token)
+
+
+@router.post(
+    "/forgot-password",
+    response_model=SuccessResponse[ForgotPasswordResponse],
+)
+@limiter.limit(AUTH_RATE_LIMIT)
+async def forgot_password(
+    request: Request,
+    body: ForgotPasswordRequest,
+    db: AsyncSession = Depends(get_db),
+) -> SuccessResponse[ForgotPasswordResponse]:
+    """Şifre sıfırlama e-postası / geliştirme token'ı üretir."""
+    data = await AuthService(db).forgot_password(str(body.email))
+    await db.commit()
+    return SuccessResponse(data=data, message=data.message)
+
+
+@router.post("/reset-password", response_model=SuccessResponse[dict])
+@limiter.limit(AUTH_RATE_LIMIT)
+async def reset_password(
+    request: Request,
+    body: ResetPasswordRequest,
+    db: AsyncSession = Depends(get_db),
+) -> SuccessResponse[dict]:
+    """Token ile yeni şifre belirler."""
+    await AuthService(db).reset_password(body.token, body.new_password)
+    await db.commit()
+    return SuccessResponse(data={}, message="Şifre güncellendi")

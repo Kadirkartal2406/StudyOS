@@ -1,0 +1,18 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_matematik",
+  "topic_code": "ales_matematik__problemler",
+  "sample_size": 21,
+  "paragraph_avg": 35.3,
+  "sentence_avg": 4.71,
+  "difficulty_avg": 44.1,
+  "reading_avg": 24.4,
+  "option_length": 8.95,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

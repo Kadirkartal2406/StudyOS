@@ -1,0 +1,18 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "unknown",
+  "topic_code": "unknown__general",
+  "sample_size": 40,
+  "paragraph_avg": 2.1,
+  "sentence_avg": 2.0,
+  "difficulty_avg": 32.0,
+  "reading_avg": 5.0,
+  "option_length": 0.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

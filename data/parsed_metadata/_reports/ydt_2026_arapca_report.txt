@@ -1,0 +1,10 @@
+2026 YDT (ydt)
+80 question
+80 answer key
+3 subjects
+3 topics
+Difficulty avg 43.9
+Paragraph avg 10.1 words
+Reading avg 15.4 sec
+Style Profile Generated
+Metadata OK

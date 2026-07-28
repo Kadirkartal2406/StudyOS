@@ -1,0 +1,740 @@
+{
+  "parsed": 50,
+  "failed": 0,
+  "errors": [],
+  "written": [
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ags\\2025.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ags\\2025.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ags\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ags\\matematik\\problemler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ags_2025_report.txt",
+      "exam": "ags"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ags\\2026.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ags\\2026.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ags\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ags\\matematik\\problemler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ags_2026_report.txt",
+      "exam": "ags"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ales\\1\\2019.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ales\\1\\2019_1.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\biyoloji\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\geometri\\ucgenler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ales_2019_1_report.txt",
+      "exam": "ales"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ales\\1\\2021.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ales\\1\\2021_1.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\cografya\\iklim\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ales_2021_1_report.txt",
+      "exam": "ales"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ales\\2\\2019.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ales\\2\\2019_2.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ales_2019_2_report.txt",
+      "exam": "ales"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ales\\2\\2021.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ales\\2\\2021_2.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\biyoloji\\hucre\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ales_2021_2_report.txt",
+      "exam": "ales"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ales\\3\\2019.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ales\\3\\2019_3.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\yazim\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\geometri\\ucgenler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ales_2019_3_report.txt",
+      "exam": "ales"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\ales\\3\\2021.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ales\\3\\2021_3.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\turkce\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ales\\geometri\\ucgenler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ales_2021_3_report.txt",
+      "exam": "ales"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\dgs\\2017.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\dgs\\2017.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\biyoloji\\hucre\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\dgs_2017_report.txt",
+      "exam": "dgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\dgs\\2021.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\dgs\\2021.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\dgs\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\dgs_2021_report.txt",
+      "exam": "dgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\lisans\\2019.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\lisans\\2019.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\iklim\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2019_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\lisans\\2020.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\lisans\\2020.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\yazim\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\iklim\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2020_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\lisans\\2021.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\lisans\\2021.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\noktalama\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2021_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\ortaöğretim\\2016.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\ortaogretim\\2016.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\geometri\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2016_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\ortaöğretim\\2018.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\ortaogretim\\2018.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\felsefe\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2018_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\ortaöğretim\\2020.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\ortaogretim\\2020.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2020_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\önlisans\\2014.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\onlisans\\2014.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\iklim\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2014_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\önlisans\\2016.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\onlisans\\2016.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\cografya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2016_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\kpss\\önlisans\\2018.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\kpss\\onlisans\\2018.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\vatandaslik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\kpss\\biyoloji\\hucre\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\kpss_2018_report.txt",
+      "exam": "kpss"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\lgs\\sayısal\\2023.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\lgs\\sayisal\\2023.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\fen\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\kimya\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\lgs_2023_report.txt",
+      "exam": "lgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\lgs\\sayısal\\2024.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\lgs\\sayisal\\2024.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\fen\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\turkce\\dil_bilgisi\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\lgs_2024_report.txt",
+      "exam": "lgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\lgs\\sayısal\\2025.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\lgs\\sayisal\\2025.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\fen\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\kimya\\mol\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\lgs_2025_report.txt",
+      "exam": "lgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\lgs\\sözel\\2023.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\lgs\\sozel\\2023.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\turkce\\noktalama\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\turkce\\dil_bilgisi\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\lgs_2023_report.txt",
+      "exam": "lgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\lgs\\sözel\\2024.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\lgs\\sozel\\2024.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\kimya\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\lgs_2024_report.txt",
+      "exam": "lgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\lgs\\sözel\\2025.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\lgs\\sozel\\2025.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\lgs\\cografya\\iklim\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\lgs_2025_report.txt",
+      "exam": "lgs"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yds\\2026.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\yds\\2026.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yds\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yds\\turkce\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yds\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yds\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yds\\turkce\\dil_bilgisi\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\yds_2026_report.txt",
+      "exam": "yds"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ayt\\2024.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ayt\\2024.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\geometri\\ucgenler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\matematik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\biyoloji\\hucre\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ayt_2024_report.txt",
+      "exam": "ayt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ayt\\2025.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ayt\\2025.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\geometri\\ucgenler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\matematik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\biyoloji\\hucre\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\biyoloji\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\kimya\\mol\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ayt_2025_report.txt",
+      "exam": "ayt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ayt\\2026.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ayt\\2026.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\geometri\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\geometri\\ucgenler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\biyoloji\\hucre\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ayt\\felsefe\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ayt_2026_report.txt",
+      "exam": "ayt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\tyt\\2024.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\tyt\\2024.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\geometri\\ucgenler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\tarih\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\cografya\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\felsefe\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\din\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\biyoloji\\hucre\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\tyt_2024_report.txt",
+      "exam": "tyt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\tyt\\2025.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\tyt\\2025.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\geometri\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\matematik\\fonksiyonlar\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\biyoloji\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\geometri\\ucgenler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\tarih\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\cografya\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\felsefe\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\din\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\biyoloji\\hucre\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\tyt_2025_report.txt",
+      "exam": "tyt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\tyt\\2026.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\tyt\\2026.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\turkce\\paragraf\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\biyoloji\\hucre\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\geometri\\ucgenler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\tarih\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\cografya\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\felsefe\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\din\\genel\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\tyt\\matematik\\problemler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\tyt_2026_report.txt",
+      "exam": "tyt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2024_almanca.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2024_almanca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\tarih\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2024_almanca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2024_arapça.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2024_arapca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\tarih\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\cografya\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2024_arapca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2024_fransızca.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2024_fransizca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\kimya\\mol\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\biyoloji\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\turkce\\dil_bilgisi\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2024_fransizca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2024_ingilizce.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2024_ingilizce.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\biyoloji\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\edebiyat\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\hareket\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2024_ingilizce_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2024_rusça.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2024_rusca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\edebiyat\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2024_rusca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2025_almanca.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2025_almanca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\turkce\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2025_almanca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2025_arapça.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2025_arapca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\cografya\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2025_arapca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2025_fransızca.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2025_fransizca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2025_fransizca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2025_ingilizce.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2025_ingilizce.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\hareket\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2025_ingilizce_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2025_rusça.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2025_rusca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\tarih\\osmanli\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2025_rusca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2026_almanca.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2026_almanca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\cografya\\iklim\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2026_almanca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2026_arapça.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2026_arapca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\turkce\\dil_bilgisi\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\turkce\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2026_arapca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2026_fransızca.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2026_fransizca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\turkce\\dil_bilgisi\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2026_fransizca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2026_ingilizce.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2026_ingilizce.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\matematik\\problemler\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\kimya\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2026_ingilizce_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yks\\ydt\\2026_rusça.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\ydt\\2026_rusca.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\ingilizce\\reading\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\ydt\\kimya\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\ydt_2026_rusca_report.txt",
+      "exam": "ydt"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yökdil\\fen_bilimleri.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\yokdil\\fen\\fen.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\ingilizce\\fen\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\kimya\\general\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\yokdil_fen_report.txt",
+      "exam": "yokdil"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yökdil\\sağlık_bilimleri.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\yokdil\\saglik\\saglik.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\ingilizce\\saglik\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\fizik\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\matematik\\problemler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\yokdil_saglik_report.txt",
+      "exam": "yokdil"
+    },
+    {
+      "pdf": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\official_exams\\yökdil\\sosyal_bilimleri.pdf",
+      "metadata": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\yokdil\\sosyal\\sosyal.json",
+      "stats": [
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\ingilizce\\sosyal\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\felsefe\\general\\stats.json",
+        "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_stats\\yokdil\\matematik\\problemler\\stats.json"
+      ],
+      "report": "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\parsed_metadata\\_reports\\yokdil_sosyal_report.txt",
+      "exam": "yokdil"
+    }
+  ],
+  "style_profiles": [
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\AGS.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\ALES.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\AYT.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\DGS.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\KPSS.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\LGS.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\TYT.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\YDS.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\YDT.json",
+    "C:\\Users\\kadir\\OneDrive\\Masaüstü\\StudyOS\\data\\exam_style_profiles\\YOKDIL.json"
+  ]
+}

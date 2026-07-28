@@ -1,0 +1,16 @@
+{
+  "$schema_note": "M26 qie_cache example — empty payload.",
+  "cache_key": {
+    "exam": "kpss",
+    "subject": "turkce",
+    "topic": "paragraf",
+    "difficulty": "medium",
+    "question_count": 5,
+    "style_version": "m26_skeleton_v1"
+  },
+  "prompt_version": "qie_v3",
+  "payload": null,
+  "created_at": null,
+  "expires_at": null,
+  "hit_count": 0
+}

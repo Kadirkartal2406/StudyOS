@@ -1,0 +1,232 @@
+{
+  "exam_code": "tyt",
+  "name": "TYT",
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "topic_count": 25,
+  "reading_profile": {
+    "paragraph_length": 93.3,
+    "sentence_count": 2.12,
+    "average_reading_time_sec": 48.2,
+    "visual_density": 0.075,
+    "information_density": 0.456,
+    "text_complexity": "medium",
+    "load_band": "very_high",
+    "option_length_avg": 10.04,
+    "page_layout": "single_column_or_sparse"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim"
+    ],
+    "distribution": {
+      "tek_adim": 0.062,
+      "iki_adim": 0.437,
+      "cok_adim": 0.062,
+      "eleme": 0.062,
+      "karsilastirma": 0.062,
+      "hipotez": 0.062,
+      "neden_sonuc": 0.062,
+      "kosul_zinciri": 0.062,
+      "soyutlama": 0.062,
+      "analojik": 0.062
+    },
+    "multi_step_ratio": 0.075,
+    "reasoning_intensity": 0.323
+  },
+  "trap_patterns": {
+    "primary": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri",
+      "yaklasik_deger"
+    ],
+    "distractor_style": "plausible_heuristic",
+    "trap_density": "high"
+  },
+  "bloom": {
+    "remember": 0.078,
+    "understand": 0.102,
+    "apply": 0.508,
+    "analyze": 0.274,
+    "evaluate": 0.018,
+    "create": 0.019
+  },
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 72,
+      "difficulty_avg": 50.5,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 73,
+      "q_to": 144,
+      "difficulty_avg": 51.9,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 145,
+      "q_to": 216,
+      "difficulty_avg": 51.5,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 217,
+      "q_to": 288,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    },
+    {
+      "segment": 5,
+      "q_from": 289,
+      "q_to": 360,
+      "difficulty_avg": 53.2,
+      "band": "medium_easy"
+    }
+  ],
+  "intents": {
+    "tyt_biyoloji__general": [
+      "genel_anlama"
+    ],
+    "tyt_biyoloji__hucre": [
+      "hatirlama",
+      "iliski_kurma",
+      "tanim"
+    ],
+    "tyt_turkce__paragraf": [
+      "ana_fikir",
+      "yardimci_fikir",
+      "cikarim",
+      "anlatim",
+      "baglam"
+    ],
+    "tyt_cografya__genel": [
+      "genel_anlama",
+      "uygulama",
+      "hatirlama",
+      "tanim"
+    ],
+    "tyt_din__genel": [
+      "genel_anlama",
+      "uygulama",
+      "hatirlama",
+      "tanim"
+    ],
+    "tyt_felsefe__genel": [
+      "genel_anlama",
+      "uygulama",
+      "cikarim",
+      "ana_fikir",
+      "baglam"
+    ],
+    "tyt_felsefe__general": [
+      "genel_anlama"
+    ],
+    "tyt_fizik__general": [
+      "genel_anlama"
+    ],
+    "tyt_fizik__hareket": [
+      "modelleme",
+      "islem",
+      "neden_sonuc",
+      "problem",
+      "akil_yurutme"
+    ],
+    "tyt_geometri__general": [
+      "genel_anlama",
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi"
+    ],
+    "tyt_geometri__ucgenler": [
+      "sekil",
+      "uzamsal",
+      "ispat_yaklasimi",
+      "genel_anlama"
+    ],
+    "tyt_kimya__general": [
+      "genel_anlama"
+    ],
+    "tyt_kimya__mol": [
+      "islem",
+      "modelleme",
+      "problem",
+      "akil_yurutme"
+    ],
+    "tyt_matematik__fonksiyonlar": [
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "genel_anlama"
+    ],
+    "tyt_matematik__problemler": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "tyt_tarih__genel": [
+      "genel_anlama",
+      "uygulama",
+      "hatirlama",
+      "tanim"
+    ],
+    "tyt_tarih__general": [
+      "genel_anlama"
+    ],
+    "tyt_turkce__dil_bilgisi": [
+      "dil_bilgisi",
+      "yapı",
+      "kural_uygulama",
+      "yazim",
+      "noktalama"
+    ],
+    "unknown__general": [
+      "genel_anlama"
+    ]
+  },
+  "clusters": [
+    {
+      "cluster": "reading_heavy",
+      "size": 14
+    },
+    {
+      "cluster": "reasoning_heavy",
+      "size": 3
+    },
+    {
+      "cluster": "calculation_heavy",
+      "size": 1
+    },
+    {
+      "cluster": "knowledge_recall",
+      "size": 4
+    },
+    {
+      "cluster": "mixed_general",
+      "size": 1
+    },
+    {
+      "cluster": "language_rules",
+      "size": 1
+    },
+    {
+      "cluster": "spatial_geometry",
+      "size": 1
+    }
+  ],
+  "notes": "Learned exam thinking profile. No question text."
+}

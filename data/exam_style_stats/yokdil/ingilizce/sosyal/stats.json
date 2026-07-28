@@ -1,0 +1,18 @@
+{
+  "exam_code": "yokdil",
+  "subject_code": "yokdil_ingilizce",
+  "topic_code": "yokdil_ingilizce__sosyal",
+  "sample_size": 75,
+  "paragraph_avg": 32.8,
+  "sentence_avg": 2.44,
+  "difficulty_avg": 45.4,
+  "reading_avg": 22.9,
+  "option_length": 7.84,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "reading_comprehension",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

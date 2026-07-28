@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_geometri",
+  "topic_code": "ayt_geometri__ucgenler",
+  "sample_size": 6,
+  "paragraph_avg": 28.5,
+  "sentence_avg": 3.67,
+  "difficulty_avg": 41.5,
+  "reading_avg": 18.7,
+  "option_length": 13.55,
+  "reasoning_avg": 0.833,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

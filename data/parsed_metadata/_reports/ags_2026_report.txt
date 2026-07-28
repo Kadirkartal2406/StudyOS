@@ -1,0 +1,11 @@
+2026 AGS (ags)
+80 question
+0 answer key
+2 subjects
+2 topics
+Difficulty avg 51.5
+Paragraph avg 0.0 words
+Reading avg 15.0 sec
+Style Profile Generated
+Metadata OK
+Issues: answer_key_missing, text_extract_weak

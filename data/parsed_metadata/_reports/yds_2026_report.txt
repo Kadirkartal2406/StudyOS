@@ -1,0 +1,11 @@
+2026 YDS (yds)
+80 question
+0 answer key
+4 subjects
+3 topics
+Difficulty avg 47.1
+Paragraph avg 28.1 words
+Reading avg 21.0 sec
+Style Profile Generated
+Metadata OK
+Issues: answer_key_missing

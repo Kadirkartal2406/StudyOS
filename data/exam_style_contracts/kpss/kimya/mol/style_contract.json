@@ -1,0 +1,141 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_kimya",
+  "topic_code": "kpss_kimya__mol",
+  "subject_slug": "kimya",
+  "topic_slug": "mol",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 222.0,
+    "sentence_count": 20.0,
+    "average_reading_time_sec": 94.0,
+    "visual_density": 0.033,
+    "information_density": 1.0,
+    "text_complexity": "high",
+    "load_band": "very_high",
+    "option_length_avg": 220.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 89.0,
+    "band": "high",
+    "curve_summary": [
+      "very_hard",
+      "hard"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "abarti",
+      "eksik_bilgi",
+      "ters_ifade",
+      "kapsam_disi",
+      "islem_hatasi",
+      "oran_hatasi",
+      "yanlis_cikarim"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "islem",
+    "intents": [
+      "islem",
+      "modelleme",
+      "cikarim",
+      "ana_fikir",
+      "baglam"
+    ],
+    "exam_defaults": [
+      "ana_fikir",
+      "cikarim",
+      "anlatim",
+      "dil_bilgisi",
+      "hatirlama"
+    ],
+    "topic_slug": "mol",
+    "subject_slug": "kimya"
+  },
+  "reasoning": {
+    "dominant": "cok_adim",
+    "patterns": [
+      "cok_adim",
+      "kosul_zinciri",
+      "eleme",
+      "karsilastirma",
+      "neden_sonuc"
+    ],
+    "distribution": {
+      "tek_adim": 0.026,
+      "iki_adim": 0.026,
+      "cok_adim": 0.211,
+      "eleme": 0.132,
+      "karsilastirma": 0.105,
+      "hipotez": 0.053,
+      "neden_sonuc": 0.105,
+      "kosul_zinciri": 0.184,
+      "soyutlama": 0.079,
+      "analojik": 0.079
+    },
+    "multi_step_ratio": 0.263,
+    "reasoning_intensity": 1.0
+  },
+  "bloom": {
+    "remember": 0.044,
+    "understand": 0.182,
+    "apply": 0.174,
+    "analyze": 0.426,
+    "evaluate": 0.158,
+    "create": 0.016
+  },
+  "thinking_pattern": [
+    "intent:islem",
+    "reasoning:cok_adim",
+    "trap:yakin_anlam",
+    "trap:abarti",
+    "reasoning:kosul_zinciri"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "inference",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 94.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 1.0
+  },
+  "paragraph_ratio": 1.0,
+  "expected_thinking": "islem via cok_adim under very_high reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 89.0,
+      "band": "very_hard"
+    },
+    {
+      "segment": 2,
+      "q_from": 2,
+      "q_to": 2,
+      "difficulty_avg": 77.0,
+      "band": "hard"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

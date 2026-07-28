@@ -1,0 +1,11 @@
+2025 LGS (sozel)
+20 question
+11 answer key
+3 subjects
+2 topics
+Difficulty avg 38.6
+Paragraph avg 28.7 words
+Reading avg 12.8 sec
+Style Profile Generated
+Metadata OK
+Issues: answer_key_mismatch_q=20_key=11

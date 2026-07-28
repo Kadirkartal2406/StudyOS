@@ -1,0 +1,122 @@
+{
+  "exam_code": "dgs",
+  "subject_code": "dgs_biyoloji",
+  "topic_code": "dgs_biyoloji__hucre",
+  "subject_slug": "biyoloji",
+  "topic_slug": "hucre",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 38.0,
+    "sentence_count": 5.0,
+    "average_reading_time_sec": 31.0,
+    "visual_density": 0.083,
+    "information_density": 0.392,
+    "text_complexity": "low",
+    "load_band": "high",
+    "option_length_avg": 36.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 69.0,
+    "band": "high",
+    "curve_summary": [
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "yanlis_cikarim",
+      "eksik_oncul"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "yanlis_cikarim",
+      "eksik_oncul"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "medium"
+  },
+  "intent": {
+    "primary": "hatirlama",
+    "intents": [
+      "hatirlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "problem",
+      "mantik",
+      "cikarim"
+    ],
+    "topic_slug": "hucre",
+    "subject_slug": "biyoloji"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.046,
+      "iki_adim": 0.324,
+      "cok_adim": 0.046,
+      "eleme": 0.046,
+      "karsilastirma": 0.139,
+      "hipotez": 0.046,
+      "neden_sonuc": 0.046,
+      "kosul_zinciri": 0.046,
+      "soyutlama": 0.139,
+      "analojik": 0.12
+    },
+    "multi_step_ratio": 0.25,
+    "reasoning_intensity": 0.525
+  },
+  "bloom": {
+    "remember": 0.085,
+    "understand": 0.192,
+    "apply": 0.341,
+    "analyze": 0.275,
+    "evaluate": 0.085,
+    "create": 0.021
+  },
+  "thinking_pattern": [
+    "intent:hatirlama",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:yanlis_cikarim",
+    "reasoning:karsilastirma"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 31.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.392
+  },
+  "paragraph_ratio": 0.317,
+  "expected_thinking": "hatirlama via iki_adim under high reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 69.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

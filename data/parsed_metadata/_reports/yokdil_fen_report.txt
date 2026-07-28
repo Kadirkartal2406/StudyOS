@@ -1,0 +1,10 @@
+? YOKDIL (fen)
+80 question
+80 answer key
+3 subjects
+1 topics
+Difficulty avg 46.4
+Paragraph avg 43.8 words
+Reading avg 26.9 sec
+Style Profile Generated
+Metadata OK

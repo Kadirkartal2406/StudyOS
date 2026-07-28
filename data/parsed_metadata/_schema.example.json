@@ -1,0 +1,36 @@
+{
+  "$schema_note": "M26 example — NO question/choice/explanation text. Replace with real parser output later.",
+  "exam_code": "kpss",
+  "pack": "lisans",
+  "session_id": "2021",
+  "source_pdf": "official_exams/kpss/lisans/2021.pdf",
+  "question_count": 120,
+  "answer_key": ["A", "C", "B"],
+  "page_count": 24,
+  "subject_distribution": {
+    "turkce": 30,
+    "matematik": 30,
+    "tarih": 27,
+    "cografya": 18,
+    "vatandaslik": 15
+  },
+  "topic_distribution": {
+    "paragraf": 12,
+    "dil_bilgisi": 8
+  },
+  "skill_distribution": {
+    "inference": 0.35,
+    "main_idea": 0.2,
+    "vocabulary": 0.15
+  },
+  "exam_duration_minutes": 130,
+  "language": "tr",
+  "difficulty_estimation": {
+    "easy": 0.2,
+    "medium": 0.45,
+    "hard": 0.35
+  },
+  "reading_time_sec_avg": 75,
+  "parser_version": "pending",
+  "extracted_at": null
+}

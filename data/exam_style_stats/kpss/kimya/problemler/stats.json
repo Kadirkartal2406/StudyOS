@@ -1,0 +1,18 @@
+{
+  "exam_code": "kpss",
+  "subject_code": "kpss_kimya",
+  "topic_code": "kpss_matematik__problemler",
+  "sample_size": 1,
+  "paragraph_avg": 83.0,
+  "sentence_avg": 7.0,
+  "difficulty_avg": 69.0,
+  "reading_avg": 44.0,
+  "option_length": 40.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "analyze",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

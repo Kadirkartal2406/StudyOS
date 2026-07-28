@@ -1,0 +1,160 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_kimya",
+  "topic_code": "ydt_ingilizce__reading",
+  "subject_slug": "kimya",
+  "topic_slug": "reading",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 40.0,
+    "sentence_count": 13.0,
+    "average_reading_time_sec": 28.0,
+    "visual_density": 0.025,
+    "information_density": 0.8,
+    "text_complexity": "high",
+    "load_band": "medium",
+    "option_length_avg": 6.8,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 48.0,
+    "band": "medium",
+    "curve_summary": [
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy",
+      "medium_easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "patterns": [
+      "yakin_anlam",
+      "ters_ifade",
+      "baglam_disi",
+      "kelime_tuzagi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "cikarim",
+    "intents": [
+      "cikarim",
+      "ana_fikir",
+      "kelime",
+      "baglam",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "reading",
+      "cikarim",
+      "kelime",
+      "baglam"
+    ],
+    "topic_slug": "reading",
+    "subject_slug": "kimya"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim",
+      "eleme",
+      "analojik",
+      "karsilastirma",
+      "soyutlama"
+    ],
+    "distribution": {
+      "tek_adim": 0.242,
+      "iki_adim": 0.03,
+      "cok_adim": 0.03,
+      "eleme": 0.242,
+      "karsilastirma": 0.121,
+      "hipotez": 0.03,
+      "neden_sonuc": 0.03,
+      "kosul_zinciri": 0.03,
+      "soyutlama": 0.091,
+      "analojik": 0.152
+    },
+    "multi_step_ratio": 0.037,
+    "reasoning_intensity": 0.018
+  },
+  "bloom": {
+    "remember": 0.08,
+    "understand": 0.278,
+    "apply": 0.318,
+    "analyze": 0.224,
+    "evaluate": 0.08,
+    "create": 0.02
+  },
+  "thinking_pattern": [
+    "intent:cikarim",
+    "reasoning:tek_adim",
+    "trap:yakin_anlam",
+    "trap:ters_ifade",
+    "reasoning:eleme"
+  ],
+  "language_style": {
+    "tone": "academic_en",
+    "skill_type": "general",
+    "vocabulary_register": "academic"
+  },
+  "expected_time_sec": 28.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.8
+  },
+  "paragraph_ratio": 0.333,
+  "expected_thinking": "cikarim via tek_adim under medium reading load",
+  "cluster": "reading_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 229,
+      "difficulty_avg": 43.6,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 230,
+      "q_to": 458,
+      "difficulty_avg": 43.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 459,
+      "q_to": 687,
+      "difficulty_avg": 44.3,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 688,
+      "q_to": 916,
+      "difficulty_avg": 46.7,
+      "band": "medium_easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 917,
+      "q_to": 1148,
+      "difficulty_avg": 44.1,
+      "band": "medium_easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

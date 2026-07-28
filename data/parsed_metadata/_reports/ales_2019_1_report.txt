@@ -1,0 +1,11 @@
+2019 ALES (1)
+100 question
+50 answer key
+8 subjects
+4 topics
+Difficulty avg 52.6
+Paragraph avg 29.0 words
+Reading avg 22.2 sec
+Style Profile Generated
+Metadata OK
+Issues: answer_key_mismatch_q=100_key=50

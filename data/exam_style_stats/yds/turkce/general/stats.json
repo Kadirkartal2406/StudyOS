@@ -1,0 +1,18 @@
+{
+  "exam_code": "yds",
+  "subject_code": "yds_turkce",
+  "topic_code": "yds_turkce__general",
+  "sample_size": 1,
+  "paragraph_avg": 67.0,
+  "sentence_avg": 6.0,
+  "difficulty_avg": 60.0,
+  "reading_avg": 39.0,
+  "option_length": 0.0,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "general",
+  "bloom_proxy": "apply",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

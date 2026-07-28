@@ -1,0 +1,18 @@
+{
+  "exam_code": "ayt",
+  "subject_code": "ayt_biyoloji",
+  "topic_code": "ayt_biyoloji__hucre",
+  "sample_size": 3,
+  "paragraph_avg": 42.3,
+  "sentence_avg": 8.0,
+  "difficulty_avg": 45.7,
+  "reading_avg": 31.0,
+  "option_length": 7.27,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "recall",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

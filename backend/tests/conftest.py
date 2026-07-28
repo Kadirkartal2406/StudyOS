@@ -11,6 +11,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.base import AsyncSessionLocal, get_db
 from app.main import app
+from app.middleware.rate_limit import limiter
+
+
+@pytest.fixture(autouse=True)
+def _reset_rate_limiter():
+    """Testler aynı IP'yi (127.0.0.1) paylaştığı için sayaç sıfırlanmazsa
+    ardışık /auth istekleri limiti aşar. Bu yalnızca test izolasyonu içindir;
+    üretim rate limit davranışı değişmez."""
+    limiter.reset()
+    yield
 
 
 @pytest.fixture

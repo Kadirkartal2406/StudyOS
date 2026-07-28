@@ -1,0 +1,18 @@
+{
+  "exam_code": "yds",
+  "subject_code": "yds_ingilizce",
+  "topic_code": "yds_ingilizce__reading",
+  "sample_size": 73,
+  "paragraph_avg": 21.6,
+  "sentence_avg": 1.55,
+  "difficulty_avg": 45.9,
+  "reading_avg": 18.3,
+  "option_length": 3.2,
+  "reasoning_avg": 0.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "reading_comprehension",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

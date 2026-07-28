@@ -23,7 +23,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-studyos}"]
+      # -d şart: aksi halde pg_isready kullanıcı adıyla "studyos" DB'sine bağlanır
+      # (volume studyos_dev ile oluştuysa her 10s FATAL log basar)
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-studyos} -d ${POSTGRES_DB:-studyos_dev}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5

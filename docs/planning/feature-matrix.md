@@ -1,4 +1,4 @@
-﻿# StudyOS — Özellik Matrisi (Feature Matrix)
+# StudyOS — Özellik Matrisi (Feature Matrix)
 
 **Belge Durumu:** Onay Bekliyor — Kapsam Dondurma  
 **Sürüm:** 1.0  
@@ -30,18 +30,29 @@
 | # | Özellik Adı | Açıklama | Hedef Kullanıcı | Öncelik | Sürüm |
 |---|------------|---------|----------------|---------|-------|
 | S-06 | Günlük Çalışma Planı | Kullanıcı tarafından oluşturulan günlük çalışma programı | Öğrenci | Zorunlu | MVP |
-| S-07 | AI Plan Oluşturma | Performans verisine göre AI'ın otomatik haftalık plan üretmesi | Öğrenci | Olmalı | v1.1 |
+| S-07 | AI Plan Oluşturma | Performans verisine göre uyarlanabilir haftalık plan (rule engine + saklanan reason; LLM yalnızca Explain) | Öğrenci | Zorunlu | MVP |
 | S-08 | Konu Takibi | Çalışılan konuları işaretleme ve ilerleme görüntüleme | Öğrenci | Zorunlu | MVP |
 | S-09 | Soru Takibi | Çözülen soru sayısını konu bazında kaydetme | Öğrenci | Zorunlu | MVP |
 | S-10 | Pomodoro Zamanlayıcı | Özelleştirilebilir odaklanma ve mola zamanlayıcısı | Öğrenci | Zorunlu | MVP |
+| S-31 | Öğrenme Kaynakları | Plana bağlı YouTube/PDF/web vb. kaynak yönetimi | Öğrenci | Zorunlu | MVP |
+
+> **Sprint-2.5 notu (B1):** S-31 eklendi. Kurumsal Material (K-12) ile karıştırılmaz;
+> öğrenci kişisel `StudyResource` kütüphanesi. YouTube Data API sonraki sprint.
 
 ### 1.3 Analiz ve Değerlendirme
 
 | # | Özellik Adı | Açıklama | Hedef Kullanıcı | Öncelik | Sürüm |
 |---|------------|---------|----------------|---------|-------|
-| S-11 | Yanlış Defteri | Yanlış yapılan soruların kaydedildiği dijital not sistemi | Öğrenci | Olmalı | v1.1 |
-| S-12 | Akıllı Tekrar Sistemi | Yanlış soruların spaced-repetition mantığıyla hatırlatılması | Öğrenci | Olmalı | v1.1 |
-| S-13 | Deneme Sınavı Analizi | Deneme sonuçlarını girerek konu/soru bazlı analiz yapma | Öğrenci | Olmalı | v1.1 |
+| S-11 | Yanlış Defteri | Yanlış/zayıf konuların kaydedildiği dijital not + tekrar kartı | Öğrenci | Zorunlu | MVP |
+| S-12 | Akıllı Tekrar Sistemi | Spaced-repetition (SM-2 lite); saklanan reason; LLM yalnızca Explain | Öğrenci | Zorunlu | MVP |
+| S-13 | Deneme Sınavı Analizi | Deneme sonuçlarını girerek konu/soru bazlı analiz yapma | Öğrenci | Zorunlu | MVP |
+
+> **Sprint-2.6 notu (C1):** S-13 MVP'ye çekildi. Öğrenci kişisel deneme kaydı
+> (`/exams`, Exam + ExamResult). Kurumsal K-14 Exam ayrı kalır (henüz yok).
+> Konu/soru bazlı derin analiz sonraki sprint.
+>
+> **Sprint-2.8 notu (C1):** S-11 + S-12 → **MVP**. Rule engine kuyruk/interval üretir;
+> LLM yalnızca Explain. Her kartta `source_type`, `reason`, `difficulty` (1–5).
 | S-14 | İstatistik ve Grafikler | Günlük/haftalık/aylık çalışma ve başarı grafikleri | Öğrenci | Zorunlu | MVP |
 
 ### 1.4 Yapay Zeka Özellikleri
@@ -49,9 +60,28 @@
 | # | Özellik Adı | Açıklama | Hedef Kullanıcı | Öncelik | Sürüm |
 |---|------------|---------|----------------|---------|-------|
 | S-15 | AI Çalışma Koçu | Kişiselleştirilmiş akademik rehberlik ve öneri sistemi | Öğrenci | Olmalı | v1.1 |
-| S-16 | AI Plan Oluşturma | Performans analizine göre uyarlanabilir çalışma planı | Öğrenci | Olmalı | v1.1 |
+| S-16 | AI Plan Oluşturma | *(alias / deprecated — S-07 ile aynı özellik)* | Öğrenci | — | — |
 
 > Not: S-07 ile S-16 aynı özelliğe karşılık gelmektedir. Bkz. Bölüm 6 — Tespit Edilen Sorunlar.
+>
+> **Sprint-2.7 notu (C1):** S-07 → **MVP**. Canonical kod **S-07**; S-16 alias/deprecated.
+> LLM plan üretmez; `reason` draft’ta saklanır. Explain endpoint doğal dil açıklar.
+>
+> **Sprint-2.0 notu (F1):** S-15 sürümü **v1.1 kalır**. Bu sprintte LLM sohbeti yok;
+> rule-based Insight/Rule Engine + `GET /ai/*` + Flutter `ai_coach` ile **insight foundation**
+> kuruldu. Tam AI Koç (Gemini/LLM) S-15 v1.1 kapsamında kalır.
+>
+> **Sprint-2.2 notu (G1):** S-15 v1.1 kalır. Chat mimarisi (Conversation/Message,
+> Context/Prompt, NullAIProvider, Flutter `ai_chat`) kuruldu; gerçek Gemini API yok.
+> **chat architecture foundation**.
+>
+> **Sprint-2.3 notu (F1):** S-15 v1.1 kalır; yeni matrix ID yok.
+> Memory Engine foundation (rule-based Writer/Retriever, `/memory` API, Flutter `memory`,
+> privacy export/clear/disable). Embedding/pgvector yok.
+>
+> **Sprint-2.4 notu (F1):** S-15 v1.1 kalır. Real LLM provider integration
+> (Gemini/OpenAI/Claude httpx, Null fallback, AI Settings E2). Gerçek SSE stream yok;
+> Conversation Summary altyapısı pasif (J1).
 
 ### 1.5 Bildirimler ve Hatırlatıcılar
 
@@ -90,10 +120,47 @@
 
 | # | Özellik Adı | Açıklama | Hedef Kullanıcı | Öncelik | Sürüm |
 |---|------------|---------|----------------|---------|-------|
-| S-30 | Ana Ekran Widget | Telefon ana ekranında günlük plan ve istatistik widget | Öğrenci | Olmayacak | Gelecek |
+| S-30 | Ana Ekran Widget | Telefon ana ekranında günlük plan ve istatistik widget | Öğrenci | Zorunlu | MVP |
 | S-31 | Akıllı Saat Desteği | WearOS / watchOS ile temel bildirim ve zamanlayıcı | Öğrenci | Olmayacak | Gelecek |
+| S-32 | Goal Engine | Haftalık/aylık çok tipli hedefler, otomatik ilerleme, milestone | Öğrenci | Zorunlu | MVP |
+| S-33 | Achievement Engine | Data-driven rozet/unlock; saklanan reason; LLM yalnızca Explain | Öğrenci | Zorunlu | MVP |
+| S-34 | Learning Profile | Student hub, multi-exam targets, subject catalog, onboarding, journey_stage | Öğrenci | Zorunlu | MVP |
+| S-35 | Profile-scoped Subjects UX | Primary exam ders metrikleri + Dashboard Derslerim insight (Sprint-3.0.1) | Öğrenci | Zorunlu | MVP |
+| S-36 | Goal Experience (Product Types) | Ürün hedef tipleri, dinamik form, exam/revision auto-progress, explain, detay (Sprint-3.0.2) | Öğrenci | Zorunlu | MVP |
+| S-37 | Journey Hub Dashboard | Active/Primary Hero, Layout Strategy, bugünkü görevler, AI tip+reason, ders/plan preview (Sprint-3.1.B) | Öğrenci | Zorunlu | MVP |
+| S-38 | Subject Hub Foundation | subject_code hub, sectioned detail API, multi-widget UI, deep-links (Sprint-3.1.C) | Öğrenci | Zorunlu | MVP |
 
----
+> **Sprint-2.1 notu (F1):** S-32 Goal Engine eklendi (MVP). AI hedef üretmez;
+> Insight Engine hedefleri okuyup öneri üretir. AI Goal Generator / adaptif planlama sonraki sprint.
+>
+> **Sprint-2.9 notu (A1/U1):** S-33 Achievement Engine MVP. RuleEngine criteria JSONB;
+> LLM unlock üretmez. Premium/ads/leaderboard bu sprintte yok (O1/Q1).
+>
+> **Sprint-3.0 notu (H1/A1):** S-02/S-03 aktivasyon + **S-34 Learning Profile**.
+> LLM plan/hedef/ders üretmez (I1). Soft onboarding (D2). Subject FK migration yok (C1).
+>
+> **Sprint-3.0.1 notu:** S-35 — Learning Profile SSOT; Subjects metrik kartları;
+> Question/Exam/Goal/Revision/Planner primary exam defaults.
+
+> **Sprint-3.0.2 notu:** S-36 — Product goal types; dinamik form; exam/revision
+> progress hooks; `POST /goals/{id}/explain`; Journey↔Goal `calc_progress` birliği.
+
+> **Sprint-3.1.B notu:** S-37 — Dashboard = Journey Hub. Primary/Active target
+> özeti tek `GET /dashboard`. RuleEngine reason; LLM Explain 3.1.D.
+
+> **Sprint-3.1.C notu:** S-38 — Subject Hub. Kimlik = `subject_code` (name eşleştirme yok).
+> Detail API sectioned; Flutter ayrı widget'lar; deep-link Q/Rev/Planner/Pomodoro/Exam/Resources.
+> Migration yok; Explain placeholder → 3.1.D.
+
+> **Sprint-3.1.C.x notu:** S-38 catalog redesign — TYT ders bazlı; AYT YKS `branch`;
+> KPSS ders odaklı (GY/GK yok); Hub prefix title; Dashboard kısa ad; migration yok.
+
+> **Sprint-3.2.A notu:** Topic Catalog Foundation — `topic_catalog` tablosu + sync;
+> Hub Topic List; Activity `topic_code` yok; Detail/AI/Planner sonraki.
+
+> **Product Vision Reset (Meeting-035):** SSOT [`docs/product/product-vision.md`](../product/product-vision.md);
+> roadmap [`docs/planning/roadmap-vision-aligned.md`](../planning/roadmap-vision-aligned.md).
+> Modül OS → Today / Topic Work Surface / Journey. Sprint gate zorunlu.---
 
 ## 2. Kurumsal Web Platformu — Özellik Listesi
 
@@ -216,8 +283,10 @@ MVP'de yalnızca **Zorunlu** öncelikli özellikler bulunur. Aşağıdaki liste 
 | S-17 | Akıllı Bildirimler |
 | S-18 | Günlük Hedef Bildirimi |
 | S-19 | Premium Üyelik |
+| S-30 | Ana Ekran Widget |
+| S-32 | Goal Engine |
 
-**Toplam MVP Öğrenci Özelliği: 13**
+**Toplam MVP Öğrenci Özelliği: 15**
 
 ### 5.2 Kurumsal Platform — MVP
 
@@ -336,7 +405,7 @@ Tüm **Olabilir** öncelikli özellikler:
 **Tahmini v2.0 özellik sayısı: 8**
 
 ### Gelecek (Kapsam Dışı — Şimdilik)
-- Öğrenci: S-27, S-28, S-29, S-30, S-31
+- Öğrenci: S-27, S-28, S-29, S-31
 - Kurumsal: K-27, K-28, K-29
 
 **Bu özellikler kapsam dışıdır. Dahil edilmeleri için ayrı bir toplantı ve onay gerekir.**
@@ -347,8 +416,8 @@ Tüm **Olabilir** öncelikli özellikler:
 
 | Kategori | Toplam | MVP | v1.1 | v2.0 | Gelecek |
 |----------|--------|-----|------|------|---------|
-| Öğrenci Uygulaması | 31 | 13 | 6 | 6 | 5 |
+| Öğrenci Uygulaması | 31 | 14 | 6 | 6 | 4 |
 | Kurumsal Platform | 29 | 14 | 10 | 2 | 3 |
 | Entegrasyon | 7 | 1 | 6 | — | — |
 | Altyapı | 7 | 7 | — | — | — |
-| **Toplam** | **74** | **35** | **22** | **8** | **8** |
+| **Toplam** | **74** | **36** | **22** | **8** | **7** |

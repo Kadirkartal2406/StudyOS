@@ -1,0 +1,126 @@
+{
+  "exam_code": "ales",
+  "subject_code": "ales_biyoloji",
+  "topic_code": "ales_biyoloji__hucre",
+  "subject_slug": "biyoloji",
+  "topic_slug": "hucre",
+  "sample_size": 1,
+  "reading_load": {
+    "paragraph_length": 42.0,
+    "sentence_count": 6.0,
+    "average_reading_time_sec": 32.0,
+    "visual_density": 0.03,
+    "information_density": 0.458,
+    "text_complexity": "high",
+    "load_band": "high",
+    "option_length_avg": 40.0,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 69.0,
+    "band": "high",
+    "curve_summary": [
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata"
+    ],
+    "patterns": [
+      "yanlis_cikarim",
+      "fazla_bilgi",
+      "eksik_oncul",
+      "matematiksel_hata",
+      "ters_iliski"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "hatirlama",
+    "intents": [
+      "hatirlama",
+      "iliski_kurma",
+      "genel_anlama"
+    ],
+    "exam_defaults": [
+      "mantik",
+      "iliski_kurma",
+      "tablo_yorumlama",
+      "cok_adimli_cikarim"
+    ],
+    "topic_slug": "hucre",
+    "subject_slug": "biyoloji"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "karsilastirma",
+      "soyutlama",
+      "analojik"
+    ],
+    "distribution": {
+      "tek_adim": 0.046,
+      "iki_adim": 0.324,
+      "cok_adim": 0.046,
+      "eleme": 0.046,
+      "karsilastirma": 0.139,
+      "hipotez": 0.046,
+      "neden_sonuc": 0.046,
+      "kosul_zinciri": 0.046,
+      "soyutlama": 0.139,
+      "analojik": 0.12
+    },
+    "multi_step_ratio": 0.201,
+    "reasoning_intensity": 0.377
+  },
+  "bloom": {
+    "remember": 0.086,
+    "understand": 0.194,
+    "apply": 0.344,
+    "analyze": 0.269,
+    "evaluate": 0.086,
+    "create": 0.022
+  },
+  "thinking_pattern": [
+    "intent:hatirlama",
+    "reasoning:iki_adim",
+    "trap:yanlis_cikarim",
+    "trap:fazla_bilgi",
+    "reasoning:karsilastirma"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "general",
+    "vocabulary_register": "neutral"
+  },
+  "expected_time_sec": 32.0,
+  "option_balance": "tight",
+  "vocabulary": {
+    "register": "academic",
+    "density": 0.458
+  },
+  "paragraph_ratio": 0.35,
+  "expected_thinking": "hatirlama via iki_adim under high reading load",
+  "cluster": "knowledge_recall",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 1,
+      "difficulty_avg": 69.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "exam_code": "lgs",
+  "subject_code": "lgs_matematik",
+  "topic_code": "lgs_matematik__problemler",
+  "subject_slug": "matematik",
+  "topic_slug": "problemler",
+  "sample_size": 10,
+  "reading_load": {
+    "paragraph_length": 20.4,
+    "sentence_count": 2.5,
+    "average_reading_time_sec": 8.7,
+    "visual_density": 0.2,
+    "information_density": 0.202,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 1.28,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 34.2,
+    "band": "medium",
+    "curve_summary": [
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma",
+      "birim_hatasi"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "dikkat_hatasi",
+      "grafik_okuma",
+      "birim_hatasi",
+      "eksik_veri"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "problem",
+    "intents": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme"
+    ],
+    "exam_defaults": [
+      "temel_uygulama",
+      "cikarim",
+      "sekil"
+    ],
+    "topic_slug": "problemler",
+    "subject_slug": "matematik"
+  },
+  "reasoning": {
+    "dominant": "tek_adim",
+    "patterns": [
+      "tek_adim",
+      "neden_sonuc",
+      "kosul_zinciri",
+      "hipotez"
+    ],
+    "distribution": {
+      "tek_adim": 0.333,
+      "iki_adim": 0.042,
+      "cok_adim": 0.042,
+      "eleme": 0.042,
+      "karsilastirma": 0.042,
+      "hipotez": 0.083,
+      "neden_sonuc": 0.167,
+      "kosul_zinciri": 0.167,
+      "soyutlama": 0.042,
+      "analojik": 0.042
+    },
+    "multi_step_ratio": 0.0,
+    "reasoning_intensity": 1.0
+  },
+  "bloom": {
+    "remember": 0.138,
+    "understand": 0.215,
+    "apply": 0.246,
+    "analyze": 0.323,
+    "evaluate": 0.062,
+    "create": 0.015
+  },
+  "thinking_pattern": [
+    "intent:problem",
+    "reasoning:tek_adim",
+    "trap:islem_hatasi",
+    "trap:dikkat_hatasi",
+    "reasoning:neden_sonuc"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "problem_solving",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 8.7,
+  "option_balance": "short",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.202
+  },
+  "paragraph_ratio": 0.17,
+  "expected_thinking": "problem via tek_adim under low reading load",
+  "cluster": "reasoning_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 6,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 2,
+      "q_from": 7,
+      "q_to": 12,
+      "difficulty_avg": 38.3,
+      "band": "easy"
+    },
+    {
+      "segment": 3,
+      "q_from": 13,
+      "q_to": 18,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 4,
+      "q_from": 19,
+      "q_to": 24,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    },
+    {
+      "segment": 5,
+      "q_from": 25,
+      "q_to": 30,
+      "difficulty_avg": 32.0,
+      "band": "easy"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

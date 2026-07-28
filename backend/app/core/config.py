@@ -3,9 +3,36 @@ StudyOS — Uygulama Konfigürasyonu
 Ortam değişkenleri pydantic-settings ile yüklenir.
 """
 
-from functools import lru_cache
+from __future__ import annotations
 
+from functools import lru_cache
+from typing import Any
+
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+def normalize_database_url(url: str) -> str:
+    """Neon/Render postgres URL → SQLAlchemy asyncpg (+ SSL)."""
+    u = (url or "").strip()
+    if not u:
+        return u
+    if u.startswith("postgres://"):
+        u = "postgresql+asyncpg://" + u[len("postgres://") :]
+    elif u.startswith("postgresql://"):
+        u = "postgresql+asyncpg://" + u[len("postgresql://") :]
+    # Neon often ships sslmode=require; asyncpg wants ssl=require
+    if "sslmode=require" in u:
+        u = u.replace("sslmode=require", "ssl=require")
+    return u
+
+
+def database_url_for_alembic(url: str) -> str:
+    """asyncpg URL → psycopg2 sync URL for Alembic."""
+    u = normalize_database_url(url).replace("+asyncpg", "")
+    if "ssl=require" in u and "sslmode=" not in u:
+        u = u.replace("ssl=require", "sslmode=require")
+    return u
 
 
 class Settings(BaseSettings):
@@ -18,8 +45,13 @@ class Settings(BaseSettings):
 
     # ── Uygulama ──────────────────────────────────────────────
     APP_NAME: str = "StudyOS"
-    APP_ENV: str = "development"
+    APP_ENV: str = "development"  # development | beta | production
     DEBUG: bool = True
+    # RC2 M22.5 — genel uygulama secret'ı (prod'da zorunlu güçlü)
+    APP_SECRET: str = "change-me-in-production"
+    # Geriye uyum: .env SECRET_KEY → APP_SECRET alias
+    SECRET_KEY: str = ""
+    COOKIE_SECRET: str = "change-me-in-production"
 
     # ── Veritabanı ────────────────────────────────────────────
     DATABASE_URL: str = "postgresql+asyncpg://studyos:studyos@localhost:5432/studyos_dev"
@@ -39,10 +71,41 @@ class Settings(BaseSettings):
     AWS_S3_BUCKET_NAME: str = "studyos-dev"
     AWS_S3_ENDPOINT_URL: str = "http://localhost:9000"
 
-    # ── AI ────────────────────────────────────────────────────
+    # ── AI (Sprint-2.4 — gerçek LLM; key'ler yalnızca .env) ───
     GEMINI_API_KEY: str = ""
     OPENAI_API_KEY: str = ""
-    AI_PROVIDER: str = "gemini"
+    ANTHROPIC_API_KEY: str = ""
+    # null | gemini | openai | claude
+    AI_PROVIDER: str = "null"
+    AI_MODEL: str = ""
+    AI_TEMPERATURE: float = 0.7
+    AI_MAX_TOKENS: int = 4096
+    AI_TIMEOUT_SECONDS: float = 30.0
+    AI_RETRY_COUNT: int = 2
+    AI_RATE_LIMIT_PER_MINUTE: int = 20
+    # B1: primary fail → null (boş bırakılırsa null)
+    AI_FALLBACK_PROVIDER: str = "null"
+    # M32 — model zinciri: primary + en fazla N fallback
+    AI_GEMINI_MAX_FALLBACKS: int = 1
+    # M32 — günlük Gemini istek bütçesi (0 = limitsiz)
+    AI_DAILY_REQUEST_BUDGET: int = 1000
+
+    # ── M32 Production readiness / cost flags (dev default: OFF) ──
+    ENABLE_AUTO_BOOKLET: bool = False
+    ENABLE_BACKGROUND_AI: bool = False
+    ENABLE_MIDNIGHT_SCHEDULER: bool = False
+    ENABLE_CATCHUP: bool = False
+    ENABLE_AI_WARMUP: bool = False
+    # Compact author: Writer+Distractor+Naturalizer tek LLM (Review/VSSE aynı)
+    ENABLE_COMPACT_AUTHOR: bool = True
+
+    # ── Knowledge Layer (Sprint 19) ───────────────────────────
+    # notebooklm | local  — domain servisleri provider'dan bağımsız
+    KNOWLEDGE_PROVIDER: str = "notebooklm"
+
+    # ── Assessment booklet (Sprint 23) ────────────────────────
+    # true → AI yerine sentetik soru (dev/test); AI_PROVIDER=null iken de sentetik
+    ASSESSMENT_BOOKLET_SYNTHETIC: bool = False
 
     # ── Firebase ──────────────────────────────────────────────
     FIREBASE_PROJECT_ID: str = ""
@@ -58,11 +121,20 @@ class Settings(BaseSettings):
     SMTP_PASSWORD: str = ""
     SMTP_FROM_EMAIL: str = "noreply@studyos.com"
     SMTP_FROM_NAME: str = "StudyOS"
+    PASSWORD_RESET_EXPIRE_MINUTES: int = 15
+    # Mobil / web deep-link tabanı (şifre sıfırlama URL'si)
+    PUBLIC_APP_URL: str = "http://127.0.0.1:8002"
+    # Admin bootstrap (yoksa startup'ta oluşturulur / role yükseltilir)
+    ADMIN_BOOTSTRAP_EMAIL: str = "kadirkartal4921@icloud.com"
+    ADMIN_BOOTSTRAP_PASSWORD: str = "Kadir_kartal49"
+    ADMIN_BOOTSTRAP_FIRST_NAME: str = "Kadir"
+    ADMIN_BOOTSTRAP_LAST_NAME: str = "Kartal"
 
     # ── Sentry ────────────────────────────────────────────────
     SENTRY_DSN: str = ""
 
     # ── CORS ──────────────────────────────────────────────────
+    # Virgülle ayrılmış liste veya JSON dizi. "*" = tüm origin (credentials kapalı)
     ALLOWED_ORIGINS: list[str] = [
         "http://localhost:3000",
         "http://localhost:8080",
@@ -73,10 +145,51 @@ class Settings(BaseSettings):
     RATE_LIMIT_PER_MINUTE: int = 60
     AUTH_RATE_LIMIT_PER_MINUTE: int = 10
 
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def _normalize_db(cls, v: Any) -> Any:
+        if isinstance(v, str):
+            return normalize_database_url(v)
+        return v
+
+    @field_validator("ALLOWED_ORIGINS", mode="before")
+    @classmethod
+    def _parse_origins(cls, v: Any) -> Any:
+        if v is None or v == "":
+            return [
+                "http://localhost:3000",
+                "http://localhost:8080",
+                "http://localhost:5173",
+            ]
+        if isinstance(v, str):
+            s = v.strip()
+            if s == "*":
+                return ["*"]
+            if s.startswith("["):
+                import json
+
+                return json.loads(s)
+            return [p.strip() for p in s.split(",") if p.strip()]
+        return v
+
+    @model_validator(mode="after")
+    def _empty_s3_endpoint(self) -> Settings:
+        if self.AWS_S3_ENDPOINT_URL is not None and self.AWS_S3_ENDPOINT_URL.strip() == "":
+            object.__setattr__(self, "AWS_S3_ENDPOINT_URL", "")
+        return self
+
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    raw = Settings()
+    updates: dict = {}
+    if (not raw.APP_SECRET or raw.APP_SECRET.startswith("change-me")) and raw.SECRET_KEY:
+        updates["APP_SECRET"] = raw.SECRET_KEY
+    if (
+        not raw.COOKIE_SECRET or raw.COOKIE_SECRET.startswith("change-me")
+    ) and raw.SECRET_KEY:
+        updates["COOKIE_SECRET"] = raw.SECRET_KEY
+    return raw.model_copy(update=updates) if updates else raw
 
 
 settings = get_settings()

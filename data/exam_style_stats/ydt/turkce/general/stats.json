@@ -1,0 +1,18 @@
+{
+  "exam_code": "ydt",
+  "subject_code": "ydt_turkce",
+  "topic_code": "ydt_turkce__general",
+  "sample_size": 1,
+  "paragraph_avg": 36.0,
+  "sentence_avg": 9.0,
+  "difficulty_avg": 48.0,
+  "reading_avg": 26.0,
+  "option_length": 6.0,
+  "reasoning_avg": 1.0,
+  "distractor_pattern": "heuristic_balanced",
+  "skill_type": "problem_solving",
+  "bloom_proxy": "understand",
+  "question_flow": "mixed",
+  "source": "m27_parser",
+  "style_version": "m27_v1"
+}

@@ -1,0 +1,161 @@
+{
+  "exam_code": "tyt",
+  "subject_code": "tyt_kimya",
+  "topic_code": "tyt_kimya__mol",
+  "subject_slug": "kimya",
+  "topic_slug": "mol",
+  "sample_size": 8,
+  "reading_load": {
+    "paragraph_length": 10.2,
+    "sentence_count": 1.12,
+    "average_reading_time_sec": 15.0,
+    "visual_density": 0.075,
+    "information_density": 0.094,
+    "text_complexity": "low",
+    "load_band": "low",
+    "option_length_avg": 4.94,
+    "page_layout": "single_column_or_sparse"
+  },
+  "difficulty": {
+    "avg": 56.0,
+    "band": "medium_high",
+    "curve_summary": [
+      "medium",
+      "medium",
+      "medium",
+      "medium",
+      "medium"
+    ]
+  },
+  "trap": {
+    "primary": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri"
+    ],
+    "patterns": [
+      "islem_hatasi",
+      "birim_hatasi",
+      "grafik_okuma",
+      "eksik_veri",
+      "yaklasik_deger",
+      "oran_hatasi"
+    ],
+    "distractor_style": "heuristic_balanced",
+    "trap_density": "high"
+  },
+  "intent": {
+    "primary": "islem",
+    "intents": [
+      "islem",
+      "modelleme",
+      "problem",
+      "akil_yurutme"
+    ],
+    "exam_defaults": [
+      "problem",
+      "modelleme",
+      "islem",
+      "akil_yurutme",
+      "cikarim"
+    ],
+    "topic_slug": "mol",
+    "subject_slug": "kimya"
+  },
+  "reasoning": {
+    "dominant": "iki_adim",
+    "patterns": [
+      "iki_adim",
+      "neden_sonuc",
+      "kosul_zinciri",
+      "hipotez"
+    ],
+    "distribution": {
+      "tek_adim": 0.043,
+      "iki_adim": 0.304,
+      "cok_adim": 0.043,
+      "eleme": 0.043,
+      "karsilastirma": 0.043,
+      "hipotez": 0.087,
+      "neden_sonuc": 0.174,
+      "kosul_zinciri": 0.174,
+      "soyutlama": 0.043,
+      "analojik": 0.043
+    },
+    "multi_step_ratio": 0.075,
+    "reasoning_intensity": 0.912
+  },
+  "bloom": {
+    "remember": 0.074,
+    "understand": 0.166,
+    "apply": 0.295,
+    "analyze": 0.374,
+    "evaluate": 0.074,
+    "create": 0.018
+  },
+  "thinking_pattern": [
+    "intent:islem",
+    "reasoning:iki_adim",
+    "trap:islem_hatasi",
+    "trap:birim_hatasi",
+    "reasoning:neden_sonuc"
+  ],
+  "language_style": {
+    "tone": "formal_tr",
+    "skill_type": "problem_solving",
+    "vocabulary_register": "technical"
+  },
+  "expected_time_sec": 15.0,
+  "option_balance": "short",
+  "vocabulary": {
+    "register": "standard",
+    "density": 0.094
+  },
+  "paragraph_ratio": 0.085,
+  "expected_thinking": "islem via iki_adim under low reading load",
+  "cluster": "reasoning_heavy",
+  "difficulty_curve": [
+    {
+      "segment": 1,
+      "q_from": 1,
+      "q_to": 4,
+      "difficulty_avg": 66.0,
+      "band": "medium"
+    },
+    {
+      "segment": 2,
+      "q_from": 5,
+      "q_to": 8,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    },
+    {
+      "segment": 3,
+      "q_from": 9,
+      "q_to": 12,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    },
+    {
+      "segment": 4,
+      "q_from": 13,
+      "q_to": 16,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    },
+    {
+      "segment": 5,
+      "q_from": 17,
+      "q_to": 24,
+      "difficulty_avg": 55.0,
+      "band": "medium"
+    }
+  ],
+  "style_version": "m27_5_v1",
+  "source": "m27_5_style_learning",
+  "validation": {
+    "passed": true,
+    "issues": []
+  }
+}

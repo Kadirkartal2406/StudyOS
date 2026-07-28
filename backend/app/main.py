@@ -2,6 +2,10 @@
 StudyOS Backend — FastAPI Application
 """
 
+from __future__ import annotations
+
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -10,17 +14,84 @@ from slowapi.errors import RateLimitExceeded
 
 from app.core.config import settings
 from app.core.exceptions import StudyOSException, studyos_exception_to_http
+from app.core.secrets_guard import enforce_or_exit
+from app.core.sentry import capture_exception, init_sentry
 from app.middleware.rate_limit import limiter
+
+logger = logging.getLogger("studyos.api")
+
+# RC2 M22.5 — prod/beta'da zayıf secret ile ayağa kalkma
+enforce_or_exit(settings)
+# RC2 M22.3 — Sentry (DSN yoksa no-op)
+init_sentry(settings)
 
 
 def create_application() -> FastAPI:
     application = FastAPI(
         title=settings.APP_NAME,
-        version="0.1.0",
+        version="0.23.1-s23p1",
         description="StudyOS REST API",
         docs_url="/api/docs" if settings.DEBUG else None,
         redoc_url="/api/redoc" if settings.DEBUG else None,
     )
+
+    @application.on_event("startup")
+    async def _start_booklet_scheduler() -> None:
+        import asyncio
+
+        from app.services.ai_cost.flags import (
+            ai_warmup_enabled,
+            midnight_scheduler_enabled,
+        )
+
+        # Exam Intelligence Catalog seed (Decision Engine dokunulmaz)
+        asyncio.create_task(_seed_exam_catalog())
+        asyncio.create_task(_bootstrap_admin())
+        # Sprint 23 — Exam Style Learning Dataset
+        if ai_warmup_enabled():
+            asyncio.create_task(_seed_exam_style())
+        else:
+            logger.info("M32: ENABLE_AI_WARMUP=false — style seed skipped at startup")
+        # Gece 00:00 (İstanbul) Gemini üretimi + catch-up — sadece flag açıksa
+        if midnight_scheduler_enabled():
+            from app.services.booklet_scheduler import midnight_booklet_loop
+
+            asyncio.create_task(midnight_booklet_loop())
+        else:
+            logger.info(
+                "M32: ENABLE_MIDNIGHT_SCHEDULER=false — no auto Gemini on startup"
+            )
+
+    async def _bootstrap_admin() -> None:
+        from app.services.admin_bootstrap import ensure_admin_user
+
+        await ensure_admin_user()
+
+    async def _seed_exam_catalog() -> None:
+        try:
+            from app.database.base import AsyncSessionLocal
+            from app.services.exam_catalog_service import ExamCatalogService
+
+            async with AsyncSessionLocal() as db:
+                n = await ExamCatalogService(db).ensure_synced()
+                await db.commit()
+                if n and n > 0:
+                    logger.info("Exam catalog seeded topics=%s", n)
+        except Exception:
+            logger.exception("Exam catalog seed failed")
+
+    async def _seed_exam_style() -> None:
+        try:
+            from app.database.base import AsyncSessionLocal
+            from app.services.exam_style_service import ExamStyleService
+
+            async with AsyncSessionLocal() as db:
+                n = await ExamStyleService(db).ensure_synced()
+                await db.commit()
+                logger.info("Exam style profiles synced count=%s", n)
+        except Exception:
+            logger.exception("Exam style seed failed")
+
 
     # ── Rate Limiting ────────────────────────────────────────
     application.state.limiter = limiter
@@ -30,29 +101,85 @@ def create_application() -> FastAPI:
     )
 
     # ── Domain Exception Handler ─────────────────────────────
-    # Servisler yalnızca StudyOSException fırlatır; HTTP durum kodu ve
-    # response envelope'u burada merkezi olarak üretilir (coding-standards.md §3.7).
     @application.exception_handler(StudyOSException)
-    async def studyos_exception_handler(_request: Request, exc: StudyOSException) -> JSONResponse:
+    async def studyos_exception_handler(
+        _request: Request, exc: StudyOSException
+    ) -> JSONResponse:
         http_exc = studyos_exception_to_http(exc)
         return JSONResponse(
             status_code=http_exc.status_code,
-            content={"success": False, "error": {"code": exc.code, "message": exc.message}},
+            content={
+                "success": False,
+                "error": {"code": exc.code, "message": exc.message},
+            },
+        )
+
+    # Sprint 21 RC.8 + RC2 M22.3 — Unhandled → log + Sentry
+    @application.exception_handler(Exception)
+    async def unhandled_exception_handler(
+        request: Request, exc: Exception
+    ) -> JSONResponse:
+        logger.exception(
+            "unhandled path=%s method=%s err=%s",
+            request.url.path,
+            request.method,
+            exc,
+        )
+        capture_exception(exc)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": {
+                    "code": "INTERNAL_ERROR",
+                    "message": "Beklenmeyen bir sunucu hatası oluştu",
+                },
+            },
         )
 
     # ── CORS ──────────────────────────────────────────────────
-    application.add_middleware(
-        CORSMiddleware,
-        allow_origins=settings.ALLOWED_ORIGINS,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["Authorization", "Content-Type"],
-    )
+    origins = list(settings.ALLOWED_ORIGINS or [])
+    allow_all = origins == ["*"]
+    cors_kwargs: dict = {
+        "allow_origins": ["*"] if allow_all else origins,
+        # "*" ile credentials birlikte kullanılamaz
+        "allow_credentials": not allow_all,
+        "allow_methods": ["*"],
+        # PDF / bytes istekleri için Accept ve özel header'lara izin
+        "allow_headers": ["*"],
+        "expose_headers": ["Content-Disposition", "Content-Type"],
+    }
+    # Flutter Web bazen localhost'un rastgele bir portundan çalışır (örn:
+    # http://localhost:xxxx). Bu yüzden development/beta/prod fark etmeksizin
+    # localhost için regex ile izin veriyoruz.
+    if not allow_all:
+        cors_kwargs["allow_origin_regex"] = (
+            r"https?://(localhost|127\.0\.0\.1)(:\d+)?|"
+            r"https://.*\.onrender\.com"
+        )
+    application.add_middleware(CORSMiddleware, **cors_kwargs)
 
     # ── Routers ───────────────────────────────────────────────
+    from pathlib import Path
+
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import RedirectResponse
+
     from app.api.router import api_router
 
     application.include_router(api_router, prefix="/api/v1")
+
+    admin_dir = Path(__file__).resolve().parent / "admin_static"
+    if admin_dir.is_dir():
+        application.mount(
+            "/admin",
+            StaticFiles(directory=str(admin_dir), html=True),
+            name="admin",
+        )
+
+        @application.get("/admin-panel", include_in_schema=False)
+        async def admin_panel_redirect():
+            return RedirectResponse(url="/admin/")
 
     return application
 

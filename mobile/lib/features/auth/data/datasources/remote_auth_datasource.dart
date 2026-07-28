@@ -84,11 +84,27 @@ class RemoteAuthDatasource {
   }
 
   /// POST /auth/forgot-password
-  Future<void> forgotPassword(String email) async {
+  Future<Map<String, dynamic>> forgotPassword(String email) async {
     try {
-      await _dio.post<void>(
+      final response = await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.forgotPassword,
         data: {'email': email},
+      );
+      return _extractData(response.data);
+    } on DioException catch (e) {
+      throw dioExceptionToAppException(e);
+    }
+  }
+
+  /// POST /auth/reset-password
+  Future<void> resetPassword({
+    required String token,
+    required String newPassword,
+  }) async {
+    try {
+      await _dio.post<Map<String, dynamic>>(
+        ApiEndpoints.resetPassword,
+        data: {'token': token, 'new_password': newPassword},
       );
     } on DioException catch (e) {
       throw dioExceptionToAppException(e);
