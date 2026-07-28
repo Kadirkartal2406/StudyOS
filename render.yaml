@@ -54,6 +54,6 @@ services:
       - key: PUBLIC_APP_URL
         sync: false
       - key: ALLOWED_ORIGINS
-        value: "*"
+        value: '["*"]'
       - key: AWS_S3_ENDPOINT_URL
         value: ""

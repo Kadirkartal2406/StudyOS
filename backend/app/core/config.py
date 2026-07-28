@@ -6,10 +6,10 @@ Ortam değişkenleri pydantic-settings ile yüklenir.
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import Any
+from typing import Annotated, Any
 
 from pydantic import field_validator, model_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 def normalize_database_url(url: str) -> str:
@@ -134,8 +134,9 @@ class Settings(BaseSettings):
     SENTRY_DSN: str = ""
 
     # ── CORS ──────────────────────────────────────────────────
-    # Virgülle ayrılmış liste veya JSON dizi. "*" = tüm origin (credentials kapalı)
-    ALLOWED_ORIGINS: list[str] = [
+    # Env: "*", "https://a.com,https://b.com" veya JSON '["https://a.com"]'
+    # NoDecode: pydantic-settings list'i JSON sanmasın (Render'da "*" patlıyordu)
+    ALLOWED_ORIGINS: Annotated[list[str], NoDecode] = [
         "http://localhost:3000",
         "http://localhost:8080",
         "http://localhost:5173",
@@ -155,22 +156,34 @@ class Settings(BaseSettings):
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
     def _parse_origins(cls, v: Any) -> Any:
+        default = [
+            "http://localhost:3000",
+            "http://localhost:8080",
+            "http://localhost:5173",
+        ]
         if v is None or v == "":
-            return [
-                "http://localhost:3000",
-                "http://localhost:8080",
-                "http://localhost:5173",
-            ]
+            return default
+        if isinstance(v, (list, tuple, set)):
+            return [str(x).strip() for x in v if str(x).strip()]
         if isinstance(v, str):
             s = v.strip()
-            if s == "*":
+            if not s or s == "*":
                 return ["*"]
             if s.startswith("["):
                 import json
 
-                return json.loads(s)
-            return [p.strip() for p in s.split(",") if p.strip()]
-        return v
+                try:
+                    parsed = json.loads(s)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(
+                        "ALLOWED_ORIGINS JSON dizi olmalı, örn. "
+                        '[\"*\"] veya [\"https://app.example.com\"]'
+                    ) from exc
+                if not isinstance(parsed, list):
+                    raise ValueError("ALLOWED_ORIGINS JSON bir dizi olmalı")
+                return [str(x).strip() for x in parsed if str(x).strip()] or ["*"]
+            return [p.strip() for p in s.split(",") if p.strip()] or default
+        return default
 
     @model_validator(mode="after")
     def _empty_s3_endpoint(self) -> Settings:
