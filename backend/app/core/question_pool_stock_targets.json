@@ -1,0 +1,35 @@
+[
+  {
+    "exam": "kpss",
+    "subject_name": "Türkçe",
+    "topic_name": "Paragraf",
+    "difficulty_band": "medium",
+    "minimum": 300,
+    "target": 500
+  },
+  {
+    "exam": "tyt",
+    "subject_name": "Problemler",
+    "topic_name": "Problemler",
+    "difficulty_band": "medium",
+    "minimum": 500,
+    "target": 1000
+  },
+  {
+    "exam": "ayt",
+    "subject_name": "Türev",
+    "topic_name": "Türev",
+    "difficulty_band": "medium",
+    "minimum": 250,
+    "target": 500
+  },
+  {
+    "exam": "lgs",
+    "subject_name": "Matematik",
+    "topic_name": "Matematik",
+    "difficulty_band": "medium",
+    "minimum": 200,
+    "target": 400
+  }
+]
+

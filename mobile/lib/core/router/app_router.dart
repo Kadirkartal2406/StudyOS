@@ -113,13 +113,25 @@ class _RouterNotifier extends ChangeNotifier {
       // Giriş yapıldı — Sprint-3.1.A hard gate: onboarding zorunlu
       AuthAuthenticated() => () {
           final profileAsync = _ref.read(learningProfileProvider);
+          // Profil yüklenirken: login'de kal (splash'e atma — "takılı kaldı" hissi)
           if (profileAsync.isLoading) {
-            if (location == '/splash' || isOnboarding || isSetup) return null;
-            if (isAuthRoute) return '/splash';
+            if (isAuthRoute ||
+                location == '/splash' ||
+                isOnboarding ||
+                isSetup) {
+              return null;
+            }
+            return null;
+          }
+          // Profil hatası: yeni kullanıcıyı onboarding'e al (dashboard'a yanlış düşme)
+          if (profileAsync.hasError) {
+            if (!isOnboarding && !isSetup && location != '/setup/wow') {
+              return '/setup/wow';
+            }
             return null;
           }
           final required =
-              profileAsync.valueOrNull?.onboardingRequired ?? false;
+              profileAsync.valueOrNull?.onboardingRequired ?? true;
           if (required && !isOnboarding && location != '/setup/wow') {
             // İlk kez: WOW sonra sohbet
             return '/setup/wow';

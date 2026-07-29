@@ -6,6 +6,7 @@ import '../providers/auth_provider.dart';
 import '../providers/auth_state.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/auth_text_field.dart';
+import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
 
 /// Giriş ekranı.
 class LoginScreen extends ConsumerStatefulWidget {
@@ -38,7 +39,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
-    final isLoading = authState is AuthLoading;
+    final isLoading = switch (authState) {
+      AuthLoading() => true,
+      AuthAuthenticated() => ref.watch(learningProfileProvider).isLoading,
+      _ => false,
+    };
 
     // Hata mesajını göster
     ref.listen<AuthState>(authProvider, (_, next) {

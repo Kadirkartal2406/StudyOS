@@ -78,6 +78,10 @@ from app.models.knowledge import (
 from app.models.beta_ops import AnalyticsEvent, AnalyticsEventName, BetaFeedback
 from app.models.qie_eval import QieHumanEvaluation
 from app.models.question_pool import QuestionPoolCard
+from app.models.question_pool_inventory import (
+    QuestionPoolGenerationHistory,
+    QuestionPoolGenerationLock,
+)
 from app.models.password_reset import PasswordResetToken
 from app.models.user import User, UserRole, UserStatus
 
@@ -164,6 +168,8 @@ __all__ = [
     "BetaFeedback",
     "QieHumanEvaluation",
     "QuestionPoolCard",
+    "QuestionPoolGenerationHistory",
+    "QuestionPoolGenerationLock",
     "PasswordResetToken",
     "User",
     "UserRole",

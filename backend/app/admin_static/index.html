@@ -25,6 +25,7 @@
         <button data-tab="overview" class="nav active">Özet</button>
         <button data-tab="users" class="nav">Kullanıcılar</button>
         <button data-tab="questions" class="nav">Sorular</button>
+        <button data-tab="question-pool" class="nav">Question Pool</button>
       </nav>
       <button id="logout-btn" class="ghost">Çıkış</button>
     </aside>
@@ -69,6 +70,98 @@
         </div>
         <div id="questions-list" class="q-list"></div>
       </section>
+
+      <section id="tab-question-pool" class="tab" hidden>
+        <div class="toolbar">
+          <button id="qp-fill-missing-btn">Fill missing</button>
+          <button id="qp-run-scheduler-btn" style="background:#3b82f6;">▶ Run Scheduler Now</button>
+          <button id="qp-run-missing-safe-btn" style="background:#0ea5e9;">▶ Run Missing (Safe)</button>
+          <button id="qp-validate-5-btn" style="background:#f59e0b;">Generate 5 (no save)</button>
+          <button id="qp-stop-gen-btn" class="danger">⏹ STOP</button>
+          <button id="qp-batch-report-btn" style="background:#8b5cf6;">📊 Batch Report</button>
+          <button id="qp-production-report-btn" style="background:#059669;">📋 Production Report</button>
+          <label style="display:inline-flex;gap:8px;align-items:center;">
+            <input id="qp-dry-run" type="checkbox" />
+            dry_run
+          </label>
+          <label style="display:inline-flex;gap:8px;align-items:center;">
+            Approval
+            <select id="qp-approval-mode">
+              <option value="auto" selected>AUTO</option>
+              <option value="manual">MANUAL</option>
+            </select>
+          </label>
+          <div class="muted" id="qp-last-result" style="margin-left:auto;"></div>
+        </div>
+
+        <!-- Scheduler status -->
+        <div id="qp-scheduler-status" class="muted" style="margin:8px 0;font-size:13px;"></div>
+
+        <!-- M34.5 Live progress + cost gate -->
+        <div id="qp-cost-gate" class="muted" style="margin:8px 0;font-size:13px;"></div>
+        <div id="qp-live-progress" style="margin:8px 0;padding:12px;border:1px solid var(--border,#ddd);border-radius:8px;font-size:13px;">
+          <strong>Live Progress</strong>
+          <div id="qp-live-progress-body" class="muted">Idle</div>
+        </div>
+        <div id="qp-live-preview" style="margin:8px 0;padding:12px;border:1px solid var(--border,#ddd);border-radius:8px;font-size:13px;">
+          <strong>Live Preview</strong>
+          <div id="qp-live-preview-body" class="muted">Henüz soru yok.</div>
+        </div>
+        <div id="qp-pending-box" style="margin:8px 0;padding:12px;border:1px dashed var(--border,#ddd);border-radius:8px;font-size:13px;">
+          <strong>Pending Approval</strong>
+          <div id="qp-pending-body" class="muted">Boş</div>
+        </div>
+
+        <div id="qp-metrics-grid" class="cards"></div>
+
+        <!-- Fill Selected Topic inline form -->
+        <fieldset style="border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:16px;">
+          <legend style="font-weight:600;font-size:14px;">Fill Selected Topic</legend>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
+            <label style="display:flex;flex-direction:column;font-size:13px;">Exam
+              <input id="qp-fill-exam" placeholder="kpss" style="width:80px;" />
+            </label>
+            <label style="display:flex;flex-direction:column;font-size:13px;">Subject code
+              <input id="qp-fill-subject" placeholder="turkce" style="width:120px;" />
+            </label>
+            <label style="display:flex;flex-direction:column;font-size:13px;">Topic code
+              <input id="qp-fill-topic" placeholder="paragraf" style="width:140px;" />
+            </label>
+            <label style="display:flex;flex-direction:column;font-size:13px;">Difficulty
+              <select id="qp-fill-diff" style="width:90px;">
+                <option value="easy">easy</option>
+                <option value="medium" selected>medium</option>
+                <option value="hard">hard</option>
+              </select>
+            </label>
+            <label style="display:flex;flex-direction:column;font-size:13px;">Count
+              <input id="qp-fill-count" type="number" value="20" min="1" max="2000" style="width:70px;" />
+            </label>
+            <button id="qp-fill-selected-btn" class="secondary">Generate</button>
+          </div>
+          <div class="muted" id="qp-fill-selected-result" style="margin-top:6px;font-size:13px;"></div>
+        </fieldset>
+
+        <div class="table-wrap" style="margin-top:16px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Exam</th>
+                <th>Subject</th>
+                <th>Topic</th>
+                <th>Current</th>
+                <th>Minimum</th>
+                <th>Target</th>
+                <th>Status</th>
+                <th>Quality</th>
+                <th>Last Generated</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="qp-inventory-body"></tbody>
+          </table>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -106,6 +199,16 @@
         <button type="button" id="u-close" class="ghost">Kapat</button>
       </div>
     </form>
+  </dialog>
+
+  <dialog id="qp-preview-dialog" style="max-width:720px;width:90%;max-height:85vh;overflow-y:auto;">
+    <div class="dialog-body" id="qp-preview-content">
+      <h3>Question Preview</h3>
+      <div id="qp-preview-body"></div>
+      <div style="margin-top:16px;text-align:right;">
+        <button type="button" id="qp-preview-close" class="ghost">Kapat</button>
+      </div>
+    </div>
   </dialog>
 
   <script src="/admin/app.js"></script>

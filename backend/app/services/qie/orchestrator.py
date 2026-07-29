@@ -174,10 +174,35 @@ class QieOrchestrator:
                             correct_key=aq.correct_key,
                             explanation=aq.explanation,
                         )
-                        if is_similar_question(
-                            item, existing_stems=stems, existing_option_sets=opts
-                        ):
+
+                        # NEW: M34 question intelligence layer (Blueprint/ExamFeel/etc)
+                        from app.services.question_intelligence.pipeline import (
+                            evaluate_question as m34_evaluate_question,
+                        )
+
+                        qdict = {
+                            "stem": item.stem,
+                            "choices": item.choices,
+                            "correct_key": item.correct_key,
+                            "explanation": item.explanation,
+                        }
+                        m34 = m34_evaluate_question(
+                            qdict,
+                            plan.to_dict(),
+                            dna,
+                            existing_stems=stems,
+                            allow_repair=True,
+                        )
+                        if not m34.get("accepted"):
                             continue
+                        q2 = m34.get("question") or qdict
+                        item = ValidatedQuizItem(
+                            stem=str(q2.get("stem") or ""),
+                            choices=dict(q2.get("choices") or {}),
+                            correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
+                            explanation=q2.get("explanation"),
+                        )
+
                         diff = analyze_for_plan(item, plan, style=dna)
                         if diff.score < MIN_DIFFICULTY_SCORE:
                             continue
@@ -189,6 +214,12 @@ class QieOrchestrator:
                             style_dna=dna,
                         )
                         if not passes_quality_gate(quality):
+                            continue
+
+                        # Frozen similarity gate (runs after M34 + frozen quality gate)
+                        if is_similar_question(
+                            item, existing_stems=stems, existing_option_sets=opts
+                        ):
                             continue
                         card = build_card(
                             item,
@@ -412,12 +443,35 @@ class QieOrchestrator:
                 correct_key=aq.correct_key,
                 explanation=aq.explanation,
             )
-            if is_similar_question(
-                item,
+
+            # NEW: M34 question intelligence layer (Blueprint/ExamFeel/etc)
+            from app.services.question_intelligence.pipeline import (
+                evaluate_question as m34_evaluate_question,
+            )
+
+            qdict = {
+                "stem": item.stem,
+                "choices": item.choices,
+                "correct_key": item.correct_key,
+                "explanation": item.explanation,
+            }
+            m34 = m34_evaluate_question(
+                qdict,
+                plan.to_dict(),
+                dna,
                 existing_stems=existing,
-                existing_option_sets=existing_opts,
-            ):
+                allow_repair=True,
+            )
+            if not m34.get("accepted"):
                 continue
+            q2 = m34.get("question") or qdict
+            item = ValidatedQuizItem(
+                stem=str(q2.get("stem") or ""),
+                choices=dict(q2.get("choices") or {}),
+                correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
+                explanation=q2.get("explanation"),
+            )
+
             diff = analyze_for_plan(item, plan, style=dna)
             if diff.score < MIN_DIFFICULTY_SCORE:
                 continue
@@ -432,6 +486,14 @@ class QieOrchestrator:
             if aq.style_score:
                 quality.style = max(quality.style, min(100, aq.style_score))
             if not passes_quality_gate(quality):
+                continue
+
+            # Frozen similarity gate (runs after M34 + frozen quality gate)
+            if is_similar_question(
+                item,
+                existing_stems=existing,
+                existing_option_sets=existing_opts,
+            ):
                 continue
             card = build_card(
                 item,
@@ -503,12 +565,35 @@ class QieOrchestrator:
             plan = self._match_plan(plans, i, index_hints[i] if i < len(index_hints) else None)
             if plan is None:
                 continue
-            if is_similar_question(
-                item,
+
+            # NEW: M34 question intelligence layer (Blueprint/ExamFeel/etc)
+            from app.services.question_intelligence.pipeline import (
+                evaluate_question as m34_evaluate_question,
+            )
+
+            qdict = {
+                "stem": item.stem,
+                "choices": item.choices,
+                "correct_key": item.correct_key,
+                "explanation": item.explanation,
+            }
+            m34 = m34_evaluate_question(
+                qdict,
+                plan.to_dict(),
+                dna,
                 existing_stems=existing_stems,
-                existing_option_sets=existing_opts,
-            ):
+                allow_repair=True,
+            )
+            if not m34.get("accepted"):
                 continue
+            q2 = m34.get("question") or qdict
+            item = ValidatedQuizItem(
+                stem=str(q2.get("stem") or ""),
+                choices=dict(q2.get("choices") or {}),
+                correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
+                explanation=q2.get("explanation"),
+            )
+
             diff = analyze_for_plan(item, plan, style=dna)
             if diff.score < MIN_DIFFICULTY_SCORE:
                 continue
@@ -520,6 +605,14 @@ class QieOrchestrator:
                 style_dna=dna,
             )
             if not passes_quality_gate(quality):
+                continue
+
+            # Frozen similarity gate (runs after M34 + frozen quality gate)
+            if is_similar_question(
+                item,
+                existing_stems=existing_stems,
+                existing_option_sets=existing_opts,
+            ):
                 continue
             out.append(
                 build_card(

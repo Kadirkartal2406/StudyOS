@@ -9,7 +9,7 @@ from functools import lru_cache
 from typing import Annotated, Any
 
 from pydantic import field_validator, model_validator
-from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 def normalize_database_url(url: str) -> str:
@@ -96,6 +96,14 @@ class Settings(BaseSettings):
     ENABLE_MIDNIGHT_SCHEDULER: bool = False
     ENABLE_CATCHUP: bool = False
     ENABLE_AI_WARMUP: bool = False
+    # M33 — Smart Question Pool Scheduler (dry-run: sadece hesaplar, üretmez)
+    QUESTION_POOL_SCHEDULER_DRY_RUN: bool = False
+    QUESTION_POOL_LOCK_TTL_MINUTES: int = 15
+    # M34.5 — Production validation / cost-aware generation
+    AI_HOURLY_REQUEST_BUDGET: int = 300  # 0 = unlimited
+    QUESTION_PRODUCTION_APPROVAL_MODE: str = "auto"  # auto | manual
+    QUESTION_PRODUCTION_MAX_RETRY: int = 2
+    QUESTION_PRODUCTION_EST_COST_PER_QUESTION_USD: float = 0.002
     # Compact author: Writer+Distractor+Naturalizer tek LLM (Review/VSSE aynı)
     ENABLE_COMPACT_AUTHOR: bool = True
 
@@ -135,8 +143,7 @@ class Settings(BaseSettings):
 
     # ── CORS ──────────────────────────────────────────────────
     # Env: "*", "https://a.com,https://b.com" veya JSON '["https://a.com"]'
-    # NoDecode: pydantic-settings list'i JSON sanmasın (Render'da "*" patlıyordu)
-    ALLOWED_ORIGINS: Annotated[list[str], NoDecode] = [
+    ALLOWED_ORIGINS: list[str] = [
         "http://localhost:3000",
         "http://localhost:8080",
         "http://localhost:5173",

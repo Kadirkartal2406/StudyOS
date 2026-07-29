@@ -57,6 +57,11 @@ def create_application() -> FastAPI:
             from app.services.booklet_scheduler import midnight_booklet_loop
 
             asyncio.create_task(midnight_booklet_loop())
+            from app.services.smart_question_pool_scheduler import (
+                midnight_question_pool_loop,
+            )
+
+            asyncio.create_task(midnight_question_pool_loop())
         else:
             logger.info(
                 "M32: ENABLE_MIDNIGHT_SCHEDULER=false — no auto Gemini on startup"

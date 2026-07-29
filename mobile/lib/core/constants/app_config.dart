@@ -24,7 +24,8 @@ class AppConfig {
   static const String appVersion = '0.23.0';
 
   /// API istek zaman aşımı (saniye).
-  static const int apiTimeoutSeconds = 30;
+  /// Render free cold-start için 30 sn yetmeyebilir.
+  static const int apiTimeoutSeconds = 90;
 
   /// Refresh token güvenli depolama anahtarı.
   static const String refreshTokenKey = 'studyos_refresh_token';

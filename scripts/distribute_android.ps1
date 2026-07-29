@@ -1,14 +1,13 @@
 # StudyOS — Android Firebase App Distribution
 #
-# Kullanım:
+# Usage:
 #   .\scripts\distribute_android.ps1 -ApiBaseUrl "https://API_HOST/api/v1" -FirebaseAppId "1:xxx:android:yyy" -Groups "testers"
 #
-# Önkoşullar:
-#   1) Node.js +: npm i -g firebase-tools
-#   2) firebase login
-#   3) Firebase Console → Android app package: com.studyos.app
-#   4) (opsiyonel) google-services.json → mobile/android/app/
-#   5) Canlı HTTPS backend URL (localhost App Distribution'da çalışmaz)
+# Prerequisites:
+#   1) npm i -g firebase-tools
+#   2) firebase login   (interactive, once)
+#   3) Firebase Android app package: com.studyos.app
+#   4) Live HTTPS API (localhost will not work on phones)
 
 param(
     [Parameter(Mandatory = $true)]
@@ -19,7 +18,7 @@ param(
 
     [string]$Groups = "testers",
     [string]$AppEnv = "beta",
-    [string]$ReleaseNotes = "StudyOS beta — Firebase App Distribution",
+    [string]$ReleaseNotes = "StudyOS beta - Firebase App Distribution",
     [switch]$SkipUpload
 )
 
@@ -28,7 +27,7 @@ $root = Split-Path -Parent $PSScriptRoot
 $mobile = Join-Path $root "mobile"
 
 if ($ApiBaseUrl -notmatch '^https://') {
-    Write-Warning "API_BASE_URL ideally https:// for testers on real devices. Got: $ApiBaseUrl"
+    Write-Warning "API_BASE_URL should be https:// for real devices. Got: $ApiBaseUrl"
 }
 
 Push-Location $mobile
