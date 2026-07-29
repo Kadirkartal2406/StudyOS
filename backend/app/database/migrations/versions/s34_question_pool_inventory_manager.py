@@ -11,7 +11,7 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision = "s34_question_pool_inventory_manager"
+revision = "s34_qpool_mgr"
 down_revision = "s33_admin_password_reset"
 branch_labels = None
 depends_on = None
