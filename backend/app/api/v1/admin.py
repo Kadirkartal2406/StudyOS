@@ -9,6 +9,7 @@ from fastapi.responses import Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime, timedelta, timezone
 
+from sqlalchemy import select
 from app.core.dependencies import require_system_admin
 from app.database.base import get_db
 from app.models.user import User
