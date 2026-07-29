@@ -168,8 +168,9 @@ class GeminiProvider(AIProvider):
                     last_exc = exc
 
                     logger.warning(
-                        "Gemini quota exceeded. key=%s model=%s",
-                        key[:8],
+                        "Gemini quota exceeded. key=%s...%s model=%s",
+                        key[:12],
+                        key[:4],
                         model,
                     )
 

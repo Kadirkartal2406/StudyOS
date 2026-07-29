@@ -33,15 +33,37 @@ def _safe_error_body(text: str, limit: int = 200) -> str:
 
 def map_http_error(status_code: int, body: str) -> AIProviderError:
     snippet = _safe_error_body(body)
+
     if status_code == 429:
         lowered = body.casefold()
-        if "quota" in lowered or "billing" in lowered or "insufficient" in lowered:
+
+        # DEBUG: Google'ın gerçek cevabını logla
+        logger.warning("Gemini raw 429 body: %s", body)
+
+        if any(
+            x in lowered
+            for x in (
+                "quota",
+                "billing",
+                "insufficient",
+                "resource_exhausted",
+                "resource exhausted",
+                "quota exceeded",
+                "generative language api has been used",
+                "generaterequests",
+                "generative language",
+            )
+        ):
             return AIQuotaExceededError("AI kullanım kotası doldu")
+
         return AIRateLimitError("AI hız limiti aşıldı (429)")
+
     if status_code in (401, 403):
         return AIUnavailableError("AI sağlayıcı kimlik doğrulaması başarısız")
+
     if status_code >= 500:
         return AIUnavailableError(f"AI sağlayıcı geçici hata ({status_code})")
+
     return AIProviderError(f"AI sağlayıcı hata ({status_code}): {snippet}")
 
 
