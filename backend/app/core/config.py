@@ -82,7 +82,7 @@ class Settings(BaseSettings):
     AI_MODEL: str = ""
     AI_TEMPERATURE: float = 0.7
     AI_MAX_TOKENS: int = 4096
-    AI_TIMEOUT_SECONDS: float = 30.0
+    AI_TIMEOUT_SECONDS: float = 90.0
     AI_RETRY_COUNT: int = 2
     AI_RATE_LIMIT_PER_MINUTE: int = 20
     # B1: primary fail → null (boş bırakılırsa null)
