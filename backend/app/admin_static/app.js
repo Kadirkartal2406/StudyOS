@@ -742,29 +742,61 @@ $("qp-production-report-btn").addEventListener("click", loadProductionReport);
 // ── M34.5 Live progress / cost gate / validate / stop ────────
 let _qpProgressTimer = null;
 
-function renderLivePreview(preview) {
-  if (!preview) {
+function renderLivePreview(previews) {
+  if (!previews || previews.length === 0) {
     $("qp-live-preview-body").textContent = "Henüz soru yok.";
     return;
   }
-  const scores = preview.scores || {};
-  let choicesHtml = "";
-  for (const [k, v] of Object.entries(preview.choices || {})) {
-    const mark = k === preview.correct_key ? " ✅" : "";
-    choicesHtml += `<div><strong>${escapeHtml(k)})</strong> ${escapeHtml(v)}${mark}</div>`;
-  }
-  $("qp-live-preview-body").innerHTML = `
-    <div class="muted" style="margin-bottom:6px;">${escapeHtml(preview.exam || "")} · ${escapeHtml(preview.subject_code || "")} · ${escapeHtml(preview.topic_code || "")}</div>
-    <div style="line-height:1.5;margin-bottom:8px;">${escapeHtml(preview.stem || "")}</div>
-    ${choicesHtml}
-    <div style="margin-top:8px;font-size:12px;">
-      style=${scores.style ?? "-"} · blueprint=${scores.blueprint ?? "-"} ·
-      review=${scores.review ?? scores.exam_feel ?? "-"} · vsse=${scores.virtual_student ?? "-"} ·
-      overall=${scores.overall ?? "-"}
-    </div>
-  `;
-}
 
+  $("qp-live-preview-body").innerHTML = previews.map((preview, index) => {
+
+    const scores = preview.scores || {};
+
+    let choicesHtml = "";
+
+    for (const [k, v] of Object.entries(preview.choices || {})) {
+      const mark = k === preview.correct_key ? " ✅" : "";
+      choicesHtml += `<div><strong>${escapeHtml(k)})</strong> ${escapeHtml(v)}${mark}</div>`;
+    }
+
+    return `
+      <div style="
+          margin-bottom:24px;
+          padding:16px;
+          border:1px solid #ddd;
+          border-radius:8px;
+          background:#fff;
+      ">
+
+        <h4>Soru ${index + 1}</h4>
+
+        <div class="muted" style="margin-bottom:6px;">
+          ${escapeHtml(preview.exam || "")}
+          ·
+          ${escapeHtml(preview.subject_code || "")}
+          ·
+          ${escapeHtml(preview.topic_code || "")}
+        </div>
+
+        <div style="line-height:1.6;margin-bottom:10px;">
+          ${escapeHtml(preview.stem || "")}
+        </div>
+
+        ${choicesHtml}
+
+        <div style="margin-top:10px;font-size:12px;">
+          style=${scores.style ?? "-"}
+          · blueprint=${scores.blueprint ?? "-"}
+          · review=${scores.review ?? scores.exam_feel ?? "-"}
+          · vsse=${scores.virtual_student ?? "-"}
+          · overall=${scores.overall ?? "-"}
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
 function renderLiveProgress(p) {
   if (!p) {
     $("qp-live-progress-body").textContent = "Idle";
@@ -887,7 +919,7 @@ $("qp-validate-5-btn").addEventListener("click", async () => {
     });
     const qs = res.data?.questions || [];
     $("qp-last-result").textContent = `Validate OK: ${qs.length} soru (not saved). can_generate=${res.data?.cost_gate?.can_generate}`;
-    if (qs.length) renderLivePreview(qs[qs.length - 1]);
+    if (qs.length) renderLivePreview(qs);
     if (res.data?.progress) renderLiveProgress(res.data.progress);
     refreshCostGate();
   } catch (err) {
