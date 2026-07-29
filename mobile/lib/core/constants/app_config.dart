@@ -8,7 +8,7 @@ class AppConfig {
   /// Üretim: https://api.studyos.com/api/v1
   static const String apiBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://localhost:8002/api/v1',
+    defaultValue: 'https://studyos-api-ghl2.onrender.com/api/v1',
   );
 
   /// Sentry DSN (hata izleme).

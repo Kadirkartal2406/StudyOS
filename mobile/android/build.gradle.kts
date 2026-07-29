@@ -5,12 +5,13 @@ allprojects {
     }
 }
 
-val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
-rootProject.layout.buildDirectory.value(newBuildDir)
+// Build output redirected to C:\FlutterBuild to avoid impellerc failing on paths
+// with non-ASCII characters (OneDrive\Masaüstü).
+val flutterBuildRoot = File("C:/FlutterBuild")
+rootProject.layout.buildDirectory.set(flutterBuildRoot)
 
 subprojects {
-    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
-    project.layout.buildDirectory.value(newSubprojectBuildDir)
+    layout.buildDirectory.set(File("C:/FlutterBuild/${project.name}"))
 }
 subprojects {
     project.evaluationDependsOn(":app")

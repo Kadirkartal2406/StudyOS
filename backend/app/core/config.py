@@ -73,6 +73,8 @@ class Settings(BaseSettings):
 
     # ── AI (Sprint-2.4 — gerçek LLM; key'ler yalnızca .env) ───
     GEMINI_API_KEY: str = ""
+    GEMINI_API_KEY_2: str = ""
+    GEMINI_API_KEY_3: str = ""
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""
     # null | gemini | openai | claude

@@ -1,7 +1,7 @@
 name: studyos_mobile
 description: "StudyOS — AI destekli öğrenci çalışma uygulaması (iOS + Android)"
 publish_to: 'none'
-version: 0.23.0+23
+version: 0.24.0+24
 
 environment:
   sdk: '>=3.6.0 <4.0.0'
