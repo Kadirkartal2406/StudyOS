@@ -79,7 +79,7 @@ class GeminiProvider(AIProvider):
         keys = [k for k in keys if k]
         logger.warning(
         "Gemini keys loaded: %s",
-        [k[:8] for k in keys],
+        [k[:12] for k in keys],
         )
 
         if not keys:
