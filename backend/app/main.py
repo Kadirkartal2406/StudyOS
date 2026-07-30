@@ -18,6 +18,12 @@ from app.core.secrets_guard import enforce_or_exit
 from app.core.sentry import capture_exception, init_sentry
 from app.middleware.rate_limit import limiter
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s:     %(name)s - %(message)s",
+    force=True,
+)
+
 logger = logging.getLogger("studyos.api")
 
 # RC2 M22.5 — prod/beta'da zayıf secret ile ayağa kalkma
