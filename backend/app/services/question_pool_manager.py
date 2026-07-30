@@ -260,7 +260,9 @@ class QuestionPoolInventoryService:
                 {
                     "exam": key.exam,
                     "subject_code": key.subject_code,
+                    "subject_name": t.subject_name or key.subject_code,
                     "topic_code": key.topic_code,
+                    "topic_name": t.topic_name or key.topic_code,
                     "difficulty_band": key.difficulty_band,
                     "current": current,
                     "minimum": int(t.minimum),
@@ -362,6 +364,8 @@ class QuestionPoolManagerService:
         minimum: int,
         target: int,
         dry_run: bool,
+        subject_name: str | None = None,
+        topic_name: str | None = None,
         max_batches: int = 30,
     ) -> dict[str, Any]:
         """Bir topic için current < minimum ise hedefe kadar üretir."""
@@ -436,9 +440,9 @@ class QuestionPoolManagerService:
                 ctx = GenerateContext(
                     exam=key.exam,
                     subject_code=key.subject_code,
-                    subject_name=key.subject_code,
+                    subject_name=subject_name or key.subject_code,
                     topic_code=key.topic_code,
-                    topic_name=key.topic_code,
+                    topic_name=topic_name or key.topic_code,
                     count=batch_n,
                     difficulty_band=key.difficulty_band,
                     user_id=None,
@@ -728,6 +732,8 @@ class QuestionPoolManagerService:
                     minimum=int(t.minimum),
                     target=int(t.target),
                     dry_run=dry_run,
+                    subject_name=t.subject_name,
+                    topic_name=t.topic_name,
                 )
             )
 

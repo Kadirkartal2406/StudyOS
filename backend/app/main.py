@@ -44,6 +44,14 @@ async def lifespan(app: FastAPI):
     # 1. AI Shared HTTP client initialization (connection pooling)
     await init_http_transport()
 
+    provider = (settings.AI_PROVIDER or "null").strip().lower()
+    if provider in ("", "null", "none"):
+        logger.warning(
+            "⚠️ AI_PROVIDER is set to 'null'! Question generation is disabled. Set AI_PROVIDER=gemini and GEMINI_API_KEY in environment variables."
+        )
+    else:
+        logger.info("AI_PROVIDER initialized: %s (model: %s)", provider, settings.AI_MODEL or "default")
+
     # 2. Startup background tasks tracking with names
     background_tasks: list[asyncio.Task] = []
 

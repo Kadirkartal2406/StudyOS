@@ -89,7 +89,7 @@ class QuestionPoolService:
         q = (
             select(QuestionPoolCard)
             .where(
-                QuestionPoolCard.exam == exam.lower(),
+                QuestionPoolCard.exam == (exam or "").lower(),
                 QuestionPoolCard.subject_code == subject_code,
                 QuestionPoolCard.topic_code == topic_code,
                 QuestionPoolCard.difficulty_band == (difficulty_band or "medium"),
@@ -175,23 +175,27 @@ class QuestionPoolService:
         qie = row.qie_card or {}
         quality_raw = qie.get("quality") if isinstance(qie.get("quality"), dict) else {}
         quality = QualityBreakdown(
-            style=int(quality_raw.get("style") or 80),
-            difficulty=int(quality_raw.get("difficulty") or 80),
-            similarity=int(quality_raw.get("similarity") or 90),
-            grammar=int(quality_raw.get("grammar") or 85),
-            option_balance=int(quality_raw.get("option_balance") or 85),
-            distractor_quality=int(quality_raw.get("distractor_quality") or 80),
-            blueprint_match=int(quality_raw.get("blueprint_match") or 80),
-            reading_time=int(quality_raw.get("reading_time") or 80),
-            exam_feel=int(quality_raw.get("exam_feel") or 80),
+            style=int(quality_raw["style"]) if quality_raw.get("style") is not None else 80,
+            difficulty=int(quality_raw["difficulty"]) if quality_raw.get("difficulty") is not None else 80,
+            similarity=int(quality_raw["similarity"]) if quality_raw.get("similarity") is not None else 90,
+            grammar=int(quality_raw["grammar"]) if quality_raw.get("grammar") is not None else 85,
+            option_balance=int(quality_raw["option_balance"]) if quality_raw.get("option_balance") is not None else 85,
+            distractor_quality=int(quality_raw["distractor_quality"]) if quality_raw.get("distractor_quality") is not None else 80,
+            blueprint_match=int(quality_raw["blueprint_match"]) if quality_raw.get("blueprint_match") is not None else 80,
+            reading_time=int(quality_raw["reading_time"]) if quality_raw.get("reading_time") is not None else 80,
+            exam_feel=int(quality_raw["exam_feel"]) if quality_raw.get("exam_feel") is not None else 80,
         )
+        try:
+            difficulty_score = int(qie.get("difficulty_score") or plan.difficulty or 70)
+        except (ValueError, TypeError):
+            difficulty_score = 70
         return QuestionCard(
             stem=row.stem,
             choices=dict(row.choices or {}),
             correct_key=row.correct_key,
             explanation=row.explanation,
             plan=plan,
-            difficulty_score=int(qie.get("difficulty_score") or plan.difficulty or 70),
+            difficulty_score=difficulty_score,
             quality=quality,
             style_score=int(qie.get("style_score") or quality.style),
             prompt_version=str(qie.get("prompt_version") or "pool_v1"),

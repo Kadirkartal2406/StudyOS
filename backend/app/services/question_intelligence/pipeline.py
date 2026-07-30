@@ -138,7 +138,7 @@ def evaluate_batch(
     existing_stems: list[str] | None = None,
 ) -> tuple[list[dict[str, Any]], BatchQualityReport]:
     """Evaluate a batch of questions, returning results and a batch report."""
-    plans = plans or [{}] * len(questions)
+    plans = plans or [{} for _ in range(len(questions))]
     existing = list(existing_stems or [])
     
     results: list[dict[str, Any]] = []

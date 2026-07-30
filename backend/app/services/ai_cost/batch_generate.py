@@ -109,7 +109,7 @@ async def generate_batch_one_call(
     try:
         payload = extract_json_payload(result.text)
     except Exception as exc:
-        logger.info("[PIPELINE] 3b. extract_json_payload FAILED | err=%s text_preview=%s", exc, (getattr(result, "text", "") or "")[:100])
+        logger.info("[PIPELINE] 3b. extract_json_payload FAILED | err=%s text_preview=%s", exc, (getattr(result, "text", "") or "")[:500])
         return [], "batch_parse_fail", result
 
     gate = validate_quiz_payload(

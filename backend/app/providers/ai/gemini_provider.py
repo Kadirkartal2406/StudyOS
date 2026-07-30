@@ -147,7 +147,7 @@ class GeminiProvider(AIProvider):
                         candidates = data["candidates"]
                         parts = candidates[0]["content"]["parts"]
                         texts = [
-                            p.get("text", "")
+                            p.get("text") or ""
                             for p in parts
                             if isinstance(p, dict)
                         ]
@@ -177,8 +177,8 @@ class GeminiProvider(AIProvider):
 
                     logger.warning(
                         "Gemini quota exceeded. key=%s...%s model=%s",
-                        key[:12],
                         key[:4],
+                        key[-4:],
                         model,
                     )
 

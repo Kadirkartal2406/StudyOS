@@ -491,6 +491,8 @@ class ProductionController:
             subject_code = str(row.get("subject_code") or "")
             topic_code = str(row.get("topic_code") or "")
             difficulty_band = str(row.get("difficulty_band") or "medium")
+            subject_name = str(row.get("subject_name") or subject_code)
+            topic_name = str(row.get("topic_name") or topic_code)
             current = int(row.get("current") or 0)
             minimum = int(row.get("minimum") or 0)
             target = int(row.get("target") or minimum)
@@ -514,8 +516,8 @@ class ProductionController:
                 subject_code=subject_code,
                 topic_code=topic_code,
                 difficulty_band=difficulty_band,
-                subject_name=subject_code,
-                topic_name=topic_code,
+                subject_name=subject_name,
+                topic_name=topic_name,
                 needed=needed,
                 approval_mode=mode,
                 save=True,
