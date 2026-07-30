@@ -39,6 +39,7 @@ class DashboardScreen extends ConsumerWidget {
             itemBuilder: (context) => const [
               PopupMenuItem(value: '/assessment/daily', child: Text('Günün denemesi')),
               PopupMenuItem(value: '/score-calculator', child: Text('Tahmini puan hesapla')),
+              PopupMenuItem(value: '/photo-solver', child: Text('Fotoğraflı soru çözücü')),
               PopupMenuItem(value: '/assessment', child: Text('Seviye testi')),
               PopupMenuItem(value: '/ai-chat', child: Text('AI sohbet')),
               PopupMenuItem(value: '/planner', child: Text('Plan önerisi')),
