@@ -276,20 +276,27 @@ class AdminService:
     ) -> tuple[list[AdminQuestionItem], int]:
         page = max(1, page)
         page_size = min(max(1, page_size), 100)
+        offset = (page - 1) * page_size
         items: list[AdminQuestionItem] = []
+        total = 0
 
         if source in ("all", "pool"):
+            count_stmt = select(func.count()).select_from(QuestionPoolCard)
             stmt = select(QuestionPoolCard).order_by(QuestionPoolCard.created_at.desc())
             if q:
                 like = f"%{q}%"
-                stmt = stmt.where(
-                    or_(
-                        QuestionPoolCard.stem.ilike(like),
-                        QuestionPoolCard.subject_code.ilike(like),
-                        QuestionPoolCard.topic_code.ilike(like),
-                    )
+                cond = or_(
+                    QuestionPoolCard.stem.ilike(like),
+                    QuestionPoolCard.subject_code.ilike(like),
+                    QuestionPoolCard.topic_code.ilike(like),
                 )
-            rows = list((await self.db.execute(stmt.limit(page_size))).scalars().all())
+                count_stmt = count_stmt.where(cond)
+                stmt = stmt.where(cond)
+
+            cnt = int((await self.db.execute(count_stmt)).scalar() or 0)
+            total += cnt
+
+            rows = list((await self.db.execute(stmt.offset(offset).limit(page_size))).scalars().all())
             for r in rows:
                 items.append(
                     AdminQuestionItem(
@@ -306,74 +313,83 @@ class AdminService:
                 )
 
         if source in ("all", "generated"):
+            count_stmt = select(func.count()).select_from(GeneratedQuestion)
             stmt = select(GeneratedQuestion).order_by(GeneratedQuestion.created_at.desc())
             if q:
                 like = f"%{q}%"
-                stmt = stmt.where(
-                    or_(
-                        GeneratedQuestion.question_text.ilike(like),
-                        GeneratedQuestion.subject_code.ilike(like),
-                        GeneratedQuestion.topic_code.ilike(like),
-                    )
+                cond = or_(
+                    GeneratedQuestion.question_text.ilike(like),
+                    GeneratedQuestion.subject_code.ilike(like),
+                    GeneratedQuestion.topic_code.ilike(like),
                 )
-            rows = list((await self.db.execute(stmt.limit(page_size))).scalars().all())
-            for r in rows:
-                items.append(
-                    AdminQuestionItem(
-                        id=r.id,
-                        source="generated",
-                        subject=r.subject_code,
-                        topic=r.topic_code,
-                        stem=(r.question_text or "")[:400],
-                        difficulty=str(r.difficulty) if r.difficulty else None,
-                        user_id=r.user_id,
-                        created_at=getattr(r, "created_at", None),
-                        extra={
-                            "status": str(r.status),
-                            "correct_option": r.correct_option,
-                        },
+                count_stmt = count_stmt.where(cond)
+                stmt = stmt.where(cond)
+
+            cnt = int((await self.db.execute(count_stmt)).scalar() or 0)
+            total += cnt
+
+            if len(items) < page_size:
+                rows = list((await self.db.execute(stmt.offset(offset).limit(page_size - len(items)))).scalars().all())
+                for r in rows:
+                    items.append(
+                        AdminQuestionItem(
+                            id=r.id,
+                            source="generated",
+                            subject=r.subject_code,
+                            topic=r.topic_code,
+                            stem=(r.question_text or "")[:400],
+                            difficulty=str(r.difficulty) if r.difficulty else None,
+                            user_id=r.user_id,
+                            created_at=getattr(r, "created_at", None),
+                            extra={
+                                "status": str(r.status),
+                                "correct_option": r.correct_option,
+                            },
+                        )
                     )
-                )
 
         if source in ("all", "record"):
+            count_stmt = select(func.count()).select_from(QuestionRecord)
             stmt = select(QuestionRecord).order_by(QuestionRecord.created_at.desc())
             if q:
                 like = f"%{q}%"
-                stmt = stmt.where(
-                    or_(
-                        QuestionRecord.subject.ilike(like),
-                        QuestionRecord.topic.ilike(like),
-                    )
+                cond = or_(
+                    QuestionRecord.subject.ilike(like),
+                    QuestionRecord.topic.ilike(like),
                 )
-            rows = list((await self.db.execute(stmt.limit(page_size))).scalars().all())
-            for r in rows:
-                stem = (
-                    f"{r.subject}"
-                    + (f" · {r.topic}" if r.topic else "")
-                    + f" — {r.correct_count}/{r.question_count} doğru"
-                )
-                items.append(
-                    AdminQuestionItem(
-                        id=r.id,
-                        source="record",
-                        exam=str(r.exam_type) if r.exam_type else None,
-                        subject=r.subject,
-                        topic=r.topic,
-                        stem=stem[:400],
-                        difficulty=str(r.difficulty) if r.difficulty else None,
-                        user_id=r.user_id,
-                        created_at=r.created_at,
-                        extra={
-                            "correct_count": r.correct_count,
-                            "question_count": r.question_count,
-                        },
-                    )
-                )
+                count_stmt = count_stmt.where(cond)
+                stmt = stmt.where(cond)
 
-        # Lightweight total for UI
-        total = len(items)
-        start = (page - 1) * page_size
-        return items[start : start + page_size], total
+            cnt = int((await self.db.execute(count_stmt)).scalar() or 0)
+            total += cnt
+
+            if len(items) < page_size:
+                rows = list((await self.db.execute(stmt.offset(offset).limit(page_size - len(items)))).scalars().all())
+                for r in rows:
+                    stem = (
+                        f"{r.subject}"
+                        + (f" · {r.topic}" if r.topic else "")
+                        + f" — {r.correct_count}/{r.question_count} doğru"
+                    )
+                    items.append(
+                        AdminQuestionItem(
+                            id=r.id,
+                            source="record",
+                            exam=str(r.exam_type) if r.exam_type else None,
+                            subject=r.subject,
+                            topic=r.topic,
+                            stem=stem[:400],
+                            difficulty=str(r.difficulty) if r.difficulty else None,
+                            user_id=r.user_id,
+                            created_at=r.created_at,
+                            extra={
+                                "correct_count": r.correct_count,
+                                "question_count": r.question_count,
+                            },
+                        )
+                    )
+
+        return items[:page_size], total
 
     @staticmethod
     def pagination_meta(page: int, page_size: int, total: int) -> dict:
