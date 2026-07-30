@@ -113,7 +113,7 @@ class _DailyChallengeSubjectsScreenState
       final path = await savePdfBytes(bytes, 'gunun-denemesi.pdf');
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('PDF indirildi: $path')),
+        SnackBar(content: Text('PDF telefonunuzun Dosyalar ➔ İndirilenler (Downloads) klasörüne kaydedildi: $path')),
       );
       await _load();
     } on AppException catch (e) {
