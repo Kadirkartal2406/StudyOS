@@ -35,7 +35,7 @@ QuizMode = Literal["easy", "medium", "hard", "mixed", "adaptive"]
 
 class QuizGenerateRequest(BaseModel):
     mode: QuizMode = "adaptive"  # adaptive = confidence'a göre otomatik
-    count: int = 5              # Kac soru üretilsin (1-10)
+    count: int = 10             # Kac soru üretilsin (1-10)
     trigger: str = "on_demand"  # on_demand | policy_triggered
 
 
@@ -389,6 +389,13 @@ Yalnızca JSON dön, açıklama ekleme."""
                 rows = list((await self.db.execute(stmt)).scalars().all())
 
             if rows:
+                from app.services.deduplication_service import get_user_seen_stem_hashes, compute_stem_hash
+                seen = await get_user_seen_stem_hashes(self.db, ctx.user_id)
+                if seen:
+                    unseen_rows = [r for r in rows if compute_stem_hash(r.stem) not in seen]
+                    if unseen_rows:
+                        rows = unseen_rows
+
                 return [
                     {
                         "question": r.stem,

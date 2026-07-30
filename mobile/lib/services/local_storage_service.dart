@@ -25,6 +25,8 @@ class LocalStorageService {
     if (kIsWeb) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(AppConfig.accessTokenKey, token);
+    } else {
+      await _storage.write(key: AppConfig.accessTokenKey, value: token);
     }
   }
 
@@ -34,9 +36,12 @@ class LocalStorageService {
 
   Future<void> restoreAccessToken() async {
     if (_accessToken != null) return;
-    if (!kIsWeb) return;
-    final prefs = await SharedPreferences.getInstance();
-    _accessToken = prefs.getString(AppConfig.accessTokenKey);
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      _accessToken = prefs.getString(AppConfig.accessTokenKey);
+    } else {
+      _accessToken = await _storage.read(key: AppConfig.accessTokenKey);
+    }
   }
 
   Future<void> saveRefreshToken(String token) async {
@@ -134,6 +139,7 @@ class LocalStorageService {
       await prefs.remove(firstRunPhaseKey);
       return;
     }
+    await _storage.delete(key: AppConfig.accessTokenKey);
     await deleteRefreshToken();
     await deleteUser();
     await clearFirstRunPhase();

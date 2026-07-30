@@ -109,6 +109,13 @@ class TopicQuizService:
                 gen.model = result.model
             gen.raw_item_count = len(cards)
 
+            from app.services.deduplication_service import get_user_seen_stem_hashes, compute_stem_hash
+            seen_hashes = await get_user_seen_stem_hashes(self.db, user_id)
+            if cards and seen_hashes:
+                unseen = [c for c in cards if compute_stem_hash(c.stem) not in seen_hashes]
+                if unseen:
+                    cards = unseen
+
             if not cards:
                 # 3-Tier Fallback: Try fetching pre-generated pool cards from QuestionPoolCard
                 pool_q = (
