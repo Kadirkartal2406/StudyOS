@@ -214,7 +214,6 @@ async def daily_challenge_start(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> SuccessResponse[AssessmentSessionRead]:
-    # Soru üretimi kullanıcı isteğinde yapılmaz — gece 00:00 Gemini job
     req = AssessmentStartRequest(
         kind="daily_challenge",
         subject_code=None,
@@ -223,13 +222,16 @@ async def daily_challenge_start(
         difficulty=(body.difficulty if body else "medium") or "medium",
         synthetic=False,
     )
-    data = await AssessmentService(db).start(current_user.id, req)
+    svc = AssessmentService(db)
+    data = await svc.start(current_user.id, req)
     await db.commit()
-    if data.is_booklet and data.status == "pending":
-        return SuccessResponse(
-            data=data,
-            message="Günün denemesi henüz hazır değil — gece Gemini üretimi bekleniyor",
-        )
+    if data.is_booklet and (data.status == "pending" or not data.questions):
+        booklet = await svc.repo.get_shared_booklet(data.exam_type, data.challenge_date)
+        if booklet:
+            await svc.fill_shared_booklet_from_bank(booklet)
+            await db.commit()
+            data = await svc.start(current_user.id, req)
+            await db.commit()
     return SuccessResponse(data=data, message="Günün denemesi hazır")
 
 
