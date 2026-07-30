@@ -74,7 +74,7 @@ def analyze_question_difficulty(
             score += 15
             reasons.append("paragraph_length_ok")
         elif n >= 20:
-            score += 10
+            score += 15
             reasons.append("paragraph_length_partial")
         else:
             score -= 10
@@ -96,7 +96,7 @@ def analyze_question_difficulty(
             score += 10
             reasons.append("options_balanced")
         else:
-            score -= 8
+            score -= 5
             reasons.append("options_imbalanced")
         if min(lens) == 0:
             score -= 20
@@ -132,7 +132,7 @@ def analyze_question_difficulty(
             "verilen tablo",
             "yukarıdaki şekil",
         )
-    ) and n < 40:
+    ) and n < 15:
         score -= 25
         reasons.append("dangling_reference")
 
