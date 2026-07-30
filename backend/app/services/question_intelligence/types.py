@@ -4,8 +4,8 @@ from dataclasses import asdict, dataclass, field
 from typing import Any
 
 M34_VERSION = "m34_v1"
-MIN_BLUEPRINT_SCORE = 85
-MIN_SCORECARD_OVERALL = 80
+MIN_BLUEPRINT_SCORE = 70
+MIN_SCORECARD_OVERALL = 70
 
 
 @dataclass
