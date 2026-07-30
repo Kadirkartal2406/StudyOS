@@ -171,8 +171,9 @@ def create_application() -> FastAPI:
         title=settings.APP_NAME,
         version="0.23.1-s23p1",
         description="StudyOS REST API",
-        docs_url="/api/docs" if settings.DEBUG else None,
-        redoc_url="/api/redoc" if settings.DEBUG else None,
+        docs_url="/api/docs",
+        redoc_url="/api/redoc",
+        openapi_url="/api/openapi.json",
         lifespan=lifespan,
     )
 
@@ -264,6 +265,10 @@ def create_application() -> FastAPI:
         @application.get("/admin-panel", include_in_schema=False)
         async def admin_panel_redirect():
             return RedirectResponse(url="/admin/")
+
+    @application.get("/docs", include_in_schema=False)
+    async def docs_redirect():
+        return RedirectResponse(url="/api/docs")
 
     return application
 

@@ -1,0 +1,9 @@
+timestamp,module,model,duration_ms,prompt_tokens,completion_tokens,cache_hit,estimated_cost_usd,provider,kind,success,error
+2026-07-30T05:55:50.147580+00:00,generate_with_fallback,x,0.06,,,False,0.0,gemini,,False,fail
+2026-07-30T05:56:27.382893+00:00,generate_with_fallback,x,0.09,,,False,0.0,gemini,,False,fail
+2026-07-30T05:59:29.867252+00:00,generate_with_fallback,x,0.12,,,False,0.0,gemini,,False,fail
+2026-07-30T06:51:25.260267+00:00,generate_with_fallback,x,0.09,,,False,0.0,gemini,,False,fail
+2026-07-30T07:43:31.163551+00:00,generate_with_fallback,x,0.07,,,False,0.0,gemini,,False,fail
+2026-07-30T07:46:33.522055+00:00,generate_with_fallback,x,0.06,,,False,0.0,gemini,,False,fail
+2026-07-30T07:56:35.661928+00:00,generate_with_fallback,x,0.06,,,False,0.0,gemini,,False,fail
+2026-07-30T08:01:57.279641+00:00,generate_with_fallback,x,0.06,,,False,0.0,gemini,,False,fail
