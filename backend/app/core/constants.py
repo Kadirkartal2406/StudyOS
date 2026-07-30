@@ -155,12 +155,13 @@ AI_CONTEXT_ACHIEVEMENTS = 5
 # ── AI Provider defaults (Sprint-2.4) ─────────────────────────
 # gemini-2.0-flash free-tier kotası sık doluyor; flash-latest daha stabil.
 AI_DEFAULT_MODELS = {
-    "gemini": "gemini-flash-latest",
+    "gemini": "gemini-3.5-flash-lite",
     "openai": "gpt-4o-mini",
     "claude": "claude-3-5-haiku-latest",
 }
+
 AI_GEMINI_MODEL_FALLBACKS = (
-    "gemini-flash-latest",
-    "gemini-2.0-flash-lite",
-    "gemini-2.0-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash-lite",
 )
