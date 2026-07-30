@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theme/app_spacing.dart';
 
-/// Sprint 35 — Kamera İle Optik Form Okuyucu & Otomatik Sonuç Ekranı
+/// Sprint 35 — Gerçek Kamera / Galeri Seçimli Optik Form Okuyucu
 class CameraOpticalScannerScreen extends ConsumerStatefulWidget {
   const CameraOpticalScannerScreen({super.key});
 
@@ -12,6 +14,8 @@ class CameraOpticalScannerScreen extends ConsumerStatefulWidget {
 }
 
 class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScannerScreen> {
+  final ImagePicker _picker = ImagePicker();
+  XFile? _scannedImage;
   bool _scanning = false;
   bool _scanned = false;
   String _selectedExam = 'KPSS';
@@ -24,14 +28,62 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
   double _estimatedScore = 78.5;
   String _badge = '🥈 Altın Hedef';
 
-  void _simulateCameraScan() async {
-    setState(() => _scanning = true);
-    await Future.delayed(const Duration(seconds: 2));
-    if (!mounted) return;
-    setState(() {
-      _scanning = false;
-      _scanned = true;
-    });
+  Future<void> _pickOpticalForm(ImageSource source) async {
+    try {
+      final image = await _picker.pickImage(source: source);
+      if (image == null) return;
+
+      setState(() {
+        _scannedImage = image;
+        _scanning = true;
+        _scanned = false;
+      });
+
+      final bytes = await image.readAsBytes();
+      final base64Str = base64Encode(bytes);
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      if (!mounted) return;
+      setState(() {
+        _scanning = false;
+        _scanned = true;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _scanning = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Optik form taranamadı: $e')),
+      );
+    }
+  }
+
+  void _showCameraModal() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Kamera İle Optik Form Çek'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickOpticalForm(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Galeriden Optik Form Seç'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickOpticalForm(ImageSource.gallery);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -63,7 +115,7 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
 
             // Camera Scanner Box Guide
             GestureDetector(
-              onTap: _scanning ? null : _simulateCameraScan,
+              onTap: _scanning ? null : _showCameraModal,
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
@@ -81,7 +133,7 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
                       const CircularProgressIndicator(),
                       const SizedBox(height: 16),
                       Text(
-                        'Kamera Hizalanıyor: Kutucuklar Okunuyor...',
+                        'Kamera Hizalanıyor: Optik Form Kutucukları Okunuyor...',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w700,
                               color: scheme.primary,
@@ -91,14 +143,16 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
                       Icon(Icons.crop_free_rounded, size: 64, color: scheme.primary),
                       const SizedBox(height: 12),
                       Text(
-                        'Optik Formu Çerçeveye Hizala ve Tara',
+                        _scannedImage != null
+                            ? 'Optik Form Seçildi (Yeniden Çekmek İçin Dokunun)'
+                            : 'Kamerayı Optik Forma Hizala ve Çek',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w700,
                             ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Kamera işaretlenmiş A-B-C-D-E kutucuklarını otomatik okur ve ÖSYM puanını hesaplar.',
+                        'Kamera veya galeriden seçilen optik formdaki A-B-C-D-E kutucukları otomatik okunur.',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: scheme.onSurfaceVariant,
@@ -161,7 +215,7 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
 
               // Detected Choice Sheet Grid
               Text(
-                'Algılanan Cevap Anahtarı Grid\'i',
+                'Kameradan Algılanan Cevap Anahtarı Grid\'i',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

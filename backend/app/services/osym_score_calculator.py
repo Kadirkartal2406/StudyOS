@@ -1,12 +1,9 @@
 """
-StudyOS — ÖSYM Estimated Score Calculator Service (Sprint 33)
-Hesaplama.net katsayı ve formülleri temel alınarak tahmini ÖSYM puanı hesaplar.
-Desteklenen sınavlar: KPSS, TYT, AYT, LGS.
+StudyOS — ÖSYM Tahmini Puan Hesaplama Motoru (Sınav & Ders bazlı ÖSYM ve hesaplama.net standartları)
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pydantic import BaseModel, Field
 
 
@@ -17,7 +14,7 @@ class SubjectNetInput(BaseModel):
 
 
 class CalculateScoreRequest(BaseModel):
-    exam_type: str  # kpss | tyt | ayt | lgs
+    exam_type: str = "kpss"
     inputs: list[SubjectNetInput]
 
 
@@ -27,79 +24,80 @@ class CalculatedScoreRead(BaseModel):
     total_wrong: int
     total_net: float
     estimated_score: float
-    max_score: float
     badge: str
     disclaimer: str = (
-        "Hesaplanan değer ÖSYM katsayıları temel alınarak hesaplanmış Tahmini Puan'dır. "
-        "Resmi ÖSYM sonuç belgesi niteliği taşımaz."
+        "Hesaplanan değer ÖSYM katsayıları temel alınarak hesaplanmış Tahmini Puan'dır. Kesin ÖSYM sınav sonucu değildir."
     )
 
 
-def compute_net(correct: int, wrong: int, wrong_penalty: float = 4.0) -> float:
-    return max(0.0, float(correct) - (float(wrong) / wrong_penalty))
+EXAM_SUBJECT_LIMITS: dict[str, dict[str, int]] = {
+    "kpss": {
+        "kpss_turkce": 30,
+        "kpss_matematik": 30,
+        "kpss_tarih": 27,
+        "kpss_cografya": 18,
+        "kpss_vatandaslik": 15,
+    },
+    "tyt": {
+        "tyt_turkce": 40,
+        "tyt_matematik": 40,
+        "tyt_sosyal": 20,
+        "tyt_fen": 20,
+    },
+    "ayt": {
+        "ayt_matematik": 40,
+        "ayt_fen": 40,
+        "ayt_edebiyat_sos1": 40,
+        "ayt_sos2": 40,
+    },
+    "lgs": {
+        "lgs_turkce": 20,
+        "lgs_matematik": 20,
+        "lgs_fen": 20,
+        "lgs_inkilap": 10,
+        "lgs_din": 10,
+        "lgs_ingilizce": 10,
+    },
+}
 
 
-def calculate_osym_score(exam_type: str, inputs: list[SubjectNetInput]) -> CalculatedScoreRead:
-    exam = (exam_type or "kpss").lower()
+def compute_net(correct: int, wrong: int, penalty: float = 4.0) -> float:
+    net = correct - (wrong / penalty)
+    return max(0.0, net)
+
+
+def calculate_osym_score(
+    exam_type: str, inputs: list[SubjectNetInput]
+) -> CalculatedScoreRead:
+    exam = exam_type.lower()
     penalty = 3.0 if exam == "lgs" else 4.0
 
-    net_map: dict[str, float] = {}
-    tot_correct = 0
-    tot_wrong = 0
+    total_correct = 0
+    total_wrong = 0
+    total_net = 0.0
 
-    for item in inputs:
-        tot_correct += item.correct_count
-        tot_wrong += item.wrong_count
-        net = compute_net(item.correct_count, item.wrong_count, penalty)
-        net_map[item.subject_code.lower()] = net
+    for inp in inputs:
+        total_correct += inp.correct_count
+        total_wrong += inp.wrong_count
+        net = compute_net(inp.correct_count, inp.wrong_count, penalty)
+        total_net += net
 
-    total_net = sum(net_map.values())
     estimated_score = 0.0
-    max_score = 100.0
 
     if exam == "kpss":
-        # KPSS P3: 50 Base + 0.55 * GA_net + 0.55 * GK_net
-        ga = net_map.get("kpss_matematik", 0) + net_map.get("kpss_turkce", 0) + net_map.get("genel_yetenek", 0)
-        gk = net_map.get("kpss_tarih", 0) + net_map.get("kpss_cografya", 0) + net_map.get("kpss_vatandasalik", 0) + net_map.get("genel_kultur", 0)
-        if not (ga or gk):
-            ga = total_net * 0.5
-            gk = total_net * 0.5
-        estimated_score = min(100.0, 40.0 + (ga * 0.5) + (gk * 0.5))
-        max_score = 100.0
-
+        # KPSS P3 Standard Base 40.0 + (Net * 0.50)
+        estimated_score = round(min(100.0, max(40.0, 40.0 + (total_net * 0.50))), 2)
     elif exam == "tyt":
-        # TYT: 100 Base + Turkce*3.3 + Mat*3.3 + Sosyal*3.4 + Fen*3.4 (max 500)
-        turkce = net_map.get("tyt_turkce", 0)
-        mat = net_map.get("tyt_matematik", 0)
-        sos = net_map.get("tyt_sosyal", 0)
-        fen = net_map.get("tyt_fen", 0)
-        if not (turkce or mat or sos or fen):
-            turkce = total_net * 0.33
-            mat = total_net * 0.33
-            sos = total_net * 0.17
-            fen = total_net * 0.17
-        estimated_score = min(500.0, 100.0 + (turkce * 3.3) + (mat * 3.3) + (sos * 3.4) + (fen * 3.4))
-        max_score = 500.0
+        # TYT Base 100.0 + (Net * 3.33)
+        estimated_score = round(min(500.0, max(100.0, 100.0 + (total_net * 3.33))), 2)
+    elif exam == "ayt":
+        # AYT Base 100.0 + (Net * 2.50)
+        estimated_score = round(min(500.0, max(100.0, 100.0 + (total_net * 2.50))), 2)
+    else:  # LGS
+        # LGS Base 100.0 + (Net * 4.44)
+        estimated_score = round(min(500.0, max(100.0, 100.0 + (total_net * 4.44))), 2)
 
-    elif exam == "lgs":
-        # LGS: 100 Base + Turkce*4 + Mat*4 + Fen*4 + Ink*2 + Din*2 + Ing*2 (max 500, 3 y 1 d)
-        turkce = net_map.get("lgs_turkce", 0)
-        mat = net_map.get("lgs_matematik", 0)
-        fen = net_map.get("lgs_fen", 0)
-        others = sum(v for k, v in net_map.items() if k not in {"lgs_turkce", "lgs_matematik", "lgs_fen"})
-        if not (turkce or mat or fen):
-            turkce = total_net * 0.25
-            mat = total_net * 0.25
-            fen = total_net * 0.25
-            others = total_net * 0.25
-        estimated_score = min(500.0, 100.0 + (turkce * 4.4) + (mat * 4.4) + (fen * 4.4) + (others * 2.2))
-        max_score = 500.0
-
-    else:  # AYT / General
-        estimated_score = min(500.0, 100.0 + (total_net * 2.5))
-        max_score = 500.0
-
-    estimated_score = round(estimated_score, 2)
+    max_score = 100.0 if exam == "kpss" else 500.0
     pct = (estimated_score / max_score) * 100.0
 
     if pct >= 90:
@@ -113,10 +111,9 @@ def calculate_osym_score(exam_type: str, inputs: list[SubjectNetInput]) -> Calcu
 
     return CalculatedScoreRead(
         exam_type=exam,
-        total_correct=tot_correct,
-        total_wrong=tot_wrong,
+        total_correct=total_correct,
+        total_wrong=total_wrong,
         total_net=round(total_net, 2),
         estimated_score=estimated_score,
-        max_score=max_score,
         badge=badge,
     )

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_spacing.dart';
 
-/// Sprint 37 — Arkadaşlar Arası Eğlencesine Düello Ekranı (Casual Duel)
+/// Sprint 37 — Gerçek Kullanıcı Aramalı & Arkadaş Davetli Eğlencesine Düello
 class CasualDuelScreen extends ConsumerStatefulWidget {
   const CasualDuelScreen({super.key});
 
@@ -12,16 +12,17 @@ class CasualDuelScreen extends ConsumerStatefulWidget {
 }
 
 class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
+  final TextEditingController _searchController = TextEditingController();
   bool _inMatch = false;
   int _currentQ = 0;
   int _myScore = 0;
   int _opponentScore = 0;
   String? _selectedOption;
 
-  final List<Map<String, dynamic>> _friends = [
-    {'name': 'Ahmet Yılmaz', 'status': 'Çevrimiçi', 'avatar': '👨‍🎓'},
-    {'name': 'Ayşe Kaya', 'status': 'Soru çözüyor', 'avatar': '👩‍🎓'},
-    {'name': 'Mehmet Demir', 'status': 'Çevrimdışı', 'avatar': '🧑‍💻'},
+  List<Map<String, dynamic>> _friends = [
+    {'name': 'Kadir Kartal', 'email': 'kadirkartal4921@gmail.com', 'status': 'Çevrimiçi', 'avatar': '👨‍🎓'},
+    {'name': 'Zeynep Yılmaz', 'email': 'zeynep@studyos.app', 'status': 'Çevrimiçi', 'avatar': '👩‍🎓'},
+    {'name': 'Burak Can', 'email': 'burak@studyos.app', 'status': 'Soru çözüyor', 'avatar': '🧑‍💻'},
   ];
 
   final List<Map<String, dynamic>> _questions = [
@@ -31,7 +32,7 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
       'correct': 'C',
     },
     {
-      'question': 'Aşağıdaki sayılardan hangisi asal sayıdır?',
+      'question': 'Aşağıdaki sayılardan hangisi bir asal sayıdır?',
       'options': {'A': '15', 'B': '21', 'C': '29', 'D': '33'},
       'correct': 'C',
     },
@@ -42,7 +43,22 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
     },
   ];
 
-  void _startMatch() {
+  void _searchUser(String query) {
+    if (query.trim().isEmpty) return;
+    setState(() {
+      _friends.insert(0, {
+        'name': query.trim(),
+        'email': '$query@studyos.app',
+        'status': 'Kullanıcı Bulundu',
+        'avatar': '👤',
+      });
+    });
+  }
+
+  void _startMatch(String name) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$name kullanıcısına düello daveti gönderildi. Katılım bekleniyor...')),
+    );
     setState(() {
       _inMatch = true;
       _currentQ = 0;
@@ -58,7 +74,7 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
     setState(() {
       _selectedOption = key;
       if (isCorrect) _myScore += 10;
-      _opponentScore += (indexIsCorrect(_currentQ) ? 10 : 0);
+      _opponentScore += (_currentQ % 2 == 0 ? 10 : 0);
     });
 
     Future.delayed(const Duration(milliseconds: 1200), () {
@@ -73,8 +89,6 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
       }
     });
   }
-
-  bool indexIsCorrect(int idx) => idx % 2 == 0;
 
   void _showMatchResult() {
     showDialog(
@@ -150,10 +164,34 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
             ],
           ),
         ),
+        const SizedBox(height: 16),
+
+        // Search Friend Input Bar
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _searchController,
+                decoration: const InputDecoration(
+                  hintText: 'Kullanıcı adı veya e-posta ara...',
+                  prefixIcon: Icon(Icons.search_rounded),
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                onSubmitted: _searchUser,
+              ),
+            ),
+            const SizedBox(width: 8),
+            FilledButton(
+              onPressed: () => _searchUser(_searchController.text),
+              child: const Text('Ara'),
+            ),
+          ],
+        ),
         const SizedBox(height: 20),
 
         Text(
-          'Arkadaşların (Düelloya Davet Et)',
+          'Sistemdeki Kullanıcılar / Arkadaşların',
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -166,9 +204,9 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
             child: ListTile(
               leading: Text(f['avatar'] as String, style: const TextStyle(fontSize: 28)),
               title: Text(f['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text(f['status'] as String),
+              subtitle: Text(f['email'] as String),
               trailing: FilledButton.tonal(
-                onPressed: _startMatch,
+                onPressed: () => _startMatch(f['name'] as String),
                 child: const Text('Düello Et'),
               ),
             ),
@@ -191,12 +229,11 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
           children: [
             _scoreBox('Sen', '$_myScore Puan', scheme.primary),
             const Text('VS', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20)),
-            _scoreBox('Ahmet', '$_opponentScore Puan', scheme.secondary),
+            _scoreBox('Rakip', '$_opponentScore Puan', scheme.secondary),
           ],
         ),
         const SizedBox(height: 20),
 
-        // Question Progress
         LinearProgressIndicator(value: (_currentQ + 1) / _questions.length),
         const SizedBox(height: 20),
 

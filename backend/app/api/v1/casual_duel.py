@@ -31,6 +31,17 @@ async def list_friends(
     return SuccessResponse(data=data)
 
 
+@router.get("/search-friends", response_model=SuccessResponse[list[FriendDTO]])
+async def search_friends(
+    q: str = "",
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> SuccessResponse[list[FriendDTO]]:
+    """Search registered StudyOS users to add as friends and invite to duels."""
+    data = await CasualDuelService(db).search_friends(current_user.id, q)
+    return SuccessResponse(data=data)
+
+
 @router.post("/invite", response_model=SuccessResponse[DuelMatchRead])
 async def invite_to_duel(
     body: DuelInviteRequest,

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_spacing.dart';
 
-/// Sprint 33 — ÖSYM Tahmini Puan Hesaplama Ekranı (KPSS, TYT, AYT, LGS)
+/// Sprint 33 / 35 — Sınava Özel Ders Bazlı ÖSYM Tahmini Puan Hesaplama (hesaplama.net standartlarında)
 class ScoreCalculatorScreen extends ConsumerStatefulWidget {
   const ScoreCalculatorScreen({super.key});
 
@@ -13,19 +13,65 @@ class ScoreCalculatorScreen extends ConsumerStatefulWidget {
 
 class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
   String _selectedExam = 'KPSS';
-  
-  final Map<String, TextEditingController> _correctControllers = {
-    'Turkce': TextEditingController(text: '24'),
-    'Matematik': TextEditingController(text: '20'),
-    'Tarih': TextEditingController(text: '18'),
-    'Cografya': TextEditingController(text: '12'),
+
+  final Map<String, Map<String, TextEditingController>> _examControllers = {
+    'KPSS': {
+      'Türkçe (30 Soru)': TextEditingController(text: '24'),
+      'Matematik (30 Soru)': TextEditingController(text: '20'),
+      'Tarih (27 Soru)': TextEditingController(text: '18'),
+      'Coğrafya (18 Soru)': TextEditingController(text: '12'),
+      'Vatandaşlık & Güncel (15 Soru)': TextEditingController(text: '10'),
+    },
+    'TYT': {
+      'Türkçe (40 Soru)': TextEditingController(text: '32'),
+      'Temel Matematik (40 Soru)': TextEditingController(text: '28'),
+      'Sosyal Bilimler (20 Soru)': TextEditingController(text: '15'),
+      'Fen Bilimleri (20 Soru)': TextEditingController(text: '14'),
+    },
+    'AYT': {
+      'Matematik (40 Soru)': TextEditingController(text: '30'),
+      'Fen Bilimleri (40 Soru)': TextEditingController(text: '25'),
+      'Türk Dili ve Ed. - Sos 1 (40 Soru)': TextEditingController(text: '28'),
+      'Sosyal Bilimler 2 (40 Soru)': TextEditingController(text: '24'),
+    },
+    'LGS': {
+      'Türkçe (20 Soru)': TextEditingController(text: '16'),
+      'Matematik (20 Soru)': TextEditingController(text: '14'),
+      'Fen Bilimleri (20 Soru)': TextEditingController(text: '15'),
+      'T.C. İnkılap (10 Soru)': TextEditingController(text: '8'),
+      'Din Kültürü (10 Soru)': TextEditingController(text: '9'),
+      'İngilizce (10 Soru)': TextEditingController(text: '8'),
+    },
   };
 
-  final Map<String, TextEditingController> _wrongControllers = {
-    'Turkce': TextEditingController(text: '4'),
-    'Matematik': TextEditingController(text: '5'),
-    'Tarih': TextEditingController(text: '3'),
-    'Cografya': TextEditingController(text: '2'),
+  final Map<String, Map<String, TextEditingController>> _examWrongControllers = {
+    'KPSS': {
+      'Türkçe (30 Soru)': TextEditingController(text: '4'),
+      'Matematik (30 Soru)': TextEditingController(text: '5'),
+      'Tarih (27 Soru)': TextEditingController(text: '3'),
+      'Coğrafya (18 Soru)': TextEditingController(text: '2'),
+      'Vatandaşlık & Güncel (15 Soru)': TextEditingController(text: '2'),
+    },
+    'TYT': {
+      'Türkçe (40 Soru)': TextEditingController(text: '5'),
+      'Temel Matematik (40 Soru)': TextEditingController(text: '4'),
+      'Sosyal Bilimler (20 Soru)': TextEditingController(text: '3'),
+      'Fen Bilimleri (20 Soru)': TextEditingController(text: '3'),
+    },
+    'AYT': {
+      'Matematik (40 Soru)': TextEditingController(text: '6'),
+      'Fen Bilimleri (40 Soru)': TextEditingController(text: '5'),
+      'Türk Dili ve Ed. - Sos 1 (40 Soru)': TextEditingController(text: '4'),
+      'Sosyal Bilimler 2 (40 Soru)': TextEditingController(text: '4'),
+    },
+    'LGS': {
+      'Türkçe (20 Soru)': TextEditingController(text: '3'),
+      'Matematik (20 Soru)': TextEditingController(text: '3'),
+      'Fen Bilimleri (20 Soru)': TextEditingController(text: '3'),
+      'T.C. İnkılap (10 Soru)': TextEditingController(text: '1'),
+      'Din Kültürü (10 Soru)': TextEditingController(text: '1'),
+      'İngilizce (10 Soru)': TextEditingController(text: '1'),
+    },
   };
 
   double? _calculatedScore;
@@ -34,16 +80,15 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
 
   void _calculate() {
     double netSum = 0;
-    int totalCorrect = 0;
-    int totalWrong = 0;
     final penalty = _selectedExam == 'LGS' ? 3.0 : 4.0;
 
-    _correctControllers.forEach((key, cController) {
-      final wController = _wrongControllers[key];
+    final corrects = _examControllers[_selectedExam]!;
+    final wrongs = _examWrongControllers[_selectedExam]!;
+
+    corrects.forEach((subject, cController) {
+      final wController = wrongs[subject];
       final correct = int.tryParse(cController.text) ?? 0;
       final wrong = int.tryParse(wController?.text ?? '0') ?? 0;
-      totalCorrect += correct;
-      totalWrong += wrong;
       final net = (correct - (wrong / penalty)).clamp(0.0, 100.0);
       netSum += net;
     });
@@ -52,13 +97,17 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
     final maxScore = _selectedExam == 'KPSS' ? 100.0 : 500.0;
 
     if (_selectedExam == 'KPSS') {
-      score = (40.0 + (netSum * 0.55)).clamp(0.0, 100.0);
+      score = (40.0 + (netSum * 0.50)).clamp(40.0, 100.0);
+    } else if (_selectedExam == 'TYT') {
+      score = (100.0 + (netSum * 3.33)).clamp(100.0, 500.0);
+    } else if (_selectedExam == 'AYT') {
+      score = (100.0 + (netSum * 2.50)).clamp(100.0, 500.0);
     } else {
-      score = (100.0 + (netSum * 3.3)).clamp(0.0, 500.0);
+      score = (100.0 + (netSum * 4.44)).clamp(100.0, 500.0);
     }
 
     setState(() {
-      _totalNet = netSum;
+      _totalNet = double.parse(netSum.toStringAsFixed(2));
       _calculatedScore = double.parse(score.toStringAsFixed(2));
       final pct = (score / maxScore) * 100.0;
       if (pct >= 90) {
@@ -76,10 +125,12 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final subjectCorrects = _examControllers[_selectedExam]!;
+    final subjectWrongs = _examWrongControllers[_selectedExam]!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tahmini Puan Hesaplama'),
+        title: Text('$_selectedExam Tahmini Puan Hesaplama'),
       ),
       body: SafeArea(
         child: ListView(
@@ -99,7 +150,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'Hesaplanan değer ÖSYM katsayıları temel alınarak hesaplanmış Tahmini Puan\'dır. Kesin ÖSYM sınav sonucu değildir.',
+                      'Hesaplanan değer ÖSYM ve MEB katsayıları (hesaplama.net standartlarında) temel alınarak hesaplanmış Tahmini Puan\'dır.',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: scheme.onSurfaceVariant,
                           ),
@@ -128,14 +179,14 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
             ),
             const SizedBox(height: 20),
 
-            // Inputs Table
-            ..._correctControllers.keys.map((subject) {
+            // Inputs Table for Selected Exam
+            ...subjectCorrects.keys.map((subject) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: Text(
                         subject,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -146,7 +197,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
                     Expanded(
                       flex: 2,
                       child: TextField(
-                        controller: _correctControllers[subject],
+                        controller: subjectCorrects[subject],
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Doğru',
@@ -159,7 +210,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
                     Expanded(
                       flex: 2,
                       child: TextField(
-                        controller: _wrongControllers[subject],
+                        controller: subjectWrongs[subject],
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Yanlış',
@@ -177,7 +228,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
             FilledButton.icon(
               onPressed: _calculate,
               icon: const Icon(Icons.calculate_outlined),
-              label: const Text('Tahmini Puan Hesapla'),
+              label: Text('$_selectedExam Tahmini Puan Hesapla'),
             ),
 
             if (_calculatedScore != null) ...[
@@ -191,7 +242,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
                 child: Column(
                   children: [
                     Text(
-                      'Tahmini Puanınız',
+                      '$_selectedExam Tahmini Puanınız',
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: scheme.onSurfaceVariant,
                           ),

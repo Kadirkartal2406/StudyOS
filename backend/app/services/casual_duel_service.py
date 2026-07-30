@@ -59,6 +59,28 @@ class CasualDuelService:
         self.db = db
         self.gen_svc = QuestionGenerationService(db)
 
+    async def search_friends(self, user_id: uuid.UUID, query: str) -> list[FriendDTO]:
+        query_pattern = f"%{query.strip().lower()}%"
+        stmt = (
+            select(User)
+            .where(User.id != user_id)
+            .where(
+                (func.lower(User.email).like(query_pattern))
+                | (func.lower(User.first_name).like(query_pattern))
+                | (func.lower(User.last_name).like(query_pattern))
+            )
+            .limit(10)
+        )
+        users = list((await self.db.execute(stmt)).scalars().all())
+        return [
+            FriendDTO(
+                user_id=u.id,
+                email=u.email,
+                nickname=u.first_name or u.email.split("@")[0],
+            )
+            for u in users
+        ]
+
     async def list_friends(self, user_id: uuid.UUID) -> list[FriendDTO]:
         stmt = select(User).where(User.id != user_id).limit(10)
         users = list((await self.db.execute(stmt)).scalars().all())
@@ -66,7 +88,7 @@ class CasualDuelService:
             FriendDTO(
                 user_id=u.id,
                 email=u.email,
-                nickname=u.first_name or f"Öğrenci {str(u.id)[:4]}",
+                nickname=u.first_name or u.email.split("@")[0],
             )
             for u in users
         ]
