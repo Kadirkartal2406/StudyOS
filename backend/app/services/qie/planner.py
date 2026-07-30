@@ -65,6 +65,8 @@ class QuestionPlanner:
         if ctx.plans:
             return list(ctx.plans)
 
+        style = style or {}
+        choice_count = ctx.choice_count or int(style.get("choice_count") or 5)
         is_reading_topic = any(
             k in (ctx.topic_name or "").lower() or k in (ctx.topic_code or "").lower()
             for k in ("paragraf", "anlam", "okuma", "reading", "clozer", "passage", "metin")
