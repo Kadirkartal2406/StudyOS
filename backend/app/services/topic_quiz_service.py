@@ -8,9 +8,12 @@ from __future__ import annotations
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
+
+from app.models.question_pool import QuestionPoolCard
+from app.services.qie.types import QuestionCard, QuestionPlan
 
 from app.core.exceptions import NotFoundError, ValidationError
 from app.models.topic_quiz import (
@@ -105,6 +108,53 @@ class TopicQuizService:
                 gen.provider = result.provider
                 gen.model = result.model
             gen.raw_item_count = len(cards)
+
+            if not cards:
+                # 3-Tier Fallback: Try fetching pre-generated pool cards from QuestionPoolCard
+                pool_q = (
+                    select(QuestionPoolCard)
+                    .where(
+                        func.lower(QuestionPoolCard.exam) == (exam_type or "kpss").lower(),
+                        QuestionPoolCard.topic_code == top,
+                    )
+                    .order_by(QuestionPoolCard.use_count.asc(), func.random())
+                    .limit(data.count or 5)
+                )
+                pool_rows = list((await self.db.execute(pool_q)).scalars().all())
+
+                if not pool_rows:
+                    pool_q = (
+                        select(QuestionPoolCard)
+                        .where(
+                            func.lower(QuestionPoolCard.exam) == (exam_type or "kpss").lower(),
+                            QuestionPoolCard.subject_code == sub,
+                        )
+                        .order_by(QuestionPoolCard.use_count.asc(), func.random())
+                        .limit(data.count or 5)
+                    )
+                    pool_rows = list((await self.db.execute(pool_q)).scalars().all())
+
+                if not pool_rows:
+                    pool_q = (
+                        select(QuestionPoolCard)
+                        .where(
+                            func.lower(QuestionPoolCard.exam) == (exam_type or "kpss").lower(),
+                        )
+                        .order_by(QuestionPoolCard.use_count.asc(), func.random())
+                        .limit(data.count or 5)
+                    )
+                    pool_rows = list((await self.db.execute(pool_q)).scalars().all())
+
+                if pool_rows:
+                    cards = [
+                        QuestionCard(
+                            stem=r.stem,
+                            choices=r.choices or {},
+                            correct_key=r.correct_key,
+                            explanation=r.explanation,
+                        )
+                        for r in pool_rows
+                    ]
 
             if not cards:
                 gen.status = QuizGenerationStatus.FAILED
