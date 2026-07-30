@@ -25,7 +25,15 @@ async function api(path, options = {}) {
   };
   const t = token();
   if (t) headers.Authorization = `Bearer ${t}`;
-  const res = await fetch(`${API}${path}`, { ...options, headers });
+
+  const timeoutMs = options.timeoutMs || 60000;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const signal = options.signal || controller.signal;
+
+  try {
+    const res = await fetch(`${API}${path}`, { ...options, headers, signal });
+    clearTimeout(timeoutId);
   if (res.status === 401 || res.status === 403) {
     clearSession();
     showLogin();
@@ -39,13 +47,25 @@ async function api(path, options = {}) {
   if (ct.includes("application/json")) {
     const body = await res.json();
     if (!res.ok || body.success === false) {
-      const msg = body?.error?.message || body?.message || `Hata ${res.status}`;
-      throw new Error(msg);
+      let msg = body?.error?.message || body?.message;
+      if (!msg && body?.detail) {
+        msg = Array.isArray(body.detail)
+          ? body.detail.map((d) => `${d.loc ? d.loc.join(".") + ": " : ""}${d.msg}`).join("; ")
+          : String(body.detail);
+      }
+      throw new Error(msg || `Hata ${res.status}`);
     }
     return body;
   }
   if (!res.ok) throw new Error(`Hata ${res.status}`);
   return res;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === "AbortError") {
+      throw new Error("İstek zaman aşımına uğradı (Timeout: 60s)");
+    }
+    throw err;
+  }
 }
 
 function showLogin() {
@@ -108,6 +128,10 @@ document.querySelectorAll(".nav").forEach((btn) => {
     ["overview", "users", "questions", "question-pool"].forEach((t) => {
       $(`tab-${t}`).hidden = t !== tab;
     });
+    if (tab !== "question-pool" && _qpProgressTimer) {
+      clearInterval(_qpProgressTimer);
+      _qpProgressTimer = null;
+    }
     if (tab === "overview") loadOverview();
     if (tab === "users") loadUsers();
     if (tab === "questions") loadQuestions();
@@ -557,6 +581,7 @@ function escapeAttr(s) {
 $("qp-preview-close").addEventListener("click", () => $("qp-preview-dialog").close());
 
 function renderPreviewData(d) {
+  if (!d) return;
   const sc = d.scorecard || {};
   const bp = d.blueprint || {};
   const ef = d.exam_feel || {};
@@ -617,6 +642,7 @@ async function showPreview(cardId) {
   try {
     const res = await api(`/admin/question-pool/preview/${cardId}`);
     const d = res.data;
+    if (!d) return;
     const sc = d.scorecard || {};
     const bp = d.blueprint || {};
     const ef = d.exam_feel || {};
@@ -803,7 +829,7 @@ function renderLivePreview(previews) {
 
   }).join("");
 }
-function renderLiveProgress(p) {
+function renderLiveProgress(p, options = {}) {
   if (!p) {
     $("qp-live-progress-body").textContent = "Idle";
     return;
@@ -816,7 +842,7 @@ function renderLiveProgress(p) {
     Gemini Calls: ${p.gemini_calls || 0} · Est. Cost: ${p.estimated_cost != null ? p.estimated_cost : "—"} ·
     Remaining: ${p.remaining != null ? p.remaining : "—"}
   `;
-  if (p.last_preview) renderLivePreview(p.last_preview);
+  if (p.last_preview && !options.skipPreview) renderLivePreview(p.last_preview);
 }
 
 async function refreshCostGate() {
@@ -902,7 +928,9 @@ $("qp-stop-gen-btn").addEventListener("click", async () => {
   }
 });
 
-$("qp-validate-5-btn").addEventListener("click", async () => {
+$("qp-validate-5-btn").addEventListener("click", async (e) => {
+  const btn = e.currentTarget;
+  if (btn.disabled) return;
   const exam = $("qp-fill-exam").value.trim() || "kpss";
   const subject = $("qp-fill-subject").value.trim();
   const topic = $("qp-fill-topic").value.trim();
@@ -910,6 +938,7 @@ $("qp-validate-5-btn").addEventListener("click", async () => {
     $("qp-last-result").textContent = "Validate için Fill Selected Topic alanlarını doldurun.";
     return;
   }
+  btn.disabled = true;
   try {
     $("qp-last-result").textContent = "Validate: 5 soru üretiliyor (kaydedilmeyecek)...";
     refreshCostGate();
@@ -926,15 +955,20 @@ $("qp-validate-5-btn").addEventListener("click", async () => {
     const qs = res.data?.questions || [];
     $("qp-last-result").textContent = `Validate OK: ${qs.length} soru (not saved). can_generate=${res.data?.cost_gate?.can_generate}`;
     if (qs.length) renderLivePreview(qs);
-    if (res.data?.progress) renderLiveProgress(res.data.progress);
+    if (res.data?.progress) renderLiveProgress(res.data.progress, { skipPreview: true });
     refreshCostGate();
   } catch (err) {
     $("qp-last-result").textContent = `Validate hata: ${err.message}`;
+  } finally {
+    btn.disabled = false;
   }
 });
 
-$("qp-run-missing-safe-btn").addEventListener("click", async () => {
+$("qp-run-missing-safe-btn").addEventListener("click", async (e) => {
+  const btn = e.currentTarget;
+  if (btn.disabled) return;
   if (!confirm("Sadece current < minimum topic'ler için güvenli üretim başlasın mı?")) return;
+  btn.disabled = true;
   try {
     $("qp-last-result").textContent = "Safe missing run başlıyor...";
     refreshCostGate();
@@ -954,6 +988,8 @@ $("qp-run-missing-safe-btn").addEventListener("click", async () => {
     loadQuestionPool();
   } catch (err) {
     $("qp-last-result").textContent = `Safe run hata: ${err.message}`;
+  } finally {
+    btn.disabled = false;
   }
 });
 
