@@ -197,15 +197,19 @@ class LocalNotificationService implements NotificationService {
       android: AndroidNotificationDetails(
         channelId,
         channelName,
-        channelDescription: 'StudyOS bildirimleri',
-        importance: Importance.high,
-        priority: Priority.high,
-        playSound: true,
-        enableVibration: true,
+        channelDescription: 'StudyOS kilit ekranı zamanlayıcı bildirimleri',
+        importance: Importance.low,
+        priority: Priority.low,
+        visibility: NotificationVisibility.public,
+        ongoing: true,
+        showWhen: true,
+        playSound: false,
+        enableVibration: false,
       ),
       iOS: const DarwinNotificationDetails(
         presentAlert: true,
-        presentSound: true,
+        presentSound: false,
+        interruptionLevel: InterruptionLevel.active,
       ),
     );
   }
