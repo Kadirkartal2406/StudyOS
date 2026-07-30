@@ -44,12 +44,14 @@ async def lifespan(app: FastAPI):
     # 1. AI Shared HTTP client initialization (connection pooling)
     await init_http_transport()
 
-    # 2. Startup background tasks
-    asyncio.create_task(_seed_exam_catalog())
-    asyncio.create_task(_bootstrap_admin())
+    # 2. Startup background tasks tracking
+    background_tasks: list[asyncio.Task] = []
+
+    background_tasks.append(asyncio.create_task(_seed_exam_catalog()))
+    background_tasks.append(asyncio.create_task(_bootstrap_admin()))
 
     if ai_warmup_enabled():
-        asyncio.create_task(_seed_exam_style())
+        background_tasks.append(asyncio.create_task(_seed_exam_style()))
     else:
         logger.info("M32: ENABLE_AI_WARMUP=false — style seed skipped at startup")
 
@@ -59,8 +61,8 @@ async def lifespan(app: FastAPI):
             midnight_question_pool_loop,
         )
 
-        asyncio.create_task(midnight_booklet_loop())
-        asyncio.create_task(midnight_question_pool_loop())
+        background_tasks.append(asyncio.create_task(midnight_booklet_loop()))
+        background_tasks.append(asyncio.create_task(midnight_question_pool_loop()))
     else:
         logger.info(
             "M32: ENABLE_MIDNIGHT_SCHEDULER=false — no auto Gemini on startup"
@@ -68,7 +70,14 @@ async def lifespan(app: FastAPI):
 
     yield
 
-    # 3. Shutdown cleanup
+    # 3. Shutdown cleanup: cancel long-running background loops & wait for cancellation
+    for task in background_tasks:
+        if not task.done():
+            task.cancel()
+
+    if background_tasks:
+        await asyncio.gather(*background_tasks, return_exceptions=True)
+
     await close_http_transport()
 
 
