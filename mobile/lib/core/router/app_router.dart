@@ -12,6 +12,7 @@ import '../../features/assessment/presentation/screens/assessment_overview_scree
 import '../../features/assessment/presentation/screens/assessment_session_screen.dart';
 import '../../features/assessment/presentation/screens/daily_challenge_subjects_screen.dart';
 import '../../features/assessment/presentation/screens/daily_leaderboard_screen.dart';
+import '../../features/assessment/presentation/screens/camera_optical_scanner_screen.dart';
 import '../../features/assessment/presentation/screens/daily_optical_screen.dart';
 import '../../features/assessment/presentation/screens/score_calculator_screen.dart';
 import '../../features/photo_solver/presentation/screens/photo_solver_screen.dart';
@@ -333,6 +334,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/photo-solver',
         name: 'photo-solver',
         builder: (_, __) => const PhotoSolverScreen(),
+      ),
+      GoRoute(
+        path: '/optical-scanner',
+        name: 'optical-scanner',
+        builder: (_, __) => const CameraOpticalScannerScreen(),
       ),
       GoRoute(
         path: '/resources',

@@ -98,5 +98,8 @@ from app.api.v1 import ai_coach, photo_solver
 api_router.include_router(ai_coach.router, prefix="/ai-coach", tags=["ai-coach"])
 # Sprint 34 — Photo Question Solver & Similar Generator
 api_router.include_router(photo_solver.router, prefix="/photo-solver", tags=["photo-solver"])
+# Sprint 35 — Optical Form Camera Scanner & Grading
+from app.api.v1 import optical_scanner
+api_router.include_router(optical_scanner.router, prefix="/optical-scanner", tags=["optical-scanner"])
 # Sprint 21 RC — Analytics + Beta Feedback
 api_router.include_router(beta_ops.router, prefix="/beta", tags=["beta"])
