@@ -134,10 +134,10 @@ class QuestionGenerationService:
             provider_name = result.provider
             raw_questions = self._parse_questions(result.text)
         except Exception:
-            raw_questions = self._fallback_questions(ctx, mode, count)
+            raw_questions = await self._get_pool_questions(ctx, count)
 
         if not raw_questions:
-            raw_questions = self._fallback_questions(ctx, mode, count)
+            raw_questions = await self._get_pool_questions(ctx, count)
 
         # Sprint 19 — Knowledge citation kaydı (Decision yok)
         if ctx.knowledge_passages:
@@ -355,6 +355,52 @@ Yalnızca JSON dön, açıklama ekleme."""
             return json.loads(text[start:end])
         except Exception:
             return []
+
+    async def _get_pool_questions(self, ctx, count: int) -> list[dict]:
+        """Fetch pre-generated questions from QuestionPoolCard DB table on AI error/rate limit."""
+        try:
+            from sqlalchemy import func, select
+            from app.models.question_pool import QuestionPoolCard
+
+            stmt = (
+                select(QuestionPoolCard)
+                .where(
+                    QuestionPoolCard.subject_code == ctx.subject_code,
+                    QuestionPoolCard.topic_code == ctx.topic_code,
+                )
+                .order_by(func.random())
+                .limit(count)
+            )
+            rows = list((await self.db.execute(stmt)).scalars().all())
+            if not rows:
+                stmt = (
+                    select(QuestionPoolCard)
+                    .where(QuestionPoolCard.subject_code == ctx.subject_code)
+                    .order_by(func.random())
+                    .limit(count)
+                )
+                rows = list((await self.db.execute(stmt)).scalars().all())
+            if not rows:
+                stmt = (
+                    select(QuestionPoolCard)
+                    .order_by(func.random())
+                    .limit(count)
+                )
+                rows = list((await self.db.execute(stmt)).scalars().all())
+
+            if rows:
+                return [
+                    {
+                        "question": r.stem,
+                        "options": r.choices or {},
+                        "correct": r.correct_key,
+                        "explanation": r.explanation or f"{ctx.topic_name or ctx.topic_code} konusunun çözümü.",
+                    }
+                    for r in rows
+                ]
+        except Exception:
+            pass
+        return self._fallback_questions(ctx, "medium", count)
 
     def _fallback_questions(self, ctx, mode: str, count: int) -> list[dict]:
         """LLM başarısız olursa template soru."""
