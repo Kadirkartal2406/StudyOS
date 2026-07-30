@@ -1264,6 +1264,10 @@ class AssessmentService:
             else None
         )
         gemini_ready = self._shared_pack_usable(booklet)
+        if not gemini_ready and booklet:
+            await self.fill_shared_booklet_from_bank(booklet)
+            booklet = await self.repo.get_shared_booklet_by_id(booklet.id) or booklet
+            gemini_ready = self._shared_pack_usable(booklet)
 
         if gemini_ready:
             session = await self._clone_shared_to_user(user_id, booklet)
