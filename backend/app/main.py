@@ -44,14 +44,20 @@ async def lifespan(app: FastAPI):
     # 1. AI Shared HTTP client initialization (connection pooling)
     await init_http_transport()
 
-    # 2. Startup background tasks tracking
+    # 2. Startup background tasks tracking with names
     background_tasks: list[asyncio.Task] = []
 
-    background_tasks.append(asyncio.create_task(_seed_exam_catalog()))
-    background_tasks.append(asyncio.create_task(_bootstrap_admin()))
+    background_tasks.append(
+        asyncio.create_task(_seed_exam_catalog(), name="seed_exam_catalog")
+    )
+    background_tasks.append(
+        asyncio.create_task(_bootstrap_admin(), name="bootstrap_admin")
+    )
 
     if ai_warmup_enabled():
-        background_tasks.append(asyncio.create_task(_seed_exam_style()))
+        background_tasks.append(
+            asyncio.create_task(_seed_exam_style(), name="seed_exam_style")
+        )
     else:
         logger.info("M32: ENABLE_AI_WARMUP=false — style seed skipped at startup")
 
@@ -61,8 +67,16 @@ async def lifespan(app: FastAPI):
             midnight_question_pool_loop,
         )
 
-        background_tasks.append(asyncio.create_task(midnight_booklet_loop()))
-        background_tasks.append(asyncio.create_task(midnight_question_pool_loop()))
+        background_tasks.append(
+            asyncio.create_task(
+                midnight_booklet_loop(), name="midnight_booklet_loop"
+            )
+        )
+        background_tasks.append(
+            asyncio.create_task(
+                midnight_question_pool_loop(), name="midnight_question_pool_loop"
+            )
+        )
     else:
         logger.info(
             "M32: ENABLE_MIDNIGHT_SCHEDULER=false — no auto Gemini on startup"
@@ -71,14 +85,38 @@ async def lifespan(app: FastAPI):
     yield
 
     # 3. Shutdown cleanup: cancel long-running background loops & wait for cancellation
+    logger.info(
+        "Lifespan shutdown starting. Active background tasks count=%s",
+        len(background_tasks),
+    )
     for task in background_tasks:
         if not task.done():
+            task_name = task.get_name() if hasattr(task, "get_name") else str(task)
+            logger.info("Cancelling background task: %s", task_name)
             task.cancel()
 
     if background_tasks:
         await asyncio.gather(*background_tasks, return_exceptions=True)
 
     await close_http_transport()
+
+    # Log any remaining tasks in event loop for diagnosis
+    current_task = asyncio.current_task()
+    remaining_tasks = [
+        t for t in asyncio.all_tasks() if t is not current_task and not t.done()
+    ]
+    if remaining_tasks:
+        remaining_names = [
+            t.get_name() if hasattr(t, "get_name") else str(t)
+            for t in remaining_tasks
+        ]
+        logger.info(
+            "Lifespan shutdown complete. Remaining event loop tasks count=%s: %s",
+            len(remaining_tasks),
+            remaining_names,
+        )
+    else:
+        logger.info("Lifespan shutdown complete. Event loop is completely clean.")
 
 
 async def _bootstrap_admin() -> None:
