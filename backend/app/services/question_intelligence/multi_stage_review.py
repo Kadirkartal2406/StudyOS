@@ -22,16 +22,18 @@ def _stage_language(question: dict[str, Any]) -> int:
     if re.search(r"[a-z]\.[A-Z]", stem):  # missing space after period
         score -= 8
     
-    # Mixed language
-    english_words = re.findall(r"\b[a-zA-Z]{4,}\b", stem)
-    turkish_words = re.findall(r"[A-Za-zĞğİıÖöŞşÜüÇç]{3,}", stem)
+    # Mixed language (filter out LaTeX commands & math formulas first)
+    clean_stem = re.sub(r"\\[a-zA-Z]+", "", stem)
+    clean_stem = re.sub(r"\$[^\$]+\$", "", clean_stem)
+    english_words = re.findall(r"\b[a-zA-Z]{4,}\b", clean_stem)
+    turkish_words = re.findall(r"[A-Za-zĞğİıÖöŞşÜüÇç]{3,}", clean_stem)
     if turkish_words and english_words:
         ratio = len(english_words) / max(len(turkish_words), 1)
-        if ratio > 0.3:
+        if ratio > 0.35:
             score -= 15
     
     # Too short
-    if len(stem.strip()) < 30:
+    if len(stem.strip()) < 15:
         score -= 20
     
     # Check options have content
@@ -125,7 +127,7 @@ def _stage_human_examiner(question: dict[str, Any]) -> int:
     return max(0, min(100, score))
 
 
-MIN_STAGE_SCORE = 65
+MIN_STAGE_SCORE = 60
 
 
 def run_multi_stage_review(

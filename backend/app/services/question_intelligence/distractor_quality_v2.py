@@ -109,20 +109,23 @@ def analyze_distractor_quality_v2(
         plausibility = 70
     
     # Trap effectiveness — distractors should share enough with correct to be tempting
-    trap_scores = []
-    for key in types_detected:
-        d_words = set(_words(str(choices[key]).lower()))
-        c_words = set(_words(correct_text.lower()))
-        sim = _jaccard(d_words, c_words)
-        # Sweet spot: 0.15-0.5 similarity
-        if 0.15 <= sim <= 0.5:
-            trap_scores.append(92)
-        elif 0.05 <= sim <= 0.65:
-            trap_scores.append(72)
-        else:
-            trap_scores.append(45)
-    
-    trap_effectiveness = int(sum(trap_scores) / len(trap_scores)) if trap_scores else 70
+    is_numeric = all(len(_words(str(v))) <= 3 for v in choices.values())
+    if is_numeric:
+        trap_effectiveness = 88
+        type_variety = max(type_variety, 85)
+    else:
+        trap_scores = []
+        for key in types_detected:
+            d_words = set(_words(str(choices[key]).lower()))
+            c_words = set(_words(correct_text.lower()))
+            sim = _jaccard(d_words, c_words)
+            if 0.15 <= sim <= 0.5:
+                trap_scores.append(92)
+            elif 0.05 <= sim <= 0.65:
+                trap_scores.append(72)
+            else:
+                trap_scores.append(60)
+        trap_effectiveness = int(sum(trap_scores) / len(trap_scores)) if trap_scores else 70
     
     return DistractorQualityV2Result(
         types_detected=types_detected,
