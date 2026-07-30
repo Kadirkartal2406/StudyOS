@@ -120,10 +120,10 @@ async def generate_batch_one_call(
         max_stem=2500,
     )
     logger.info(
-        "[PIPELINE] 4. validate_quiz_payload | valid=%s valid_count=%s reason=%s",
+        "[PIPELINE] 4. validate_quiz_payload | valid=%s valid_count=%s errors=%s",
         bool(gate.valid),
         len(gate.valid) if gate.valid else 0,
-        gate.reason,
+        gate.errors,
     )
     if not gate.valid:
         return [], "batch_gate_fail", result
