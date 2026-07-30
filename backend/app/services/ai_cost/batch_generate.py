@@ -142,7 +142,8 @@ async def generate_batch_one_call(
             except Exception:
                 pass
         if is_similar_question(item, existing_stems=existing, existing_option_sets=existing_opts):
-            logger.info("[PIPELINE] 4b. Card skipped: similar question stem=%s...", (item.get("stem") or "")[:30])
+            stem_text = getattr(item, "stem", "") or ""
+            logger.info("[PIPELINE] 4b. Card skipped: similar question stem=%s...", stem_text[:30])
             continue
         diff = analyze_for_plan(item, plan, style=dna)
         if diff.score < MIN_DIFFICULTY_SCORE:
