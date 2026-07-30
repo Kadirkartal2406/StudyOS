@@ -30,16 +30,13 @@ def _words(text: str) -> list[str]:
 def _looks_textbook(stem: str) -> bool:
     low = (stem or "").lower()
     bad = (
-        "aşağıdakilerden hangisi doğrudur",
-        "hangisi yanlıştır",
         "chatgpt",
+        "as an ai",
         "örnek olarak şöyle",
         "basitçe söylemek gerekirse",
+        "yapay zeka olarak",
     )
-    # "hangisi" alone is ok for exams; textbook combo with very short stem is bad
-    if len(_words(stem)) < 18 and any(b in low for b in bad[:2]):
-        return True
-    return any(b in low for b in bad[2:])
+    return any(b in low for b in bad)
 
 
 def analyze_question_difficulty(
@@ -73,14 +70,14 @@ def analyze_question_difficulty(
     ) or (style.get("reasoning_type") or "") in ("paragraph_inference", "paragraph_reading")
 
     if want_long:
-        if n >= pmin:
+        if n >= min(50, pmin):
             score += 15
             reasons.append("paragraph_length_ok")
         elif n >= 20:
-            score += 5
+            score += 10
             reasons.append("paragraph_length_partial")
         else:
-            score -= 20
+            score -= 10
             reasons.append("paragraph_too_short")
     else:
         if 12 <= n <= 120:
