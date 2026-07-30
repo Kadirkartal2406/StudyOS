@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import uuid
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, Query
 from fastapi.responses import Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime, timedelta, timezone
@@ -753,18 +753,21 @@ async def admin_question_pool_validate_generate(
 )
 async def admin_question_pool_run_missing_safe(
     body: ProductionRunMissingRequest,
-    db: AsyncSession = Depends(get_db),
+    background_tasks: BackgroundTasks,
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[dict]:
-    """P2 — Only generate topics where current < minimum (cost-aware)."""
+    """P2 — Only generate topics where current < minimum (cost-aware background run)."""
     from app.services.question_production.controller import ProductionController
 
-    result = await ProductionController().run_missing_topics(
-        db,
+    background_tasks.add_task(
+        ProductionController().run_missing_topics_bg,
         approval_mode=body.approval_mode,
         max_topics=body.max_topics,
     )
-    return SuccessResponse(data=result, message="OK")
+    return SuccessResponse(
+        data={"status": "running", "approval_mode": body.approval_mode},
+        message="Üretim arka planda başlatıldı. Live Progress sekmesinden canlı izleyebilirsiniz.",
+    )
 
 
 @router.post(

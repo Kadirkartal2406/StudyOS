@@ -432,6 +432,19 @@ class ProductionController:
         )
         return result
 
+    async def run_missing_topics_bg(
+        self,
+        approval_mode: str | None = None,
+        max_topics: int | None = None,
+    ) -> None:
+        """Run missing topics production safely in the background with isolated AsyncSession."""
+        from app.database.base import AsyncSessionLocal
+        async with AsyncSessionLocal() as db:
+            await self.run_missing_topics(
+                db, approval_mode=approval_mode, max_topics=max_topics
+            )
+            await db.commit()
+
     async def run_missing_topics(
         self,
         db: AsyncSession,
