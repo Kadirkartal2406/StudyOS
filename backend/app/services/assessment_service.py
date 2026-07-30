@@ -276,17 +276,13 @@ class AssessmentService:
             return await self._start_daily(user_id, exam, today, data)
         if kind == AssessmentKind.BRANCH_QUESTION:
             if not data.subject_code:
-                raise ValidationError(
-                    "Branş sorusu için subject_code gerekli",
-                    field="subject_code",
-                )
+                subjects = await self._exam_subject_codes(user_id, exam)
+                data.subject_code = subjects[0][0] if subjects else ("kpss_turkce" if exam == "kpss" else "tyt_matematik")
             return await self._start_branch(user_id, exam, today, data)
         # initial_calibration
         if not data.subject_code:
-            raise ValidationError(
-                "Kalibrasyon için subject_code gerekli",
-                field="subject_code",
-            )
+            subjects = await self._exam_subject_codes(user_id, exam)
+            data.subject_code = subjects[0][0] if subjects else ("kpss_turkce" if exam == "kpss" else "tyt_matematik")
         return await self._start_calibration(user_id, exam, data)
 
     async def _generate_linked_session(
