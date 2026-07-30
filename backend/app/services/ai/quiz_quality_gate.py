@@ -60,7 +60,24 @@ def extract_json_payload(text: str) -> Any:
         raw = raw[start_arr:]
     else:
         raw = raw[start_obj:]
-    return json.loads(raw)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+
+    # Fallback 1: Fix unescaped LaTeX backslashes (e.g. \lim, \sqrt, \alpha, \frac) inside JSON
+    cleaned1 = re.sub(r'\\(?!["]|\\)', r'\\\\', raw)
+    try:
+        return json.loads(cleaned1)
+    except json.JSONDecodeError:
+        pass
+
+    # Fallback 2: Fix remaining word backslashes
+    cleaned2 = re.sub(r'\\([a-zA-Z]+)', r'\\\\ \1', raw)
+    try:
+        return json.loads(cleaned2)
+    except json.JSONDecodeError:
+        return json.loads(raw)
 
 
 def validate_quiz_payload(

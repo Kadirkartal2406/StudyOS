@@ -34,7 +34,8 @@ def _batch_messages(plans: list[QuestionPlan], style: dict[str, Any]) -> list[Ch
     compact_plans = [p.to_dict() for p in plans]
     system = """Sen StudyOS batch soru üreticisisin.
 Tek JSON: {"questions":[{"plan_index":0,"stem":"...","choices":{...},"correct_key":"A","explanation":"..."}, ...]}
-Her plan_index için tam bir soru. Telif yok. ÖSYM üslubu."""
+Her plan_index için tam bir soru. Telif yok. ÖSYM üslubu.
+Tüm LaTeX ifadelerinde ters bölü işaretlerini JSON içinde kaçır (örn. \\\\frac, \\\\lim). Yalnızca geçerli JSON."""
     user = (
         f"STYLE={json.dumps({k: style.get(k) for k in ('choice_count','bloom_default','language_level') if k in style}, ensure_ascii=False)}\n"
         f"PLANS={json.dumps(compact_plans, ensure_ascii=False)}\n"
