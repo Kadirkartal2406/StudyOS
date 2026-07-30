@@ -73,7 +73,10 @@ class AssessmentService:
     async def _active_exam(self, user_id: uuid.UUID) -> str:
         effective, _, _ = await self.profile.resolve_active_scope(user_id)
         if not effective:
-            raise ValidationError("Aktif sınav bulunamadı")
+            targets = await self.profile.repo.list_exam_targets(user_id)
+            if targets:
+                return str(targets[0].exam_type)
+            return "kpss"
         return effective
 
     async def _exam_subject_codes(self, user_id: uuid.UUID, exam: str) -> list[tuple[str, str]]:
