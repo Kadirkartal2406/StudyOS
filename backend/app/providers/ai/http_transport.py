@@ -1,6 +1,6 @@
 """
 StudyOS — AI Provider httpx taşıma katmanı
-Sprint-2.4 (A1): ortak timeout / retry; API key loglanmaz.
+Sprint-2.4 (A1): ortak timeout / retry / connection pooling; API key loglanmaz.
 """
 
 from __future__ import annotations
@@ -21,6 +21,53 @@ from app.core.exceptions import (
 )
 
 logger = logging.getLogger("studyos.ai")
+
+_shared_client: httpx.AsyncClient | None = None
+_client_lock = asyncio.Lock()
+
+
+def _get_safe_timeout(timeout_seconds: float | None = None) -> httpx.Timeout:
+    secs = timeout_seconds if timeout_seconds is not None else float(settings.AI_TIMEOUT_SECONDS)
+    return httpx.Timeout(secs)
+
+
+def get_http_limits() -> httpx.Limits:
+    """Connection pooling limitleri: max 100 bağlantı, 20 keep-alive."""
+    return httpx.Limits(
+        max_keepalive_connections=20,
+        max_connections=100,
+        keepalive_expiry=30.0,
+    )
+
+
+async def get_shared_client() -> httpx.AsyncClient:
+    """Paylaşılan httpx.AsyncClient örneğini döndürür; yoksa lazy initialize eder."""
+    global _shared_client
+    if _shared_client is not None and not _shared_client.is_closed:
+        return _shared_client
+
+    async with _client_lock:
+        if _shared_client is None or _shared_client.is_closed:
+            _shared_client = httpx.AsyncClient(
+                limits=get_http_limits(),
+                timeout=_get_safe_timeout(),
+            )
+            logger.info("Shared AI httpx.AsyncClient initialized (pooling enabled)")
+        return _shared_client
+
+
+async def init_http_transport() -> None:
+    """FastAPI startup / lifespan anından çağrılan açık initialization."""
+    await get_shared_client()
+
+
+async def close_http_transport() -> None:
+    """FastAPI shutdown / lifespan anında bağlantı havuzunu güvenle kapatır."""
+    global _shared_client
+    if _shared_client is not None and not _shared_client.is_closed:
+        await _shared_client.aclose()
+        _shared_client = None
+        logger.info("Shared AI httpx.AsyncClient closed gracefully")
 
 
 def _safe_error_body(text: str, limit: int = 200) -> str:
@@ -74,16 +121,24 @@ async def post_json(
     payload: dict[str, Any],
     provider_label: str,
     timeout_seconds: float | None = None,
+    client: httpx.AsyncClient | None = None,
 ) -> dict[str, Any]:
-    """httpx POST + retry; Authorization header loglanmaz."""
-    timeout = httpx.Timeout(timeout_seconds or settings.AI_TIMEOUT_SECONDS)
+    """httpx POST + retry; Authorization header loglanmaz. Paylaşımlı AsyncClient kullanır."""
+    http_client = client or await get_shared_client()
+    req_timeout = _get_safe_timeout(timeout_seconds) if timeout_seconds is not None else None
     retries = max(0, int(settings.AI_RETRY_COUNT))
     last_exc: Exception | None = None
 
     for attempt in range(retries + 1):
         try:
-            async with httpx.AsyncClient(timeout=timeout) as client:
-                response = await client.post(url, headers=headers, json=payload)
+            kwargs: dict[str, Any] = {
+                "headers": headers,
+                "json": payload,
+            }
+            if req_timeout is not None:
+                kwargs["timeout"] = req_timeout
+
+            response = await http_client.post(url, **kwargs)
             if response.status_code >= 400:
                 err = map_http_error(response.status_code, response.text)
                 # 429 / 5xx → retry; diğerleri hemen fırlat
@@ -131,3 +186,4 @@ async def post_json(
     if isinstance(last_exc, AIProviderError):
         raise last_exc
     raise AIUnavailableError("AI sağlayıcı kullanılamıyor")
+

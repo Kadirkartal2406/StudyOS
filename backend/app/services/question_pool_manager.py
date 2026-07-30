@@ -17,7 +17,7 @@ from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy import case, func, select, update
+from sqlalchemy import case, func, select, update, or_
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -133,30 +133,65 @@ class QuestionPoolInventoryService:
                 .limit(1)
             )
             subj = (await db.execute(subj_stmt)).scalar_one_or_none()
+
+        found_topic = None
+
+        if subj is None:
+            # Fallback 1: If subject_name is actually a topic name in this exam (e.g. "Problemler", "Türev")
+            topic_stmt = (
+                select(EiTopic)
+                .join(EiSubject, EiTopic.subject_code == EiSubject.code)
+                .where(EiSubject.exam_code == exam)
+                .where(
+                    or_(
+                        func.lower(EiTopic.name) == subj_name,
+                        func.lower(EiTopic.name).like(f"%{subj_name}%"),
+                    )
+                )
+                .limit(1)
+            )
+            found_topic = (await db.execute(topic_stmt)).scalar_one_or_none()
+            if found_topic:
+                subj_stmt = select(EiSubject).where(EiSubject.code == found_topic.subject_code).limit(1)
+                subj = (await db.execute(subj_stmt)).scalar_one_or_none()
+
         if subj is None:
             logger.warning("Subject not found in EiCatalog exam=%s name=%s", exam, target.subject_name)
             return None
 
-        topic_stmt = (
-            select(EiTopic)
-            .where(EiTopic.subject_code == subj.code)
-            .where(func.lower(EiTopic.name) == topic_name)
-            .limit(1)
-        )
-        topic = (await db.execute(topic_stmt)).scalar_one_or_none()
-        if topic is None:
+        if found_topic is None:
+            topic_stmt = (
+                select(EiTopic)
+                .where(EiTopic.subject_code == subj.code)
+                .where(func.lower(EiTopic.name) == topic_name)
+                .limit(1)
+            )
+            found_topic = (await db.execute(topic_stmt)).scalar_one_or_none()
+
+        if found_topic is None:
             topic_stmt = (
                 select(EiTopic)
                 .where(EiTopic.subject_code == subj.code)
                 .where(func.lower(EiTopic.name).like(f"%{topic_name}%"))
                 .limit(1)
             )
-            topic = (await db.execute(topic_stmt)).scalar_one_or_none()
-        if topic is None:
+            found_topic = (await db.execute(topic_stmt)).scalar_one_or_none()
+
+        if found_topic is None:
+            # Fallback 2: If topic_name equals subject name or not found, select first topic under subject
+            first_topic_stmt = (
+                select(EiTopic)
+                .where(EiTopic.subject_code == subj.code)
+                .order_by(EiTopic.display_order)
+                .limit(1)
+            )
+            found_topic = (await db.execute(first_topic_stmt)).scalar_one_or_none()
+
+        if found_topic is None:
             logger.warning("Topic not found in EiCatalog exam=%s subject=%s name=%s", exam, subj.code, target.topic_name)
             return None
 
-        return TopicKey(exam=exam, subject_code=subj.code, topic_code=topic.code, difficulty_band=difficulty_band)
+        return TopicKey(exam=exam, subject_code=subj.code, topic_code=found_topic.code, difficulty_band=difficulty_band)
 
     async def snapshot(self, db: AsyncSession) -> list[dict[str, Any]]:
         targets = load_question_pool_stock_targets()

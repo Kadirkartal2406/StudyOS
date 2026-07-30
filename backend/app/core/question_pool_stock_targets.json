@@ -1,6 +1,8 @@
 [
   {
     "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__paragraf",
     "subject_name": "Türkçe",
     "topic_name": "Paragraf",
     "difficulty_band": "medium",
@@ -9,7 +11,9 @@
   },
   {
     "exam": "tyt",
-    "subject_name": "Problemler",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__problemler",
+    "subject_name": "Matematik",
     "topic_name": "Problemler",
     "difficulty_band": "medium",
     "minimum": 500,
@@ -17,7 +21,9 @@
   },
   {
     "exam": "ayt",
-    "subject_name": "Türev",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__turev",
+    "subject_name": "Matematik",
     "topic_name": "Türev",
     "difficulty_band": "medium",
     "minimum": 250,
@@ -25,8 +31,10 @@
   },
   {
     "exam": "lgs",
+    "subject_code": "lgs_matematik",
+    "topic_code": "lgs_matematik__sayilar",
     "subject_name": "Matematik",
-    "topic_name": "Matematik",
+    "topic_name": "Sayılar",
     "difficulty_band": "medium",
     "minimum": 200,
     "target": 400

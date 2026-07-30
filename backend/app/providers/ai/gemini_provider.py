@@ -69,18 +69,26 @@ class GeminiProvider(AIProvider):
 
         return ordered[: 1 + max_fallbacks]
 
-    async def generate(self, request: GenerateRequest) -> str:
-        keys = [
-            (settings.GEMINI_API_KEY or "").strip(),
-            (settings.GEMINI_API_KEY_2 or "").strip(),
-            (settings.GEMINI_API_KEY_3 or "").strip(),
+    def _get_api_keys(self) -> list[str]:
+        raw_keys = [
+            str(getattr(settings, "GEMINI_API_KEY", "") or ""),
+            str(getattr(settings, "GEMINI_API_KEY_2", "") or ""),
+            str(getattr(settings, "GEMINI_API_KEY_3", "") or ""),
         ]
+        valid_keys = []
+        for k in raw_keys:
+            cleaned = k.strip()
+            if cleaned and not cleaned.startswith("<MagicMock"):
+                valid_keys.append(cleaned)
 
-        keys = [k for k in keys if k]
-        logger.warning(
-        "Gemini keys loaded: %s",
-        [k[:12] for k in keys],
+        logger.debug(
+            "Gemini keys loaded: %s",
+            [k[:12] for k in valid_keys],
         )
+        return valid_keys
+
+    async def generate(self, request: GenerateRequest) -> str:
+        keys = self._get_api_keys()
 
         if not keys:
             raise AIUnavailableError("Gemini API anahtarı yapılandırılmamış")

@@ -26,6 +26,85 @@ enforce_or_exit(settings)
 init_sentry(settings)
 
 
+from contextlib import asynccontextmanager
+from app.providers.ai.http_transport import (
+    close_http_transport,
+    init_http_transport,
+)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    import asyncio
+    from app.services.ai_cost.flags import (
+        ai_warmup_enabled,
+        midnight_scheduler_enabled,
+    )
+
+    # 1. AI Shared HTTP client initialization (connection pooling)
+    await init_http_transport()
+
+    # 2. Startup background tasks
+    asyncio.create_task(_seed_exam_catalog())
+    asyncio.create_task(_bootstrap_admin())
+
+    if ai_warmup_enabled():
+        asyncio.create_task(_seed_exam_style())
+    else:
+        logger.info("M32: ENABLE_AI_WARMUP=false — style seed skipped at startup")
+
+    if midnight_scheduler_enabled():
+        from app.services.booklet_scheduler import midnight_booklet_loop
+        from app.services.smart_question_pool_scheduler import (
+            midnight_question_pool_loop,
+        )
+
+        asyncio.create_task(midnight_booklet_loop())
+        asyncio.create_task(midnight_question_pool_loop())
+    else:
+        logger.info(
+            "M32: ENABLE_MIDNIGHT_SCHEDULER=false — no auto Gemini on startup"
+        )
+
+    yield
+
+    # 3. Shutdown cleanup
+    await close_http_transport()
+
+
+async def _bootstrap_admin() -> None:
+    from app.services.admin_bootstrap import ensure_admin_user
+
+    await ensure_admin_user()
+
+
+async def _seed_exam_catalog() -> None:
+    try:
+        from app.database.base import AsyncSessionLocal
+        from app.services.exam_catalog_service import ExamCatalogService
+
+        async with AsyncSessionLocal() as db:
+            n = await ExamCatalogService(db).ensure_synced()
+            await db.commit()
+            if n and n > 0:
+                logger.info("Exam catalog seeded topics=%s", n)
+    except Exception:
+        logger.exception("Exam catalog seed failed")
+
+
+async def _seed_exam_style() -> None:
+    try:
+        from app.database.base import AsyncSessionLocal
+        from app.services.exam_style_service import ExamStyleService
+
+        async with AsyncSessionLocal() as db:
+            n = await ExamStyleService(db).ensure_synced()
+            await db.commit()
+            logger.info("Exam style profiles synced count=%s", n)
+    except Exception:
+        logger.exception("Exam style seed failed")
+
+
 def create_application() -> FastAPI:
     application = FastAPI(
         title=settings.APP_NAME,
@@ -33,69 +112,8 @@ def create_application() -> FastAPI:
         description="StudyOS REST API",
         docs_url="/api/docs" if settings.DEBUG else None,
         redoc_url="/api/redoc" if settings.DEBUG else None,
+        lifespan=lifespan,
     )
-
-    @application.on_event("startup")
-    async def _start_booklet_scheduler() -> None:
-        import asyncio
-
-        from app.services.ai_cost.flags import (
-            ai_warmup_enabled,
-            midnight_scheduler_enabled,
-        )
-
-        # Exam Intelligence Catalog seed (Decision Engine dokunulmaz)
-        asyncio.create_task(_seed_exam_catalog())
-        asyncio.create_task(_bootstrap_admin())
-        # Sprint 23 — Exam Style Learning Dataset
-        if ai_warmup_enabled():
-            asyncio.create_task(_seed_exam_style())
-        else:
-            logger.info("M32: ENABLE_AI_WARMUP=false — style seed skipped at startup")
-        # Gece 00:00 (İstanbul) Gemini üretimi + catch-up — sadece flag açıksa
-        if midnight_scheduler_enabled():
-            from app.services.booklet_scheduler import midnight_booklet_loop
-
-            asyncio.create_task(midnight_booklet_loop())
-            from app.services.smart_question_pool_scheduler import (
-                midnight_question_pool_loop,
-            )
-
-            asyncio.create_task(midnight_question_pool_loop())
-        else:
-            logger.info(
-                "M32: ENABLE_MIDNIGHT_SCHEDULER=false — no auto Gemini on startup"
-            )
-
-    async def _bootstrap_admin() -> None:
-        from app.services.admin_bootstrap import ensure_admin_user
-
-        await ensure_admin_user()
-
-    async def _seed_exam_catalog() -> None:
-        try:
-            from app.database.base import AsyncSessionLocal
-            from app.services.exam_catalog_service import ExamCatalogService
-
-            async with AsyncSessionLocal() as db:
-                n = await ExamCatalogService(db).ensure_synced()
-                await db.commit()
-                if n and n > 0:
-                    logger.info("Exam catalog seeded topics=%s", n)
-        except Exception:
-            logger.exception("Exam catalog seed failed")
-
-    async def _seed_exam_style() -> None:
-        try:
-            from app.database.base import AsyncSessionLocal
-            from app.services.exam_style_service import ExamStyleService
-
-            async with AsyncSessionLocal() as db:
-                n = await ExamStyleService(db).ensure_synced()
-                await db.commit()
-                logger.info("Exam style profiles synced count=%s", n)
-        except Exception:
-            logger.exception("Exam style seed failed")
 
 
     # ── Rate Limiting ────────────────────────────────────────
