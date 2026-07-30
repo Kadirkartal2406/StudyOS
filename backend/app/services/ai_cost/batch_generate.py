@@ -82,8 +82,10 @@ async def generate_batch_one_call(
     )
     plans = QuestionPlanner().plan_batch(ctx_local, style=dna)
     if not plans:
+        logger.info("[PIPELINE] 2. QuestionPlanner returned zero plans")
         return [], "batch_empty", None
 
+    logger.info("[PIPELINE] 2. Gemini request sending | exam=%s topic=%s count=%s", ctx_local.exam, ctx_local.topic_code, len(plans))
     result = await generate_with_fallback(
         GenerateRequest(
             messages=_batch_messages(plans, dna),
@@ -98,9 +100,16 @@ async def generate_batch_one_call(
         preferred=ctx_local.preferred_provider,
         model=ctx_local.preferred_model,
     )
+    logger.info(
+        "[PIPELINE] 3. Gemini response received | provider=%s model=%s text_len=%s",
+        getattr(result, "provider", None),
+        getattr(result, "model", None),
+        len(getattr(result, "text", "") or ""),
+    )
     try:
         payload = extract_json_payload(result.text)
-    except Exception:
+    except Exception as exc:
+        logger.info("[PIPELINE] 3b. extract_json_payload FAILED | err=%s text_preview=%s", exc, (getattr(result, "text", "") or "")[:100])
         return [], "batch_parse_fail", result
 
     gate = validate_quiz_payload(
@@ -109,6 +118,12 @@ async def generate_batch_one_call(
         expected_count=len(plans),
         choice_count=plans[0].choice_count,
         max_stem=2500,
+    )
+    logger.info(
+        "[PIPELINE] 4. validate_quiz_payload | valid=%s valid_count=%s reason=%s",
+        bool(gate.valid),
+        len(gate.valid) if gate.valid else 0,
+        gate.reason,
     )
     if not gate.valid:
         return [], "batch_gate_fail", result
@@ -127,14 +142,17 @@ async def generate_batch_one_call(
             except Exception:
                 pass
         if is_similar_question(item, existing_stems=existing, existing_option_sets=existing_opts):
+            logger.info("[PIPELINE] 4b. Card skipped: similar question stem=%s...", (item.get("stem") or "")[:30])
             continue
         diff = analyze_for_plan(item, plan, style=dna)
         if diff.score < MIN_DIFFICULTY_SCORE:
+            logger.info("[PIPELINE] 4b. Card skipped: low difficulty score=%s min=%s", diff.score, MIN_DIFFICULTY_SCORE)
             continue
         quality = score_quality(
             item, plan, difficulty_score=diff.score, existing_stems=existing, style_dna=dna
         )
         if not passes_quality_gate(quality):
+            logger.info("[PIPELINE] 4b. Card skipped: failed QIE quality gate")
             continue
         card = build_card(
             item,
@@ -148,5 +166,7 @@ async def generate_batch_one_call(
         out.append(card)
         existing.append(card.stem)
         existing_opts.append(card.choices)
+
+    logger.info("[PIPELINE] 4c. Cards building finished | total_built_cards=%s", len(out))
 
     return out, f"batch_one_call:{len(out)}", result

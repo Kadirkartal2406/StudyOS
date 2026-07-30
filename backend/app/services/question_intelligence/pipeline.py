@@ -110,6 +110,11 @@ def evaluate_question(
     elif sc.overall < MIN_SCORECARD_OVERALL:
         accepted = False
         reject_reason = f"scorecard_low:{sc.overall}"
+
+    logger.info(
+        "[PIPELINE] 6. evaluate_question decision | accepted=%s reject_reason=%s bp_score=%s ef_score=%s ef_passed=%s uq_unique=%s ms_passed=%s sc_overall=%s",
+        accepted, reject_reason, bp.score, ef.score, ef.passed, uq.is_unique, ms.passed, sc.overall,
+    )
     
     return {
         "accepted": accepted,

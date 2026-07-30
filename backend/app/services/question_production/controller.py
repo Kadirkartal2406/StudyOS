@@ -581,6 +581,10 @@ class ProductionController:
         save: bool,
         reset_progress: bool = True,
     ) -> dict[str, Any]:
+        logger.info(
+            "[PIPELINE] 1. _produce_for_topic entered | exam=%s subject=%s topic=%s needed=%s approval_mode=%s save=%s",
+            exam, subject_code, topic_code, needed, approval_mode, save,
+        )
         tracker = get_progress_tracker()
         if reset_progress:
             tracker.reset(
@@ -741,6 +745,7 @@ class ProductionController:
                     "explanation": card.explanation,
                 }
                 plan_dict = card.plan.to_dict() if hasattr(card.plan, "to_dict") else {}
+                logger.info("[PIPELINE] 5. evaluate_question starting | stem_preview=%s...", (card.stem or "")[:40])
                 ev = evaluate_question(qdict, plan_dict, existing_stems=existing_stems)
                 if ev.get("repair") and getattr(ev["repair"], "repaired", False):
                     rewrite += 1
@@ -759,6 +764,7 @@ class ProductionController:
                         remaining=remaining,
                         current_index=generated,
                     )
+                    logger.info("[PIPELINE] 7. Card REJECTED | reject_reason=%s", preview.get("scores", {}).get("reject_reason"))
                     continue
 
                 if save and approval_mode == "auto":
@@ -781,6 +787,7 @@ class ProductionController:
                         difficulty_band=difficulty_band,
                         skill=card.plan.skill,
                     )
+                    logger.info("[PIPELINE] 9. Card saved to QuestionPool db pool | topic=%s", topic_code)
                 elif save and approval_mode == "manual":
                     pq = PendingQuestion(
                         id=str(uuid4()),
@@ -798,6 +805,7 @@ class ProductionController:
                     )
                     pending.add(pq)
                     preview["pending_id"] = pq.id
+                    logger.info("[PIPELINE] 9. Card saved to PendingQueue | pending_id=%s", pq.id)
 
                 accepted += 1
                 remaining = max(0, remaining - 1)
@@ -806,6 +814,7 @@ class ProductionController:
                     remaining=remaining,
                     current_index=generated,
                 )
+                logger.info("[PIPELINE] 8. accepted += 1 EXECUTED | total_accepted=%s remaining=%s", accepted, remaining)
 
             if save and approval_mode == "auto":
                 try:
