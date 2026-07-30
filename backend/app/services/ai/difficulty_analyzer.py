@@ -76,7 +76,7 @@ def analyze_question_difficulty(
         if n >= pmin:
             score += 15
             reasons.append("paragraph_length_ok")
-        elif n >= max(30, pmin // 2):
+        elif n >= 20:
             score += 5
             reasons.append("paragraph_length_partial")
         else:

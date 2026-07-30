@@ -122,7 +122,7 @@ class StyleIntelligence:
     ) -> dict[str, Any]:
         return {
             "exam_code": (exam or "kpss").lower(),
-            "choice_count": 5,
+            "choice_count": 4 if (exam or "").strip().lower() == "lgs" else 5,
             "difficulty": difficulty or "medium",
             "paragraph_length_avg": 160,
             "paragraph_length_range": [80, 220],
