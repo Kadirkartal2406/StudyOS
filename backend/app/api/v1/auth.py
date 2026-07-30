@@ -49,21 +49,51 @@ async def register_user(
     return SuccessResponse(data=data, message="Kayıt başarılı")
 
 
-@router.post("/login", response_model=SuccessResponse[AuthResponse])
+@router.post("/login")
 @limiter.limit(AUTH_RATE_LIMIT)
 async def login_user(
     request: Request,
-    body: LoginRequest,
+    body: LoginRequest | None = None,
     db: AsyncSession = Depends(get_db),
-) -> SuccessResponse[AuthResponse]:
-    """E-posta ve şifre ile giriş yapar; access + refresh token döner."""
-    user, access_token, refresh_token = await AuthService(db).login(body)
-    data = AuthResponse(
-        access_token=access_token,
-        refresh_token=refresh_token,
-        user=UserRead.from_user(user),
-    )
-    return SuccessResponse(data=data, message="Giriş başarılı")
+):
+    """E-posta ve şifre ile giriş yapar; access + refresh token döner (JSON & OAuth2 Form desteğiyle)."""
+    content_type = (request.headers.get("content-type") or "").lower()
+    email = None
+    password = None
+
+    if "application/x-www-form-urlencoded" in content_type or "multipart/form-data" in content_type:
+        form = await request.form()
+        email = str(form.get("username") or form.get("email") or "").strip()
+        password = str(form.get("password") or "").strip()
+    else:
+        try:
+            json_data = await request.json()
+            email = str(json_data.get("email") or json_data.get("username") or "").strip()
+            password = str(json_data.get("password") or "").strip()
+        except Exception:
+            if body:
+                email = body.email
+                password = body.password
+
+    if not email or not password:
+        from app.core.exceptions import ValidationError
+        raise ValidationError("E-posta ve şifre zorunludur")
+
+    login_req = LoginRequest(email=email, password=password)
+    user, access_token, refresh_token = await AuthService(db).login(login_req)
+    
+    return {
+        "success": True,
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "token_type": "bearer",
+        "data": {
+            "access_token": access_token,
+            "refresh_token": refresh_token,
+            "user": UserRead.from_user(user).model_dump(mode="json"),
+        },
+        "message": "Giriş başarılı",
+    }
 
 
 @router.post("/refresh", response_model=SuccessResponse[TokenRefreshResponse])
