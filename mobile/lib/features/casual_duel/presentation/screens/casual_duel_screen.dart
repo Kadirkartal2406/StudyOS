@@ -182,7 +182,7 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
     final q = _questions[_currentQ];
     final opts = q['options'] as Map<String, String>;
 
-    return Padding(
+    return ListView(
       padding: AppSpacing.pageWide,
       children: [
         // Score Header

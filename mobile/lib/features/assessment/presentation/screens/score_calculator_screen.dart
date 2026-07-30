@@ -150,7 +150,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Doğru',
-                          dense: true,
+                          isDense: true,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -163,7 +163,7 @@ class _ScoreCalculatorScreenState extends ConsumerState<ScoreCalculatorScreen> {
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Yanlış',
-                          dense: true,
+                          isDense: true,
                           border: OutlineInputBorder(),
                         ),
                       ),
