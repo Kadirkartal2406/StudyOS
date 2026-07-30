@@ -13,6 +13,7 @@ import '../../features/assessment/presentation/screens/assessment_session_screen
 import '../../features/assessment/presentation/screens/daily_challenge_subjects_screen.dart';
 import '../../features/assessment/presentation/screens/daily_leaderboard_screen.dart';
 import '../../features/assessment/presentation/screens/daily_optical_screen.dart';
+import '../../features/assessment/presentation/screens/score_calculator_screen.dart';
 import '../../features/auth/presentation/providers/auth_provider.dart';
 import '../../features/auth/presentation/providers/auth_state.dart';
 import '../../features/auth/presentation/screens/forgot_password_screen.dart';
@@ -321,6 +322,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/score-calculator',
+        name: 'score-calculator',
+        builder: (_, __) => const ScoreCalculatorScreen(),
       ),
       GoRoute(
         path: '/resources',

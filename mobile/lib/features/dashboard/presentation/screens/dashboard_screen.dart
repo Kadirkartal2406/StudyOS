@@ -14,6 +14,7 @@ import '../../domain/entities/dashboard_entity.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/dashboard_state.dart';
 import '../widgets/exam_countdown_banner.dart';
+import '../widgets/goal_progress_banner.dart';
 import '../widgets/notification_bell.dart';
 import '../widgets/today_next_action_card.dart';
 import '../../../onboarding/presentation/welcome/exam_calendar.dart';
@@ -37,6 +38,7 @@ class DashboardScreen extends ConsumerWidget {
             onSelected: (value) => context.push(value),
             itemBuilder: (context) => const [
               PopupMenuItem(value: '/assessment/daily', child: Text('Günün denemesi')),
+              PopupMenuItem(value: '/score-calculator', child: Text('Tahmini puan hesapla')),
               PopupMenuItem(value: '/assessment', child: Text('Seviye testi')),
               PopupMenuItem(value: '/ai-chat', child: Text('AI sohbet')),
               PopupMenuItem(value: '/planner', child: Text('Plan önerisi')),
@@ -161,6 +163,7 @@ class _TodayLoadedView extends ConsumerWidget {
               if (exam.isNotEmpty && examDate != null) ...[
                 const SizedBox(height: 10),
                 ExamCountdownBanner(examLabel: exam, examDate: examDate),
+                GoalProgressBanner(examLabel: exam),
               ] else if (exam.isNotEmpty) ...[
                 const SizedBox(height: 6),
                 Text(
@@ -171,6 +174,7 @@ class _TodayLoadedView extends ConsumerWidget {
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                 ),
+                GoalProgressBanner(examLabel: exam),
               ],
               if (coachLine != null && coachLine.trim().isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.md),

@@ -18,6 +18,11 @@ from app.core.exceptions import NotFoundError, ValidationError
 from app.database.base import get_db
 from app.models.assessment import AssessmentSessionStatus
 from app.models.user import User
+from app.services.osym_score_calculator import (
+    CalculateScoreRequest,
+    CalculatedScoreRead,
+    calculate_osym_score,
+)
 from app.schemas.assessment import (
     AssessmentOverview,
     AssessmentSessionRead,
@@ -285,4 +290,13 @@ async def ranking(
     db: AsyncSession = Depends(get_db),
 ) -> SuccessResponse[RankingRead]:
     data = await AssessmentService(db).ranking(current_user.id)
+    return SuccessResponse(data=data)
+
+
+@router.post("/calculate-score", response_model=SuccessResponse[CalculatedScoreRead])
+async def calculate_score(
+    body: CalculateScoreRequest,
+    current_user: User = Depends(get_current_user),
+) -> SuccessResponse[CalculatedScoreRead]:
+    data = calculate_osym_score(body.exam_type, body.inputs)
     return SuccessResponse(data=data)

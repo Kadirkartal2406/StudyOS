@@ -93,5 +93,8 @@ api_router.include_router(assessment.router, prefix="/assessment", tags=["assess
 api_router.include_router(knowledge.router, prefix="/knowledge", tags=["knowledge"])
 # Sprint 20 — Adaptive AI Coach (Experience)
 api_router.include_router(coach.router, prefix="/coach", tags=["coach"])
+# Sprint 33 — AI Coach Daily & Score Calculation
+from app.api.v1 import ai_coach
+api_router.include_router(ai_coach.router, prefix="/ai-coach", tags=["ai-coach"])
 # Sprint 21 RC — Analytics + Beta Feedback
 api_router.include_router(beta_ops.router, prefix="/beta", tags=["beta"])
