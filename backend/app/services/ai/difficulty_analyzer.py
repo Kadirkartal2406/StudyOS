@@ -69,8 +69,8 @@ def analyze_question_difficulty(
     # Reading / paragraph skills prefer longer stems
     want_long = any(
         k in (topic_name or "").lower()
-        for k in ("paragraf", "anlam", "okuma", "reading", "clozer", "passage")
-    ) or (style.get("reasoning_type") or "") in ("inference", "paragraph")
+        for k in ("paragraf", "anlam", "okuma", "reading", "clozer", "passage", "metin")
+    ) or (style.get("reasoning_type") or "") in ("paragraph_inference", "paragraph_reading")
 
     if want_long:
         if n >= pmin:

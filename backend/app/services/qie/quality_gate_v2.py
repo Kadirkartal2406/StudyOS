@@ -31,15 +31,19 @@ def score_quality(
     style_dna = style_dna or {}
     existing_stems = existing_stems or []
 
+    is_reading = any(
+        k in (plan.topic_name or "").lower() or k in (plan.topic_code or "").lower()
+        for k in ("paragraf", "anlam", "okuma", "reading", "clozer", "passage", "metin")
+    )
     stem_n = len(_words(item.stem))
-    target = plan.paragraph_length or 120
+    target = plan.paragraph_length or (160 if is_reading else 40)
     # Style: length vs DNA/plan
-    if abs(stem_n - target) <= target * 0.35:
+    if abs(stem_n - target) <= target * 0.50:
         style = 90
-    elif abs(stem_n - target) <= target * 0.55:
+    elif abs(stem_n - target) <= target * 0.80:
         style = 75
     else:
-        style = 55
+        style = 65
 
     # Difficulty channel
     difficulty = max(0, min(100, difficulty_score))
@@ -52,7 +56,7 @@ def score_quality(
     grammar = 88
     if any(x in low for x in ("chatgpt", "as an ai", "tabii ki", "😊")):
         grammar = 30
-    if len(item.stem.strip()) < 20:
+    if len(item.stem.strip()) < 12:
         grammar = min(grammar, 40)
 
     # Option balance
@@ -81,7 +85,7 @@ def score_quality(
 
     # Reading time proxy from length
     reading_time = 85
-    if plan.reading_time_sec >= 70 and stem_n < 50:
+    if is_reading and plan.reading_time_sec >= 70 and stem_n < 50:
         reading_time = 55
     elif plan.reading_time_sec <= 45 and stem_n > 220:
         reading_time = 60

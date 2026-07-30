@@ -65,10 +65,14 @@ class QuestionPlanner:
         if ctx.plans:
             return list(ctx.plans)
 
-        style = style or {}
-        choice_count = ctx.choice_count or int(style.get("choice_count") or 5)
-        para_avg = int(style.get("paragraph_length_avg") or style.get("paragraph_words_avg") or 180)
-        reading = int(style.get("reading_time_sec_avg") or style.get("reading_time") or 75)
+        is_reading_topic = any(
+            k in (ctx.topic_name or "").lower() or k in (ctx.topic_code or "").lower()
+            for k in ("paragraf", "anlam", "okuma", "reading", "clozer", "passage", "metin")
+        )
+        default_para = 180 if is_reading_topic else 40
+        default_read = 75 if is_reading_topic else 45
+        para_avg = int(style.get("paragraph_length_avg") or style.get("paragraph_words_avg") or default_para)
+        reading = int(style.get("reading_time_sec_avg") or style.get("reading_time") or default_read)
         preferred_dist = list(style.get("distractor_patterns") or style.get("distractor_types") or [])
 
         forbidden_patterns = list(ctx.recent_patterns)
