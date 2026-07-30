@@ -70,10 +70,10 @@ def analyze_question_difficulty(
     ) or (style.get("reasoning_type") or "") in ("paragraph_inference", "paragraph_reading")
 
     if want_long:
-        if n >= min(50, pmin):
-            score += 15
+        if n >= min(35, pmin):
+            score += 20
             reasons.append("paragraph_length_ok")
-        elif n >= 20:
+        elif n >= 15:
             score += 15
             reasons.append("paragraph_length_partial")
         else:
