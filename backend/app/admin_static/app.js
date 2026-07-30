@@ -743,12 +743,18 @@ $("qp-production-report-btn").addEventListener("click", loadProductionReport);
 let _qpProgressTimer = null;
 
 function renderLivePreview(previews) {
-  if (!previews || previews.length === 0) {
+  if (!previews) {
     $("qp-live-preview-body").textContent = "Henüz soru yok.";
     return;
   }
 
-  $("qp-live-preview-body").innerHTML = previews.map((preview, index) => {
+  const items = Array.isArray(previews) ? previews : [previews];
+  if (items.length === 0) {
+    $("qp-live-preview-body").textContent = "Henüz soru yok.";
+    return;
+  }
+
+  $("qp-live-preview-body").innerHTML = items.map((preview, index) => {
 
     const scores = preview.scores || {};
 
