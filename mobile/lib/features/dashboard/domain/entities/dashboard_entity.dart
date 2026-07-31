@@ -1,5 +1,63 @@
 import 'activity_entity.dart';
 
+/// LOS Hizalama — Topic Confidence özeti (Dashboard projeksiyon).
+class TopicConfidenceSummaryEntity {
+  const TopicConfidenceSummaryEntity({
+    required this.topicCode,
+    required this.subjectCode,
+    required this.belief,
+    required this.uncertainty,
+    required this.confidenceLevel,
+    this.topicName,
+    this.trendDirection = 0.0,
+  });
+
+  final String topicCode;
+  final String subjectCode;
+  final String? topicName;
+  final double belief;           // 0.0–1.0
+  final double uncertainty;      // 0.0–1.0
+  final String confidenceLevel;  // unknown | low | medium | high | conflicted
+  final double trendDirection;   // -1 düşen, 0 durağan, +1 yükselen
+
+  String get displayName => topicName ?? topicCode.split('__').last.replaceAll('_', ' ');
+
+  /// Confidence rengi (Flutter renk tonu olarak string)
+  String get colorTone {
+    switch (confidenceLevel) {
+      case 'low':
+        return 'error';
+      case 'medium':
+        return 'warning';
+      case 'high':
+        return 'success';
+      case 'conflicted':
+        return 'warning';
+      default:
+        return 'neutral';
+    }
+  }
+}
+
+/// LOS Hizalama — Living Plan Suggestion önerisi.
+class LivingPlanSuggestionEntity {
+  const LivingPlanSuggestionEntity({
+    required this.draftId,
+    required this.reason,
+    this.topicCode,
+    this.topicName,
+    this.estimatedMinutes = 45,
+  });
+
+  final String draftId;
+  final String? topicCode;
+  final String? topicName;
+  final String reason;
+  final int estimatedMinutes;
+
+  String get displayTopic => topicName ?? topicCode?.split('__').last.replaceAll('_', ' ') ?? 'Konu';
+}
+
 /// Dashboard'daki haftalık hedef özeti (Sprint-2.1 / 3.0.2).
 class WeeklyGoalSummaryEntity {
   const WeeklyGoalSummaryEntity({
@@ -158,6 +216,8 @@ class DashboardEntity {
     this.learningFeed = const [],
     this.insightCards = const [],
     this.coachToday,
+    this.confidenceSummary = const [],
+    this.livingPlanSuggestion,
   });
 
   final String firstName;
@@ -242,6 +302,12 @@ class DashboardEntity {
 
   /// Sprint 20 — Adaptive Coach (Experience).
   final CoachTodayEntity? coachToday;
+
+  /// LOS Hizalama — Confidence Summary (en zayıf 3 topic).
+  final List<TopicConfidenceSummaryEntity> confidenceSummary;
+
+  /// LOS Hizalama — Living Plan Suggestion (SUGGEST policy → banner).
+  final LivingPlanSuggestionEntity? livingPlanSuggestion;
 }
 
 /// Sprint 20 — Today Coach mesajı.

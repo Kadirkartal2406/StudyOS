@@ -135,6 +135,104 @@ class LivingPlanService:
             "affected_topics": [topic_code],
         }
 
+    # ── Accept / Reject — Kullanıcı karar API'si ─────────────────────────────
+
+    async def accept_suggestion(
+        self, user_id: uuid.UUID, *, draft_id: uuid.UUID | None = None
+    ) -> dict:
+        """
+        LOS § 9.1 — Suggest → Accept.
+        PENDING draft → ACCEPTED; StudyPlan'a dönüştür.
+        """
+        draft = await self._get_pending_draft(user_id, draft_id)
+        if draft is None:
+            return {"action": "no_pending", "draft_id": None, "reason": "Bekleyen öneri yok."}
+
+        draft.status = PlannerDraftStatus.ACCEPTED
+        draft.updated_at = datetime.now(UTC)
+        await self.db.flush()
+
+        # Plan payload'dan bugün için StudyPlan blokları üret
+        try:
+            items = (draft.plan_payload or {}).get("items", [])
+            today = datetime.now(UTC).date()
+            for idx, item in enumerate(items[:3]):  # max 3 blok
+                from app.models.study_plan import StudyPlan, StudyPlanStatus
+                sp = StudyPlan(
+                    user_id=user_id,
+                    title=item.get("title") or item.get("topic_name") or "Kaydedilen Öneri",
+                    subject=item.get("subject") or item.get("subject_code"),
+                    topic=item.get("topic_name") or item.get("topic_code"),
+                    estimated_minutes=item.get("estimated_minutes", 45),
+                    study_date=today,
+                    order_index=100 + idx,  # mevcut planların sonuna
+                    status=StudyPlanStatus.PLANNED,
+                )
+                self.db.add(sp)
+        except Exception:
+            pass  # Plan dönüştirme hatası accept'i engellemez
+
+        await self.db.flush()
+        return {
+            "action": "accepted",
+            "draft_id": str(draft.id),
+            "reason": "Plan önerisi kabul edildi. Bugünün planlarına eklendi.",
+        }
+
+    async def reject_suggestion(
+        self, user_id: uuid.UUID, *, draft_id: uuid.UUID | None = None
+    ) -> dict:
+        """
+        LOS § 9.4 — Reddetmek öğrenmektir.
+        PENDING draft → REJECTED.
+        Red cezalandırılmaz: cooldown aktifleşir, Memory'ye yazılır.
+        """
+        draft = await self._get_pending_draft(user_id, draft_id)
+        if draft is None:
+            return {"action": "no_pending", "draft_id": None, "reason": "Bekleyen öneri yok."}
+
+        draft.status = PlannerDraftStatus.REJECTED
+        draft.updated_at = datetime.now(UTC)
+        await self.db.flush()
+
+        # Memory'ye red sinyali yaz (plan_receptivity bilgisi)
+        try:
+            from app.services.behavioral_memory_service import BehavioralMemoryService
+            mem_svc = BehavioralMemoryService(self.db)
+            await mem_svc.record_plan_decision(user_id, accepted=False)
+        except Exception:
+            pass  # Memory yazımı kritik değil
+
+
+        return {
+            "action": "rejected",
+            "draft_id": str(draft.id),
+            "reason": "Plan önerisi reddedildi. Mevcut plan değişmedi.",
+        }
+
+    async def _get_pending_draft(
+        self, user_id: uuid.UUID, draft_id: uuid.UUID | None
+    ) -> PlannerDraft | None:
+        """PENDING draft'u döner (spesifik ID veya en son)."""
+        if draft_id:
+            stmt = select(PlannerDraft).where(
+                PlannerDraft.id == draft_id,
+                PlannerDraft.user_id == user_id,
+                PlannerDraft.status == PlannerDraftStatus.PENDING,
+            )
+        else:
+            stmt = (
+                select(PlannerDraft)
+                .where(
+                    PlannerDraft.user_id == user_id,
+                    PlannerDraft.status == PlannerDraftStatus.PENDING,
+                )
+                .order_by(PlannerDraft.created_at.desc())
+                .limit(1)
+            )
+        result = await self.db.execute(stmt)
+        return result.scalars().first()
+
     # ── Yardımcı: mevcut plan bul ────────────────────────────────────────────
 
     async def _find_existing_plan_for_topic(

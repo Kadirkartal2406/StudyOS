@@ -131,6 +131,28 @@ class CasualDuelService:
                 ),
             ]
 
+        # Record Practice Effort Evidence for challenger
+        try:
+            from app.models.topic_evidence import EvidenceCategory, EvidenceSourceType
+            from app.services.evidence_service import EvidenceService
+
+            await EvidenceService(self.db).ingest_raw_evidence(
+                user_id=challenger_id,
+                subject_code=req.subject_code,
+                topic_code=f"{req.subject_code}__genel",
+                category=EvidenceCategory.EFFORT,
+                source_type=EvidenceSourceType.AI_QUESTION,
+                value=0.7,
+                quality_weight=0.5,
+                metadata_={
+                    "casual_duel": True,
+                    "friend_id": str(req.friend_id),
+                    "question_count": req.question_count,
+                },
+            )
+        except Exception:
+            pass
+
         return DuelMatchRead(
             challenger_id=challenger_id,
             opponent_id=req.friend_id,

@@ -312,6 +312,21 @@ class _WorkSurfaceBody extends StatelessWidget {
               icon: Icons.edit_note,
               onPressed: () => context.push('/questions?$q'),
             ),
+            TonalButton(
+              label: 'Foto Çözücü',
+              icon: Icons.camera_alt_outlined,
+              onPressed: () => context.push('/photo-solver?$q'),
+            ),
+            TonalButton(
+              label: 'Optik Taraması',
+              icon: Icons.qr_code_scanner,
+              onPressed: () => context.push('/optical-scanner?$q'),
+            ),
+            TonalButton(
+              label: 'Konu Düellosu',
+              icon: Icons.sports_esports_outlined,
+              onPressed: () => context.push('/casual-duel?$q'),
+            ),
           ],
         ),
         const SizedBox(height: AppSpacing.md),

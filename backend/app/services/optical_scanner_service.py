@@ -15,6 +15,8 @@ from app.services.osym_score_calculator import SubjectNetInput, calculate_osym_s
 class OpticalScanRequest(BaseModel):
     image_base64: str
     exam_type: str = "kpss"
+    subject_code: str | None = None
+    topic_code: str | None = None
     question_count: int = Field(default=20, ge=1, le=120)
     answer_key: dict[int, str] | None = None
 
@@ -74,12 +76,38 @@ class OpticalScannerService:
             exam_type=exam,
             inputs=[
                 SubjectNetInput(
-                    subject_code=f"{exam}_genel",
+                    subject_code=req.subject_code or f"{exam}_genel",
                     correct_count=correct,
                     wrong_count=wrong,
                 )
             ],
         )
+
+        # Record Evidence if subject_code/topic_code provided or fuzzy bound
+        try:
+            from app.models.topic_evidence import EvidenceCategory, EvidenceSourceType
+            from app.services.evidence_service import EvidenceService
+
+            accuracy = correct / count if count > 0 else 0.0
+            await EvidenceService(self.db).ingest_raw_evidence(
+                user_id=user_id,
+                subject_code=req.subject_code,
+                topic_code=req.topic_code,
+                subject_hint=f"{exam} genel",
+                category=EvidenceCategory.PERFORMANCE,
+                source_type=EvidenceSourceType.MANUAL_INPUT,
+                value=accuracy,
+                quality_weight=0.9,
+                metadata_={
+                    "optical_scan": True,
+                    "total_count": count,
+                    "correct": correct,
+                    "wrong": wrong,
+                    "net": calc.total_net,
+                },
+            )
+        except Exception:
+            pass
 
         return OpticalScanResponse(
             exam_type=exam,

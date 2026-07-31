@@ -105,3 +105,6 @@ api_router.include_router(optical_scanner.router, prefix="/optical-scanner", tag
 api_router.include_router(casual_duel.router, prefix="/casual-duel", tags=["casual-duel"])
 # Sprint 21 RC — Analytics + Beta Feedback
 api_router.include_router(beta_ops.router, prefix="/beta", tags=["beta"])
+# LOS Hizalama — Living Plan (accept/reject)
+from app.api.v1 import living_plan
+api_router.include_router(living_plan.router, tags=["living-plan"])

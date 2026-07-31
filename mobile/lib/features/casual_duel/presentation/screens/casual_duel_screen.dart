@@ -5,7 +5,10 @@ import '../../../../core/theme/app_spacing.dart';
 
 /// Sprint 37 — Gerçek Kullanıcı Aramalı & Arkadaş Davetli Eğlencesine Düello
 class CasualDuelScreen extends ConsumerStatefulWidget {
-  const CasualDuelScreen({super.key});
+  const CasualDuelScreen({super.key, this.subjectCode, this.topicCode});
+
+  final String? subjectCode;
+  final String? topicCode;
 
   @override
   ConsumerState<CasualDuelScreen> createState() => _CasualDuelScreenState();
@@ -126,10 +129,25 @@ class _CasualDuelScreenState extends ConsumerState<CasualDuelScreen> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final topicDisplay = widget.topicCode?.split('__').last.replaceAll('_', ' ').toUpperCase();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Eğlencesine Düello'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Eğlencesine Düello'),
+            if (topicDisplay != null)
+              Text(
+                'Konu: $topicDisplay',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: scheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+          ],
+        ),
       ),
       body: SafeArea(
         child: _inMatch ? _buildMatchView(context, scheme) : _buildLobbyView(context, scheme),

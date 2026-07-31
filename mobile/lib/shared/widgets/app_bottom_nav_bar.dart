@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-/// Alt gezinme — RC3 Türkçe etiketler.
+/// Alt gezinme — LOS § 13.2 Omurgası: Today · Topic (Derslerim) · Journey
 class AppBottomNavBar extends StatelessWidget {
   const AppBottomNavBar({super.key, required this.currentIndex});
 
@@ -10,9 +10,7 @@ class AppBottomNavBar extends StatelessWidget {
   static const _destinations = [
     (icon: Icons.today_rounded, label: 'Bugün', route: '/dashboard'),
     (icon: Icons.menu_book_rounded, label: 'Derslerim', route: '/subjects'),
-    (icon: Icons.calendar_today_outlined, label: 'Planım', route: '/study-plan'),
     (icon: Icons.map_outlined, label: 'Yolculuk', route: '/journey'),
-    (icon: Icons.person_outline_rounded, label: 'Profil', route: '/profile'),
   ];
 
   void _handleTap(BuildContext context, int index) {
@@ -22,8 +20,12 @@ class AppBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final validIndex = (currentIndex >= 0 && currentIndex < _destinations.length)
+        ? currentIndex
+        : 0;
+
     return NavigationBar(
-      selectedIndex: currentIndex,
+      selectedIndex: validIndex,
       onDestinationSelected: (i) => _handleTap(context, i),
       destinations: [
         for (final d in _destinations)

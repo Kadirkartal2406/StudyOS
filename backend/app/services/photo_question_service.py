@@ -69,29 +69,23 @@ class PhotoQuestionService:
         correct_ans = "C"
         expl = "Kalan iş miktarı 1/2 olduğundan 2. işçi 12 günde tamamlar."
 
-        # 2. Record Wrong Evidence into User Learning Profile
+        # 2. Record Wrong Evidence into User Learning Profile using EvidenceService
         try:
-            from app.models.topic_evidence import EvidenceCategory, EvidenceHorizon, EvidenceSourceType, TopicEvidence
-            from datetime import datetime, UTC
+            from app.models.topic_evidence import EvidenceCategory, EvidenceSourceType
 
-            ev = TopicEvidence(
+            await self.evidence_svc.ingest_raw_evidence(
                 user_id=user_id,
                 subject_code=subject,
                 topic_code=topic,
                 category=EvidenceCategory.PERFORMANCE,
-                horizon=EvidenceHorizon.INSTANT,
+                source_type=EvidenceSourceType.AI_QUESTION,
                 value=0.0,  # Wrong question uploaded
                 quality_weight=0.8,
-                source_type=EvidenceSourceType.AI_QUESTION,
-                source_id=uuid.uuid4(),
                 metadata_={
                     "photo_uploaded": True,
                     "extracted_text": extracted_text[:100],
                 },
-                occurred_at=datetime.now(UTC),
             )
-            self.db.add(ev)
-            await self.db.flush()
         except Exception:
             pass
 

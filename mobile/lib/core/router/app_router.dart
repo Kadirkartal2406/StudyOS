@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/achievements/presentation/screens/achievements_screen.dart';
-import '../../features/adaptive_planner/presentation/screens/adaptive_planner_screen.dart';
 import '../../features/ai_chat/presentation/screens/chat_screen.dart';
 import '../../features/ai_chat/presentation/screens/conversations_screen.dart';
-import '../../features/ai_coach/presentation/screens/ai_coach_screen.dart';
 import '../../features/ai_settings/presentation/screens/ai_settings_screen.dart';
 import '../../features/assessment/presentation/screens/assessment_overview_screen.dart';
 import '../../features/assessment/presentation/screens/assessment_session_screen.dart';
@@ -59,7 +57,6 @@ import '../../features/question_tracking/presentation/screens/question_detail_sc
 import '../../features/question_tracking/presentation/screens/question_list_screen.dart';
 import '../../features/question_tracking/presentation/screens/question_statistics_screen.dart';
 import '../../features/revision/presentation/screens/revision_screen.dart';
-import '../../features/statistics/presentation/screens/statistics_screen.dart';
 import '../../features/study_plan/presentation/screens/add_study_plan_screen.dart';
 import '../../features/study_plan/presentation/screens/edit_study_plan_screen.dart';
 import '../../features/study_plan/presentation/screens/study_plan_detail_screen.dart';
@@ -334,17 +331,26 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/photo-solver',
         name: 'photo-solver',
-        builder: (_, __) => const PhotoSolverScreen(),
+        builder: (_, state) => PhotoSolverScreen(
+          subjectCode: state.uri.queryParameters['subject_code'],
+          topicCode: state.uri.queryParameters['topic_code'],
+        ),
       ),
       GoRoute(
         path: '/optical-scanner',
         name: 'optical-scanner',
-        builder: (_, __) => const CameraOpticalScannerScreen(),
+        builder: (_, state) => CameraOpticalScannerScreen(
+          subjectCode: state.uri.queryParameters['subject_code'],
+          topicCode: state.uri.queryParameters['topic_code'],
+        ),
       ),
       GoRoute(
         path: '/casual-duel',
         name: 'casual-duel',
-        builder: (_, __) => const CasualDuelScreen(),
+        builder: (_, state) => CasualDuelScreen(
+          subjectCode: state.uri.queryParameters['subject_code'],
+          topicCode: state.uri.queryParameters['topic_code'],
+        ),
       ),
       GoRoute(
         path: '/resources',
@@ -388,9 +394,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/planner',
         name: 'planner',
-        builder: (_, state) => AdaptivePlannerScreen(
-          subjectCode: state.uri.queryParameters['subject_code'],
-        ),
+        redirect: (_, __) => '/dashboard',
       ),
       GoRoute(
         path: '/revisions',
@@ -506,7 +510,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/statistics',
         name: 'statistics',
-        builder: (_, __) => const StatisticsScreen(),
+        redirect: (_, __) => '/journey',
       ),
       // Sprint 10 — Journey Surface
       GoRoute(
@@ -532,7 +536,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/ai-coach',
         name: 'ai-coach',
-        builder: (_, __) => const AiCoachScreen(),
+        redirect: (_, __) => '/dashboard',
       ),
       GoRoute(
         path: '/ai-settings',

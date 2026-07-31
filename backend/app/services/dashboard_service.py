@@ -14,7 +14,7 @@ from app.core.constants import DEFAULT_DAILY_STUDY_GOAL_MINUTES
 from app.models.study_plan import StudyPlan, StudyPlanStatus
 from app.models.user import User
 from app.repositories.study_plan_repository import StudyPlanRepository
-from app.schemas.dashboard import DashboardExamTargetSummary, DashboardResponse
+from app.schemas.dashboard import DashboardExamTargetSummary, DashboardResponse, LivingPlanSuggestionSummary, TopicConfidenceSummary
 from app.schemas.study_plan import StudyPlanRead
 from app.services.achievement_service import AchievementService
 from app.services.activity_service import ActivityService
@@ -200,6 +200,81 @@ class DashboardService:
         except Exception:
             pass  # LOS layer hatası Today Engine'i kesmez
 
+        # ── LOS: Confidence Summary (en düşük 3 topic) ───────────────────────
+        confidence_summary: list[TopicConfidenceSummary] = []
+        try:
+            from sqlalchemy import select
+
+            from app.models.topic_confidence import TopicConfidence
+
+            conf_stmt = (
+                select(TopicConfidence)
+                .where(TopicConfidence.user_id == user.id)
+                .order_by(
+                    TopicConfidence.belief.asc(),
+                    TopicConfidence.uncertainty.desc(),
+                )
+                .limit(3)
+            )
+            conf_rows = list((await self.db.execute(conf_stmt)).scalars().all())
+
+            # Catalog'tan topic isimlerini al
+            topic_name_map: dict[str, str] = {}
+            if conf_rows:
+                all_cat = await self.learning_profile_service.repo.list_catalog()
+                for cat in all_cat:
+                    # catalog: Subject (code+name); topic catalog ayrı
+                    pass
+                topic_cat = await self.learning_profile_service.repo.list_topics(active_only=False)
+                topic_name_map = {t.code: t.name for t in topic_cat}
+
+            confidence_summary = [
+                TopicConfidenceSummary(
+                    topic_code=row.topic_code,
+                    subject_code=row.subject_code,
+                    topic_name=topic_name_map.get(row.topic_code),
+                    belief=round(row.belief, 3),
+                    uncertainty=round(row.uncertainty, 3),
+                    confidence_level=row.confidence_level,
+                    trend_direction=round(row.trend_direction, 3),
+                )
+                for row in conf_rows
+            ]
+        except Exception:
+            pass
+
+        # ── LOS: Living Plan Suggestion (PENDING draft) ──────────────────────
+        living_plan_suggestion: LivingPlanSuggestionSummary | None = None
+        try:
+            from app.models.planner_draft import PlannerDraft, PlannerDraftStatus
+
+            draft_stmt = (
+                select(PlannerDraft)
+                .where(
+                    PlannerDraft.user_id == user.id,
+                    PlannerDraft.status == PlannerDraftStatus.PENDING,
+                )
+                .order_by(PlannerDraft.created_at.desc())
+                .limit(1)
+            )
+            draft_row = (await self.db.execute(draft_stmt)).scalars().first()
+            if draft_row:
+                payload = draft_row.plan_payload or {}
+                override_reason = payload.get("override_reason", "")
+                items = payload.get("items", [])
+                first_topic = items[0].get("topic_code") if items else None
+                first_topic_name = items[0].get("topic_name") if items else None
+                est_min = items[0].get("estimated_minutes", 45) if items else 45
+                living_plan_suggestion = LivingPlanSuggestionSummary(
+                    draft_id=str(draft_row.id),
+                    topic_code=first_topic,
+                    topic_name=first_topic_name,
+                    reason=override_reason or "Sistem bu konuya odaklanmanı öneriyor.",
+                    estimated_minutes=est_min,
+                )
+        except Exception:
+            pass
+
         next_action = build_next_action(
             today_plans=today_plans,
             revision=revision,
@@ -364,6 +439,8 @@ class DashboardService:
             learning_feed=learning_feed,
             insight_cards=insight_cards,
             coach_today=coach_today,
+            confidence_summary=confidence_summary,
+            living_plan_suggestion=living_plan_suggestion,
         )
 
     async def _subjects_summary_vs_target(

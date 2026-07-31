@@ -176,6 +176,8 @@ class DashboardModel {
     this.learningFeed = const [],
     this.insightCards = const [],
     this.coachToday,
+    this.confidenceSummary = const [],
+    this.livingPlanSuggestion,
   });
 
   final String firstName;
@@ -250,6 +252,8 @@ class DashboardModel {
   final List<FeedCardEntity> learningFeed;
   final List<InsightCardEntity> insightCards;
   final CoachTodayEntity? coachToday;
+  final List<TopicConfidenceSummaryEntity> confidenceSummary;
+  final LivingPlanSuggestionEntity? livingPlanSuggestion;
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) {
     final activitiesJson = json['recent_activities'] as List<dynamic>? ?? [];
@@ -286,6 +290,34 @@ class DashboardModel {
         winTitle: win?['title'] as String?,
         winMessage: win?['message'] as String?,
         reasons: reasons,
+      );
+    }
+
+    final confJson = json['confidence_summary'] as List<dynamic>? ?? [];
+    final confSummary = confJson
+        .whereType<Map<String, dynamic>>()
+        .map(
+          (m) => TopicConfidenceSummaryEntity(
+            topicCode: m['topic_code'] as String? ?? '',
+            subjectCode: m['subject_code'] as String? ?? '',
+            topicName: m['topic_name'] as String?,
+            belief: (m['belief'] as num?)?.toDouble() ?? 0.0,
+            uncertainty: (m['uncertainty'] as num?)?.toDouble() ?? 1.0,
+            confidenceLevel: m['confidence_level'] as String? ?? 'unknown',
+            trendDirection: (m['trend_direction'] as num?)?.toDouble() ?? 0.0,
+          ),
+        )
+        .toList();
+
+    final lpJson = json['living_plan_suggestion'] as Map<String, dynamic>?;
+    LivingPlanSuggestionEntity? lpSuggestion;
+    if (lpJson != null) {
+      lpSuggestion = LivingPlanSuggestionEntity(
+        draftId: lpJson['draft_id'] as String? ?? '',
+        topicCode: lpJson['topic_code'] as String?,
+        topicName: lpJson['topic_name'] as String?,
+        reason: lpJson['reason'] as String? ?? '',
+        estimatedMinutes: lpJson['estimated_minutes'] as int? ?? 45,
       );
     }
     return DashboardModel(
@@ -423,6 +455,8 @@ class DashboardModel {
           )
           .toList(),
       coachToday: coachToday,
+      confidenceSummary: confSummary,
+      livingPlanSuggestion: lpSuggestion,
     );
   }
 
@@ -500,6 +534,8 @@ class DashboardModel {
       learningFeed: learningFeed,
       insightCards: insightCards,
       coachToday: coachToday,
+      confidenceSummary: confidenceSummary,
+      livingPlanSuggestion: livingPlanSuggestion,
     );
   }
 }

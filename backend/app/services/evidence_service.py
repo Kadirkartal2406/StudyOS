@@ -545,6 +545,54 @@ class EvidenceService:
         )
         return result
 
+    # ── Ingest: Raw / Generic Tool Evidence ───────────────────────────────────
+
+    async def ingest_raw_evidence(
+        self,
+        user_id: uuid.UUID,
+        *,
+        subject_code: str | None = None,
+        topic_code: str | None = None,
+        subject_hint: str | None = None,
+        topic_hint: str | None = None,
+        category: EvidenceCategory = EvidenceCategory.PERFORMANCE,
+        source_type: EvidenceSourceType = EvidenceSourceType.MANUAL_INPUT,
+        value: float = 1.0,
+        quality_weight: float = 1.0,
+        metadata_: dict | None = None,
+        catalog: list | None = None,
+    ) -> TopicEvidence:
+        """
+        Herhangi bir araçtan (Photo Solver, Optical Scanner, Duels vb.) gelen ham sinyali
+        bind edip Evidence Engine'e kaydeder ve Confidence recalculation tetikler.
+        """
+        s_code, t_code = self.bind(
+            subject_code=subject_code,
+            topic_code=topic_code,
+            subject_hint=subject_hint,
+            topic_hint=topic_hint,
+            catalog=catalog,
+        )
+        is_bound = s_code != _UNBOUND and t_code != _UNBOUND
+
+        ev = TopicEvidence(
+            user_id=user_id,
+            subject_code=s_code,
+            topic_code=t_code,
+            category=category,
+            horizon=EvidenceHorizon.INSTANT,
+            value=max(min(value, 1.0), 0.0),
+            quality_weight=round(quality_weight if is_bound else quality_weight * 0.5, 3),
+            source_type=source_type,
+            metadata_=metadata_ or {},
+            occurred_at=datetime.now(UTC),
+        )
+        result = await self.repo.add_evidence(ev)
+        if is_bound:
+            await self.trigger_confidence_recalculation(user_id, s_code, t_code)
+        return result
+
+
     # ── Confidence recalculation trigger ─────────────────────────────────────
 
     async def trigger_confidence_recalculation(

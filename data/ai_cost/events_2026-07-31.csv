@@ -1,0 +1,2 @@
+timestamp,module,model,duration_ms,prompt_tokens,completion_tokens,cache_hit,estimated_cost_usd,provider,kind,success,error
+2026-07-31T06:56:11.404554+00:00,generate_with_fallback,x,0.13,,,False,0.0,gemini,,False,fail

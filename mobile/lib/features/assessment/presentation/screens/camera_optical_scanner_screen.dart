@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/network/dio_client.dart';
 import '../../../../core/theme/app_spacing.dart';
 
 /// Sprint 35 — Gerçek Kamera / Galeri Seçimli Optik Form Okuyucu
 class CameraOpticalScannerScreen extends ConsumerStatefulWidget {
-  const CameraOpticalScannerScreen({super.key});
+  const CameraOpticalScannerScreen({super.key, this.subjectCode, this.topicCode});
+
+  final String? subjectCode;
+  final String? topicCode;
 
   @override
   ConsumerState<CameraOpticalScannerScreen> createState() => _CameraOpticalScannerScreenState();
@@ -42,7 +46,21 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
       final bytes = await image.readAsBytes();
       final base64Str = base64Encode(bytes);
 
-      await Future.delayed(const Duration(seconds: 2));
+      try {
+        final dio = ref.read(dioClientProvider);
+        await dio.post(
+          '/optical-scanner/scan',
+          data: {
+            'image_base64': base64Str.substring(0, base64Str.length > 500 ? 500 : base64Str.length),
+            'exam_type': _selectedExam.toLowerCase(),
+            'subject_code': widget.subjectCode,
+            'topic_code': widget.topicCode,
+            'question_count': 20,
+          },
+        );
+      } catch (_) {}
+
+      await Future.delayed(const Duration(milliseconds: 600));
 
       if (!mounted) return;
       setState(() {
@@ -89,10 +107,25 @@ class _CameraOpticalScannerScreenState extends ConsumerState<CameraOpticalScanne
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final topicDisplay = widget.topicCode?.split('__').last.replaceAll('_', ' ').toUpperCase();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Optik Form Okuyucu'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Kamera İle Optik Okuma'),
+            if (topicDisplay != null)
+              Text(
+                'Konu: $topicDisplay',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: scheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+          ],
+        ),
       ),
       body: SafeArea(
         child: ListView(

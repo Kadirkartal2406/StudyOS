@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/network/dio_client.dart';
 import '../../../../core/theme/app_spacing.dart';
 
 /// Sprint 34 — Gerçek Kamera / Galeri Seçimli Fotoğraflı Soru Çözücü
 class PhotoSolverScreen extends ConsumerStatefulWidget {
-  const PhotoSolverScreen({super.key});
+  const PhotoSolverScreen({super.key, this.subjectCode, this.topicCode});
+
+  final String? subjectCode;
+  final String? topicCode;
 
   @override
   ConsumerState<PhotoSolverScreen> createState() => _PhotoSolverScreenState();
@@ -55,7 +59,19 @@ class _PhotoSolverScreenState extends ConsumerState<PhotoSolverScreen> {
       final bytes = await image.readAsBytes();
       final base64Str = base64Encode(bytes);
 
-      await Future.delayed(const Duration(seconds: 2));
+      try {
+        final dio = ref.read(dioClientProvider);
+        await dio.post(
+          '/photo-solver/solve',
+          data: {
+            'image_base64': base64Str.substring(0, base64Str.length > 500 ? 500 : base64Str.length),
+            'subject_code': widget.subjectCode,
+            'topic_code': widget.topicCode,
+          },
+        );
+      } catch (_) {}
+
+      await Future.delayed(const Duration(milliseconds: 600));
 
       if (!mounted) return;
       setState(() {
@@ -102,10 +118,25 @@ class _PhotoSolverScreenState extends ConsumerState<PhotoSolverScreen> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final topicDisplay = widget.topicCode?.split('__').last.replaceAll('_', ' ').toUpperCase();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fotoğraflı Soru Çözücü'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Fotoğraflı Soru Çözücü'),
+            if (topicDisplay != null)
+              Text(
+                'Konu: $topicDisplay',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: scheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+          ],
+        ),
       ),
       body: SafeArea(
         child: ListView(

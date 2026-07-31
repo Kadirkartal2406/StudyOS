@@ -4,6 +4,9 @@ Bkz. docs/architecture/api-design.md §2.16
 
 Sprint-1.6: StatisticsService.overview alanları eklendi (streak, pomodoro vb.).
 Mevcut alanlar korunur; yeni alanlar geriye uyumlu genişletmedir.
+
+LOS Hizalama: confidence_summary eklendi (en düşük 3 topic).
+  TopicConfidenceSummary — Confidence Engine çıktısı; karar değil, projeksiyon.
 """
 
 from datetime import datetime
@@ -26,6 +29,31 @@ from app.schemas.planner import DashboardPlannerSummary
 from app.schemas.revision import DashboardRevisionSummary
 from app.schemas.study_plan import StudyPlanRead
 from app.schemas.study_resource import StudyResourceRead
+
+
+# ── LOS Hizalama — Confidence Summary ───────────────────────────────────────
+
+
+class TopicConfidenceSummary(BaseModel):
+    """En düşük confidence'a sahip topic özeti (Dashboard projeksiyon)."""
+
+    topic_code: str
+    subject_code: str
+    topic_name: str | None = None
+    belief: float           # 0.0–1.0
+    uncertainty: float      # 0.0–1.0
+    confidence_level: str   # unknown | low | medium | high | conflicted
+    trend_direction: float = 0.0  # -1.0 düşen, 0 durağan, +1.0 yükselen
+
+
+class LivingPlanSuggestionSummary(BaseModel):
+    """Kullanıcıya gösterilecek Living Plan önerisi özeti."""
+
+    draft_id: str
+    topic_code: str | None = None
+    topic_name: str | None = None
+    reason: str
+    estimated_minutes: int = 45
 
 
 class DashboardExamTargetSummary(BaseModel):
@@ -127,3 +155,7 @@ class DashboardResponse(BaseModel):
     insight_cards: list[InsightCard] = Field(default_factory=list)
     # Sprint 20 — Adaptive AI Coach (Experience; Decision değil)
     coach_today: CoachTodayMessage | None = None
+    # LOS Hizalama — Confidence Summary (en düşük 3 topic, Alignment Sprint)
+    confidence_summary: list[TopicConfidenceSummary] = Field(default_factory=list)
+    # LOS Hizalama — Living Plan Suggestion (SUGGEST policy → kullanıcı banner'ı)
+    living_plan_suggestion: LivingPlanSuggestionSummary | None = None

@@ -6,7 +6,7 @@ Bkz. docs/architecture/api-design.md §2.6
 import uuid
 from datetime import date
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.dependencies import get_current_user
@@ -55,10 +55,18 @@ async def get_study_plan(
 @router.post("", response_model=SuccessResponse[StudyPlanRead], status_code=status.HTTP_201_CREATED)
 async def create_study_plan(
     body: StudyPlanCreate,
+    response: Response,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> SuccessResponse[StudyPlanRead]:
-    """Yeni çalışma planı kalemi oluşturur."""
+    """
+    [DEPRECATED — LOS Hizalama]
+    Kullanıcı artık manuel plan oluşturmaz.
+    Living Plan sistemi planı otomatik üretir/önerir (POST /living-plan/accept).
+    Bu endpoint backward-compatibility için korunmuştur; yeni akışta kullanılmaz.
+    """
+    response.headers["X-Deprecated"] = "true"
+    response.headers["X-Deprecation-Reason"] = "Use Living Plan: POST /living-plan/accept"
     plan = await StudyPlanService(db).create_plan(current_user.id, body)
     return SuccessResponse(data=StudyPlanRead.model_validate(plan), message="Plan oluşturuldu")
 
@@ -67,10 +75,17 @@ async def create_study_plan(
 async def update_study_plan(
     plan_id: uuid.UUID,
     body: StudyPlanUpdate,
+    response: Response,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> SuccessResponse[StudyPlanRead]:
-    """Mevcut çalışma planını günceller."""
+    """
+    [DEPRECATED — LOS Hizalama]
+    Plan düzenlemesi Living Plan adapt döngüsüyle yapılır.
+    Bu endpoint backward-compatibility için korunmuştur.
+    """
+    response.headers["X-Deprecated"] = "true"
+    response.headers["X-Deprecation-Reason"] = "Use Living Plan adapt cycle"
     plan = await StudyPlanService(db).update_plan(plan_id, current_user.id, body)
     return SuccessResponse(data=StudyPlanRead.model_validate(plan), message="Plan güncellendi")
 
@@ -78,10 +93,17 @@ async def update_study_plan(
 @router.delete("/{plan_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_study_plan(
     plan_id: uuid.UUID,
+    response: Response,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> None:
-    """Çalışma planını soft-delete eder (deleted_at alanı doldurulur)."""
+    """
+    [DEPRECATED — LOS Hizalama]
+    Living Plan sistemi planları yönetir; kullanıcı silmez.
+    Bu endpoint backward-compatibility için korunmuştur.
+    """
+    response.headers["X-Deprecated"] = "true"
+    response.headers["X-Deprecation-Reason"] = "Living Plan manages plan lifecycle"
     await StudyPlanService(db).delete_plan(plan_id, current_user.id)
 
 

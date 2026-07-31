@@ -8,18 +8,22 @@ import '../../../../shared/widgets/ds.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../../auth/presentation/providers/auth_state.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
+import '../../../onboarding/presentation/welcome/exam_calendar.dart';
 import '../../../study_session/presentation/widgets/live_study_session_card.dart';
 import '../../../study_session/presentation/widgets/today_summary_card.dart';
 import '../../domain/entities/dashboard_entity.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/dashboard_state.dart';
+import '../widgets/confidence_summary_card.dart';
 import '../widgets/exam_countdown_banner.dart';
 import '../widgets/goal_progress_banner.dart';
+import '../widgets/living_plan_suggestion_banner.dart';
 import '../widgets/notification_bell.dart';
 import '../widgets/today_next_action_card.dart';
-import '../../../onboarding/presentation/welcome/exam_calendar.dart';
 
-/// RC3 — Bugün first fold: karşılama · kalan gün · sıradaki iş · bloklar.
+/// LOS Hizalama — Dashboard (Today OS).
+/// Dashboard yalnızca "Bugün ne yapmalıyım?" sorusunu cevaplar.
+/// Modül menüsü değildir.
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
 
@@ -37,16 +41,7 @@ class DashboardScreen extends ConsumerWidget {
             icon: const Icon(Icons.more_horiz),
             onSelected: (value) => context.push(value),
             itemBuilder: (context) => const [
-              PopupMenuItem(value: '/assessment/daily', child: Text('Günün denemesi')),
-              PopupMenuItem(value: '/score-calculator', child: Text('Tahmini puan hesapla')),
-              PopupMenuItem(value: '/photo-solver', child: Text('Fotoğraflı soru çözücü')),
-              PopupMenuItem(value: '/optical-scanner', child: Text('Kamera ile optik oku')),
-              PopupMenuItem(value: '/casual-duel', child: Text('Eğlencesine düello')),
-              PopupMenuItem(value: '/assessment', child: Text('Seviye testi')),
-              PopupMenuItem(value: '/ai-chat', child: Text('AI sohbet')),
-              PopupMenuItem(value: '/planner', child: Text('Plan önerisi')),
-              PopupMenuItem(value: '/pomodoro', child: Text('Odak oturumu')),
-              PopupMenuItem(value: '/exams', child: Text('Deneme sonuçları')),
+              PopupMenuItem(value: '/journey', child: Text('Yolculuğum')),
               PopupMenuItem(value: '/settings', child: Text('Ayarlar')),
             ],
           ),
@@ -189,6 +184,11 @@ class _TodayLoadedView extends ConsumerWidget {
                 ),
               ],
               const SizedBox(height: AppSpacing.lg),
+              // LOS Hizalama — Living Plan Önerisi Banner'ı
+              if (dashboard.livingPlanSuggestion != null)
+                LivingPlanSuggestionBanner(
+                  suggestion: dashboard.livingPlanSuggestion!,
+                ),
               const LiveStudySessionCard(),
               if (action != null)
                 TodayNextActionCard(action: action)
@@ -200,6 +200,9 @@ class _TodayLoadedView extends ConsumerWidget {
                   ),
                 ),
               const SizedBox(height: AppSpacing.lg),
+              // LOS Hizalama — Topic Confidence Özeti
+              if (dashboard.confidenceSummary.isNotEmpty)
+                ConfidenceSummaryCard(items: dashboard.confidenceSummary),
               Text(
                 'Bugünkü bloklar',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
