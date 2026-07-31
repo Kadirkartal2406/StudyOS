@@ -5,16 +5,18 @@ allprojects {
     }
 }
 
-// Build output redirected to C:\FlutterBuild to avoid impellerc failing on paths
-// with non-ASCII characters (OneDrive\Masaüstü).
-val flutterBuildRoot = File("C:/FlutterBuild")
-rootProject.layout.buildDirectory.set(flutterBuildRoot)
-
-subprojects {
-    layout.buildDirectory.set(File("C:/FlutterBuild/${project.name}"))
-}
 subprojects {
     project.evaluationDependsOn(":app")
+}
+
+subprojects {
+    project.configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.jetbrains.kotlin" && requested.name.startsWith("kotlin-stdlib")) {
+                useVersion("2.1.0")
+            }
+        }
+    }
 }
 
 tasks.register<Delete>("clean") {
