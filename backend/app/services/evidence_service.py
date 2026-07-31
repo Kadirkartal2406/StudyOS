@@ -556,7 +556,7 @@ class EvidenceService:
         subject_hint: str | None = None,
         topic_hint: str | None = None,
         category: EvidenceCategory = EvidenceCategory.PERFORMANCE,
-        source_type: EvidenceSourceType = EvidenceSourceType.MANUAL_INPUT,
+        source_type: EvidenceSourceType = EvidenceSourceType.MANUAL,
         value: float = 1.0,
         quality_weight: float = 1.0,
         metadata_: dict | None = None,

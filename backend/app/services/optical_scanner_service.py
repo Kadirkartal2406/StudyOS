@@ -95,7 +95,7 @@ class OpticalScannerService:
                 topic_code=req.topic_code,
                 subject_hint=f"{exam} genel",
                 category=EvidenceCategory.PERFORMANCE,
-                source_type=EvidenceSourceType.MANUAL_INPUT,
+                source_type=EvidenceSourceType.MANUAL,
                 value=accuracy,
                 quality_weight=0.9,
                 metadata_={

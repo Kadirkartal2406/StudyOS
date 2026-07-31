@@ -16,9 +16,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ApiBaseUrl,
 
-    # Falls back to the mobilesdk_app_id from google-services.json
     [string]$FirebaseAppId = "",
-
     [string]$Groups = "beta",
     [string]$AppEnv = "beta",
     [switch]$SkipUpload
@@ -28,21 +26,12 @@ $ErrorActionPreference = "Stop"
 $root    = Split-Path -Parent $PSScriptRoot
 $mobile  = Join-Path $root "mobile"
 
-# ── Release Notes ────────────────────────────────────────────
-$ReleaseNotes = @"
-StudyOS Beta
-• Daily Challenge düzeltmeleri
-• Gemini soru üretimi iyileştirildi
-• Question Pool geliştirmeleri
-• Performans ve hata düzeltmeleri
-"@
+$ReleaseNotes = "StudyOS RC2 Alignment Release - Topic Binding, Today OS & Journey Consolidation"
 
-# ── API URL validation ────────────────────────────────────────
 if ($ApiBaseUrl -notmatch '^https://') {
     Write-Warning "API_BASE_URL should be https:// for real devices. Got: $ApiBaseUrl"
 }
 
-# ── Auto-detect Firebase App ID ───────────────────────────────
 if (-not $FirebaseAppId) {
     $gsJson = Join-Path $mobile "android\app\google-services.json"
     if (Test-Path $gsJson) {
@@ -54,7 +43,6 @@ if (-not $FirebaseAppId) {
     }
 }
 
-# ── Version info ──────────────────────────────────────────────
 $pubspec = Join-Path $mobile "pubspec.yaml"
 $versionLine = (Get-Content $pubspec | Where-Object { $_ -match '^version:' })
 Write-Host ""
@@ -67,63 +55,53 @@ Write-Host "=============================================="
 Write-Host ""
 
 Push-Location $mobile
-try {
-    # ── Step 1: Clean ─────────────────────────────────────────
-    Write-Host "[1/4] flutter clean..."
-    flutter clean
 
-    # ── Step 2: Get packages ──────────────────────────────────
-    Write-Host "[2/4] flutter pub get..."
-    flutter pub get
+Write-Host "[1/4] flutter clean..."
+flutter clean
 
-    # ── Step 3: Build APK ─────────────────────────────────────
-    Write-Host "[3/4] flutter build apk --release..."
-    flutter build apk --release `
-        --dart-define="API_BASE_URL=$ApiBaseUrl" `
-        --dart-define="APP_ENV=$AppEnv"
+Write-Host "[2/4] flutter pub get..."
+flutter pub get
 
-    # ── Step 4: Verify APK ────────────────────────────────────
-    $apk = Join-Path $mobile "build\app\outputs\flutter-apk\app-release.apk"
-    if (-not (Test-Path $apk)) {
-        throw "APK not found at expected path: $apk"
-    }
-    $apkSizeMB = [math]::Round((Get-Item $apk).Length / 1MB, 2)
-    Write-Host "[4/4] APK verified: $apk ($apkSizeMB MB)"
+Write-Host "[3/4] flutter build apk --release..."
+flutter build apk --release --dart-define="API_BASE_URL=$ApiBaseUrl" --dart-define="APP_ENV=$AppEnv"
 
-    if ($SkipUpload) {
-        Write-Host ""
-        Write-Host "SkipUpload set — skipping Firebase upload."
-        Write-Host "Upload manually:"
-        Write-Host "  firebase appdistribution:distribute '$apk' --app $FirebaseAppId --groups $Groups"
-        return
-    }
-
-    # ── Step 5: Firebase CLI check ────────────────────────────
-    $firebase = Get-Command firebase -ErrorAction SilentlyContinue
-    if (-not $firebase) {
-        Write-Host ""
-        Write-Host "ERROR: firebase CLI not found." -ForegroundColor Red
-        Write-Host "Install it and authenticate:"
-        Write-Host "  npm i -g firebase-tools"
-        Write-Host "  firebase login"
-        throw "firebase CLI missing."
-    }
-
-    # ── Step 6: Upload to Firebase App Distribution ───────────
-    Write-Host ""
-    Write-Host "==> Uploading to Firebase App Distribution (group: $Groups)..."
-    firebase appdistribution:distribute $apk `
-        --app $FirebaseAppId `
-        --groups $Groups `
-        --release-notes $ReleaseNotes
-
-    Write-Host ""
-    Write-Host "=============================================="
-    Write-Host "  Distribution SUCCESSFUL"
-    Write-Host "  Beta users in group '$Groups' will receive"
-    Write-Host "  an update notification shortly."
-    Write-Host "=============================================="
-}
-finally {
+$apk = Join-Path $mobile "build\app\outputs\flutter-apk\app-release.apk"
+if (-not (Test-Path $apk)) {
     Pop-Location
+    throw "APK not found at expected path: $apk"
 }
+$apkSizeMB = [math]::Round((Get-Item $apk).Length / 1MB, 2)
+Write-Host "[4/4] APK verified: $apk ($apkSizeMB MB)"
+
+if ($SkipUpload) {
+    Write-Host ""
+    Write-Host "SkipUpload set — skipping Firebase upload."
+    Write-Host "Upload manually:"
+    Write-Host "  firebase appdistribution:distribute '$apk' --app $FirebaseAppId --groups $Groups"
+    Pop-Location
+    return
+}
+
+$firebase = Get-Command firebase -ErrorAction SilentlyContinue
+if (-not $firebase) {
+    Write-Host ""
+    Write-Host "ERROR: firebase CLI not found." -ForegroundColor Red
+    Write-Host "Install it and authenticate:"
+    Write-Host "  npm i -g firebase-tools"
+    Write-Host "  firebase login"
+    Pop-Location
+    throw "firebase CLI missing."
+}
+
+Write-Host ""
+Write-Host "==> Uploading to Firebase App Distribution (group: $Groups)..."
+firebase appdistribution:distribute "$apk" --app "$FirebaseAppId" --groups "$Groups" --release-notes "$ReleaseNotes"
+
+Write-Host ""
+Write-Host "=============================================="
+Write-Host "  Distribution SUCCESSFUL"
+Write-Host "  Beta users in group '$Groups' will receive"
+Write-Host "  an update notification shortly."
+Write-Host "=============================================="
+
+Pop-Location
