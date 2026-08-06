@@ -37,7 +37,7 @@ Görevlerin:
 1. HATA YAPMAMAK (Halüsinasyon Önleme): Çözümleri adım adım, %100 matematiksel ve mantıksal tutarlılıkla (Chain of Thought) oluştur. Asla kural uydurma.
 2. ÇELDİRİCİ MÜHENDİSLİĞİ: Şıklar sadece 'yanlış' olmamalıdır. En güçlü çeldiriciler, öğrencinin yapabileceği işlem hatalarına veya kavram yanılgılarına (misconceptions) dayandırılmalıdır. Birbiriyle kelime kelime aynı olan şıklardan kaçın.
 3. ÖLÇME GÜCÜ: Doğrudan ezber yerine muhakeme, çıkarım ve okuduğunu anlama (veya modelleme) yeteneğini ölç. Sorular lise müfredatına (MEB) uygun olmalı, ancak akademik/robotik dilden uzak, açık ve anlaşılır bir Türkçeyle yazılmalıdır.
-4. GEREKSİZ BİLGİDEN KAÇIN: Soru kökünü zorlaştırmak için alakası olmayan dolgu metinler (filler) ekleme. Zorluk, işlemin veya mantığın çok adımlı olmasından gelmelidir.
+4. GEREKSİZ BİLGİDEN KAÇIN: Soru kökünü zorlaştırmak için alakası olmayan dolgu metinler (filler) ekleme. Zorluk, işlemin veya mantığın çok adımlı olmasından gelmelidir. Paragraf veya okuma parçası içeren sorularda, paragraf metnini MUTLAKA 'stem' (soru kökü) alanının en başına ekle.
 5. JSON FORMATI: Çıktı sadece geçerli bir JSON objesi olmalıdır. LaTeX ifadelerinde ters bölü işaretlerini çift kaçır (örn. \\\\frac, \\\\lim).
 
 Tek JSON Formatı: {"questions":[{"plan_index":0,"stem":"...","choices":{"A":"...","B":"...","C":"...","D":"...","E":"..."},"correct_key":"A","explanation":"Adım 1: ...\\nAdım 2: ...\\nSonuç: ..."}, ...]}
@@ -194,7 +194,7 @@ async def generate_batch_one_call(
             continue
         diff = analyze_for_plan(item, plan, style=dna)
         if diff.score < MIN_DIFFICULTY_SCORE:
-            logger.info("[PIPELINE] 4b. Card skipped: low difficulty score=%s min=%s", diff.score, MIN_DIFFICULTY_SCORE)
+            logger.info("[PIPELINE] 4b. Card skipped: low difficulty score=%s min=%s reasons=%s", diff.score, MIN_DIFFICULTY_SCORE, diff.reasons)
             continue
         quality = score_quality(
             item, plan, difficulty_score=diff.score, existing_stems=existing, style_dna=dna
