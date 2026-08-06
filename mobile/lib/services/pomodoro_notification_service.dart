@@ -14,39 +14,55 @@ class PomodoroNotificationService {
 
   Future<void> init() => _notifications.init();
 
-  Future<void> scheduleFocusEnd({required Duration after}) {
-    return _notifications.schedule(
-      type: AppNotificationType.pomodoroCompleted,
-      title: 'Pomodoro tamamlandı',
-      body: 'Odak süren bitti. Kısa bir mola zamanı!',
-      after: after,
-      notificationId: _focusEndId,
-    );
+  Future<void> scheduleFocusEnd({required Duration after}) async {
+    try {
+      await _notifications.schedule(
+        type: AppNotificationType.pomodoroCompleted,
+        title: 'Pomodoro tamamlandı',
+        body: 'Odak süren bitti. Kısa bir mola zamanı!',
+        after: after,
+        notificationId: _focusEndId,
+      );
+    } catch (_) {
+      // Ignored to prevent state machine disruption
+    }
   }
 
-  Future<void> scheduleBreakEnd({required Duration after}) {
-    return _notifications.schedule(
-      type: AppNotificationType.longBreak,
-      title: 'Mola bitti',
-      body: 'Hazırsan bir sonraki odak oturumuna başla.',
-      after: after,
-      notificationId: _breakEndId,
-    );
+  Future<void> scheduleBreakEnd({required Duration after}) async {
+    try {
+      await _notifications.schedule(
+        type: AppNotificationType.longBreak,
+        title: 'Mola bitti',
+        body: 'Hazırsan bir sonraki odak oturumuna başla.',
+        after: after,
+        notificationId: _breakEndId,
+      );
+    } catch (_) {
+      // Ignored
+    }
   }
 
   Future<void> showImmediate({
     required String title,
     required String body,
-  }) {
-    return _notifications.show(
-      type: AppNotificationType.pomodoroCompleted,
-      title: title,
-      body: body,
-    );
+  }) async {
+    try {
+      await _notifications.show(
+        type: AppNotificationType.pomodoroCompleted,
+        title: title,
+        body: body,
+      );
+    } catch (_) {
+      // Ignored
+    }
   }
 
   Future<void> cancelAll() async {
-    await _notifications.cancel(_focusEndId);
-    await _notifications.cancel(_breakEndId);
+    try {
+      await _notifications.cancel(_focusEndId);
+      await _notifications.cancel(_breakEndId);
+    } catch (_) {
+      // Ignored
+    }
   }
 }
