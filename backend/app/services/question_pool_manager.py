@@ -35,7 +35,7 @@ from app.models.question_pool_inventory import (
     QuestionPoolGenerationLock,
 )
 from app.services.ai_cost.batch_generate import generate_batch_one_call
-from app.services.ai_cost.pool import QuestionPoolService
+from app.services.ai_cost.pool import QuestionPoolService, generate_card_fingerprint
 from app.services.ai_cost.flags import midnight_scheduler_enabled
 from app.services.qie.types import GenerateContext
 
@@ -617,7 +617,18 @@ class QuestionPoolManagerService:
 
                 cards, status, result = await generate_batch_one_call(db, ctx, count=batch_n)
                 if cards:
-                    db.add_all(cards)
+                    pool_svc = QuestionPoolService(db)
+                    for c in cards:
+                        fp = generate_card_fingerprint(ctx, c.plan)
+                        await pool_svc.put_card(
+                            fingerprint=fp,
+                            card=c,
+                            exam=key.exam,
+                            subject_code=key.subject_code,
+                            topic_code=key.topic_code,
+                            difficulty_band=key.difficulty_band,
+                            skill=c.plan.skill,
+                        )
                 await db.commit()
 
                 after = await self._count_topic(db, key)
