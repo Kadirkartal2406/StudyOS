@@ -34,6 +34,16 @@ from app.services.asset_version_service import AssetVersionService
 
 router = APIRouter()
 
+@router.get("/admin/trigger-seed")
+async def trigger_geography_seed():
+    """TEMPORARY ENDPOINT: Seed Turkey geography assets directly from Render."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+    from scripts.geography.seed_turkey_assets import seed
+    await seed()
+    return {"success": True, "message": "12 Turkey packages seeded successfully to production DB!"}
+
 
 def _latest_bundle_manifest(asset) -> dict | None:
     versions = sorted(
@@ -132,23 +142,6 @@ async def compile_and_register_asset(
     await db.commit()
     detail = build_asset_detail_dto(asset, svg_manifest=raw_manifest)
     return SuccessResponse(data=detail, message="Asset compiled and registered")
-
-
-@router.get(
-    "/{asset_key:path}",
-    response_model=SuccessResponse[AssetDetailDTO],
-    summary="Get detailed asset manifest and nodes (UUID or asset URI)",
-)
-async def get_asset_detail(
-    asset_key: str,
-    db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-) -> SuccessResponse[AssetDetailDTO]:
-    asset = await _resolve_asset(db, asset_key)
-    AssetTenantService().enforce_tenant_access(asset, current_user)
-    return SuccessResponse(
-        data=build_asset_detail_dto(asset, svg_manifest=_latest_bundle_manifest(asset))
-    )
 
 
 @router.get(
@@ -298,7 +291,7 @@ async def register_asset_manifest(
 
 
 @router.post(
-    "/{asset_key}/deprecate",
+    "/{asset_key:path}/deprecate",
     response_model=SuccessResponse[AssetDetailDTO],
     summary="Mark an asset version as deprecated (Admin only)",
 )
@@ -312,4 +305,21 @@ async def deprecate_asset(
     return SuccessResponse(
         data=build_asset_detail_dto(deprecated),
         message="Asset version marked as deprecated",
+    )
+
+
+@router.get(
+    "/{asset_key:path}",
+    response_model=SuccessResponse[AssetDetailDTO],
+    summary="Get detailed asset manifest and nodes (UUID or asset URI)",
+)
+async def get_asset_detail(
+    asset_key: str,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> SuccessResponse[AssetDetailDTO]:
+    asset = await _resolve_asset(db, asset_key)
+    AssetTenantService().enforce_tenant_access(asset, current_user)
+    return SuccessResponse(
+        data=build_asset_detail_dto(asset, svg_manifest=_latest_bundle_manifest(asset))
     )
