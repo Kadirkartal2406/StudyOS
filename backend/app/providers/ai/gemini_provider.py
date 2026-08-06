@@ -42,6 +42,8 @@ def _to_gemini_contents(
     return system, contents
 
 
+_current_key_index = 0
+
 class GeminiProvider(AIProvider):
     def __init__(self, model: str | None = None) -> None:
         self._model = model or settings.AI_MODEL or AI_DEFAULT_MODELS["gemini"]
@@ -81,17 +83,19 @@ class GeminiProvider(AIProvider):
             if cleaned and not cleaned.startswith("<MagicMock"):
                 valid_keys.append(cleaned)
 
-        logger.debug(
-            "Gemini keys loaded: %s",
-            [k[:12] for k in valid_keys],
-        )
         return valid_keys
 
     async def generate(self, request: GenerateRequest) -> str:
+        global _current_key_index
         keys = self._get_api_keys()
 
         if not keys:
             raise AIUnavailableError("Gemini API anahtarı yapılandırılmamış")
+
+        if _current_key_index >= len(keys):
+            _current_key_index = 0
+            
+        rotated_keys = keys[_current_key_index:] + keys[:_current_key_index]
 
         system, contents = _to_gemini_contents(request.messages)
 
@@ -107,7 +111,7 @@ class GeminiProvider(AIProvider):
 
         last_exc: Exception | None = None
 
-        for key in keys:
+        for key in rotated_keys:
             for model in self._candidate_models():
                 url = (
                     "https://generativelanguage.googleapis.com/v1beta/models/"
@@ -182,7 +186,10 @@ class GeminiProvider(AIProvider):
                         model,
                     )
 
-                    # Aynı key'i bırak, sonraki key'e geç
+                    # Bu anahtarın limiti doldu, sistemin kalıcı hafızasındaki (global) sırayı bir sonrakine kaydır
+                    _current_key_index = (_current_key_index + 1) % len(keys)
+                    
+                    # Aynı key'in model döngüsünü bırak, sonraki key'e geç
                     break
 
                 except AIProviderError as exc:
