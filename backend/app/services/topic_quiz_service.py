@@ -172,7 +172,15 @@ class TopicQuizService:
         for item in gen.items:
             selected = answer_map.get(item.id)
             selected_node = node_map.get(item.id)
-            expected_node = (item.qie_card or {}).get("correct_node_id")
+            expected_node = None
+            if item.eae_interaction:
+                expected_node = item.eae_interaction.get("expected_node_id")
+            elif item.qie_card and item.qie_card.get("eae_interaction"):
+                expected_node = item.qie_card.get("eae_interaction", {}).get("expected_node_id")
+            
+            if not expected_node:
+                expected_node = (item.qie_card or {}).get("correct_node_id")
+
             item.selected_key = selected
 
             # EAE node selection can grade independently of letter keys
@@ -186,6 +194,10 @@ class TopicQuizService:
                 card = dict(item.qie_card or {})
                 card["selected_node_id"] = selected_node
                 card["expected_node_id"] = expected_node
+                if "eae_interaction" not in card:
+                    card["eae_interaction"] = {}
+                card["eae_interaction"]["selected_node_id"] = selected_node
+                card["eae_interaction"]["expected_node_id"] = expected_node
                 item.qie_card = card
             elif selected is None:
                 item.is_correct = False
@@ -219,8 +231,21 @@ class TopicQuizService:
             bridge = EAEEvidenceBridge(self.db)
             for it in gen.items:
                 card = it.qie_card or {}
-                selected_node = card.get("selected_node_id")
-                expected_node = card.get("expected_node_id") or card.get("correct_node_id")
+                selected_node = None
+                expected_node = None
+                
+                if it.eae_interaction:
+                    selected_node = card.get("eae_interaction", {}).get("selected_node_id") or card.get("selected_node_id")
+                    expected_node = it.eae_interaction.get("expected_node_id")
+                elif card.get("eae_interaction"):
+                    eae = card.get("eae_interaction", {})
+                    selected_node = eae.get("selected_node_id") or card.get("selected_node_id")
+                    expected_node = eae.get("expected_node_id")
+                
+                if not expected_node:
+                    selected_node = card.get("selected_node_id")
+                    expected_node = card.get("correct_node_id")
+
                 if not selected_node or not expected_node:
                     continue
                 confusable = []
@@ -247,8 +272,8 @@ class TopicQuizService:
                 explanation=it.explanation,
                 selected_key=it.selected_key,
                 is_correct=it.is_correct,
-                target_asset_id=it.qie_card.get("target_asset_id"),
-                correct_node_id=it.qie_card.get("correct_node_id"),
+                target_asset_id=it.eae_interaction.get("asset_uri") if it.eae_interaction else (it.qie_card.get("eae_interaction", {}).get("asset_uri") or it.qie_card.get("target_asset_id")),
+                correct_node_id=it.eae_interaction.get("expected_node_id") if it.eae_interaction else (it.qie_card.get("eae_interaction", {}).get("expected_node_id") or it.qie_card.get("correct_node_id")),
             )
             for it in gen.items
         ]
@@ -284,7 +309,7 @@ class TopicQuizService:
                 ord_index=it.ord_index,
                 stem=it.stem,
                 choices=dict(it.choices),
-                target_asset_id=it.qie_card.get("target_asset_id"),
+                target_asset_id=it.eae_interaction.get("asset_uri") if it.eae_interaction else (it.qie_card.get("eae_interaction", {}).get("asset_uri") or it.qie_card.get("target_asset_id")),
             )
             for it in (gen.items or [])
         ]

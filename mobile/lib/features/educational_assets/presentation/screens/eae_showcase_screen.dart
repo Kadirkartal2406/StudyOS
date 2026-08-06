@@ -19,7 +19,22 @@ class EAEShowcaseScreen extends ConsumerStatefulWidget {
 }
 
 class _EAEShowcaseScreenState extends ConsumerState<EAEShowcaseScreen> {
-  static const _turkeyAdminUri = 'studyos://assets/geography/turkey_admin/v1';
+  String _currentUri = 'studyos://assets/geography/turkey_admin/v1';
+  
+  final Map<String, String> _availableMaps = {
+    'Siyasi Harita (Admin)': 'studyos://assets/geography/turkey_admin/v1',
+    'Fiziki Harita': 'studyos://assets/geography/turkey_physical/v1',
+    'Bölgeler': 'studyos://assets/geography/turkey_regions/v1',
+    'Fay Hatları': 'studyos://assets/geography/turkey_fault_lines/v1',
+    'İklim': 'studyos://assets/geography/turkey_climate/v1',
+    'Tarım': 'studyos://assets/geography/turkey_agriculture/v1',
+    'Sanayi': 'studyos://assets/geography/turkey_industry/v1',
+    'Nüfus': 'studyos://assets/geography/turkey_population/v1',
+    'Enerji': 'studyos://assets/geography/turkey_energy/v1',
+    'Madencilik': 'studyos://assets/geography/turkey_mining/v1',
+    'Turizm': 'studyos://assets/geography/turkey_tourism/v1',
+    'Ulaşım': 'studyos://assets/geography/turkey_transportation/v1',
+  };
 
   EAEAssetManifestContract? _manifest;
   String? _svgContent;
@@ -34,21 +49,21 @@ class _EAEShowcaseScreenState extends ConsumerState<EAEShowcaseScreen> {
     super.initState();
     // API gelmeden önce yerel demo göster — boş ekran / redirect hissi olmasın.
     _loadDemoFallback();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _loadTurkeyAdmin());
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadAsset());
   }
 
-  Future<void> _loadTurkeyAdmin() async {
+  Future<void> _loadAsset() async {
     try {
       final repo = ref.read(assetRepositoryProvider);
       // Prefer logical URI (API resolves UUID or URI).
       try {
-        final bytes = await repo.downloadBundle(_turkeyAdminUri);
+        final bytes = await repo.downloadBundle(_currentUri);
         final decoded = EAEAssetBundleDecoder.decodeBundleBytes(bytes);
         if (!mounted) return;
         setState(() {
           _manifest = decoded.manifest;
           _svgContent = decoded.svgContent;
-          _sourceLabel = 'registry bundle · $_turkeyAdminUri';
+          _sourceLabel = 'registry bundle · $_currentUri';
           _loading = false;
           _loadError = null;
         });
@@ -58,8 +73,8 @@ class _EAEShowcaseScreenState extends ConsumerState<EAEShowcaseScreen> {
       }
 
       final results = await repo.searchAssets(
-        const AssetSearchQueryDTO(
-          query: 'turkey_admin',
+        AssetSearchQueryDTO(
+          query: _currentUri.split('/').lastWhere((e) => e != 'v1', orElse: () => 'turkey_admin'),
           domain: 'geography',
           pageSize: 5,
         ),
@@ -184,12 +199,35 @@ class _EAEShowcaseScreenState extends ConsumerState<EAEShowcaseScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('StudyOS EAE — Türkiye İdari'),
+        title: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            value: _currentUri,
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+            dropdownColor: theme.colorScheme.primary,
+            style: theme.textTheme.titleMedium?.copyWith(color: Colors.white),
+            items: _availableMaps.entries.map((entry) {
+              return DropdownMenuItem<String>(
+                value: entry.value,
+                child: Text(entry.key),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null && newValue != _currentUri) {
+                setState(() {
+                  _currentUri = newValue;
+                  _loading = true;
+                  _selectedNode = null;
+                });
+                _loadAsset();
+              }
+            },
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             tooltip: 'Yeniden yükle',
-            onPressed: _loading ? null : _loadTurkeyAdmin,
+            onPressed: _loading ? null : _loadAsset,
           ),
           IconButton(
             icon: Icon(

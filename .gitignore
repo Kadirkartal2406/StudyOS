@@ -77,3 +77,16 @@ docker-compose.override.yml
 *.tmp
 *.temp
 *.bak
+# Build logs
+**/build_log.txt
+**/buildlog.txt
+
+# Dependency dumps
+**/deps.txt
+**/pubdeps.txt
+
+# AI cost logs
+data/ai_cost/
+
+# Uploaded resources
+data/uploads/

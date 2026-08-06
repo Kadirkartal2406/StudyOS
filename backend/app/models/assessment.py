@@ -131,6 +131,8 @@ class AssessmentQuestion(Base):
     topic_code: Mapped[str | None] = mapped_column(String(200), nullable=True)
     # Sprint 25 — internal QIE card
     qie_card: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    # Sprint 26 / EAE interaction
+    eae_interaction: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
 
     session: Mapped[AssessmentSession] = relationship(
         "AssessmentSession", back_populates="questions"
@@ -203,6 +205,7 @@ class SharedDailyBookletQuestion(Base):
     subject_code: Mapped[str | None] = mapped_column(String(100), nullable=True)
     topic_code: Mapped[str | None] = mapped_column(String(200), nullable=True)
     qie_card: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    eae_interaction: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
 
     booklet: Mapped[SharedDailyBooklet] = relationship(
         "SharedDailyBooklet", back_populates="questions"

@@ -43,3 +43,4 @@ class QieEvalQueueItem(BaseModel):
     stem_preview: str
     choices: dict[str, str] = Field(default_factory=dict)
     qie_card: dict = Field(default_factory=dict)
+    eae_interaction: dict | None = None

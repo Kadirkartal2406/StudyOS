@@ -24,8 +24,8 @@
       <nav>
         <button data-tab="overview" class="nav active">Özet</button>
         <button data-tab="users" class="nav">Kullanıcılar</button>
-        <button data-tab="questions" class="nav">Sorular</button>
-        <button data-tab="question-pool" class="nav">Question Pool</button>
+        <button data-tab="questions" class="nav">Tüm Sorular / Ara</button>
+        <button data-tab="question-pool" class="nav">Soru Envanteri</button>
         <button data-tab="assets" class="nav">Assets</button>
       </nav>
       <button id="logout-btn" class="ghost">Çıkış</button>
@@ -74,18 +74,19 @@
 
       <section id="tab-question-pool" class="tab" hidden>
         <div class="toolbar">
-          <button id="qp-fill-missing-btn">Fill missing</button>
-          <button id="qp-run-scheduler-btn" style="background:#3b82f6;">▶ Run Scheduler Now</button>
-          <button id="qp-run-missing-safe-btn" style="background:#0ea5e9;">▶ Run Missing (Safe)</button>
-          <button id="qp-validate-5-btn" style="background:#f59e0b;">Generate 5 (no save)</button>
-          <button id="qp-stop-gen-btn" class="danger">⏹ STOP</button>
-          <button id="qp-batch-report-btn" style="background:#8b5cf6;">📊 Batch Report</button>
-          <button id="qp-production-report-btn" style="background:#059669;">📋 Production Report</button>
-          <label style="display:inline-flex;gap:8px;align-items:center;">
-            <input id="qp-dry-run" type="checkbox" />
-            dry_run
+          <button id="qp-run-scheduler-btn" style="background:#3b82f6;">▶ Gece Üretimini Tetikle (Manuel)</button>
+          
+          <!-- Gizlenen Geliştirici Butonları -->
+          <button id="qp-fill-missing-btn" style="display:none;">Fill missing</button>
+          <button id="qp-run-missing-safe-btn" style="display:none;">▶ Run Missing (Safe)</button>
+          <button id="qp-validate-5-btn" style="display:none;">Generate 5 (no save)</button>
+          <button id="qp-stop-gen-btn" class="danger" style="display:none;">⏹ STOP</button>
+          <button id="qp-batch-report-btn" style="display:none;">📊 Batch Report</button>
+          <button id="qp-production-report-btn" style="display:none;">📋 Production Report</button>
+          <label style="display:none;">
+            <input id="qp-dry-run" type="checkbox" /> dry_run
           </label>
-          <label style="display:inline-flex;gap:8px;align-items:center;">
+          <label style="display:none;">
             Approval
             <select id="qp-approval-mode">
               <option value="auto" selected>AUTO</option>
@@ -117,46 +118,100 @@
 
         <!-- Fill Selected Topic inline form -->
         <fieldset style="border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:16px;">
-          <legend style="font-weight:600;font-size:14px;">Fill Selected Topic</legend>
+          <legend style="font-weight:600;font-size:14px;color:#3b82f6;">✨ Yapay Zeka ile Hızlı Üretim</legend>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
-            <label style="display:flex;flex-direction:column;font-size:13px;">Exam
-              <input id="qp-fill-exam" placeholder="kpss" style="width:80px;" />
+            <label style="display:flex;flex-direction:column;font-size:13px;">Sınav (örn: tyt)
+              <input id="qp-fill-exam" placeholder="tyt" style="width:100px;" />
             </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Subject code
-              <input id="qp-fill-subject" placeholder="turkce" style="width:120px;" />
+            <label style="display:flex;flex-direction:column;font-size:13px;">Ders (örn: tyt_turkce)
+              <input id="qp-fill-subject" placeholder="tyt_turkce" style="width:140px;" />
             </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Topic code
+            <label style="display:flex;flex-direction:column;font-size:13px;">Konu Kodu
               <input id="qp-fill-topic" placeholder="paragraf" style="width:140px;" />
             </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Difficulty
+            <label style="display:flex;flex-direction:column;font-size:13px;">Zorluk
               <select id="qp-fill-diff" style="width:90px;">
-                <option value="easy">easy</option>
-                <option value="medium" selected>medium</option>
-                <option value="hard">hard</option>
+                <option value="easy">Kolay</option>
+                <option value="medium" selected>Orta</option>
+                <option value="hard">Zor</option>
               </select>
             </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Count
-              <input id="qp-fill-count" type="number" value="20" min="1" max="2000" style="width:70px;" />
+            <label style="display:flex;flex-direction:column;font-size:13px;">Soru Sayısı
+              <input id="qp-fill-count" type="number" value="10" min="1" max="2000" style="width:80px;" />
             </label>
-            <button id="qp-fill-selected-btn" class="secondary">Generate</button>
+            <button id="qp-fill-selected-btn" class="secondary" style="background:#3b82f6;color:white;border:none;">Üretimi Başlat</button>
           </div>
           <div class="muted" id="qp-fill-selected-result" style="margin-top:6px;font-size:13px;"></div>
+        </fieldset>
+
+        <fieldset style="border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:16px;">
+          <legend style="font-weight:600;font-size:14px;">✍️ Elle Soru Ekle (Manuel)</legend>
+          <div style="display:flex;gap:8px;flex-direction:column;">
+            <div style="display:flex;gap:8px;align-items:flex-end;">
+              <label style="display:flex;flex-direction:column;font-size:13px;">Sınav
+                <input id="qp-manual-exam" placeholder="kpss" style="width:80px;" />
+              </label>
+              <label style="display:flex;flex-direction:column;font-size:13px;">Ders Kodu
+                <input id="qp-manual-subject" placeholder="cografya" style="width:120px;" />
+              </label>
+              <label style="display:flex;flex-direction:column;font-size:13px;">Konu Kodu
+                <input id="qp-manual-topic" placeholder="turkiye-haritasi" style="width:140px;" />
+              </label>
+              <label style="display:flex;flex-direction:column;font-size:13px;">Zorluk
+                <select id="qp-manual-diff" style="width:90px;">
+                  <option value="easy">Kolay</option>
+                  <option value="medium" selected>Orta</option>
+                  <option value="hard">Zor</option>
+                </select>
+              </label>
+            </div>
+            <label style="display:flex;flex-direction:column;font-size:13px;">Soru Metni (Kök)
+              <textarea id="qp-manual-stem" rows="2" style="width:100%;"></textarea>
+            </label>
+            <div style="display:flex;gap:8px;">
+              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">A<input id="qp-manual-a" /></label>
+              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">B<input id="qp-manual-b" /></label>
+              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">C<input id="qp-manual-c" /></label>
+              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">D<input id="qp-manual-d" /></label>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-end;">
+              <label style="display:flex;flex-direction:column;font-size:13px;">Doğru Cevap
+                <select id="qp-manual-correct" style="width:90px;">
+                  <option value="A" selected>A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="E">E</option>
+                </select>
+              </label>
+              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">Çözüm Açıklaması (Opsiyonel)
+                <input id="qp-manual-explanation" />
+              </label>
+            </div>
+            <label style="display:flex;flex-direction:column;font-size:13px;">EAE Interaction (JSON, opsiyonel)
+              <textarea id="qp-manual-eae" rows="2" placeholder='{"asset_uri": "studyos://assets/geography/turkey_admin/v1", "expected_node_id": "turkey_admin_v1::province::ankara"}' style="width:100%;font-family:monospace;font-size:12px;"></textarea>
+            </label>
+            <div style="display:flex;justify-content:flex-end;">
+              <button id="qp-manual-add-btn" class="secondary" style="background:#10b981;color:white;border:none;">Soruyu Ekle</button>
+            </div>
+            <div class="muted" id="qp-manual-add-result" style="font-size:13px;"></div>
+          </div>
         </fieldset>
 
         <div class="table-wrap" style="margin-top:16px;">
           <table>
             <thead>
               <tr>
-                <th>Exam</th>
-                <th>Subject</th>
-                <th>Topic</th>
-                <th>Current</th>
-                <th>Minimum</th>
-                <th>Target</th>
-                <th>Status</th>
-                <th>Quality</th>
-                <th>Last Generated</th>
-                <th></th>
+                <th>Sınav</th>
+                <th>Ders</th>
+                <th>Konu</th>
+                <th>Mevcut</th>
+                <th>Min</th>
+                <th>Hedef</th>
+                <th>Durum</th>
+                <th>Kalite</th>
+                <th>Son Üretim</th>
+                <th>İşlemler</th>
               </tr>
             </thead>
             <tbody id="qp-inventory-body"></tbody>

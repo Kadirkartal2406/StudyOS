@@ -37,6 +37,7 @@ class QieEvalService:
                     stem_preview=(q.stem or "")[:280],
                     choices=dict(q.choices or {}),
                     qie_card=dict(q.qie_card or {}),
+                    eae_interaction=q.eae_interaction,
                 )
             )
             if len(out) >= limit:
@@ -52,6 +53,7 @@ class QieEvalService:
                     stem_preview=(q.stem or "")[:280],
                     choices=dict(q.choices or {}),
                     qie_card=dict(q.qie_card or {}),
+                    eae_interaction=q.eae_interaction,
                 )
             )
             if len(out) >= limit:

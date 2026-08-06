@@ -130,6 +130,7 @@ class QuestionCard:
     model: str | None = None
     target_asset_id: str | None = None
     correct_node_id: str | None = None
+    eae_interaction: dict[str, Any] | None = None
 
     def to_persist_dict(self) -> dict[str, Any]:
         return {
@@ -153,6 +154,7 @@ class QuestionCard:
             "model": self.model,
             "target_asset_id": self.target_asset_id,
             "correct_node_id": self.correct_node_id,
+            "eae_interaction": self.eae_interaction,
         }
 
 

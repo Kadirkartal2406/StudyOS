@@ -24,11 +24,11 @@ def _now_istanbul() -> datetime:
     return datetime.now(_TZ)
 
 
-def seconds_until_next_midnight() -> float:
+def seconds_until_next_0300() -> float:
     now = _now_istanbul()
-    nxt = (now + timedelta(days=1)).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
+    nxt = now.replace(hour=3, minute=0, second=0, microsecond=0)
+    if nxt <= now:
+        nxt += timedelta(days=1)
     return max(1.0, (nxt - now).total_seconds())
 
 
@@ -91,7 +91,7 @@ async def generate_until_complete(challenge_date) -> None:
         if done:
             logger.info("Booklet packs ready for %s", challenge_date)
             return
-        remaining = seconds_until_next_midnight()
+        remaining = seconds_until_next_0300()
         if remaining <= _RESUME_INTERVAL_SECONDS:
             # Gün bitiyor — yeni günün job'ı devralır
             return
@@ -128,9 +128,9 @@ async def midnight_booklet_loop() -> None:
         logger.exception("Booklet catch-up failed")
 
     while True:
-        wait_s = seconds_until_next_midnight()
+        wait_s = seconds_until_next_0300()
         logger.info(
-            "Next booklet generation in %.0f seconds (Istanbul midnight)", wait_s
+            "Next booklet generation in %.0f seconds (Istanbul 03:00)", wait_s
         )
         await asyncio.sleep(wait_s)
         if not midnight_scheduler_enabled() or not auto_booklet_enabled():

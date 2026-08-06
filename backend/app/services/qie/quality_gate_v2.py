@@ -54,8 +54,9 @@ def score_quality(
     # Grammar / formal tone proxy
     low = (item.stem or "").lower()
     grammar = 88
-    if any(x in low for x in ("chatgpt", "as an ai", "tabii ki", "😊")):
-        grammar = 30
+    # Penalize filler and AI typical text heavily
+    if any(x in low for x in ("chatgpt", "as an ai", "tabii ki", "😊", "aşağıdakilerden hangisi söylenemez:", "kısaca", "özetle", "bu metin", "şüphesiz")):
+        grammar = 20
     if len(item.stem.strip()) < 12:
         grammar = min(grammar, 40)
 
@@ -68,13 +69,18 @@ def score_quality(
     else:
         option_balance = 20
 
-    # Distractor quality: no duplicates, not empty
+    # Distractor quality: no duplicates, not empty, no obvious fillers
     norms = {re.sub(r"\s+", " ", str(v).strip().lower()) for v in (item.choices or {}).values()}
     distractor_quality = 88
     if len(norms) < len(item.choices or {}):
         distractor_quality = 25
     if any(not str(v).strip() for v in (item.choices or {}).values()):
         distractor_quality = 20
+    # Strong penalty for overly simple distractors like "hiçbiri", "hepsi"
+    for v in (item.choices or {}).values():
+        v_low = str(v).strip().lower()
+        if v_low in ("hepsi", "hiçbiri", "yalnız", "sadece"):
+            distractor_quality = min(distractor_quality, 50)
 
     # Blueprint match: choice count + stem type intent
     expect = plan.choice_count

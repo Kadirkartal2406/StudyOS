@@ -187,22 +187,22 @@ async function loadQuestionPool() {
         <td>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <button ${disable ? "disabled" : ""} class="secondary qp-topup-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Top-up
+              Eksikleri Üret
             </button>
             <button class="danger qp-delete-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Delete
+              Sil
             </button>
-            <button ${disable ? "disabled" : ""} class="secondary qp-regenerate-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+            <button ${disable ? "disabled" : ""} class="secondary qp-regenerate-btn" style="display:none;" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
               Regenerate
             </button>
-            <button ${disable ? "disabled" : ""} class="secondary qp-rebuild-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+            <button ${disable ? "disabled" : ""} class="secondary qp-rebuild-btn" style="display:none;" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
               Rebuild
             </button>
-            <button ${disable ? "disabled" : ""} class="secondary qp-review-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+            <button ${disable ? "disabled" : ""} class="secondary qp-review-btn" style="display:none;" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
               Review
             </button>
             <button class="secondary qp-preview-topic-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Preview
+              Önizle
             </button>
           </div>
         </td>
@@ -238,7 +238,7 @@ async function loadQuestionPool() {
   document.querySelectorAll(".qp-delete-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       try {
-        if (!confirm("Bu topic'in havuz kartlarını silinsin mi?")) return;
+        if (!confirm("Bu konudaki tüm havuz soruları silinsin mi?")) return;
         const payload = {
           exam: btn.dataset.exam,
           subject_code: btn.dataset.subject,
@@ -1167,6 +1167,64 @@ $("asset-node-save-btn")?.addEventListener("click", async () => {
     openAsset(_selectedAssetId);
   } catch (err) {
     $("asset-node-save-result").textContent = err.message;
+  }
+});
+
+// Manual Question Add
+$("qp-manual-add-btn")?.addEventListener("click", async () => {
+  const btn = $("qp-manual-add-btn");
+  const res = $("qp-manual-add-result");
+  btn.disabled = true;
+  res.textContent = "Kaydediliyor...";
+  
+  try {
+    let eaeJson = null;
+    const eaeText = $("qp-manual-eae").value.trim();
+    if (eaeText) {
+      eaeJson = JSON.parse(eaeText);
+    }
+    
+    const payload = {
+      exam: $("qp-manual-exam").value || "kpss",
+      subject_code: $("qp-manual-subject").value || "cografya",
+      topic_code: $("qp-manual-topic").value || "turkiye-haritasi",
+      difficulty_band: $("qp-manual-diff").value || "medium",
+      stem: $("qp-manual-stem").value,
+      choices: {
+        "A": $("qp-manual-a").value,
+        "B": $("qp-manual-b").value,
+        "C": $("qp-manual-c").value,
+        "D": $("qp-manual-d").value,
+      },
+      correct_key: $("qp-manual-correct").value,
+      explanation: $("qp-manual-explanation").value || null,
+      eae_interaction: eaeJson
+    };
+    
+    await api("/admin/question-pool/card", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+    
+    res.textContent = "Soru başarıyla havuza eklendi!";
+    res.style.color = "green";
+    
+    // reset form fields
+    $("qp-manual-stem").value = "";
+    $("qp-manual-a").value = "";
+    $("qp-manual-b").value = "";
+    $("qp-manual-c").value = "";
+    $("qp-manual-d").value = "";
+    $("qp-manual-eae").value = "";
+    
+    if (currentTab === "question-pool") {
+      fetchQuestionPool();
+    }
+  } catch (err) {
+    res.textContent = "Hata: " + err.message;
+    res.style.color = "red";
+  } finally {
+    btn.disabled = false;
   }
 });
 

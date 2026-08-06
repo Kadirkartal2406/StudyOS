@@ -15,6 +15,7 @@ class AssessmentQuestionItem {
     this.subjectCode,
     this.topicCode,
     this.subjectName,
+    this.eaeInteraction,
   });
 
   final String id;
@@ -24,6 +25,7 @@ class AssessmentQuestionItem {
   final String? subjectCode;
   final String? topicCode;
   final String? subjectName;
+  final Map<String, dynamic>? eaeInteraction;
 
   bool get isMathSubject {
     final c = (subjectCode ?? '').toLowerCase();
@@ -46,6 +48,7 @@ class AssessmentQuestionItem {
       subjectCode: json['subject_code'] as String?,
       topicCode: json['topic_code'] as String?,
       subjectName: json['subject_name'] as String?,
+      eaeInteraction: json['eae_interaction'] as Map<String, dynamic>?,
     );
   }
 }
@@ -132,6 +135,7 @@ class AssessmentReviewItem {
     this.explanation,
     this.selectedKey,
     this.isCorrect,
+    this.eaeInteraction,
   });
 
   final String id;
@@ -142,6 +146,7 @@ class AssessmentReviewItem {
   final String? explanation;
   final String? selectedKey;
   final bool? isCorrect;
+  final Map<String, dynamic>? eaeInteraction;
 
   factory AssessmentReviewItem.fromJson(Map<String, dynamic> json) {
     final raw = json['choices'];
@@ -160,6 +165,7 @@ class AssessmentReviewItem {
       explanation: json['explanation'] as String?,
       selectedKey: json['selected_key'] as String?,
       isCorrect: json['is_correct'] as bool?,
+      eaeInteraction: json['eae_interaction'] as Map<String, dynamic>?,
     );
   }
 }

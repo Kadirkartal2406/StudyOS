@@ -32,6 +32,7 @@ class QuizItemRead(BaseModel):
     explanation: str | None = None
     selected_key: str | None = None
     is_correct: bool | None = None
+    eae_interaction: dict | None = None
 
     model_config = {"from_attributes": True}
 
@@ -47,8 +48,7 @@ class QuizItemReview(BaseModel):
     explanation: str | None = None
     selected_key: str | None = None
     is_correct: bool | None = None
-    target_asset_id: str | None = None  # DB UUID or studyos:// asset URI
-    correct_node_id: str | None = None
+    eae_interaction: dict | None = None
 
 
 class QuizItemPublic(BaseModel):
@@ -58,7 +58,7 @@ class QuizItemPublic(BaseModel):
     ord_index: int
     stem: str
     choices: dict[str, str]
-    target_asset_id: str | None = None  # DB UUID or studyos:// asset URI
+    eae_interaction: dict | None = None
 
 
 class QuizGenerationRead(BaseModel):

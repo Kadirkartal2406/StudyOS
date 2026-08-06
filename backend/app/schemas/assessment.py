@@ -37,6 +37,7 @@ class AssessmentQuestionPublic(BaseModel):
     subject_code: str | None = None
     topic_code: str | None = None
     subject_name: str | None = None
+    eae_interaction: dict | None = None
 
 
 class AssessmentQuestionReview(BaseModel):
@@ -48,6 +49,7 @@ class AssessmentQuestionReview(BaseModel):
     explanation: str | None = None
     selected_key: str | None = None
     is_correct: bool | None = None
+    eae_interaction: dict | None = None
 
 
 class AssessmentSessionRead(BaseModel):

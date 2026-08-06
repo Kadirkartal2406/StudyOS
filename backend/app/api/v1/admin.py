@@ -199,7 +199,11 @@ async def admin_question_pool_metrics(
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[QuestionPoolMetrics]:
     inventory_rows = await QuestionPoolInventoryService().snapshot(db)
-    total_questions = int(sum(int(r.get("current") or 0) for r in inventory_rows))
+    
+    from app.models.question_pool import QuestionPoolCard
+    from sqlalchemy import func
+    total_questions = int((await db.execute(select(func.count()).select_from(QuestionPoolCard))).scalar() or 0)
+
     healthy_topics = int(sum(1 for r in inventory_rows if r.get("status") == "healthy"))
     low_topics = int(sum(1 for r in inventory_rows if r.get("status") == "low"))
     empty_topics = int(sum(1 for r in inventory_rows if r.get("status") == "empty"))
@@ -837,4 +841,68 @@ async def admin_question_pool_reject_pending(
 
     result = ProductionController().reject_pending(pending_id=body.pending_id)
     return SuccessResponse(data=result, message="Rejected")
+
+
+@router.post(
+    "/question-pool/card",
+    response_model=SuccessResponse[dict],
+)
+async def admin_question_pool_create_card(
+    body: QuestionPoolCardCreate,
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    """Manually create a pool card with optional EAE interaction."""
+    from app.models.question_pool import QuestionPoolCard
+    from app.services.qie.types import QuestionPlan, QualityBreakdown, QuestionCard
+
+    # Dummy QIE plan and card for manual inserts
+    plan = QuestionPlan(
+        exam=body.exam.lower(),
+        subject_code=body.subject_code,
+        subject_name=body.subject_code,
+        topic_code=body.topic_code,
+        topic_name=body.topic_code,
+        skill="manual_entry",
+        difficulty=70,
+    )
+    
+    qie_card = QuestionCard(
+        stem=body.stem,
+        choices=body.choices,
+        correct_key=body.correct_key,
+        explanation=body.explanation,
+        plan=plan,
+        difficulty_score=70,
+        quality=QualityBreakdown(total=100),
+        provider="manual",
+    )
+    
+    qie_dict = qie_card.to_persist_dict()
+    if body.eae_interaction:
+        qie_dict["eae_interaction"] = body.eae_interaction
+
+    import hashlib
+    content = f"{body.exam}:{body.subject_code}:{body.topic_code}:{body.stem}:{body.correct_key}"
+    fp = hashlib.sha256(content.encode()).hexdigest()
+
+    card = QuestionPoolCard(
+        fingerprint=fp,
+        content_hash=fp,
+        exam=body.exam.lower(),
+        subject_code=body.subject_code,
+        topic_code=body.topic_code,
+        difficulty_band=body.difficulty_band.lower(),
+        skill="manual_entry",
+        stem=body.stem,
+        choices=body.choices,
+        correct_key=body.correct_key,
+        explanation=body.explanation,
+        qie_card=qie_dict,
+    )
+
+    db.add(card)
+    await db.commit()
+    
+    return SuccessResponse(data={"id": str(card.id)}, message="Soru havuza eklendi")
 

@@ -105,6 +105,8 @@ class TopicQuizItem(Base):
     explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
     # Sprint 25 — internal QIE QuestionCard (never exposed on public quiz APIs)
     qie_card: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    # Sprint 26 / EAE interaction
+    eae_interaction: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
     # Kullanıcı cevabı (submit sonrası)
     selected_key: Mapped[str | None] = mapped_column(String(1), nullable=True)
     is_correct: Mapped[bool | None] = mapped_column(Boolean, nullable=True)

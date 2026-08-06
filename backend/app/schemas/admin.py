@@ -61,3 +61,15 @@ class AdminQuestionItem(BaseModel):
     user_id: uuid.UUID | None = None
     created_at: datetime | None = None
     extra: dict | None = None
+
+
+class QuestionPoolCardCreate(BaseModel):
+    exam: str = Field(min_length=1, max_length=32)
+    subject_code: str = Field(min_length=1, max_length=80)
+    topic_code: str = Field(min_length=1, max_length=120)
+    difficulty_band: str = Field(default="medium", max_length=16)
+    stem: str = Field(min_length=1)
+    choices: dict[str, str]
+    correct_key: str = Field(min_length=1, max_length=8)
+    explanation: str | None = None
+    eae_interaction: dict | None = None

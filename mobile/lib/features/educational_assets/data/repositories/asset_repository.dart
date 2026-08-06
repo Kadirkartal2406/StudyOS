@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import '../../../../core/asset_contracts/asset_manifest_contract.dart';
 import '../models/asset_search_query_dto.dart';
 
+import '../../../../core/asset_engine/cache/eae_local_cache_service.dart';
+
 abstract class AssetRepository {
   Future<List<EAEAssetManifestContract>> searchAssets(
       AssetSearchQueryDTO query);
@@ -12,8 +14,9 @@ abstract class AssetRepository {
 
 class AssetRepositoryImpl implements AssetRepository {
   final Dio _dio;
+  final EAELocalCacheService _cacheService;
 
-  AssetRepositoryImpl(this._dio);
+  AssetRepositoryImpl(this._dio, this._cacheService);
 
   @override
   Future<List<EAEAssetManifestContract>> searchAssets(
@@ -53,11 +56,26 @@ class AssetRepositoryImpl implements AssetRepository {
 
   @override
   Future<List<int>> downloadBundle(String assetDbId) async {
+    // 1. Try to read from local cache first
+    final cachedBytes = await _cacheService.getCachedBundle(assetDbId);
+    if (cachedBytes != null) {
+      return cachedBytes;
+    }
+
+    // 2. If not in cache, download from API
     final key = Uri.encodeComponent(assetDbId);
     final response = await _dio.get<List<int>>(
       '/assets/$key/bundle',
       options: Options(responseType: ResponseType.bytes),
     );
-    return response.data ?? <int>[];
+    
+    final bytes = response.data ?? <int>[];
+    
+    // 3. Save to cache asynchronously
+    if (bytes.isNotEmpty) {
+      _cacheService.saveBundleToCache(assetDbId, bytes);
+    }
+    
+    return bytes;
   }
 }

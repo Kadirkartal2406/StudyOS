@@ -32,14 +32,38 @@ logger = logging.getLogger("studyos.ai_cost.batch")
 
 def _batch_messages(plans: list[QuestionPlan], style: dict[str, Any]) -> list[ChatMessageDTO]:
     compact_plans = [p.to_dict() for p in plans]
-    system = """Sen StudyOS batch soru üreticisisin.
-Tek JSON: {"questions":[{"plan_index":0,"stem":"...","choices":{...},"correct_key":"A","explanation":"..."}, ...]}
-Her plan_index için tam bir soru. Telif yok. ÖSYM üslubu.
-Tüm LaTeX ifadelerinde ters bölü işaretlerini JSON içinde kaçır (örn. \\\\frac, \\\\lim). Yalnızca geçerli JSON."""
+    system = """Sen ÖSYM (Ölçme, Seçme ve Yerleştirme Merkezi) standartlarında soru hazırlayan kıdemli bir kurulsun.
+Görevlerin:
+1. HATA YAPMAMAK (Halüsinasyon Önleme): Çözümleri adım adım, %100 matematiksel ve mantıksal tutarlılıkla (Chain of Thought) oluştur. Asla kural uydurma.
+2. ÇELDİRİCİ MÜHENDİSLİĞİ: Şıklar sadece 'yanlış' olmamalıdır. En güçlü çeldiriciler, öğrencinin yapabileceği işlem hatalarına veya kavram yanılgılarına (misconceptions) dayandırılmalıdır. Birbiriyle kelime kelime aynı olan şıklardan kaçın.
+3. ÖLÇME GÜCÜ: Doğrudan ezber yerine muhakeme, çıkarım ve okuduğunu anlama (veya modelleme) yeteneğini ölç. Sorular lise müfredatına (MEB) uygun olmalı, ancak akademik/robotik dilden uzak, açık ve anlaşılır bir Türkçeyle yazılmalıdır.
+4. GEREKSİZ BİLGİDEN KAÇIN: Soru kökünü zorlaştırmak için alakası olmayan dolgu metinler (filler) ekleme. Zorluk, işlemin veya mantığın çok adımlı olmasından gelmelidir.
+5. JSON FORMATI: Çıktı sadece geçerli bir JSON objesi olmalıdır. LaTeX ifadelerinde ters bölü işaretlerini çift kaçır (örn. \\\\frac, \\\\lim).
+
+Tek JSON Formatı: {"questions":[{"plan_index":0,"stem":"...","choices":{"A":"...","B":"...","C":"...","D":"...","E":"..."},"correct_key":"A","explanation":"Adım 1: ...\\nAdım 2: ...\\nSonuç: ..."}, ...]}
+"""
+    # Actively pass all rich DNA parameters, not just basic ones.
     user = (
-        f"STYLE={json.dumps({k: style.get(k) for k in ('choice_count','bloom_default','language_level') if k in style}, ensure_ascii=False)}\n"
+        f"STYLE={json.dumps(style, ensure_ascii=False)}\n"
         f"PLANS={json.dumps(compact_plans, ensure_ascii=False)}\n"
-        f"COUNT={len(plans)}\nYalnızca JSON."
+        f"COUNT={len(plans)}\nKurallara katı şekilde uyarak soruları üret. Yalnızca JSON ver."
+    )
+    return [
+        ChatMessageDTO(role="system", content=system),
+        ChatMessageDTO(role="user", content=user),
+    ]
+
+def _verify_messages(generated_payload: dict) -> list[ChatMessageDTO]:
+    system = """Sen kıdemli bir soru denetmenisin (Reviewer).
+Sana verilen JSON formatındaki sorularda sadece şıkları ve correct_key değerini göreceksin, kendi başına bu soruları sıfırdan çözeceksin. 
+Eğer üretenin bulduğu sonuç (correct_key) ile kendi matematiksel/mantıksal hesabın tutmuyorsa veya hatalıysa:
+1. Şıkları (choices) düzelt.
+2. Doğru şıkkı (correct_key) güncelle.
+3. Açıklamayı (explanation) kendi çözümüne göre düzelt.
+DİKKAT: Yeni soru üretme! Sadece sana verilen soruları analiz et ve hatalarını düzeltip aynı JSON formatında geri döndür."""
+    user = (
+        f"GELEN SORULAR:\n{json.dumps(generated_payload, ensure_ascii=False)}\n"
+        "Soruları adım adım çöz, hataları düzelt ve sadece düzeltilmiş halini JSON formatında ver."
     )
     return [
         ChatMessageDTO(role="system", content=system),
@@ -112,6 +136,28 @@ async def generate_batch_one_call(
     except Exception as exc:
         logger.info("[PIPELINE] 3b. extract_json_payload FAILED | err=%s text_preview=%s", exc, (getattr(result, "text", "") or "")[:500])
         return [], "batch_parse_fail", result
+
+    # --- TWO-STAGE SELF-REFLECTION (Verification Pass) ---
+    logger.info("[PIPELINE] 3c. Gemini Verification (Self-Correction) sending...")
+    verify_result = await generate_with_fallback(
+        GenerateRequest(
+            messages=_verify_messages(payload),
+            context={
+                "kind": "batch_verify",
+                "exam": ctx_local.exam,
+                "topic_code": ctx_local.topic_code,
+                "count": len(plans),
+                "max_output_tokens": 8192,
+            },
+        ),
+        preferred=ctx_local.preferred_provider,
+        model=ctx_local.preferred_model,
+    )
+    try:
+        payload = extract_json_payload(verify_result.text)
+        logger.info("[PIPELINE] 3d. Verification successful.")
+    except Exception as exc:
+        logger.warning("[PIPELINE] 3d. Verification parse failed, falling back to original payload. err=%s", exc)
 
     gate = validate_quiz_payload(
         payload,

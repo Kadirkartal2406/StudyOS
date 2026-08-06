@@ -23,11 +23,11 @@ def _now_istanbul() -> datetime:
     return datetime.now(_TZ)
 
 
-def seconds_until_next_midnight() -> float:
+def seconds_until_next_0300() -> float:
     now = _now_istanbul()
-    nxt = (now + timedelta(days=1)).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
+    nxt = now.replace(hour=3, minute=0, second=0, microsecond=0)
+    if nxt <= now:
+        nxt += timedelta(days=1)
     return max(1.0, (nxt - now).total_seconds())
 
 
@@ -39,7 +39,7 @@ async def midnight_question_pool_loop() -> None:
     )
 
     while True:
-        wait_s = seconds_until_next_midnight()
+        wait_s = seconds_until_next_0300()
         logger.info("M33: Next question pool fill in %.0f seconds", wait_s)
         await asyncio.sleep(wait_s)
         try:

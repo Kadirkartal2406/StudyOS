@@ -281,11 +281,11 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
                     ),
               ),
               const SizedBox(height: 16),
-              if (item.targetAssetId != null && item.targetAssetId!.isNotEmpty)
+              if (item.eaeInteraction != null && item.eaeInteraction!['asset_uri'] != null)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: EAEInteractiveCanvas(
-                    targetAssetId: item.targetAssetId!,
+                    targetAssetId: item.eaeInteraction!['asset_uri'] as String,
                     selectedNodeId: _selectedNodes[item.id],
                     onNodeSelected: (nodeId) {
                       setState(() {
@@ -314,7 +314,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
                     },
                   ),
                 ),
-              ...['A', 'B', 'C', 'D'].map((key) {
+              if (item.eaeInteraction == null) ...['A', 'B', 'C', 'D'].map((key) {
                 final text = item.choices[key] ?? '';
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8),
@@ -420,12 +420,12 @@ class _ResultsView extends StatelessWidget {
                   Text(
                     'Senin: ${item.selectedKey ?? "—"} · Doğru: ${item.correctKey}',
                   ),
-                  if (item.targetAssetId != null && item.targetAssetId!.isNotEmpty)
+                  if (item.eaeInteraction != null && item.eaeInteraction!['asset_uri'] != null)
                     Padding(
                       padding: const EdgeInsets.only(top: 12.0, bottom: 8.0),
                       child: EAEInteractiveCanvas(
-                        targetAssetId: item.targetAssetId!,
-                        correctNodeId: item.correctNodeId,
+                        targetAssetId: item.eaeInteraction!['asset_uri'] as String,
+                        correctNodeId: item.eaeInteraction!['expected_node_id'] as String?,
                         showAnswer: true,
                         onNodeSelected: (_) {},
                       ),

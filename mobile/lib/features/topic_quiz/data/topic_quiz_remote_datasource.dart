@@ -12,14 +12,14 @@ class QuizChoiceItem {
     required this.ordIndex,
     required this.stem,
     required this.choices,
-    this.targetAssetId,
+    this.eaeInteraction,
   });
 
   final String id;
   final int ordIndex;
   final String stem;
   final Map<String, String> choices;
-  final String? targetAssetId;
+  final Map<String, dynamic>? eaeInteraction;
 
   factory QuizChoiceItem.fromJson(Map<String, dynamic> json) {
     final raw = json['choices'];
@@ -34,7 +34,7 @@ class QuizChoiceItem {
       ordIndex: json['ord_index'] as int? ?? 0,
       stem: json['stem'] as String? ?? '',
       choices: choices,
-      targetAssetId: json['target_asset_id'] as String?,
+      eaeInteraction: json['eae_interaction'] as Map<String, dynamic>?,
     );
   }
 }
@@ -89,8 +89,7 @@ class QuizReviewItem {
     this.explanation,
     this.selectedKey,
     this.isCorrect,
-    this.targetAssetId,
-    this.correctNodeId,
+    this.eaeInteraction,
   });
 
   final String id;
@@ -101,8 +100,7 @@ class QuizReviewItem {
   final String? explanation;
   final String? selectedKey;
   final bool? isCorrect;
-  final String? targetAssetId;
-  final String? correctNodeId;
+  final Map<String, dynamic>? eaeInteraction;
 
   factory QuizReviewItem.fromJson(Map<String, dynamic> json) {
     final raw = json['choices'];
@@ -121,8 +119,7 @@ class QuizReviewItem {
       explanation: json['explanation'] as String?,
       selectedKey: json['selected_key'] as String?,
       isCorrect: json['is_correct'] as bool?,
-      targetAssetId: json['target_asset_id'] as String?,
-      correctNodeId: json['correct_node_id'] as String?,
+      eaeInteraction: json['eae_interaction'] as Map<String, dynamic>?,
     );
   }
 }
