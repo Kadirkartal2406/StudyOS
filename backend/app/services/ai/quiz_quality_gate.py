@@ -33,6 +33,7 @@ class ValidatedQuizItem:
     choices: dict[str, str]
     correct_key: str
     explanation: str | None = None
+    eae_interaction: dict[str, Any] | None = None
 
 
 @dataclass
@@ -223,9 +224,14 @@ def _validate_one(
     if expl and len(expl) > 600:
         expl = expl[:600]
 
+    eae_interaction = raw.get("eae_interaction")
+    if eae_interaction and not isinstance(eae_interaction, dict):
+        eae_interaction = None
+
     return True, ValidatedQuizItem(
         stem=stem,
         choices=choices,
         correct_key=correct,
         explanation=expl,
+        eae_interaction=eae_interaction,
     ), ""

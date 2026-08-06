@@ -39,6 +39,8 @@ class QuestionPlan:
     choice_count: int = 5
     pack: str | None = None
     index: int = 0
+    target_asset_id: str | None = None
+    available_nodes: list[str] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -65,6 +67,8 @@ class QuestionPlan:
             "choice_count": self.choice_count,
             "index": self.index,
             "plan_version": PLAN_VERSION,
+            "target_asset_id": self.target_asset_id,
+            "available_nodes": self.available_nodes,
         }
 
 

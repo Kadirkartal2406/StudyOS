@@ -16,6 +16,12 @@ def build_card(
     provider: str | None = None,
     model: str | None = None,
 ) -> QuestionCard:
+    target_asset_id = None
+    correct_node_id = None
+    if item.eae_interaction:
+        target_asset_id = item.eae_interaction.get("target_asset_id")
+        correct_node_id = item.eae_interaction.get("correct_node_id")
+
     return QuestionCard(
         stem=item.stem,
         choices=dict(item.choices),
@@ -27,4 +33,7 @@ def build_card(
         style_score=style_score or quality.style,
         provider=provider,
         model=model,
+        target_asset_id=target_asset_id,
+        correct_node_id=correct_node_id,
+        eae_interaction=item.eae_interaction,
     )

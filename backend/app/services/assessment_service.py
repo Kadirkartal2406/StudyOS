@@ -259,7 +259,7 @@ class AssessmentService:
     ) -> AssessmentSessionRead:
         kind = (data.kind or "").strip().lower()
         if kind not in {k.value for k in AssessmentKind}:
-            raise ValidationError("Geçersiz assessment kind")
+            raise ValidationError("Geçersiz değerlendirme türü")
         exam = await self._active_exam(user_id)
         today = datetime.now(UTC).date()
 
@@ -397,43 +397,33 @@ class AssessmentService:
         if shared is not None:
             return shared
 
-        from app.services.qie.calibration_planner import CalibrationPlanner
-
-        initial_batch = min(4, count)
-        all_plans = CalibrationPlanner().plan(
-            exam=exam,
-            subject_code=sub,
-            subject_name=sn or sub,
-            topic_code=top or sub,
-            topic_name=tn or top or sn or sub,
-            count=count,
-            difficulty_band=data.difficulty or "medium",
-        )
-        first_plans = all_plans[:initial_batch]
-        qie_meta = {
-            "adaptive": count > initial_batch,
-            "total_count": count,
-            "initial_batch": initial_batch,
-            "phase": "awaiting_early_answers" if count > initial_batch else "complete",
-            "planned_skills": [p.skill for p in all_plans],
-            "remaining_skills": [p.skill for p in all_plans[initial_batch:]],
-        }
-        session = await self._generate_linked_session(
-            user_id,
-            exam=exam,
+        # Eğer ortak havuzdan session gelmediyse (veya havuzda soru kalmadıysa)
+        # canlı Gemini üretimi yapmak yerine 0 soruluk boş bir kalibrasyon session'u oluştur.
+        # Böylece uygulama soru gösteremez, "ileride sorular üretilince" devreye girer.
+        session = AssessmentSession(
+            user_id=user_id,
+            exam_type=exam,
             kind=AssessmentKind.INITIAL_CALIBRATION,
             subject_code=sub,
             topic_code=top,
             subject_name=sn,
             topic_name=tn,
-            count=initial_batch,
-            difficulty=data.difficulty,
+            status=AssessmentSessionStatus.READY,
+            difficulty=data.difficulty or "medium",
+            requested_count=count,
             challenge_date=None,
-            plans=first_plans,
-            qie_meta=qie_meta,
-            generate_kind="calibration",
+            quiz_generation_id=None,
+            qie_meta={
+                "adaptive": False,
+                "total_count": count,
+                "initial_batch": 0,
+                "phase": "complete",
+                "planned_skills": [],
+                "remaining_skills": [],
+                "note": "Havuzda yeterli soru bulunamadı. Arka plan üretimi bekleniyor."
+            },
         )
-        session.requested_count = count
+        self.db.add(session)
         await self.db.flush()
         return self._to_read(session)
 
@@ -450,7 +440,7 @@ class AssessmentService:
         if session is None:
             raise NotFoundError("Assessment", str(session_id))
         if session.kind != AssessmentKind.INITIAL_CALIBRATION:
-            raise ValidationError("Yalnızca seviye testi için adaptive devam")
+            raise ValidationError("Yalnızca seviye testine devam edilebilir")
         meta = dict(session.qie_meta or {})
         if not meta.get("adaptive") or meta.get("phase") == "complete":
             return self._to_read(session)
@@ -887,11 +877,11 @@ class AssessmentService:
         self,
         booklet: SharedDailyBooklet,
     ) -> SharedDailyBooklet:
-        """Yerel bankadan doldur — Gemini kotası / AI kapalıyken günlük pack."""
+        """Yerel bankadan doldur — Havuzdaki (question_pool_cards) üretilmiş soruları kullanır."""
         from sqlalchemy import delete
 
         from app.services.ai.booklet_prompt_builder import BOOKLET_CONTENT_VERSION
-        from app.services.ai.booklet_question_bank import make_booklet_question
+        from app.services.ai_cost.pool import QuestionPoolService
 
         booklet = await self.repo.get_shared_booklet_by_id(booklet.id) or booklet
         plan_meta = dict(booklet.section_plan or {})
@@ -916,32 +906,34 @@ class AssessmentService:
         )
         await self.db.flush()
 
+        pool_svc = QuestionPoolService(self.db)
         ord_index = 0
         for sec in plan:
             subject_code = str(sec.get("subject_code") or "")
-            subject_name = str(sec.get("subject_name") or subject_code)
             for topic in sec.get("topics") or []:
                 topic_code = str(topic.get("topic_code") or "")
-                topic_name = str(topic.get("topic_name") or topic_code)
                 need = int(topic.get("count") or 0)
-                for _ in range(need):
-                    item = make_booklet_question(
-                        exam_type=booklet.exam_type,
-                        challenge_date=booklet.challenge_date,
-                        ord_index=ord_index,
-                        subject_code=subject_code,
-                        subject_name=subject_name,
-                        topic_code=topic_code,
-                        topic_name=topic_name,
-                    )
+                if need <= 0:
+                    continue
+                
+                # Güncel üretilmiş havuzdan deterministik olarak en eski / ilk soruları çek
+                cards = await pool_svc.get_unused_for_topic(
+                    exam=booklet.exam_type,
+                    subject_code=subject_code,
+                    topic_code=topic_code,
+                    difficulty_band=booklet.difficulty or "medium",
+                    limit=need,
+                )
+                
+                for card in cards:
                     self.db.add(
                         SharedDailyBookletQuestion(
                             booklet_id=booklet.id,
                             ord_index=ord_index,
-                            stem=item.stem,
-                            choices=dict(item.choices),
-                            correct_key=item.correct_key,
-                            explanation=item.explanation,
+                            stem=card.stem,
+                            choices=dict(card.choices or {}),
+                            correct_key=card.correct_key,
+                            explanation=card.explanation,
                             subject_code=subject_code,
                             topic_code=topic_code,
                         )
@@ -955,8 +947,7 @@ class AssessmentService:
         booklet.generation_progress = ord_index
         booklet.status = "ready"
         booklet.error_message = (
-            "Gemini kotası dolu — bugün yerel banka kullanıldı; "
-            "kota açılınca gece Gemini ile yenilenecek"
+            "Yerel havuzdan dolduruldu."
         )
         await self.db.flush()
         refreshed = await self.repo.get_shared_booklet_by_id(booklet.id)
@@ -1445,9 +1436,9 @@ class AssessmentService:
         if session is None:
             raise NotFoundError("Assessment", str(session_id))
         if session.status == AssessmentSessionStatus.SUBMITTED:
-            raise ValidationError("Bu assessment zaten gönderildi")
+            raise ValidationError("Bu değerlendirme zaten gönderildi")
         if session.status != AssessmentSessionStatus.READY:
-            raise ValidationError("Assessment henüz hazır değil")
+            raise ValidationError("Değerlendirme henüz hazır değil")
 
         by_aq = {q.id: q for q in session.questions}
         answers_map = {a.question_id: a.selected_key for a in data.answers}

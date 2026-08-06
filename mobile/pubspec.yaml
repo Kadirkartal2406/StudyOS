@@ -84,5 +84,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/geography/
 
   # fonts: []  # Google Fonts paketi ile yönetilecek

@@ -1,13 +1,213 @@
 [
   {
-    "exam": "kpss",
-    "subject_code": "kpss_turkce",
-    "topic_code": "kpss_turkce__paragraf",
-    "subject_name": "Türkçe",
-    "topic_name": "Paragraf",
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__temel_kavramlar",
+    "subject_name": "Matematik",
+    "topic_name": "Temel Kavramlar",
     "difficulty_band": "medium",
-    "minimum": 300,
-    "target": 500
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__temel_kavramlar",
+    "subject_name": "Matematik",
+    "topic_name": "Temel Kavramlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__sayi_basamaklari",
+    "subject_name": "Matematik",
+    "topic_name": "Sayı Basamakları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__sayi_basamaklari",
+    "subject_name": "Matematik",
+    "topic_name": "Sayı Basamakları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__bolme_bolunebilme",
+    "subject_name": "Matematik",
+    "topic_name": "Bölme Bölünebilme",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__bolme_bolunebilme",
+    "subject_name": "Matematik",
+    "topic_name": "Bölme Bölünebilme",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__obeb_okek",
+    "subject_name": "Matematik",
+    "topic_name": "OBEB OKEK",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__obeb_okek",
+    "subject_name": "Matematik",
+    "topic_name": "OBEB OKEK",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__rasyonel_sayilar",
+    "subject_name": "Matematik",
+    "topic_name": "Rasyonel Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__rasyonel_sayilar",
+    "subject_name": "Matematik",
+    "topic_name": "Rasyonel Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__mutlak_deger",
+    "subject_name": "Matematik",
+    "topic_name": "Mutlak Değer",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__mutlak_deger",
+    "subject_name": "Matematik",
+    "topic_name": "Mutlak Değer",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__uslu_sayilar",
+    "subject_name": "Matematik",
+    "topic_name": "Üslü Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__uslu_sayilar",
+    "subject_name": "Matematik",
+    "topic_name": "Üslü Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__koklu_sayilar",
+    "subject_name": "Matematik",
+    "topic_name": "Köklü Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__koklu_sayilar",
+    "subject_name": "Matematik",
+    "topic_name": "Köklü Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__carpanlara_ayirma",
+    "subject_name": "Matematik",
+    "topic_name": "Çarpanlara Ayırma",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__carpanlara_ayirma",
+    "subject_name": "Matematik",
+    "topic_name": "Çarpanlara Ayırma",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__oran_oranti",
+    "subject_name": "Matematik",
+    "topic_name": "Oran Orantı",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__oran_oranti",
+    "subject_name": "Matematik",
+    "topic_name": "Oran Orantı",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__problemler",
+    "subject_name": "Matematik",
+    "topic_name": "Problemler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
   },
   {
     "exam": "tyt",
@@ -16,8 +216,1378 @@
     "subject_name": "Matematik",
     "topic_name": "Problemler",
     "difficulty_band": "medium",
-    "minimum": 500,
-    "target": 1000
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__kumeler",
+    "subject_name": "Matematik",
+    "topic_name": "Kümeler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__kumeler",
+    "subject_name": "Matematik",
+    "topic_name": "Kümeler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__fonksiyonlar",
+    "subject_name": "Matematik",
+    "topic_name": "Fonksiyonlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__fonksiyonlar",
+    "subject_name": "Matematik",
+    "topic_name": "Fonksiyonlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__polinomlar",
+    "subject_name": "Matematik",
+    "topic_name": "Polinomlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__polinomlar",
+    "subject_name": "Matematik",
+    "topic_name": "Polinomlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__ikinci_derece",
+    "subject_name": "Matematik",
+    "topic_name": "İkinci Dereceden Denklemler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__ikinci_derece",
+    "subject_name": "Matematik",
+    "topic_name": "İkinci Dereceden Denklemler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__permutasyon_kombinasyon",
+    "subject_name": "Matematik",
+    "topic_name": "Permütasyon Kombinasyon",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__permutasyon_kombinasyon",
+    "subject_name": "Matematik",
+    "topic_name": "Permütasyon Kombinasyon",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__olasilik",
+    "subject_name": "Matematik",
+    "topic_name": "Olasılık",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_matematik",
+    "topic_code": "tyt_matematik__olasilik",
+    "subject_name": "Matematik",
+    "topic_name": "Olasılık",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__temel_geometri",
+    "subject_name": "Geometri",
+    "topic_name": "Temel Geometri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__temel_geometri",
+    "subject_name": "Geometri",
+    "topic_name": "Temel Geometri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__ucgenler",
+    "subject_name": "Geometri",
+    "topic_name": "Üçgenler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__ucgenler",
+    "subject_name": "Geometri",
+    "topic_name": "Üçgenler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__dik_ucgen",
+    "subject_name": "Geometri",
+    "topic_name": "Dik Üçgen",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__dik_ucgen",
+    "subject_name": "Geometri",
+    "topic_name": "Dik Üçgen",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__cokgenler",
+    "subject_name": "Geometri",
+    "topic_name": "Çokgenler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__cokgenler",
+    "subject_name": "Geometri",
+    "topic_name": "Çokgenler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__cember",
+    "subject_name": "Geometri",
+    "topic_name": "Çember",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__cember",
+    "subject_name": "Geometri",
+    "topic_name": "Çember",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__katı_cisimler",
+    "subject_name": "Geometri",
+    "topic_name": "Katı Cisimler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__katı_cisimler",
+    "subject_name": "Geometri",
+    "topic_name": "Katı Cisimler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__analitik",
+    "subject_name": "Geometri",
+    "topic_name": "Analitik Geometri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_geometri",
+    "topic_code": "tyt_geometri__analitik",
+    "subject_name": "Geometri",
+    "topic_name": "Analitik Geometri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__vektorler",
+    "subject_name": "Fizik",
+    "topic_name": "Vektörler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__vektorler",
+    "subject_name": "Fizik",
+    "topic_name": "Vektörler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__kuvvet",
+    "subject_name": "Fizik",
+    "topic_name": "Kuvvet",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__kuvvet",
+    "subject_name": "Fizik",
+    "topic_name": "Kuvvet",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__hareket",
+    "subject_name": "Fizik",
+    "topic_name": "Hareket",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__hareket",
+    "subject_name": "Fizik",
+    "topic_name": "Hareket",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__enerji",
+    "subject_name": "Fizik",
+    "topic_name": "Enerji",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__enerji",
+    "subject_name": "Fizik",
+    "topic_name": "Enerji",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__isitma",
+    "subject_name": "Fizik",
+    "topic_name": "Isı ve Sıcaklık",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__isitma",
+    "subject_name": "Fizik",
+    "topic_name": "Isı ve Sıcaklık",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__elektrostatik",
+    "subject_name": "Fizik",
+    "topic_name": "Elektrostatik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__elektrostatik",
+    "subject_name": "Fizik",
+    "topic_name": "Elektrostatik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__akim",
+    "subject_name": "Fizik",
+    "topic_name": "Elektrik Akımı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__akim",
+    "subject_name": "Fizik",
+    "topic_name": "Elektrik Akımı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__manyetizma",
+    "subject_name": "Fizik",
+    "topic_name": "Manyetizma",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__manyetizma",
+    "subject_name": "Fizik",
+    "topic_name": "Manyetizma",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__dalgalar",
+    "subject_name": "Fizik",
+    "topic_name": "Dalgalar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__dalgalar",
+    "subject_name": "Fizik",
+    "topic_name": "Dalgalar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__optik",
+    "subject_name": "Fizik",
+    "topic_name": "Optik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_fizik",
+    "topic_code": "tyt_fizik__optik",
+    "subject_name": "Fizik",
+    "topic_name": "Optik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__atom",
+    "subject_name": "Kimya",
+    "topic_name": "Atom ve Periyodik Sistem",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__atom",
+    "subject_name": "Kimya",
+    "topic_name": "Atom ve Periyodik Sistem",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__kimyasal_turler",
+    "subject_name": "Kimya",
+    "topic_name": "Kimyasal Türler Arası Etkileşim",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__kimyasal_turler",
+    "subject_name": "Kimya",
+    "topic_name": "Kimyasal Türler Arası Etkileşim",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__mol",
+    "subject_name": "Kimya",
+    "topic_name": "Mol Kavramı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__mol",
+    "subject_name": "Kimya",
+    "topic_name": "Mol Kavramı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__kimyasal_tepkimeler",
+    "subject_name": "Kimya",
+    "topic_name": "Kimyasal Tepkimeler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__kimyasal_tepkimeler",
+    "subject_name": "Kimya",
+    "topic_name": "Kimyasal Tepkimeler",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__asitler_bazlar",
+    "subject_name": "Kimya",
+    "topic_name": "Asitler Bazlar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__asitler_bazlar",
+    "subject_name": "Kimya",
+    "topic_name": "Asitler Bazlar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__karisimlar",
+    "subject_name": "Kimya",
+    "topic_name": "Karışımlar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__karisimlar",
+    "subject_name": "Kimya",
+    "topic_name": "Karışımlar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__kimya_her_yerde",
+    "subject_name": "Kimya",
+    "topic_name": "Kimya Her Yerde",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_kimya",
+    "topic_code": "tyt_kimya__kimya_her_yerde",
+    "subject_name": "Kimya",
+    "topic_name": "Kimya Her Yerde",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__canlilarin_ortak",
+    "subject_name": "Biyoloji",
+    "topic_name": "Canlıların Ortak Özellikleri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__canlilarin_ortak",
+    "subject_name": "Biyoloji",
+    "topic_name": "Canlıların Ortak Özellikleri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__hucre",
+    "subject_name": "Biyoloji",
+    "topic_name": "Hücre",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__hucre",
+    "subject_name": "Biyoloji",
+    "topic_name": "Hücre",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__canlilarin_siniflandirilmasi",
+    "subject_name": "Biyoloji",
+    "topic_name": "Canlıların Sınıflandırılması",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__canlilarin_siniflandirilmasi",
+    "subject_name": "Biyoloji",
+    "topic_name": "Canlıların Sınıflandırılması",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__hucresel_solunum",
+    "subject_name": "Biyoloji",
+    "topic_name": "Hücresel Solunum",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__hucresel_solunum",
+    "subject_name": "Biyoloji",
+    "topic_name": "Hücresel Solunum",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__fotosentez",
+    "subject_name": "Biyoloji",
+    "topic_name": "Fotosentez",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__fotosentez",
+    "subject_name": "Biyoloji",
+    "topic_name": "Fotosentez",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__kalitim",
+    "subject_name": "Biyoloji",
+    "topic_name": "Kalıtım",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__kalitim",
+    "subject_name": "Biyoloji",
+    "topic_name": "Kalıtım",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__ekoloji",
+    "subject_name": "Biyoloji",
+    "topic_name": "Ekoloji",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_biyoloji",
+    "topic_code": "tyt_biyoloji__ekoloji",
+    "subject_name": "Biyoloji",
+    "topic_name": "Ekoloji",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__sozcukte_anlam",
+    "subject_name": "Türkçe",
+    "topic_name": "Sözcükte Anlam",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__sozcukte_anlam",
+    "subject_name": "Türkçe",
+    "topic_name": "Sözcükte Anlam",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__cumlede_anlam",
+    "subject_name": "Türkçe",
+    "topic_name": "Cümlede Anlam",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__cumlede_anlam",
+    "subject_name": "Türkçe",
+    "topic_name": "Cümlede Anlam",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__paragraf",
+    "subject_name": "Türkçe",
+    "topic_name": "Paragraf",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__paragraf",
+    "subject_name": "Türkçe",
+    "topic_name": "Paragraf",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__anlatim_bozukluklari",
+    "subject_name": "Türkçe",
+    "topic_name": "Anlatım Bozuklukları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__anlatim_bozukluklari",
+    "subject_name": "Türkçe",
+    "topic_name": "Anlatım Bozuklukları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__yazim",
+    "subject_name": "Türkçe",
+    "topic_name": "Yazım Kuralları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__yazim",
+    "subject_name": "Türkçe",
+    "topic_name": "Yazım Kuralları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__noktalama",
+    "subject_name": "Türkçe",
+    "topic_name": "Noktalama",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__noktalama",
+    "subject_name": "Türkçe",
+    "topic_name": "Noktalama",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__ses_bilgisi",
+    "subject_name": "Türkçe",
+    "topic_name": "Ses Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__ses_bilgisi",
+    "subject_name": "Türkçe",
+    "topic_name": "Ses Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__dil_bilgisi",
+    "subject_name": "Türkçe",
+    "topic_name": "Dil Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_turkce",
+    "topic_code": "tyt_turkce__dil_bilgisi",
+    "subject_name": "Türkçe",
+    "topic_name": "Dil Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__tarih_bilimi",
+    "subject_name": "Tarih",
+    "topic_name": "Tarih Bilimi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__tarih_bilimi",
+    "subject_name": "Tarih",
+    "topic_name": "Tarih Bilimi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__ilk_cag",
+    "subject_name": "Tarih",
+    "topic_name": "İlk Çağ",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__ilk_cag",
+    "subject_name": "Tarih",
+    "topic_name": "İlk Çağ",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__orta_cag",
+    "subject_name": "Tarih",
+    "topic_name": "Orta Çağ",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__orta_cag",
+    "subject_name": "Tarih",
+    "topic_name": "Orta Çağ",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__osmanli",
+    "subject_name": "Tarih",
+    "topic_name": "Osmanlı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__osmanli",
+    "subject_name": "Tarih",
+    "topic_name": "Osmanlı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__yakin_cag",
+    "subject_name": "Tarih",
+    "topic_name": "Yakın Çağ",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__yakin_cag",
+    "subject_name": "Tarih",
+    "topic_name": "Yakın Çağ",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__inkilap",
+    "subject_name": "Tarih",
+    "topic_name": "İnkılap Tarihi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_tarih",
+    "topic_code": "tyt_tarih__inkilap",
+    "subject_name": "Tarih",
+    "topic_name": "İnkılap Tarihi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__harita",
+    "subject_name": "Coğrafya",
+    "topic_name": "Harita Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__harita",
+    "subject_name": "Coğrafya",
+    "topic_name": "Harita Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__iklim",
+    "subject_name": "Coğrafya",
+    "topic_name": "İklim",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__iklim",
+    "subject_name": "Coğrafya",
+    "topic_name": "İklim",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__nufus",
+    "subject_name": "Coğrafya",
+    "topic_name": "Nüfus",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__nufus",
+    "subject_name": "Coğrafya",
+    "topic_name": "Nüfus",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__turkiye_cografyasi",
+    "subject_name": "Coğrafya",
+    "topic_name": "Türkiye Coğrafyası",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__turkiye_cografyasi",
+    "subject_name": "Coğrafya",
+    "topic_name": "Türkiye Coğrafyası",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__ekonomik_cografya",
+    "subject_name": "Coğrafya",
+    "topic_name": "Ekonomik Coğrafya",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_cografya",
+    "topic_code": "tyt_cografya__ekonomik_cografya",
+    "subject_name": "Coğrafya",
+    "topic_name": "Ekonomik Coğrafya",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__felsefeye_giris",
+    "subject_name": "Felsefe",
+    "topic_name": "Felsefeye Giriş",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__felsefeye_giris",
+    "subject_name": "Felsefe",
+    "topic_name": "Felsefeye Giriş",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__bilgi_felsefesi",
+    "subject_name": "Felsefe",
+    "topic_name": "Bilgi Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__bilgi_felsefesi",
+    "subject_name": "Felsefe",
+    "topic_name": "Bilgi Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__varlik",
+    "subject_name": "Felsefe",
+    "topic_name": "Varlık Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__varlik",
+    "subject_name": "Felsefe",
+    "topic_name": "Varlık Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__ahlak",
+    "subject_name": "Felsefe",
+    "topic_name": "Ahlak Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__ahlak",
+    "subject_name": "Felsefe",
+    "topic_name": "Ahlak Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__siyaset",
+    "subject_name": "Felsefe",
+    "topic_name": "Siyaset Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_felsefe",
+    "topic_code": "tyt_felsefe__siyaset",
+    "subject_name": "Felsefe",
+    "topic_name": "Siyaset Felsefesi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__inanc",
+    "subject_name": "Din Kültürü",
+    "topic_name": "İnanç",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__inanc",
+    "subject_name": "Din Kültürü",
+    "topic_name": "İnanç",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__ibadet",
+    "subject_name": "Din Kültürü",
+    "topic_name": "İbadet",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__ibadet",
+    "subject_name": "Din Kültürü",
+    "topic_name": "İbadet",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__ahlak_din",
+    "subject_name": "Din Kültürü",
+    "topic_name": "Ahlak",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__ahlak_din",
+    "subject_name": "Din Kültürü",
+    "topic_name": "Ahlak",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__din_ve_hayat",
+    "subject_name": "Din Kültürü",
+    "topic_name": "Din ve Hayat",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "tyt",
+    "subject_code": "tyt_din",
+    "topic_code": "tyt_din__din_ve_hayat",
+    "subject_name": "Din Kültürü",
+    "topic_name": "Din ve Hayat",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__fonksiyonlar",
+    "subject_name": "Matematik",
+    "topic_name": "Fonksiyonlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__fonksiyonlar",
+    "subject_name": "Matematik",
+    "topic_name": "Fonksiyonlar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__trigonometri",
+    "subject_name": "Matematik",
+    "topic_name": "Trigonometri",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__trigonometri",
+    "subject_name": "Matematik",
+    "topic_name": "Trigonometri",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__limit",
+    "subject_name": "Matematik",
+    "topic_name": "Limit",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__limit",
+    "subject_name": "Matematik",
+    "topic_name": "Limit",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__turev",
+    "subject_name": "Matematik",
+    "topic_name": "Türev",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
   },
   {
     "exam": "ayt",
@@ -26,18 +1596,617 @@
     "subject_name": "Matematik",
     "topic_name": "Türev",
     "difficulty_band": "medium",
-    "minimum": 250,
-    "target": 500
+    "minimum": 100,
+    "target": 200
   },
   {
-    "exam": "lgs",
-    "subject_code": "lgs_matematik",
-    "topic_code": "lgs_matematik__sayilar",
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__integral",
     "subject_name": "Matematik",
-    "topic_name": "Sayılar",
+    "topic_name": "İntegral",
     "difficulty_band": "medium",
-    "minimum": 200,
-    "target": 400
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__integral",
+    "subject_name": "Matematik",
+    "topic_name": "İntegral",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__logaritma",
+    "subject_name": "Matematik",
+    "topic_name": "Logaritma",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__logaritma",
+    "subject_name": "Matematik",
+    "topic_name": "Logaritma",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__diziler",
+    "subject_name": "Matematik",
+    "topic_name": "Diziler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__diziler",
+    "subject_name": "Matematik",
+    "topic_name": "Diziler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__kompleks",
+    "subject_name": "Matematik",
+    "topic_name": "Kompleks Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_matematik",
+    "topic_code": "ayt_matematik__kompleks",
+    "subject_name": "Matematik",
+    "topic_name": "Kompleks Sayılar",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__kuvvet_hareket",
+    "subject_name": "Fizik",
+    "topic_name": "Kuvvet ve Hareket",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__kuvvet_hareket",
+    "subject_name": "Fizik",
+    "topic_name": "Kuvvet ve Hareket",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__enerji_momentum",
+    "subject_name": "Fizik",
+    "topic_name": "Enerji ve Momentum",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__enerji_momentum",
+    "subject_name": "Fizik",
+    "topic_name": "Enerji ve Momentum",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__elektrik",
+    "subject_name": "Fizik",
+    "topic_name": "Elektrik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__elektrik",
+    "subject_name": "Fizik",
+    "topic_name": "Elektrik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__manyetizma",
+    "subject_name": "Fizik",
+    "topic_name": "Manyetizma",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__manyetizma",
+    "subject_name": "Fizik",
+    "topic_name": "Manyetizma",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__modern_fizik",
+    "subject_name": "Fizik",
+    "topic_name": "Modern Fizik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__modern_fizik",
+    "subject_name": "Fizik",
+    "topic_name": "Modern Fizik",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yks",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__dalgalar",
+    "subject_name": "Fizik",
+    "topic_name": "Dalgalar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "ayt",
+    "subject_code": "ayt_fizik",
+    "topic_code": "ayt_fizik__dalgalar",
+    "subject_name": "Fizik",
+    "topic_name": "Dalgalar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__sozcukte_anlam",
+    "subject_name": "Türkçe",
+    "topic_name": "Sözcükte Anlam",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__cumlede_anlam",
+    "subject_name": "Türkçe",
+    "topic_name": "Cümlede Anlam",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__paragraf",
+    "subject_name": "Türkçe",
+    "topic_name": "Paragraf",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__yazim",
+    "subject_name": "Türkçe",
+    "topic_name": "Yazım",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__noktalama",
+    "subject_name": "Türkçe",
+    "topic_name": "Noktalama",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__anlatim_bozukluklari",
+    "subject_name": "Türkçe",
+    "topic_name": "Anlatım Bozuklukları",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_turkce",
+    "topic_code": "kpss_turkce__dil_bilgisi",
+    "subject_name": "Türkçe",
+    "topic_name": "Dil Bilgisi",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_matematik",
+    "topic_code": "kpss_matematik__temel_matematik",
+    "subject_name": "Matematik",
+    "topic_name": "Temel Matematik",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_matematik",
+    "topic_code": "kpss_matematik__problemler",
+    "subject_name": "Matematik",
+    "topic_name": "Problemler",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_matematik",
+    "topic_code": "kpss_matematik__geometri",
+    "subject_name": "Matematik",
+    "topic_name": "Geometri",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_matematik",
+    "topic_code": "kpss_matematik__yorum",
+    "subject_name": "Matematik",
+    "topic_name": "Sayısal Mantık",
+    "difficulty_band": "medium",
+    "minimum": 100,
+    "target": 200
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_tarih",
+    "topic_code": "kpss_tarih__osmanli",
+    "subject_name": "Tarih",
+    "topic_name": "Osmanlı Tarihi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_tarih",
+    "topic_code": "kpss_tarih__inkilap",
+    "subject_name": "Tarih",
+    "topic_name": "İnkılap Tarihi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_tarih",
+    "topic_code": "kpss_tarih__cumhuriyet",
+    "subject_name": "Tarih",
+    "topic_name": "Cumhuriyet Dönemi",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_tarih",
+    "topic_code": "kpss_tarih__kultur",
+    "subject_name": "Tarih",
+    "topic_name": "Kültür ve Medeniyet",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_cografya",
+    "topic_code": "kpss_cografya__turkiye",
+    "subject_name": "Coğrafya",
+    "topic_name": "Türkiye Coğrafyası",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_cografya",
+    "topic_code": "kpss_cografya__iklim",
+    "subject_name": "Coğrafya",
+    "topic_name": "İklim",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_cografya",
+    "topic_code": "kpss_cografya__nufus",
+    "subject_name": "Coğrafya",
+    "topic_name": "Nüfus ve Yerleşme",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_cografya",
+    "topic_code": "kpss_cografya__ekonomi",
+    "subject_name": "Coğrafya",
+    "topic_name": "Ekonomik Coğrafya",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_vatandaslik",
+    "topic_code": "kpss_vatandaslik__anayasa",
+    "subject_name": "Vatandaşlık",
+    "topic_name": "Anayasa",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_vatandaslik",
+    "topic_code": "kpss_vatandaslik__temel_haklar",
+    "subject_name": "Vatandaşlık",
+    "topic_name": "Temel Haklar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_vatandaslik",
+    "topic_code": "kpss_vatandaslik__devlet_yapisi",
+    "subject_name": "Vatandaşlık",
+    "topic_name": "Devlet Yapısı",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_vatandaslik",
+    "topic_code": "kpss_vatandaslik__idare",
+    "subject_name": "Vatandaşlık",
+    "topic_name": "İdare Hukuku Temelleri",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_guncel",
+    "topic_code": "kpss_guncel__guncel_olaylar",
+    "subject_name": "Güncel Bilgiler",
+    "topic_name": "Güncel Olaylar",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_guncel",
+    "topic_code": "kpss_guncel__kultur_sanat",
+    "subject_name": "Güncel Bilgiler",
+    "topic_name": "Kültür Sanat",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "kpss",
+    "subject_code": "kpss_guncel",
+    "topic_code": "kpss_guncel__bilim_teknoloji",
+    "subject_name": "Güncel Bilgiler",
+    "topic_name": "Bilim Teknoloji",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_reading",
+    "topic_code": "yds_reading__inference",
+    "subject_name": "Reading",
+    "topic_name": "Inference",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_reading",
+    "topic_code": "yds_reading__vocabulary_in_context",
+    "subject_name": "Reading",
+    "topic_name": "Vocabulary in Context",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_reading",
+    "topic_code": "yds_reading__paragraph_completion",
+    "subject_name": "Reading",
+    "topic_name": "Paragraph Completion",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_reading",
+    "topic_code": "yds_reading__main_idea",
+    "subject_name": "Reading",
+    "topic_name": "Main Idea",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_reading",
+    "topic_code": "yds_reading__detail",
+    "subject_name": "Reading",
+    "topic_name": "Detail Questions",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_vocabulary",
+    "topic_code": "yds_vocabulary__synonyms",
+    "subject_name": "Vocabulary",
+    "topic_name": "Synonyms",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_vocabulary",
+    "topic_code": "yds_vocabulary__collocations",
+    "subject_name": "Vocabulary",
+    "topic_name": "Collocations",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_vocabulary",
+    "topic_code": "yds_vocabulary__academic_words",
+    "subject_name": "Vocabulary",
+    "topic_name": "Academic Words",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_grammar",
+    "topic_code": "yds_grammar__tenses",
+    "subject_name": "Grammar",
+    "topic_name": "Tenses",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_grammar",
+    "topic_code": "yds_grammar__conditionals",
+    "subject_name": "Grammar",
+    "topic_name": "Conditionals",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_grammar",
+    "topic_code": "yds_grammar__relative_clauses",
+    "subject_name": "Grammar",
+    "topic_name": "Relative Clauses",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_grammar",
+    "topic_code": "yds_grammar__passive",
+    "subject_name": "Grammar",
+    "topic_name": "Passive Voice",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_cloze",
+    "topic_code": "yds_cloze__cloze_practice",
+    "subject_name": "Cloze Test",
+    "topic_name": "Cloze Practice",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_translation",
+    "topic_code": "yds_translation__tr_en",
+    "subject_name": "Translation",
+    "topic_name": "TR → EN",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
+  },
+  {
+    "exam": "yds",
+    "subject_code": "yds_translation",
+    "topic_code": "yds_translation__en_tr",
+    "subject_name": "Translation",
+    "topic_name": "EN → TR",
+    "difficulty_band": "medium",
+    "minimum": 50,
+    "target": 100
   }
 ]
-

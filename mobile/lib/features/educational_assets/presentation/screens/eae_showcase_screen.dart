@@ -24,16 +24,16 @@ class _EAEShowcaseScreenState extends ConsumerState<EAEShowcaseScreen> {
   final Map<String, String> _availableMaps = {
     'Siyasi Harita (Admin)': 'studyos://assets/geography/turkey_admin/v1',
     'Fiziki Harita': 'studyos://assets/geography/turkey_physical/v1',
-    'Bölgeler': 'studyos://assets/geography/turkey_regions/v1',
-    'Fay Hatları': 'studyos://assets/geography/turkey_fault_lines/v1',
+    'Hidrografya': 'studyos://assets/geography/turkey_hydrography/v1',
     'İklim': 'studyos://assets/geography/turkey_climate/v1',
+    'Bitki Örtüsü': 'studyos://assets/geography/turkey_vegetation/v1',
     'Tarım': 'studyos://assets/geography/turkey_agriculture/v1',
-    'Sanayi': 'studyos://assets/geography/turkey_industry/v1',
-    'Nüfus': 'studyos://assets/geography/turkey_population/v1',
+    'Madencilik': 'studyos://assets/geography/turkey_minerals/v1',
     'Enerji': 'studyos://assets/geography/turkey_energy/v1',
-    'Madencilik': 'studyos://assets/geography/turkey_mining/v1',
+    'Nüfus': 'studyos://assets/geography/turkey_population/v1',
+    'Ulaşım': 'studyos://assets/geography/turkey_transport/v1',
     'Turizm': 'studyos://assets/geography/turkey_tourism/v1',
-    'Ulaşım': 'studyos://assets/geography/turkey_transportation/v1',
+    'Afetler': 'studyos://assets/geography/turkey_hazards/v1',
   };
 
   EAEAssetManifestContract? _manifest;

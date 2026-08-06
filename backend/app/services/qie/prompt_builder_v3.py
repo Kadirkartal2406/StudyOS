@@ -69,9 +69,18 @@ KURALLAR:
 9) Kullanıcıya veya meta olarak skill/bloom yazma; sadece soru metni.
 """
 
+    has_eae = any(p.target_asset_id for p in plans)
+    if has_eae:
+        system += """10) EAE MAP BAĞLANTISI: Eğer planda `target_asset_id` ve `available_nodes` verilmişse, bu soru interaktif bir harita (EAE) sorusudur. 
+`available_nodes` listesinden bir node'u seçip, o node ile ilgili ("Haritada işaretli il hangisidir?", "Hangi nehir..." vb.) bir soru yaz.
+Seçtiğin node'u JSON içerisinde `eae_interaction` objesi olarak belirt.
+Örnek JSON eklemesi: 
+"eae_interaction": {"target_asset_id": "studyos://...", "correct_node_id": "turkey_admin_v1::province::konya"}
+"""
+
     plan_lines = []
     for p in plans:
-        plan_lines.append(
+        line = (
             f"- index={p.index} skill={p.skill} bloom={p.bloom} "
             f"difficulty={p.difficulty} stem_type={p.stem_type} "
             f"paragraph_words≈{p.paragraph_length} reading_sec={p.reading_time_sec} "
@@ -79,6 +88,9 @@ KURALLAR:
             f"({distractor_contract(p.distractor_pattern)}) "
             f"forbidden={p.forbidden_recent_patterns}"
         )
+        if p.target_asset_id:
+            line += f" TARGET_MAP={p.target_asset_id} ALLOWED_NODES={p.available_nodes}"
+        plan_lines.append(line)
 
     user = f"""EXAM STYLE DNA (istatistik — soru metni yok):
 {json.dumps(dna_compact, ensure_ascii=False, indent=2)}

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/asset_contracts/asset_manifest_contract.dart';
 import '../models/asset_search_query_dto.dart';
@@ -56,6 +57,20 @@ class AssetRepositoryImpl implements AssetRepository {
 
   @override
   Future<List<int>> downloadBundle(String assetDbId) async {
+    // 0. Try to load from offline embedded assets (geography maps)
+    if (assetDbId.startsWith('studyos://assets/geography/')) {
+      final parts = assetDbId.split('/');
+      if (parts.length >= 5) {
+        final mapName = parts[4]; // e.g., 'turkey_admin'
+        try {
+          final byteData = await rootBundle.load('assets/geography/$mapName.eae');
+          return byteData.buffer.asUint8List();
+        } catch (_) {
+          // Ignore and fallback to cache or API
+        }
+      }
+    }
+
     // 1. Try to read from local cache first
     final cachedBytes = await _cacheService.getCachedBundle(assetDbId);
     if (cachedBytes != null) {
