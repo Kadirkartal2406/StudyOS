@@ -82,7 +82,11 @@ from app.models.question_pool_inventory import (
     QuestionPoolGenerationHistory,
     QuestionPoolGenerationLock,
 )
-from app.models.password_reset import PasswordResetToken
+from app.models.educational_asset import (
+    EducationalAsset,
+    EducationalAssetNode,
+    EducationalAssetVersion,
+)
 from app.models.user import User, UserRole, UserStatus
 
 __all__ = [
@@ -171,7 +175,11 @@ __all__ = [
     "QuestionPoolGenerationHistory",
     "QuestionPoolGenerationLock",
     "PasswordResetToken",
+    "EducationalAsset",
+    "EducationalAssetNode",
+    "EducationalAssetVersion",
     "User",
     "UserRole",
     "UserStatus",
 ]
+

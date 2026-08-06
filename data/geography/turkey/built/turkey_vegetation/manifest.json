@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_vegetation/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Bitki Örtüsü",
+    "en": "Turkey Vegetation"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "forest",
+      "z_index": 0,
+      "min_lod": 0.9,
+      "nodes": [
+        {
+          "id": "turkey_vegetation_v1::forest::karadeniz_ormani",
+          "name": {
+            "tr": "Karadeniz Ormanları",
+            "en": "Black Sea Forests"
+          },
+          "bounding_box": [
+            489.74,
+            71.0,
+            689.74,
+            121.0
+          ],
+          "attributes": {
+            "layer_type": "forest",
+            "feature_class": "forest",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karadeniz Ormanları"
+            ],
+            "evidence_topic_hints": [
+              "bitki_ortusu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "maquis",
+      "z_index": 1,
+      "min_lod": 0.9,
+      "nodes": [
+        {
+          "id": "turkey_vegetation_v1::maquis::akdeniz_maki",
+          "name": {
+            "tr": "Akdeniz Makisi",
+            "en": "Mediterranean Maquis"
+          },
+          "bounding_box": [
+            223.33,
+            376.27,
+            443.33,
+            421.27
+          ],
+          "attributes": {
+            "layer_type": "maquis",
+            "feature_class": "maquis",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Akdeniz Makisi"
+            ],
+            "evidence_topic_hints": [
+              "bitki_ortusu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "steppe",
+      "z_index": 2,
+      "min_lod": 0.9,
+      "nodes": [
+        {
+          "id": "turkey_vegetation_v1::steppe::ic_anadolu_bozkir",
+          "name": {
+            "tr": "İç Anadolu Bozkırı",
+            "en": "Central Anatolian Steppe"
+          },
+          "bounding_box": [
+            310.26,
+            193.69,
+            510.26,
+            293.69
+          ],
+          "attributes": {
+            "layer_type": "steppe",
+            "feature_class": "steppe",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İç Anadolu Bozkırı"
+            ],
+            "evidence_topic_hints": [
+              "bitki_ortusu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "meadow",
+      "z_index": 3,
+      "min_lod": 0.9,
+      "nodes": [
+        {
+          "id": "turkey_vegetation_v1::meadow::yayla_cayirlari",
+          "name": {
+            "tr": "Yayla Çayırları",
+            "en": "Alpine Meadows"
+          },
+          "bounding_box": [
+            744.87,
+            107.92,
+            844.87,
+            157.92
+          ],
+          "attributes": {
+            "layer_type": "meadow",
+            "feature_class": "meadow",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yayla Çayırları"
+            ],
+            "evidence_topic_hints": [
+              "bitki_ortusu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "endemic_zone",
+      "z_index": 4,
+      "min_lod": 0.9,
+      "nodes": [
+        {
+          "id": "turkey_vegetation_v1::endemic_zone::toros_endemik",
+          "name": {
+            "tr": "Toros Endemik Bölgesi",
+            "en": "Taurus Endemic Zone"
+          },
+          "bounding_box": [
+            324.62,
+            371.38,
+            444.62,
+            411.38
+          ],
+          "attributes": {
+            "layer_type": "endemic_zone",
+            "feature_class": "endemic_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Toros Endemik Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bitki_ortusu"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "bitki",
+    "orman"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

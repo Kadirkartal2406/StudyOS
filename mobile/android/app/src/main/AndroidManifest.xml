@@ -9,7 +9,8 @@
     <application
         android:label="StudyOS"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
         <!-- Disable Impeller: shader compiler fails on paths with non-ASCII chars (OneDrive/Masaüstü) -->
         <meta-data
             android:name="io.flutter.embedding.android.EnableImpeller"

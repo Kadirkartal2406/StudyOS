@@ -96,6 +96,7 @@ class QuestionGenerationService:
         *,
         topic_name: str | None = None,
         subject_name: str | None = None,
+        asset_id: str | None = None,
     ) -> QuizGenerateResponse:
         """Confidence + Evidence bazlı soru üret ve DB'ye kaydet."""
         # 1. Topic context
@@ -113,6 +114,15 @@ class QuestionGenerationService:
 
         # 3. Prompt oluştur (Knowledge-first; yoksa genel fallback)
         system_prompt = self._build_system_prompt(ctx, mode)
+        
+        # Sprint A: Asset Grounding
+        if asset_id:
+            from app.services.ai.asset_context_engine import AssetContextEngine
+            asset_ctx_engine = AssetContextEngine(self.db)
+            asset_ctx = await asset_ctx_engine.get_asset_context(asset_id)
+            if asset_ctx:
+                system_prompt = asset_ctx_engine.inject_to_prompt(system_prompt, asset_ctx)
+
         user_prompt = self._build_user_prompt(ctx, mode, count)
 
         messages = [

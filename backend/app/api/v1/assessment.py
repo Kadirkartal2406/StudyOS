@@ -95,6 +95,28 @@ async def assessment_session_pdf(
         raise ValidationError(
             "Kitapçık henüz hazır değil — birkaç saniye sonra tekrar dene"
         )
+    from app.services.asset_registry_service import AssetRegistryService
+    from app.services.asset_compiler.packager import BundlePackager
+    registry = AssetRegistryService(db)
+    packager = BundlePackager()
+
+    for q in session.questions:
+        q_meta = q.metadata_ or {}
+        if isinstance(q_meta, dict) and "target_asset_id" in q_meta and "eae_svg_content" not in q_meta:
+            try:
+                asset = await registry.get_asset_by_uri(q_meta["target_asset_id"])
+                if asset and asset.versions:
+                    # Pick latest version
+                    latest_version = sorted(asset.versions, key=lambda v: v.version)[-1]
+                    if latest_version.bundle_payload:
+                        unpacked = packager.unpack(latest_version.bundle_payload)
+                        # We mutate it in memory. Since we don't db.commit(), it's fine.
+                        new_meta = dict(q_meta)
+                        new_meta["eae_svg_content"] = unpacked.get("svg_content")
+                        q.metadata_ = new_meta
+            except Exception:
+                pass
+
     pdf_bytes = build_booklet_pdf(session)
     filename = f"gunun-denemesi-{session.challenge_date or session_id}.pdf"
     return Response(

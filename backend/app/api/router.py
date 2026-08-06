@@ -13,6 +13,7 @@ from app.api.v1 import (
     ai_cost,
     ai_insights,
     assessment,
+    assets,
     auth,
     beta_ops,
     coach,
@@ -38,6 +39,7 @@ from app.api.v1 import (
 )
 
 api_router = APIRouter()
+
 
 
 @api_router.get("/health", tags=["system"])
@@ -95,3 +97,6 @@ api_router.include_router(knowledge.router, prefix="/knowledge", tags=["knowledg
 api_router.include_router(coach.router, prefix="/coach", tags=["coach"])
 # Sprint 21 RC — Analytics + Beta Feedback
 api_router.include_router(beta_ops.router, prefix="/beta", tags=["beta"])
+# Sprint 35 — Educational Asset Engine (EAE)
+api_router.include_router(assets.router, prefix="/assets", tags=["assets"])
+

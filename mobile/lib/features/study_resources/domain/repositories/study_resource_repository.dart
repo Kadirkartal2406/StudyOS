@@ -46,4 +46,10 @@ abstract class StudyResourceRepository {
   Future<StudyResourceEntity> openResource(String id);
 
   Future<ResourceStatisticsEntity> getStatistics();
+
+  Future<String> uploadResourceFile(
+    List<int> fileBytes,
+    String filename, {
+    String? filePath,
+  });
 }

@@ -24,9 +24,29 @@ from app.schemas.question_record import (
     QuestionRecordUpdate,
     QuestionStatisticsOverview,
 )
+from app.schemas.question import AssetInteractiveQuestionDTO
 from app.services.question_record_service import QuestionRecordService
 
 router = APIRouter()
+
+@router.get("/assets/{asset_id}", response_model=SuccessResponse[list[AssetInteractiveQuestionDTO]])
+async def get_asset_questions(
+    asset_id: uuid.UUID,
+    limit: int = Query(default=5, ge=1, le=20),
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> SuccessResponse[list[AssetInteractiveQuestionDTO]]:
+    """Sprint A — Asset ID'ye göre interaktif soruları getir."""
+    from app.services.ai_cost.pool import QuestionPoolService
+    pool_svc = QuestionPoolService(db)
+    
+    # 1. Pool'dan çek
+    cards = await pool_svc.get_by_asset_id(asset_id, limit=limit)
+    
+    # QIE AssetContextEngine tetiklemesi (AI katmanında yapılacak)
+    
+    data = [AssetInteractiveQuestionDTO.model_validate(c) for c in cards]
+    return SuccessResponse(data=data)
 
 
 @router.get("/statistics", response_model=SuccessResponse[QuestionStatisticsOverview])

@@ -1,0 +1,30 @@
+{
+  "province_to_minerals": {
+    "eskisehir": [
+      "turkey_minerals_v1::mineral_deposit::bor_eskisehir"
+    ],
+    "zonguldak": [
+      "turkey_minerals_v1::mineral_deposit::komur_zonguldak"
+    ],
+    "batman": [
+      "turkey_minerals_v1::mineral_deposit::petrol_batman"
+    ]
+  },
+  "river_to_basin": {
+    "turkey_hydro_v1::river::kizilirmak": [
+      "turkey_hydro_v1::basin::kizilirmak_havzasi"
+    ],
+    "turkey_hydro_v1::river::firat": [
+      "turkey_hydro_v1::basin::firat_dicle_havzasi"
+    ]
+  },
+  "fault_to_provinces": {
+    "turkey_hazards_v1::fault::kuzey_anadolu": [
+      "sakarya",
+      "kocaeli",
+      "duzce",
+      "bolu",
+      "erzincan"
+    ]
+  }
+}

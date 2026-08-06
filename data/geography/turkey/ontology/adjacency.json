@@ -1,0 +1,749 @@
+{
+  "region_membership": {
+    "akdeniz": [
+      "adana",
+      "antalya",
+      "burdur",
+      "hatay",
+      "isparta",
+      "mersin",
+      "kahramanmaras",
+      "osmaniye"
+    ],
+    "guneydogu_anadolu": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "sanliurfa",
+      "batman",
+      "sirnak",
+      "kilis"
+    ],
+    "ege": [
+      "afyonkarahisar",
+      "aydin",
+      "denizli",
+      "izmir",
+      "kutahya",
+      "manisa",
+      "mugla",
+      "usak"
+    ],
+    "dogu_anadolu": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum",
+      "hakkari",
+      "kars",
+      "malatya",
+      "mus",
+      "tunceli",
+      "van",
+      "ardahan",
+      "igdir"
+    ],
+    "karadeniz": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane",
+      "kastamonu",
+      "ordu",
+      "rize",
+      "samsun",
+      "sinop",
+      "tokat",
+      "trabzon",
+      "zonguldak",
+      "bayburt",
+      "bartin",
+      "karabuk",
+      "duzce"
+    ],
+    "ic_anadolu": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya",
+      "nevsehir",
+      "nigde",
+      "sivas",
+      "yozgat",
+      "aksaray",
+      "karaman",
+      "kirikkale"
+    ],
+    "marmara": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul",
+      "kirklareli",
+      "kocaeli",
+      "sakarya",
+      "tekirdag",
+      "yalova"
+    ]
+  },
+  "province_neighbors": {
+    "adana": [
+      "antalya",
+      "burdur",
+      "hatay",
+      "isparta",
+      "mersin",
+      "kahramanmaras"
+    ],
+    "antalya": [
+      "adana",
+      "burdur",
+      "hatay",
+      "isparta",
+      "mersin",
+      "kahramanmaras"
+    ],
+    "burdur": [
+      "adana",
+      "antalya",
+      "hatay",
+      "isparta",
+      "mersin",
+      "kahramanmaras"
+    ],
+    "hatay": [
+      "adana",
+      "antalya",
+      "burdur",
+      "isparta",
+      "mersin",
+      "kahramanmaras"
+    ],
+    "isparta": [
+      "adana",
+      "antalya",
+      "burdur",
+      "hatay",
+      "mersin",
+      "kahramanmaras"
+    ],
+    "mersin": [
+      "adana",
+      "antalya",
+      "burdur",
+      "hatay",
+      "isparta",
+      "kahramanmaras"
+    ],
+    "kahramanmaras": [
+      "adana",
+      "antalya",
+      "burdur",
+      "hatay",
+      "isparta",
+      "mersin"
+    ],
+    "osmaniye": [
+      "adana",
+      "antalya",
+      "burdur",
+      "hatay",
+      "isparta",
+      "mersin"
+    ],
+    "adiyaman": [
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "sanliurfa",
+      "batman"
+    ],
+    "diyarbakir": [
+      "adiyaman",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "sanliurfa",
+      "batman"
+    ],
+    "gaziantep": [
+      "adiyaman",
+      "diyarbakir",
+      "mardin",
+      "siirt",
+      "sanliurfa",
+      "batman"
+    ],
+    "mardin": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "siirt",
+      "sanliurfa",
+      "batman"
+    ],
+    "siirt": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "sanliurfa",
+      "batman"
+    ],
+    "sanliurfa": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "batman"
+    ],
+    "batman": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "sanliurfa"
+    ],
+    "sirnak": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "sanliurfa"
+    ],
+    "kilis": [
+      "adiyaman",
+      "diyarbakir",
+      "gaziantep",
+      "mardin",
+      "siirt",
+      "sanliurfa"
+    ],
+    "afyonkarahisar": [
+      "aydin",
+      "denizli",
+      "izmir",
+      "kutahya",
+      "manisa",
+      "mugla"
+    ],
+    "aydin": [
+      "afyonkarahisar",
+      "denizli",
+      "izmir",
+      "kutahya",
+      "manisa",
+      "mugla"
+    ],
+    "denizli": [
+      "afyonkarahisar",
+      "aydin",
+      "izmir",
+      "kutahya",
+      "manisa",
+      "mugla"
+    ],
+    "izmir": [
+      "afyonkarahisar",
+      "aydin",
+      "denizli",
+      "kutahya",
+      "manisa",
+      "mugla"
+    ],
+    "kutahya": [
+      "afyonkarahisar",
+      "aydin",
+      "denizli",
+      "izmir",
+      "manisa",
+      "mugla"
+    ],
+    "manisa": [
+      "afyonkarahisar",
+      "aydin",
+      "denizli",
+      "izmir",
+      "kutahya",
+      "mugla"
+    ],
+    "mugla": [
+      "afyonkarahisar",
+      "aydin",
+      "denizli",
+      "izmir",
+      "kutahya",
+      "manisa"
+    ],
+    "usak": [
+      "afyonkarahisar",
+      "aydin",
+      "denizli",
+      "izmir",
+      "kutahya",
+      "manisa"
+    ],
+    "agri": [
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum",
+      "hakkari"
+    ],
+    "bingol": [
+      "agri",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum",
+      "hakkari"
+    ],
+    "bitlis": [
+      "agri",
+      "bingol",
+      "elazig",
+      "erzincan",
+      "erzurum",
+      "hakkari"
+    ],
+    "elazig": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "erzincan",
+      "erzurum",
+      "hakkari"
+    ],
+    "erzincan": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzurum",
+      "hakkari"
+    ],
+    "erzurum": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "hakkari"
+    ],
+    "hakkari": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "kars": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "malatya": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "mus": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "tunceli": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "van": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "ardahan": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "igdir": [
+      "agri",
+      "bingol",
+      "bitlis",
+      "elazig",
+      "erzincan",
+      "erzurum"
+    ],
+    "amasya": [
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane",
+      "kastamonu"
+    ],
+    "artvin": [
+      "amasya",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane",
+      "kastamonu"
+    ],
+    "bolu": [
+      "amasya",
+      "artvin",
+      "corum",
+      "giresun",
+      "gumushane",
+      "kastamonu"
+    ],
+    "corum": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "giresun",
+      "gumushane",
+      "kastamonu"
+    ],
+    "giresun": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "gumushane",
+      "kastamonu"
+    ],
+    "gumushane": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "kastamonu"
+    ],
+    "kastamonu": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "ordu": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "rize": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "samsun": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "sinop": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "tokat": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "trabzon": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "zonguldak": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "bayburt": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "bartin": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "karabuk": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "duzce": [
+      "amasya",
+      "artvin",
+      "bolu",
+      "corum",
+      "giresun",
+      "gumushane"
+    ],
+    "ankara": [
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya",
+      "nevsehir"
+    ],
+    "cankiri": [
+      "ankara",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya",
+      "nevsehir"
+    ],
+    "eskisehir": [
+      "ankara",
+      "cankiri",
+      "kayseri",
+      "kirsehir",
+      "konya",
+      "nevsehir"
+    ],
+    "kayseri": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kirsehir",
+      "konya",
+      "nevsehir"
+    ],
+    "kirsehir": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "konya",
+      "nevsehir"
+    ],
+    "konya": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "nevsehir"
+    ],
+    "nevsehir": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "nigde": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "sivas": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "yozgat": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "aksaray": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "karaman": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "kirikkale": [
+      "ankara",
+      "cankiri",
+      "eskisehir",
+      "kayseri",
+      "kirsehir",
+      "konya"
+    ],
+    "balikesir": [
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul",
+      "kirklareli"
+    ],
+    "bilecik": [
+      "balikesir",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul",
+      "kirklareli"
+    ],
+    "bursa": [
+      "balikesir",
+      "bilecik",
+      "canakkale",
+      "edirne",
+      "istanbul",
+      "kirklareli"
+    ],
+    "canakkale": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "edirne",
+      "istanbul",
+      "kirklareli"
+    ],
+    "edirne": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "istanbul",
+      "kirklareli"
+    ],
+    "istanbul": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "kirklareli"
+    ],
+    "kirklareli": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul"
+    ],
+    "kocaeli": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul"
+    ],
+    "sakarya": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul"
+    ],
+    "tekirdag": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul"
+    ],
+    "yalova": [
+      "balikesir",
+      "bilecik",
+      "bursa",
+      "canakkale",
+      "edirne",
+      "istanbul"
+    ]
+  }
+}

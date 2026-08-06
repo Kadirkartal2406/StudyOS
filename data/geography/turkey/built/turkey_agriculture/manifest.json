@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Tarım Haritası",
+    "en": "Turkey Agriculture Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "crop_region",
+      "z_index": 0,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_agriculture_v1::crop_region::bugday_ic_anadolu",
+          "name": {
+            "tr": "Buğday — İç Anadolu",
+            "en": "Wheat Central Anatolia"
+          },
+          "bounding_box": [
+            330.26,
+            198.69,
+            490.26,
+            288.69
+          ],
+          "attributes": {
+            "layer_type": "crop_region",
+            "feature_class": "crop_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Buğday — İç Anadolu"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_agriculture_v1::crop_region::pamuk_cukurova",
+          "name": {
+            "tr": "Pamuk — Çukurova",
+            "en": "Cotton Cukurova"
+          },
+          "bounding_box": [
+            467.56,
+            381.27,
+            537.56,
+            416.27
+          ],
+          "attributes": {
+            "layer_type": "crop_region",
+            "feature_class": "crop_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Pamuk — Çukurova"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_agriculture_v1::crop_region::findik_karadeniz",
+          "name": {
+            "tr": "Fındık — Karadeniz",
+            "en": "Hazelnut Black Sea"
+          },
+          "bounding_box": [
+            561.03,
+            76.0,
+            721.03,
+            116.0
+          ],
+          "attributes": {
+            "layer_type": "crop_region",
+            "feature_class": "crop_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Fındık — Karadeniz"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_agriculture_v1::crop_region::cay_dogu_karadeniz",
+          "name": {
+            "tr": "Çay — Doğu Karadeniz",
+            "en": "Tea East Black Sea"
+          },
+          "bounding_box": [
+            729.23,
+            78.5,
+            809.23,
+            113.5
+          ],
+          "attributes": {
+            "layer_type": "crop_region",
+            "feature_class": "crop_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çay — Doğu Karadeniz"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "irrigation_area",
+      "z_index": 1,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_agriculture_v1::irrigation_area::gap_sulama",
+          "name": {
+            "tr": "GAP Sulama Alanları",
+            "en": "GAP Irrigation"
+          },
+          "bounding_box": [
+            647.95,
+            326.85,
+            787.95,
+            396.85
+          ],
+          "attributes": {
+            "layer_type": "irrigation_area",
+            "feature_class": "irrigation_area",
+            "confusable_with": [],
+            "qie_aliases": [
+              "GAP Sulama Alanları"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "livestock_region",
+      "z_index": 2,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_agriculture_v1::livestock_region::koyunculuk_ic_anadolu",
+          "name": {
+            "tr": "Koyunculuk — İç Anadolu",
+            "en": "Sheep Central"
+          },
+          "bounding_box": [
+            365.9,
+            203.69,
+            505.9,
+            283.69
+          ],
+          "attributes": {
+            "layer_type": "livestock_region",
+            "feature_class": "livestock_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Koyunculuk — İç Anadolu"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_agriculture_v1::livestock_region::buyukbas_marmara",
+          "name": {
+            "tr": "Büyükbaş — Marmara",
+            "en": "Cattle Marmara"
+          },
+          "bounding_box": [
+            103.85,
+            80.77,
+            203.85,
+            140.77
+          ],
+          "attributes": {
+            "layer_type": "livestock_region",
+            "feature_class": "livestock_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Büyükbaş — Marmara"
+            ],
+            "evidence_topic_hints": [
+              "tarim"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "tarim",
+    "hayvancilik"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

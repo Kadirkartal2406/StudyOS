@@ -1,0 +1,698 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Hidrografya Haritası",
+    "en": "Turkey Hydrography Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "basins",
+      "z_index": 0,
+      "min_lod": 0.8,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::basin::kizilirmak_havzasi",
+          "name": {
+            "tr": "Kızılırmak Havzası",
+            "en": "Kizilirmak Basin"
+          },
+          "bounding_box": [
+            427.18,
+            129.85,
+            547.18,
+            209.85
+          ],
+          "attributes": {
+            "layer_type": "basin",
+            "feature_class": "drainage_basin",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kızılırmak Havzası"
+            ],
+            "evidence_topic_hints": [
+              "havzalar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::basin::firat_dicle_havzasi",
+          "name": {
+            "tr": "Fırat-Dicle Havzası",
+            "en": "Euphrates-Tigris Basin"
+          },
+          "bounding_box": [
+            683.59,
+            277.54,
+            803.59,
+            357.54
+          ],
+          "attributes": {
+            "layer_type": "basin",
+            "feature_class": "drainage_basin",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Fırat-Dicle Havzası"
+            ],
+            "evidence_topic_hints": [
+              "havzalar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::basin::marmara_havzasi",
+          "name": {
+            "tr": "Marmara Havzası",
+            "en": "Marmara Basin"
+          },
+          "bounding_box": [
+            93.85,
+            70.77,
+            213.85,
+            150.77
+          ],
+          "attributes": {
+            "layer_type": "basin",
+            "feature_class": "drainage_basin",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Marmara Havzası"
+            ],
+            "evidence_topic_hints": [
+              "havzalar"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rivers",
+      "z_index": 1,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::river::kizilirmak",
+          "name": {
+            "tr": "Kızılırmak",
+            "en": "Kizilirmak"
+          },
+          "bounding_box": [
+            431.9,
+            69.85,
+            568.1,
+            247.69
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [
+              "turkey_hydro_v1::river::sakarya",
+              "turkey_hydro_v1::river::yesilirmak"
+            ],
+            "qie_aliases": [
+              "Kızılırmak",
+              "Kızılırmak Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::sakarya",
+          "name": {
+            "tr": "Sakarya",
+            "en": "Sakarya"
+          },
+          "bounding_box": [
+            242.15,
+            84.62,
+            265.54,
+            210.77
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [
+              "turkey_hydro_v1::river::kizilirmak"
+            ],
+            "qie_aliases": [
+              "Sakarya",
+              "Sakarya Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::yesilirmak",
+          "name": {
+            "tr": "Yeşilırmak",
+            "en": "Yesilirmak"
+          },
+          "bounding_box": [
+            549.85,
+            77.23,
+            568.1,
+            173.85
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [
+              "turkey_hydro_v1::river::kizilirmak"
+            ],
+            "qie_aliases": [
+              "Yeşilırmak",
+              "Yeşilırmak Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::firat",
+          "name": {
+            "tr": "Fırat",
+            "en": "Euphrates"
+          },
+          "bounding_box": [
+            662.67,
+            202.77,
+            721.95,
+            395.38
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Fırat",
+              "Fırat Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::dicle",
+          "name": {
+            "tr": "Dicle",
+            "en": "Tigris"
+          },
+          "bounding_box": [
+            765.23,
+            276.62,
+            798.87,
+            380.62
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Dicle",
+              "Dicle Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::gediz",
+          "name": {
+            "tr": "Gediz",
+            "en": "Gediz"
+          },
+          "bounding_box": [
+            83.18,
+            261.85,
+            157.85,
+            277.23
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [
+              "turkey_hydro_v1::river::ergene"
+            ],
+            "qie_aliases": [
+              "Gediz",
+              "Gediz Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::buyuk_menderes",
+          "name": {
+            "tr": "Büyük Menderes",
+            "en": "Buyuk Menderes"
+          },
+          "bounding_box": [
+            93.44,
+            320.92,
+            183.49,
+            351.08
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Büyük Menderes",
+              "Büyük Menderes Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::ergene",
+          "name": {
+            "tr": "Ergene",
+            "en": "Ergene"
+          },
+          "bounding_box": [
+            62.67,
+            77.23,
+            111.69,
+            100.0
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [
+              "turkey_hydro_v1::river::gediz"
+            ],
+            "qie_aliases": [
+              "Ergene",
+              "Ergene Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::seyhan",
+          "name": {
+            "tr": "Seyhan",
+            "en": "Seyhan"
+          },
+          "bounding_box": [
+            498.56,
+            313.54,
+            506.56,
+            410.15
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Seyhan",
+              "Seyhan Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::river::ceyhan",
+          "name": {
+            "tr": "Ceyhan",
+            "en": "Ceyhan"
+          },
+          "bounding_box": [
+            508.82000000000005,
+            328.31,
+            542.46,
+            410.15
+          ],
+          "attributes": {
+            "layer_type": "river",
+            "feature_class": "river",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ceyhan",
+              "Ceyhan Nehri"
+            ],
+            "evidence_topic_hints": [
+              "akarsular",
+              "hidrografya"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tributaries",
+      "z_index": 2,
+      "min_lod": 1.8,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::tributary::delice",
+          "name": {
+            "tr": "Delice",
+            "en": "Delice"
+          },
+          "bounding_box": [
+            441.54,
+            159.85,
+            481.54,
+            179.85
+          ],
+          "attributes": {
+            "layer_type": "tributary",
+            "feature_class": "tributary",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Delice"
+            ],
+            "evidence_topic_hints": [
+              "kollar"
+            ],
+            "province_codes": [
+              "yozgat"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "lakes",
+      "z_index": 3,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::lake::van",
+          "name": {
+            "tr": "Van Gölü",
+            "en": "Lake Van"
+          },
+          "bounding_box": [
+            890.32,
+            258.23,
+            935.32,
+            288.23
+          ],
+          "attributes": {
+            "layer_type": "lake",
+            "feature_class": "lake",
+            "confusable_with": [
+              "turkey_hydro_v1::lake::tuz"
+            ],
+            "qie_aliases": [
+              "Van Gölü"
+            ],
+            "evidence_topic_hints": [
+              "goller"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::lake::tuz",
+          "name": {
+            "tr": "Tuz Gölü",
+            "en": "Lake Tuz"
+          },
+          "bounding_box": [
+            385.13,
+            251.85,
+            425.13,
+            279.85
+          ],
+          "attributes": {
+            "layer_type": "lake",
+            "feature_class": "lake",
+            "confusable_with": [
+              "turkey_hydro_v1::lake::van"
+            ],
+            "qie_aliases": [
+              "Tuz Gölü"
+            ],
+            "evidence_topic_hints": [
+              "goller"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::lake::beysehir",
+          "name": {
+            "tr": "Beyşehir Gölü",
+            "en": "Lake Beysehir"
+          },
+          "bounding_box": [
+            293.69,
+            328.69,
+            321.69,
+            350.69
+          ],
+          "attributes": {
+            "layer_type": "lake",
+            "feature_class": "lake",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Beyşehir Gölü"
+            ],
+            "evidence_topic_hints": [
+              "goller"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::lake::egirdir",
+          "name": {
+            "tr": "Eğirdir Gölü",
+            "en": "Lake Egirdir"
+          },
+          "bounding_box": [
+            263.36,
+            313.62,
+            285.36,
+            343.62
+          ],
+          "attributes": {
+            "layer_type": "lake",
+            "feature_class": "lake",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Eğirdir Gölü"
+            ],
+            "evidence_topic_hints": [
+              "goller"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dams",
+      "z_index": 4,
+      "min_lod": 1.5,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::dam::ataturk",
+          "name": {
+            "tr": "Atatürk Barajı",
+            "en": "Ataturk Dam"
+          },
+          "bounding_box": [
+            658.67,
+            346.46,
+            674.67,
+            362.46
+          ],
+          "attributes": {
+            "layer_type": "dam",
+            "feature_class": "dam",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Atatürk Barajı"
+            ],
+            "evidence_topic_hints": [
+              "barajlar",
+              "gap"
+            ],
+            "gap_project": true
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::dam::keban",
+          "name": {
+            "tr": "Keban Barajı",
+            "en": "Keban Dam"
+          },
+          "bounding_box": [
+            674.05,
+            250.46,
+            690.05,
+            266.46
+          ],
+          "attributes": {
+            "layer_type": "dam",
+            "feature_class": "dam",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Keban Barajı"
+            ],
+            "evidence_topic_hints": [
+              "barajlar",
+              "gap"
+            ],
+            "gap_project": true
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::dam::karakaya",
+          "name": {
+            "tr": "Karakaya Barajı",
+            "en": "Karakaya Dam"
+          },
+          "bounding_box": [
+            684.31,
+            280.0,
+            700.31,
+            296.0
+          ],
+          "attributes": {
+            "layer_type": "dam",
+            "feature_class": "dam",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karakaya Barajı"
+            ],
+            "evidence_topic_hints": [
+              "barajlar",
+              "gap"
+            ],
+            "gap_project": true
+          }
+        },
+        {
+          "id": "turkey_hydro_v1::dam::hirfanli",
+          "name": {
+            "tr": "Hirfanlı Barajı",
+            "en": "Hirfanli Dam"
+          },
+          "bounding_box": [
+            412.51,
+            220.92,
+            428.51,
+            236.92
+          ],
+          "attributes": {
+            "layer_type": "dam",
+            "feature_class": "dam",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Hirfanlı Barajı"
+            ],
+            "evidence_topic_hints": [
+              "barajlar"
+            ],
+            "gap_project": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "waterfalls",
+      "z_index": 5,
+      "min_lod": 2.0,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::waterfall::dudeniz",
+          "name": {
+            "tr": "Düden Şelalesi",
+            "en": "Duden Falls"
+          },
+          "bounding_box": [
+            260.67,
+            392.77,
+            272.67,
+            404.77
+          ],
+          "attributes": {
+            "layer_type": "waterfall",
+            "feature_class": "waterfall",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Düden"
+            ],
+            "evidence_topic_hints": [
+              "selaleler"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "springs",
+      "z_index": 6,
+      "min_lod": 2.0,
+      "nodes": [
+        {
+          "id": "turkey_hydro_v1::spring::kirkgoz",
+          "name": {
+            "tr": "Kırkgöz Kaynakları",
+            "en": "Kirkgöz Springs"
+          },
+          "bounding_box": [
+            255.54,
+            378.0,
+            267.54,
+            390.0
+          ],
+          "attributes": {
+            "layer_type": "spring",
+            "feature_class": "spring",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırkgöz"
+            ],
+            "evidence_topic_hints": [
+              "kaynaklar"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "hidrografya",
+    "nehirler",
+    "goller",
+    "barajlar"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

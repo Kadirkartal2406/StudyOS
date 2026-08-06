@@ -85,6 +85,7 @@ class QuestionPoolService:
         difficulty_band: str,
         exclude_stems: list[str] | None = None,
         limit: int = 10,
+        target_asset_id: uuid.UUID | None = None,
     ) -> list[QuestionPoolCard]:
         q = (
             select(QuestionPoolCard)
@@ -94,7 +95,12 @@ class QuestionPoolService:
                 QuestionPoolCard.topic_code == topic_code,
                 QuestionPoolCard.difficulty_band == (difficulty_band or "medium"),
             )
-            .order_by(QuestionPoolCard.use_count.asc(), QuestionPoolCard.created_at.asc())
+        )
+        if target_asset_id:
+            q = q.where(QuestionPoolCard.target_asset_id == target_asset_id)
+            
+        q = (
+            q.order_by(QuestionPoolCard.use_count.asc(), QuestionPoolCard.created_at.asc())
             .limit(limit)
         )
         rows = list((await self.db.execute(q)).scalars().all())
@@ -102,6 +108,17 @@ class QuestionPoolService:
             return rows
         blocked = {s.strip().lower() for s in exclude_stems if s}
         return [r for r in rows if (r.stem or "").strip().lower() not in blocked]
+
+    async def get_by_asset_id(
+        self, target_asset_id: uuid.UUID, limit: int = 10
+    ) -> list[QuestionPoolCard]:
+        q = (
+            select(QuestionPoolCard)
+            .where(QuestionPoolCard.target_asset_id == target_asset_id)
+            .order_by(QuestionPoolCard.created_at.desc())
+            .limit(limit)
+        )
+        return list((await self.db.execute(q)).scalars().all())
 
     async def put_card(
         self,
@@ -113,6 +130,8 @@ class QuestionPoolService:
         topic_code: str,
         difficulty_band: str,
         skill: str = "",
+        target_asset_id: uuid.UUID | None = None,
+        correct_node_id: str | None = None,
     ) -> QuestionPoolCard:
         if isinstance(card, QuestionCard):
             stem = card.stem
@@ -155,6 +174,8 @@ class QuestionPoolService:
             correct_key=correct_key,
             explanation=explanation,
             qie_card=qie_card or {},
+            target_asset_id=target_asset_id,
+            correct_node_id=correct_node_id,
             use_count=0,
             created_at=datetime.now(UTC),
         )

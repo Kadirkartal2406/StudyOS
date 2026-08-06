@@ -1,0 +1,242 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Afet Haritası",
+    "en": "Turkey Hazard Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "faults",
+      "z_index": 0,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_hazards_v1::fault::kuzey_anadolu",
+          "name": {
+            "tr": "Kuzey Anadolu Fay Hattı",
+            "en": "North Anatolian Fault"
+          },
+          "bounding_box": [
+            72.92,
+            99.38,
+            747.59,
+            136.92
+          ],
+          "attributes": {
+            "layer_type": "fault",
+            "feature_class": "fault",
+            "confusable_with": [
+              "turkey_hazards_v1::fault::dogu_anadolu"
+            ],
+            "qie_aliases": [
+              "Kuzey Anadolu Fay Hattı",
+              "KAF"
+            ],
+            "evidence_topic_hints": [
+              "afet",
+              "deprem",
+              "fay"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hazards_v1::fault::dogu_anadolu",
+          "name": {
+            "tr": "Doğu Anadolu Fay Hattı",
+            "en": "East Anatolian Fault"
+          },
+          "bounding_box": [
+            560.1,
+            202.77,
+            824.51,
+            358.46
+          ],
+          "attributes": {
+            "layer_type": "fault",
+            "feature_class": "fault",
+            "confusable_with": [
+              "turkey_hazards_v1::fault::kuzey_anadolu"
+            ],
+            "qie_aliases": [
+              "Doğu Anadolu Fay Hattı",
+              "DAF"
+            ],
+            "evidence_topic_hints": [
+              "afet",
+              "deprem",
+              "fay"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "earthquake_zones",
+      "z_index": 1,
+      "min_lod": 0.9,
+      "nodes": [
+        {
+          "id": "turkey_hazards_v1::earthquake_zone::birinci_derece",
+          "name": {
+            "tr": "1. Derece Deprem Bölgesi",
+            "en": "Highest Seismic Zone"
+          },
+          "bounding_box": [
+            99.49,
+            75.77,
+            259.49,
+            145.77
+          ],
+          "attributes": {
+            "layer_type": "earthquake_zone",
+            "feature_class": "earthquake_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "1. Derece Deprem Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "afet",
+              "deprem"
+            ]
+          }
+        },
+        {
+          "id": "turkey_hazards_v1::earthquake_zone::dogu_yuksek_risk",
+          "name": {
+            "tr": "Doğu Yüksek Risk",
+            "en": "East High Risk"
+          },
+          "bounding_box": [
+            699.23,
+            198.69,
+            839.23,
+            288.69
+          ],
+          "attributes": {
+            "layer_type": "earthquake_zone",
+            "feature_class": "earthquake_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Doğu Yüksek Risk"
+            ],
+            "evidence_topic_hints": [
+              "afet",
+              "deprem"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "landslides",
+      "z_index": 2,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_hazards_v1::landslide::karadeniz_heyelan",
+          "name": {
+            "tr": "Karadeniz Heyelan Bölgesi",
+            "en": "Black Sea Landslide"
+          },
+          "bounding_box": [
+            581.03,
+            76.0,
+            701.03,
+            116.0
+          ],
+          "attributes": {
+            "layer_type": "landslide",
+            "feature_class": "landslide",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karadeniz Heyelan Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "afet"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "floods",
+      "z_index": 3,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_hazards_v1::flood::cakurova_sel",
+          "name": {
+            "tr": "Çukurova Sel Riski",
+            "en": "Cukurova Flood"
+          },
+          "bounding_box": [
+            467.56,
+            381.27,
+            537.56,
+            416.27
+          ],
+          "attributes": {
+            "layer_type": "flood",
+            "feature_class": "flood",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çukurova Sel Riski"
+            ],
+            "evidence_topic_hints": [
+              "afet"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "avalanches",
+      "z_index": 4,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_hazards_v1::avalanche::dogu_cig",
+          "name": {
+            "tr": "Doğu Anadolu Çığ Bölgesi",
+            "en": "East Avalanche"
+          },
+          "bounding_box": [
+            770.51,
+            154.62,
+            870.51,
+            214.62
+          ],
+          "attributes": {
+            "layer_type": "avalanche",
+            "feature_class": "avalanche",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Doğu Anadolu Çığ Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "afet"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "afet",
+    "deprem",
+    "fay"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

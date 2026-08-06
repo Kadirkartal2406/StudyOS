@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 480.0">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<path id="turkey_agriculture_v1::crop_region::bugday_ic_anadolu" d="M330.26 198.69 L490.26 198.69 L490.26 288.69 L330.26 288.69 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_agriculture_v1::crop_region::pamuk_cukurova" d="M467.56 381.27 L537.56 381.27 L537.56 416.27 L467.56 416.27 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_agriculture_v1::crop_region::findik_karadeniz" d="M561.03 76.00 L721.03 76.00 L721.03 116.00 L561.03 116.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_agriculture_v1::crop_region::cay_dogu_karadeniz" d="M729.23 78.50 L809.23 78.50 L809.23 113.50 L729.23 113.50 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_agriculture_v1::irrigation_area::gap_sulama" d="M647.95 326.85 L787.95 326.85 L787.95 396.85 L647.95 396.85 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_agriculture_v1::livestock_region::koyunculuk_ic_anadolu" d="M365.90 203.69 L505.90 203.69 L505.90 283.69 L365.90 283.69 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_agriculture_v1::livestock_region::buyukbas_marmara" d="M103.85 80.77 L203.85 80.77 L203.85 140.77 L103.85 140.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+</svg>

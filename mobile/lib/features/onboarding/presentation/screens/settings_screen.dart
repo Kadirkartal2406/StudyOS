@@ -95,6 +95,12 @@ class SettingsScreen extends ConsumerWidget {
             onTap: () => context.push('/ai-settings'),
           ),
           ListTile(
+            leading: const Icon(Icons.map_outlined),
+            title: const Text('EAE Harita (Türkiye)'),
+            subtitle: const Text('Eğitim varlık motoru demo'),
+            onTap: () => context.push('/eae-demo'),
+          ),
+          ListTile(
             leading: const Icon(Icons.feedback_outlined),
             title: const Text('Geri bildirim'),
             onTap: () => context.push('/feedback'),

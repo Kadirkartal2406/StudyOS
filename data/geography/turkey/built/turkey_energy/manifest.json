@@ -1,0 +1,262 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_energy/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Enerji Haritası",
+    "en": "Turkey Energy Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "hes",
+      "z_index": 0,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::hes::ataturk_hes",
+          "name": {
+            "tr": "Atatürk HES",
+            "en": "Ataturk HEP"
+          },
+          "bounding_box": [
+            659.67,
+            347.46,
+            673.67,
+            361.46
+          ],
+          "attributes": {
+            "layer_type": "hes",
+            "feature_class": "hes",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Atatürk HES"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::hes::keban_hes",
+          "name": {
+            "tr": "Keban HES",
+            "en": "Keban HEP"
+          },
+          "bounding_box": [
+            675.05,
+            251.46,
+            689.05,
+            265.46
+          ],
+          "attributes": {
+            "layer_type": "hes",
+            "feature_class": "hes",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Keban HES"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "z_index": 1,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::res::canakkale_res",
+          "name": {
+            "tr": "Çanakkale RES",
+            "en": "Canakkale Wind"
+          },
+          "bounding_box": [
+            44.28,
+            155.46,
+            58.28,
+            169.46
+          ],
+          "attributes": {
+            "layer_type": "res",
+            "feature_class": "res",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çanakkale RES"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::res::izmir_res",
+          "name": {
+            "tr": "İzmir RES",
+            "en": "Izmir Wind"
+          },
+          "bounding_box": [
+            69.92,
+            273.62,
+            83.92,
+            287.62
+          ],
+          "attributes": {
+            "layer_type": "res",
+            "feature_class": "res",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İzmir RES"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ges",
+      "z_index": 2,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::ges::karapinar_ges",
+          "name": {
+            "tr": "Karapınar GES",
+            "en": "Karapinar Solar"
+          },
+          "bounding_box": [
+            408.38,
+            332.69,
+            422.38,
+            346.69
+          ],
+          "attributes": {
+            "layer_type": "ges",
+            "feature_class": "ges",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karapınar GES"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "jes",
+      "z_index": 3,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::jes::buyuk_menderes_jes",
+          "name": {
+            "tr": "Büyük Menderes JES",
+            "en": "Buyuk Menderes Geo"
+          },
+          "bounding_box": [
+            146.85,
+            317.92,
+            160.85,
+            331.92
+          ],
+          "attributes": {
+            "layer_type": "jes",
+            "feature_class": "jes",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Büyük Menderes JES"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "thermal",
+      "z_index": 4,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::thermal::soma_termik",
+          "name": {
+            "tr": "Soma Termik",
+            "en": "Soma Thermal"
+          },
+          "bounding_box": [
+            100.69,
+            221.92,
+            114.69,
+            235.92
+          ],
+          "attributes": {
+            "layer_type": "thermal",
+            "feature_class": "thermal",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Soma Termik"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "nuclear",
+      "z_index": 5,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::nuclear::akkuyu_nukleer",
+          "name": {
+            "tr": "Akkuyu Nükleer",
+            "en": "Akkuyu Nuclear"
+          },
+          "bounding_box": [
+            403.26,
+            450.85,
+            417.26,
+            464.85
+          ],
+          "attributes": {
+            "layer_type": "nuclear",
+            "feature_class": "nuclear",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Akkuyu Nükleer"
+            ],
+            "evidence_topic_hints": [
+              "enerji"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "enerji",
+    "hes",
+    "res",
+    "ges"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/api_endpoints.dart';
+import '../../../../core/constants/app_config.dart';
 import '../../../../core/errors/app_exception.dart';
 import '../../../../core/errors/dio_exception_mapper.dart';
 import '../models/study_resource_model.dart';
@@ -145,6 +146,45 @@ class StudyResourceRemoteDatasource {
     } on DioException catch (e) {
       throw dioExceptionToAppException(e);
     }
+  }
+
+  Future<String> uploadResourceFile(
+    List<int> fileBytes,
+    String filename, {
+    String? filePath,
+  }) async {
+    try {
+      final MultipartFile part;
+      if (filePath != null && filePath.isNotEmpty) {
+        part = await MultipartFile.fromFile(filePath, filename: filename);
+      } else if (fileBytes.isNotEmpty) {
+        part = MultipartFile.fromBytes(fileBytes, filename: filename);
+      } else {
+        throw const NetworkException(message: 'Dosya içeriği boş');
+      }
+      final formData = FormData.fromMap({'file': part});
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/resources/upload',
+        data: formData,
+      );
+      final data = _extractData(response.data) as Map<String, dynamic>;
+      return _absoluteUrl(data['url'] as String);
+    } on DioException catch (e) {
+      throw dioExceptionToAppException(e);
+    }
+  }
+
+  /// Backend `/uploads/...` gibi göreli yol döner; dosyanın açılabilmesi için
+  /// API host'u ile birleştirilir (`/api/v1` yolu atılır).
+  String _absoluteUrl(String url) {
+    if (!url.startsWith('/')) return url;
+    final base = Uri.parse(AppConfig.apiBaseUrl);
+    return Uri(
+      scheme: base.scheme,
+      host: base.host,
+      port: base.hasPort ? base.port : null,
+      path: url,
+    ).toString();
   }
 
   dynamic _extractData(Map<String, dynamic>? responseData) {

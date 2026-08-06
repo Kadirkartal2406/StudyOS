@@ -110,4 +110,17 @@ class StudyResourceRepositoryImpl implements StudyResourceRepository {
   Future<ResourceStatisticsEntity> getStatistics() async {
     return (await _remote.getStatistics()).toEntity();
   }
+
+  @override
+  Future<String> uploadResourceFile(
+    List<int> fileBytes,
+    String filename, {
+    String? filePath,
+  }) {
+    return _remote.uploadResourceFile(
+      fileBytes,
+      filename,
+      filePath: filePath,
+    );
+  }
 }

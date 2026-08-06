@@ -47,6 +47,8 @@ class QuizItemReview(BaseModel):
     explanation: str | None = None
     selected_key: str | None = None
     is_correct: bool | None = None
+    target_asset_id: str | None = None  # DB UUID or studyos:// asset URI
+    correct_node_id: str | None = None
 
 
 class QuizItemPublic(BaseModel):
@@ -56,6 +58,7 @@ class QuizItemPublic(BaseModel):
     ord_index: int
     stem: str
     choices: dict[str, str]
+    target_asset_id: str | None = None  # DB UUID or studyos:// asset URI
 
 
 class QuizGenerationRead(BaseModel):
@@ -83,6 +86,7 @@ class QuizGenerationRead(BaseModel):
 class QuizAnswerItem(BaseModel):
     item_id: uuid.UUID
     selected_key: str | None = None  # None = boş
+    selected_node_id: str | None = None  # EAE map selection
 
     @field_validator("selected_key")
     @classmethod

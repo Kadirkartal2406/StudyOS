@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_population/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Nüfus Haritası",
+    "en": "Turkey Population Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "density_zone",
+      "z_index": 0,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_population_v1::density_zone::yogun_marmara",
+          "name": {
+            "tr": "Yoğun Nüfus — Marmara",
+            "en": "Dense Marmara"
+          },
+          "bounding_box": [
+            119.23,
+            68.38,
+            219.23,
+            138.38
+          ],
+          "attributes": {
+            "layer_type": "density_zone",
+            "feature_class": "density_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yoğun Nüfus — Marmara"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        },
+        {
+          "id": "turkey_population_v1::density_zone::seyrek_dogu",
+          "name": {
+            "tr": "Seyrek Nüfus — Doğu",
+            "en": "Sparse East"
+          },
+          "bounding_box": [
+            750.51,
+            161.77,
+            890.51,
+            251.77
+          ],
+          "attributes": {
+            "layer_type": "density_zone",
+            "feature_class": "density_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Seyrek Nüfus — Doğu"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "metro_area",
+      "z_index": 1,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_population_v1::metro_area::istanbul_metro",
+          "name": {
+            "tr": "İstanbul Metropol",
+            "en": "Istanbul Metro"
+          },
+          "bounding_box": [
+            153.46,
+            77.76,
+            203.46,
+            112.76
+          ],
+          "attributes": {
+            "layer_type": "metro_area",
+            "feature_class": "metro_area",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İstanbul Metropol"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        },
+        {
+          "id": "turkey_population_v1::metro_area::ankara_metro",
+          "name": {
+            "tr": "Ankara Metropol",
+            "en": "Ankara Metro"
+          },
+          "bounding_box": [
+            356.92,
+            160.02,
+            396.92,
+            190.02
+          ],
+          "attributes": {
+            "layer_type": "metro_area",
+            "feature_class": "metro_area",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ankara Metropol"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "major_city",
+      "z_index": 2,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_population_v1::major_city::izmir_kent",
+          "name": {
+            "tr": "İzmir",
+            "en": "Izmir"
+          },
+          "bounding_box": [
+            76.1,
+            278.52,
+            92.1,
+            294.52
+          ],
+          "attributes": {
+            "layer_type": "major_city",
+            "feature_class": "major_city",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İzmir"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        },
+        {
+          "id": "turkey_population_v1::major_city::bursa_kent",
+          "name": {
+            "tr": "Bursa",
+            "en": "Bursa"
+          },
+          "bounding_box": [
+            174.56,
+            147.82,
+            190.56,
+            163.82
+          ],
+          "attributes": {
+            "layer_type": "major_city",
+            "feature_class": "major_city",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bursa"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        },
+        {
+          "id": "turkey_population_v1::major_city::antalya_kent",
+          "name": {
+            "tr": "Antalya",
+            "en": "Antalya"
+          },
+          "bounding_box": [
+            259.18,
+            390.77,
+            275.18,
+            406.77
+          ],
+          "attributes": {
+            "layer_type": "major_city",
+            "feature_class": "major_city",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Antalya"
+            ],
+            "evidence_topic_hints": [
+              "nufus"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "nufus",
+    "metropol"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

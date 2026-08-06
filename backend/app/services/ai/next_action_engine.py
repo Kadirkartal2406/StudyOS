@@ -189,7 +189,7 @@ def build_next_action(
             catalog=catalog, subject_hint=subject, topic_hint=topic or plan.title
         )
         minutes = plan.estimated_minutes or 25
-        questions = plan.target_question_count or 0
+        questions = getattr(plan, "target_question_count", None) or 0
         reason = ai_reason or "Bugünkü sıradaki çalışma bloğun."
         topic_label = ref.topic_name if ref else (topic or plan.title or subject or "bu konu")
         if subject and topic_label and subject.casefold() not in topic_label.casefold():
@@ -212,11 +212,30 @@ def build_next_action(
             tool_hint="pomodoro",
         )
 
-    # Observation — konu çözülemezse Subject container; rastgele ilk katalog konusu önerme
+    # Observation — plan ve revision yoksa catalog'dan ilk konuyu öner
+    # Eğer catalog varsa yeterli sinyal yok ama hedef verilebilir (deep link'i doldur).
     reason = (
         ai_reason
         or "Henüz yeterli sinyal yok; seni tanımaya devam ediyoruz. Bir konu seçerek başla."
     )
+    ordered_catalog = _reorder_by_exam_priority(catalog, exam_type)
+    if ordered_catalog:
+        first = ordered_catalog[0]
+        ref = TopicRef(first.subject_code, first.topic_code, first.topic_name)
+        deep = _work_surface_path(ref)
+        return NextActionProjection(
+            title="Çalışmaya başla",
+            subtitle="Derslerinden bir konu seç",
+            reason=reason,
+            action_type="focus",
+            deep_link_hint=deep,
+            cta_label="Dersleri Gör",
+            confidence_tone="low",
+            subject_code=ref.subject_code,
+            topic_code=ref.topic_code,
+            purpose="study",
+            tool_hint="pomodoro",
+        )
     return NextActionProjection(
         title="Çalışmaya başla",
         subtitle="Derslerinden bir konu seç",

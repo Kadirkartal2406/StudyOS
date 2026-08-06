@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 480.0">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<path id="turkey_transport_v1::highway::o4" d="M179.49 110.77 L256.41 118.15 L358.97 177.23" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::highway::o3" d="M56.41 59.08 L153.85 96.00" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::railway::ankara_istanbul_demiryolu" d="M178.46 95.26 L256.41 132.92 L376.92 175.02" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::port::haydarpasa" d="M175.51 96.00 C175.51 93.24 177.75 91.00 180.51 91.00 C183.27 91.00 185.51 93.24 185.51 96.00 C185.51 98.76 183.27 101.00 180.51 101.00 C177.75 101.00 175.51 98.76 175.51 96.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::port::mersin_liman" d="M463.72 406.15 C463.72 403.39 465.96 401.15 468.72 401.15 C471.48 401.15 473.72 403.39 473.72 406.15 C473.72 408.91 471.48 411.15 468.72 411.15 C465.96 411.15 463.72 408.91 463.72 406.15 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::port::izmir_liman" d="M79.10 286.52 C79.10 283.76 81.34 281.52 84.10 281.52 C86.86 281.52 89.10 283.76 89.10 286.52 C89.10 289.28 86.86 291.52 84.10 291.52 C81.34 291.52 79.10 289.28 79.10 286.52 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::airport::ist" d="M161.67 76.06 C161.67 73.30 163.91 71.06 166.67 71.06 C169.43 71.06 171.67 73.30 171.67 76.06 C171.67 78.82 169.43 81.06 166.67 81.06 C163.91 81.06 161.67 78.82 161.67 76.06 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::airport::esb" d="M379.62 160.25 C379.62 157.49 381.86 155.25 384.62 155.25 C387.38 155.25 389.62 157.49 389.62 160.25 C389.62 163.01 387.38 165.25 384.62 165.25 C381.86 165.25 379.62 163.01 379.62 160.25 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_transport_v1::airport::ayt" d="M266.28 398.77 C266.28 396.01 268.52 393.77 271.28 393.77 C274.04 393.77 276.28 396.01 276.28 398.77 C276.28 401.53 274.04 403.77 271.28 403.77 C268.52 403.77 266.28 401.53 266.28 398.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+</svg>

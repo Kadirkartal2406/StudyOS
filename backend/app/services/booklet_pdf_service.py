@@ -6,6 +6,8 @@ import io
 from pathlib import Path
 
 from app.models.assessment import AssessmentSession
+# EAE Sprint 5+1 — Native vector PDF renderer for EAE visual assets
+from app.services.booklet_pdf_eae_renderer import BookletPdfEaeRenderer
 
 _FONT_CANDIDATES = (
     Path(__file__).resolve().parents[1] / "assets" / "fonts" / "DejaVuSans.ttf",
@@ -100,6 +102,31 @@ def build_booklet_pdf(session: AssessmentSession) -> bytes:
             text = f"  {key}) {str(choices[key])[:110]}"
             c.drawString(margin + 6, y, text)
             y -= 13
+
+        # EAE Sprint 5+1 — Render SVG visual asset as native ReportLab vector drawing
+        q_meta = dict(q.metadata_ or {}) if hasattr(q, "metadata_") else {}
+        eae_svg = q_meta.get("eae_svg_content")
+        if eae_svg:
+            try:
+                from reportlab.graphics import renderPDF
+                eae_renderer = BookletPdfEaeRenderer()
+                highlight = []
+                if q_meta.get("correct_node_id"):
+                    highlight.append(str(q_meta["correct_node_id"]))
+                if q_meta.get("highlight_node_ids"):
+                    highlight.extend(str(x) for x in q_meta["highlight_node_ids"])
+                drawing = eae_renderer.create_vector_drawing(
+                    svg_content=eae_svg,
+                    target_width=170.0,  # ~60% of A4 text width in points
+                    target_height=100.0,
+                    highlight_node_ids=highlight or None,
+                )
+                ensure(110)
+                renderPDF.draw(drawing, c, margin, y - 105)
+                y -= 112
+            except Exception:
+                pass  # Graceful degradation: skip vector draw, text already rendered
+
         y -= 8
 
     # Blank optical sheet

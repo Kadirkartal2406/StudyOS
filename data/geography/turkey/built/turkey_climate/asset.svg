@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 480.0">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<path id="turkey_climate_v1::climate_zone::karadeniz" d="M428.46 66.00 L648.46 66.00 L648.46 126.00 L428.46 126.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::climate_zone::akdeniz" d="M203.33 371.27 L463.33 371.27 L463.33 426.27 L203.33 426.27 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::climate_zone::karasal" d="M295.90 168.92 L575.90 168.92 L575.90 288.92 L295.90 288.92 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::climate_zone::marmara_gecis" d="M93.85 75.77 L213.85 75.77 L213.85 145.77 L93.85 145.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::precip_zone::yuksek_yagis_karadeniz" d="M612.31 76.00 L772.31 76.00 L772.31 116.00 L612.31 116.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::precip_zone::dusuk_yagis_ic_anadolu" d="M330.26 198.69 L490.26 198.69 L490.26 288.69 L330.26 288.69 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::temp_zone::sicak_akdeniz" d="M233.33 376.27 L433.33 376.27 L433.33 421.27 L233.33 421.27 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::temp_zone::soguk_dogu" d="M714.87 161.77 L874.87 161.77 L874.87 251.77 L714.87 251.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::wind_system::poyraz" d="M149.49 76.00 L209.49 76.00 L209.49 116.00 L149.49 116.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_climate_v1::wind_system::lodos" d="M98.21 223.69 L158.21 223.69 L158.21 263.69 L98.21 263.69 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+</svg>

@@ -1,0 +1,378 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Maden Haritası",
+    "en": "Turkey Minerals Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "mineral_deposits",
+      "z_index": 0,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::bor_eskisehir",
+          "name": {
+            "tr": "Bor — Eskişehir",
+            "en": "Boron Eskisehir"
+          },
+          "bounding_box": [
+            249.41,
+            177.62,
+            263.41,
+            191.62
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [
+              "turkey_minerals_v1::mineral_deposit::komur_zonguldak"
+            ],
+            "qie_aliases": [
+              "Bor",
+              "Bor — Eskişehir"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "eskisehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::bor_kutahya",
+          "name": {
+            "tr": "Bor — Kütahya",
+            "en": "Boron Kutahya"
+          },
+          "bounding_box": [
+            218.64,
+            207.15,
+            232.64,
+            221.15
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bor",
+              "Bor — Kütahya"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "kutahya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::komur_zonguldak",
+          "name": {
+            "tr": "Kömür — Zonguldak",
+            "en": "Coal Zonguldak"
+          },
+          "bounding_box": [
+            316.08,
+            52.08,
+            330.08,
+            66.08
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [
+              "turkey_minerals_v1::mineral_deposit::bor_eskisehir"
+            ],
+            "qie_aliases": [
+              "Kömür",
+              "Kömür — Zonguldak"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "zonguldak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::demir_divrigi",
+          "name": {
+            "tr": "Demir — Divriği",
+            "en": "Iron Divrigi"
+          },
+          "bounding_box": [
+            628.9,
+            207.15,
+            642.9,
+            221.15
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Demir",
+              "Demir — Divriği"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "sivas"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::bakir_murgul",
+          "name": {
+            "tr": "Bakır — Murgul",
+            "en": "Copper Murgul"
+          },
+          "bounding_box": [
+            818.64,
+            66.85,
+            832.64,
+            80.85
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [
+              "turkey_minerals_v1::mineral_deposit::krom_elazig"
+            ],
+            "qie_aliases": [
+              "Bakır",
+              "Bakır — Murgul"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "artvin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::krom_elazig",
+          "name": {
+            "tr": "Krom — Elazığ",
+            "en": "Chrome Elazig"
+          },
+          "bounding_box": [
+            695.56,
+            258.85,
+            709.56,
+            272.85
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [
+              "turkey_minerals_v1::mineral_deposit::bakir_murgul"
+            ],
+            "qie_aliases": [
+              "Krom",
+              "Krom — Elazığ"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "elazig"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::petrol_batman",
+          "name": {
+            "tr": "Petrol — Batman",
+            "en": "Oil Batman"
+          },
+          "bounding_box": [
+            793.0,
+            317.92,
+            807.0,
+            331.92
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Petrol",
+              "Petrol — Batman"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "batman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::dogalgaz_trakya",
+          "name": {
+            "tr": "Doğalgaz — Trakya",
+            "en": "Natural Gas Thrace"
+          },
+          "bounding_box": [
+            69.92,
+            66.85,
+            83.92,
+            80.85
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Doğalgaz",
+              "Doğalgaz — Trakya"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "kirklareli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::altin_bergama",
+          "name": {
+            "tr": "Altın — Bergama",
+            "en": "Gold Bergama"
+          },
+          "bounding_box": [
+            80.18,
+            229.31,
+            94.18,
+            243.31
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Altın",
+              "Altın — Bergama"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "izmir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::gumus_gumushane",
+          "name": {
+            "tr": "Gümüş — Gümüşhane",
+            "en": "Silver Gumushane"
+          },
+          "bounding_box": [
+            710.95,
+            125.92,
+            724.95,
+            139.92
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Gümüş",
+              "Gümüş — Gümüşhane"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "gumushane"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::mermer_afyon",
+          "name": {
+            "tr": "Mermer — Afyon",
+            "en": "Marble Afyon"
+          },
+          "bounding_box": [
+            249.41,
+            251.46,
+            263.41,
+            265.46
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Mermer",
+              "Mermer — Afyon"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "afyonkarahisar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_minerals_v1::mineral_deposit::pomza_nevsehir",
+          "name": {
+            "tr": "Pomza — Nevşehir",
+            "en": "Pumice Nevsehir"
+          },
+          "bounding_box": [
+            464.79,
+            266.23,
+            478.79,
+            280.23
+          ],
+          "attributes": {
+            "layer_type": "mineral_deposit",
+            "feature_class": "mineral_deposit",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Pomza",
+              "Pomza — Nevşehir"
+            ],
+            "evidence_topic_hints": [
+              "madenler"
+            ],
+            "province_codes": [
+              "nevsehir"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "madenler",
+    "bor",
+    "komur"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

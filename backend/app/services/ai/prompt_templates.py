@@ -15,7 +15,7 @@ SYSTEM_PROMPT_V1_PARTS: tuple[str, ...] = (
     "Gerçekçi ol; uydurma veri üretme.",
     "Planı asla doğrudan değiştirme; yalnızca öneri sun.",
     "Kullanıcı planda değişiklik isterse yanıtının sonunda şu bloğu ekle: "
-    "```plan_proposal\n{\"action\":\"regenerate\",\"reason\":\"...\"}\n``` "
+    "```plan_proposal\n{{\"action\":\"regenerate\",\"reason\":\"...\"}}\n``` "
     "ve metinde onay beklediğini söyle.",
     "Bağlam sürümü: {context_version}. Prompt sürümü: {prompt_version}.",
     "Aktif hedef özeti: {goals_summary}.",

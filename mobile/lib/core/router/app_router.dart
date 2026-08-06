@@ -24,7 +24,9 @@ import '../../features/beta_feedback/presentation/screens/analytics_dashboard_sc
 import '../../features/beta_feedback/presentation/screens/beta_feedback_screen.dart';
 import '../../features/beta_feedback/presentation/screens/qie_eval_screen.dart';
 import '../../features/dashboard/presentation/screens/dashboard_screen.dart';
+import '../../features/educational_assets/presentation/screens/eae_showcase_screen.dart';
 import '../../features/exam_tracking/presentation/screens/add_exam_screen.dart';
+
 import '../../features/exam_tracking/presentation/screens/edit_exam_screen.dart';
 import '../../features/exam_tracking/presentation/screens/exam_detail_screen.dart';
 import '../../features/exam_tracking/presentation/screens/exam_list_screen.dart';
@@ -100,6 +102,7 @@ class _RouterNotifier extends ChangeNotifier {
       '/forgot-password',
       '/reset-password',
     };
+
     final isAuthRoute = authRoutes.contains(location);
     final isOnboarding = location == '/onboarding';
     final isSetup = location.startsWith('/setup');
@@ -214,6 +217,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           token: state.uri.queryParameters['token'],
         ),
       ),
+      GoRoute(
+        path: '/eae-demo',
+        name: 'eae-demo',
+        builder: (_, __) => const EAEShowcaseScreen(),
+      ),
+
       GoRoute(
         path: '/dashboard',
         name: 'dashboard',

@@ -99,7 +99,45 @@ class QuestionRecordService:
         except Exception:
             pass
 
+        # EAE Sprint 6+1 — Sub-node evidence bridge: if this question record has
+        # EAE node metadata, propagate to Confidence Engine via EAEEvidenceBridge.
+        try:
+            meta = {}
+            if hasattr(record, "metadata_") and isinstance(record.metadata_, dict):
+                meta = record.metadata_
+            eae_node_id = meta.get("eae_node_id") or meta.get("selected_node_id")
+            expected_node_id = meta.get("expected_node_id") or meta.get("correct_node_id")
+            selected_node_id = meta.get("selected_node_id") or eae_node_id
+            if eae_node_id and record.subject_code and record.topic_code:
+                from app.services.eae_evidence_bridge import EAEEvidenceBridge
+
+                bridge = EAEEvidenceBridge(self.db)
+                if expected_node_id and selected_node_id:
+                    confusable = meta.get("confusable_with")
+                    await bridge.ingest_node_selection(
+                        user_id=user_id,
+                        subject_code=record.subject_code,
+                        topic_code=record.topic_code,
+                        expected_node_id=str(expected_node_id),
+                        selected_node_id=str(selected_node_id),
+                        confusable_with=list(confusable)
+                        if isinstance(confusable, list)
+                        else None,
+                    )
+                else:
+                    is_correct = (record.correct_count or 0) > (record.wrong_count or 0)
+                    await bridge.ingest_sub_node_evidence(
+                        user_id=user_id,
+                        subject_code=record.subject_code,
+                        topic_code=record.topic_code,
+                        node_id=str(eae_node_id),
+                        is_correct=is_correct,
+                    )
+        except Exception:
+            pass
+
         return record
+
 
     async def get(self, record_id: uuid.UUID, user_id: uuid.UUID) -> QuestionRecord:
         record = await self.repo.get_by_id_for_user(record_id, user_id)

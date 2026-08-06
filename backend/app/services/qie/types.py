@@ -125,8 +125,11 @@ class QuestionCard:
     prompt_version: str = PROMPT_VERSION
     plan_version: str = PLAN_VERSION
     question_version: str = "1"
+    question_version: str = "1"
     provider: str | None = None
     model: str | None = None
+    target_asset_id: str | None = None
+    correct_node_id: str | None = None
 
     def to_persist_dict(self) -> dict[str, Any]:
         return {
@@ -148,6 +151,8 @@ class QuestionCard:
             "question_version": self.question_version,
             "provider": self.provider,
             "model": self.model,
+            "target_asset_id": self.target_asset_id,
+            "correct_node_id": self.correct_node_id,
         }
 
 

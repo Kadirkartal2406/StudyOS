@@ -1174,21 +1174,20 @@ class LearningProfileService:
         }
 
     async def planner_defaults(self, user_id: uuid.UUID) -> dict | None:
-        """F1 — planner generate için profile default (Active Exam SSOT)."""
+        """F1 — planner generate için profile default.
+
+        Planner her zaman PRIMARY exam hedefini kullanır.
+        active_exam_type yalnızca dashboard görünümü içindir; çalışma planı
+        birincil sınav üzerinden oluşturulmalıdır.
+        """
         student = await self.repo.get_student(user_id)
         if not student:
             return None
         targets = await self.repo.list_exam_targets(user_id)
         if not targets:
             return None
-        active = self.resolve_active_exam_type(student, targets)
-        focus = (
-            next((t for t in targets if str(t.exam_type) == active), None)
-            if active
-            else None
-        )
-        if focus is None:
-            focus = next((t for t in targets if t.is_primary), targets[0])
+        # Primary exam target öncelikli; yoksa ilk hedef kullanılır.
+        focus = next((t for t in targets if t.is_primary), targets[0])
         days = list(student.available_days or [])
         if not days:
             days = [0, 1, 2, 3, 4]
@@ -1199,3 +1198,4 @@ class LearningProfileService:
             "available_days": days,
             "available_hours": float(student.available_hours or 2.0),
         }
+

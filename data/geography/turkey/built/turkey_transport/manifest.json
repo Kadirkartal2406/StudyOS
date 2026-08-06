@@ -1,0 +1,277 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_transport/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Ulaşım Haritası",
+    "en": "Turkey Transport Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "highways",
+      "z_index": 0,
+      "min_lod": 1.0,
+      "nodes": [
+        {
+          "id": "turkey_transport_v1::highway::o4",
+          "name": {
+            "tr": "O-4 Anadolu Otoyolu",
+            "en": "O-4 Anatolian Highway"
+          },
+          "bounding_box": [
+            176.49,
+            107.77,
+            361.97,
+            180.23
+          ],
+          "attributes": {
+            "layer_type": "highway",
+            "feature_class": "highway",
+            "confusable_with": [],
+            "qie_aliases": [
+              "O-4 Anadolu Otoyolu"
+            ],
+            "evidence_topic_hints": [
+              "ulasim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_transport_v1::highway::o3",
+          "name": {
+            "tr": "O-3 Avrupa Otoyolu",
+            "en": "O-3 European Highway"
+          },
+          "bounding_box": [
+            53.41,
+            56.08,
+            156.85,
+            99.0
+          ],
+          "attributes": {
+            "layer_type": "highway",
+            "feature_class": "highway",
+            "confusable_with": [],
+            "qie_aliases": [
+              "O-3 Avrupa Otoyolu"
+            ],
+            "evidence_topic_hints": [
+              "ulasim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "railways",
+      "z_index": 1,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_transport_v1::railway::ankara_istanbul_demiryolu",
+          "name": {
+            "tr": "Ankara–İstanbul Demiryolu",
+            "en": "Ankara-Istanbul Rail"
+          },
+          "bounding_box": [
+            175.46,
+            92.26,
+            379.92,
+            178.02
+          ],
+          "attributes": {
+            "layer_type": "railway",
+            "feature_class": "railway",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ankara–İstanbul Demiryolu"
+            ],
+            "evidence_topic_hints": [
+              "ulasim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ports",
+      "z_index": 2,
+      "min_lod": 1.5,
+      "nodes": [
+        {
+          "id": "turkey_transport_v1::port::haydarpasa",
+          "name": {
+            "tr": "Haydarpaşa Limanı",
+            "en": "Haydarpasa Port"
+          },
+          "bounding_box": [
+            174.51,
+            90.0,
+            186.51,
+            102.0
+          ],
+          "attributes": {
+            "layer_type": "port",
+            "feature_class": "port",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Haydarpaşa Limanı"
+            ],
+            "evidence_topic_hints": [
+              "ulasim",
+              "limanlar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_transport_v1::port::mersin_liman",
+          "name": {
+            "tr": "Mersin Limanı",
+            "en": "Mersin Port"
+          },
+          "bounding_box": [
+            462.72,
+            400.15,
+            474.72,
+            412.15
+          ],
+          "attributes": {
+            "layer_type": "port",
+            "feature_class": "port",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Mersin Limanı"
+            ],
+            "evidence_topic_hints": [
+              "ulasim",
+              "limanlar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_transport_v1::port::izmir_liman",
+          "name": {
+            "tr": "İzmir Limanı",
+            "en": "Izmir Port"
+          },
+          "bounding_box": [
+            78.1,
+            280.52,
+            90.1,
+            292.52
+          ],
+          "attributes": {
+            "layer_type": "port",
+            "feature_class": "port",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İzmir Limanı"
+            ],
+            "evidence_topic_hints": [
+              "ulasim",
+              "limanlar"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "airports",
+      "z_index": 3,
+      "min_lod": 1.5,
+      "nodes": [
+        {
+          "id": "turkey_transport_v1::airport::ist",
+          "name": {
+            "tr": "İstanbul Havalimanı",
+            "en": "Istanbul Airport"
+          },
+          "bounding_box": [
+            160.67,
+            70.06,
+            172.67,
+            82.06
+          ],
+          "attributes": {
+            "layer_type": "airport",
+            "feature_class": "airport",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İstanbul Havalimanı"
+            ],
+            "evidence_topic_hints": [
+              "ulasim",
+              "havalimanlari"
+            ]
+          }
+        },
+        {
+          "id": "turkey_transport_v1::airport::esb",
+          "name": {
+            "tr": "Esenboğa",
+            "en": "Esenboga Airport"
+          },
+          "bounding_box": [
+            378.62,
+            154.25,
+            390.62,
+            166.25
+          ],
+          "attributes": {
+            "layer_type": "airport",
+            "feature_class": "airport",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Esenboğa"
+            ],
+            "evidence_topic_hints": [
+              "ulasim",
+              "havalimanlari"
+            ]
+          }
+        },
+        {
+          "id": "turkey_transport_v1::airport::ayt",
+          "name": {
+            "tr": "Antalya Havalimanı",
+            "en": "Antalya Airport"
+          },
+          "bounding_box": [
+            265.28,
+            392.77,
+            277.28,
+            404.77
+          ],
+          "attributes": {
+            "layer_type": "airport",
+            "feature_class": "airport",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Antalya Havalimanı"
+            ],
+            "evidence_topic_hints": [
+              "ulasim",
+              "havalimanlari"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "ulasim",
+    "otoyol",
+    "liman"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

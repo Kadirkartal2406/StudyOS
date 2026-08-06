@@ -266,6 +266,14 @@ def create_application() -> FastAPI:
         async def admin_panel_redirect():
             return RedirectResponse(url="/admin/")
 
+    uploads_dir = Path(__file__).resolve().parent.parent.parent / "data" / "uploads"
+    uploads_dir.mkdir(parents=True, exist_ok=True)
+    application.mount(
+        "/uploads",
+        StaticFiles(directory=str(uploads_dir)),
+        name="uploads",
+    )
+
     @application.get("/docs", include_in_schema=False)
     async def docs_redirect():
         return RedirectResponse(url="/api/docs")

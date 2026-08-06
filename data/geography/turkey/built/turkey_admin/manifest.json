@@ -1,0 +1,5742 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_admin/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye İdari Haritası",
+    "en": "Turkey Administrative Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "country",
+      "z_index": 0,
+      "min_lod": 0.5,
+      "nodes": [
+        {
+          "id": "turkey_admin_v1::country::turkiye",
+          "name": {
+            "tr": "Türkiye",
+            "en": "Turkey"
+          },
+          "bounding_box": [
+            37.18,
+            43.69,
+            937.18,
+            443.69
+          ],
+          "attributes": {
+            "layer_type": "country",
+            "feature_class": "sovereign_state",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Türkiye",
+              "Turkey"
+            ],
+            "evidence_topic_hints": [
+              "turkiye_cografyasi"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "regions",
+      "z_index": 1,
+      "min_lod": 0.8,
+      "nodes": [
+        {
+          "id": "turkey_admin_v1::region::marmara",
+          "name": {
+            "tr": "Marmara",
+            "en": "Marmara"
+          },
+          "bounding_box": [
+            73.85,
+            60.77,
+            233.85,
+            160.77
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [
+              "turkey_admin_v1::region::ege"
+            ],
+            "qie_aliases": [
+              "Marmara",
+              "Marmara Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "marmara"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::region::ege",
+          "name": {
+            "tr": "Ege",
+            "en": "Aegean"
+          },
+          "bounding_box": [
+            48.21,
+            230.62,
+            208.21,
+            330.62
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [
+              "turkey_admin_v1::region::marmara"
+            ],
+            "qie_aliases": [
+              "Ege",
+              "Ege Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "ege"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::region::akdeniz",
+          "name": {
+            "tr": "Akdeniz",
+            "en": "Mediterranean"
+          },
+          "bounding_box": [
+            278.97,
+            356.15,
+            438.97,
+            456.15
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Akdeniz",
+              "Akdeniz Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::region::ic_anadolu",
+          "name": {
+            "tr": "İç Anadolu",
+            "en": "Central Anatolia"
+          },
+          "bounding_box": [
+            330.26,
+            193.69,
+            490.26,
+            293.69
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İç Anadolu",
+              "İç Anadolu Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::region::karadeniz",
+          "name": {
+            "tr": "Karadeniz",
+            "en": "Black Sea"
+          },
+          "bounding_box": [
+            432.82,
+            46.0,
+            592.82,
+            146.0
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karadeniz",
+              "Karadeniz Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::region::dogu_anadolu",
+          "name": {
+            "tr": "Doğu Anadolu",
+            "en": "Eastern Anatolia"
+          },
+          "bounding_box": [
+            714.87,
+            156.77,
+            874.87,
+            256.77
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Doğu Anadolu",
+              "Doğu Anadolu Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::region::guneydogu_anadolu",
+          "name": {
+            "tr": "Güneydoğu Anadolu",
+            "en": "Southeastern Anatolia"
+          },
+          "bounding_box": [
+            637.95,
+            304.46,
+            797.95,
+            404.46
+          ],
+          "attributes": {
+            "layer_type": "region",
+            "feature_class": "geographic_region",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Güneydoğu Anadolu",
+              "Güneydoğu Anadolu Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "bolgeler"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "subregions",
+      "z_index": 2,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_admin_v1::subregion::trakya",
+          "name": {
+            "tr": "Trakya",
+            "en": "Thrace"
+          },
+          "bounding_box": [
+            21.67,
+            46.35,
+            111.67,
+            101.35
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Trakya"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "marmara"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::subregion::canakkale_bogazi_cevre",
+          "name": {
+            "tr": "Çanakkale Boğazı Çevresi",
+            "en": "Dardanelles Area"
+          },
+          "bounding_box": [
+            1.15,
+            127.58,
+            91.15,
+            182.58
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çanakkale Boğazı Çevresi"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "marmara"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::subregion::ic_bati_anadolu",
+          "name": {
+            "tr": "İç Batı Anadolu",
+            "en": "Inner West Anatolia"
+          },
+          "bounding_box": [
+            160.13,
+            230.96,
+            250.13,
+            285.96
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İç Batı Anadolu"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "ege"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::subregion::toroslar",
+          "name": {
+            "tr": "Toroslar",
+            "en": "Taurus Belt"
+          },
+          "bounding_box": [
+            339.62,
+            363.88,
+            429.62,
+            418.88
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Toroslar"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::subregion::orta_karadeniz",
+          "name": {
+            "tr": "Orta Karadeniz",
+            "en": "Central Black Sea"
+          },
+          "bounding_box": [
+            519.1,
+            68.5,
+            609.1,
+            123.5
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Orta Karadeniz"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::subregion::yukari_firat",
+          "name": {
+            "tr": "Yukarı Fırat",
+            "en": "Upper Euphrates"
+          },
+          "bounding_box": [
+            672.95,
+            201.42,
+            762.95,
+            256.42
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yukarı Fırat"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::subregion::gap_bolgesi",
+          "name": {
+            "tr": "GAP Bölgesi",
+            "en": "GAP Region"
+          },
+          "bounding_box": [
+            672.95,
+            334.35,
+            762.95,
+            389.35
+          ],
+          "attributes": {
+            "layer_type": "subregion",
+            "feature_class": "geographic_subregion",
+            "confusable_with": [],
+            "qie_aliases": [
+              "GAP Bölgesi"
+            ],
+            "evidence_topic_hints": [
+              "alt_bolgeler"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "provinces",
+      "z_index": 3,
+      "min_lod": 0.8,
+      "nodes": [
+        {
+          "id": "turkey_admin_v1::province::adana",
+          "name": {
+            "tr": "Adana",
+            "en": "Adana"
+          },
+          "bounding_box": [
+            476.22,
+            283.1,
+            563.66,
+            425.47
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::antalya"
+            ],
+            "qie_aliases": [
+              "Adana",
+              "Adana ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "adana"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::adiyaman",
+          "name": {
+            "tr": "Adıyaman",
+            "en": "Adıyaman"
+          },
+          "bounding_box": [
+            611.1,
+            300.51,
+            704.94,
+            361.33
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::diyarbakir"
+            ],
+            "qie_aliases": [
+              "Adıyaman",
+              "Adıyaman ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "adiyaman"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::afyonkarahisar",
+          "name": {
+            "tr": "Afyonkarahisar",
+            "en": "Afyonkarahisar"
+          },
+          "bounding_box": [
+            213.53,
+            222.68,
+            318.39,
+            335.2
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::aydin"
+            ],
+            "qie_aliases": [
+              "Afyonkarahisar",
+              "Afyonkarahisar ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "afyonkarahisar"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::agri",
+          "name": {
+            "tr": "Ağrı",
+            "en": "Ağrı"
+          },
+          "bounding_box": [
+            859.24,
+            169.23,
+            974.18,
+            240.95
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::bingol"
+            ],
+            "qie_aliases": [
+              "Ağrı",
+              "Ağrı ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "agri"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::amasya",
+          "name": {
+            "tr": "Amasya",
+            "en": "Amasya"
+          },
+          "bounding_box": [
+            488.47,
+            89.31,
+            562.71,
+            155.83
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::artvin"
+            ],
+            "qie_aliases": [
+              "Amasya",
+              "Amasya ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "amasya"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::ankara",
+          "name": {
+            "tr": "Ankara",
+            "en": "Ankara"
+          },
+          "bounding_box": [
+            275.59,
+            117.84,
+            433.17,
+            270.54
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::konya"
+            ],
+            "qie_aliases": [
+              "Ankara",
+              "Ankara ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "ankara"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::antalya",
+          "name": {
+            "tr": "Antalya",
+            "en": "Antalya"
+          },
+          "bounding_box": [
+            192.63,
+            360.05,
+            367.08,
+            458.43
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::izmir"
+            ],
+            "qie_aliases": [
+              "Antalya",
+              "Antalya ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "antalya"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::artvin",
+          "name": {
+            "tr": "Artvin",
+            "en": "Artvin"
+          },
+          "bounding_box": [
+            801.14,
+            57.14,
+            876.06,
+            128.27
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Artvin",
+              "Artvin ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "artvin"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::aydin",
+          "name": {
+            "tr": "Aydın",
+            "en": "Aydın"
+          },
+          "bounding_box": [
+            77.07,
+            309.33,
+            173.25,
+            366.59
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::afyonkarahisar"
+            ],
+            "qie_aliases": [
+              "Aydın",
+              "Aydın ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "aydin"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::balikesir",
+          "name": {
+            "tr": "Balıkesir",
+            "en": "Balıkesir"
+          },
+          "bounding_box": [
+            56.35,
+            130.82,
+            177.61,
+            240.54
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::bilecik"
+            ],
+            "qie_aliases": [
+              "Balıkesir",
+              "Balıkesir ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "balikesir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bilecik",
+          "name": {
+            "tr": "Bilecik",
+            "en": "Bilecik"
+          },
+          "bounding_box": [
+            214.21,
+            130.59,
+            268.04,
+            193.32
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Bilecik",
+              "Bilecik ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "bilecik"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bingol",
+          "name": {
+            "tr": "Bingöl",
+            "en": "Bingöl"
+          },
+          "bounding_box": [
+            744.09,
+            201.92,
+            808.95,
+            282.48
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Bingöl",
+              "Bingöl ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "bingol"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bitlis",
+          "name": {
+            "tr": "Bitlis",
+            "en": "Bitlis"
+          },
+          "bounding_box": [
+            821.65,
+            236.64,
+            907.59,
+            316.54
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Bitlis",
+              "Bitlis ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "bitlis"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bolu",
+          "name": {
+            "tr": "Bolu",
+            "en": "Bolu"
+          },
+          "bounding_box": [
+            261.33,
+            92.85,
+            361.03,
+            159.48
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Bolu",
+              "Bolu ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bolu"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::burdur",
+          "name": {
+            "tr": "Burdur",
+            "en": "Burdur"
+          },
+          "bounding_box": [
+            199.37,
+            329.36,
+            277.74,
+            397.37
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adana"
+            ],
+            "qie_aliases": [
+              "Burdur",
+              "Burdur ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "burdur"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bursa",
+          "name": {
+            "tr": "Bursa",
+            "en": "Bursa"
+          },
+          "bounding_box": [
+            134.54,
+            124.55,
+            227.77,
+            203.55
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Bursa",
+              "Bursa ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "bursa"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::canakkale",
+          "name": {
+            "tr": "Çanakkale",
+            "en": "Çanakkale"
+          },
+          "bounding_box": [
+            8.47,
+            110.62,
+            106.7,
+            210.25
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Çanakkale",
+              "Çanakkale ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "canakkale"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::cankiri",
+          "name": {
+            "tr": "Çankırı",
+            "en": "Çankırı"
+          },
+          "bounding_box": [
+            359.04,
+            88.94,
+            444.07,
+            150.59
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Çankırı",
+              "Çankırı ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "cankiri"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::corum",
+          "name": {
+            "tr": "Çorum",
+            "en": "Çorum"
+          },
+          "bounding_box": [
+            434.13,
+            73.37,
+            510.87,
+            176.87
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Çorum",
+              "Çorum ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "corum"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::denizli",
+          "name": {
+            "tr": "Denizli",
+            "en": "Denizli"
+          },
+          "bounding_box": [
+            156.44,
+            284.0,
+            232.91,
+            400.15
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::afyonkarahisar"
+            ],
+            "qie_aliases": [
+              "Denizli",
+              "Denizli ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "denizli"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::diyarbakir",
+          "name": {
+            "tr": "Diyarbakır",
+            "en": "Diyarbakır"
+          },
+          "bounding_box": [
+            698.04,
+            263.96,
+            817.1,
+            350.3
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Diyarbakır",
+              "Diyarbakır ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "diyarbakir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::edirne",
+          "name": {
+            "tr": "Edirne",
+            "en": "Edirne"
+          },
+          "bounding_box": [
+            27.26,
+            21.73,
+            76.92,
+            126.25
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Edirne",
+              "Edirne ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "edirne"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::elazig",
+          "name": {
+            "tr": "Elazığ",
+            "en": "Elazığ"
+          },
+          "bounding_box": [
+            658.93,
+            226.95,
+            763.99,
+            294.72
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Elazığ",
+              "Elazığ ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "elazig"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::erzincan",
+          "name": {
+            "tr": "Erzincan",
+            "en": "Erzincan"
+          },
+          "bounding_box": [
+            658.93,
+            164.69,
+            779.05,
+            243.35
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Erzincan",
+              "Erzincan ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "erzincan"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::erzurum",
+          "name": {
+            "tr": "Erzurum",
+            "en": "Erzurum"
+          },
+          "bounding_box": [
+            756.14,
+            97.26,
+            875.28,
+            231.71
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Erzurum",
+              "Erzurum ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "erzurum"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::eskisehir",
+          "name": {
+            "tr": "Eskişehir",
+            "en": "Eskişehir"
+          },
+          "bounding_box": [
+            230.8,
+            157.15,
+            333.92,
+            238.01
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Eskişehir",
+              "Eskişehir ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "eskisehir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::gaziantep",
+          "name": {
+            "tr": "Gaziantep",
+            "en": "Gaziantep"
+          },
+          "bounding_box": [
+            561.16,
+            351.1,
+            643.67,
+            416.83
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Gaziantep",
+              "Gaziantep ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "gaziantep"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::giresun",
+          "name": {
+            "tr": "Giresun",
+            "en": "Giresun"
+          },
+          "bounding_box": [
+            641.47,
+            90.14,
+            701.47,
+            166.28
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Giresun",
+              "Giresun ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "giresun"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::gumushane",
+          "name": {
+            "tr": "Gümüşhane",
+            "en": "Gümüşhane"
+          },
+          "bounding_box": [
+            684.6,
+            112.58,
+            749.13,
+            179.19
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Gümüşhane",
+              "Gümüşhane ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "gumushane"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::hakkari",
+          "name": {
+            "tr": "Hakkâri",
+            "en": "Hakkâri"
+          },
+          "bounding_box": [
+            919.82,
+            334.6,
+            991.48,
+            393.82
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Hakkâri",
+              "Hakkâri ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "hakkari"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::hatay",
+          "name": {
+            "tr": "Hatay",
+            "en": "Hatay"
+          },
+          "bounding_box": [
+            527.2,
+            389.5,
+            574.6,
+            478.86
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adana"
+            ],
+            "qie_aliases": [
+              "Hatay",
+              "Hatay ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "hatay"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::isparta",
+          "name": {
+            "tr": "Isparta",
+            "en": "Isparta"
+          },
+          "bounding_box": [
+            230.92,
+            279.39,
+            313.68,
+            366.07
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adana"
+            ],
+            "qie_aliases": [
+              "Isparta",
+              "Isparta ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "isparta"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::mersin",
+          "name": {
+            "tr": "Mersin",
+            "en": "Mersin"
+          },
+          "bounding_box": [
+            362.36,
+            362.14,
+            490.76,
+            464.09
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adana"
+            ],
+            "qie_aliases": [
+              "Mersin",
+              "Mersin ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "mersin"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::istanbul",
+          "name": {
+            "tr": "İstanbul",
+            "en": "İstanbul"
+          },
+          "bounding_box": [
+            131.15,
+            55.68,
+            224.77,
+            109.47
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "İstanbul",
+              "İstanbul ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "istanbul"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::izmir",
+          "name": {
+            "tr": "İzmir",
+            "en": "İzmir"
+          },
+          "bounding_box": [
+            37.51,
+            212.57,
+            156.92,
+            325.57
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::antalya"
+            ],
+            "qie_aliases": [
+              "İzmir",
+              "İzmir ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "izmir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kars",
+          "name": {
+            "tr": "Kars",
+            "en": "Kars"
+          },
+          "bounding_box": [
+            853.24,
+            81.06,
+            935.9,
+            175.93
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Kars",
+              "Kars ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "kars"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kastamonu",
+          "name": {
+            "tr": "Kastamonu",
+            "en": "Kastamonu"
+          },
+          "bounding_box": [
+            368.26,
+            20.65,
+            466.63,
+            107.01
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Kastamonu",
+              "Kastamonu ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "kastamonu"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kayseri",
+          "name": {
+            "tr": "Kayseri",
+            "en": "Kayseri"
+          },
+          "bounding_box": [
+            482.46,
+            221.58,
+            586.92,
+            323.48
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Kayseri",
+              "Kayseri ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kayseri"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kirklareli",
+          "name": {
+            "tr": "Kırklareli",
+            "en": "Kırklareli"
+          },
+          "bounding_box": [
+            70.86,
+            14.37,
+            135.88,
+            79.67
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Kırklareli",
+              "Kırklareli ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "kirklareli"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kirsehir",
+          "name": {
+            "tr": "Kırşehir",
+            "en": "Kırşehir"
+          },
+          "bounding_box": [
+            411.69,
+            184.0,
+            474.59,
+            258.93
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Kırşehir",
+              "Kırşehir ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kirsehir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kocaeli",
+          "name": {
+            "tr": "Kocaeli",
+            "en": "Kocaeli"
+          },
+          "bounding_box": [
+            192.53,
+            79.93,
+            250.12,
+            128.85
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Kocaeli",
+              "Kocaeli ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "kocaeli"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::konya",
+          "name": {
+            "tr": "Konya",
+            "en": "Konya"
+          },
+          "bounding_box": [
+            294.58,
+            223.25,
+            462.26,
+            409.76
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Konya",
+              "Konya ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "konya"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kutahya",
+          "name": {
+            "tr": "Kütahya",
+            "en": "Kütahya"
+          },
+          "bounding_box": [
+            162.12,
+            175.42,
+            254.02,
+            265.13
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::afyonkarahisar"
+            ],
+            "qie_aliases": [
+              "Kütahya",
+              "Kütahya ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "kutahya"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::malatya",
+          "name": {
+            "tr": "Malatya",
+            "en": "Malatya"
+          },
+          "bounding_box": [
+            599.74,
+            233.47,
+            699.6,
+            331.67
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Malatya",
+              "Malatya ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "malatya"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::manisa",
+          "name": {
+            "tr": "Manisa",
+            "en": "Manisa"
+          },
+          "bounding_box": [
+            83.31,
+            213.13,
+            181.36,
+            310.21
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::afyonkarahisar"
+            ],
+            "qie_aliases": [
+              "Manisa",
+              "Manisa ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "manisa"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kahramanmaras",
+          "name": {
+            "tr": "Kahramanmaraş",
+            "en": "Kahramanmaraş"
+          },
+          "bounding_box": [
+            549.37,
+            271.13,
+            629.43,
+            375.33
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adana"
+            ],
+            "qie_aliases": [
+              "Kahramanmaraş",
+              "Kahramanmaraş ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "kahramanmaras"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::mardin",
+          "name": {
+            "tr": "Mardin",
+            "en": "Mardin"
+          },
+          "bounding_box": [
+            737.51,
+            333.22,
+            843.97,
+            397.58
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Mardin",
+              "Mardin ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "mardin"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::mugla",
+          "name": {
+            "tr": "Muğla",
+            "en": "Muğla"
+          },
+          "bounding_box": [
+            88.48,
+            348.04,
+            214.2,
+            443.01
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::afyonkarahisar"
+            ],
+            "qie_aliases": [
+              "Muğla",
+              "Muğla ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "mugla"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::mus",
+          "name": {
+            "tr": "Muş",
+            "en": "Muş"
+          },
+          "bounding_box": [
+            802.9,
+            207.8,
+            885.59,
+            278.72
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Muş",
+              "Muş ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "mus"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::nevsehir",
+          "name": {
+            "tr": "Nevşehir",
+            "en": "Nevşehir"
+          },
+          "bounding_box": [
+            446.49,
+            207.76,
+            490.77,
+            291.54
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Nevşehir",
+              "Nevşehir ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "nevsehir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::nigde",
+          "name": {
+            "tr": "Niğde",
+            "en": "Niğde"
+          },
+          "bounding_box": [
+            442.34,
+            285.13,
+            503.19,
+            365.59
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Niğde",
+              "Niğde ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "nigde"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::ordu",
+          "name": {
+            "tr": "Ordu",
+            "en": "Ordu"
+          },
+          "bounding_box": [
+            573.78,
+            85.06,
+            649.01,
+            145.5
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Ordu",
+              "Ordu ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "ordu"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::rize",
+          "name": {
+            "tr": "Rize",
+            "en": "Rize"
+          },
+          "bounding_box": [
+            760.76,
+            74.22,
+            816.61,
+            130.31
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Rize",
+              "Rize ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "rize"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::sakarya",
+          "name": {
+            "tr": "Sakarya",
+            "en": "Sakarya"
+          },
+          "bounding_box": [
+            226.92,
+            82.78,
+            283.91,
+            145.09
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Sakarya",
+              "Sakarya ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "sakarya"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::samsun",
+          "name": {
+            "tr": "Samsun",
+            "en": "Samsun"
+          },
+          "bounding_box": [
+            481.65,
+            41.7,
+            597.57,
+            107.6
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Samsun",
+              "Samsun ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "samsun"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::siirt",
+          "name": {
+            "tr": "Siirt",
+            "en": "Siirt"
+          },
+          "bounding_box": [
+            815.96,
+            301.52,
+            899.44,
+            341.03
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Siirt",
+              "Siirt ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "siirt"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::sinop",
+          "name": {
+            "tr": "Sinop",
+            "en": "Sinop"
+          },
+          "bounding_box": [
+            447.46,
+            14.92,
+            512.77,
+            81.54
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Sinop",
+              "Sinop ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "sinop"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::sivas",
+          "name": {
+            "tr": "Sivas",
+            "en": "Sivas"
+          },
+          "bounding_box": [
+            528.85,
+            132.28,
+            680.7,
+            274.84
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Sivas",
+              "Sivas ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "sivas"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::tekirdag",
+          "name": {
+            "tr": "Tekirdağ",
+            "en": "Tekirdağ"
+          },
+          "bounding_box": [
+            63.12,
+            53.13,
+            140.09,
+            126.23
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Tekirdağ",
+              "Tekirdağ ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "tekirdag"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::tokat",
+          "name": {
+            "tr": "Tokat",
+            "en": "Tokat"
+          },
+          "bounding_box": [
+            513.44,
+            103.43,
+            622.97,
+            173.84
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Tokat",
+              "Tokat ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "tokat"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::trabzon",
+          "name": {
+            "tr": "Trabzon",
+            "en": "Trabzon"
+          },
+          "bounding_box": [
+            698.36,
+            88.05,
+            769.84,
+            132.87
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Trabzon",
+              "Trabzon ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "trabzon"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::tunceli",
+          "name": {
+            "tr": "Tunceli",
+            "en": "Tunceli"
+          },
+          "bounding_box": [
+            678.3,
+            202.59,
+            771.45,
+            262.22
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Tunceli",
+              "Tunceli ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "tunceli"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::sanliurfa",
+          "name": {
+            "tr": "Şanlıurfa",
+            "en": "Şanlıurfa"
+          },
+          "bounding_box": [
+            632.33,
+            315.27,
+            756.68,
+            416.12
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Şanlıurfa",
+              "Şanlıurfa ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "sanliurfa"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::usak",
+          "name": {
+            "tr": "Uşak",
+            "en": "Uşak"
+          },
+          "bounding_box": [
+            170.53,
+            251.82,
+            225.35,
+            303.38
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::afyonkarahisar"
+            ],
+            "qie_aliases": [
+              "Uşak",
+              "Uşak ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "usak"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::van",
+          "name": {
+            "tr": "Van",
+            "en": "Van"
+          },
+          "bounding_box": [
+            881.43,
+            214.02,
+            978.19,
+            345.03
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Van",
+              "Van ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "van"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::yozgat",
+          "name": {
+            "tr": "Yozgat",
+            "en": "Yozgat"
+          },
+          "bounding_box": [
+            438.68,
+            152.94,
+            546.5,
+            243.27
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Yozgat",
+              "Yozgat ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "yozgat"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::zonguldak",
+          "name": {
+            "tr": "Zonguldak",
+            "en": "Zonguldak"
+          },
+          "bounding_box": [
+            299.39,
+            54.43,
+            351.49,
+            94.64
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Zonguldak",
+              "Zonguldak ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "zonguldak"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::aksaray",
+          "name": {
+            "tr": "Aksaray",
+            "en": "Aksaray"
+          },
+          "bounding_box": [
+            396.93,
+            243.09,
+            456.13,
+            322.52
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Aksaray",
+              "Aksaray ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "aksaray"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bayburt",
+          "name": {
+            "tr": "Bayburt",
+            "en": "Bayburt"
+          },
+          "bounding_box": [
+            727.72,
+            130.31,
+            784.5,
+            174.94
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Bayburt",
+              "Bayburt ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bayburt"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::karaman",
+          "name": {
+            "tr": "Karaman",
+            "en": "Karaman"
+          },
+          "bounding_box": [
+            356.74,
+            346.48,
+            446.03,
+            433.38
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Karaman",
+              "Karaman ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "karaman"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kirikkale",
+          "name": {
+            "tr": "Kırıkkale",
+            "en": "Kırıkkale"
+          },
+          "bounding_box": [
+            396.58,
+            148.82,
+            446.08,
+            231.79
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::ankara"
+            ],
+            "qie_aliases": [
+              "Kırıkkale",
+              "Kırıkkale ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kirikkale"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::batman",
+          "name": {
+            "tr": "Batman",
+            "en": "Batman"
+          },
+          "bounding_box": [
+            796.57,
+            277.48,
+            839.69,
+            350.44
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Batman",
+              "Batman ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "batman"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::sirnak",
+          "name": {
+            "tr": "Şırnak",
+            "en": "Şırnak"
+          },
+          "bounding_box": [
+            832.77,
+            326.56,
+            923.13,
+            383.32
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Şırnak",
+              "Şırnak ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "sirnak"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::bartin",
+          "name": {
+            "tr": "Bartın",
+            "en": "Bartın"
+          },
+          "bounding_box": [
+            334.64,
+            34.38,
+            380.8,
+            78.39
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Bartın",
+              "Bartın ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bartin"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::ardahan",
+          "name": {
+            "tr": "Ardahan",
+            "en": "Ardahan"
+          },
+          "bounding_box": [
+            863.12,
+            51.84,
+            911.91,
+            122.58
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Ardahan",
+              "Ardahan ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "ardahan"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::igdir",
+          "name": {
+            "tr": "Iğdır",
+            "en": "Iğdır"
+          },
+          "bounding_box": [
+            912.47,
+            153.7,
+            990.78,
+            197.52
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::agri"
+            ],
+            "qie_aliases": [
+              "Iğdır",
+              "Iğdır ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "igdir"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::yalova",
+          "name": {
+            "tr": "Yalova",
+            "en": "Yalova"
+          },
+          "bounding_box": [
+            168.21,
+            118.0,
+            202.19,
+            136.19
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::balikesir"
+            ],
+            "qie_aliases": [
+              "Yalova",
+              "Yalova ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "yalova"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::karabuk",
+          "name": {
+            "tr": "Karabük",
+            "en": "Karabük"
+          },
+          "bounding_box": [
+            338.05,
+            55.09,
+            388.57,
+            107.87
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Karabük",
+              "Karabük ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "karabuk"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::kilis",
+          "name": {
+            "tr": "Kilis",
+            "en": "Kilis"
+          },
+          "bounding_box": [
+            578.56,
+            390.61,
+            615.82,
+            419.18
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adiyaman"
+            ],
+            "qie_aliases": [
+              "Kilis",
+              "Kilis ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "kilis"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::osmaniye",
+          "name": {
+            "tr": "Osmaniye",
+            "en": "Osmaniye"
+          },
+          "bounding_box": [
+            530.91,
+            343.29,
+            575.83,
+            394.83
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::adana"
+            ],
+            "qie_aliases": [
+              "Osmaniye",
+              "Osmaniye ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "osmaniye"
+            ],
+            "capital": true
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province::duzce",
+          "name": {
+            "tr": "Düzce",
+            "en": "Düzce"
+          },
+          "bounding_box": [
+            275.54,
+            85.97,
+            320.92,
+            122.08
+          ],
+          "attributes": {
+            "layer_type": "province",
+            "feature_class": "admin_province",
+            "confusable_with": [
+              "turkey_admin_v1::province::amasya"
+            ],
+            "qie_aliases": [
+              "Düzce",
+              "Düzce ili"
+            ],
+            "evidence_topic_hints": [
+              "iller",
+              "turkiye_idari"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "duzce"
+            ],
+            "capital": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "province_centers",
+      "z_index": 4,
+      "min_lod": 2.0,
+      "nodes": [
+        {
+          "id": "turkey_admin_v1::province_center::adana_merkez",
+          "name": {
+            "tr": "Adana Merkezi",
+            "en": "Adana Center"
+          },
+          "bounding_box": [
+            498.59,
+            386.38,
+            508.59,
+            396.38
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Adana merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "adana"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::adiyaman_merkez",
+          "name": {
+            "tr": "Adıyaman Merkezi",
+            "en": "Adıyaman Center"
+          },
+          "bounding_box": [
+            650.38,
+            330.26,
+            660.38,
+            340.26
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Adıyaman merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "adiyaman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::afyonkarahisar_merkez",
+          "name": {
+            "tr": "Afyonkarahisar Merkezi",
+            "en": "Afyonkarahisar Center"
+          },
+          "bounding_box": [
+            253.46,
+            257.15,
+            263.46,
+            267.15
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Afyonkarahisar merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "afyonkarahisar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::agri_merkez",
+          "name": {
+            "tr": "Ağrı Merkezi",
+            "en": "Ağrı Center"
+          },
+          "bounding_box": [
+            895.0,
+            185.52,
+            905.0,
+            195.52
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ağrı merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "agri"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::amasya_merkez",
+          "name": {
+            "tr": "Amasya Merkezi",
+            "en": "Amasya Center"
+          },
+          "bounding_box": [
+            524.74,
+            116.85,
+            534.74,
+            126.85
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Amasya merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "amasya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::ankara_merkez",
+          "name": {
+            "tr": "Ankara Merkezi",
+            "en": "Ankara Center"
+          },
+          "bounding_box": [
+            371.92,
+            170.02,
+            381.92,
+            180.02
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ankara merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "ankara"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::antalya_merkez",
+          "name": {
+            "tr": "Antalya Merkezi",
+            "en": "Antalya Center"
+          },
+          "bounding_box": [
+            262.18,
+            393.77,
+            272.18,
+            403.77
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Antalya merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "antalya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::artvin_merkez",
+          "name": {
+            "tr": "Artvin Merkezi",
+            "en": "Artvin Center"
+          },
+          "bounding_box": [
+            831.92,
+            77.71,
+            841.92,
+            87.71
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Artvin merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "artvin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::aydin_merkez",
+          "name": {
+            "tr": "Aydın Merkezi",
+            "en": "Aydın Center"
+          },
+          "bounding_box": [
+            115.0,
+            324.35,
+            125.0,
+            334.35
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Aydın merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "aydin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::balikesir_merkez",
+          "name": {
+            "tr": "Balıkesir Merkezi",
+            "en": "Balıkesir Center"
+          },
+          "bounding_box": [
+            117.05,
+            190.69,
+            127.05,
+            200.69
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Balıkesir merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "balikesir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bilecik_merkez",
+          "name": {
+            "tr": "Bilecik Merkezi",
+            "en": "Bilecik Center"
+          },
+          "bounding_box": [
+            224.74,
+            154.51,
+            234.74,
+            164.51
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bilecik merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "bilecik"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bingol_merkez",
+          "name": {
+            "tr": "Bingöl Merkezi",
+            "en": "Bingöl Center"
+          },
+          "bounding_box": [
+            764.23,
+            247.55,
+            774.23,
+            257.55
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bingöl merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "bingol"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bitlis_merkez",
+          "name": {
+            "tr": "Bitlis Merkezi",
+            "en": "Bitlis Center"
+          },
+          "bounding_box": [
+            846.79,
+            283.0,
+            856.79,
+            293.0
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bitlis merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "bitlis"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bolu_merkez",
+          "name": {
+            "tr": "Bolu Merkezi",
+            "en": "Bolu Center"
+          },
+          "bounding_box": [
+            308.33,
+            110.94,
+            318.33,
+            120.94
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bolu merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bolu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::burdur_merkez",
+          "name": {
+            "tr": "Burdur Merkezi",
+            "en": "Burdur Center"
+          },
+          "bounding_box": [
+            240.64,
+            333.22,
+            250.64,
+            343.22
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Burdur merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "burdur"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bursa_merkez",
+          "name": {
+            "tr": "Bursa Merkezi",
+            "en": "Bursa Center"
+          },
+          "bounding_box": [
+            177.56,
+            150.82,
+            187.56,
+            160.82
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bursa merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "bursa"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::canakkale_merkez",
+          "name": {
+            "tr": "Çanakkale Merkezi",
+            "en": "Çanakkale Center"
+          },
+          "bounding_box": [
+            41.67,
+            153.77,
+            51.67,
+            163.77
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çanakkale merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "canakkale"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::cankiri_merkez",
+          "name": {
+            "tr": "Çankırı Merkezi",
+            "en": "Çankırı Center"
+          },
+          "bounding_box": [
+            410.9,
+            120.54,
+            420.9,
+            130.54
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çankırı merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "cankiri"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::corum_merkez",
+          "name": {
+            "tr": "Çorum Merkezi",
+            "en": "Çorum Center"
+          },
+          "bounding_box": [
+            479.62,
+            124.23,
+            489.62,
+            134.23
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çorum merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "corum"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::denizli_merkez",
+          "name": {
+            "tr": "Denizli Merkezi",
+            "en": "Denizli Center"
+          },
+          "bounding_box": [
+            179.1,
+            328.78,
+            189.1,
+            338.78
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Denizli merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "denizli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::diyarbakir_merkez",
+          "name": {
+            "tr": "Diyarbakır Merkezi",
+            "en": "Diyarbakır Center"
+          },
+          "bounding_box": [
+            750.38,
+            319.18,
+            760.38,
+            329.18
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Diyarbakır merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "diyarbakir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::edirne_merkez",
+          "name": {
+            "tr": "Edirne Merkezi",
+            "en": "Edirne Center"
+          },
+          "bounding_box": [
+            49.36,
+            40.78,
+            59.36,
+            50.78
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Edirne merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "edirne"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::elazig_merkez",
+          "name": {
+            "tr": "Elazığ Merkezi",
+            "en": "Elazığ Center"
+          },
+          "bounding_box": [
+            699.1,
+            263.06,
+            709.1,
+            273.06
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Elazığ merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "elazig"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::erzincan_merkez",
+          "name": {
+            "tr": "Erzincan Merkezi",
+            "en": "Erzincan Center"
+          },
+          "bounding_box": [
+            712.44,
+            183.31,
+            722.44,
+            193.31
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Erzincan merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "erzincan"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::erzurum_merkez",
+          "name": {
+            "tr": "Erzurum Merkezi",
+            "en": "Erzurum Center"
+          },
+          "bounding_box": [
+            804.23,
+            172.23,
+            814.23,
+            182.23
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Erzurum merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "erzurum"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::eskisehir_merkez",
+          "name": {
+            "tr": "Eskişehir Merkezi",
+            "en": "Eskişehir Center"
+          },
+          "bounding_box": [
+            252.44,
+            181.09,
+            262.44,
+            191.09
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Eskişehir merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "eskisehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::gaziantep_merkez",
+          "name": {
+            "tr": "Gaziantep Merkezi",
+            "en": "Gaziantep Center"
+          },
+          "bounding_box": [
+            604.23,
+            381.22,
+            614.23,
+            391.22
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Gaziantep merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "gaziantep"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::giresun_merkez",
+          "name": {
+            "tr": "Giresun Merkezi",
+            "en": "Giresun Center"
+          },
+          "bounding_box": [
+            656.03,
+            97.65,
+            666.03,
+            107.65
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Giresun merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "giresun"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::gumushane_merkez",
+          "name": {
+            "tr": "Gümüşhane Merkezi",
+            "en": "Gümüşhane Center"
+          },
+          "bounding_box": [
+            711.92,
+            130.88,
+            721.92,
+            140.88
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Gümüşhane merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "gumushane"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::hakkari_merkez",
+          "name": {
+            "tr": "Hakkâri Merkezi",
+            "en": "Hakkâri Center"
+          },
+          "bounding_box": [
+            930.38,
+            344.29,
+            940.38,
+            354.29
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Hakkâri merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "hakkari"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::hatay_merkez",
+          "name": {
+            "tr": "Hatay Merkezi",
+            "en": "Hatay Center"
+          },
+          "bounding_box": [
+            541.67,
+            445.46,
+            551.67,
+            455.46
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Hatay merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "hatay"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::isparta_merkez",
+          "name": {
+            "tr": "Isparta Merkezi",
+            "en": "Isparta Center"
+          },
+          "bounding_box": [
+            254.49,
+            330.26,
+            264.49,
+            340.26
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Isparta merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "isparta"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::mersin_merkez",
+          "name": {
+            "tr": "Mersin Merkezi",
+            "en": "Mersin Center"
+          },
+          "bounding_box": [
+            463.21,
+            401.15,
+            473.21,
+            411.15
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Mersin merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "mersin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::istanbul_merkez",
+          "name": {
+            "tr": "İstanbul Merkezi",
+            "en": "İstanbul Center"
+          },
+          "bounding_box": [
+            173.46,
+            90.26,
+            183.46,
+            100.26
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İstanbul merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "istanbul"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::izmir_merkez",
+          "name": {
+            "tr": "İzmir Merkezi",
+            "en": "İzmir Center"
+          },
+          "bounding_box": [
+            79.1,
+            281.52,
+            89.1,
+            291.52
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İzmir merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "izmir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kars_merkez",
+          "name": {
+            "tr": "Kars Merkezi",
+            "en": "Kars Center"
+          },
+          "bounding_box": [
+            897.56,
+            120.54,
+            907.56,
+            130.54
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kars merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "kars"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kastamonu_merkez",
+          "name": {
+            "tr": "Kastamonu Merkezi",
+            "en": "Kastamonu Center"
+          },
+          "bounding_box": [
+            419.62,
+            62.2,
+            429.62,
+            72.2
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kastamonu merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "kastamonu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kayseri_merkez",
+          "name": {
+            "tr": "Kayseri Merkezi",
+            "en": "Kayseri Center"
+          },
+          "bounding_box": [
+            507.31,
+            258.63,
+            517.31,
+            268.63
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kayseri merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kayseri"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kirklareli_merkez",
+          "name": {
+            "tr": "Kırklareli Merkezi",
+            "en": "Kırklareli Center"
+          },
+          "bounding_box": [
+            83.72,
+            37.09,
+            93.72,
+            47.09
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırklareli merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "kirklareli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kirsehir_merkez",
+          "name": {
+            "tr": "Kırşehir Merkezi",
+            "en": "Kırşehir Center"
+          },
+          "bounding_box": [
+            439.1,
+            227.62,
+            449.1,
+            237.62
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırşehir merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kirsehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kocaeli_merkez",
+          "name": {
+            "tr": "Kocaeli Merkezi",
+            "en": "Kocaeli Center"
+          },
+          "bounding_box": [
+            221.67,
+            102.08,
+            231.67,
+            112.08
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kocaeli merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "kocaeli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::konya_merkez",
+          "name": {
+            "tr": "Konya Merkezi",
+            "en": "Konya Center"
+          },
+          "bounding_box": [
+            352.95,
+            322.14,
+            362.95,
+            332.14
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Konya merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "konya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kutahya_merkez",
+          "name": {
+            "tr": "Kütahya Merkezi",
+            "en": "Kütahya Center"
+          },
+          "bounding_box": [
+            224.74,
+            207.68,
+            234.74,
+            217.68
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kütahya merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "kutahya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::malatya_merkez",
+          "name": {
+            "tr": "Malatya Merkezi",
+            "en": "Malatya Center"
+          },
+          "bounding_box": [
+            651.92,
+            285.95,
+            661.92,
+            295.95
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Malatya merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "malatya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::manisa_merkez",
+          "name": {
+            "tr": "Manisa Merkezi",
+            "en": "Manisa Center"
+          },
+          "bounding_box": [
+            93.97,
+            266.75,
+            103.97,
+            276.75
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Manisa merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "manisa"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kahramanmaras_merkez",
+          "name": {
+            "tr": "Kahramanmaraş Merkezi",
+            "en": "Kahramanmaraş Center"
+          },
+          "bounding_box": [
+            581.67,
+            342.82,
+            591.67,
+            352.82
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kahramanmaraş merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "kahramanmaras"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::mardin_merkez",
+          "name": {
+            "tr": "Mardin Merkezi",
+            "en": "Mardin Center"
+          },
+          "bounding_box": [
+            776.03,
+            363.49,
+            786.03,
+            373.49
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Mardin merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "mardin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::mugla_merkez",
+          "name": {
+            "tr": "Muğla Merkezi",
+            "en": "Muğla Center"
+          },
+          "bounding_box": [
+            142.18,
+            370.14,
+            152.18,
+            380.14
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Muğla merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "mugla"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::mus_merkez",
+          "name": {
+            "tr": "Muş Merkezi",
+            "en": "Muş Center"
+          },
+          "bounding_box": [
+            815.0,
+            257.89,
+            825.0,
+            267.89
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Muş merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "mus"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::nevsehir_merkez",
+          "name": {
+            "tr": "Nevşehir Merkezi",
+            "en": "Nevşehir Center"
+          },
+          "bounding_box": [
+            467.31,
+            266.75,
+            477.31,
+            276.75
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Nevşehir merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "nevsehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::nigde_merkez",
+          "name": {
+            "tr": "Niğde Merkezi",
+            "en": "Niğde Center"
+          },
+          "bounding_box": [
+            465.77,
+            314.75,
+            475.77,
+            324.75
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Niğde merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "nigde"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::ordu_merkez",
+          "name": {
+            "tr": "Ordu Merkezi",
+            "en": "Ordu Center"
+          },
+          "bounding_box": [
+            629.87,
+            92.48,
+            639.87,
+            102.48
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ordu merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "ordu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::rize_merkez",
+          "name": {
+            "tr": "Rize Merkezi",
+            "en": "Rize Center"
+          },
+          "bounding_box": [
+            765.26,
+            89.52,
+            775.26,
+            99.52
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Rize merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "rize"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::sakarya_merkez",
+          "name": {
+            "tr": "Sakarya Merkezi",
+            "en": "Sakarya Center"
+          },
+          "bounding_box": [
+            246.28,
+            108.72,
+            256.28,
+            118.72
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sakarya merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "sakarya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::samsun_merkez",
+          "name": {
+            "tr": "Samsun Merkezi",
+            "en": "Samsun Center"
+          },
+          "bounding_box": [
+            550.38,
+            69.58,
+            560.38,
+            79.58
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Samsun merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "samsun"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::siirt_merkez",
+          "name": {
+            "tr": "Siirt Merkezi",
+            "en": "Siirt Center"
+          },
+          "bounding_box": [
+            838.08,
+            317.71,
+            848.08,
+            327.71
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Siirt merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "siirt"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::sinop_merkez",
+          "name": {
+            "tr": "Sinop Merkezi",
+            "en": "Sinop Center"
+          },
+          "bounding_box": [
+            489.87,
+            14.94,
+            499.87,
+            24.94
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sinop merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "sinop"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::sivas_merkez",
+          "name": {
+            "tr": "Sivas Merkezi",
+            "en": "Sivas Center"
+          },
+          "bounding_box": [
+            585.77,
+            183.31,
+            595.77,
+            193.31
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sivas merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "sivas"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::tekirdag_merkez",
+          "name": {
+            "tr": "Tekirdağ Merkezi",
+            "en": "Tekirdağ Center"
+          },
+          "bounding_box": [
+            98.08,
+            92.48,
+            108.08,
+            102.48
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Tekirdağ merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "tekirdag"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::tokat_merkez",
+          "name": {
+            "tr": "Tokat Merkezi",
+            "en": "Tokat Center"
+          },
+          "bounding_box": [
+            561.67,
+            141.22,
+            571.67,
+            151.22
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Tokat merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "tokat"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::trabzon_merkez",
+          "name": {
+            "tr": "Trabzon Merkezi",
+            "en": "Trabzon Center"
+          },
+          "bounding_box": [
+            724.23,
+            91.0,
+            734.23,
+            101.0
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Trabzon merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "trabzon"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::tunceli_merkez",
+          "name": {
+            "tr": "Tunceli Merkezi",
+            "en": "Tunceli Center"
+          },
+          "bounding_box": [
+            715.0,
+            230.57,
+            725.0,
+            240.57
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Tunceli merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "tunceli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::sanliurfa_merkez",
+          "name": {
+            "tr": "Şanlıurfa Merkezi",
+            "en": "Şanlıurfa Center"
+          },
+          "bounding_box": [
+            676.54,
+            373.83,
+            686.54,
+            383.83
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Şanlıurfa merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "sanliurfa"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::usak_merkez",
+          "name": {
+            "tr": "Uşak Merkezi",
+            "en": "Uşak Center"
+          },
+          "bounding_box": [
+            195.51,
+            262.32,
+            205.51,
+            272.32
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Uşak merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "usak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::van_merkez",
+          "name": {
+            "tr": "Van Merkezi",
+            "en": "Van Center"
+          },
+          "bounding_box": [
+            909.87,
+            276.35,
+            919.87,
+            286.35
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Van merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "van"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::yozgat_merkez",
+          "name": {
+            "tr": "Yozgat Merkezi",
+            "en": "Yozgat Center"
+          },
+          "bounding_box": [
+            472.44,
+            178.14,
+            482.44,
+            188.14
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yozgat merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "yozgat"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::zonguldak_merkez",
+          "name": {
+            "tr": "Zonguldak Merkezi",
+            "en": "Zonguldak Center"
+          },
+          "bounding_box": [
+            317.56,
+            57.03,
+            327.56,
+            67.03
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Zonguldak merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "zonguldak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::aksaray_merkez",
+          "name": {
+            "tr": "Aksaray Merkezi",
+            "en": "Aksaray Center"
+          },
+          "bounding_box": [
+            432.44,
+            285.22,
+            442.44,
+            295.22
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Aksaray merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "aksaray"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bayburt_merkez",
+          "name": {
+            "tr": "Bayburt Merkezi",
+            "en": "Bayburt Center"
+          },
+          "bounding_box": [
+            750.38,
+            145.65,
+            760.38,
+            155.65
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bayburt merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bayburt"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::karaman_merkez",
+          "name": {
+            "tr": "Karaman Merkezi",
+            "en": "Karaman Center"
+          },
+          "bounding_box": [
+            390.9,
+            373.09,
+            400.9,
+            383.09
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karaman merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "karaman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kirikkale_merkez",
+          "name": {
+            "tr": "Kırıkkale Merkezi",
+            "en": "Kırıkkale Center"
+          },
+          "bounding_box": [
+            405.77,
+            175.92,
+            415.77,
+            185.92
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırıkkale merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kirikkale"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::batman_merkez",
+          "name": {
+            "tr": "Batman Merkezi",
+            "en": "Batman Center"
+          },
+          "bounding_box": [
+            796.54,
+            320.66,
+            806.54,
+            330.66
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Batman merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "batman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::sirnak_merkez",
+          "name": {
+            "tr": "Şırnak Merkezi",
+            "en": "Şırnak Center"
+          },
+          "bounding_box": [
+            864.74,
+            347.98,
+            874.74,
+            357.98
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Şırnak merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "sirnak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::bartin_merkez",
+          "name": {
+            "tr": "Bartın Merkezi",
+            "en": "Bartın Center"
+          },
+          "bounding_box": [
+            345.77,
+            44.48,
+            355.77,
+            54.48
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bartın merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bartin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::ardahan_merkez",
+          "name": {
+            "tr": "Ardahan Merkezi",
+            "en": "Ardahan Center"
+          },
+          "bounding_box": [
+            877.05,
+            82.88,
+            887.05,
+            92.88
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ardahan merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "ardahan"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::igdir_merkez",
+          "name": {
+            "tr": "Iğdır Merkezi",
+            "en": "Iğdır Center"
+          },
+          "bounding_box": [
+            946.28,
+            170.75,
+            956.28,
+            180.75
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Iğdır merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "igdir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::yalova_merkez",
+          "name": {
+            "tr": "Yalova Merkezi",
+            "en": "Yalova Center"
+          },
+          "bounding_box": [
+            188.85,
+            116.85,
+            198.85,
+            126.85
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yalova merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "yalova"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::karabuk_merkez",
+          "name": {
+            "tr": "Karabük Merkezi",
+            "en": "Karabük Center"
+          },
+          "bounding_box": [
+            360.64,
+            76.23,
+            370.64,
+            86.23
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karabük merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "karabuk"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::kilis_merkez",
+          "name": {
+            "tr": "Kilis Merkezi",
+            "en": "Kilis Center"
+          },
+          "bounding_box": [
+            590.9,
+            407.06,
+            600.9,
+            417.06
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kilis merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "kilis"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::osmaniye_merkez",
+          "name": {
+            "tr": "Osmaniye Merkezi",
+            "en": "Osmaniye Center"
+          },
+          "bounding_box": [
+            546.28,
+            381.22,
+            556.28,
+            391.22
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Osmaniye merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "osmaniye"
+            ]
+          }
+        },
+        {
+          "id": "turkey_admin_v1::province_center::duzce_merkez",
+          "name": {
+            "tr": "Düzce Merkezi",
+            "en": "Düzce Center"
+          },
+          "bounding_box": [
+            285.26,
+            102.82,
+            295.26,
+            112.82
+          ],
+          "attributes": {
+            "layer_type": "province_center",
+            "feature_class": "admin_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Düzce merkez"
+            ],
+            "evidence_topic_hints": [
+              "il_merkezleri"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "duzce"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "turkiye",
+    "idari",
+    "iller",
+    "bolgeler"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

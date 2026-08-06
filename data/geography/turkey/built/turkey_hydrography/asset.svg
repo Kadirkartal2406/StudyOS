@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 480.0">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<path id="turkey_hydro_v1::basin::kizilirmak_havzasi" d="M427.18 129.85 L547.18 129.85 L547.18 209.85 L427.18 209.85 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::basin::firat_dicle_havzasi" d="M683.59 277.54 L803.59 277.54 L803.59 357.54 L683.59 357.54 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::basin::marmara_havzasi" d="M93.85 70.77 L213.85 70.77 L213.85 150.77 L93.85 150.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::kizilirmak" d="M435.90 81.23 L461.54 132.92 L487.18 206.77 L538.46 243.69 L564.10 73.85" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::sakarya" d="M256.41 206.77 L261.54 155.08 L251.28 110.77 L246.15 88.62" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::yesilirmak" d="M564.10 169.85 L558.97 132.92 L553.85 81.23" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::firat" d="M717.95 206.77 L702.56 280.62 L682.05 354.46 L666.67 391.38" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::dicle" d="M794.87 280.62 L784.62 332.31 L769.23 376.62" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::gediz" d="M153.85 265.85 L117.95 273.23 L87.18 273.23" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::buyuk_menderes" d="M179.49 324.92 L138.46 332.31 L97.44 347.08" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::ergene" d="M66.67 81.23 L87.18 88.62 L107.69 96.00" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::seyhan" d="M502.56 317.54 L502.56 354.46 L502.56 406.15" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::river::ceyhan" d="M538.46 332.31 L528.21 376.62 L512.82 406.15" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::tributary::delice" d="M446.15 184.62 L476.92 155.08" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::lake::van" d="M890.32 258.23 L935.32 258.23 L935.32 288.23 L890.32 288.23 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::lake::tuz" d="M385.13 251.85 L425.13 251.85 L425.13 279.85 L385.13 279.85 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::lake::beysehir" d="M293.69 328.69 L321.69 328.69 L321.69 350.69 L293.69 350.69 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::lake::egirdir" d="M263.36 313.62 L285.36 313.62 L285.36 343.62 L263.36 343.62 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::dam::ataturk" d="M659.67 354.46 C659.67 350.59 662.80 347.46 666.67 347.46 C670.54 347.46 673.67 350.59 673.67 354.46 C673.67 358.33 670.54 361.46 666.67 361.46 C662.80 361.46 659.67 358.33 659.67 354.46 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::dam::keban" d="M675.05 258.46 C675.05 254.59 678.18 251.46 682.05 251.46 C685.92 251.46 689.05 254.59 689.05 258.46 C689.05 262.33 685.92 265.46 682.05 265.46 C678.18 265.46 675.05 262.33 675.05 258.46 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::dam::karakaya" d="M685.31 288.00 C685.31 284.13 688.44 281.00 692.31 281.00 C696.18 281.00 699.31 284.13 699.31 288.00 C699.31 291.87 696.18 295.00 692.31 295.00 C688.44 295.00 685.31 291.87 685.31 288.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::dam::hirfanli" d="M413.51 228.92 C413.51 225.05 416.64 221.92 420.51 221.92 C424.38 221.92 427.51 225.05 427.51 228.92 C427.51 232.79 424.38 235.92 420.51 235.92 C416.64 235.92 413.51 232.79 413.51 228.92 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::waterfall::dudeniz" d="M261.67 398.77 C261.67 396.01 263.91 393.77 266.67 393.77 C269.43 393.77 271.67 396.01 271.67 398.77 C271.67 401.53 269.43 403.77 266.67 403.77 C263.91 403.77 261.67 401.53 261.67 398.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hydro_v1::spring::kirkgoz" d="M256.54 384.00 C256.54 381.24 258.78 379.00 261.54 379.00 C264.30 379.00 266.54 381.24 266.54 384.00 C266.54 386.76 264.30 389.00 261.54 389.00 C258.78 389.00 256.54 386.76 256.54 384.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+</svg>

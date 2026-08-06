@@ -1,0 +1,298 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_climate/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye İklim Haritası",
+    "en": "Turkey Climate Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "climate_zones",
+      "z_index": 0,
+      "min_lod": 0.8,
+      "nodes": [
+        {
+          "id": "turkey_climate_v1::climate_zone::karadeniz",
+          "name": {
+            "tr": "Karadeniz İklimi",
+            "en": "Black Sea Climate"
+          },
+          "bounding_box": [
+            428.46,
+            66.0,
+            648.46,
+            126.0
+          ],
+          "attributes": {
+            "layer_type": "climate_zone",
+            "feature_class": "climate_zone",
+            "confusable_with": [
+              "turkey_climate_v1::climate_zone::akdeniz"
+            ],
+            "qie_aliases": [
+              "Karadeniz İklimi"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_climate_v1::climate_zone::akdeniz",
+          "name": {
+            "tr": "Akdeniz İklimi",
+            "en": "Mediterranean Climate"
+          },
+          "bounding_box": [
+            203.33,
+            371.27,
+            463.33,
+            426.27
+          ],
+          "attributes": {
+            "layer_type": "climate_zone",
+            "feature_class": "climate_zone",
+            "confusable_with": [
+              "turkey_climate_v1::climate_zone::karadeniz"
+            ],
+            "qie_aliases": [
+              "Akdeniz İklimi"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_climate_v1::climate_zone::karasal",
+          "name": {
+            "tr": "Karasal İklim",
+            "en": "Continental Climate"
+          },
+          "bounding_box": [
+            295.9,
+            168.92,
+            575.9,
+            288.92
+          ],
+          "attributes": {
+            "layer_type": "climate_zone",
+            "feature_class": "climate_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karasal İklim"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_climate_v1::climate_zone::marmara_gecis",
+          "name": {
+            "tr": "Marmara Geçiş İklimi",
+            "en": "Marmara Transitional"
+          },
+          "bounding_box": [
+            93.85,
+            75.77,
+            213.85,
+            145.77
+          ],
+          "attributes": {
+            "layer_type": "climate_zone",
+            "feature_class": "climate_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Marmara Geçiş İklimi"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "precip_zones",
+      "z_index": 1,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_climate_v1::precip_zone::yuksek_yagis_karadeniz",
+          "name": {
+            "tr": "Yüksek Yağış — Karadeniz",
+            "en": "High Precip Black Sea"
+          },
+          "bounding_box": [
+            612.31,
+            76.0,
+            772.31,
+            116.0
+          ],
+          "attributes": {
+            "layer_type": "precip_zone",
+            "feature_class": "precip_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yüksek Yağış — Karadeniz"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_climate_v1::precip_zone::dusuk_yagis_ic_anadolu",
+          "name": {
+            "tr": "Düşük Yağış — İç Anadolu",
+            "en": "Low Precip Central"
+          },
+          "bounding_box": [
+            330.26,
+            198.69,
+            490.26,
+            288.69
+          ],
+          "attributes": {
+            "layer_type": "precip_zone",
+            "feature_class": "precip_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Düşük Yağış — İç Anadolu"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "temp_zones",
+      "z_index": 2,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_climate_v1::temp_zone::sicak_akdeniz",
+          "name": {
+            "tr": "Sıcak — Akdeniz",
+            "en": "Warm Mediterranean"
+          },
+          "bounding_box": [
+            233.33,
+            376.27,
+            433.33,
+            421.27
+          ],
+          "attributes": {
+            "layer_type": "temp_zone",
+            "feature_class": "temp_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sıcak — Akdeniz"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_climate_v1::temp_zone::soguk_dogu",
+          "name": {
+            "tr": "Soğuk — Doğu Anadolu",
+            "en": "Cold East"
+          },
+          "bounding_box": [
+            714.87,
+            161.77,
+            874.87,
+            251.77
+          ],
+          "attributes": {
+            "layer_type": "temp_zone",
+            "feature_class": "temp_zone",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Soğuk — Doğu Anadolu"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "wind_systems",
+      "z_index": 3,
+      "min_lod": 1.5,
+      "nodes": [
+        {
+          "id": "turkey_climate_v1::wind_system::poyraz",
+          "name": {
+            "tr": "Poyraz",
+            "en": "Poyraz Wind"
+          },
+          "bounding_box": [
+            149.49,
+            76.0,
+            209.49,
+            116.0
+          ],
+          "attributes": {
+            "layer_type": "wind_system",
+            "feature_class": "wind_system",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Poyraz"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        },
+        {
+          "id": "turkey_climate_v1::wind_system::lodos",
+          "name": {
+            "tr": "Lodos",
+            "en": "Lodos Wind"
+          },
+          "bounding_box": [
+            98.21,
+            223.69,
+            158.21,
+            263.69
+          ],
+          "attributes": {
+            "layer_type": "wind_system",
+            "feature_class": "wind_system",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Lodos"
+            ],
+            "evidence_topic_hints": [
+              "iklim"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "iklim",
+    "yagis"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

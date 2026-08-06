@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,7 +27,8 @@ class ResourcesScreen extends ConsumerWidget {
   /// Topic bağlamı — opsiyonel.
   final String? topicCode;
 
-  ResourceKey get _key => (planId: studyPlanId, subjectCode: subjectCode, topicCode: topicCode);
+  ResourceKey get _key =>
+      (planId: studyPlanId, subjectCode: subjectCode, topicCode: topicCode);
 
   String get _title {
     if (planTitle != null) return 'Kaynaklar · $planTitle';
@@ -86,7 +88,11 @@ class ResourcesScreen extends ConsumerWidget {
               ],
             ),
           ),
-        StudyResourceLoaded(:final items, :final errorMessage, :final statistics) =>
+        StudyResourceLoaded(
+          :final items,
+          :final errorMessage,
+          :final statistics,
+        ) =>
           RefreshIndicator(
             onRefresh: () =>
                 ref.read(studyResourceProvider(_key).notifier).load(),
@@ -128,13 +134,15 @@ class ResourcesScreen extends ConsumerWidget {
                   ...items.map(
                     (r) => ResourceCard(
                       resource: r,
-                      onOpen: () =>
-                          ref.read(studyResourceProvider(_key).notifier).open(r.id),
+                      onOpen: () => ref
+                          .read(studyResourceProvider(_key).notifier)
+                          .open(r.id),
                       onComplete: () => ref
                           .read(studyResourceProvider(_key).notifier)
                           .setStatus(r.id, ResourceStatus.completed),
-                      onDelete: () =>
-                          ref.read(studyResourceProvider(_key).notifier).delete(r.id),
+                      onDelete: () => ref
+                          .read(studyResourceProvider(_key).notifier)
+                          .delete(r.id),
                     ),
                   ),
               ],
@@ -147,9 +155,12 @@ class ResourcesScreen extends ConsumerWidget {
   Future<void> _showAddSheet(BuildContext context, WidgetRef ref) async {
     final titleCtrl = TextEditingController();
     final urlCtrl = TextEditingController();
+    var inputMode = _ResourceInputMode.link;
     var type = ResourceType.youtube;
+    PlatformFile? selectedFile;
+    var isUploading = false;
 
-    final ok = await showModalBottomSheet<bool>(
+    final finalUrl = await showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
       builder: (ctx) {
@@ -162,62 +173,218 @@ class ResourcesScreen extends ConsumerWidget {
           ),
           child: StatefulBuilder(
             builder: (ctx, setLocal) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Kaynak ekle',
-                    style: Theme.of(ctx).textTheme.titleLarge,
-                  ),
-                  if (subjectCode != null && subjectCode!.isNotEmpty) ...[
-                    const SizedBox(height: 4),
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
                     Text(
-                      topicCode != null && topicCode!.isNotEmpty 
-                          ? '${subjectCode!.toUpperCase()} - ${topicCode!} konusuna eklenecek'
-                          : '${subjectCode!.toUpperCase()} dersine eklenecek',
-                      style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(ctx).colorScheme.onSurfaceVariant,
+                      'Kaynak ekle',
+                      style: Theme.of(ctx).textTheme.titleLarge,
+                    ),
+                    if (subjectCode != null && subjectCode!.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        topicCode != null && topicCode!.isNotEmpty
+                            ? '${subjectCode!.toUpperCase()} - ${topicCode!} konusuna eklenecek'
+                            : '${subjectCode!.toUpperCase()} dersine eklenecek',
+                        style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(ctx).colorScheme.onSurfaceVariant,
+                            ),
+                      ),
+                    ],
+                    const SizedBox(height: 12),
+                    SegmentedButton<_ResourceInputMode>(
+                      segments: const [
+                        ButtonSegment(
+                          value: _ResourceInputMode.link,
+                          icon: Icon(Icons.link),
+                          label: Text('Bağlantı ekle'),
+                        ),
+                        ButtonSegment(
+                          value: _ResourceInputMode.device,
+                          icon: Icon(Icons.upload_file),
+                          label: Text('Cihazdan ekle'),
+                        ),
+                      ],
+                      selected: {inputMode},
+                      onSelectionChanged: (selection) {
+                        setLocal(() {
+                          inputMode = selection.first;
+                          type = inputMode == _ResourceInputMode.link
+                              ? ResourceType.youtube
+                              : ResourceType.pdf;
+                          selectedFile = null;
+                          urlCtrl.clear();
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: titleCtrl,
+                      decoration: const InputDecoration(
+                        labelText: 'Başlık',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<ResourceType>(
+                      key: ValueKey((inputMode, type)),
+                      initialValue: type,
+                      decoration: const InputDecoration(
+                        labelText: 'Tür',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: (inputMode == _ResourceInputMode.link
+                              ? const [
+                                  ResourceType.youtube,
+                                  ResourceType.website,
+                                ]
+                              : const [
+                                  ResourceType.pdf,
+                                  ResourceType.audio,
+                                  ResourceType.video,
+                                  ResourceType.document,
+                                  ResourceType.book,
+                                  ResourceType.note,
+                                  ResourceType.other,
+                                ])
+                          .map(
+                            (t) => DropdownMenuItem(
+                              value: t,
+                              child: Text(t.label),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (v) {
+                        if (v != null) {
+                          setLocal(() {
+                            type = v;
+                            selectedFile = null;
+                            urlCtrl.clear();
+                          });
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    if (inputMode == _ResourceInputMode.link)
+                      TextField(
+                        controller: urlCtrl,
+                        keyboardType: TextInputType.url,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          labelText: type == ResourceType.youtube
+                              ? 'URL (YouTube linki)'
+                              : 'Web URL',
+                          prefixIcon: const Icon(Icons.link),
+                          border: const OutlineInputBorder(),
+                        ),
+                      )
+                    else
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          OutlinedButton.icon(
+                            icon: const Icon(Icons.upload_file),
+                            label: Text(
+                              selectedFile?.name ?? _filePickerLabel(type),
+                            ),
+                            onPressed: () async {
+                              final result = await FilePicker.pickFiles(
+                                withData: true,
+                              );
+                              if (result != null && result.files.isNotEmpty) {
+                                setLocal(
+                                  () => selectedFile = result.files.first,
+                                );
+                              }
+                            },
                           ),
+                          if (selectedFile != null) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              '${selectedFile!.name} · ${_formatFileSize(selectedFile!.size)}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(ctx).textTheme.bodySmall,
+                            ),
+                          ],
+                        ],
+                      ),
+                    const SizedBox(height: 16),
+                    FilledButton(
+                      onPressed: isUploading
+                          ? null
+                          : () async {
+                              var url = urlCtrl.text.trim();
+                              if (inputMode == _ResourceInputMode.link &&
+                                  url.isEmpty) {
+                                ScaffoldMessenger.of(ctx).showSnackBar(
+                                  const SnackBar(
+                                    content:
+                                        Text('Lütfen bir bağlantı girin.'),
+                                  ),
+                                );
+                                return;
+                              }
+                              if (inputMode == _ResourceInputMode.device) {
+                                if (selectedFile == null) {
+                                  ScaffoldMessenger.of(ctx).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Lütfen bir dosya seçin.'),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                final hasBytes = selectedFile!.bytes != null;
+                                final hasPath = selectedFile!.path != null &&
+                                    selectedFile!.path!.isNotEmpty;
+                                if (!hasBytes && !hasPath) {
+                                  ScaffoldMessenger.of(ctx).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Dosya okunamadı. Daha küçük bir dosya deneyin.',
+                                      ),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                setLocal(() => isUploading = true);
+                                try {
+                                  final repo = ref.read(
+                                    studyResourceRepositoryProvider,
+                                  );
+                                  url = await repo.uploadResourceFile(
+                                    selectedFile!.bytes ?? const <int>[],
+                                    selectedFile!.name,
+                                    filePath: selectedFile!.path,
+                                  );
+                                } catch (e) {
+                                  setLocal(() => isUploading = false);
+                                  if (ctx.mounted) {
+                                    ScaffoldMessenger.of(ctx).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Yükleme hatası: $e'),
+                                      ),
+                                    );
+                                  }
+                                  return;
+                                }
+                              }
+
+                              if (ctx.mounted) {
+                                Navigator.pop(ctx, url);
+                              }
+                            },
+                      child: isUploading
+                          ? const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Text('Kaydet'),
                     ),
                   ],
-                  const SizedBox(height: 12),
-                  TextField(
-                    controller: titleCtrl,
-                    decoration: const InputDecoration(
-                      labelText: 'Başlık',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: urlCtrl,
-                    decoration: const InputDecoration(
-                      labelText: 'URL (YouTube linki)',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  DropdownButtonFormField<ResourceType>(
-                    value: type,
-                    decoration: const InputDecoration(
-                      labelText: 'Tür',
-                      border: OutlineInputBorder(),
-                    ),
-                    items: ResourceType.values
-                        .map(
-                          (t) => DropdownMenuItem(value: t, child: Text(t.label)),
-                        )
-                        .toList(),
-                    onChanged: (v) {
-                      if (v != null) setLocal(() => type = v);
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  FilledButton(
-                    onPressed: () => Navigator.pop(ctx, true),
-                    child: const Text('Kaydet'),
-                  ),
-                ],
+                ),
               );
             },
           ),
@@ -225,11 +392,13 @@ class ResourcesScreen extends ConsumerWidget {
       },
     );
 
-    if (ok == true && context.mounted) {
+    if (finalUrl != null && context.mounted) {
       await ref.read(studyResourceProvider(_key).notifier).create(
-            title: titleCtrl.text.trim().isEmpty ? 'Kaynak' : titleCtrl.text.trim(),
+            title: titleCtrl.text.trim().isEmpty
+                ? 'Kaynak'
+                : titleCtrl.text.trim(),
             resourceType: type,
-            url: urlCtrl.text.trim().isEmpty ? null : urlCtrl.text.trim(),
+            url: finalUrl.isEmpty ? null : finalUrl,
           );
     }
     titleCtrl.dispose();
@@ -237,8 +406,26 @@ class ResourcesScreen extends ConsumerWidget {
   }
 }
 
+enum _ResourceInputMode { link, device }
+
+String _filePickerLabel(ResourceType type) => switch (type) {
+      ResourceType.pdf => 'Cihazdan PDF seç',
+      ResourceType.audio => 'Cihazdan ses dosyası seç',
+      ResourceType.video => 'Cihazdan video seç',
+      ResourceType.document => 'Cihazdan doküman seç',
+      _ => 'Cihazdan dosya seç',
+    };
+
+String _formatFileSize(int bytes) {
+  if (bytes < 1024) return '$bytes B';
+  final kilobytes = bytes / 1024;
+  if (kilobytes < 1024) return '${kilobytes.toStringAsFixed(1)} KB';
+  return '${(kilobytes / 1024).toStringAsFixed(1)} MB';
+}
+
 class _StatsPlaceholder extends ConsumerWidget {
-  const _StatsPlaceholder({required ResourceKey resourceKey}) : _key = resourceKey;
+  const _StatsPlaceholder({required ResourceKey resourceKey})
+      : _key = resourceKey;
 
   final ResourceKey _key;
 

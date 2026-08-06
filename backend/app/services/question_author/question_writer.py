@@ -48,6 +48,7 @@ async def write_question(
     model: str | None = None,
     use_llm: bool = True,
     correct_only: bool = False,
+    eae_grounding_context: str | None = None,
 ) -> dict[str, Any]:
     if not use_llm:
         return _stub_question(plan, correct_only=correct_only)
@@ -58,6 +59,7 @@ async def write_question(
                 plan.to_dict(),
                 style=plan.style_contract,
                 correct_only=correct_only,
+                eae_grounding_context=eae_grounding_context,
             ),
             context={
                 "kind": "author_writer",

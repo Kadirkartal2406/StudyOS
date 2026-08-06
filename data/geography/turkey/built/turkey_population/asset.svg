@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 480.0">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<path id="turkey_population_v1::density_zone::yogun_marmara" d="M119.23 68.38 L219.23 68.38 L219.23 138.38 L119.23 138.38 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_population_v1::density_zone::seyrek_dogu" d="M750.51 161.77 L890.51 161.77 L890.51 251.77 L750.51 251.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_population_v1::metro_area::istanbul_metro" d="M153.46 77.76 L203.46 77.76 L203.46 112.76 L153.46 112.76 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_population_v1::metro_area::ankara_metro" d="M356.92 160.02 L396.92 160.02 L396.92 190.02 L356.92 190.02 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_population_v1::major_city::izmir_kent" d="M78.10 286.52 C78.10 283.21 80.79 280.52 84.10 280.52 C87.41 280.52 90.10 283.21 90.10 286.52 C90.10 289.83 87.41 292.52 84.10 292.52 C80.79 292.52 78.10 289.83 78.10 286.52 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_population_v1::major_city::bursa_kent" d="M176.56 155.82 C176.56 152.51 179.25 149.82 182.56 149.82 C185.87 149.82 188.56 152.51 188.56 155.82 C188.56 159.13 185.87 161.82 182.56 161.82 C179.25 161.82 176.56 159.13 176.56 155.82 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_population_v1::major_city::antalya_kent" d="M261.18 398.77 C261.18 395.46 263.87 392.77 267.18 392.77 C270.49 392.77 273.18 395.46 273.18 398.77 C273.18 402.08 270.49 404.77 267.18 404.77 C263.87 404.77 261.18 402.08 261.18 398.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+</svg>

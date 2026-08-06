@@ -613,6 +613,53 @@ class EvidenceService:
             "last_evidence_at": last_ev.isoformat() if last_ev else None,
         }
 
+    # ── Ingest: EAE Asset Interaction (Behavioral Micro) ──────────────────────
+
+    async def ingest_asset_interaction(
+        self,
+        user_id: uuid.UUID,
+        subject_code: str,
+        topic_code: str,
+        asset_id: str,
+        node_id: str,
+        is_correct: bool,
+        source_id: uuid.UUID | None = None,
+    ) -> TopicEvidence | None:
+        """
+        Kullanıcı harita/görsel üzerinde bir alt bileşen (node) seçtiğinde çağrılır.
+        Hatalı seçimlerde veya başarılı etkileşimlerde mikro kanıt toplar.
+        """
+        canonical_sub, canonical_top = self.bind(
+            subject_code=subject_code,
+            topic_code=topic_code,
+        )
+
+        ev = TopicEvidence(
+            user_id=user_id,
+            subject_code=canonical_sub,
+            topic_code=canonical_top,
+            category=EvidenceCategory.BEHAVIORAL_MICRO,
+            horizon=EvidenceHorizon.SHORT,
+            value=1.0 if is_correct else 0.0,
+            quality_weight=0.4, # Mikro etkileşim olduğu için ağırlığı düşük
+            source_type=EvidenceSourceType.AI_QUESTION, # veya yeni bir source
+            source_id=source_id or uuid.uuid4(),
+            metadata_={
+                "type": "asset_interaction",
+                "asset_id": asset_id,
+                "node_id": node_id,
+                "is_correct": is_correct,
+            },
+            occurred_at=datetime.now(UTC),
+        )
+        result = await self.repo.add_evidence(ev)
+        
+        if not is_correct:
+            # Hatalı tıklamalarda Confidence recalculate tetikleyebiliriz
+            await self.trigger_confidence_recalculation(user_id, canonical_sub, canonical_top)
+            
+        return result
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 

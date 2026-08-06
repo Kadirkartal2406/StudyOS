@@ -3,9 +3,12 @@ StudyOS — Study Resources Endpoint'leri
 Sprint-2.5 — /api/v1/resources
 """
 
+import os
+import shutil
 import uuid
+from pathlib import Path
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.dependencies import get_current_user
@@ -23,6 +26,9 @@ from app.schemas.study_resource import (
 from app.services.study_resource_service import StudyResourceService
 
 router = APIRouter()
+
+# Yüklenen dosyalar main.py'de /uploads altında statik olarak sunulur.
+UPLOADS_DIR = Path(__file__).resolve().parents[4] / "data" / "uploads" / "resources"
 
 
 @router.get("/statistics", response_model=SuccessResponse[ResourceStatistics])
@@ -63,6 +69,26 @@ async def create_resource(
 ) -> SuccessResponse[StudyResourceRead]:
     data = await StudyResourceService(db).create_resource(current_user.id, body)
     return SuccessResponse(data=data, message="Kaynak oluşturuldu")
+
+
+@router.post("/upload", response_model=SuccessResponse[dict])
+async def upload_resource_file(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+) -> SuccessResponse[dict]:
+    """Cihazdan seçilen PDF/ses/video/doküman dosyasını sunucuya yükler."""
+    UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+
+    extension = os.path.splitext(file.filename or "")[1]
+    stored_name = f"{uuid.uuid4()}{extension}"
+
+    with open(UPLOADS_DIR / stored_name, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    return SuccessResponse(
+        data={"url": f"/uploads/resources/{stored_name}"},
+        message="Dosya yüklendi",
+    )
 
 
 @router.get("/{resource_id}", response_model=SuccessResponse[StudyResourceRead])

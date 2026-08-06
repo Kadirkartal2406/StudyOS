@@ -21,6 +21,8 @@ from app.services.question_intelligence.multi_stage_review import run_multi_stag
 from app.services.question_intelligence.scorecard import build_scorecard
 from app.services.question_intelligence.auto_repair import auto_repair
 from app.services.question_intelligence.batch_report import generate_batch_report
+# EAE Sprint 4+1 — Node ID hallucination guard (P_EAE quality gate)
+from app.services.question_intelligence.eae_node_verifier import EAENodeVerifier
 
 logger = logging.getLogger("studyos.m34")
 
@@ -35,6 +37,7 @@ def evaluate_question(
     review_scores: dict[str, Any] | None = None,
     vsse_scores: dict[str, Any] | None = None,
     allow_repair: bool = True,
+    eae_asset_node_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     """Run full M34 evaluation on a single question.
     
@@ -50,6 +53,7 @@ def evaluate_question(
       - repair: AutoRepairResult | None
       - reject_reason: str | None
       - question: dict (possibly repaired)
+      - eae_node_verification: NodeVerificationResult | None
     """
     plan = plan or {}
     existing_stems = existing_stems or []
@@ -91,11 +95,24 @@ def evaluate_question(
         vsse_scores=vsse_scores,
     )
     
+    # P_EAE: EAE Visual Node ID Hallucination Guard
+    # Only runs when a visual EAE asset is attached to the question (eae_asset_node_ids supplied).
+    eae_node_verification = None
+    if eae_asset_node_ids is not None:
+        eae_node_verification = EAENodeVerifier().verify_question_grounding(
+            question_payload=repaired_question,
+            available_node_ids=eae_asset_node_ids,
+        )
+
     # Decision
     reject_reason = None
     accepted = True
-    
-    if bp.score < MIN_BLUEPRINT_SCORE:
+
+    # P_EAE runs first — hallucinated node IDs are an immediate hard reject
+    if eae_node_verification is not None and not eae_node_verification.is_valid:
+        accepted = False
+        reject_reason = f"eae_node_hallucination:{eae_node_verification.missing_node_ids}"
+    elif bp.score < MIN_BLUEPRINT_SCORE:
         accepted = False
         reject_reason = f"blueprint_low:{bp.score}"
     elif not ef.passed:
@@ -112,10 +129,11 @@ def evaluate_question(
         reject_reason = f"scorecard_low:{sc.overall}"
 
     logger.info(
-        "[PIPELINE] 6. evaluate_question decision | accepted=%s reject_reason=%s bp_score=%s ef_score=%s ef_passed=%s uq_unique=%s ms_passed=%s sc_overall=%s",
-        accepted, reject_reason, bp.score, ef.score, ef.passed, uq.is_unique, ms.passed, sc.overall,
+        "[PIPELINE] M34 evaluate_question | accepted=%s reject_reason=%s bp=%s ef=%s uq=%s ms=%s sc=%s eae_ok=%s",
+        accepted, reject_reason, bp.score, ef.score, uq.is_unique, ms.passed, sc.overall,
+        eae_node_verification.is_valid if eae_node_verification else "n/a",
     )
-    
+
     return {
         "accepted": accepted,
         "scorecard": sc,
@@ -128,6 +146,7 @@ def evaluate_question(
         "repair": repair_result,
         "reject_reason": reject_reason,
         "question": repaired_question,
+        "eae_node_verification": eae_node_verification,
     }
 
 

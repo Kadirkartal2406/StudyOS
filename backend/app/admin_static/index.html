@@ -26,6 +26,7 @@
         <button data-tab="users" class="nav">Kullanıcılar</button>
         <button data-tab="questions" class="nav">Sorular</button>
         <button data-tab="question-pool" class="nav">Question Pool</button>
+        <button data-tab="assets" class="nav">Assets</button>
       </nav>
       <button id="logout-btn" class="ghost">Çıkış</button>
     </aside>
@@ -160,6 +161,57 @@
             </thead>
             <tbody id="qp-inventory-body"></tbody>
           </table>
+        </div>
+      </section>
+
+      <section id="tab-assets" class="tab" hidden>
+        <div class="toolbar">
+          <input id="asset-search" placeholder="Asset ara (q)…" />
+          <select id="asset-domain">
+            <option value="geography" selected>geography</option>
+            <option value="">tümü</option>
+          </select>
+          <button id="asset-search-btn">Ara</button>
+        </div>
+        <div class="row" style="gap:16px;align-items:flex-start;">
+          <div style="flex:1;min-width:260px;">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Başlık</th><th>URI</th><th>v</th><th></th></tr>
+                </thead>
+                <tbody id="assets-body"></tbody>
+              </table>
+            </div>
+            <fieldset style="border:1px solid var(--border,#ddd);border-radius:8px;padding:12px;margin-top:12px;">
+              <legend>Compile / Upload</legend>
+              <label>SVG<input id="asset-svg-file" type="file" accept=".svg,image/svg+xml" /></label>
+              <label>Manifest JSON<textarea id="asset-manifest-json" rows="6" style="width:100%;font-family:monospace;font-size:12px;"></textarea></label>
+              <button id="asset-compile-btn">Compile &amp; Register</button>
+              <div id="asset-compile-result" class="muted" style="margin-top:8px;font-size:13px;"></div>
+            </fieldset>
+          </div>
+          <div style="flex:1.4;min-width:320px;">
+            <div id="asset-preview-meta" class="muted" style="margin-bottom:8px;">Asset seçin</div>
+            <div id="asset-preview-svg" style="border:1px solid var(--border,#ddd);border-radius:8px;min-height:220px;background:#f8fafc;overflow:auto;"></div>
+            <div class="toolbar" style="margin-top:8px;">
+              <input id="asset-node-search" placeholder="Node ara…" />
+            </div>
+            <div class="table-wrap" style="max-height:280px;overflow:auto;">
+              <table>
+                <thead><tr><th>Node ID</th><th>Ad</th><th></th></tr></thead>
+                <tbody id="asset-nodes-body"></tbody>
+              </table>
+            </div>
+            <fieldset style="border:1px solid var(--border,#ddd);border-radius:8px;padding:12px;margin-top:12px;">
+              <legend>Node metadata</legend>
+              <input type="hidden" id="asset-edit-node-id" />
+              <label>Name (JSON)<textarea id="asset-edit-name" rows="2" style="width:100%;font-family:monospace;font-size:12px;"></textarea></label>
+              <label>Attributes (JSON)<textarea id="asset-edit-attrs" rows="5" style="width:100%;font-family:monospace;font-size:12px;"></textarea></label>
+              <button id="asset-node-save-btn">Kaydet</button>
+              <div id="asset-node-save-result" class="muted" style="margin-top:6px;font-size:13px;"></div>
+            </fieldset>
+          </div>
         </div>
       </section>
     </main>

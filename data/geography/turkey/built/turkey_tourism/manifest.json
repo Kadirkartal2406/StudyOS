@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+  "version": "1.0.0",
+  "domain": "geography",
+  "format": "svg",
+  "title": {
+    "tr": "Türkiye Turizm Haritası",
+    "en": "Turkey Tourism Map"
+  },
+  "viewport": {
+    "width": 1000.0,
+    "height": 480.0,
+    "default_scale": 1.0,
+    "max_scale": 12.0
+  },
+  "layers": [
+    {
+      "id": "unesco",
+      "z_index": 0,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_tourism_v1::unesco::cappadocia",
+          "name": {
+            "tr": "Kapadokya",
+            "en": "Cappadocia"
+          },
+          "bounding_box": [
+            469.92,
+            266.23,
+            483.92,
+            280.23
+          ],
+          "attributes": {
+            "layer_type": "unesco",
+            "feature_class": "unesco",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kapadokya"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        },
+        {
+          "id": "turkey_tourism_v1::unesco::pamukkale",
+          "name": {
+            "tr": "Pamukkale",
+            "en": "Pamukkale"
+          },
+          "bounding_box": [
+            177.62,
+            317.92,
+            191.62,
+            331.92
+          ],
+          "attributes": {
+            "layer_type": "unesco",
+            "feature_class": "unesco",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Pamukkale"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        },
+        {
+          "id": "turkey_tourism_v1::unesco::troy",
+          "name": {
+            "tr": "Troya",
+            "en": "Troy"
+          },
+          "bounding_box": [
+            28.9,
+            165.8,
+            42.9,
+            179.8
+          ],
+          "attributes": {
+            "layer_type": "unesco",
+            "feature_class": "unesco",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Troya"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        },
+        {
+          "id": "turkey_tourism_v1::unesco::gobeklitepe",
+          "name": {
+            "tr": "Göbeklitepe",
+            "en": "Gobekli Tepe"
+          },
+          "bounding_box": [
+            681.21,
+            368.14,
+            695.21,
+            382.14
+          ],
+          "attributes": {
+            "layer_type": "unesco",
+            "feature_class": "unesco",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Göbeklitepe"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "national_park",
+      "z_index": 1,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_tourism_v1::national_park::uludag",
+          "name": {
+            "tr": "Uludağ Milli Parkı",
+            "en": "Uludag NP"
+          },
+          "bounding_box": [
+            180.18,
+            157.68,
+            194.18,
+            171.68
+          ],
+          "attributes": {
+            "layer_type": "national_park",
+            "feature_class": "national_park",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Uludağ Milli Parkı"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        },
+        {
+          "id": "turkey_tourism_v1::national_park::kazdagi",
+          "name": {
+            "tr": "Kazdağı Milli Parkı",
+            "en": "Kazdag NP"
+          },
+          "bounding_box": [
+            59.67,
+            185.0,
+            73.67,
+            199.0
+          ],
+          "attributes": {
+            "layer_type": "national_park",
+            "feature_class": "national_park",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kazdağı Milli Parkı"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tourism_center",
+      "z_index": 2,
+      "min_lod": 1.2,
+      "nodes": [
+        {
+          "id": "turkey_tourism_v1::tourism_center::antalya_turizm",
+          "name": {
+            "tr": "Antalya Turizm Merkezi",
+            "en": "Antalya Tourism"
+          },
+          "bounding_box": [
+            260.18,
+            391.77,
+            274.18,
+            405.77
+          ],
+          "attributes": {
+            "layer_type": "tourism_center",
+            "feature_class": "tourism_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Antalya Turizm Merkezi"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        },
+        {
+          "id": "turkey_tourism_v1::tourism_center::bodrum",
+          "name": {
+            "tr": "Bodrum",
+            "en": "Bodrum"
+          },
+          "bounding_box": [
+            91.97,
+            382.17,
+            105.97,
+            396.17
+          ],
+          "attributes": {
+            "layer_type": "tourism_center",
+            "feature_class": "tourism_center",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bodrum"
+            ],
+            "evidence_topic_hints": [
+              "turizm"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "cografya",
+    "turizm",
+    "unesco"
+  ],
+  "license_type": "studyos_core",
+  "tenant_id": null
+}

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/errors/app_exception.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
+import '../../../educational_assets/presentation/components/eae_interactive_canvas.dart';
 import '../../data/topic_quiz_remote_datasource.dart';
 
 /// Sprint 14 — Topic Quiz Session (Secondary tool).
@@ -33,6 +34,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
   QuizGenerationEntity? _quiz;
   QuizSubmitResultEntity? _result;
   final Map<String, String?> _answers = {};
+  final Map<String, String?> _selectedNodes = {};
   int _index = 0;
 
   @override
@@ -56,6 +58,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
       _error = null;
       _result = null;
       _answers.clear();
+      _selectedNodes.clear();
       _index = 0;
     });
     try {
@@ -119,6 +122,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
       _error = null;
       _result = null;
       _answers.clear();
+      _selectedNodes.clear();
       _index = 0;
     });
     try {
@@ -158,6 +162,11 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
             generationId: quiz.id,
             answers: {
               for (final item in quiz.items) item.id: _answers[item.id],
+            },
+            selectedNodes: {
+              for (final item in quiz.items)
+                if (_selectedNodes[item.id] != null)
+                  item.id: _selectedNodes[item.id],
             },
           );
       if (!mounted) return;
@@ -272,6 +281,39 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
                     ),
               ),
               const SizedBox(height: 16),
+              if (item.targetAssetId != null && item.targetAssetId!.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: EAEInteractiveCanvas(
+                    targetAssetId: item.targetAssetId!,
+                    selectedNodeId: _selectedNodes[item.id],
+                    onNodeSelected: (nodeId) {
+                      setState(() {
+                        _selectedNodes[item.id] = nodeId;
+                        // Map node id / label onto A-D choice when possible
+                        for (final entry in item.choices.entries) {
+                          final text = entry.value;
+                          if (text == nodeId ||
+                              text.contains(nodeId) ||
+                              nodeId.endsWith('::${text.toLowerCase().replaceAll(' ', '_')}') ||
+                              nodeId.split('::').last ==
+                                  text
+                                      .toLowerCase()
+                                      .replaceAll('ı', 'i')
+                                      .replaceAll('ğ', 'g')
+                                      .replaceAll('ü', 'u')
+                                      .replaceAll('ş', 's')
+                                      .replaceAll('ö', 'o')
+                                      .replaceAll('ç', 'c')
+                                      .replaceAll(' ', '_')) {
+                            _answers[item.id] = entry.key;
+                            break;
+                          }
+                        }
+                      });
+                    },
+                  ),
+                ),
               ...['A', 'B', 'C', 'D'].map((key) {
                 final text = item.choices[key] ?? '';
                 return Padding(
@@ -378,6 +420,16 @@ class _ResultsView extends StatelessWidget {
                   Text(
                     'Senin: ${item.selectedKey ?? "—"} · Doğru: ${item.correctKey}',
                   ),
+                  if (item.targetAssetId != null && item.targetAssetId!.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12.0, bottom: 8.0),
+                      child: EAEInteractiveCanvas(
+                        targetAssetId: item.targetAssetId!,
+                        correctNodeId: item.correctNodeId,
+                        showAnswer: true,
+                        onNodeSelected: (_) {},
+                      ),
+                    ),
                   if (item.explanation != null && item.explanation!.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Text(

@@ -39,6 +39,7 @@ class DashboardScreen extends ConsumerWidget {
               PopupMenuItem(value: '/assessment/daily', child: Text('Günün denemesi')),
               PopupMenuItem(value: '/assessment', child: Text('Seviye testi')),
               PopupMenuItem(value: '/ai-chat', child: Text('AI sohbet')),
+              PopupMenuItem(value: '/eae-demo', child: Text('EAE Harita')),
               PopupMenuItem(value: '/planner', child: Text('Plan önerisi')),
               PopupMenuItem(value: '/pomodoro', child: Text('Odak oturumu')),
               PopupMenuItem(value: '/exams', child: Text('Deneme sonuçları')),

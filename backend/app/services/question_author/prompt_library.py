@@ -49,6 +49,7 @@ def writer_messages(
     *,
     style: dict[str, Any],
     correct_only: bool = False,
+    eae_grounding_context: str | None = None,
 ) -> list[dict[str, str]]:
     keys = ["A", "B", "C", "D", "E"][: int(author_plan.get("choice_count") or 5)]
     if correct_only:
@@ -61,8 +62,11 @@ JSON: {"stem":"...","correct_answer_text":"...","rationale":"..."}
         system = f"""Sen StudyOS Question Writer'sın.
 Author Plan + Style Contract + Difficulty Target'a uyarak TEK çoktan seçmeli soru yaz.
 Şıklar: {", ".join(keys)}. Tek doğru.
-JSON: {{"stem":"...","choices":{{{", ".join(f'"{k}":"..."' for k in keys)}}},"correct_key":"{keys[0]}","explanation":"..."}}
-ÖSYM dili. Telifli kopya yasak. Plan alanlarını değiştirme."""
+JSON: {{"stem":"...","choices":{{{", ".join(f'"{k}":"..."' for k in keys)}}},"correct_key":"{keys[0]}","explanation":"...","target_node_id":"...","correct_node_id":"..."}}
+ÖSYM dili. Telifli kopya yasak. Plan alanlarını değiştirme.
+EAE görsel sorularda seçenekler ve doğru cevap Node ID kullanmalıdır."""
+    if eae_grounding_context:
+        system = f"{system}\n\n{eae_grounding_context}"
     user = f"""STYLE CONTRACT:
 {json.dumps(_compact_style(style), ensure_ascii=False, indent=2)}
 

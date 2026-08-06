@@ -124,8 +124,10 @@ document.querySelectorAll(".nav").forEach((btn) => {
         ? "Sorular"
         : tab === "question-pool"
         ? "Question Pool"
+        : tab === "assets"
+        ? "Assets"
         : "Admin";
-    ["overview", "users", "questions", "question-pool"].forEach((t) => {
+    ["overview", "users", "questions", "question-pool", "assets"].forEach((t) => {
       $(`tab-${t}`).hidden = t !== tab;
     });
     if (tab !== "question-pool" && _qpProgressTimer) {
@@ -136,6 +138,7 @@ document.querySelectorAll(".nav").forEach((btn) => {
     if (tab === "users") loadUsers();
     if (tab === "questions") loadQuestions();
     if (tab === "question-pool") loadQuestionPool();
+    if (tab === "assets") loadAssets();
   });
 });
 
@@ -990,6 +993,180 @@ $("qp-run-missing-safe-btn").addEventListener("click", async (e) => {
     $("qp-last-result").textContent = `Safe run hata: ${err.message}`;
   } finally {
     btn.disabled = false;
+  }
+});
+
+// ── Assets (EAE) ─────────────────────────────────────────────
+let _selectedAssetId = null;
+let _selectedAssetDetail = null;
+let _assetSvgContent = "";
+
+async function loadAssets() {
+  const q = ($("asset-search")?.value || "").trim();
+  const domain = $("asset-domain")?.value || "";
+  const params = new URLSearchParams({ page: "1", page_size: "50" });
+  if (q) params.set("q", q);
+  if (domain) params.set("domain", domain);
+  try {
+    const res = await api(`/assets/search?${params}`);
+    const items = res.data || [];
+    $("assets-body").innerHTML = items
+      .map((a) => {
+        const title = a.title?.tr || a.title?.en || a.asset_id;
+        return `<tr>
+          <td>${title}</td>
+          <td style="font-size:11px;">${a.asset_id}</td>
+          <td>${a.version}</td>
+          <td><button data-asset-id="${a.id}" class="secondary asset-open-btn">Aç</button></td>
+        </tr>`;
+      })
+      .join("");
+    document.querySelectorAll(".asset-open-btn").forEach((btn) => {
+      btn.addEventListener("click", () => openAsset(btn.dataset.assetId));
+    });
+  } catch (err) {
+    $("assets-body").innerHTML = `<tr><td colspan="4">${err.message}</td></tr>`;
+  }
+}
+
+async function openAsset(assetDbId) {
+  _selectedAssetId = assetDbId;
+  try {
+    const res = await api(`/assets/${assetDbId}`);
+    _selectedAssetDetail = res.data;
+    const title = _selectedAssetDetail.title?.tr || _selectedAssetDetail.asset_id;
+    $("asset-preview-meta").textContent = `${title} · ${_selectedAssetDetail.version} · nodes=${(_selectedAssetDetail.nodes || []).length}`;
+
+    // Prefer bundle SVG for preview
+    try {
+      const raw = await api(`/assets/${assetDbId}/bundle`, { raw: true });
+      const buf = await raw.arrayBuffer();
+      const inflated = await inflateZlib(new Uint8Array(buf));
+      const parsed = JSON.parse(new TextDecoder().decode(inflated));
+      _assetSvgContent = parsed.svg_content || "";
+    } catch (_) {
+      _assetSvgContent = "";
+    }
+    renderAssetPreview(null);
+    renderAssetNodes();
+  } catch (err) {
+    $("asset-preview-meta").textContent = err.message;
+  }
+}
+
+function renderAssetPreview(highlightNodeId) {
+  const host = $("asset-preview-svg");
+  if (!_assetSvgContent) {
+    host.innerHTML = `<div class="muted" style="padding:16px;">Bundle SVG yok — node listesinden highlight deneyin.</div>`;
+    return;
+  }
+  let svg = _assetSvgContent;
+  if (highlightNodeId) {
+    svg = svg.replace(
+      new RegExp(`id="${highlightNodeId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "g"),
+      `id="${highlightNodeId}" fill="#FBBF24" stroke="#B45309" stroke-width="2.5"`
+    );
+  }
+  host.innerHTML = svg;
+}
+
+function renderAssetNodes() {
+  const q = ($("asset-node-search")?.value || "").trim().toLowerCase();
+  const nodes = _selectedAssetDetail?.nodes || [];
+  const filtered = nodes.filter((n) => {
+    const name = (n.name?.tr || n.name?.en || "").toLowerCase();
+    return !q || n.node_id.toLowerCase().includes(q) || name.includes(q);
+  });
+  $("asset-nodes-body").innerHTML = filtered
+    .map(
+      (n) => `<tr>
+      <td style="font-size:11px;">${n.node_id}</td>
+      <td>${n.name?.tr || n.name?.en || ""}</td>
+      <td>
+        <button class="ghost asset-hl-btn" data-node="${n.node_id}">Highlight</button>
+        <button class="secondary asset-edit-btn" data-node="${n.node_id}">Düzenle</button>
+      </td>
+    </tr>`
+    )
+    .join("");
+  document.querySelectorAll(".asset-hl-btn").forEach((btn) => {
+    btn.addEventListener("click", () => renderAssetPreview(btn.dataset.node));
+  });
+  document.querySelectorAll(".asset-edit-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const node = nodes.find((n) => n.node_id === btn.dataset.node);
+      if (!node) return;
+      $("asset-edit-node-id").value = node.node_id;
+      $("asset-edit-name").value = JSON.stringify(node.name || {}, null, 2);
+      $("asset-edit-attrs").value = JSON.stringify(node.attributes || {}, null, 2);
+    });
+  });
+}
+
+async function inflateZlib(bytes) {
+  if (typeof DecompressionStream !== "undefined") {
+    // browsers often lack raw zlib; fall back to manual inflate via pako-less approach
+  }
+  // Use Response + CompressionStream deflate-raw fallback: try DecompressionStream('deflate')
+  try {
+    const ds = new DecompressionStream("deflate");
+    const stream = new Blob([bytes]).stream().pipeThrough(ds);
+    const ab = await new Response(stream).arrayBuffer();
+    return new Uint8Array(ab);
+  } catch (_) {
+    // zlib wrapper: strip 2-byte header + 4-byte checksum if present
+    const raw = bytes.length > 6 ? bytes.slice(2, bytes.length - 4) : bytes;
+    const ds = new DecompressionStream("deflate-raw");
+    const stream = new Blob([raw]).stream().pipeThrough(ds);
+    const ab = await new Response(stream).arrayBuffer();
+    return new Uint8Array(ab);
+  }
+}
+
+$("asset-search-btn")?.addEventListener("click", loadAssets);
+$("asset-node-search")?.addEventListener("input", renderAssetNodes);
+$("asset-compile-btn")?.addEventListener("click", async () => {
+  const file = $("asset-svg-file").files?.[0];
+  const manifest = $("asset-manifest-json").value.trim();
+  if (!file || !manifest) {
+    $("asset-compile-result").textContent = "SVG ve manifest gerekli";
+    return;
+  }
+  const fd = new FormData();
+  fd.append("svg_file", file);
+  fd.append("manifest_json", manifest);
+  try {
+    const t = token();
+    const res = await fetch(`${API}/assets/compile`, {
+      method: "POST",
+      headers: t ? { Authorization: `Bearer ${t}` } : {},
+      body: fd,
+    });
+    const body = await res.json();
+    if (!res.ok || body.success === false) {
+      throw new Error(body?.error?.message || body?.message || `Hata ${res.status}`);
+    }
+    $("asset-compile-result").textContent = `OK: ${body.data?.asset_id}`;
+    loadAssets();
+  } catch (err) {
+    $("asset-compile-result").textContent = err.message;
+  }
+});
+$("asset-node-save-btn")?.addEventListener("click", async () => {
+  if (!_selectedAssetId) return;
+  const nodeId = $("asset-edit-node-id").value;
+  if (!nodeId) return;
+  try {
+    const name = JSON.parse($("asset-edit-name").value || "{}");
+    const attributes = JSON.parse($("asset-edit-attrs").value || "{}");
+    await api(`/assets/${_selectedAssetId}/nodes/${encodeURIComponent(nodeId)}`, {
+      method: "PATCH",
+      body: JSON.stringify({ name, attributes }),
+    });
+    $("asset-node-save-result").textContent = "Kaydedildi";
+    openAsset(_selectedAssetId);
+  } catch (err) {
+    $("asset-node-save-result").textContent = err.message;
   }
 });
 

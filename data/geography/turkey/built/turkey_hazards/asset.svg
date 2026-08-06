@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 480.0">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<path id="turkey_hazards_v1::fault::kuzey_anadolu" d="M76.92 118.15 L230.77 110.77 L384.62 103.38 L538.46 118.15 L743.59 132.92" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hazards_v1::fault::dogu_anadolu" d="M564.10 354.46 L641.03 317.54 L743.59 258.46 L820.51 206.77" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hazards_v1::earthquake_zone::birinci_derece" d="M99.49 75.77 L259.49 75.77 L259.49 145.77 L99.49 145.77 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hazards_v1::earthquake_zone::dogu_yuksek_risk" d="M699.23 198.69 L839.23 198.69 L839.23 288.69 L699.23 288.69 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hazards_v1::landslide::karadeniz_heyelan" d="M581.03 76.00 L701.03 76.00 L701.03 116.00 L581.03 116.00 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hazards_v1::flood::cakurova_sel" d="M467.56 381.27 L537.56 381.27 L537.56 416.27 L467.56 416.27 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+<path id="turkey_hazards_v1::avalanche::dogu_cig" d="M770.51 154.62 L870.51 154.62 L870.51 214.62 L770.51 214.62 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.2"/>
+</svg>

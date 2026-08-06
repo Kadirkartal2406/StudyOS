@@ -1,0 +1,7380 @@
+[
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::country::turkiye",
+    "name": {
+      "tr": "Türkiye",
+      "en": "Turkey"
+    },
+    "layer_type": "country",
+    "attributes": {
+      "layer_type": "country",
+      "feature_class": "sovereign_state",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Türkiye",
+        "Turkey"
+      ],
+      "evidence_topic_hints": [
+        "turkiye_cografyasi"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::marmara",
+    "name": {
+      "tr": "Marmara",
+      "en": "Marmara"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [
+        "turkey_admin_v1::region::ege"
+      ],
+      "qie_aliases": [
+        "Marmara",
+        "Marmara Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "marmara"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::ege",
+    "name": {
+      "tr": "Ege",
+      "en": "Aegean"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [
+        "turkey_admin_v1::region::marmara"
+      ],
+      "qie_aliases": [
+        "Ege",
+        "Ege Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "ege"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::akdeniz",
+    "name": {
+      "tr": "Akdeniz",
+      "en": "Mediterranean"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Akdeniz",
+        "Akdeniz Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::ic_anadolu",
+    "name": {
+      "tr": "İç Anadolu",
+      "en": "Central Anatolia"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İç Anadolu",
+        "İç Anadolu Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::karadeniz",
+    "name": {
+      "tr": "Karadeniz",
+      "en": "Black Sea"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karadeniz",
+        "Karadeniz Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::dogu_anadolu",
+    "name": {
+      "tr": "Doğu Anadolu",
+      "en": "Eastern Anatolia"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Doğu Anadolu",
+        "Doğu Anadolu Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::region::guneydogu_anadolu",
+    "name": {
+      "tr": "Güneydoğu Anadolu",
+      "en": "Southeastern Anatolia"
+    },
+    "layer_type": "region",
+    "attributes": {
+      "layer_type": "region",
+      "feature_class": "geographic_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Güneydoğu Anadolu",
+        "Güneydoğu Anadolu Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bolgeler"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::trakya",
+    "name": {
+      "tr": "Trakya",
+      "en": "Thrace"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Trakya"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "marmara"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::canakkale_bogazi_cevre",
+    "name": {
+      "tr": "Çanakkale Boğazı Çevresi",
+      "en": "Dardanelles Area"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çanakkale Boğazı Çevresi"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "marmara"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::ic_bati_anadolu",
+    "name": {
+      "tr": "İç Batı Anadolu",
+      "en": "Inner West Anatolia"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İç Batı Anadolu"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "ege"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::toroslar",
+    "name": {
+      "tr": "Toroslar",
+      "en": "Taurus Belt"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Toroslar"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::orta_karadeniz",
+    "name": {
+      "tr": "Orta Karadeniz",
+      "en": "Central Black Sea"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Orta Karadeniz"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::yukari_firat",
+    "name": {
+      "tr": "Yukarı Fırat",
+      "en": "Upper Euphrates"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Yukarı Fırat"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::subregion::gap_bolgesi",
+    "name": {
+      "tr": "GAP Bölgesi",
+      "en": "GAP Region"
+    },
+    "layer_type": "subregion",
+    "attributes": {
+      "layer_type": "subregion",
+      "feature_class": "geographic_subregion",
+      "confusable_with": [],
+      "qie_aliases": [
+        "GAP Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "alt_bolgeler"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::adana",
+    "name": {
+      "tr": "Adana",
+      "en": "Adana"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::antalya"
+      ],
+      "qie_aliases": [
+        "Adana",
+        "Adana ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "adana"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::adiyaman",
+    "name": {
+      "tr": "Adıyaman",
+      "en": "Adıyaman"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::diyarbakir"
+      ],
+      "qie_aliases": [
+        "Adıyaman",
+        "Adıyaman ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "adiyaman"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::afyonkarahisar",
+    "name": {
+      "tr": "Afyonkarahisar",
+      "en": "Afyonkarahisar"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::aydin"
+      ],
+      "qie_aliases": [
+        "Afyonkarahisar",
+        "Afyonkarahisar ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "afyonkarahisar"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::agri",
+    "name": {
+      "tr": "Ağrı",
+      "en": "Ağrı"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::bingol"
+      ],
+      "qie_aliases": [
+        "Ağrı",
+        "Ağrı ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "agri"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::amasya",
+    "name": {
+      "tr": "Amasya",
+      "en": "Amasya"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::artvin"
+      ],
+      "qie_aliases": [
+        "Amasya",
+        "Amasya ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "amasya"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::ankara",
+    "name": {
+      "tr": "Ankara",
+      "en": "Ankara"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::konya"
+      ],
+      "qie_aliases": [
+        "Ankara",
+        "Ankara ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "ankara"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::antalya",
+    "name": {
+      "tr": "Antalya",
+      "en": "Antalya"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::izmir"
+      ],
+      "qie_aliases": [
+        "Antalya",
+        "Antalya ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "antalya"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::artvin",
+    "name": {
+      "tr": "Artvin",
+      "en": "Artvin"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Artvin",
+        "Artvin ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "artvin"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::aydin",
+    "name": {
+      "tr": "Aydın",
+      "en": "Aydın"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::afyonkarahisar"
+      ],
+      "qie_aliases": [
+        "Aydın",
+        "Aydın ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "aydin"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::balikesir",
+    "name": {
+      "tr": "Balıkesir",
+      "en": "Balıkesir"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::bilecik"
+      ],
+      "qie_aliases": [
+        "Balıkesir",
+        "Balıkesir ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "balikesir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bilecik",
+    "name": {
+      "tr": "Bilecik",
+      "en": "Bilecik"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Bilecik",
+        "Bilecik ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "bilecik"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bingol",
+    "name": {
+      "tr": "Bingöl",
+      "en": "Bingöl"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Bingöl",
+        "Bingöl ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "bingol"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bitlis",
+    "name": {
+      "tr": "Bitlis",
+      "en": "Bitlis"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Bitlis",
+        "Bitlis ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "bitlis"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bolu",
+    "name": {
+      "tr": "Bolu",
+      "en": "Bolu"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Bolu",
+        "Bolu ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "bolu"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::burdur",
+    "name": {
+      "tr": "Burdur",
+      "en": "Burdur"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adana"
+      ],
+      "qie_aliases": [
+        "Burdur",
+        "Burdur ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "burdur"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bursa",
+    "name": {
+      "tr": "Bursa",
+      "en": "Bursa"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Bursa",
+        "Bursa ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "bursa"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::canakkale",
+    "name": {
+      "tr": "Çanakkale",
+      "en": "Çanakkale"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Çanakkale",
+        "Çanakkale ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "canakkale"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::cankiri",
+    "name": {
+      "tr": "Çankırı",
+      "en": "Çankırı"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Çankırı",
+        "Çankırı ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "cankiri"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::corum",
+    "name": {
+      "tr": "Çorum",
+      "en": "Çorum"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Çorum",
+        "Çorum ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "corum"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::denizli",
+    "name": {
+      "tr": "Denizli",
+      "en": "Denizli"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::afyonkarahisar"
+      ],
+      "qie_aliases": [
+        "Denizli",
+        "Denizli ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "denizli"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::diyarbakir",
+    "name": {
+      "tr": "Diyarbakır",
+      "en": "Diyarbakır"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Diyarbakır",
+        "Diyarbakır ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "diyarbakir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::edirne",
+    "name": {
+      "tr": "Edirne",
+      "en": "Edirne"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Edirne",
+        "Edirne ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "edirne"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::elazig",
+    "name": {
+      "tr": "Elazığ",
+      "en": "Elazığ"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Elazığ",
+        "Elazığ ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "elazig"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::erzincan",
+    "name": {
+      "tr": "Erzincan",
+      "en": "Erzincan"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Erzincan",
+        "Erzincan ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "erzincan"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::erzurum",
+    "name": {
+      "tr": "Erzurum",
+      "en": "Erzurum"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Erzurum",
+        "Erzurum ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "erzurum"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::eskisehir",
+    "name": {
+      "tr": "Eskişehir",
+      "en": "Eskişehir"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Eskişehir",
+        "Eskişehir ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "eskisehir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::gaziantep",
+    "name": {
+      "tr": "Gaziantep",
+      "en": "Gaziantep"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Gaziantep",
+        "Gaziantep ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "gaziantep"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::giresun",
+    "name": {
+      "tr": "Giresun",
+      "en": "Giresun"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Giresun",
+        "Giresun ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "giresun"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::gumushane",
+    "name": {
+      "tr": "Gümüşhane",
+      "en": "Gümüşhane"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Gümüşhane",
+        "Gümüşhane ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "gumushane"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::hakkari",
+    "name": {
+      "tr": "Hakkâri",
+      "en": "Hakkâri"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Hakkâri",
+        "Hakkâri ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "hakkari"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::hatay",
+    "name": {
+      "tr": "Hatay",
+      "en": "Hatay"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adana"
+      ],
+      "qie_aliases": [
+        "Hatay",
+        "Hatay ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "hatay"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::isparta",
+    "name": {
+      "tr": "Isparta",
+      "en": "Isparta"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adana"
+      ],
+      "qie_aliases": [
+        "Isparta",
+        "Isparta ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "isparta"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::mersin",
+    "name": {
+      "tr": "Mersin",
+      "en": "Mersin"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adana"
+      ],
+      "qie_aliases": [
+        "Mersin",
+        "Mersin ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "mersin"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::istanbul",
+    "name": {
+      "tr": "İstanbul",
+      "en": "İstanbul"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "İstanbul",
+        "İstanbul ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "istanbul"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::izmir",
+    "name": {
+      "tr": "İzmir",
+      "en": "İzmir"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::antalya"
+      ],
+      "qie_aliases": [
+        "İzmir",
+        "İzmir ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "izmir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kars",
+    "name": {
+      "tr": "Kars",
+      "en": "Kars"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Kars",
+        "Kars ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "kars"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kastamonu",
+    "name": {
+      "tr": "Kastamonu",
+      "en": "Kastamonu"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Kastamonu",
+        "Kastamonu ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "kastamonu"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kayseri",
+    "name": {
+      "tr": "Kayseri",
+      "en": "Kayseri"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Kayseri",
+        "Kayseri ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "kayseri"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kirklareli",
+    "name": {
+      "tr": "Kırklareli",
+      "en": "Kırklareli"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Kırklareli",
+        "Kırklareli ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "kirklareli"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kirsehir",
+    "name": {
+      "tr": "Kırşehir",
+      "en": "Kırşehir"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Kırşehir",
+        "Kırşehir ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "kirsehir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kocaeli",
+    "name": {
+      "tr": "Kocaeli",
+      "en": "Kocaeli"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Kocaeli",
+        "Kocaeli ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "kocaeli"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::konya",
+    "name": {
+      "tr": "Konya",
+      "en": "Konya"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Konya",
+        "Konya ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "konya"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kutahya",
+    "name": {
+      "tr": "Kütahya",
+      "en": "Kütahya"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::afyonkarahisar"
+      ],
+      "qie_aliases": [
+        "Kütahya",
+        "Kütahya ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "kutahya"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::malatya",
+    "name": {
+      "tr": "Malatya",
+      "en": "Malatya"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Malatya",
+        "Malatya ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "malatya"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::manisa",
+    "name": {
+      "tr": "Manisa",
+      "en": "Manisa"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::afyonkarahisar"
+      ],
+      "qie_aliases": [
+        "Manisa",
+        "Manisa ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "manisa"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kahramanmaras",
+    "name": {
+      "tr": "Kahramanmaraş",
+      "en": "Kahramanmaraş"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adana"
+      ],
+      "qie_aliases": [
+        "Kahramanmaraş",
+        "Kahramanmaraş ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "kahramanmaras"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::mardin",
+    "name": {
+      "tr": "Mardin",
+      "en": "Mardin"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Mardin",
+        "Mardin ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "mardin"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::mugla",
+    "name": {
+      "tr": "Muğla",
+      "en": "Muğla"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::afyonkarahisar"
+      ],
+      "qie_aliases": [
+        "Muğla",
+        "Muğla ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "mugla"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::mus",
+    "name": {
+      "tr": "Muş",
+      "en": "Muş"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Muş",
+        "Muş ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "mus"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::nevsehir",
+    "name": {
+      "tr": "Nevşehir",
+      "en": "Nevşehir"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Nevşehir",
+        "Nevşehir ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "nevsehir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::nigde",
+    "name": {
+      "tr": "Niğde",
+      "en": "Niğde"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Niğde",
+        "Niğde ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "nigde"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::ordu",
+    "name": {
+      "tr": "Ordu",
+      "en": "Ordu"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Ordu",
+        "Ordu ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "ordu"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::rize",
+    "name": {
+      "tr": "Rize",
+      "en": "Rize"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Rize",
+        "Rize ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "rize"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::sakarya",
+    "name": {
+      "tr": "Sakarya",
+      "en": "Sakarya"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Sakarya",
+        "Sakarya ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "sakarya"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::samsun",
+    "name": {
+      "tr": "Samsun",
+      "en": "Samsun"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Samsun",
+        "Samsun ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "samsun"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::siirt",
+    "name": {
+      "tr": "Siirt",
+      "en": "Siirt"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Siirt",
+        "Siirt ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "siirt"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::sinop",
+    "name": {
+      "tr": "Sinop",
+      "en": "Sinop"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Sinop",
+        "Sinop ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "sinop"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::sivas",
+    "name": {
+      "tr": "Sivas",
+      "en": "Sivas"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Sivas",
+        "Sivas ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "sivas"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::tekirdag",
+    "name": {
+      "tr": "Tekirdağ",
+      "en": "Tekirdağ"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Tekirdağ",
+        "Tekirdağ ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "tekirdag"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::tokat",
+    "name": {
+      "tr": "Tokat",
+      "en": "Tokat"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Tokat",
+        "Tokat ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "tokat"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::trabzon",
+    "name": {
+      "tr": "Trabzon",
+      "en": "Trabzon"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Trabzon",
+        "Trabzon ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "trabzon"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::tunceli",
+    "name": {
+      "tr": "Tunceli",
+      "en": "Tunceli"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Tunceli",
+        "Tunceli ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "tunceli"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::sanliurfa",
+    "name": {
+      "tr": "Şanlıurfa",
+      "en": "Şanlıurfa"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Şanlıurfa",
+        "Şanlıurfa ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "sanliurfa"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::usak",
+    "name": {
+      "tr": "Uşak",
+      "en": "Uşak"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::afyonkarahisar"
+      ],
+      "qie_aliases": [
+        "Uşak",
+        "Uşak ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "usak"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::van",
+    "name": {
+      "tr": "Van",
+      "en": "Van"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Van",
+        "Van ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "van"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::yozgat",
+    "name": {
+      "tr": "Yozgat",
+      "en": "Yozgat"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Yozgat",
+        "Yozgat ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "yozgat"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::zonguldak",
+    "name": {
+      "tr": "Zonguldak",
+      "en": "Zonguldak"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Zonguldak",
+        "Zonguldak ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "zonguldak"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::aksaray",
+    "name": {
+      "tr": "Aksaray",
+      "en": "Aksaray"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Aksaray",
+        "Aksaray ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "aksaray"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bayburt",
+    "name": {
+      "tr": "Bayburt",
+      "en": "Bayburt"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Bayburt",
+        "Bayburt ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "bayburt"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::karaman",
+    "name": {
+      "tr": "Karaman",
+      "en": "Karaman"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Karaman",
+        "Karaman ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "karaman"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kirikkale",
+    "name": {
+      "tr": "Kırıkkale",
+      "en": "Kırıkkale"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::ankara"
+      ],
+      "qie_aliases": [
+        "Kırıkkale",
+        "Kırıkkale ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "kirikkale"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::batman",
+    "name": {
+      "tr": "Batman",
+      "en": "Batman"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Batman",
+        "Batman ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "batman"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::sirnak",
+    "name": {
+      "tr": "Şırnak",
+      "en": "Şırnak"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Şırnak",
+        "Şırnak ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "sirnak"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::bartin",
+    "name": {
+      "tr": "Bartın",
+      "en": "Bartın"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Bartın",
+        "Bartın ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "bartin"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::ardahan",
+    "name": {
+      "tr": "Ardahan",
+      "en": "Ardahan"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Ardahan",
+        "Ardahan ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "ardahan"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::igdir",
+    "name": {
+      "tr": "Iğdır",
+      "en": "Iğdır"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::agri"
+      ],
+      "qie_aliases": [
+        "Iğdır",
+        "Iğdır ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "igdir"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::yalova",
+    "name": {
+      "tr": "Yalova",
+      "en": "Yalova"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::balikesir"
+      ],
+      "qie_aliases": [
+        "Yalova",
+        "Yalova ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "yalova"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::karabuk",
+    "name": {
+      "tr": "Karabük",
+      "en": "Karabük"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Karabük",
+        "Karabük ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "karabuk"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::kilis",
+    "name": {
+      "tr": "Kilis",
+      "en": "Kilis"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adiyaman"
+      ],
+      "qie_aliases": [
+        "Kilis",
+        "Kilis ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "kilis"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::osmaniye",
+    "name": {
+      "tr": "Osmaniye",
+      "en": "Osmaniye"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::adana"
+      ],
+      "qie_aliases": [
+        "Osmaniye",
+        "Osmaniye ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "osmaniye"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province::duzce",
+    "name": {
+      "tr": "Düzce",
+      "en": "Düzce"
+    },
+    "layer_type": "province",
+    "attributes": {
+      "layer_type": "province",
+      "feature_class": "admin_province",
+      "confusable_with": [
+        "turkey_admin_v1::province::amasya"
+      ],
+      "qie_aliases": [
+        "Düzce",
+        "Düzce ili"
+      ],
+      "evidence_topic_hints": [
+        "iller",
+        "turkiye_idari"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "duzce"
+      ],
+      "capital": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::adana_merkez",
+    "name": {
+      "tr": "Adana Merkezi",
+      "en": "Adana Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Adana merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "adana"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::adiyaman_merkez",
+    "name": {
+      "tr": "Adıyaman Merkezi",
+      "en": "Adıyaman Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Adıyaman merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "adiyaman"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::afyonkarahisar_merkez",
+    "name": {
+      "tr": "Afyonkarahisar Merkezi",
+      "en": "Afyonkarahisar Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Afyonkarahisar merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "afyonkarahisar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::agri_merkez",
+    "name": {
+      "tr": "Ağrı Merkezi",
+      "en": "Ağrı Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ağrı merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "agri"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::amasya_merkez",
+    "name": {
+      "tr": "Amasya Merkezi",
+      "en": "Amasya Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Amasya merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "amasya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::ankara_merkez",
+    "name": {
+      "tr": "Ankara Merkezi",
+      "en": "Ankara Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ankara merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "ankara"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::antalya_merkez",
+    "name": {
+      "tr": "Antalya Merkezi",
+      "en": "Antalya Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Antalya merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "antalya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::artvin_merkez",
+    "name": {
+      "tr": "Artvin Merkezi",
+      "en": "Artvin Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Artvin merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "artvin"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::aydin_merkez",
+    "name": {
+      "tr": "Aydın Merkezi",
+      "en": "Aydın Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Aydın merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "aydin"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::balikesir_merkez",
+    "name": {
+      "tr": "Balıkesir Merkezi",
+      "en": "Balıkesir Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Balıkesir merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "balikesir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bilecik_merkez",
+    "name": {
+      "tr": "Bilecik Merkezi",
+      "en": "Bilecik Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bilecik merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "bilecik"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bingol_merkez",
+    "name": {
+      "tr": "Bingöl Merkezi",
+      "en": "Bingöl Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bingöl merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "bingol"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bitlis_merkez",
+    "name": {
+      "tr": "Bitlis Merkezi",
+      "en": "Bitlis Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bitlis merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "bitlis"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bolu_merkez",
+    "name": {
+      "tr": "Bolu Merkezi",
+      "en": "Bolu Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bolu merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "bolu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::burdur_merkez",
+    "name": {
+      "tr": "Burdur Merkezi",
+      "en": "Burdur Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Burdur merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "burdur"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bursa_merkez",
+    "name": {
+      "tr": "Bursa Merkezi",
+      "en": "Bursa Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bursa merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "bursa"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::canakkale_merkez",
+    "name": {
+      "tr": "Çanakkale Merkezi",
+      "en": "Çanakkale Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çanakkale merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "canakkale"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::cankiri_merkez",
+    "name": {
+      "tr": "Çankırı Merkezi",
+      "en": "Çankırı Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çankırı merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "cankiri"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::corum_merkez",
+    "name": {
+      "tr": "Çorum Merkezi",
+      "en": "Çorum Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çorum merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "corum"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::denizli_merkez",
+    "name": {
+      "tr": "Denizli Merkezi",
+      "en": "Denizli Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Denizli merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "denizli"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::diyarbakir_merkez",
+    "name": {
+      "tr": "Diyarbakır Merkezi",
+      "en": "Diyarbakır Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Diyarbakır merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "diyarbakir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::edirne_merkez",
+    "name": {
+      "tr": "Edirne Merkezi",
+      "en": "Edirne Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Edirne merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "edirne"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::elazig_merkez",
+    "name": {
+      "tr": "Elazığ Merkezi",
+      "en": "Elazığ Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Elazığ merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "elazig"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::erzincan_merkez",
+    "name": {
+      "tr": "Erzincan Merkezi",
+      "en": "Erzincan Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Erzincan merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "erzincan"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::erzurum_merkez",
+    "name": {
+      "tr": "Erzurum Merkezi",
+      "en": "Erzurum Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Erzurum merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "erzurum"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::eskisehir_merkez",
+    "name": {
+      "tr": "Eskişehir Merkezi",
+      "en": "Eskişehir Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Eskişehir merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "eskisehir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::gaziantep_merkez",
+    "name": {
+      "tr": "Gaziantep Merkezi",
+      "en": "Gaziantep Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Gaziantep merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "gaziantep"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::giresun_merkez",
+    "name": {
+      "tr": "Giresun Merkezi",
+      "en": "Giresun Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Giresun merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "giresun"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::gumushane_merkez",
+    "name": {
+      "tr": "Gümüşhane Merkezi",
+      "en": "Gümüşhane Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Gümüşhane merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "gumushane"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::hakkari_merkez",
+    "name": {
+      "tr": "Hakkâri Merkezi",
+      "en": "Hakkâri Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Hakkâri merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "hakkari"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::hatay_merkez",
+    "name": {
+      "tr": "Hatay Merkezi",
+      "en": "Hatay Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Hatay merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "hatay"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::isparta_merkez",
+    "name": {
+      "tr": "Isparta Merkezi",
+      "en": "Isparta Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Isparta merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "isparta"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::mersin_merkez",
+    "name": {
+      "tr": "Mersin Merkezi",
+      "en": "Mersin Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Mersin merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "mersin"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::istanbul_merkez",
+    "name": {
+      "tr": "İstanbul Merkezi",
+      "en": "İstanbul Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İstanbul merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "istanbul"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::izmir_merkez",
+    "name": {
+      "tr": "İzmir Merkezi",
+      "en": "İzmir Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İzmir merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "izmir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kars_merkez",
+    "name": {
+      "tr": "Kars Merkezi",
+      "en": "Kars Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kars merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "kars"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kastamonu_merkez",
+    "name": {
+      "tr": "Kastamonu Merkezi",
+      "en": "Kastamonu Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kastamonu merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "kastamonu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kayseri_merkez",
+    "name": {
+      "tr": "Kayseri Merkezi",
+      "en": "Kayseri Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kayseri merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "kayseri"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kirklareli_merkez",
+    "name": {
+      "tr": "Kırklareli Merkezi",
+      "en": "Kırklareli Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kırklareli merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "kirklareli"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kirsehir_merkez",
+    "name": {
+      "tr": "Kırşehir Merkezi",
+      "en": "Kırşehir Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kırşehir merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "kirsehir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kocaeli_merkez",
+    "name": {
+      "tr": "Kocaeli Merkezi",
+      "en": "Kocaeli Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kocaeli merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "kocaeli"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::konya_merkez",
+    "name": {
+      "tr": "Konya Merkezi",
+      "en": "Konya Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Konya merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "konya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kutahya_merkez",
+    "name": {
+      "tr": "Kütahya Merkezi",
+      "en": "Kütahya Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kütahya merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "kutahya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::malatya_merkez",
+    "name": {
+      "tr": "Malatya Merkezi",
+      "en": "Malatya Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Malatya merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "malatya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::manisa_merkez",
+    "name": {
+      "tr": "Manisa Merkezi",
+      "en": "Manisa Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Manisa merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "manisa"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kahramanmaras_merkez",
+    "name": {
+      "tr": "Kahramanmaraş Merkezi",
+      "en": "Kahramanmaraş Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kahramanmaraş merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "kahramanmaras"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::mardin_merkez",
+    "name": {
+      "tr": "Mardin Merkezi",
+      "en": "Mardin Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Mardin merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "mardin"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::mugla_merkez",
+    "name": {
+      "tr": "Muğla Merkezi",
+      "en": "Muğla Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Muğla merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "mugla"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::mus_merkez",
+    "name": {
+      "tr": "Muş Merkezi",
+      "en": "Muş Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Muş merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "mus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::nevsehir_merkez",
+    "name": {
+      "tr": "Nevşehir Merkezi",
+      "en": "Nevşehir Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Nevşehir merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "nevsehir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::nigde_merkez",
+    "name": {
+      "tr": "Niğde Merkezi",
+      "en": "Niğde Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Niğde merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "nigde"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::ordu_merkez",
+    "name": {
+      "tr": "Ordu Merkezi",
+      "en": "Ordu Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ordu merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "ordu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::rize_merkez",
+    "name": {
+      "tr": "Rize Merkezi",
+      "en": "Rize Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Rize merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "rize"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::sakarya_merkez",
+    "name": {
+      "tr": "Sakarya Merkezi",
+      "en": "Sakarya Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Sakarya merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "sakarya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::samsun_merkez",
+    "name": {
+      "tr": "Samsun Merkezi",
+      "en": "Samsun Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Samsun merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "samsun"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::siirt_merkez",
+    "name": {
+      "tr": "Siirt Merkezi",
+      "en": "Siirt Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Siirt merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "siirt"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::sinop_merkez",
+    "name": {
+      "tr": "Sinop Merkezi",
+      "en": "Sinop Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Sinop merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "sinop"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::sivas_merkez",
+    "name": {
+      "tr": "Sivas Merkezi",
+      "en": "Sivas Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Sivas merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "sivas"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::tekirdag_merkez",
+    "name": {
+      "tr": "Tekirdağ Merkezi",
+      "en": "Tekirdağ Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Tekirdağ merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "tekirdag"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::tokat_merkez",
+    "name": {
+      "tr": "Tokat Merkezi",
+      "en": "Tokat Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Tokat merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "tokat"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::trabzon_merkez",
+    "name": {
+      "tr": "Trabzon Merkezi",
+      "en": "Trabzon Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Trabzon merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "trabzon"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::tunceli_merkez",
+    "name": {
+      "tr": "Tunceli Merkezi",
+      "en": "Tunceli Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Tunceli merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "tunceli"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::sanliurfa_merkez",
+    "name": {
+      "tr": "Şanlıurfa Merkezi",
+      "en": "Şanlıurfa Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Şanlıurfa merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "sanliurfa"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::usak_merkez",
+    "name": {
+      "tr": "Uşak Merkezi",
+      "en": "Uşak Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Uşak merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ege"
+      ],
+      "province_codes": [
+        "usak"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::van_merkez",
+    "name": {
+      "tr": "Van Merkezi",
+      "en": "Van Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Van merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "van"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::yozgat_merkez",
+    "name": {
+      "tr": "Yozgat Merkezi",
+      "en": "Yozgat Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Yozgat merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "yozgat"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::zonguldak_merkez",
+    "name": {
+      "tr": "Zonguldak Merkezi",
+      "en": "Zonguldak Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Zonguldak merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "zonguldak"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::aksaray_merkez",
+    "name": {
+      "tr": "Aksaray Merkezi",
+      "en": "Aksaray Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Aksaray merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "aksaray"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bayburt_merkez",
+    "name": {
+      "tr": "Bayburt Merkezi",
+      "en": "Bayburt Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bayburt merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "bayburt"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::karaman_merkez",
+    "name": {
+      "tr": "Karaman Merkezi",
+      "en": "Karaman Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karaman merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "karaman"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kirikkale_merkez",
+    "name": {
+      "tr": "Kırıkkale Merkezi",
+      "en": "Kırıkkale Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kırıkkale merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "ic_anadolu"
+      ],
+      "province_codes": [
+        "kirikkale"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::batman_merkez",
+    "name": {
+      "tr": "Batman Merkezi",
+      "en": "Batman Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Batman merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "batman"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::sirnak_merkez",
+    "name": {
+      "tr": "Şırnak Merkezi",
+      "en": "Şırnak Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Şırnak merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "sirnak"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::bartin_merkez",
+    "name": {
+      "tr": "Bartın Merkezi",
+      "en": "Bartın Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bartın merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "bartin"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::ardahan_merkez",
+    "name": {
+      "tr": "Ardahan Merkezi",
+      "en": "Ardahan Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ardahan merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "ardahan"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::igdir_merkez",
+    "name": {
+      "tr": "Iğdır Merkezi",
+      "en": "Iğdır Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Iğdır merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "dogu_anadolu"
+      ],
+      "province_codes": [
+        "igdir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::yalova_merkez",
+    "name": {
+      "tr": "Yalova Merkezi",
+      "en": "Yalova Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Yalova merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "marmara"
+      ],
+      "province_codes": [
+        "yalova"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::karabuk_merkez",
+    "name": {
+      "tr": "Karabük Merkezi",
+      "en": "Karabük Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karabük merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "karabuk"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::kilis_merkez",
+    "name": {
+      "tr": "Kilis Merkezi",
+      "en": "Kilis Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kilis merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "guneydogu_anadolu"
+      ],
+      "province_codes": [
+        "kilis"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::osmaniye_merkez",
+    "name": {
+      "tr": "Osmaniye Merkezi",
+      "en": "Osmaniye Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Osmaniye merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "akdeniz"
+      ],
+      "province_codes": [
+        "osmaniye"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_admin/v1",
+    "node_id": "turkey_admin_v1::province_center::duzce_merkez",
+    "name": {
+      "tr": "Düzce Merkezi",
+      "en": "Düzce Center"
+    },
+    "layer_type": "province_center",
+    "attributes": {
+      "layer_type": "province_center",
+      "feature_class": "admin_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Düzce merkez"
+      ],
+      "evidence_topic_hints": [
+        "il_merkezleri"
+      ],
+      "region_codes": [
+        "karadeniz"
+      ],
+      "province_codes": [
+        "duzce"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::mountain_range::toroslar",
+    "name": {
+      "tr": "Toroslar",
+      "en": "Taurus Mountains"
+    },
+    "layer_type": "mountain_range",
+    "attributes": {
+      "layer_type": "mountain_range",
+      "feature_class": "mountain_range",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Toroslar"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::mountain_range::kuzey_anadolu_daglari",
+    "name": {
+      "tr": "Kuzey Anadolu Dağları",
+      "en": "Northern Anatolian Mts"
+    },
+    "layer_type": "mountain_range",
+    "attributes": {
+      "layer_type": "mountain_range",
+      "feature_class": "mountain_range",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kuzey Anadolu Dağları"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::mountain::agri_dagi",
+    "name": {
+      "tr": "Ağrı Dağı",
+      "en": "Mount Ararat"
+    },
+    "layer_type": "mountain",
+    "attributes": {
+      "layer_type": "mountain",
+      "feature_class": "mountain",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ağrı Dağı"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::peak::agri_zirve",
+    "name": {
+      "tr": "Ağrı Zirvesi",
+      "en": "Ararat Peak"
+    },
+    "layer_type": "peak",
+    "attributes": {
+      "layer_type": "peak",
+      "feature_class": "peak",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ağrı Zirvesi"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::plain::gediz",
+    "name": {
+      "tr": "Gediz Ovası",
+      "en": "Gediz Plain"
+    },
+    "layer_type": "plain",
+    "attributes": {
+      "layer_type": "plain",
+      "feature_class": "plain",
+      "confusable_with": [
+        "turkey_physical_v1::plain::buyuk_menderes"
+      ],
+      "qie_aliases": [
+        "Gediz Ovası"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::plain::buyuk_menderes",
+    "name": {
+      "tr": "Büyük Menderes Ovası",
+      "en": "Buyuk Menderes Plain"
+    },
+    "layer_type": "plain",
+    "attributes": {
+      "layer_type": "plain",
+      "feature_class": "plain",
+      "confusable_with": [
+        "turkey_physical_v1::plain::gediz"
+      ],
+      "qie_aliases": [
+        "Büyük Menderes Ovası"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::plain::cukurova",
+    "name": {
+      "tr": "Çukurova",
+      "en": "Cukurova Plain"
+    },
+    "layer_type": "plain",
+    "attributes": {
+      "layer_type": "plain",
+      "feature_class": "plain",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çukurova"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::plateau::anadolu_platosu",
+    "name": {
+      "tr": "Anadolu Platosu",
+      "en": "Anatolian Plateau"
+    },
+    "layer_type": "plateau",
+    "attributes": {
+      "layer_type": "plateau",
+      "feature_class": "plateau",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Anadolu Platosu"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::valley::firat_vadisi",
+    "name": {
+      "tr": "Fırat Vadisi",
+      "en": "Euphrates Valley"
+    },
+    "layer_type": "valley",
+    "attributes": {
+      "layer_type": "valley",
+      "feature_class": "valley",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Fırat Vadisi"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::strait::istanbul_bogazi",
+    "name": {
+      "tr": "İstanbul Boğazı",
+      "en": "Bosphorus"
+    },
+    "layer_type": "strait",
+    "attributes": {
+      "layer_type": "strait",
+      "feature_class": "strait",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İstanbul Boğazı"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::strait::canakkale_bogazi",
+    "name": {
+      "tr": "Çanakkale Boğazı",
+      "en": "Dardanelles"
+    },
+    "layer_type": "strait",
+    "attributes": {
+      "layer_type": "strait",
+      "feature_class": "strait",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çanakkale Boğazı"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::peninsula::gelibolu",
+    "name": {
+      "tr": "Gelibolu Yarımadası",
+      "en": "Gallipoli Peninsula"
+    },
+    "layer_type": "peninsula",
+    "attributes": {
+      "layer_type": "peninsula",
+      "feature_class": "peninsula",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Gelibolu Yarımadası"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::cape::baba_burnu",
+    "name": {
+      "tr": "Baba Burnu",
+      "en": "Cape Baba"
+    },
+    "layer_type": "cape",
+    "attributes": {
+      "layer_type": "cape",
+      "feature_class": "cape",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Baba Burnu"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::gulf::izmir_korfezi",
+    "name": {
+      "tr": "İzmir Körfezi",
+      "en": "Gulf of Izmir"
+    },
+    "layer_type": "gulf",
+    "attributes": {
+      "layer_type": "gulf",
+      "feature_class": "gulf",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İzmir Körfezi"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::bay::antalya_korfezi",
+    "name": {
+      "tr": "Antalya Körfezi",
+      "en": "Gulf of Antalya"
+    },
+    "layer_type": "bay",
+    "attributes": {
+      "layer_type": "bay",
+      "feature_class": "bay",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Antalya Körfezi"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::island::gokceada",
+    "name": {
+      "tr": "Gökçeada",
+      "en": "Gokceada"
+    },
+    "layer_type": "island",
+    "attributes": {
+      "layer_type": "island",
+      "feature_class": "island",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Gökçeada"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_physical/v1",
+    "node_id": "turkey_physical_v1::island::bozcaada",
+    "name": {
+      "tr": "Bozcaada",
+      "en": "Bozcaada"
+    },
+    "layer_type": "island",
+    "attributes": {
+      "layer_type": "island",
+      "feature_class": "island",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bozcaada"
+      ],
+      "evidence_topic_hints": [
+        "fiziki_cografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::basin::kizilirmak_havzasi",
+    "name": {
+      "tr": "Kızılırmak Havzası",
+      "en": "Kizilirmak Basin"
+    },
+    "layer_type": "basin",
+    "attributes": {
+      "layer_type": "basin",
+      "feature_class": "drainage_basin",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kızılırmak Havzası"
+      ],
+      "evidence_topic_hints": [
+        "havzalar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::basin::firat_dicle_havzasi",
+    "name": {
+      "tr": "Fırat-Dicle Havzası",
+      "en": "Euphrates-Tigris Basin"
+    },
+    "layer_type": "basin",
+    "attributes": {
+      "layer_type": "basin",
+      "feature_class": "drainage_basin",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Fırat-Dicle Havzası"
+      ],
+      "evidence_topic_hints": [
+        "havzalar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::basin::marmara_havzasi",
+    "name": {
+      "tr": "Marmara Havzası",
+      "en": "Marmara Basin"
+    },
+    "layer_type": "basin",
+    "attributes": {
+      "layer_type": "basin",
+      "feature_class": "drainage_basin",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Marmara Havzası"
+      ],
+      "evidence_topic_hints": [
+        "havzalar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::kizilirmak",
+    "name": {
+      "tr": "Kızılırmak",
+      "en": "Kizilirmak"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [
+        "turkey_hydro_v1::river::sakarya",
+        "turkey_hydro_v1::river::yesilirmak"
+      ],
+      "qie_aliases": [
+        "Kızılırmak",
+        "Kızılırmak Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::sakarya",
+    "name": {
+      "tr": "Sakarya",
+      "en": "Sakarya"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [
+        "turkey_hydro_v1::river::kizilirmak"
+      ],
+      "qie_aliases": [
+        "Sakarya",
+        "Sakarya Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::yesilirmak",
+    "name": {
+      "tr": "Yeşilırmak",
+      "en": "Yesilirmak"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [
+        "turkey_hydro_v1::river::kizilirmak"
+      ],
+      "qie_aliases": [
+        "Yeşilırmak",
+        "Yeşilırmak Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::firat",
+    "name": {
+      "tr": "Fırat",
+      "en": "Euphrates"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Fırat",
+        "Fırat Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::dicle",
+    "name": {
+      "tr": "Dicle",
+      "en": "Tigris"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Dicle",
+        "Dicle Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::gediz",
+    "name": {
+      "tr": "Gediz",
+      "en": "Gediz"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [
+        "turkey_hydro_v1::river::ergene"
+      ],
+      "qie_aliases": [
+        "Gediz",
+        "Gediz Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::buyuk_menderes",
+    "name": {
+      "tr": "Büyük Menderes",
+      "en": "Buyuk Menderes"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Büyük Menderes",
+        "Büyük Menderes Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::ergene",
+    "name": {
+      "tr": "Ergene",
+      "en": "Ergene"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [
+        "turkey_hydro_v1::river::gediz"
+      ],
+      "qie_aliases": [
+        "Ergene",
+        "Ergene Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::seyhan",
+    "name": {
+      "tr": "Seyhan",
+      "en": "Seyhan"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Seyhan",
+        "Seyhan Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::river::ceyhan",
+    "name": {
+      "tr": "Ceyhan",
+      "en": "Ceyhan"
+    },
+    "layer_type": "river",
+    "attributes": {
+      "layer_type": "river",
+      "feature_class": "river",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ceyhan",
+        "Ceyhan Nehri"
+      ],
+      "evidence_topic_hints": [
+        "akarsular",
+        "hidrografya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::tributary::delice",
+    "name": {
+      "tr": "Delice",
+      "en": "Delice"
+    },
+    "layer_type": "tributary",
+    "attributes": {
+      "layer_type": "tributary",
+      "feature_class": "tributary",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Delice"
+      ],
+      "evidence_topic_hints": [
+        "kollar"
+      ],
+      "province_codes": [
+        "yozgat"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::lake::van",
+    "name": {
+      "tr": "Van Gölü",
+      "en": "Lake Van"
+    },
+    "layer_type": "lake",
+    "attributes": {
+      "layer_type": "lake",
+      "feature_class": "lake",
+      "confusable_with": [
+        "turkey_hydro_v1::lake::tuz"
+      ],
+      "qie_aliases": [
+        "Van Gölü"
+      ],
+      "evidence_topic_hints": [
+        "goller"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::lake::tuz",
+    "name": {
+      "tr": "Tuz Gölü",
+      "en": "Lake Tuz"
+    },
+    "layer_type": "lake",
+    "attributes": {
+      "layer_type": "lake",
+      "feature_class": "lake",
+      "confusable_with": [
+        "turkey_hydro_v1::lake::van"
+      ],
+      "qie_aliases": [
+        "Tuz Gölü"
+      ],
+      "evidence_topic_hints": [
+        "goller"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::lake::beysehir",
+    "name": {
+      "tr": "Beyşehir Gölü",
+      "en": "Lake Beysehir"
+    },
+    "layer_type": "lake",
+    "attributes": {
+      "layer_type": "lake",
+      "feature_class": "lake",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Beyşehir Gölü"
+      ],
+      "evidence_topic_hints": [
+        "goller"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::lake::egirdir",
+    "name": {
+      "tr": "Eğirdir Gölü",
+      "en": "Lake Egirdir"
+    },
+    "layer_type": "lake",
+    "attributes": {
+      "layer_type": "lake",
+      "feature_class": "lake",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Eğirdir Gölü"
+      ],
+      "evidence_topic_hints": [
+        "goller"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::dam::ataturk",
+    "name": {
+      "tr": "Atatürk Barajı",
+      "en": "Ataturk Dam"
+    },
+    "layer_type": "dam",
+    "attributes": {
+      "layer_type": "dam",
+      "feature_class": "dam",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Atatürk Barajı"
+      ],
+      "evidence_topic_hints": [
+        "barajlar",
+        "gap"
+      ],
+      "gap_project": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::dam::keban",
+    "name": {
+      "tr": "Keban Barajı",
+      "en": "Keban Dam"
+    },
+    "layer_type": "dam",
+    "attributes": {
+      "layer_type": "dam",
+      "feature_class": "dam",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Keban Barajı"
+      ],
+      "evidence_topic_hints": [
+        "barajlar",
+        "gap"
+      ],
+      "gap_project": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::dam::karakaya",
+    "name": {
+      "tr": "Karakaya Barajı",
+      "en": "Karakaya Dam"
+    },
+    "layer_type": "dam",
+    "attributes": {
+      "layer_type": "dam",
+      "feature_class": "dam",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karakaya Barajı"
+      ],
+      "evidence_topic_hints": [
+        "barajlar",
+        "gap"
+      ],
+      "gap_project": true
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::dam::hirfanli",
+    "name": {
+      "tr": "Hirfanlı Barajı",
+      "en": "Hirfanli Dam"
+    },
+    "layer_type": "dam",
+    "attributes": {
+      "layer_type": "dam",
+      "feature_class": "dam",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Hirfanlı Barajı"
+      ],
+      "evidence_topic_hints": [
+        "barajlar"
+      ],
+      "gap_project": false
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::waterfall::dudeniz",
+    "name": {
+      "tr": "Düden Şelalesi",
+      "en": "Duden Falls"
+    },
+    "layer_type": "waterfall",
+    "attributes": {
+      "layer_type": "waterfall",
+      "feature_class": "waterfall",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Düden"
+      ],
+      "evidence_topic_hints": [
+        "selaleler"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hydrography/v1",
+    "node_id": "turkey_hydro_v1::spring::kirkgoz",
+    "name": {
+      "tr": "Kırkgöz Kaynakları",
+      "en": "Kirkgöz Springs"
+    },
+    "layer_type": "spring",
+    "attributes": {
+      "layer_type": "spring",
+      "feature_class": "spring",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kırkgöz"
+      ],
+      "evidence_topic_hints": [
+        "kaynaklar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::climate_zone::karadeniz",
+    "name": {
+      "tr": "Karadeniz İklimi",
+      "en": "Black Sea Climate"
+    },
+    "layer_type": "climate_zone",
+    "attributes": {
+      "layer_type": "climate_zone",
+      "feature_class": "climate_zone",
+      "confusable_with": [
+        "turkey_climate_v1::climate_zone::akdeniz"
+      ],
+      "qie_aliases": [
+        "Karadeniz İklimi"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::climate_zone::akdeniz",
+    "name": {
+      "tr": "Akdeniz İklimi",
+      "en": "Mediterranean Climate"
+    },
+    "layer_type": "climate_zone",
+    "attributes": {
+      "layer_type": "climate_zone",
+      "feature_class": "climate_zone",
+      "confusable_with": [
+        "turkey_climate_v1::climate_zone::karadeniz"
+      ],
+      "qie_aliases": [
+        "Akdeniz İklimi"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::climate_zone::karasal",
+    "name": {
+      "tr": "Karasal İklim",
+      "en": "Continental Climate"
+    },
+    "layer_type": "climate_zone",
+    "attributes": {
+      "layer_type": "climate_zone",
+      "feature_class": "climate_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karasal İklim"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::climate_zone::marmara_gecis",
+    "name": {
+      "tr": "Marmara Geçiş İklimi",
+      "en": "Marmara Transitional"
+    },
+    "layer_type": "climate_zone",
+    "attributes": {
+      "layer_type": "climate_zone",
+      "feature_class": "climate_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Marmara Geçiş İklimi"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::precip_zone::yuksek_yagis_karadeniz",
+    "name": {
+      "tr": "Yüksek Yağış — Karadeniz",
+      "en": "High Precip Black Sea"
+    },
+    "layer_type": "precip_zone",
+    "attributes": {
+      "layer_type": "precip_zone",
+      "feature_class": "precip_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Yüksek Yağış — Karadeniz"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::precip_zone::dusuk_yagis_ic_anadolu",
+    "name": {
+      "tr": "Düşük Yağış — İç Anadolu",
+      "en": "Low Precip Central"
+    },
+    "layer_type": "precip_zone",
+    "attributes": {
+      "layer_type": "precip_zone",
+      "feature_class": "precip_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Düşük Yağış — İç Anadolu"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::temp_zone::sicak_akdeniz",
+    "name": {
+      "tr": "Sıcak — Akdeniz",
+      "en": "Warm Mediterranean"
+    },
+    "layer_type": "temp_zone",
+    "attributes": {
+      "layer_type": "temp_zone",
+      "feature_class": "temp_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Sıcak — Akdeniz"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::temp_zone::soguk_dogu",
+    "name": {
+      "tr": "Soğuk — Doğu Anadolu",
+      "en": "Cold East"
+    },
+    "layer_type": "temp_zone",
+    "attributes": {
+      "layer_type": "temp_zone",
+      "feature_class": "temp_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Soğuk — Doğu Anadolu"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::wind_system::poyraz",
+    "name": {
+      "tr": "Poyraz",
+      "en": "Poyraz Wind"
+    },
+    "layer_type": "wind_system",
+    "attributes": {
+      "layer_type": "wind_system",
+      "feature_class": "wind_system",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Poyraz"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_climate/v1",
+    "node_id": "turkey_climate_v1::wind_system::lodos",
+    "name": {
+      "tr": "Lodos",
+      "en": "Lodos Wind"
+    },
+    "layer_type": "wind_system",
+    "attributes": {
+      "layer_type": "wind_system",
+      "feature_class": "wind_system",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Lodos"
+      ],
+      "evidence_topic_hints": [
+        "iklim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_vegetation/v1",
+    "node_id": "turkey_vegetation_v1::forest::karadeniz_ormani",
+    "name": {
+      "tr": "Karadeniz Ormanları",
+      "en": "Black Sea Forests"
+    },
+    "layer_type": "forest",
+    "attributes": {
+      "layer_type": "forest",
+      "feature_class": "forest",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karadeniz Ormanları"
+      ],
+      "evidence_topic_hints": [
+        "bitki_ortusu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_vegetation/v1",
+    "node_id": "turkey_vegetation_v1::maquis::akdeniz_maki",
+    "name": {
+      "tr": "Akdeniz Makisi",
+      "en": "Mediterranean Maquis"
+    },
+    "layer_type": "maquis",
+    "attributes": {
+      "layer_type": "maquis",
+      "feature_class": "maquis",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Akdeniz Makisi"
+      ],
+      "evidence_topic_hints": [
+        "bitki_ortusu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_vegetation/v1",
+    "node_id": "turkey_vegetation_v1::steppe::ic_anadolu_bozkir",
+    "name": {
+      "tr": "İç Anadolu Bozkırı",
+      "en": "Central Anatolian Steppe"
+    },
+    "layer_type": "steppe",
+    "attributes": {
+      "layer_type": "steppe",
+      "feature_class": "steppe",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İç Anadolu Bozkırı"
+      ],
+      "evidence_topic_hints": [
+        "bitki_ortusu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_vegetation/v1",
+    "node_id": "turkey_vegetation_v1::meadow::yayla_cayirlari",
+    "name": {
+      "tr": "Yayla Çayırları",
+      "en": "Alpine Meadows"
+    },
+    "layer_type": "meadow",
+    "attributes": {
+      "layer_type": "meadow",
+      "feature_class": "meadow",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Yayla Çayırları"
+      ],
+      "evidence_topic_hints": [
+        "bitki_ortusu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_vegetation/v1",
+    "node_id": "turkey_vegetation_v1::endemic_zone::toros_endemik",
+    "name": {
+      "tr": "Toros Endemik Bölgesi",
+      "en": "Taurus Endemic Zone"
+    },
+    "layer_type": "endemic_zone",
+    "attributes": {
+      "layer_type": "endemic_zone",
+      "feature_class": "endemic_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Toros Endemik Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "bitki_ortusu"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::crop_region::bugday_ic_anadolu",
+    "name": {
+      "tr": "Buğday — İç Anadolu",
+      "en": "Wheat Central Anatolia"
+    },
+    "layer_type": "crop_region",
+    "attributes": {
+      "layer_type": "crop_region",
+      "feature_class": "crop_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Buğday — İç Anadolu"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::crop_region::pamuk_cukurova",
+    "name": {
+      "tr": "Pamuk — Çukurova",
+      "en": "Cotton Cukurova"
+    },
+    "layer_type": "crop_region",
+    "attributes": {
+      "layer_type": "crop_region",
+      "feature_class": "crop_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Pamuk — Çukurova"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::crop_region::findik_karadeniz",
+    "name": {
+      "tr": "Fındık — Karadeniz",
+      "en": "Hazelnut Black Sea"
+    },
+    "layer_type": "crop_region",
+    "attributes": {
+      "layer_type": "crop_region",
+      "feature_class": "crop_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Fındık — Karadeniz"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::crop_region::cay_dogu_karadeniz",
+    "name": {
+      "tr": "Çay — Doğu Karadeniz",
+      "en": "Tea East Black Sea"
+    },
+    "layer_type": "crop_region",
+    "attributes": {
+      "layer_type": "crop_region",
+      "feature_class": "crop_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çay — Doğu Karadeniz"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::irrigation_area::gap_sulama",
+    "name": {
+      "tr": "GAP Sulama Alanları",
+      "en": "GAP Irrigation"
+    },
+    "layer_type": "irrigation_area",
+    "attributes": {
+      "layer_type": "irrigation_area",
+      "feature_class": "irrigation_area",
+      "confusable_with": [],
+      "qie_aliases": [
+        "GAP Sulama Alanları"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::livestock_region::koyunculuk_ic_anadolu",
+    "name": {
+      "tr": "Koyunculuk — İç Anadolu",
+      "en": "Sheep Central"
+    },
+    "layer_type": "livestock_region",
+    "attributes": {
+      "layer_type": "livestock_region",
+      "feature_class": "livestock_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Koyunculuk — İç Anadolu"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_agriculture/v1",
+    "node_id": "turkey_agriculture_v1::livestock_region::buyukbas_marmara",
+    "name": {
+      "tr": "Büyükbaş — Marmara",
+      "en": "Cattle Marmara"
+    },
+    "layer_type": "livestock_region",
+    "attributes": {
+      "layer_type": "livestock_region",
+      "feature_class": "livestock_region",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Büyükbaş — Marmara"
+      ],
+      "evidence_topic_hints": [
+        "tarim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::bor_eskisehir",
+    "name": {
+      "tr": "Bor — Eskişehir",
+      "en": "Boron Eskisehir"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [
+        "turkey_minerals_v1::mineral_deposit::komur_zonguldak"
+      ],
+      "qie_aliases": [
+        "Bor",
+        "Bor — Eskişehir"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "eskisehir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::bor_kutahya",
+    "name": {
+      "tr": "Bor — Kütahya",
+      "en": "Boron Kutahya"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bor",
+        "Bor — Kütahya"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "kutahya"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::komur_zonguldak",
+    "name": {
+      "tr": "Kömür — Zonguldak",
+      "en": "Coal Zonguldak"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [
+        "turkey_minerals_v1::mineral_deposit::bor_eskisehir"
+      ],
+      "qie_aliases": [
+        "Kömür",
+        "Kömür — Zonguldak"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "zonguldak"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::demir_divrigi",
+    "name": {
+      "tr": "Demir — Divriği",
+      "en": "Iron Divrigi"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Demir",
+        "Demir — Divriği"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "sivas"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::bakir_murgul",
+    "name": {
+      "tr": "Bakır — Murgul",
+      "en": "Copper Murgul"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [
+        "turkey_minerals_v1::mineral_deposit::krom_elazig"
+      ],
+      "qie_aliases": [
+        "Bakır",
+        "Bakır — Murgul"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "artvin"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::krom_elazig",
+    "name": {
+      "tr": "Krom — Elazığ",
+      "en": "Chrome Elazig"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [
+        "turkey_minerals_v1::mineral_deposit::bakir_murgul"
+      ],
+      "qie_aliases": [
+        "Krom",
+        "Krom — Elazığ"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "elazig"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::petrol_batman",
+    "name": {
+      "tr": "Petrol — Batman",
+      "en": "Oil Batman"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Petrol",
+        "Petrol — Batman"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "batman"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::dogalgaz_trakya",
+    "name": {
+      "tr": "Doğalgaz — Trakya",
+      "en": "Natural Gas Thrace"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Doğalgaz",
+        "Doğalgaz — Trakya"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "kirklareli"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::altin_bergama",
+    "name": {
+      "tr": "Altın — Bergama",
+      "en": "Gold Bergama"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Altın",
+        "Altın — Bergama"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "izmir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::gumus_gumushane",
+    "name": {
+      "tr": "Gümüş — Gümüşhane",
+      "en": "Silver Gumushane"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Gümüş",
+        "Gümüş — Gümüşhane"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "gumushane"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::mermer_afyon",
+    "name": {
+      "tr": "Mermer — Afyon",
+      "en": "Marble Afyon"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Mermer",
+        "Mermer — Afyon"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "afyonkarahisar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_minerals/v1",
+    "node_id": "turkey_minerals_v1::mineral_deposit::pomza_nevsehir",
+    "name": {
+      "tr": "Pomza — Nevşehir",
+      "en": "Pumice Nevsehir"
+    },
+    "layer_type": "mineral_deposit",
+    "attributes": {
+      "layer_type": "mineral_deposit",
+      "feature_class": "mineral_deposit",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Pomza",
+        "Pomza — Nevşehir"
+      ],
+      "evidence_topic_hints": [
+        "madenler"
+      ],
+      "province_codes": [
+        "nevsehir"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::hes::ataturk_hes",
+    "name": {
+      "tr": "Atatürk HES",
+      "en": "Ataturk HEP"
+    },
+    "layer_type": "hes",
+    "attributes": {
+      "layer_type": "hes",
+      "feature_class": "hes",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Atatürk HES"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::hes::keban_hes",
+    "name": {
+      "tr": "Keban HES",
+      "en": "Keban HEP"
+    },
+    "layer_type": "hes",
+    "attributes": {
+      "layer_type": "hes",
+      "feature_class": "hes",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Keban HES"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::res::canakkale_res",
+    "name": {
+      "tr": "Çanakkale RES",
+      "en": "Canakkale Wind"
+    },
+    "layer_type": "res",
+    "attributes": {
+      "layer_type": "res",
+      "feature_class": "res",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çanakkale RES"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::res::izmir_res",
+    "name": {
+      "tr": "İzmir RES",
+      "en": "Izmir Wind"
+    },
+    "layer_type": "res",
+    "attributes": {
+      "layer_type": "res",
+      "feature_class": "res",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İzmir RES"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::ges::karapinar_ges",
+    "name": {
+      "tr": "Karapınar GES",
+      "en": "Karapinar Solar"
+    },
+    "layer_type": "ges",
+    "attributes": {
+      "layer_type": "ges",
+      "feature_class": "ges",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karapınar GES"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::jes::buyuk_menderes_jes",
+    "name": {
+      "tr": "Büyük Menderes JES",
+      "en": "Buyuk Menderes Geo"
+    },
+    "layer_type": "jes",
+    "attributes": {
+      "layer_type": "jes",
+      "feature_class": "jes",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Büyük Menderes JES"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::thermal::soma_termik",
+    "name": {
+      "tr": "Soma Termik",
+      "en": "Soma Thermal"
+    },
+    "layer_type": "thermal",
+    "attributes": {
+      "layer_type": "thermal",
+      "feature_class": "thermal",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Soma Termik"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_energy/v1",
+    "node_id": "turkey_energy_v1::nuclear::akkuyu_nukleer",
+    "name": {
+      "tr": "Akkuyu Nükleer",
+      "en": "Akkuyu Nuclear"
+    },
+    "layer_type": "nuclear",
+    "attributes": {
+      "layer_type": "nuclear",
+      "feature_class": "nuclear",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Akkuyu Nükleer"
+      ],
+      "evidence_topic_hints": [
+        "enerji"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::density_zone::yogun_marmara",
+    "name": {
+      "tr": "Yoğun Nüfus — Marmara",
+      "en": "Dense Marmara"
+    },
+    "layer_type": "density_zone",
+    "attributes": {
+      "layer_type": "density_zone",
+      "feature_class": "density_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Yoğun Nüfus — Marmara"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::density_zone::seyrek_dogu",
+    "name": {
+      "tr": "Seyrek Nüfus — Doğu",
+      "en": "Sparse East"
+    },
+    "layer_type": "density_zone",
+    "attributes": {
+      "layer_type": "density_zone",
+      "feature_class": "density_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Seyrek Nüfus — Doğu"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::metro_area::istanbul_metro",
+    "name": {
+      "tr": "İstanbul Metropol",
+      "en": "Istanbul Metro"
+    },
+    "layer_type": "metro_area",
+    "attributes": {
+      "layer_type": "metro_area",
+      "feature_class": "metro_area",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İstanbul Metropol"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::metro_area::ankara_metro",
+    "name": {
+      "tr": "Ankara Metropol",
+      "en": "Ankara Metro"
+    },
+    "layer_type": "metro_area",
+    "attributes": {
+      "layer_type": "metro_area",
+      "feature_class": "metro_area",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ankara Metropol"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::major_city::izmir_kent",
+    "name": {
+      "tr": "İzmir",
+      "en": "Izmir"
+    },
+    "layer_type": "major_city",
+    "attributes": {
+      "layer_type": "major_city",
+      "feature_class": "major_city",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İzmir"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::major_city::bursa_kent",
+    "name": {
+      "tr": "Bursa",
+      "en": "Bursa"
+    },
+    "layer_type": "major_city",
+    "attributes": {
+      "layer_type": "major_city",
+      "feature_class": "major_city",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bursa"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_population/v1",
+    "node_id": "turkey_population_v1::major_city::antalya_kent",
+    "name": {
+      "tr": "Antalya",
+      "en": "Antalya"
+    },
+    "layer_type": "major_city",
+    "attributes": {
+      "layer_type": "major_city",
+      "feature_class": "major_city",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Antalya"
+      ],
+      "evidence_topic_hints": [
+        "nufus"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::highway::o4",
+    "name": {
+      "tr": "O-4 Anadolu Otoyolu",
+      "en": "O-4 Anatolian Highway"
+    },
+    "layer_type": "highway",
+    "attributes": {
+      "layer_type": "highway",
+      "feature_class": "highway",
+      "confusable_with": [],
+      "qie_aliases": [
+        "O-4 Anadolu Otoyolu"
+      ],
+      "evidence_topic_hints": [
+        "ulasim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::highway::o3",
+    "name": {
+      "tr": "O-3 Avrupa Otoyolu",
+      "en": "O-3 European Highway"
+    },
+    "layer_type": "highway",
+    "attributes": {
+      "layer_type": "highway",
+      "feature_class": "highway",
+      "confusable_with": [],
+      "qie_aliases": [
+        "O-3 Avrupa Otoyolu"
+      ],
+      "evidence_topic_hints": [
+        "ulasim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::railway::ankara_istanbul_demiryolu",
+    "name": {
+      "tr": "Ankara–İstanbul Demiryolu",
+      "en": "Ankara-Istanbul Rail"
+    },
+    "layer_type": "railway",
+    "attributes": {
+      "layer_type": "railway",
+      "feature_class": "railway",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Ankara–İstanbul Demiryolu"
+      ],
+      "evidence_topic_hints": [
+        "ulasim"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::port::haydarpasa",
+    "name": {
+      "tr": "Haydarpaşa Limanı",
+      "en": "Haydarpasa Port"
+    },
+    "layer_type": "port",
+    "attributes": {
+      "layer_type": "port",
+      "feature_class": "port",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Haydarpaşa Limanı"
+      ],
+      "evidence_topic_hints": [
+        "ulasim",
+        "limanlar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::port::mersin_liman",
+    "name": {
+      "tr": "Mersin Limanı",
+      "en": "Mersin Port"
+    },
+    "layer_type": "port",
+    "attributes": {
+      "layer_type": "port",
+      "feature_class": "port",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Mersin Limanı"
+      ],
+      "evidence_topic_hints": [
+        "ulasim",
+        "limanlar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::port::izmir_liman",
+    "name": {
+      "tr": "İzmir Limanı",
+      "en": "Izmir Port"
+    },
+    "layer_type": "port",
+    "attributes": {
+      "layer_type": "port",
+      "feature_class": "port",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İzmir Limanı"
+      ],
+      "evidence_topic_hints": [
+        "ulasim",
+        "limanlar"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::airport::ist",
+    "name": {
+      "tr": "İstanbul Havalimanı",
+      "en": "Istanbul Airport"
+    },
+    "layer_type": "airport",
+    "attributes": {
+      "layer_type": "airport",
+      "feature_class": "airport",
+      "confusable_with": [],
+      "qie_aliases": [
+        "İstanbul Havalimanı"
+      ],
+      "evidence_topic_hints": [
+        "ulasim",
+        "havalimanlari"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::airport::esb",
+    "name": {
+      "tr": "Esenboğa",
+      "en": "Esenboga Airport"
+    },
+    "layer_type": "airport",
+    "attributes": {
+      "layer_type": "airport",
+      "feature_class": "airport",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Esenboğa"
+      ],
+      "evidence_topic_hints": [
+        "ulasim",
+        "havalimanlari"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_transport/v1",
+    "node_id": "turkey_transport_v1::airport::ayt",
+    "name": {
+      "tr": "Antalya Havalimanı",
+      "en": "Antalya Airport"
+    },
+    "layer_type": "airport",
+    "attributes": {
+      "layer_type": "airport",
+      "feature_class": "airport",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Antalya Havalimanı"
+      ],
+      "evidence_topic_hints": [
+        "ulasim",
+        "havalimanlari"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::unesco::cappadocia",
+    "name": {
+      "tr": "Kapadokya",
+      "en": "Cappadocia"
+    },
+    "layer_type": "unesco",
+    "attributes": {
+      "layer_type": "unesco",
+      "feature_class": "unesco",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kapadokya"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::unesco::pamukkale",
+    "name": {
+      "tr": "Pamukkale",
+      "en": "Pamukkale"
+    },
+    "layer_type": "unesco",
+    "attributes": {
+      "layer_type": "unesco",
+      "feature_class": "unesco",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Pamukkale"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::unesco::troy",
+    "name": {
+      "tr": "Troya",
+      "en": "Troy"
+    },
+    "layer_type": "unesco",
+    "attributes": {
+      "layer_type": "unesco",
+      "feature_class": "unesco",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Troya"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::unesco::gobeklitepe",
+    "name": {
+      "tr": "Göbeklitepe",
+      "en": "Gobekli Tepe"
+    },
+    "layer_type": "unesco",
+    "attributes": {
+      "layer_type": "unesco",
+      "feature_class": "unesco",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Göbeklitepe"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::national_park::uludag",
+    "name": {
+      "tr": "Uludağ Milli Parkı",
+      "en": "Uludag NP"
+    },
+    "layer_type": "national_park",
+    "attributes": {
+      "layer_type": "national_park",
+      "feature_class": "national_park",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Uludağ Milli Parkı"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::national_park::kazdagi",
+    "name": {
+      "tr": "Kazdağı Milli Parkı",
+      "en": "Kazdag NP"
+    },
+    "layer_type": "national_park",
+    "attributes": {
+      "layer_type": "national_park",
+      "feature_class": "national_park",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Kazdağı Milli Parkı"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::tourism_center::antalya_turizm",
+    "name": {
+      "tr": "Antalya Turizm Merkezi",
+      "en": "Antalya Tourism"
+    },
+    "layer_type": "tourism_center",
+    "attributes": {
+      "layer_type": "tourism_center",
+      "feature_class": "tourism_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Antalya Turizm Merkezi"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_tourism/v1",
+    "node_id": "turkey_tourism_v1::tourism_center::bodrum",
+    "name": {
+      "tr": "Bodrum",
+      "en": "Bodrum"
+    },
+    "layer_type": "tourism_center",
+    "attributes": {
+      "layer_type": "tourism_center",
+      "feature_class": "tourism_center",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Bodrum"
+      ],
+      "evidence_topic_hints": [
+        "turizm"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::fault::kuzey_anadolu",
+    "name": {
+      "tr": "Kuzey Anadolu Fay Hattı",
+      "en": "North Anatolian Fault"
+    },
+    "layer_type": "fault",
+    "attributes": {
+      "layer_type": "fault",
+      "feature_class": "fault",
+      "confusable_with": [
+        "turkey_hazards_v1::fault::dogu_anadolu"
+      ],
+      "qie_aliases": [
+        "Kuzey Anadolu Fay Hattı",
+        "KAF"
+      ],
+      "evidence_topic_hints": [
+        "afet",
+        "deprem",
+        "fay"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::fault::dogu_anadolu",
+    "name": {
+      "tr": "Doğu Anadolu Fay Hattı",
+      "en": "East Anatolian Fault"
+    },
+    "layer_type": "fault",
+    "attributes": {
+      "layer_type": "fault",
+      "feature_class": "fault",
+      "confusable_with": [
+        "turkey_hazards_v1::fault::kuzey_anadolu"
+      ],
+      "qie_aliases": [
+        "Doğu Anadolu Fay Hattı",
+        "DAF"
+      ],
+      "evidence_topic_hints": [
+        "afet",
+        "deprem",
+        "fay"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::earthquake_zone::birinci_derece",
+    "name": {
+      "tr": "1. Derece Deprem Bölgesi",
+      "en": "Highest Seismic Zone"
+    },
+    "layer_type": "earthquake_zone",
+    "attributes": {
+      "layer_type": "earthquake_zone",
+      "feature_class": "earthquake_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "1. Derece Deprem Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "afet",
+        "deprem"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::earthquake_zone::dogu_yuksek_risk",
+    "name": {
+      "tr": "Doğu Yüksek Risk",
+      "en": "East High Risk"
+    },
+    "layer_type": "earthquake_zone",
+    "attributes": {
+      "layer_type": "earthquake_zone",
+      "feature_class": "earthquake_zone",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Doğu Yüksek Risk"
+      ],
+      "evidence_topic_hints": [
+        "afet",
+        "deprem"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::landslide::karadeniz_heyelan",
+    "name": {
+      "tr": "Karadeniz Heyelan Bölgesi",
+      "en": "Black Sea Landslide"
+    },
+    "layer_type": "landslide",
+    "attributes": {
+      "layer_type": "landslide",
+      "feature_class": "landslide",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Karadeniz Heyelan Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "afet"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::flood::cakurova_sel",
+    "name": {
+      "tr": "Çukurova Sel Riski",
+      "en": "Cukurova Flood"
+    },
+    "layer_type": "flood",
+    "attributes": {
+      "layer_type": "flood",
+      "feature_class": "flood",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Çukurova Sel Riski"
+      ],
+      "evidence_topic_hints": [
+        "afet"
+      ]
+    }
+  },
+  {
+    "asset_id": "studyos://assets/geography/turkey_hazards/v1",
+    "node_id": "turkey_hazards_v1::avalanche::dogu_cig",
+    "name": {
+      "tr": "Doğu Anadolu Çığ Bölgesi",
+      "en": "East Avalanche"
+    },
+    "layer_type": "avalanche",
+    "attributes": {
+      "layer_type": "avalanche",
+      "feature_class": "avalanche",
+      "confusable_with": [],
+      "qie_aliases": [
+        "Doğu Anadolu Çığ Bölgesi"
+      ],
+      "evidence_topic_hints": [
+        "afet"
+      ]
+    }
+  }
+]

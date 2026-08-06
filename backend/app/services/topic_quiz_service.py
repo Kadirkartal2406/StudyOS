@@ -162,12 +162,32 @@ class TopicQuizService:
             raise ValidationError("Quiz çözüme hazır değil")
 
         answer_map = {a.item_id: a.selected_key for a in data.answers}
+        node_map = {
+            a.item_id: a.selected_node_id
+            for a in data.answers
+            if a.selected_node_id
+        }
 
         correct = wrong = blank = 0
         for item in gen.items:
             selected = answer_map.get(item.id)
+            selected_node = node_map.get(item.id)
+            expected_node = (item.qie_card or {}).get("correct_node_id")
             item.selected_key = selected
-            if selected is None:
+
+            # EAE node selection can grade independently of letter keys
+            if selected_node and expected_node:
+                item.is_correct = selected_node == expected_node
+                if item.is_correct:
+                    correct += 1
+                else:
+                    wrong += 1
+                # Persist node answer into item metadata for evidence bridge
+                card = dict(item.qie_card or {})
+                card["selected_node_id"] = selected_node
+                card["expected_node_id"] = expected_node
+                item.qie_card = card
+            elif selected is None:
                 item.is_correct = False
                 blank += 1
             elif selected == item.correct_key:
@@ -192,6 +212,30 @@ class TopicQuizService:
         except Exception:
             pass
 
+        # EAE misconception evidence for node-graded items
+        try:
+            from app.services.eae_evidence_bridge import EAEEvidenceBridge
+
+            bridge = EAEEvidenceBridge(self.db)
+            for it in gen.items:
+                card = it.qie_card or {}
+                selected_node = card.get("selected_node_id")
+                expected_node = card.get("expected_node_id") or card.get("correct_node_id")
+                if not selected_node or not expected_node:
+                    continue
+                confusable = []
+                # confusable list may live on asset nodes; pass empty → bridge still tags pair
+                await bridge.ingest_node_selection(
+                    user_id=user_id,
+                    subject_code=gen.subject_code,
+                    topic_code=gen.topic_code,
+                    expected_node_id=str(expected_node),
+                    selected_node_id=str(selected_node),
+                    confusable_with=confusable or None,
+                )
+        except Exception:
+            pass
+
         accuracy = round((correct / total) * 100, 1)
         review = [
             QuizItemReview(
@@ -203,6 +247,8 @@ class TopicQuizService:
                 explanation=it.explanation,
                 selected_key=it.selected_key,
                 is_correct=it.is_correct,
+                target_asset_id=it.qie_card.get("target_asset_id"),
+                correct_node_id=it.qie_card.get("correct_node_id"),
             )
             for it in gen.items
         ]
@@ -238,6 +284,7 @@ class TopicQuizService:
                 ord_index=it.ord_index,
                 stem=it.stem,
                 choices=dict(it.choices),
+                target_asset_id=it.qie_card.get("target_asset_id"),
             )
             for it in (gen.items or [])
         ]

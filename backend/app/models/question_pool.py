@@ -32,6 +32,8 @@ class QuestionPoolCard(Base):
     explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
     qie_card: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     use_count: Mapped[int] = mapped_column(Integer, default=0)
+    target_asset_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True, index=True)
+    correct_node_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

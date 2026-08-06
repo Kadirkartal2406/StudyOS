@@ -12,6 +12,7 @@ class QuickActionsCard extends StatelessWidget {
     (icon: Icons.flag_outlined, label: 'Hedefler', route: '/goals'),
     (icon: Icons.quiz_outlined, label: 'Soru Takibi', route: '/questions'),
     (icon: Icons.library_books_outlined, label: 'Kaynaklar', route: '/resources'),
+    (icon: Icons.map_outlined, label: 'EAE Harita', route: '/eae-demo'),
     (icon: Icons.assignment_outlined, label: 'Denemeler', route: '/exams'),
     (icon: Icons.menu_book_outlined, label: 'Derslerim', route: '/subjects'),
     (icon: Icons.auto_awesome, label: 'Önerilen plan', route: '/planner'),

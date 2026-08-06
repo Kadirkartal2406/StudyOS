@@ -57,7 +57,31 @@ class QuestionAuthorEngine:
         preferred: str | None = None,
         model: str | None = None,
         calibration: bool = False,
+        asset_uri: str | None = None,
+        db: Any | None = None,
     ) -> AuthoredQuestion:
+        """Author a single question. If asset_uri is provided and db is given,
+        EAE Visual Grounding Context is injected into the QIE prompt chain.
+        """
+        # EAE Sprint 4+2 — Inject visual asset grounding context into prompt
+        eae_node_ids: list[str] | None = None
+        eae_grounding_context: str | None = None
+        if asset_uri and db is not None:
+            try:
+                from app.services.question_author.eae_grounding_builder import EAEGroundingPromptBuilder
+                builder = EAEGroundingPromptBuilder(db)
+                # build_grounding_dto is async; use base prompt as placeholder
+                grounding_dto = await builder.context_engine.build_grounding_dto(asset_uri)
+                eae_grounding_context = builder.context_engine.build_prompt_context_string(grounding_dto)
+                eae_node_ids = grounding_dto.available_node_ids
+                logger.info(
+                    "EAE grounding injected asset_uri=%s node_count=%d",
+                    asset_uri,
+                    len(eae_node_ids),
+                )
+            except Exception as exc:
+                logger.warning("EAE grounding failed asset_uri=%s: %s", asset_uri, exc)
+
         plan = await build_author_plan(
             qie_plan,
             data_root=self.data_root,
@@ -75,6 +99,7 @@ class QuestionAuthorEngine:
             model=model,
             use_llm=self.use_llm,
             correct_only=self.separate_distractors,
+            eae_grounding_context=eae_grounding_context,
         )
         provider = raw.pop("_provider", None)
         model_name = raw.pop("_model", None)
@@ -204,7 +229,28 @@ class QuestionAuthorEngine:
                 "Author stub template blocked topic=%s",
                 plan.topic_code,
             )
+
+        # EAE Sprint 4+2 — P_EAE hard gate: verify node IDs in authored question
+        if eae_node_ids is not None and not authored.rejected:
+            from app.services.question_intelligence.eae_node_verifier import EAENodeVerifier
+            verification = EAENodeVerifier().verify_question_grounding(
+                question_payload={
+                    "choices": authored.choices,
+                    "target_node_id": authored.author_plan.to_dict().get("target_node_id"),
+                },
+                available_node_ids=eae_node_ids,
+            )
+            if not verification.is_valid:
+                authored.rejected = True
+                authored.reject_reason = f"eae_node_hallucination:{verification.missing_node_ids}"
+                logger.warning(
+                    "EAE node hallucination blocked topic=%s missing=%s",
+                    plan.topic_code,
+                    verification.missing_node_ids,
+                )
+
         return authored
+
 
     async def author_batch(
         self,
