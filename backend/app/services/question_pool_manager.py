@@ -452,9 +452,22 @@ class QuestionPoolManagerService:
                 cards, _fp, result = await generate_batch_one_call(
                     db, ctx, count=batch_n
                 )
+                # Save accepted cards to DB via QuestionPoolService
+                if cards:
+                    pool_svc = QuestionPoolService(db)
+                    for c in cards:
+                        fp = fingerprint_for_plan(c.plan, ctx)
+                        await pool_svc.put_card(
+                            fingerprint=fp,
+                            card=c,
+                            exam=key.exam,
+                            subject_code=key.subject_code,
+                            topic_code=key.topic_code,
+                            difficulty_band=key.difficulty_band,
+                            skill=c.plan.skill,
+                        )
                 # Ensure newly added rows are visible
                 await db.commit()
-                _ = cards  # accepted_count computed via counts
 
                 after = await self._count_topic(db, key)
                 accepted_total = max(0, after - before)
