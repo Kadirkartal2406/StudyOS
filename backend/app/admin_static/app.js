@@ -566,22 +566,60 @@ async function loadQuestions() {
   if (q) qs.set("q", q);
   const body = await api(`/admin/questions?${qs}`);
   const items = body.data || [];
-  $("questions-list").innerHTML = items.length
-    ? items
-        .map(
-          (it) => `<div class="q-item">
-        <div class="meta">
-          <span class="badge">${escapeHtml(it.source)}</span>
-          ${it.exam ? escapeHtml(it.exam) + " · " : ""}
-          ${escapeHtml(it.subject || "")}
-          ${it.topic ? " · " + escapeHtml(it.topic) : ""}
-          ${it.difficulty ? " · " + escapeHtml(it.difficulty) : ""}
-        </div>
-        <div>${escapeHtml(it.stem || "")}</div>
-      </div>`
-        )
-        .join("")
-    : `<p class="muted">Soru bulunamadı.</p>`;
+  const grouped = {};
+  const ungrouped = [];
+  
+  for (const it of items) {
+    if (it.exam && it.subject) {
+      if (!grouped[it.exam]) grouped[it.exam] = {};
+      if (!grouped[it.exam][it.subject]) grouped[it.exam][it.subject] = [];
+      grouped[it.exam][it.subject].push(it);
+    } else {
+      ungrouped.push(it);
+    }
+  }
+
+  let html = "";
+  for (const [exam, subjects] of Object.entries(grouped)) {
+    const examCls = "qe-" + escapeHtml(exam).replace(/\W/g, "_");
+    html += `<div style="margin-bottom:8px; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+      <div style="background:#f1f5f9; padding:12px; cursor:pointer; font-weight:600;" onclick="document.querySelectorAll('.${examCls}').forEach(el=>el.hidden=!el.hidden)">
+        📂 Sınav: ${escapeHtml(exam).toUpperCase()} 
+        <span style="float:right; font-size:12px; font-weight:normal; color:#3b82f6;">Genişlet / Daralt 🔽</span>
+      </div>`;
+    for (const [subj, subItems] of Object.entries(subjects)) {
+      const subjCls = examCls + "-qs-" + escapeHtml(subj).replace(/\W/g, "_");
+      html += `<div class="${examCls}" hidden style="background:#f8fafc; border-top:1px solid #e2e8f0; padding:10px 12px 10px 24px; cursor:pointer; font-weight:600; color:#334155;" onclick="document.querySelectorAll('.${subjCls}').forEach(el=>el.hidden=!el.hidden)">
+        📁 Ders: ${escapeHtml(subj)} <span style="font-weight:normal; color:#64748b;">(${subItems.length} Soru)</span>
+      </div>`;
+      for (const it of subItems) {
+        html += `<div class="${examCls} ${subjCls} q-item" hidden style="margin:0; border-top:1px solid #e2e8f0; border-radius:0; border-left:4px solid #cbd5e1; margin-left:16px;">
+          <div class="meta">
+            <span class="badge">${escapeHtml(it.source)}</span>
+            ${it.topic ? escapeHtml(it.topic) : ""}
+            ${it.difficulty ? " · " + escapeHtml(it.difficulty) : ""}
+          </div>
+          <div>${escapeHtml(it.stem || "")}</div>
+        </div>`;
+      }
+    }
+    html += `</div>`;
+  }
+
+  for (const it of ungrouped) {
+    html += `<div class="q-item">
+      <div class="meta">
+        <span class="badge">${escapeHtml(it.source)}</span>
+        ${it.exam ? escapeHtml(it.exam) + " · " : ""}
+        ${escapeHtml(it.subject || "")}
+        ${it.topic ? " · " + escapeHtml(it.topic) : ""}
+        ${it.difficulty ? " · " + escapeHtml(it.difficulty) : ""}
+      </div>
+      <div>${escapeHtml(it.stem || "")}</div>
+    </div>`;
+  }
+
+  $("questions-list").innerHTML = items.length ? html : `<p class="muted">Soru bulunamadı.</p>`;
 }
 
 $("q-search-btn").addEventListener("click", loadQuestions);

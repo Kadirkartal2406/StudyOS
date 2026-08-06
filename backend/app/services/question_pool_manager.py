@@ -615,7 +615,9 @@ class QuestionPoolManagerService:
                     kind="batch_generate",
                 )
 
-                await generate_batch_one_call(db, ctx, count=batch_n)
+                cards, status, result = await generate_batch_one_call(db, ctx, count=batch_n)
+                if cards:
+                    db.add_all(cards)
                 await db.commit()
 
                 after = await self._count_topic(db, key)
