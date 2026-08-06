@@ -602,7 +602,7 @@ class QuestionPoolManagerService:
         try:
             while accepted_total < count and attempts < max_batches:
                 remaining = count - accepted_total
-                batch_n = min(remaining, 20)
+                batch_n = min(remaining, 10)
                 ctx = GenerateContext(
                     exam=key.exam,
                     subject_code=key.subject_code,

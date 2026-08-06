@@ -170,45 +170,65 @@ async function loadQuestionPool() {
 
   const inv = await api("/admin/question-pool/inventory");
   const rows = inv.data || [];
-  $("qp-inventory-body").innerHTML = rows
-    .map((r) => {
-      const suggested = Math.max(0, (r.target || 0) - (r.current || 0));
-      const disable = suggested <= 0;
-      return `<tr>
-        <td>${escapeHtml(r.exam)}</td>
-        <td>${escapeHtml(r.subject_code)}</td>
-        <td>${escapeHtml(r.topic_code)}</td>
-        <td>${r.current}</td>
-        <td>${r.minimum}</td>
-        <td>${r.target}</td>
-        <td>${escapeHtml(r.status)}</td>
-        <td>${r.quality === null || r.quality === undefined ? "-" : r.quality.toFixed(1)}</td>
-        <td>${r.last_generated ? new Date(r.last_generated).toLocaleString() : "-"}</td>
-        <td>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button ${disable ? "disabled" : ""} class="secondary qp-topup-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Eksikleri Üret
-            </button>
-            <button class="danger qp-delete-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Sil
-            </button>
-            <button ${disable ? "disabled" : ""} class="secondary qp-regenerate-btn" style="display:none;" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Regenerate
-            </button>
-            <button ${disable ? "disabled" : ""} class="secondary qp-rebuild-btn" style="display:none;" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Rebuild
-            </button>
-            <button ${disable ? "disabled" : ""} class="secondary qp-review-btn" style="display:none;" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Review
-            </button>
-            <button class="secondary qp-preview-topic-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-              Önizle
-            </button>
-          </div>
+  const grouped = {};
+  for (const r of rows) {
+    if (!grouped[r.exam]) grouped[r.exam] = { total: 0, subjects: {} };
+    grouped[r.exam].total += (r.current || 0);
+    if (!grouped[r.exam].subjects[r.subject_code]) grouped[r.exam].subjects[r.subject_code] = { total: 0, topics: [] };
+    grouped[r.exam].subjects[r.subject_code].total += (r.current || 0);
+    grouped[r.exam].subjects[r.subject_code].topics.push(r);
+  }
+
+  let html = "";
+  for (const [exam, exData] of Object.entries(grouped)) {
+    const eCls = "ex-" + escapeHtml(exam).replace(/\W/g, "_");
+    html += `<tr style="background:#f1f5f9; cursor:pointer;" onclick="document.querySelectorAll('.${eCls}').forEach(el=>el.hidden=!el.hidden)">
+      <td colspan="10" style="padding:12px 16px;">
+        <strong style="color:#0f172a; font-size:15px;">Sınav: ${escapeHtml(exam).toUpperCase()}</strong> 
+        <span style="color:#64748b; margin-left:8px;">(${exData.total} Soru)</span>
+        <span style="float:right; font-size:12px; color:#3b82f6;">Genişlet / Daralt 🔽</span>
+      </td>
+    </tr>`;
+    for (const [subj, subData] of Object.entries(exData.subjects)) {
+      const sCls = eCls + "-sub-" + escapeHtml(subj).replace(/\W/g, "_");
+      html += `<tr class="${eCls}" style="background:#f8fafc; cursor:pointer;" hidden onclick="document.querySelectorAll('.${sCls}').forEach(el=>el.hidden=!el.hidden)">
+        <td colspan="10" style="padding:10px 16px 10px 32px; border-left:4px solid #cbd5e1;">
+          <strong style="color:#334155; font-size:14px;">Ders: ${escapeHtml(subj)}</strong> 
+          <span style="color:#64748b; margin-left:8px;">(${subData.total} Soru)</span>
+          <span style="float:right; font-size:12px; color:#3b82f6;">Konuları Göster 🔽</span>
         </td>
       </tr>`;
-    })
-    .join("");
+      for (const r of subData.topics) {
+        const suggested = Math.max(0, (r.target || 0) - (r.current || 0));
+        const disable = suggested <= 0;
+        html += `<tr class="${eCls} ${sCls}" hidden>
+          <td style="padding-left:40px; color:#94a3b8;">${escapeHtml(r.exam)}</td>
+          <td style="color:#64748b;">${escapeHtml(r.subject_code)}</td>
+          <td><strong>${escapeHtml(r.topic_code)}</strong></td>
+          <td>${r.current}</td>
+          <td>${r.minimum}</td>
+          <td>${r.target}</td>
+          <td>${escapeHtml(r.status)}</td>
+          <td>${r.quality === null || r.quality === undefined ? "-" : r.quality.toFixed(1)}</td>
+          <td>${r.last_generated ? new Date(r.last_generated).toLocaleString() : "-"}</td>
+          <td>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button ${disable ? "disabled" : ""} class="secondary qp-topup-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+                Eksikleri Üret
+              </button>
+              <button class="danger qp-delete-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+                Sil
+              </button>
+              <button class="secondary qp-preview-topic-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+                Önizle
+              </button>
+            </div>
+          </td>
+        </tr>`;
+      }
+    }
+  }
+  $("qp-inventory-body").innerHTML = html;
 
   document.querySelectorAll(".qp-topup-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
