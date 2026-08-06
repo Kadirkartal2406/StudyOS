@@ -79,7 +79,7 @@ async def generate_batch_one_call(
 ) -> tuple[list[QuestionCard], str, Any]:
     """One Gemini call for up to `count` questions. Frozen gates still applied."""
     get_metrics().record_batch()
-    n = max(1, min(int(count or ctx.count or 20), 20))
+    n = max(1, min(int(count or ctx.count or 10), 10))
     ctx_local = GenerateContext(
         exam=ctx.exam,
         subject_code=ctx.subject_code,
