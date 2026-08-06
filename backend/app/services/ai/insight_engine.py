@@ -238,7 +238,9 @@ class InsightEngine:
             return 0.0
         ok = 0
         for planned, actual in rows:
-            if planned <= 0:
+            if planned is None or planned <= 0:
+                continue
+            if actual is None:
                 continue
             if actual >= planned * 0.8:
                 ok += 1

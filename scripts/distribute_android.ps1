@@ -31,10 +31,10 @@ $mobile  = Join-Path $root "mobile"
 # ── Release Notes ────────────────────────────────────────────
 $ReleaseNotes = @"
 StudyOS Beta
-• Daily Challenge düzeltmeleri
-• Gemini soru üretimi iyileştirildi
-• Question Pool geliştirmeleri
-• Performans ve hata düzeltmeleri
+• Coğrafya (Offline) harita (EAE bundle) entegrasyonu
+• Gemini kota aşımında otomatik 2. anahtara geçiş (Retry) eklendi
+• Gece soru havuzu hedefleri tüm müfredata (221 konuya) yayıldı
+• Seviye tespit (Kalibrasyon) anlık üretimden havuza bağlandı
 "@
 
 # ── API URL validation ────────────────────────────────────────

@@ -118,7 +118,7 @@ class _EAEShowcaseScreenState extends ConsumerState<EAEShowcaseScreen> {
   void _loadDemoFallback({Object? error}) {
     final demo = EAEAssetManifestContract.fromJson({
       'schema_version': '1.0',
-      'asset_id': _turkeyAdminUri,
+      'asset_id': _currentUri,
       'version': '1.0.0',
       'domain': 'geography',
       'format': 'svg',
