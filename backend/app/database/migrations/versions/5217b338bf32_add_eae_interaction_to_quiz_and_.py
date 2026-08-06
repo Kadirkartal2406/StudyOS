@@ -270,16 +270,12 @@ def upgrade() -> None:
         existing_nullable=False,
         existing_server_default=sa.text("'{}'::json"),
     )
-    op.drop_constraint(op.f("students_user_id_key"), "students", type_="unique")
-    op.drop_index(op.f("ix_students_user_id"), table_name="students")
-    op.create_index(op.f("ix_students_user_id"), "students", ["user_id"], unique=True)
+
     op.drop_index(op.f("ix_study_sessions_topic_code"), table_name="study_sessions")
     op.create_index(
         op.f("ix_study_sessions_subject_code"), "study_sessions", ["subject_code"], unique=False
     )
-    op.drop_constraint(op.f("subject_catalog_code_key"), "subject_catalog", type_="unique")
-    op.drop_index(op.f("ix_subject_catalog_code"), table_name="subject_catalog")
-    op.create_index(op.f("ix_subject_catalog_code"), "subject_catalog", ["code"], unique=True)
+
     op.alter_column(
         "topic_confidence",
         "history_snapshot",
@@ -374,23 +370,12 @@ def downgrade() -> None:
         existing_nullable=False,
         existing_server_default=sa.text("'{}'::json"),
     )
-    op.drop_index(op.f("ix_subject_catalog_code"), table_name="subject_catalog")
-    op.create_index(op.f("ix_subject_catalog_code"), "subject_catalog", ["code"], unique=False)
-    op.create_unique_constraint(
-        op.f("subject_catalog_code_key"),
-        "subject_catalog",
-        ["code"],
-        postgresql_nulls_not_distinct=False,
-    )
+
     op.drop_index(op.f("ix_study_sessions_subject_code"), table_name="study_sessions")
     op.create_index(
         op.f("ix_study_sessions_topic_code"), "study_sessions", ["topic_code"], unique=False
     )
-    op.drop_index(op.f("ix_students_user_id"), table_name="students")
-    op.create_index(op.f("ix_students_user_id"), "students", ["user_id"], unique=False)
-    op.create_unique_constraint(
-        op.f("students_user_id_key"), "students", ["user_id"], postgresql_nulls_not_distinct=False
-    )
+
     op.alter_column(
         "students",
         "observation_gates",
