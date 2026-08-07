@@ -466,6 +466,21 @@ class AssessmentRemoteDatasource {
     }
   }
 
+  Future<List<Map<String, dynamic>>> dailyHistory() async {
+    try {
+      final response = await _dio.get<Map<String, dynamic>>(
+        '${ApiEndpoints.dailyChallenge}/history',
+      );
+      final data = response.data?['data'];
+      if (data is List) {
+        return data.map((e) => Map<String, dynamic>.from(e as Map)).toList();
+      }
+      return [];
+    } on DioException catch (e) {
+      throw dioExceptionToAppException(e);
+    }
+  }
+
   Future<Map<String, dynamic>> dailySubjects() async {
     try {
       final response = await _dio.get<Map<String, dynamic>>(

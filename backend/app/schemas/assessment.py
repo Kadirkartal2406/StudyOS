@@ -186,6 +186,15 @@ class DailyChallengeBundle(BaseModel):
     branches: list[BranchChallengeRead] = Field(default_factory=list)
 
 
+class DailyHistoryItemRead(BaseModel):
+    id: uuid.UUID
+    exam_type: str
+    challenge_date: date
+    status: str
+    score: float | None = None
+    session_id: uuid.UUID | None = None
+
+
 class EstimatedScoreRead(BaseModel):
     exam_type: str
     estimated_score: float

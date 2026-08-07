@@ -124,6 +124,17 @@ class AssessmentRepository(BaseRepository[AssessmentSession]):
         )
         return list(result.scalars().all())
 
+    async def list_daily_history(
+        self, user_id: uuid.UUID, limit: int = 30
+    ) -> list[DailyChallenge]:
+        result = await self.db.execute(
+            select(DailyChallenge)
+            .where(DailyChallenge.user_id == user_id)
+            .order_by(DailyChallenge.challenge_date.desc())
+            .limit(limit)
+        )
+        return list(result.scalars().all())
+
     async def get_shared_booklet(
         self,
         exam_type: str,

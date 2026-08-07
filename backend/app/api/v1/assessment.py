@@ -27,6 +27,7 @@ from app.schemas.assessment import (
     AssessmentWrongExplainRequest,
     AssessmentWrongExplainResponse,
     DailyChallengeBundle,
+    DailyHistoryItemRead,
     DailySubjectsBundle,
     EstimatedScoreRead,
     LeaderboardRead,
@@ -212,6 +213,18 @@ async def daily_challenge(
     db: AsyncSession = Depends(get_db),
 ) -> SuccessResponse[DailyChallengeBundle]:
     data = await AssessmentService(db).daily_bundle(current_user.id)
+    return SuccessResponse(data=data)
+
+
+@router.get(
+    "/daily-challenge/history",
+    response_model=SuccessResponse[list[DailyHistoryItemRead]],
+)
+async def daily_challenge_history(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> SuccessResponse[list[DailyHistoryItemRead]]:
+    data = await AssessmentService(db).daily_history(current_user.id)
     return SuccessResponse(data=data)
 
 

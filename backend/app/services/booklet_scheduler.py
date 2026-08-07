@@ -1,4 +1,4 @@
-"""Daily shared booklet scheduler — her gece 00:00 (Europe/Istanbul) Gemini üretimi."""
+"""Daily shared booklet scheduler — her gün 10:00 (Europe/Istanbul) Gemini üretimi."""
 
 from __future__ import annotations
 
@@ -24,9 +24,9 @@ def _now_istanbul() -> datetime:
     return datetime.now(_TZ)
 
 
-def seconds_until_next_0300() -> float:
+def seconds_until_next_1000() -> float:
     now = _now_istanbul()
-    nxt = now.replace(hour=3, minute=0, second=0, microsecond=0)
+    nxt = now.replace(hour=10, minute=0, second=0, microsecond=0)
     if nxt <= now:
         nxt += timedelta(days=1)
     return max(1.0, (nxt - now).total_seconds())
@@ -91,7 +91,7 @@ async def generate_until_complete(challenge_date) -> None:
         if done:
             logger.info("Booklet packs ready for %s", challenge_date)
             return
-        remaining = seconds_until_next_0300()
+        remaining = seconds_until_next_1000()
         if remaining <= _RESUME_INTERVAL_SECONDS:
             # Gün bitiyor — yeni günün job'ı devralır
             return

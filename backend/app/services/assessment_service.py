@@ -39,6 +39,7 @@ from app.schemas.assessment import (
     BranchChallengeRead,
     DailyChallengeBundle,
     DailyChallengeRead,
+    DailyHistoryItemRead,
     DailySubjectOption,
     DailySubjectsBundle,
     EstimatedScoreRead,
@@ -1895,6 +1896,31 @@ class AssessmentService:
         row.duration_seconds = duration
         row.nickname = nickname
         await self.db.flush()
+
+    async def daily_history(self, user_id: uuid.UUID) -> list[DailyHistoryItemRead]:
+        challenges = await self.repo.list_daily_history(user_id)
+        res = []
+        for c in challenges:
+            # Score not implemented yet, using placeholder or correct/total if available
+            score = None
+            status = "pending"
+            if c.session_id:
+                s = await self.repo.get_session(c.session_id, user_id)
+                if s:
+                    status = s.status
+                    if s.accuracy is not None:
+                        score = float(s.accuracy)
+            res.append(
+                DailyHistoryItemRead(
+                    id=c.id,
+                    exam_type=c.exam_type,
+                    challenge_date=c.challenge_date,
+                    status=status,
+                    score=score,
+                    session_id=c.session_id,
+                )
+            )
+        return res
 
     async def daily_subjects(self, user_id: uuid.UUID) -> DailySubjectsBundle:
         """Deprecated picker — returns single booklet card for compatibility."""

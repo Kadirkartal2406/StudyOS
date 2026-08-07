@@ -11,6 +11,7 @@ import '../../features/ai_settings/presentation/screens/ai_settings_screen.dart'
 import '../../features/assessment/presentation/screens/assessment_overview_screen.dart';
 import '../../features/assessment/presentation/screens/assessment_session_screen.dart';
 import '../../features/assessment/presentation/screens/daily_challenge_subjects_screen.dart';
+import '../../features/assessment/presentation/screens/daily_exams_list_screen.dart';
 import '../../features/assessment/presentation/screens/daily_leaderboard_screen.dart';
 import '../../features/assessment/presentation/screens/daily_optical_screen.dart';
 import '../../features/auth/presentation/providers/auth_provider.dart';
@@ -439,6 +440,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             name: 'assessment-daily',
             builder: (_, __) => const DailyChallengeSubjectsScreen(),
             routes: [
+              GoRoute(
+                path: 'history',
+                name: 'assessment-daily-history',
+                builder: (_, __) => const DailyExamsListScreen(),
+              ),
               GoRoute(
                 path: 'start',
                 name: 'assessment-daily-start',

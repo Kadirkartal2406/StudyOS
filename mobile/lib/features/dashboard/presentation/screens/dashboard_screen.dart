@@ -189,6 +189,21 @@ class _TodayLoadedView extends ConsumerWidget {
                 ),
               ],
               const SizedBox(height: AppSpacing.lg),
+              Card(
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)),
+                ),
+                child: ListTile(
+                  leading: const Icon(Icons.stars_rounded, size: 32, color: Colors.amber),
+                  title: const Text('Günün Denemesi', style: TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: const Text('Her sabah 10:00\'da yenilenir'),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  onTap: () => context.push('/assessment/daily/history'),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
               const LiveStudySessionCard(),
               if (action != null)
                 TodayNextActionCard(action: action)
