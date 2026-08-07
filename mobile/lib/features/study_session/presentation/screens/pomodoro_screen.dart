@@ -330,6 +330,9 @@ class _PomodoroStudyPlanSection extends ConsumerWidget {
               onEdit: () {
                 // TODO: Implement edit logic or navigate to edit screen
               },
+              onDelete: () {
+                // TODO: Implement delete logic
+              },
             ),
           ),
         ),
