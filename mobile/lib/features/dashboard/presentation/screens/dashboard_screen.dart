@@ -123,16 +123,29 @@ class _TodayLoadedView extends ConsumerWidget {
       _ => '',
     };
     final profile = ref.watch(learningProfileProvider).valueOrNull;
-    final exam = (profile?.activeExamType ??
+    final examRaw = (profile?.activeExamType ??
             profile?.primaryExamType ??
             dashboard.activeExamType ??
-            '')
-        .toUpperCase();
+            '');
+    final branch = (profile?.activeBranch ?? profile?.primaryBranch ?? '');
+    
+    String exam = examRaw.toUpperCase();
+    if (exam == 'KPSS' && branch.isNotEmpty) {
+      final bl = branch.toLowerCase();
+      if (bl.contains('onlisans') || bl.contains('önlisans')) {
+        exam = 'KPSS ÖNLİSANS';
+      } else if (bl.contains('orta') || bl.contains('lise')) {
+        exam = 'KPSS ORTAÖĞRETİM';
+      } else if (bl.contains('lisans')) {
+        exam = 'KPSS LİSANS';
+      }
+    }
+
     final daysLeft = dashboard.journeyDaysRemaining;
     final examDate = dashboard.journeyExamDate ??
         dashboard.primaryTarget?.examDate ??
         dashboard.activeTarget?.examDate ??
-        (exam.isNotEmpty ? nextExamDate(exam.toLowerCase()) : null);
+        (examRaw.isNotEmpty ? nextExamDate(examRaw.toLowerCase(), branch: branch.toLowerCase()) : null);
     final coachLine = (dashboard.coachToday?.headline.isNotEmpty == true
             ? dashboard.coachToday!.headline
             : dashboard.coachToday?.body) ??
