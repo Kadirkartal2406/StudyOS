@@ -1307,7 +1307,7 @@ class AssessmentService:
             requested_count=(booklet.requested_count if booklet else 0) or 0,
             challenge_date=today,
             is_booklet=True,
-            section_plan=dict(plan),
+            section_plan=dict(booklet.section_plan) if booklet and booklet.section_plan else {},
             generation_progress=(booklet.generation_progress if booklet else 0) or 0,
         )
         self.db.add(pending)
