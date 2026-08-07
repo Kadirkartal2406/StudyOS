@@ -31,20 +31,13 @@ class DashboardScreen extends ConsumerWidget {
         title: const Text('Bugün'),
         actions: [
           const NotificationBell(),
-          PopupMenuButton<String>(
-            tooltip: 'Daha fazla',
-            icon: const Icon(Icons.more_horiz),
-            onSelected: (value) => context.push(value),
-            itemBuilder: (context) => const [
-              PopupMenuItem(value: '/assessment/daily', child: Text('Günün denemesi')),
-              PopupMenuItem(value: '/assessment', child: Text('Seviye testi')),
-              PopupMenuItem(value: '/ai-chat', child: Text('AI sohbet')),
-              PopupMenuItem(value: '/eae-demo', child: Text('EAE Harita')),
-              PopupMenuItem(value: '/planner', child: Text('Plan önerisi')),
-              PopupMenuItem(value: '/pomodoro', child: Text('Odak oturumu')),
-              PopupMenuItem(value: '/exams', child: Text('Deneme sonuçları')),
-              PopupMenuItem(value: '/settings', child: Text('Ayarlar')),
-            ],
+          IconButton(
+            icon: const CircleAvatar(
+              radius: 14,
+              child: Icon(Icons.person, size: 18),
+            ),
+            tooltip: 'Profil',
+            onPressed: () => context.push('/profile'),
           ),
         ],
       ),

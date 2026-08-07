@@ -12,8 +12,7 @@ class AppBottomNavBar extends StatelessWidget {
     (icon: Icons.menu_book_rounded, label: 'Derslerim', route: '/subjects'),
     (icon: Icons.timer_outlined, label: 'Odak', route: '/pomodoro'),
     (icon: Icons.calendar_today_outlined, label: 'Planım', route: '/study-plan'),
-    (icon: Icons.map_outlined, label: 'Yolculuk', route: '/journey'),
-    (icon: Icons.person_outline_rounded, label: 'Profil', route: '/profile'),
+    (icon: Icons.menu_rounded, label: 'Menü', route: '/menu'),
   ];
 
   void _handleTap(BuildContext context, int index) {

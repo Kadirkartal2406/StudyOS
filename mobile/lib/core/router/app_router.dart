@@ -24,6 +24,7 @@ import '../../features/beta_feedback/presentation/screens/analytics_dashboard_sc
 import '../../features/beta_feedback/presentation/screens/beta_feedback_screen.dart';
 import '../../features/beta_feedback/presentation/screens/qie_eval_screen.dart';
 import '../../features/dashboard/presentation/screens/dashboard_screen.dart';
+import '../../features/dashboard/presentation/screens/menu_screen.dart';
 import '../../features/educational_assets/presentation/screens/eae_showcase_screen.dart';
 import '../../features/exam_tracking/presentation/screens/add_exam_screen.dart';
 
@@ -227,6 +228,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/dashboard',
         name: 'dashboard',
         builder: (_, __) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: '/menu',
+        name: 'menu',
+        builder: (_, __) => const MenuScreen(),
       ),
       GoRoute(
         path: '/onboarding',
