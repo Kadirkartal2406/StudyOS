@@ -398,6 +398,17 @@ $("qp-run-scheduler-btn").addEventListener("click", async () => {
   }
 });
 
+$("qp-trigger-trial-exams-btn").addEventListener("click", async () => {
+  if (!confirm("Deneme üretimini (Trial Exams) şimdi tetiklemek istediğinize emin misiniz?")) return;
+  try {
+    $("qp-last-result").textContent = "Deneme üretimi tetikleniyor...";
+    const res = await api("/admin/trial-exams/trigger", { method: "POST" });
+    $("qp-last-result").textContent = `Deneme Üretimi OK: ${res.data.message || 'Başlatıldı'}`;
+  } catch (err) {
+    $("qp-last-result").textContent = `Deneme Üretimi hata: ${err.message}`;
+  }
+});
+
 $("qp-fill-selected-btn").addEventListener("click", async () => {
   const exam = $("qp-fill-exam").value.trim();
   const subject = $("qp-fill-subject").value.trim();
