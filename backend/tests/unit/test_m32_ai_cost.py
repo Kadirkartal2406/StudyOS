@@ -65,6 +65,56 @@ def test_m32_pool_fingerprint_stable():
     assert a != c
 
 
+def test_m32_fingerprint_for_card_differs_by_content():
+    """Same plan index + different stems must not collide (pool fill bug)."""
+    from app.services.ai_cost.pool import fingerprint_for_card, fingerprint_for_plan
+    from app.services.qie.types import GenerateContext, QualityBreakdown, QuestionCard, QuestionPlan
+
+    ctx = GenerateContext(
+        exam="yks",
+        subject_code="tyt_matematik",
+        subject_name="Matematik",
+        topic_code="tyt_matematik__temel_kavramlar",
+        topic_name="Temel Kavramlar",
+        count=10,
+        difficulty_band="medium",
+    )
+    plan = QuestionPlan(
+        exam="yks",
+        subject_code="tyt_matematik",
+        subject_name="Matematik",
+        topic_code="tyt_matematik__temel_kavramlar",
+        topic_name="Temel Kavramlar",
+        skill="logic",
+        bloom="apply",
+        stem_type="mcq",
+        choice_count=5,
+        index=0,
+        difficulty=70,
+    )
+    q = QualityBreakdown()
+    c1 = QuestionCard(
+        stem="Soru A nedir?",
+        choices={"A": "1", "B": "2", "C": "3", "D": "4", "E": "5"},
+        correct_key="A",
+        explanation=None,
+        plan=plan,
+        difficulty_score=70,
+        quality=q,
+    )
+    c2 = QuestionCard(
+        stem="Soru B nedir?",
+        choices={"A": "1", "B": "2", "C": "3", "D": "4", "E": "5"},
+        correct_key="B",
+        explanation=None,
+        plan=plan,
+        difficulty_score=70,
+        quality=q,
+    )
+    assert fingerprint_for_plan(c1.plan, ctx) == fingerprint_for_plan(c2.plan, ctx)
+    assert fingerprint_for_card(c1, ctx) != fingerprint_for_card(c2, ctx)
+
+
 def test_m32_request_dedup_single_flight():
     dedup = RequestDeduplicator()
     calls = {"n": 0}

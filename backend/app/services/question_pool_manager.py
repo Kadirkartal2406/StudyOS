@@ -645,8 +645,19 @@ class QuestionPoolManagerService:
                 await db.commit()
 
                 after = await self._count_topic(db, key)
+                batch_added = max(0, after - (before + accepted_total))
                 accepted_total = max(0, after - before)
                 attempts += 1
+                if cards and batch_added == 0:
+                    # Built cards but none inserted (unexpected); avoid burning more Gemini
+                    logger.warning(
+                        "fill_topic_amount: batch built=%s added=0 topic=%s — stopping early",
+                        len(cards),
+                        key.topic_code,
+                    )
+                    break
+                if not cards and attempts >= 3 and accepted_total == 0:
+                    break
         except Exception as e:
             duration_ms = (
                 (datetime.now(tz=UTC) - start).total_seconds() * 1000.0

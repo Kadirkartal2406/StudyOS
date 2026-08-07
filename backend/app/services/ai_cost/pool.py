@@ -1,9 +1,10 @@
-"""M32 P2 — Question Pool (DB cache; identical fingerprint → reuse)."""
+"""M32 P2 — Question Pool (DB cache; identical content → reuse)."""
 
 from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import uuid
 from datetime import UTC, datetime
 from typing import Any
@@ -13,6 +14,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.question_pool import QuestionPoolCard
 from app.services.qie.types import GenerateContext, QuestionCard, QuestionPlan
+
+logger = logging.getLogger("studyos.ai_cost.pool")
 
 
 def pool_fingerprint(
@@ -44,6 +47,7 @@ def pool_fingerprint(
 
 
 def fingerprint_for_plan(plan: QuestionPlan, ctx: GenerateContext) -> str:
+    """Plan-slot key (cache lookup). Not unique per question text."""
     return pool_fingerprint(
         exam=plan.exam or ctx.exam,
         subject_code=plan.subject_code or ctx.subject_code,
@@ -64,6 +68,39 @@ def card_content_hash(stem: str, choices: dict[str, str], correct_key: str) -> s
         sort_keys=True,
     )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def fingerprint_for_card(card: QuestionCard | dict[str, Any], ctx: GenerateContext) -> str:
+    """Unique pool key: plan slot + question content (allows many cards per topic)."""
+    if isinstance(card, QuestionCard):
+        plan = card.plan
+        stem = card.stem
+        choices = dict(card.choices or {})
+        correct_key = card.correct_key
+    else:
+        plan_raw = card.get("plan") if isinstance(card.get("plan"), dict) else {}
+        from app.services.qie.types import QuestionPlan as QP
+
+        plan = QP(
+            exam=str(plan_raw.get("exam") or ctx.exam),
+            subject_code=str(plan_raw.get("subject_code") or ctx.subject_code),
+            subject_name=str(plan_raw.get("subject_name") or ctx.subject_name or ""),
+            topic_code=str(plan_raw.get("topic_code") or ctx.topic_code),
+            topic_name=str(plan_raw.get("topic_name") or ctx.topic_name or ""),
+            skill=str(plan_raw.get("skill") or ""),
+            bloom=str(plan_raw.get("bloom") or "analyze"),
+            stem_type=str(plan_raw.get("stem_type") or ""),
+            choice_count=int(plan_raw.get("choice_count") or 5),
+            index=int(plan_raw.get("index") or 0),
+            difficulty=int(plan_raw.get("difficulty") or 70),
+        )
+        stem = str(card.get("stem") or "")
+        choices = {str(k): str(v) for k, v in (card.get("choices") or {}).items()}
+        correct_key = str(card.get("correct_key") or "A").upper()
+
+    slot = fingerprint_for_plan(plan, ctx)
+    ch = card_content_hash(stem, choices, correct_key)
+    return hashlib.sha256(f"{slot}|{ch}".encode("utf-8")).hexdigest()
 
 
 class QuestionPoolService:
@@ -146,23 +183,32 @@ class QuestionPoolService:
             explanation = card.get("explanation")
             qie_card = dict(card.get("qie_card") or card)
 
-        existing = await self.get_by_fingerprint(fingerprint)
-        if existing:
-            existing.use_count = int(existing.use_count or 0)
-            return existing
-
-        # Also skip exact duplicate content under another fingerprint
         ch = card_content_hash(stem, choices, correct_key)
+
+        # Exact content already in pool → reuse (do not inflate counts)
         dup = await self.db.execute(
             select(QuestionPoolCard).where(QuestionPoolCard.content_hash == ch)
         )
         hit = dup.scalar_one_or_none()
         if hit:
+            logger.info(
+                "pool put: content dedup topic=%s stem=%s...",
+                topic_code,
+                (stem or "")[:40],
+            )
             return hit
+
+        # Always store under plan-slot + content key.
+        # Legacy callers pass plan-slot-only fingerprints (index 0..N); using that
+        # alone made every subsequent batch silently skip inserts.
+        content_fp = hashlib.sha256(f"{fingerprint}|{ch}".encode("utf-8")).hexdigest()
+        existing = await self.get_by_fingerprint(content_fp)
+        if existing is not None:
+            return existing
 
         row = QuestionPoolCard(
             id=uuid.uuid4(),
-            fingerprint=fingerprint,
+            fingerprint=content_fp,
             content_hash=ch,
             exam=(exam or "").lower(),
             subject_code=subject_code,
@@ -181,6 +227,12 @@ class QuestionPoolService:
         )
         self.db.add(row)
         await self.db.flush()
+        logger.info(
+            "pool put: inserted id=%s topic=%s exam=%s",
+            row.id,
+            topic_code,
+            exam,
+        )
         return row
 
     async def mark_used(self, card_id: uuid.UUID) -> None:
