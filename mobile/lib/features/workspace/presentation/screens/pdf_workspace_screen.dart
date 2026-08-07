@@ -21,11 +21,11 @@ class _PdfWorkspaceScreenState extends ConsumerState<PdfWorkspaceScreen> {
   List<Offset> _currentStroke = [];
   
   void _onPanStart(DragStartDetails details) {
-    final state = ref.read(workspaceProvider);
+    final state = ref.read(workspaceProvider({'workspaceId': widget.pdfUrl, 'pageIndex': '1'}));
     if (state.currentTool == DrawingTool.select || state.currentTool == DrawingTool.eae) return;
     
     if (state.currentTool == DrawingTool.eraser) {
-      ref.read(workspaceProvider.notifier).eraseAt(details.localPosition);
+      ref.read(workspaceProvider({'workspaceId': widget.pdfUrl, 'pageIndex': '1'}).notifier).eraseAt(details.localPosition);
     } else {
       setState(() {
         _currentStroke = [details.localPosition];
@@ -34,11 +34,11 @@ class _PdfWorkspaceScreenState extends ConsumerState<PdfWorkspaceScreen> {
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    final state = ref.read(workspaceProvider);
+    final state = ref.read(workspaceProvider({'workspaceId': widget.pdfUrl, 'pageIndex': '1'}));
     if (state.currentTool == DrawingTool.select || state.currentTool == DrawingTool.eae) return;
 
     if (state.currentTool == DrawingTool.eraser) {
-      ref.read(workspaceProvider.notifier).eraseAt(details.localPosition);
+      ref.read(workspaceProvider({'workspaceId': widget.pdfUrl, 'pageIndex': '1'}).notifier).eraseAt(details.localPosition);
     } else if (_currentStroke.isNotEmpty) {
       setState(() {
         _currentStroke.add(details.localPosition);
@@ -48,7 +48,7 @@ class _PdfWorkspaceScreenState extends ConsumerState<PdfWorkspaceScreen> {
 
   void _onPanEnd(DragEndDetails details) {
     if (_currentStroke.isNotEmpty) {
-      ref.read(workspaceProvider.notifier).addStroke(_currentStroke);
+      ref.read(workspaceProvider({'workspaceId': widget.pdfUrl, 'pageIndex': '1'}).notifier).addStroke(_currentStroke);
       setState(() {
         _currentStroke = [];
       });
@@ -57,8 +57,13 @@ class _PdfWorkspaceScreenState extends ConsumerState<PdfWorkspaceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(workspaceProvider);
-    final notifier = ref.read(workspaceProvider.notifier);
+    final provider = workspaceProvider({'workspaceId': widget.pdfUrl, 'pageIndex': '1'});
+    final state = ref.watch(provider);
+    final notifier = ref.read(provider.notifier);
+
+    if (state.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
     // EAE (Educational Asset Engine) items
     final eaeWidgets = state.objects.where((o) => o.type == 'eae').map((o) {

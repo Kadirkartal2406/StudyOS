@@ -2,10 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import '../../domain/entities/annotation_object.dart';
+import '../data/repositories/workspace_repository.dart';
 
 enum DrawingTool { pen, highlighter, eraser, text, select, eae }
 
 class WorkspaceState {
+  final String workspaceId;
+  final String pageIndex;
   final List<AnnotationObject> objects;
   final List<List<AnnotationObject>> undoHistory;
   final List<List<AnnotationObject>> redoHistory;
@@ -13,8 +16,11 @@ class WorkspaceState {
   final Color currentColor;
   final double currentStrokeWidth;
   final AnnotationObject? selectedObject;
+  final bool isLoading;
 
   WorkspaceState({
+    required this.workspaceId,
+    required this.pageIndex,
     this.objects = const [],
     this.undoHistory = const [],
     this.redoHistory = const [],
@@ -22,9 +28,12 @@ class WorkspaceState {
     this.currentColor = Colors.black,
     this.currentStrokeWidth = 2.0,
     this.selectedObject,
+    this.isLoading = false,
   });
 
   WorkspaceState copyWith({
+    String? workspaceId,
+    String? pageIndex,
     List<AnnotationObject>? objects,
     List<List<AnnotationObject>>? undoHistory,
     List<List<AnnotationObject>>? redoHistory,
@@ -32,8 +41,11 @@ class WorkspaceState {
     Color? currentColor,
     double? currentStrokeWidth,
     AnnotationObject? selectedObject,
+    bool? isLoading,
   }) {
     return WorkspaceState(
+      workspaceId: workspaceId ?? this.workspaceId,
+      pageIndex: pageIndex ?? this.pageIndex,
       objects: objects ?? this.objects,
       undoHistory: undoHistory ?? this.undoHistory,
       redoHistory: redoHistory ?? this.redoHistory,
@@ -41,12 +53,28 @@ class WorkspaceState {
       currentColor: currentColor ?? this.currentColor,
       currentStrokeWidth: currentStrokeWidth ?? this.currentStrokeWidth,
       selectedObject: selectedObject ?? this.selectedObject,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 }
 
 class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
-  WorkspaceNotifier() : super(WorkspaceState());
+  final WorkspaceRepository _repository;
+
+  WorkspaceNotifier(this._repository, String workspaceId, String pageIndex) 
+      : super(WorkspaceState(workspaceId: workspaceId, pageIndex: pageIndex, isLoading: true)) {
+    _initAndLoad();
+  }
+
+  Future<void> _initAndLoad() async {
+    await _repository.init();
+    final objects = await _repository.getAnnotations(state.workspaceId, state.pageIndex);
+    state = state.copyWith(objects: objects, isLoading: false);
+  }
+
+  void _persistState() {
+    _repository.saveAnnotations(state.workspaceId, state.pageIndex, state.objects);
+  }
 
   void setTool(DrawingTool tool) {
     state = state.copyWith(currentTool: tool, selectedObject: null);
@@ -83,6 +111,7 @@ class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
     );
     
     state = state.copyWith(objects: [...state.objects, newStroke]);
+    _persistState();
   }
 
   void eraseAt(Offset point, {double radius = 15.0}) {
@@ -101,6 +130,7 @@ class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
       _saveHistory();
       final remaining = state.objects.where((o) => !toRemove.contains(o.id)).toList();
       state = state.copyWith(objects: remaining);
+      _persistState();
     }
   }
   
@@ -110,6 +140,7 @@ class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
     final prev = state.undoHistory.last;
     final newUndo = List<List<AnnotationObject>>.from(state.undoHistory)..removeLast();
     state = state.copyWith(objects: prev, undoHistory: newUndo, redoHistory: newRedo);
+    _persistState();
   }
 
   void redo() {
@@ -118,6 +149,7 @@ class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
     final next = state.redoHistory.last;
     final newRedo = List<List<AnnotationObject>>.from(state.redoHistory)..removeLast();
     state = state.copyWith(objects: next, undoHistory: newUndo, redoHistory: newRedo);
+    _persistState();
   }
 
   void addEaeAsset(String assetId, Offset position) {
@@ -128,9 +160,11 @@ class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
       position: position,
     );
     state = state.copyWith(objects: [...state.objects, newEae]);
+    _persistState();
   }
 }
 
-final workspaceProvider = StateNotifierProvider<WorkspaceNotifier, WorkspaceState>((ref) {
-  return WorkspaceNotifier();
+final workspaceProvider = StateNotifierProvider.family<WorkspaceNotifier, WorkspaceState, Map<String, String>>((ref, params) {
+  final repo = ref.read(workspaceRepositoryProvider);
+  return WorkspaceNotifier(repo, params['workspaceId']!, params['pageIndex']!);
 });

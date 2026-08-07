@@ -60,6 +60,8 @@ dependencies:
   archive: ^4.0.2
   path_provider: ^2.1.6
   syncfusion_flutter_pdfviewer: ^33.2.13
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

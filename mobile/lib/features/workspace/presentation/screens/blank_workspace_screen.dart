@@ -16,14 +16,14 @@ class _BlankWorkspaceScreenState extends ConsumerState<BlankWorkspaceScreen> {
   final TransformationController _transformationController = TransformationController();
 
   void _onPanStart(DragStartDetails details) {
-    final state = ref.read(workspaceProvider);
+    final state = ref.read(workspaceProvider({'workspaceId': 'blank_1', 'pageIndex': '1'}));
     if (state.currentTool == DrawingTool.select || state.currentTool == DrawingTool.eae) return;
     
     // Convert global position to local position considering InteractiveViewer transform
     final localPosition = _transformationController.toScene(details.localPosition);
     
     if (state.currentTool == DrawingTool.eraser) {
-      ref.read(workspaceProvider.notifier).eraseAt(localPosition);
+      ref.read(workspaceProvider({'workspaceId': 'blank_1', 'pageIndex': '1'}).notifier).eraseAt(localPosition);
     } else {
       setState(() {
         _currentStroke = [localPosition];
@@ -32,13 +32,13 @@ class _BlankWorkspaceScreenState extends ConsumerState<BlankWorkspaceScreen> {
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    final state = ref.read(workspaceProvider);
+    final state = ref.read(workspaceProvider({'workspaceId': 'blank_1', 'pageIndex': '1'}));
     if (state.currentTool == DrawingTool.select || state.currentTool == DrawingTool.eae) return;
 
     final localPosition = _transformationController.toScene(details.localPosition);
 
     if (state.currentTool == DrawingTool.eraser) {
-      ref.read(workspaceProvider.notifier).eraseAt(localPosition);
+      ref.read(workspaceProvider({'workspaceId': 'blank_1', 'pageIndex': '1'}).notifier).eraseAt(localPosition);
     } else if (_currentStroke.isNotEmpty) {
       setState(() {
         _currentStroke.add(localPosition);
@@ -48,7 +48,7 @@ class _BlankWorkspaceScreenState extends ConsumerState<BlankWorkspaceScreen> {
 
   void _onPanEnd(DragEndDetails details) {
     if (_currentStroke.isNotEmpty) {
-      ref.read(workspaceProvider.notifier).addStroke(_currentStroke);
+      ref.read(workspaceProvider({'workspaceId': 'blank_1', 'pageIndex': '1'}).notifier).addStroke(_currentStroke);
       setState(() {
         _currentStroke = [];
       });
@@ -57,11 +57,16 @@ class _BlankWorkspaceScreenState extends ConsumerState<BlankWorkspaceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(workspaceProvider);
-    final notifier = ref.read(workspaceProvider.notifier);
+    final provider = workspaceProvider({'workspaceId': 'blank_1', 'pageIndex': '1'});
+    final state = ref.watch(provider);
+    final notifier = ref.read(provider.notifier);
 
     // Disable InteractiveViewer pan when drawing
     final canPanAndZoom = state.currentTool == DrawingTool.select;
+
+    if (state.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
