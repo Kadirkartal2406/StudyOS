@@ -5,6 +5,8 @@ abstract class AnnotationObject {
   
   AnnotationObject({required this.id});
   
+  String get type;
+  
   Map<String, dynamic> toJson();
   
   static AnnotationObject fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,9 @@ class StrokeObject extends AnnotationObject {
     required this.color,
     required this.strokeWidth,
   });
+
+  @override
+  String get type => 'stroke';
 
   @override
   Map<String, dynamic> toJson() => {
@@ -69,6 +74,9 @@ class TextObject extends AnnotationObject {
   });
 
   @override
+  String get type => 'text';
+
+  @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'type': 'text',
@@ -101,6 +109,9 @@ class EaeObject extends AnnotationObject {
     required this.position,
     this.scale = 1.0,
   });
+
+  @override
+  String get type => 'eae';
 
   @override
   Map<String, dynamic> toJson() => {

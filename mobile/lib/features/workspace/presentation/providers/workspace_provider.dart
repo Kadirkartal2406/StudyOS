@@ -119,6 +119,16 @@ class WorkspaceNotifier extends StateNotifier<WorkspaceState> {
     final newRedo = List<List<AnnotationObject>>.from(state.redoHistory)..removeLast();
     state = state.copyWith(objects: next, undoHistory: newUndo, redoHistory: newRedo);
   }
+
+  void addEaeAsset(String assetId, Offset position) {
+    _saveHistory();
+    final newEae = EaeObject(
+      id: const Uuid().v4(),
+      assetId: assetId,
+      position: position,
+    );
+    state = state.copyWith(objects: [...state.objects, newEae]);
+  }
 }
 
 final workspaceProvider = StateNotifierProvider<WorkspaceNotifier, WorkspaceState>((ref) {
