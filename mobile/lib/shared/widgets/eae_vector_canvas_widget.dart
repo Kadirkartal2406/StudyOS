@@ -31,6 +31,7 @@ class _EAEVectorCanvasWidgetState
   final TransformationController _transformationController =
       TransformationController();
   final Map<String, Path> _parsedPaths = {};
+  bool _isInitialScaleSet = false;
 
   @override
   void initState() {
@@ -114,30 +115,44 @@ class _EAEVectorCanvasWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final renderState = ref.watch(eaeRenderNotifierProvider);
     final viewport = widget.manifest.viewport;
 
-    return Container(
-      color: Colors.transparent,
-      child: InteractiveViewer(
-        transformationController: _transformationController,
-        minScale: viewport.defaultScale,
-        maxScale: viewport.maxScale,
-        clipBehavior: Clip.hardEdge,
-        child: GestureDetector(
-          onTapUp: _handleTapUp,
-          child: CustomPaint(
-            size: Size(viewport.width, viewport.height),
-            painter: EAEVectorCanvasPainter(
-              manifest: widget.manifest,
-              parsedPaths: _parsedPaths,
-              selectedNodeIds: renderState.selectedNodeIds,
-              highlightedNodeIds: renderState.highlightedNodeIds,
-              currentScale: renderState.currentScale,
-            ),
-          ),
-        ),
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        final renderState = ref.watch(eaeRenderNotifierProvider);
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            if (!_isInitialScaleSet && constraints.maxWidth > 0) {
+              final scale = constraints.maxWidth / viewport.width;
+              _transformationController.value = Matrix4.identity()..scale(scale);
+              _isInitialScaleSet = true;
+            }
+            
+            return Container(
+              color: Colors.transparent,
+              child: InteractiveViewer(
+                transformationController: _transformationController,
+                minScale: 0.1,
+                maxScale: viewport.maxScale * 2,
+                clipBehavior: Clip.hardEdge,
+                child: GestureDetector(
+                  onTapUp: _handleTapUp,
+                  child: CustomPaint(
+                    size: Size(viewport.width, viewport.height),
+                    painter: EAEVectorCanvasPainter(
+                      manifest: widget.manifest,
+                      parsedPaths: _parsedPaths,
+                      selectedNodeIds: renderState.selectedNodeIds,
+                      highlightedNodeIds: renderState.highlightedNodeIds,
+                      currentScale: renderState.currentScale,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+        );
+      },
     );
   }
 }

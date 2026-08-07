@@ -25,7 +25,8 @@ import '../../features/beta_feedback/presentation/screens/beta_feedback_screen.d
 import '../../features/beta_feedback/presentation/screens/qie_eval_screen.dart';
 import '../../features/dashboard/presentation/screens/dashboard_screen.dart';
 import '../../features/dashboard/presentation/screens/menu_screen.dart';
-import '../../features/educational_assets/presentation/screens/eae_showcase_screen.dart';
+import '../../features/educational_assets/presentation/screens/maps_list_screen.dart';
+import '../../features/educational_assets/presentation/screens/map_viewer_screen.dart';
 import '../../features/exam_tracking/presentation/screens/add_exam_screen.dart';
 
 import '../../features/exam_tracking/presentation/screens/edit_exam_screen.dart';
@@ -219,9 +220,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
-        path: '/eae-demo',
-        name: 'eae-demo',
-        builder: (_, __) => const EAEShowcaseScreen(),
+        path: '/maps',
+        name: 'maps',
+        builder: (_, __) => const MapsListScreen(),
+      ),
+      GoRoute(
+        path: '/maps/view',
+        name: 'map-viewer',
+        builder: (_, state) {
+          final uri = state.uri.queryParameters['uri'] ?? 'studyos://assets/geography/turkey_admin/v1';
+          final title = state.uri.queryParameters['title'] ?? 'Harita';
+          return MapViewerScreen(uri: uri, title: title);
+        },
       ),
 
       GoRoute(

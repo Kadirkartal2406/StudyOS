@@ -20,11 +20,20 @@ class EAEVectorCanvasPainter extends CustomPainter {
     this.selectionColor = const Color(0xFF38BDF8),        // StudyOS Sky Blue
   });
 
+  static const _palette = [
+    Color(0xFFFFB3BA), // Pastel Red
+    Color(0xFFFFDFBA), // Pastel Orange
+    Color(0xFFFFFFBA), // Pastel Yellow
+    Color(0xFFBAFFC9), // Pastel Green
+    Color(0xFFBAE1FF), // Pastel Blue
+    Color(0xFFE2C9FF), // Pastel Purple
+    Color(0xFFFFC9DE), // Pastel Pink
+    Color(0xFFD4F0F0), // Mint
+    Color(0xFFFBE4E4), // Peach
+  ];
+
   @override
   void paint(Canvas canvas, Size size) {
-    final fillPaint = Paint()
-      ..style = PaintingStyle.fill
-      ..color = Colors.blueGrey.withValues(alpha: 0.15);
 
     final strokePaint = Paint()
       ..style = PaintingStyle.stroke
@@ -61,7 +70,12 @@ class EAEVectorCanvasPainter extends CustomPainter {
           canvas.drawPath(path, highlightPaint);
           canvas.drawPath(path, strokePaint);
         } else {
-          canvas.drawPath(path, fillPaint);
+          final colorIndex = node.id.hashCode.abs() % _palette.length;
+          final dynamicFill = Paint()
+            ..style = PaintingStyle.fill
+            ..color = _palette[colorIndex];
+            
+          canvas.drawPath(path, dynamicFill);
           canvas.drawPath(path, strokePaint);
         }
       }

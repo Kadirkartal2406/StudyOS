@@ -50,8 +50,8 @@ class MenuScreen extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.map_rounded),
-            title: const Text('EAE Harita (Demo)'),
-            onTap: () => context.push('/eae-demo'),
+            title: const Text('Haritalar'),
+            onTap: () => context.push('/maps'),
           ),
           const Divider(),
           ListTile(
