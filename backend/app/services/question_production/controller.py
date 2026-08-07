@@ -850,6 +850,36 @@ class ProductionController:
         if reset_progress:
             tracker.update(status=status, cost_report=report.to_dict(), remaining=remaining)
 
+        # Admin metrics: production path previously never wrote history → "Bugün üretilen" stuck
+        if save and approval_mode == "auto" and (accepted > 0 or rejected > 0 or gemini_calls > 0):
+            try:
+                from app.models.question_pool_inventory import QuestionPoolGenerationHistory
+
+                hist = QuestionPoolGenerationHistory(
+                    timestamp=datetime.now(UTC),
+                    exam=exam,
+                    subject_code=subject_code,
+                    topic_code=topic_code,
+                    difficulty_band=difficulty_band or "medium",
+                    generated_count=int(generated),
+                    accepted=int(accepted),
+                    rejected=int(rejected),
+                    quality_average=None,
+                    duration_ms=float(duration_ms),
+                    gemini_calls=int(gemini_calls),
+                    estimated_cost=float(est_cost) if est_cost else None,
+                    provider=(settings.AI_PROVIDER or None),
+                    model=None,
+                )
+                db.add(hist)
+                await db.commit()
+            except Exception:
+                logger.exception("Failed to persist QuestionPoolGenerationHistory")
+                try:
+                    await db.rollback()
+                except Exception:
+                    pass
+
         return {
             "exam": exam,
             "subject_code": subject_code,

@@ -130,10 +130,6 @@ document.querySelectorAll(".nav").forEach((btn) => {
     ["overview", "users", "questions", "question-pool", "assets"].forEach((t) => {
       $(`tab-${t}`).hidden = t !== tab;
     });
-    if (tab !== "question-pool" && _qpProgressTimer) {
-      clearInterval(_qpProgressTimer);
-      _qpProgressTimer = null;
-    }
     if (tab === "overview") loadOverview();
     if (tab === "users") loadUsers();
     if (tab === "questions") loadQuestions();
@@ -422,7 +418,8 @@ $("qp-fill-selected-btn").addEventListener("click", async () => {
       }),
     });
     $("qp-fill-selected-result").textContent = `OK: accepted=${res.data.accepted || 0}, rejected=${res.data.rejected || 0}`;
-    loadQuestionPool();
+    await loadQuestionPool();
+    try { await loadOverview(); } catch { /* ignore */ }
   } catch (err) {
     $("qp-fill-selected-result").textContent = `Hata: ${err.message}`;
   }
@@ -828,6 +825,7 @@ $("qp-production-report-btn").addEventListener("click", loadProductionReport);
 
 // ── M34.5 Live progress / cost gate / validate / stop ────────
 let _qpProgressTimer = null;
+let _qpWasActive = false;
 
 function renderLivePreview(previews) {
   if (!previews) {
@@ -927,13 +925,30 @@ async function refreshLiveProgress() {
   try {
     const res = await api("/admin/question-pool/live-progress");
     renderLiveProgress(res.data);
-    if (res.data && (res.data.status === "running" || res.data.status === "stopping")) {
+    const st = (res.data && res.data.status) || "idle";
+    const active = st === "running" || st === "stopping";
+    if (active) {
+      _qpWasActive = true;
       if (!_qpProgressTimer) {
         _qpProgressTimer = setInterval(refreshLiveProgress, 2000);
       }
-    } else if (_qpProgressTimer) {
-      clearInterval(_qpProgressTimer);
-      _qpProgressTimer = null;
+    } else {
+      if (_qpProgressTimer) {
+        clearInterval(_qpProgressTimer);
+        _qpProgressTimer = null;
+      }
+      // Üretim bitince metrik / inventory sayılarını yenile
+      if (_qpWasActive) {
+        _qpWasActive = false;
+        try {
+          await loadQuestionPool();
+        } catch { /* ignore */ }
+        refreshPending();
+        refreshCostGate();
+        try {
+          if ($("tab-overview") && !$("tab-overview").hidden) await loadOverview();
+        } catch { /* ignore */ }
+      }
     }
   } catch { /* ignore */ }
 }
@@ -1043,10 +1058,11 @@ $("qp-run-missing-safe-btn").addEventListener("click", async (e) => {
     });
     $("qp-last-result").textContent =
       `Safe OK: accepted=${res.data?.accepted || 0}, rejected=${res.data?.rejected || 0}, skipped=${res.data?.skipped_topics || 0}`;
-    refreshLiveProgress();
-    refreshPending();
-    refreshCostGate();
-    loadQuestionPool();
+    await refreshLiveProgress();
+    await refreshPending();
+    await refreshCostGate();
+    await loadQuestionPool();
+    try { await loadOverview(); } catch { /* ignore */ }
   } catch (err) {
     $("qp-last-result").textContent = `Safe run hata: ${err.message}`;
   } finally {
@@ -1275,9 +1291,7 @@ $("qp-manual-add-btn")?.addEventListener("click", async () => {
     $("qp-manual-d").value = "";
     $("qp-manual-eae").value = "";
     
-    if (currentTab === "question-pool") {
-      fetchQuestionPool();
-    }
+    await loadQuestionPool();
   } catch (err) {
     res.textContent = "Hata: " + err.message;
     res.style.color = "red";

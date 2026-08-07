@@ -208,7 +208,7 @@ async def admin_question_pool_metrics(
     low_topics = int(sum(1 for r in inventory_rows if r.get("status") == "low"))
     empty_topics = int(sum(1 for r in inventory_rows if r.get("status") == "empty"))
 
-    # Generation stats from history table (best-effort)
+    # Generation stats — pool'a yazılan kartlar (gerçek sayı) + history (gemini/cost)
     now = datetime.now(timezone.utc)
     tz = timezone(timedelta(hours=3), name="Europe/Istanbul")
     now_local = now.astimezone(tz)
@@ -226,6 +226,20 @@ async def admin_question_pool_metrics(
     start_week_utc = start_week_local.astimezone(timezone.utc)
     end_utc = now
 
+    async def _count_cards_created(day_start_utc: datetime, day_end_utc: datetime) -> int:
+        stmt_c = (
+            select(func.count())
+            .select_from(QuestionPoolCard)
+            .where(QuestionPoolCard.created_at >= day_start_utc)
+            .where(QuestionPoolCard.created_at < day_end_utc)
+        )
+        return int((await db.execute(stmt_c)).scalar() or 0)
+
+    # Bugün/dün/haftalık: havuza gerçekten eklenen kart sayısı
+    today_generated = await _count_cards_created(start_today_utc, end_utc)
+    yesterday_generated = await _count_cards_created(start_yesterday_utc, start_today_utc)
+    weekly_generated = await _count_cards_created(start_week_utc, end_utc)
+
     stmt = (
         select(QuestionPoolGenerationHistory)
         .where(QuestionPoolGenerationHistory.timestamp >= start_week_utc)
@@ -233,16 +247,11 @@ async def admin_question_pool_metrics(
     )
     records = list((await db.execute(stmt.order_by(QuestionPoolGenerationHistory.timestamp.desc()))).scalars().all())
 
-    def _sum_day(day_start_utc: datetime, day_end_utc: datetime) -> tuple[int, int]:
-        gen = sum(int(r.generated_count or 0) for r in records if day_start_utc <= r.timestamp < day_end_utc)
-        gemini = sum(int(r.gemini_calls or 0) for r in records if day_start_utc <= r.timestamp < day_end_utc)
-        return gen, gemini
-
-    # Today: [start_today, now]
-    today_generated, gemini_calls_today = _sum_day(start_today_utc, end_utc)
-    # Yesterday: [start_yesterday, start_today)
-    yesterday_generated, _ = _sum_day(start_yesterday_utc, start_today_utc)
-    weekly_generated = sum(int(r.generated_count or 0) for r in records)
+    gemini_calls_today = sum(
+        int(r.gemini_calls or 0)
+        for r in records
+        if start_today_utc <= r.timestamp < end_utc
+    )
 
     # Avg quality/difficulty from latest inventory snapshot
     qualities = [r.get("average_quality") for r in inventory_rows if r.get("average_quality") is not None]
