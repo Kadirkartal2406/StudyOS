@@ -128,9 +128,9 @@ async def midnight_booklet_loop() -> None:
         logger.exception("Booklet catch-up failed")
 
     while True:
-        wait_s = seconds_until_next_0300()
+        wait_s = seconds_until_next_1000()
         logger.info(
-            "Next booklet generation in %.0f seconds (Istanbul 03:00)", wait_s
+            "Next booklet generation in %.0f seconds (Istanbul 10:00)", wait_s
         )
         await asyncio.sleep(wait_s)
         if not midnight_scheduler_enabled() or not auto_booklet_enabled():
