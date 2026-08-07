@@ -203,7 +203,7 @@ class _NotificationSettingsScreenState
                 leading: const Icon(Icons.timer_outlined),
                 title: const Text('Pomodoro'),
                 subtitle: const Text('Odak oturumu başlat'),
-                onTap: () => context.push('/pomodoro'),
+                onTap: () => context.go('/pomodoro'),
               ),
               ListTile(
                 leading: const Icon(Icons.assignment_outlined),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../shared/widgets/app_bottom_nav_bar.dart';
+import '../../study_plan/presentation/providers/study_plan_provider.dart';
+import '../../study_plan/presentation/providers/study_plan_state.dart';
+import '../../study_plan/presentation/widgets/study_card.dart';
 import '../../../subjects/presentation/widgets/subject_code_chip.dart';
 import '../providers/study_session_provider.dart';
 import '../providers/study_session_state.dart';
@@ -65,6 +69,7 @@ class _PomodoroScreenState extends ConsumerState<PomodoroScreen> {
             ),
         ],
       ),
+      bottomNavigationBar: const AppBottomNavBar(currentIndex: 2),
       body: switch (state) {
         StudySessionInitial() => const Center(
             child: CircularProgressIndicator(),
@@ -255,10 +260,77 @@ class _PomodoroBody extends StatelessWidget {
             if (state.phase == PomodoroPhase.idle) ...[
               const SizedBox(height: 24),
               const TodaySummaryCard(),
+              const _PomodoroStudyPlanSection(),
             ],
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PomodoroStudyPlanSection extends ConsumerWidget {
+  const _PomodoroStudyPlanSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(studyPlanProvider);
+    final theme = Theme.of(context);
+
+    if (state is! StudyPlanLoaded) {
+      return const SizedBox.shrink();
+    }
+
+    final pendingPlans =
+        state.plans.where((p) => p.status != 'completed').toList();
+
+    if (pendingPlans.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 24),
+        Text(
+          'Bugünkü ders planın',
+          style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+        ),
+        const SizedBox(height: 12),
+        ...pendingPlans.take(3).map(
+          (plan) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: StudyCard(
+              plan: plan,
+              isMutating: state.mutatingPlanId == plan.id,
+              onStart: () async {
+                try {
+                  await ref.read(studyPlanProvider.notifier).startPlan(plan.id);
+                } catch (_) {}
+              },
+              onStartStudy: () {
+                ref.read(studySessionProvider.notifier).setContext(
+                      subject: plan.subject,
+                      topic: plan.topic,
+                      studyPlanId: plan.id,
+                    );
+              },
+              onComplete: () async {
+                try {
+                  await ref.read(studyPlanProvider.notifier).completePlan(plan.id);
+                } catch (_) {}
+              },
+              onSkip: () async {
+                try {
+                  await ref.read(studyPlanProvider.notifier).skipPlan(plan.id);
+                } catch (_) {}
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

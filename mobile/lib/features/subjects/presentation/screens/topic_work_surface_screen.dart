@@ -219,7 +219,7 @@ class _WorkSurfaceBody extends StatelessWidget {
             title: 'Henüz geçmiş yok',
             message: 'Pomodoro veya quiz sonrası burada görünecek.',
             ctaLabel: 'Pomodoro başlat',
-            onCta: () => context.push('/pomodoro?$q'),
+            onCta: () => context.go('/pomodoro?$q'),
           ),
 
         const SizedBox(height: AppSpacing.xl),
@@ -300,7 +300,7 @@ class _WorkSurfaceBody extends StatelessWidget {
             TonalButton(
               label: 'Pomodoro',
               icon: Icons.timer_outlined,
-              onPressed: () => context.push('/pomodoro?$q'),
+              onPressed: () => context.go('/pomodoro?$q'),
             ),
             TonalButton(
               label: 'Quiz',
@@ -357,7 +357,7 @@ class _WorkSurfaceBody extends StatelessWidget {
       _ => action.deepLinkHint.isNotEmpty ? action.deepLinkHint : '/pomodoro?$q',
     };
     if (path.contains('/topics/')) {
-      context.push(hint == 'revision' ? '/revisions?$q' : '/pomodoro?$q');
+      context.go(hint == 'revision' ? '/revisions?$q' : '/pomodoro?$q');
       return;
     }
     context.push(path);

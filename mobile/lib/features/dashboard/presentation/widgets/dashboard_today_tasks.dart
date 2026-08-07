@@ -51,7 +51,7 @@ class DashboardTodayTasks extends StatelessWidget {
               icon: Icons.timer_outlined,
               title: 'Pomodoro',
               subtitle: 'Odak oturumu başlat',
-              onTap: () => context.push('/pomodoro'),
+              onTap: () => context.go('/pomodoro'),
             ),
             _TaskTile(
               icon: Icons.replay_circle_filled_outlined,

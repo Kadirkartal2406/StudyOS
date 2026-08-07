@@ -28,7 +28,7 @@ class JourneyScreen extends ConsumerWidget {
         title: const Text('Yolculuğum'),
         actions: const [ActiveExamSwitcher()],
       ),
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 3),
+      bottomNavigationBar: const AppBottomNavBar(currentIndex: 4),
       body: switch (statsState) {
         StatisticsInitial() || StatisticsLoading() => ListView(
             padding: AppSpacing.pageWide,

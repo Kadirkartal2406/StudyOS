@@ -83,7 +83,7 @@ class LiveStudySessionCard extends ConsumerWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => context.push('/pomodoro'),
+                    onPressed: () => context.go('/pomodoro'),
                     child: const Text('Aç'),
                   ),
                 ],

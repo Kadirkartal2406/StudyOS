@@ -67,7 +67,7 @@ class StudyPlanScreen extends ConsumerWidget {
           StudyPlanError(:final message) => _ErrorView(message: message),
         },
       ),
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 2),
+      bottomNavigationBar: const AppBottomNavBar(currentIndex: 3),
     );
   }
 }
@@ -247,7 +247,7 @@ class _LoadedView extends ConsumerWidget {
                                         topic: plan.topic,
                                         studyPlanId: plan.id,
                                       );
-                                  context.push('/pomodoro');
+                                  context.go('/pomodoro');
                                 },
                                 onComplete: () async {
                                   try {

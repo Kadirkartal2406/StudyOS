@@ -10,6 +10,7 @@ class AppBottomNavBar extends StatelessWidget {
   static const _destinations = [
     (icon: Icons.today_rounded, label: 'Bugün', route: '/dashboard'),
     (icon: Icons.menu_book_rounded, label: 'Derslerim', route: '/subjects'),
+    (icon: Icons.timer_outlined, label: 'Odak', route: '/pomodoro'),
     (icon: Icons.calendar_today_outlined, label: 'Planım', route: '/study-plan'),
     (icon: Icons.map_outlined, label: 'Yolculuk', route: '/journey'),
     (icon: Icons.person_outline_rounded, label: 'Profil', route: '/profile'),

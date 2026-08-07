@@ -155,7 +155,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 4),
+      bottomNavigationBar: const AppBottomNavBar(currentIndex: 5),
     );
   }
 
