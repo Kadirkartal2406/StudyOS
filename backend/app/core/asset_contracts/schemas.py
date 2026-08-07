@@ -25,13 +25,40 @@ class ViewportSchemaDTO(BaseModel):
     max_scale: float = Field(8.0, gt=1.0, le=50.0, description="Maximum zoom scale")
 
 
+class AssetNodeRelationshipDTO(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    target_id: str = Field(..., description="Target node ID")
+    relation_type: str = Field(..., description="Type of relationship (e.g., 'contains', 'part_of', 'depends_on')")
+    metadata: dict[str, Any] | None = Field(default=None, description="Relationship metadata")
+
+
+class EducationalMetadataDTO(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    aliases: list[str] | None = Field(default=None, description="Searchable aliases for this node")
+    searchable_keywords: list[str] | None = Field(default=None, description="Keywords to aid in search indexing")
+    categories: list[str] | None = Field(default=None, description="Taxonomic categories")
+    tags: list[str] | None = Field(default=None, description="Arbitrary grouping tags")
+    exam_relevance: dict[str, float] | None = Field(default=None, description="Relevance scores per exam type (e.g. {'yks': 0.9})")
+    difficulty: float | None = Field(default=None, ge=0.0, le=100.0, description="Inherent difficulty score 0-100")
+    explanations: dict[str, str] | None = Field(default=None, description="Localized detailed explanations")
+    hints: dict[str, str] | None = Field(default=None, description="Localized hints for solving/learning")
+    ai_context: str | None = Field(default=None, description="Rich semantic context for AI Agent consumption")
+    relationships: list[AssetNodeRelationshipDTO] | None = Field(default=None, description="Graph edges to other nodes")
+    references: list[str] | None = Field(default=None, description="External reference URIs or citations")
+    interaction_metadata: dict[str, Any] | None = Field(default=None, description="UI/UX interaction behaviors")
+    educational_metadata: dict[str, Any] | None = Field(default=None, description="Domain-specific educational properties")
+
+
 class AssetNodeSchemaDTO(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     id: str = Field(..., description="Unique node ID matching pattern <asset>::<type>::<name>")
     name: dict[str, str] = Field(..., description="Localized display names e.g. {'tr': 'Konya', 'en': 'Konya'}")
     bounding_box: list[float] = Field(..., min_length=4, max_length=4, description="[min_x, min_y, max_x, max_y]")
-    attributes: dict[str, Any] = Field(default_factory=dict, description="Domain-specific pedagogical metadata")
+    attributes: dict[str, Any] = Field(default_factory=dict, description="Legacy or domain-specific pedagogical metadata")
+    educational_metadata: EducationalMetadataDTO | None = Field(default=None, description="Structured semantic AI-ready node metadata")
 
     @field_validator("id")
     @classmethod

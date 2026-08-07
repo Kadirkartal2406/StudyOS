@@ -103,6 +103,9 @@ class EducationalAssetNode(Base):
     attributes: Mapped[dict[str, Any]] = mapped_column(
         JSONB, nullable=False, default=dict
     )
+    educational_metadata: Mapped[dict[str, Any] | None] = mapped_column(
+        JSONB, nullable=True, default=None
+    )
 
     asset: Mapped[EducationalAsset] = relationship(
         "EducationalAsset", back_populates="nodes"

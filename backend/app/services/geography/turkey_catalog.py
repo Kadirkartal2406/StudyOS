@@ -453,6 +453,18 @@ def make_node(
         "name": {"tr": tr, "en": en},
         "bounding_box": bbox,
         "attributes": attrs,
+        "educational_metadata": {
+            "aliases": attrs.get("qie_aliases", []),
+            "searchable_keywords": [tr, en] + attrs.get("qie_aliases", []),
+            "categories": [attrs.get("feature_class", "")] if attrs.get("feature_class") else [],
+            "tags": [attrs.get("layer_type", "")] if attrs.get("layer_type") else [],
+            "hints": {"tr": h for h in attrs.get("evidence_topic_hints", [])} if attrs.get("evidence_topic_hints") else {},
+            "educational_metadata": {
+                "confusable_with": attrs.get("confusable_with", []),
+                "region_codes": attrs.get("region_codes", []),
+                "province_codes": attrs.get("province_codes", []),
+            },
+        },
         "path_d": path_d,
     }
 

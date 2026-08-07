@@ -88,6 +88,7 @@ class AssetRegistryService:
                             "z_index": layer.z_index,
                             "min_lod": layer.min_lod,
                         },
+                        educational_metadata=node_dto.educational_metadata.model_dump() if node_dto.educational_metadata else None,
                     )
                 )
 
@@ -152,6 +153,7 @@ class AssetRegistryService:
                             "z_index": layer.z_index,
                             "min_lod": layer.min_lod,
                         },
+                        educational_metadata=node_dto.educational_metadata.model_dump() if node_dto.educational_metadata else None,
                     )
                 )
 
