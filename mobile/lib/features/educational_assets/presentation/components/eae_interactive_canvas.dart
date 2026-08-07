@@ -107,15 +107,24 @@ class _EAEInteractiveCanvasState extends ConsumerState<EAEInteractiveCanvas> {
     }
 
     if (_bundle != null) {
-      return SizedBox(
-        height: 320,
-        child: EAEVectorCanvasWidget(
-          manifest: _bundle!.manifest,
-          svgContent: _bundle!.svgContent,
-          onNodeTapped: widget.showAnswer
-              ? null
-              : (node) => widget.onNodeSelected(node.id),
-        ),
+      return Column(
+        children: [
+          _buildInteractionModeSelector(ref),
+          Expanded(
+            child: Stack(
+              children: [
+                EAEVectorCanvasWidget(
+                  manifest: _bundle!.manifest,
+                  svgContent: _bundle!.svgContent,
+                  onNodeTapped: widget.showAnswer
+                      ? null
+                      : (node) => _handleNodeInteraction(node, ref),
+                ),
+                _buildInteractionOverlay(ref),
+              ],
+            ),
+          ),
+        ],
       );
     }
 
@@ -188,5 +197,80 @@ class _EAEInteractiveCanvasState extends ConsumerState<EAEInteractiveCanvas> {
         );
       },
     );
+  }
+
+  Widget _buildInteractionModeSelector(WidgetRef ref) {
+    final mode = ref.watch(eaeRenderNotifierProvider).interactionMode;
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: EAEInteractionMode.values.map((m) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: ChoiceChip(
+              label: Text(m.name.toUpperCase(), style: const TextStyle(fontSize: 10)),
+              selected: mode == m,
+              onSelected: (selected) {
+                if (selected) {
+                  ref.read(eaeRenderNotifierProvider.notifier).setInteractionMode(m);
+                }
+              },
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  void _handleNodeInteraction(EAENodeContract node, WidgetRef ref) {
+    widget.onNodeSelected(node.id);
+    final notifier = ref.read(eaeRenderNotifierProvider.notifier);
+    final state = ref.read(eaeRenderNotifierProvider);
+    
+    if (state.interactionMode == EAEInteractionMode.explore) {
+      // Show info overlay implemented via overlay widget
+    } else if (state.interactionMode == EAEInteractionMode.practice) {
+      if (state.activeQuestionNodeId == node.id) {
+        notifier.addMatch(node.id);
+        notifier.setActiveQuestion(null); // Wait for next question
+      }
+    }
+  }
+
+  Widget _buildInteractionOverlay(WidgetRef ref) {
+    final state = ref.watch(eaeRenderNotifierProvider);
+    final node = state.lastTappedNodeId != null ? _bundle?.manifest.layers.expand((l) => l.nodes).where((n) => n.id == state.lastTappedNodeId).firstOrNull : null;
+    
+    if (state.interactionMode == EAEInteractionMode.explore && node != null) {
+      return Positioned(
+        bottom: 16,
+        left: 16,
+        right: 16,
+        child: Card(
+          elevation: 8,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(node.getLocalizedName('tr'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                if (node.educationalMetadata?.explanations?['tr'] != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(node.educationalMetadata!.explanations!['tr']!),
+                  ),
+                if (node.educationalMetadata?.hints?['tr'] != null)
+                   Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text('İpucu: ${node.educationalMetadata!.hints!['tr']}', style: const TextStyle(fontStyle: FontStyle.italic)),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 }

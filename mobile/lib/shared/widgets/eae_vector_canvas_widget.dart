@@ -11,6 +11,9 @@ class EAEVectorCanvasWidget extends ConsumerStatefulWidget {
   final EAEAssetManifestContract manifest;
   final String svgContent;
   final ValueChanged<EAENodeContract>? onNodeTapped;
+  final TransformationController? externalTransformationController;
+  final bool panEnabled;
+  final bool scaleEnabled;
   final bool enableMultiSelect;
 
   const EAEVectorCanvasWidget({
@@ -18,6 +21,9 @@ class EAEVectorCanvasWidget extends ConsumerStatefulWidget {
     required this.manifest,
     required this.svgContent,
     this.onNodeTapped,
+    this.externalTransformationController,
+    this.panEnabled = true,
+    this.scaleEnabled = true,
     this.enableMultiSelect = false,
   });
 
@@ -28,14 +34,15 @@ class EAEVectorCanvasWidget extends ConsumerStatefulWidget {
 
 class _EAEVectorCanvasWidgetState
     extends ConsumerState<EAEVectorCanvasWidget> {
-  final TransformationController _transformationController =
-      TransformationController();
+  late TransformationController _transformationController;
   final Map<String, Path> _parsedPaths = {};
   bool _isInitialScaleSet = false;
 
   @override
   void initState() {
     super.initState();
+    _transformationController =
+        widget.externalTransformationController ?? TransformationController();
     _parseSvgPaths();
     _transformationController.addListener(_onTransformationChanged);
   }
@@ -48,12 +55,24 @@ class _EAEVectorCanvasWidgetState
       _parsedPaths.clear();
       _parseSvgPaths();
     }
+    if (widget.externalTransformationController !=
+            oldWidget.externalTransformationController) {
+      if (oldWidget.externalTransformationController == null) {
+        _transformationController.removeListener(_onTransformationChanged);
+        _transformationController.dispose();
+      }
+      _transformationController = widget.externalTransformationController ??
+          TransformationController();
+      _transformationController.addListener(_onTransformationChanged);
+    }
   }
 
   @override
   void dispose() {
     _transformationController.removeListener(_onTransformationChanged);
-    _transformationController.dispose();
+    if (widget.externalTransformationController == null) {
+      _transformationController.dispose();
+    }
     super.dispose();
   }
 
@@ -139,6 +158,8 @@ class _EAEVectorCanvasWidgetState
                 minScale: 0.1,
                 maxScale: viewport.maxScale * 2,
                 clipBehavior: Clip.hardEdge,
+                panEnabled: widget.panEnabled,
+                scaleEnabled: widget.scaleEnabled,
                 child: GestureDetector(
                   onTapUp: _handleTapUp,
                   child: CustomPaint(
@@ -148,7 +169,10 @@ class _EAEVectorCanvasWidgetState
                       parsedPaths: _parsedPaths,
                       selectedNodeIds: renderState.selectedNodeIds,
                       highlightedNodeIds: renderState.highlightedNodeIds,
+                      matchedNodeIds: renderState.matchedNodeIds,
+                      activeQuestionNodeId: renderState.activeQuestionNodeId,
                       currentScale: renderState.currentScale,
+                      interactionMode: renderState.interactionMode,
                     ),
                   ),
                 ),

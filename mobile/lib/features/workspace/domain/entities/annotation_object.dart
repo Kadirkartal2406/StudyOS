@@ -102,12 +102,18 @@ class EaeObject extends AnnotationObject {
   final String assetId;
   final Offset position;
   final double scale;
+  final double rotation;
+  final Map<String, dynamic>? viewportState;
+  final List<AnnotationObject> embeddedAnnotations;
 
   EaeObject({
     required super.id,
     required this.assetId,
     required this.position,
     this.scale = 1.0,
+    this.rotation = 0.0,
+    this.viewportState,
+    this.embeddedAnnotations = const [],
   });
 
   @override
@@ -120,15 +126,25 @@ class EaeObject extends AnnotationObject {
         'assetId': assetId,
         'position': {'x': position.dx, 'y': position.dy},
         'scale': scale,
+        'rotation': rotation,
+        if (viewportState != null) 'viewportState': viewportState,
+        if (embeddedAnnotations.isNotEmpty)
+          'embeddedAnnotations': embeddedAnnotations.map((e) => e.toJson()).toList(),
       };
 
   factory EaeObject.fromJson(Map<String, dynamic> json) {
     final p = json['position'] as Map<String, dynamic>;
+    final annotationsList = json['embeddedAnnotations'] as List?;
     return EaeObject(
       id: json['id'] as String,
       assetId: json['assetId'] as String,
       position: Offset((p['x'] as num).toDouble(), (p['y'] as num).toDouble()),
       scale: (json['scale'] as num).toDouble(),
+      rotation: (json['rotation'] as num?)?.toDouble() ?? 0.0,
+      viewportState: json['viewportState'] as Map<String, dynamic>?,
+      embeddedAnnotations: annotationsList != null
+          ? annotationsList.map((e) => AnnotationObject.fromJson(e as Map<String, dynamic>)).toList()
+          : const [],
     );
   }
 }

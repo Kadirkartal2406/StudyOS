@@ -33,17 +33,113 @@ class EAEViewportContract {
       };
 }
 
+class EAEAssetNodeRelationshipContract {
+  final String targetId;
+  final String relationType;
+  final Map<String, dynamic>? metadata;
+
+  const EAEAssetNodeRelationshipContract({
+    required this.targetId,
+    required this.relationType,
+    this.metadata,
+  });
+
+  factory EAEAssetNodeRelationshipContract.fromJson(Map<String, dynamic> json) {
+    return EAEAssetNodeRelationshipContract(
+      targetId: json['target_id'] as String,
+      relationType: json['relation_type'] as String,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'target_id': targetId,
+        'relation_type': relationType,
+        'metadata': metadata,
+      };
+}
+
+class EAEEducationalMetadataContract {
+  final List<String>? aliases;
+  final List<String>? searchableKeywords;
+  final List<String>? categories;
+  final List<String>? tags;
+  final Map<String, double>? examRelevance;
+  final double? difficulty;
+  final Map<String, String>? explanations;
+  final Map<String, String>? hints;
+  final String? aiContext;
+  final List<EAEAssetNodeRelationshipContract>? relationships;
+  final List<String>? references;
+  final Map<String, dynamic>? interactionMetadata;
+  final Map<String, dynamic>? educationalMetadata;
+
+  const EAEEducationalMetadataContract({
+    this.aliases,
+    this.searchableKeywords,
+    this.categories,
+    this.tags,
+    this.examRelevance,
+    this.difficulty,
+    this.explanations,
+    this.hints,
+    this.aiContext,
+    this.relationships,
+    this.references,
+    this.interactionMetadata,
+    this.educationalMetadata,
+  });
+
+  factory EAEEducationalMetadataContract.fromJson(Map<String, dynamic> json) {
+    List<String>? parseStringList(String key) =>
+        (json[key] as List<dynamic>?)?.map((e) => e.toString()).toList();
+        
+    Map<String, String>? parseStringMap(String key) {
+      final map = json[key] as Map<String, dynamic>?;
+      return map?.map((k, v) => MapEntry(k, v.toString()));
+    }
+
+    Map<String, double>? parseDoubleMap(String key) {
+      final map = json[key] as Map<String, dynamic>?;
+      return map?.map((k, v) => MapEntry(k, (v as num).toDouble()));
+    }
+
+    List<EAEAssetNodeRelationshipContract>? parseRels() {
+      final list = json['relationships'] as List<dynamic>?;
+      return list?.map((e) => EAEAssetNodeRelationshipContract.fromJson(e as Map<String, dynamic>)).toList();
+    }
+
+    return EAEEducationalMetadataContract(
+      aliases: parseStringList('aliases'),
+      searchableKeywords: parseStringList('searchable_keywords'),
+      categories: parseStringList('categories'),
+      tags: parseStringList('tags'),
+      examRelevance: parseDoubleMap('exam_relevance'),
+      difficulty: (json['difficulty'] as num?)?.toDouble(),
+      explanations: parseStringMap('explanations'),
+      hints: parseStringMap('hints'),
+      aiContext: json['ai_context'] as String?,
+      relationships: parseRels(),
+      references: parseStringList('references'),
+      interactionMetadata: json['interaction_metadata'] as Map<String, dynamic>?,
+      educationalMetadata: json['educational_metadata'] as Map<String, dynamic>?,
+    );
+  }
+}
+
 class EAENodeContract {
   final String id;
   final Map<String, String> name;
   final List<double> boundingBox;
   final Map<String, dynamic> attributes;
+  final EAEEducationalMetadataContract? educationalMetadata;
 
   const EAENodeContract({
     required this.id,
     required this.name,
     required this.boundingBox,
     this.attributes = const {},
+    this.educationalMetadata,
   });
 
   factory EAENodeContract.fromJson(Map<String, dynamic> json) {
@@ -54,13 +150,17 @@ class EAENodeContract {
             .toList() ??
         [0.0, 0.0, 0.0, 0.0];
 
+    final eduMeta = json['educational_metadata'] as Map<String, dynamic>?;
+
     return EAENodeContract(
       id: json['id'] as String,
       name: localizedName,
       boundingBox: rawBbox,
       attributes: json['attributes'] as Map<String, dynamic>? ?? {},
+      educationalMetadata: eduMeta != null ? EAEEducationalMetadataContract.fromJson(eduMeta) : null,
     );
   }
+
 
   String getLocalizedName(String languageCode) {
     return name[languageCode] ?? name['tr'] ?? name['en'] ?? id;
