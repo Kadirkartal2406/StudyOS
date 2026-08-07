@@ -601,7 +601,7 @@ class _ResultsViewState extends ConsumerState<_ResultsView> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
-                'Bu sonuç tahminidir. Denemeyi saat 21:59\\'dan sonra çözdüğünüz için resmi sıralamaya dahil edilmediniz.',
+                "Bu sonuç tahminidir. Denemeyi saat 21:59'dan sonra çözdüğünüz için resmi sıralamaya dahil edilmediniz.",
                 style: TextStyle(color: Colors.orange, fontSize: 12),
                 textAlign: TextAlign.center,
               ),

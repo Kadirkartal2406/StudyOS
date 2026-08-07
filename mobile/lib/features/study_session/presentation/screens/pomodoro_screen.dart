@@ -327,6 +327,9 @@ class _PomodoroStudyPlanSection extends ConsumerWidget {
                   await ref.read(studyPlanProvider.notifier).skipPlan(plan.id);
                 } catch (_) {}
               },
+              onEdit: () {
+                // TODO: Implement edit logic or navigate to edit screen
+              },
             ),
           ),
         ),
