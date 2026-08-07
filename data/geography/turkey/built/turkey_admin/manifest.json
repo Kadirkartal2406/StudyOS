@@ -43,6 +43,32 @@
             "evidence_topic_hints": [
               "turkiye_cografyasi"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Türkiye",
+              "Turkey"
+            ],
+            "searchable_keywords": [
+              "Türkiye",
+              "Turkey",
+              "Türkiye",
+              "Turkey"
+            ],
+            "categories": [
+              "sovereign_state"
+            ],
+            "tags": [
+              "country"
+            ],
+            "hints": {
+              "tr": "turkiye_cografyasi"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [],
+              "province_codes": []
+            }
           }
         }
       ]
@@ -80,6 +106,36 @@
             "region_codes": [
               "marmara"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Marmara",
+              "Marmara Bölgesi"
+            ],
+            "searchable_keywords": [
+              "Marmara",
+              "Marmara",
+              "Marmara",
+              "Marmara Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::region::ege"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -110,6 +166,36 @@
             "region_codes": [
               "ege"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ege",
+              "Ege Bölgesi"
+            ],
+            "searchable_keywords": [
+              "Ege",
+              "Aegean",
+              "Ege",
+              "Ege Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::region::marmara"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -138,6 +224,34 @@
             "region_codes": [
               "akdeniz"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Akdeniz",
+              "Akdeniz Bölgesi"
+            ],
+            "searchable_keywords": [
+              "Akdeniz",
+              "Mediterranean",
+              "Akdeniz",
+              "Akdeniz Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -166,6 +280,34 @@
             "region_codes": [
               "ic_anadolu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "İç Anadolu",
+              "İç Anadolu Bölgesi"
+            ],
+            "searchable_keywords": [
+              "İç Anadolu",
+              "Central Anatolia",
+              "İç Anadolu",
+              "İç Anadolu Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -194,6 +336,34 @@
             "region_codes": [
               "karadeniz"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Karadeniz",
+              "Karadeniz Bölgesi"
+            ],
+            "searchable_keywords": [
+              "Karadeniz",
+              "Black Sea",
+              "Karadeniz",
+              "Karadeniz Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -222,6 +392,34 @@
             "region_codes": [
               "dogu_anadolu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Doğu Anadolu",
+              "Doğu Anadolu Bölgesi"
+            ],
+            "searchable_keywords": [
+              "Doğu Anadolu",
+              "Eastern Anatolia",
+              "Doğu Anadolu",
+              "Doğu Anadolu Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -250,6 +448,34 @@
             "region_codes": [
               "guneydogu_anadolu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Güneydoğu Anadolu",
+              "Güneydoğu Anadolu Bölgesi"
+            ],
+            "searchable_keywords": [
+              "Güneydoğu Anadolu",
+              "Southeastern Anatolia",
+              "Güneydoğu Anadolu",
+              "Güneydoğu Anadolu Bölgesi"
+            ],
+            "categories": [
+              "geographic_region"
+            ],
+            "tags": [
+              "region"
+            ],
+            "hints": {
+              "tr": "bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": []
+            }
           }
         }
       ]
@@ -284,6 +510,32 @@
             "region_codes": [
               "marmara"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Trakya"
+            ],
+            "searchable_keywords": [
+              "Trakya",
+              "Thrace",
+              "Trakya"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -311,6 +563,32 @@
             "region_codes": [
               "marmara"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çanakkale Boğazı Çevresi"
+            ],
+            "searchable_keywords": [
+              "Çanakkale Boğazı Çevresi",
+              "Dardanelles Area",
+              "Çanakkale Boğazı Çevresi"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -338,6 +616,32 @@
             "region_codes": [
               "ege"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "İç Batı Anadolu"
+            ],
+            "searchable_keywords": [
+              "İç Batı Anadolu",
+              "Inner West Anatolia",
+              "İç Batı Anadolu"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -365,6 +669,32 @@
             "region_codes": [
               "akdeniz"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Toroslar"
+            ],
+            "searchable_keywords": [
+              "Toroslar",
+              "Taurus Belt",
+              "Toroslar"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -392,6 +722,32 @@
             "region_codes": [
               "karadeniz"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Orta Karadeniz"
+            ],
+            "searchable_keywords": [
+              "Orta Karadeniz",
+              "Central Black Sea",
+              "Orta Karadeniz"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -419,6 +775,32 @@
             "region_codes": [
               "dogu_anadolu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Yukarı Fırat"
+            ],
+            "searchable_keywords": [
+              "Yukarı Fırat",
+              "Upper Euphrates",
+              "Yukarı Fırat"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": []
+            }
           }
         },
         {
@@ -446,6 +828,32 @@
             "region_codes": [
               "guneydogu_anadolu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "GAP Bölgesi"
+            ],
+            "searchable_keywords": [
+              "GAP Bölgesi",
+              "GAP Region",
+              "GAP Bölgesi"
+            ],
+            "categories": [
+              "geographic_subregion"
+            ],
+            "tags": [
+              "subregion"
+            ],
+            "hints": {
+              "tr": "alt_bolgeler"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": []
+            }
           }
         }
       ]
@@ -488,6 +896,38 @@
               "adana"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Adana",
+              "Adana ili"
+            ],
+            "searchable_keywords": [
+              "Adana",
+              "Adana",
+              "Adana",
+              "Adana ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::antalya"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "adana"
+              ]
+            }
           }
         },
         {
@@ -523,6 +963,38 @@
               "adiyaman"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Adıyaman",
+              "Adıyaman ili"
+            ],
+            "searchable_keywords": [
+              "Adıyaman",
+              "Adıyaman",
+              "Adıyaman",
+              "Adıyaman ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::diyarbakir"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "adiyaman"
+              ]
+            }
           }
         },
         {
@@ -558,6 +1030,38 @@
               "afyonkarahisar"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Afyonkarahisar",
+              "Afyonkarahisar ili"
+            ],
+            "searchable_keywords": [
+              "Afyonkarahisar",
+              "Afyonkarahisar",
+              "Afyonkarahisar",
+              "Afyonkarahisar ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::aydin"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "afyonkarahisar"
+              ]
+            }
           }
         },
         {
@@ -593,6 +1097,38 @@
               "agri"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ağrı",
+              "Ağrı ili"
+            ],
+            "searchable_keywords": [
+              "Ağrı",
+              "Ağrı",
+              "Ağrı",
+              "Ağrı ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::bingol"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "agri"
+              ]
+            }
           }
         },
         {
@@ -628,6 +1164,38 @@
               "amasya"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Amasya",
+              "Amasya ili"
+            ],
+            "searchable_keywords": [
+              "Amasya",
+              "Amasya",
+              "Amasya",
+              "Amasya ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::artvin"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "amasya"
+              ]
+            }
           }
         },
         {
@@ -663,6 +1231,38 @@
               "ankara"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ankara",
+              "Ankara ili"
+            ],
+            "searchable_keywords": [
+              "Ankara",
+              "Ankara",
+              "Ankara",
+              "Ankara ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::konya"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "ankara"
+              ]
+            }
           }
         },
         {
@@ -698,6 +1298,38 @@
               "antalya"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Antalya",
+              "Antalya ili"
+            ],
+            "searchable_keywords": [
+              "Antalya",
+              "Antalya",
+              "Antalya",
+              "Antalya ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::izmir"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "antalya"
+              ]
+            }
           }
         },
         {
@@ -733,6 +1365,38 @@
               "artvin"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Artvin",
+              "Artvin ili"
+            ],
+            "searchable_keywords": [
+              "Artvin",
+              "Artvin",
+              "Artvin",
+              "Artvin ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "artvin"
+              ]
+            }
           }
         },
         {
@@ -768,6 +1432,38 @@
               "aydin"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Aydın",
+              "Aydın ili"
+            ],
+            "searchable_keywords": [
+              "Aydın",
+              "Aydın",
+              "Aydın",
+              "Aydın ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::afyonkarahisar"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "aydin"
+              ]
+            }
           }
         },
         {
@@ -803,6 +1499,38 @@
               "balikesir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Balıkesir",
+              "Balıkesir ili"
+            ],
+            "searchable_keywords": [
+              "Balıkesir",
+              "Balıkesir",
+              "Balıkesir",
+              "Balıkesir ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::bilecik"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "balikesir"
+              ]
+            }
           }
         },
         {
@@ -838,6 +1566,38 @@
               "bilecik"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bilecik",
+              "Bilecik ili"
+            ],
+            "searchable_keywords": [
+              "Bilecik",
+              "Bilecik",
+              "Bilecik",
+              "Bilecik ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "bilecik"
+              ]
+            }
           }
         },
         {
@@ -873,6 +1633,38 @@
               "bingol"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bingöl",
+              "Bingöl ili"
+            ],
+            "searchable_keywords": [
+              "Bingöl",
+              "Bingöl",
+              "Bingöl",
+              "Bingöl ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "bingol"
+              ]
+            }
           }
         },
         {
@@ -908,6 +1700,38 @@
               "bitlis"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bitlis",
+              "Bitlis ili"
+            ],
+            "searchable_keywords": [
+              "Bitlis",
+              "Bitlis",
+              "Bitlis",
+              "Bitlis ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "bitlis"
+              ]
+            }
           }
         },
         {
@@ -943,6 +1767,38 @@
               "bolu"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bolu",
+              "Bolu ili"
+            ],
+            "searchable_keywords": [
+              "Bolu",
+              "Bolu",
+              "Bolu",
+              "Bolu ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "bolu"
+              ]
+            }
           }
         },
         {
@@ -978,6 +1834,38 @@
               "burdur"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Burdur",
+              "Burdur ili"
+            ],
+            "searchable_keywords": [
+              "Burdur",
+              "Burdur",
+              "Burdur",
+              "Burdur ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adana"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "burdur"
+              ]
+            }
           }
         },
         {
@@ -1013,6 +1901,38 @@
               "bursa"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bursa",
+              "Bursa ili"
+            ],
+            "searchable_keywords": [
+              "Bursa",
+              "Bursa",
+              "Bursa",
+              "Bursa ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "bursa"
+              ]
+            }
           }
         },
         {
@@ -1048,6 +1968,38 @@
               "canakkale"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çanakkale",
+              "Çanakkale ili"
+            ],
+            "searchable_keywords": [
+              "Çanakkale",
+              "Çanakkale",
+              "Çanakkale",
+              "Çanakkale ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "canakkale"
+              ]
+            }
           }
         },
         {
@@ -1083,6 +2035,38 @@
               "cankiri"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çankırı",
+              "Çankırı ili"
+            ],
+            "searchable_keywords": [
+              "Çankırı",
+              "Çankırı",
+              "Çankırı",
+              "Çankırı ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "cankiri"
+              ]
+            }
           }
         },
         {
@@ -1118,6 +2102,38 @@
               "corum"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çorum",
+              "Çorum ili"
+            ],
+            "searchable_keywords": [
+              "Çorum",
+              "Çorum",
+              "Çorum",
+              "Çorum ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "corum"
+              ]
+            }
           }
         },
         {
@@ -1153,6 +2169,38 @@
               "denizli"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Denizli",
+              "Denizli ili"
+            ],
+            "searchable_keywords": [
+              "Denizli",
+              "Denizli",
+              "Denizli",
+              "Denizli ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::afyonkarahisar"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "denizli"
+              ]
+            }
           }
         },
         {
@@ -1188,6 +2236,38 @@
               "diyarbakir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Diyarbakır",
+              "Diyarbakır ili"
+            ],
+            "searchable_keywords": [
+              "Diyarbakır",
+              "Diyarbakır",
+              "Diyarbakır",
+              "Diyarbakır ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "diyarbakir"
+              ]
+            }
           }
         },
         {
@@ -1223,6 +2303,38 @@
               "edirne"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Edirne",
+              "Edirne ili"
+            ],
+            "searchable_keywords": [
+              "Edirne",
+              "Edirne",
+              "Edirne",
+              "Edirne ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "edirne"
+              ]
+            }
           }
         },
         {
@@ -1258,6 +2370,38 @@
               "elazig"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Elazığ",
+              "Elazığ ili"
+            ],
+            "searchable_keywords": [
+              "Elazığ",
+              "Elazığ",
+              "Elazığ",
+              "Elazığ ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "elazig"
+              ]
+            }
           }
         },
         {
@@ -1293,6 +2437,38 @@
               "erzincan"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Erzincan",
+              "Erzincan ili"
+            ],
+            "searchable_keywords": [
+              "Erzincan",
+              "Erzincan",
+              "Erzincan",
+              "Erzincan ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "erzincan"
+              ]
+            }
           }
         },
         {
@@ -1328,6 +2504,38 @@
               "erzurum"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Erzurum",
+              "Erzurum ili"
+            ],
+            "searchable_keywords": [
+              "Erzurum",
+              "Erzurum",
+              "Erzurum",
+              "Erzurum ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "erzurum"
+              ]
+            }
           }
         },
         {
@@ -1363,6 +2571,38 @@
               "eskisehir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Eskişehir",
+              "Eskişehir ili"
+            ],
+            "searchable_keywords": [
+              "Eskişehir",
+              "Eskişehir",
+              "Eskişehir",
+              "Eskişehir ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "eskisehir"
+              ]
+            }
           }
         },
         {
@@ -1398,6 +2638,38 @@
               "gaziantep"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Gaziantep",
+              "Gaziantep ili"
+            ],
+            "searchable_keywords": [
+              "Gaziantep",
+              "Gaziantep",
+              "Gaziantep",
+              "Gaziantep ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "gaziantep"
+              ]
+            }
           }
         },
         {
@@ -1433,6 +2705,38 @@
               "giresun"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Giresun",
+              "Giresun ili"
+            ],
+            "searchable_keywords": [
+              "Giresun",
+              "Giresun",
+              "Giresun",
+              "Giresun ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "giresun"
+              ]
+            }
           }
         },
         {
@@ -1468,6 +2772,38 @@
               "gumushane"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Gümüşhane",
+              "Gümüşhane ili"
+            ],
+            "searchable_keywords": [
+              "Gümüşhane",
+              "Gümüşhane",
+              "Gümüşhane",
+              "Gümüşhane ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "gumushane"
+              ]
+            }
           }
         },
         {
@@ -1503,6 +2839,38 @@
               "hakkari"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Hakkâri",
+              "Hakkâri ili"
+            ],
+            "searchable_keywords": [
+              "Hakkâri",
+              "Hakkâri",
+              "Hakkâri",
+              "Hakkâri ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "hakkari"
+              ]
+            }
           }
         },
         {
@@ -1538,6 +2906,38 @@
               "hatay"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Hatay",
+              "Hatay ili"
+            ],
+            "searchable_keywords": [
+              "Hatay",
+              "Hatay",
+              "Hatay",
+              "Hatay ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adana"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "hatay"
+              ]
+            }
           }
         },
         {
@@ -1573,6 +2973,38 @@
               "isparta"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Isparta",
+              "Isparta ili"
+            ],
+            "searchable_keywords": [
+              "Isparta",
+              "Isparta",
+              "Isparta",
+              "Isparta ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adana"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "isparta"
+              ]
+            }
           }
         },
         {
@@ -1608,6 +3040,38 @@
               "mersin"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Mersin",
+              "Mersin ili"
+            ],
+            "searchable_keywords": [
+              "Mersin",
+              "Mersin",
+              "Mersin",
+              "Mersin ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adana"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "mersin"
+              ]
+            }
           }
         },
         {
@@ -1643,6 +3107,38 @@
               "istanbul"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "İstanbul",
+              "İstanbul ili"
+            ],
+            "searchable_keywords": [
+              "İstanbul",
+              "İstanbul",
+              "İstanbul",
+              "İstanbul ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "istanbul"
+              ]
+            }
           }
         },
         {
@@ -1678,6 +3174,38 @@
               "izmir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "İzmir",
+              "İzmir ili"
+            ],
+            "searchable_keywords": [
+              "İzmir",
+              "İzmir",
+              "İzmir",
+              "İzmir ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::antalya"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "izmir"
+              ]
+            }
           }
         },
         {
@@ -1713,6 +3241,38 @@
               "kars"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kars",
+              "Kars ili"
+            ],
+            "searchable_keywords": [
+              "Kars",
+              "Kars",
+              "Kars",
+              "Kars ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "kars"
+              ]
+            }
           }
         },
         {
@@ -1748,6 +3308,38 @@
               "kastamonu"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kastamonu",
+              "Kastamonu ili"
+            ],
+            "searchable_keywords": [
+              "Kastamonu",
+              "Kastamonu",
+              "Kastamonu",
+              "Kastamonu ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "kastamonu"
+              ]
+            }
           }
         },
         {
@@ -1783,6 +3375,38 @@
               "kayseri"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kayseri",
+              "Kayseri ili"
+            ],
+            "searchable_keywords": [
+              "Kayseri",
+              "Kayseri",
+              "Kayseri",
+              "Kayseri ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "kayseri"
+              ]
+            }
           }
         },
         {
@@ -1818,6 +3442,38 @@
               "kirklareli"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kırklareli",
+              "Kırklareli ili"
+            ],
+            "searchable_keywords": [
+              "Kırklareli",
+              "Kırklareli",
+              "Kırklareli",
+              "Kırklareli ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "kirklareli"
+              ]
+            }
           }
         },
         {
@@ -1853,6 +3509,38 @@
               "kirsehir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kırşehir",
+              "Kırşehir ili"
+            ],
+            "searchable_keywords": [
+              "Kırşehir",
+              "Kırşehir",
+              "Kırşehir",
+              "Kırşehir ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "kirsehir"
+              ]
+            }
           }
         },
         {
@@ -1888,6 +3576,38 @@
               "kocaeli"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kocaeli",
+              "Kocaeli ili"
+            ],
+            "searchable_keywords": [
+              "Kocaeli",
+              "Kocaeli",
+              "Kocaeli",
+              "Kocaeli ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "kocaeli"
+              ]
+            }
           }
         },
         {
@@ -1923,6 +3643,38 @@
               "konya"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Konya",
+              "Konya ili"
+            ],
+            "searchable_keywords": [
+              "Konya",
+              "Konya",
+              "Konya",
+              "Konya ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "konya"
+              ]
+            }
           }
         },
         {
@@ -1958,6 +3710,38 @@
               "kutahya"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kütahya",
+              "Kütahya ili"
+            ],
+            "searchable_keywords": [
+              "Kütahya",
+              "Kütahya",
+              "Kütahya",
+              "Kütahya ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::afyonkarahisar"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "kutahya"
+              ]
+            }
           }
         },
         {
@@ -1993,6 +3777,38 @@
               "malatya"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Malatya",
+              "Malatya ili"
+            ],
+            "searchable_keywords": [
+              "Malatya",
+              "Malatya",
+              "Malatya",
+              "Malatya ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "malatya"
+              ]
+            }
           }
         },
         {
@@ -2028,6 +3844,38 @@
               "manisa"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Manisa",
+              "Manisa ili"
+            ],
+            "searchable_keywords": [
+              "Manisa",
+              "Manisa",
+              "Manisa",
+              "Manisa ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::afyonkarahisar"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "manisa"
+              ]
+            }
           }
         },
         {
@@ -2063,6 +3911,38 @@
               "kahramanmaras"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kahramanmaraş",
+              "Kahramanmaraş ili"
+            ],
+            "searchable_keywords": [
+              "Kahramanmaraş",
+              "Kahramanmaraş",
+              "Kahramanmaraş",
+              "Kahramanmaraş ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adana"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "kahramanmaras"
+              ]
+            }
           }
         },
         {
@@ -2098,6 +3978,38 @@
               "mardin"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Mardin",
+              "Mardin ili"
+            ],
+            "searchable_keywords": [
+              "Mardin",
+              "Mardin",
+              "Mardin",
+              "Mardin ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "mardin"
+              ]
+            }
           }
         },
         {
@@ -2133,6 +4045,38 @@
               "mugla"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Muğla",
+              "Muğla ili"
+            ],
+            "searchable_keywords": [
+              "Muğla",
+              "Muğla",
+              "Muğla",
+              "Muğla ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::afyonkarahisar"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "mugla"
+              ]
+            }
           }
         },
         {
@@ -2168,6 +4112,38 @@
               "mus"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Muş",
+              "Muş ili"
+            ],
+            "searchable_keywords": [
+              "Muş",
+              "Muş",
+              "Muş",
+              "Muş ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "mus"
+              ]
+            }
           }
         },
         {
@@ -2203,6 +4179,38 @@
               "nevsehir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Nevşehir",
+              "Nevşehir ili"
+            ],
+            "searchable_keywords": [
+              "Nevşehir",
+              "Nevşehir",
+              "Nevşehir",
+              "Nevşehir ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "nevsehir"
+              ]
+            }
           }
         },
         {
@@ -2238,6 +4246,38 @@
               "nigde"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Niğde",
+              "Niğde ili"
+            ],
+            "searchable_keywords": [
+              "Niğde",
+              "Niğde",
+              "Niğde",
+              "Niğde ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "nigde"
+              ]
+            }
           }
         },
         {
@@ -2273,6 +4313,38 @@
               "ordu"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ordu",
+              "Ordu ili"
+            ],
+            "searchable_keywords": [
+              "Ordu",
+              "Ordu",
+              "Ordu",
+              "Ordu ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "ordu"
+              ]
+            }
           }
         },
         {
@@ -2308,6 +4380,38 @@
               "rize"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Rize",
+              "Rize ili"
+            ],
+            "searchable_keywords": [
+              "Rize",
+              "Rize",
+              "Rize",
+              "Rize ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "rize"
+              ]
+            }
           }
         },
         {
@@ -2343,6 +4447,38 @@
               "sakarya"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Sakarya",
+              "Sakarya ili"
+            ],
+            "searchable_keywords": [
+              "Sakarya",
+              "Sakarya",
+              "Sakarya",
+              "Sakarya ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "sakarya"
+              ]
+            }
           }
         },
         {
@@ -2378,6 +4514,38 @@
               "samsun"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Samsun",
+              "Samsun ili"
+            ],
+            "searchable_keywords": [
+              "Samsun",
+              "Samsun",
+              "Samsun",
+              "Samsun ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "samsun"
+              ]
+            }
           }
         },
         {
@@ -2413,6 +4581,38 @@
               "siirt"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Siirt",
+              "Siirt ili"
+            ],
+            "searchable_keywords": [
+              "Siirt",
+              "Siirt",
+              "Siirt",
+              "Siirt ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "siirt"
+              ]
+            }
           }
         },
         {
@@ -2448,6 +4648,38 @@
               "sinop"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Sinop",
+              "Sinop ili"
+            ],
+            "searchable_keywords": [
+              "Sinop",
+              "Sinop",
+              "Sinop",
+              "Sinop ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "sinop"
+              ]
+            }
           }
         },
         {
@@ -2483,6 +4715,38 @@
               "sivas"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Sivas",
+              "Sivas ili"
+            ],
+            "searchable_keywords": [
+              "Sivas",
+              "Sivas",
+              "Sivas",
+              "Sivas ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "sivas"
+              ]
+            }
           }
         },
         {
@@ -2518,6 +4782,38 @@
               "tekirdag"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Tekirdağ",
+              "Tekirdağ ili"
+            ],
+            "searchable_keywords": [
+              "Tekirdağ",
+              "Tekirdağ",
+              "Tekirdağ",
+              "Tekirdağ ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "tekirdag"
+              ]
+            }
           }
         },
         {
@@ -2553,6 +4849,38 @@
               "tokat"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Tokat",
+              "Tokat ili"
+            ],
+            "searchable_keywords": [
+              "Tokat",
+              "Tokat",
+              "Tokat",
+              "Tokat ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "tokat"
+              ]
+            }
           }
         },
         {
@@ -2588,6 +4916,38 @@
               "trabzon"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Trabzon",
+              "Trabzon ili"
+            ],
+            "searchable_keywords": [
+              "Trabzon",
+              "Trabzon",
+              "Trabzon",
+              "Trabzon ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "trabzon"
+              ]
+            }
           }
         },
         {
@@ -2623,6 +4983,38 @@
               "tunceli"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Tunceli",
+              "Tunceli ili"
+            ],
+            "searchable_keywords": [
+              "Tunceli",
+              "Tunceli",
+              "Tunceli",
+              "Tunceli ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "tunceli"
+              ]
+            }
           }
         },
         {
@@ -2658,6 +5050,38 @@
               "sanliurfa"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Şanlıurfa",
+              "Şanlıurfa ili"
+            ],
+            "searchable_keywords": [
+              "Şanlıurfa",
+              "Şanlıurfa",
+              "Şanlıurfa",
+              "Şanlıurfa ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "sanliurfa"
+              ]
+            }
           }
         },
         {
@@ -2693,6 +5117,38 @@
               "usak"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Uşak",
+              "Uşak ili"
+            ],
+            "searchable_keywords": [
+              "Uşak",
+              "Uşak",
+              "Uşak",
+              "Uşak ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::afyonkarahisar"
+              ],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "usak"
+              ]
+            }
           }
         },
         {
@@ -2728,6 +5184,38 @@
               "van"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Van",
+              "Van ili"
+            ],
+            "searchable_keywords": [
+              "Van",
+              "Van",
+              "Van",
+              "Van ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "van"
+              ]
+            }
           }
         },
         {
@@ -2763,6 +5251,38 @@
               "yozgat"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Yozgat",
+              "Yozgat ili"
+            ],
+            "searchable_keywords": [
+              "Yozgat",
+              "Yozgat",
+              "Yozgat",
+              "Yozgat ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "yozgat"
+              ]
+            }
           }
         },
         {
@@ -2798,6 +5318,38 @@
               "zonguldak"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Zonguldak",
+              "Zonguldak ili"
+            ],
+            "searchable_keywords": [
+              "Zonguldak",
+              "Zonguldak",
+              "Zonguldak",
+              "Zonguldak ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "zonguldak"
+              ]
+            }
           }
         },
         {
@@ -2833,6 +5385,38 @@
               "aksaray"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Aksaray",
+              "Aksaray ili"
+            ],
+            "searchable_keywords": [
+              "Aksaray",
+              "Aksaray",
+              "Aksaray",
+              "Aksaray ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "aksaray"
+              ]
+            }
           }
         },
         {
@@ -2868,6 +5452,38 @@
               "bayburt"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bayburt",
+              "Bayburt ili"
+            ],
+            "searchable_keywords": [
+              "Bayburt",
+              "Bayburt",
+              "Bayburt",
+              "Bayburt ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "bayburt"
+              ]
+            }
           }
         },
         {
@@ -2903,6 +5519,38 @@
               "karaman"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Karaman",
+              "Karaman ili"
+            ],
+            "searchable_keywords": [
+              "Karaman",
+              "Karaman",
+              "Karaman",
+              "Karaman ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "karaman"
+              ]
+            }
           }
         },
         {
@@ -2938,6 +5586,38 @@
               "kirikkale"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kırıkkale",
+              "Kırıkkale ili"
+            ],
+            "searchable_keywords": [
+              "Kırıkkale",
+              "Kırıkkale",
+              "Kırıkkale",
+              "Kırıkkale ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::ankara"
+              ],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "kirikkale"
+              ]
+            }
           }
         },
         {
@@ -2973,6 +5653,38 @@
               "batman"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Batman",
+              "Batman ili"
+            ],
+            "searchable_keywords": [
+              "Batman",
+              "Batman",
+              "Batman",
+              "Batman ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "batman"
+              ]
+            }
           }
         },
         {
@@ -3008,6 +5720,38 @@
               "sirnak"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Şırnak",
+              "Şırnak ili"
+            ],
+            "searchable_keywords": [
+              "Şırnak",
+              "Şırnak",
+              "Şırnak",
+              "Şırnak ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "sirnak"
+              ]
+            }
           }
         },
         {
@@ -3043,6 +5787,38 @@
               "bartin"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bartın",
+              "Bartın ili"
+            ],
+            "searchable_keywords": [
+              "Bartın",
+              "Bartın",
+              "Bartın",
+              "Bartın ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "bartin"
+              ]
+            }
           }
         },
         {
@@ -3078,6 +5854,38 @@
               "ardahan"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ardahan",
+              "Ardahan ili"
+            ],
+            "searchable_keywords": [
+              "Ardahan",
+              "Ardahan",
+              "Ardahan",
+              "Ardahan ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "ardahan"
+              ]
+            }
           }
         },
         {
@@ -3113,6 +5921,38 @@
               "igdir"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Iğdır",
+              "Iğdır ili"
+            ],
+            "searchable_keywords": [
+              "Iğdır",
+              "Iğdır",
+              "Iğdır",
+              "Iğdır ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::agri"
+              ],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "igdir"
+              ]
+            }
           }
         },
         {
@@ -3148,6 +5988,38 @@
               "yalova"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Yalova",
+              "Yalova ili"
+            ],
+            "searchable_keywords": [
+              "Yalova",
+              "Yalova",
+              "Yalova",
+              "Yalova ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::balikesir"
+              ],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "yalova"
+              ]
+            }
           }
         },
         {
@@ -3183,6 +6055,38 @@
               "karabuk"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Karabük",
+              "Karabük ili"
+            ],
+            "searchable_keywords": [
+              "Karabük",
+              "Karabük",
+              "Karabük",
+              "Karabük ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "karabuk"
+              ]
+            }
           }
         },
         {
@@ -3218,6 +6122,38 @@
               "kilis"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kilis",
+              "Kilis ili"
+            ],
+            "searchable_keywords": [
+              "Kilis",
+              "Kilis",
+              "Kilis",
+              "Kilis ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adiyaman"
+              ],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "kilis"
+              ]
+            }
           }
         },
         {
@@ -3253,6 +6189,38 @@
               "osmaniye"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Osmaniye",
+              "Osmaniye ili"
+            ],
+            "searchable_keywords": [
+              "Osmaniye",
+              "Osmaniye",
+              "Osmaniye",
+              "Osmaniye ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::adana"
+              ],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "osmaniye"
+              ]
+            }
           }
         },
         {
@@ -3288,6 +6256,38 @@
               "duzce"
             ],
             "capital": true
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Düzce",
+              "Düzce ili"
+            ],
+            "searchable_keywords": [
+              "Düzce",
+              "Düzce",
+              "Düzce",
+              "Düzce ili"
+            ],
+            "categories": [
+              "admin_province"
+            ],
+            "tags": [
+              "province"
+            ],
+            "hints": {
+              "tr": "turkiye_idari"
+            },
+            "educational_metadata": {
+              "confusable_with": [
+                "turkey_admin_v1::province::amasya"
+              ],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "duzce"
+              ]
+            }
           }
         }
       ]
@@ -3325,6 +6325,34 @@
             "province_codes": [
               "adana"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Adana merkez"
+            ],
+            "searchable_keywords": [
+              "Adana Merkezi",
+              "Adana Center",
+              "Adana merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "adana"
+              ]
+            }
           }
         },
         {
@@ -3355,6 +6383,34 @@
             "province_codes": [
               "adiyaman"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Adıyaman merkez"
+            ],
+            "searchable_keywords": [
+              "Adıyaman Merkezi",
+              "Adıyaman Center",
+              "Adıyaman merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "adiyaman"
+              ]
+            }
           }
         },
         {
@@ -3385,6 +6441,34 @@
             "province_codes": [
               "afyonkarahisar"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Afyonkarahisar merkez"
+            ],
+            "searchable_keywords": [
+              "Afyonkarahisar Merkezi",
+              "Afyonkarahisar Center",
+              "Afyonkarahisar merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "afyonkarahisar"
+              ]
+            }
           }
         },
         {
@@ -3415,6 +6499,34 @@
             "province_codes": [
               "agri"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ağrı merkez"
+            ],
+            "searchable_keywords": [
+              "Ağrı Merkezi",
+              "Ağrı Center",
+              "Ağrı merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "agri"
+              ]
+            }
           }
         },
         {
@@ -3445,6 +6557,34 @@
             "province_codes": [
               "amasya"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Amasya merkez"
+            ],
+            "searchable_keywords": [
+              "Amasya Merkezi",
+              "Amasya Center",
+              "Amasya merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "amasya"
+              ]
+            }
           }
         },
         {
@@ -3475,6 +6615,34 @@
             "province_codes": [
               "ankara"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ankara merkez"
+            ],
+            "searchable_keywords": [
+              "Ankara Merkezi",
+              "Ankara Center",
+              "Ankara merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "ankara"
+              ]
+            }
           }
         },
         {
@@ -3505,6 +6673,34 @@
             "province_codes": [
               "antalya"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Antalya merkez"
+            ],
+            "searchable_keywords": [
+              "Antalya Merkezi",
+              "Antalya Center",
+              "Antalya merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "antalya"
+              ]
+            }
           }
         },
         {
@@ -3535,6 +6731,34 @@
             "province_codes": [
               "artvin"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Artvin merkez"
+            ],
+            "searchable_keywords": [
+              "Artvin Merkezi",
+              "Artvin Center",
+              "Artvin merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "artvin"
+              ]
+            }
           }
         },
         {
@@ -3565,6 +6789,34 @@
             "province_codes": [
               "aydin"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Aydın merkez"
+            ],
+            "searchable_keywords": [
+              "Aydın Merkezi",
+              "Aydın Center",
+              "Aydın merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "aydin"
+              ]
+            }
           }
         },
         {
@@ -3595,6 +6847,34 @@
             "province_codes": [
               "balikesir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Balıkesir merkez"
+            ],
+            "searchable_keywords": [
+              "Balıkesir Merkezi",
+              "Balıkesir Center",
+              "Balıkesir merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "balikesir"
+              ]
+            }
           }
         },
         {
@@ -3625,6 +6905,34 @@
             "province_codes": [
               "bilecik"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bilecik merkez"
+            ],
+            "searchable_keywords": [
+              "Bilecik Merkezi",
+              "Bilecik Center",
+              "Bilecik merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "bilecik"
+              ]
+            }
           }
         },
         {
@@ -3655,6 +6963,34 @@
             "province_codes": [
               "bingol"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bingöl merkez"
+            ],
+            "searchable_keywords": [
+              "Bingöl Merkezi",
+              "Bingöl Center",
+              "Bingöl merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "bingol"
+              ]
+            }
           }
         },
         {
@@ -3685,6 +7021,34 @@
             "province_codes": [
               "bitlis"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bitlis merkez"
+            ],
+            "searchable_keywords": [
+              "Bitlis Merkezi",
+              "Bitlis Center",
+              "Bitlis merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "bitlis"
+              ]
+            }
           }
         },
         {
@@ -3715,6 +7079,34 @@
             "province_codes": [
               "bolu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bolu merkez"
+            ],
+            "searchable_keywords": [
+              "Bolu Merkezi",
+              "Bolu Center",
+              "Bolu merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "bolu"
+              ]
+            }
           }
         },
         {
@@ -3745,6 +7137,34 @@
             "province_codes": [
               "burdur"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Burdur merkez"
+            ],
+            "searchable_keywords": [
+              "Burdur Merkezi",
+              "Burdur Center",
+              "Burdur merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "burdur"
+              ]
+            }
           }
         },
         {
@@ -3775,6 +7195,34 @@
             "province_codes": [
               "bursa"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bursa merkez"
+            ],
+            "searchable_keywords": [
+              "Bursa Merkezi",
+              "Bursa Center",
+              "Bursa merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "bursa"
+              ]
+            }
           }
         },
         {
@@ -3805,6 +7253,34 @@
             "province_codes": [
               "canakkale"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çanakkale merkez"
+            ],
+            "searchable_keywords": [
+              "Çanakkale Merkezi",
+              "Çanakkale Center",
+              "Çanakkale merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "canakkale"
+              ]
+            }
           }
         },
         {
@@ -3835,6 +7311,34 @@
             "province_codes": [
               "cankiri"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çankırı merkez"
+            ],
+            "searchable_keywords": [
+              "Çankırı Merkezi",
+              "Çankırı Center",
+              "Çankırı merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "cankiri"
+              ]
+            }
           }
         },
         {
@@ -3865,6 +7369,34 @@
             "province_codes": [
               "corum"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Çorum merkez"
+            ],
+            "searchable_keywords": [
+              "Çorum Merkezi",
+              "Çorum Center",
+              "Çorum merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "corum"
+              ]
+            }
           }
         },
         {
@@ -3895,6 +7427,34 @@
             "province_codes": [
               "denizli"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Denizli merkez"
+            ],
+            "searchable_keywords": [
+              "Denizli Merkezi",
+              "Denizli Center",
+              "Denizli merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "denizli"
+              ]
+            }
           }
         },
         {
@@ -3925,6 +7485,34 @@
             "province_codes": [
               "diyarbakir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Diyarbakır merkez"
+            ],
+            "searchable_keywords": [
+              "Diyarbakır Merkezi",
+              "Diyarbakır Center",
+              "Diyarbakır merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "diyarbakir"
+              ]
+            }
           }
         },
         {
@@ -3955,6 +7543,34 @@
             "province_codes": [
               "edirne"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Edirne merkez"
+            ],
+            "searchable_keywords": [
+              "Edirne Merkezi",
+              "Edirne Center",
+              "Edirne merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "edirne"
+              ]
+            }
           }
         },
         {
@@ -3985,6 +7601,34 @@
             "province_codes": [
               "elazig"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Elazığ merkez"
+            ],
+            "searchable_keywords": [
+              "Elazığ Merkezi",
+              "Elazığ Center",
+              "Elazığ merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "elazig"
+              ]
+            }
           }
         },
         {
@@ -4015,6 +7659,34 @@
             "province_codes": [
               "erzincan"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Erzincan merkez"
+            ],
+            "searchable_keywords": [
+              "Erzincan Merkezi",
+              "Erzincan Center",
+              "Erzincan merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "erzincan"
+              ]
+            }
           }
         },
         {
@@ -4045,6 +7717,34 @@
             "province_codes": [
               "erzurum"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Erzurum merkez"
+            ],
+            "searchable_keywords": [
+              "Erzurum Merkezi",
+              "Erzurum Center",
+              "Erzurum merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "erzurum"
+              ]
+            }
           }
         },
         {
@@ -4075,6 +7775,34 @@
             "province_codes": [
               "eskisehir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Eskişehir merkez"
+            ],
+            "searchable_keywords": [
+              "Eskişehir Merkezi",
+              "Eskişehir Center",
+              "Eskişehir merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "eskisehir"
+              ]
+            }
           }
         },
         {
@@ -4105,6 +7833,34 @@
             "province_codes": [
               "gaziantep"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Gaziantep merkez"
+            ],
+            "searchable_keywords": [
+              "Gaziantep Merkezi",
+              "Gaziantep Center",
+              "Gaziantep merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "gaziantep"
+              ]
+            }
           }
         },
         {
@@ -4135,6 +7891,34 @@
             "province_codes": [
               "giresun"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Giresun merkez"
+            ],
+            "searchable_keywords": [
+              "Giresun Merkezi",
+              "Giresun Center",
+              "Giresun merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "giresun"
+              ]
+            }
           }
         },
         {
@@ -4165,6 +7949,34 @@
             "province_codes": [
               "gumushane"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Gümüşhane merkez"
+            ],
+            "searchable_keywords": [
+              "Gümüşhane Merkezi",
+              "Gümüşhane Center",
+              "Gümüşhane merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "gumushane"
+              ]
+            }
           }
         },
         {
@@ -4195,6 +8007,34 @@
             "province_codes": [
               "hakkari"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Hakkâri merkez"
+            ],
+            "searchable_keywords": [
+              "Hakkâri Merkezi",
+              "Hakkâri Center",
+              "Hakkâri merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "hakkari"
+              ]
+            }
           }
         },
         {
@@ -4225,6 +8065,34 @@
             "province_codes": [
               "hatay"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Hatay merkez"
+            ],
+            "searchable_keywords": [
+              "Hatay Merkezi",
+              "Hatay Center",
+              "Hatay merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "hatay"
+              ]
+            }
           }
         },
         {
@@ -4255,6 +8123,34 @@
             "province_codes": [
               "isparta"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Isparta merkez"
+            ],
+            "searchable_keywords": [
+              "Isparta Merkezi",
+              "Isparta Center",
+              "Isparta merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "isparta"
+              ]
+            }
           }
         },
         {
@@ -4285,6 +8181,34 @@
             "province_codes": [
               "mersin"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Mersin merkez"
+            ],
+            "searchable_keywords": [
+              "Mersin Merkezi",
+              "Mersin Center",
+              "Mersin merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "mersin"
+              ]
+            }
           }
         },
         {
@@ -4315,6 +8239,34 @@
             "province_codes": [
               "istanbul"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "İstanbul merkez"
+            ],
+            "searchable_keywords": [
+              "İstanbul Merkezi",
+              "İstanbul Center",
+              "İstanbul merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "istanbul"
+              ]
+            }
           }
         },
         {
@@ -4345,6 +8297,34 @@
             "province_codes": [
               "izmir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "İzmir merkez"
+            ],
+            "searchable_keywords": [
+              "İzmir Merkezi",
+              "İzmir Center",
+              "İzmir merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "izmir"
+              ]
+            }
           }
         },
         {
@@ -4375,6 +8355,34 @@
             "province_codes": [
               "kars"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kars merkez"
+            ],
+            "searchable_keywords": [
+              "Kars Merkezi",
+              "Kars Center",
+              "Kars merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "kars"
+              ]
+            }
           }
         },
         {
@@ -4405,6 +8413,34 @@
             "province_codes": [
               "kastamonu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kastamonu merkez"
+            ],
+            "searchable_keywords": [
+              "Kastamonu Merkezi",
+              "Kastamonu Center",
+              "Kastamonu merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "kastamonu"
+              ]
+            }
           }
         },
         {
@@ -4435,6 +8471,34 @@
             "province_codes": [
               "kayseri"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kayseri merkez"
+            ],
+            "searchable_keywords": [
+              "Kayseri Merkezi",
+              "Kayseri Center",
+              "Kayseri merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "kayseri"
+              ]
+            }
           }
         },
         {
@@ -4465,6 +8529,34 @@
             "province_codes": [
               "kirklareli"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kırklareli merkez"
+            ],
+            "searchable_keywords": [
+              "Kırklareli Merkezi",
+              "Kırklareli Center",
+              "Kırklareli merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "kirklareli"
+              ]
+            }
           }
         },
         {
@@ -4495,6 +8587,34 @@
             "province_codes": [
               "kirsehir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kırşehir merkez"
+            ],
+            "searchable_keywords": [
+              "Kırşehir Merkezi",
+              "Kırşehir Center",
+              "Kırşehir merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "kirsehir"
+              ]
+            }
           }
         },
         {
@@ -4525,6 +8645,34 @@
             "province_codes": [
               "kocaeli"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kocaeli merkez"
+            ],
+            "searchable_keywords": [
+              "Kocaeli Merkezi",
+              "Kocaeli Center",
+              "Kocaeli merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "kocaeli"
+              ]
+            }
           }
         },
         {
@@ -4555,6 +8703,34 @@
             "province_codes": [
               "konya"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Konya merkez"
+            ],
+            "searchable_keywords": [
+              "Konya Merkezi",
+              "Konya Center",
+              "Konya merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "konya"
+              ]
+            }
           }
         },
         {
@@ -4585,6 +8761,34 @@
             "province_codes": [
               "kutahya"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kütahya merkez"
+            ],
+            "searchable_keywords": [
+              "Kütahya Merkezi",
+              "Kütahya Center",
+              "Kütahya merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "kutahya"
+              ]
+            }
           }
         },
         {
@@ -4615,6 +8819,34 @@
             "province_codes": [
               "malatya"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Malatya merkez"
+            ],
+            "searchable_keywords": [
+              "Malatya Merkezi",
+              "Malatya Center",
+              "Malatya merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "malatya"
+              ]
+            }
           }
         },
         {
@@ -4645,6 +8877,34 @@
             "province_codes": [
               "manisa"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Manisa merkez"
+            ],
+            "searchable_keywords": [
+              "Manisa Merkezi",
+              "Manisa Center",
+              "Manisa merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "manisa"
+              ]
+            }
           }
         },
         {
@@ -4675,6 +8935,34 @@
             "province_codes": [
               "kahramanmaras"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kahramanmaraş merkez"
+            ],
+            "searchable_keywords": [
+              "Kahramanmaraş Merkezi",
+              "Kahramanmaraş Center",
+              "Kahramanmaraş merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "kahramanmaras"
+              ]
+            }
           }
         },
         {
@@ -4705,6 +8993,34 @@
             "province_codes": [
               "mardin"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Mardin merkez"
+            ],
+            "searchable_keywords": [
+              "Mardin Merkezi",
+              "Mardin Center",
+              "Mardin merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "mardin"
+              ]
+            }
           }
         },
         {
@@ -4735,6 +9051,34 @@
             "province_codes": [
               "mugla"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Muğla merkez"
+            ],
+            "searchable_keywords": [
+              "Muğla Merkezi",
+              "Muğla Center",
+              "Muğla merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "mugla"
+              ]
+            }
           }
         },
         {
@@ -4765,6 +9109,34 @@
             "province_codes": [
               "mus"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Muş merkez"
+            ],
+            "searchable_keywords": [
+              "Muş Merkezi",
+              "Muş Center",
+              "Muş merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "mus"
+              ]
+            }
           }
         },
         {
@@ -4795,6 +9167,34 @@
             "province_codes": [
               "nevsehir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Nevşehir merkez"
+            ],
+            "searchable_keywords": [
+              "Nevşehir Merkezi",
+              "Nevşehir Center",
+              "Nevşehir merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "nevsehir"
+              ]
+            }
           }
         },
         {
@@ -4825,6 +9225,34 @@
             "province_codes": [
               "nigde"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Niğde merkez"
+            ],
+            "searchable_keywords": [
+              "Niğde Merkezi",
+              "Niğde Center",
+              "Niğde merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "nigde"
+              ]
+            }
           }
         },
         {
@@ -4855,6 +9283,34 @@
             "province_codes": [
               "ordu"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ordu merkez"
+            ],
+            "searchable_keywords": [
+              "Ordu Merkezi",
+              "Ordu Center",
+              "Ordu merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "ordu"
+              ]
+            }
           }
         },
         {
@@ -4885,6 +9341,34 @@
             "province_codes": [
               "rize"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Rize merkez"
+            ],
+            "searchable_keywords": [
+              "Rize Merkezi",
+              "Rize Center",
+              "Rize merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "rize"
+              ]
+            }
           }
         },
         {
@@ -4915,6 +9399,34 @@
             "province_codes": [
               "sakarya"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Sakarya merkez"
+            ],
+            "searchable_keywords": [
+              "Sakarya Merkezi",
+              "Sakarya Center",
+              "Sakarya merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "sakarya"
+              ]
+            }
           }
         },
         {
@@ -4945,6 +9457,34 @@
             "province_codes": [
               "samsun"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Samsun merkez"
+            ],
+            "searchable_keywords": [
+              "Samsun Merkezi",
+              "Samsun Center",
+              "Samsun merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "samsun"
+              ]
+            }
           }
         },
         {
@@ -4975,6 +9515,34 @@
             "province_codes": [
               "siirt"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Siirt merkez"
+            ],
+            "searchable_keywords": [
+              "Siirt Merkezi",
+              "Siirt Center",
+              "Siirt merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "siirt"
+              ]
+            }
           }
         },
         {
@@ -5005,6 +9573,34 @@
             "province_codes": [
               "sinop"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Sinop merkez"
+            ],
+            "searchable_keywords": [
+              "Sinop Merkezi",
+              "Sinop Center",
+              "Sinop merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "sinop"
+              ]
+            }
           }
         },
         {
@@ -5035,6 +9631,34 @@
             "province_codes": [
               "sivas"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Sivas merkez"
+            ],
+            "searchable_keywords": [
+              "Sivas Merkezi",
+              "Sivas Center",
+              "Sivas merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "sivas"
+              ]
+            }
           }
         },
         {
@@ -5065,6 +9689,34 @@
             "province_codes": [
               "tekirdag"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Tekirdağ merkez"
+            ],
+            "searchable_keywords": [
+              "Tekirdağ Merkezi",
+              "Tekirdağ Center",
+              "Tekirdağ merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "tekirdag"
+              ]
+            }
           }
         },
         {
@@ -5095,6 +9747,34 @@
             "province_codes": [
               "tokat"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Tokat merkez"
+            ],
+            "searchable_keywords": [
+              "Tokat Merkezi",
+              "Tokat Center",
+              "Tokat merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "tokat"
+              ]
+            }
           }
         },
         {
@@ -5125,6 +9805,34 @@
             "province_codes": [
               "trabzon"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Trabzon merkez"
+            ],
+            "searchable_keywords": [
+              "Trabzon Merkezi",
+              "Trabzon Center",
+              "Trabzon merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "trabzon"
+              ]
+            }
           }
         },
         {
@@ -5155,6 +9863,34 @@
             "province_codes": [
               "tunceli"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Tunceli merkez"
+            ],
+            "searchable_keywords": [
+              "Tunceli Merkezi",
+              "Tunceli Center",
+              "Tunceli merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "tunceli"
+              ]
+            }
           }
         },
         {
@@ -5185,6 +9921,34 @@
             "province_codes": [
               "sanliurfa"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Şanlıurfa merkez"
+            ],
+            "searchable_keywords": [
+              "Şanlıurfa Merkezi",
+              "Şanlıurfa Center",
+              "Şanlıurfa merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "sanliurfa"
+              ]
+            }
           }
         },
         {
@@ -5215,6 +9979,34 @@
             "province_codes": [
               "usak"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Uşak merkez"
+            ],
+            "searchable_keywords": [
+              "Uşak Merkezi",
+              "Uşak Center",
+              "Uşak merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ege"
+              ],
+              "province_codes": [
+                "usak"
+              ]
+            }
           }
         },
         {
@@ -5245,6 +10037,34 @@
             "province_codes": [
               "van"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Van merkez"
+            ],
+            "searchable_keywords": [
+              "Van Merkezi",
+              "Van Center",
+              "Van merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "van"
+              ]
+            }
           }
         },
         {
@@ -5275,6 +10095,34 @@
             "province_codes": [
               "yozgat"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Yozgat merkez"
+            ],
+            "searchable_keywords": [
+              "Yozgat Merkezi",
+              "Yozgat Center",
+              "Yozgat merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "yozgat"
+              ]
+            }
           }
         },
         {
@@ -5305,6 +10153,34 @@
             "province_codes": [
               "zonguldak"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Zonguldak merkez"
+            ],
+            "searchable_keywords": [
+              "Zonguldak Merkezi",
+              "Zonguldak Center",
+              "Zonguldak merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "zonguldak"
+              ]
+            }
           }
         },
         {
@@ -5335,6 +10211,34 @@
             "province_codes": [
               "aksaray"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Aksaray merkez"
+            ],
+            "searchable_keywords": [
+              "Aksaray Merkezi",
+              "Aksaray Center",
+              "Aksaray merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "aksaray"
+              ]
+            }
           }
         },
         {
@@ -5365,6 +10269,34 @@
             "province_codes": [
               "bayburt"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bayburt merkez"
+            ],
+            "searchable_keywords": [
+              "Bayburt Merkezi",
+              "Bayburt Center",
+              "Bayburt merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "bayburt"
+              ]
+            }
           }
         },
         {
@@ -5395,6 +10327,34 @@
             "province_codes": [
               "karaman"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Karaman merkez"
+            ],
+            "searchable_keywords": [
+              "Karaman Merkezi",
+              "Karaman Center",
+              "Karaman merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "karaman"
+              ]
+            }
           }
         },
         {
@@ -5425,6 +10385,34 @@
             "province_codes": [
               "kirikkale"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kırıkkale merkez"
+            ],
+            "searchable_keywords": [
+              "Kırıkkale Merkezi",
+              "Kırıkkale Center",
+              "Kırıkkale merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "ic_anadolu"
+              ],
+              "province_codes": [
+                "kirikkale"
+              ]
+            }
           }
         },
         {
@@ -5455,6 +10443,34 @@
             "province_codes": [
               "batman"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Batman merkez"
+            ],
+            "searchable_keywords": [
+              "Batman Merkezi",
+              "Batman Center",
+              "Batman merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "batman"
+              ]
+            }
           }
         },
         {
@@ -5485,6 +10501,34 @@
             "province_codes": [
               "sirnak"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Şırnak merkez"
+            ],
+            "searchable_keywords": [
+              "Şırnak Merkezi",
+              "Şırnak Center",
+              "Şırnak merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "sirnak"
+              ]
+            }
           }
         },
         {
@@ -5515,6 +10559,34 @@
             "province_codes": [
               "bartin"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Bartın merkez"
+            ],
+            "searchable_keywords": [
+              "Bartın Merkezi",
+              "Bartın Center",
+              "Bartın merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "bartin"
+              ]
+            }
           }
         },
         {
@@ -5545,6 +10617,34 @@
             "province_codes": [
               "ardahan"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Ardahan merkez"
+            ],
+            "searchable_keywords": [
+              "Ardahan Merkezi",
+              "Ardahan Center",
+              "Ardahan merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "ardahan"
+              ]
+            }
           }
         },
         {
@@ -5575,6 +10675,34 @@
             "province_codes": [
               "igdir"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Iğdır merkez"
+            ],
+            "searchable_keywords": [
+              "Iğdır Merkezi",
+              "Iğdır Center",
+              "Iğdır merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "dogu_anadolu"
+              ],
+              "province_codes": [
+                "igdir"
+              ]
+            }
           }
         },
         {
@@ -5605,6 +10733,34 @@
             "province_codes": [
               "yalova"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Yalova merkez"
+            ],
+            "searchable_keywords": [
+              "Yalova Merkezi",
+              "Yalova Center",
+              "Yalova merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "marmara"
+              ],
+              "province_codes": [
+                "yalova"
+              ]
+            }
           }
         },
         {
@@ -5635,6 +10791,34 @@
             "province_codes": [
               "karabuk"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Karabük merkez"
+            ],
+            "searchable_keywords": [
+              "Karabük Merkezi",
+              "Karabük Center",
+              "Karabük merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "karabuk"
+              ]
+            }
           }
         },
         {
@@ -5665,6 +10849,34 @@
             "province_codes": [
               "kilis"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Kilis merkez"
+            ],
+            "searchable_keywords": [
+              "Kilis Merkezi",
+              "Kilis Center",
+              "Kilis merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "guneydogu_anadolu"
+              ],
+              "province_codes": [
+                "kilis"
+              ]
+            }
           }
         },
         {
@@ -5695,6 +10907,34 @@
             "province_codes": [
               "osmaniye"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Osmaniye merkez"
+            ],
+            "searchable_keywords": [
+              "Osmaniye Merkezi",
+              "Osmaniye Center",
+              "Osmaniye merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "akdeniz"
+              ],
+              "province_codes": [
+                "osmaniye"
+              ]
+            }
           }
         },
         {
@@ -5725,6 +10965,34 @@
             "province_codes": [
               "duzce"
             ]
+          },
+          "educational_metadata": {
+            "aliases": [
+              "Düzce merkez"
+            ],
+            "searchable_keywords": [
+              "Düzce Merkezi",
+              "Düzce Center",
+              "Düzce merkez"
+            ],
+            "categories": [
+              "admin_center"
+            ],
+            "tags": [
+              "province_center"
+            ],
+            "hints": {
+              "tr": "il_merkezleri"
+            },
+            "educational_metadata": {
+              "confusable_with": [],
+              "region_codes": [
+                "karadeniz"
+              ],
+              "province_codes": [
+                "duzce"
+              ]
+            }
           }
         }
       ]
