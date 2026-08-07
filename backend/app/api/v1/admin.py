@@ -912,6 +912,22 @@ async def admin_question_pool_create_card(
 
     db.add(card)
     await db.commit()
-    
     return SuccessResponse(data={"id": str(card.id)}, message="Soru havuza eklendi")
+
+
+@router.post(
+    "/trial-exams/trigger",
+    response_model=SuccessResponse[dict],
+)
+async def admin_trigger_trial_exam_generation(
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    """Manually trigger the midnight trial exam generation pipeline."""
+    from app.services.trial_exam_scheduler import generate_trial_exams_for_today
+    import asyncio
+    
+    # Run in background to avoid blocking the HTTP response
+    asyncio.create_task(generate_trial_exams_for_today(db))
+    return SuccessResponse(data={"message": "Trial exam generation started in background."})
 
