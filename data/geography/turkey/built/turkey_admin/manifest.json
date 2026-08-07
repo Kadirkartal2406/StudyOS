@@ -27,10 +27,10 @@
             "en": "Turkey"
           },
           "bounding_box": [
-            37.18,
-            43.69,
-            937.18,
-            443.69
+            8.47,
+            14.37,
+            991.48,
+            478.86
           ],
           "attributes": {
             "layer_type": "country",
@@ -59,10 +59,10 @@
             "en": "Marmara"
           },
           "bounding_box": [
-            73.85,
-            60.77,
-            233.85,
-            160.77
+            8.47,
+            14.37,
+            283.91,
+            240.54
           ],
           "attributes": {
             "layer_type": "region",
@@ -89,10 +89,10 @@
             "en": "Aegean"
           },
           "bounding_box": [
-            48.21,
-            230.62,
-            208.21,
-            330.62
+            37.51,
+            175.42,
+            318.39,
+            443.01
           ],
           "attributes": {
             "layer_type": "region",
@@ -119,10 +119,10 @@
             "en": "Mediterranean"
           },
           "bounding_box": [
-            278.97,
-            356.15,
-            438.97,
-            456.15
+            192.63,
+            271.13,
+            629.43,
+            478.86
           ],
           "attributes": {
             "layer_type": "region",
@@ -147,10 +147,10 @@
             "en": "Central Anatolia"
           },
           "bounding_box": [
-            330.26,
-            193.69,
-            490.26,
-            293.69
+            230.8,
+            88.94,
+            680.7,
+            433.38
           ],
           "attributes": {
             "layer_type": "region",
@@ -175,10 +175,10 @@
             "en": "Black Sea"
           },
           "bounding_box": [
-            432.82,
-            46.0,
-            592.82,
-            146.0
+            261.33,
+            14.92,
+            876.06,
+            179.19
           ],
           "attributes": {
             "layer_type": "region",
@@ -203,10 +203,10 @@
             "en": "Eastern Anatolia"
           },
           "bounding_box": [
-            714.87,
-            156.77,
-            874.87,
-            256.77
+            599.74,
+            51.84,
+            991.48,
+            393.82
           ],
           "attributes": {
             "layer_type": "region",
@@ -231,10 +231,10 @@
             "en": "Southeastern Anatolia"
           },
           "bounding_box": [
-            637.95,
-            304.46,
-            797.95,
-            404.46
+            561.16,
+            263.96,
+            923.13,
+            419.18
           ],
           "attributes": {
             "layer_type": "region",
@@ -266,10 +266,10 @@
             "en": "Thrace"
           },
           "bounding_box": [
-            21.67,
-            46.35,
-            111.67,
-            101.35
+            27.26,
+            14.37,
+            140.09,
+            126.25
           ],
           "attributes": {
             "layer_type": "subregion",
@@ -293,10 +293,10 @@
             "en": "Dardanelles Area"
           },
           "bounding_box": [
-            1.15,
-            127.58,
-            91.15,
-            182.58
+            8.47,
+            110.62,
+            106.7,
+            210.25
           ],
           "attributes": {
             "layer_type": "subregion",
@@ -320,10 +320,10 @@
             "en": "Inner West Anatolia"
           },
           "bounding_box": [
-            160.13,
-            230.96,
-            250.13,
-            285.96
+            162.12,
+            175.42,
+            318.39,
+            335.2
           ],
           "attributes": {
             "layer_type": "subregion",
@@ -347,10 +347,10 @@
             "en": "Taurus Belt"
           },
           "bounding_box": [
-            339.62,
-            363.88,
-            429.62,
-            418.88
+            192.63,
+            279.39,
+            563.66,
+            464.09
           ],
           "attributes": {
             "layer_type": "subregion",
@@ -374,10 +374,10 @@
             "en": "Central Black Sea"
           },
           "bounding_box": [
-            519.1,
-            68.5,
-            609.1,
-            123.5
+            481.65,
+            41.7,
+            649.01,
+            173.84
           ],
           "attributes": {
             "layer_type": "subregion",
@@ -401,10 +401,10 @@
             "en": "Upper Euphrates"
           },
           "bounding_box": [
-            672.95,
-            201.42,
-            762.95,
-            256.42
+            658.93,
+            97.26,
+            875.28,
+            294.72
           ],
           "attributes": {
             "layer_type": "subregion",
@@ -428,10 +428,10 @@
             "en": "GAP Region"
           },
           "bounding_box": [
-            672.95,
-            334.35,
-            762.95,
-            389.35
+            561.16,
+            263.96,
+            923.13,
+            419.18
           ],
           "attributes": {
             "layer_type": "subregion",

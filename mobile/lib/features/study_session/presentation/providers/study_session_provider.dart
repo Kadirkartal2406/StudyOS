@@ -243,6 +243,7 @@ class StudySessionNotifier extends StateNotifier<StudySessionState> {
           topicCode: session.topicCode ?? current.topicCode,
           studyPlanId: session.studyPlanId ?? current.studyPlanId,
           clearError: true,
+          clearBlockedActive: true,
         );
       } else {
         state = current.copyWith(
@@ -262,6 +263,7 @@ class StudySessionNotifier extends StateNotifier<StudySessionState> {
           topicCode: session.topicCode ?? current.topicCode,
           studyPlanId: session.studyPlanId ?? current.studyPlanId,
           clearError: true,
+          clearBlockedActive: true,
         );
       }
       if (!isPaused) {
@@ -331,11 +333,182 @@ class StudySessionNotifier extends StateNotifier<StudySessionState> {
       );
       await _syncLiveNotification(force: true);
     } on AppException catch (e) {
+      if (_isActiveSessionConflict(e)) {
+        await _presentBlockedActiveSession(
+          fallbackMessage: e.message,
+          base: current,
+        );
+        return;
+      }
       state = current.copyWith(isMutating: false, errorMessage: e.message);
     } catch (_) {
       state = current.copyWith(
         isMutating: false,
         errorMessage: 'Oturum başlatılamadı',
+      );
+    }
+  }
+
+  bool _isActiveSessionConflict(AppException e) {
+    if (e is ConflictException) {
+      final m = e.message.toLowerCase();
+      return m.contains('aktif') ||
+          m.contains('active session') ||
+          m.contains('already exists') ||
+          m.contains('oturum var');
+    }
+    final m = e.message.toLowerCase();
+    return m.contains('active session already') ||
+        m.contains('zaten aktif bir oturum');
+  }
+
+  ({int elapsed, int remaining}) _timingForActiveSession(
+    StudySessionEntity session, {
+    required int fallbackFocusMinutes,
+    required int fallbackBreakMinutes,
+  }) {
+    final now = DateTime.now().toUtc();
+    final started = session.startedAt.toUtc();
+    var paused = session.pausedSeconds;
+    final pausedAt = session.pausedAt?.toUtc();
+    if (pausedAt != null) {
+      paused += now.difference(pausedAt).inSeconds;
+    }
+    final openBreak = session.breakStartedAt?.toUtc();
+    final openBreakSecs =
+        openBreak != null ? now.difference(openBreak).inSeconds : 0;
+    final focusElapsed = (now.difference(started).inSeconds -
+            paused -
+            session.actualBreakMinutes * 60 -
+            openBreakSecs)
+        .clamp(0, 24 * 3600);
+    final isBreak = session.phase == 'break' ||
+        session.engineState == StudyEngineState.breakTime;
+    final focusMinutes = session.plannedDurationMinutes > 0
+        ? session.plannedDurationMinutes
+        : fallbackFocusMinutes;
+    final breakMinutes = session.breakDurationMinutes > 0
+        ? session.breakDurationMinutes
+        : (fallbackBreakMinutes > 0 ? fallbackBreakMinutes : 5);
+    final isChronometer = session.mode == 'chronometer';
+
+    if (isBreak) {
+      return (
+        elapsed: openBreakSecs.clamp(0, 24 * 3600),
+        remaining: (breakMinutes * 60 - openBreakSecs).clamp(0, breakMinutes * 60),
+      );
+    }
+    return (
+      elapsed: focusElapsed,
+      remaining: isChronometer
+          ? focusElapsed
+          : (focusMinutes * 60 - focusElapsed).clamp(0, focusMinutes * 60),
+    );
+  }
+
+  Future<void> _presentBlockedActiveSession({
+    required String fallbackMessage,
+    required StudySessionReady base,
+  }) async {
+    try {
+      final active = await _repository.getActive();
+      if (active == null) {
+        state = base.copyWith(
+          isMutating: false,
+          errorMessage: fallbackMessage,
+          clearBlockedActive: true,
+        );
+        return;
+      }
+      final timing = _timingForActiveSession(
+        active,
+        fallbackFocusMinutes: base.focusMinutes,
+        fallbackBreakMinutes: base.breakMinutes,
+      );
+      state = base.copyWith(
+        isMutating: false,
+        clearError: true,
+        blockedActiveSession: active,
+        blockedElapsedSeconds: timing.elapsed,
+        blockedRemainingSeconds: timing.remaining,
+      );
+    } catch (_) {
+      state = base.copyWith(
+        isMutating: false,
+        errorMessage: fallbackMessage,
+        clearBlockedActive: true,
+      );
+    }
+  }
+
+  /// Idle ekrandaki "Active Session" kartından çalışan oturuma dön.
+  Future<void> resumeBlockedSession() async {
+    if (state is! StudySessionReady) return;
+    final current = _ready;
+    if (current.isMutating) return;
+    state = current.copyWith(isMutating: true, clearError: true);
+    await restoreActiveSession();
+    if (state is StudySessionReady) {
+      final after = _ready;
+      if (after.session != null && after.phase != PomodoroPhase.idle) {
+        state = after.copyWith(
+          isMutating: false,
+          clearBlockedActive: true,
+          clearError: true,
+        );
+      } else {
+        state = current.copyWith(
+          isMutating: false,
+          errorMessage: 'Aktif oturum yüklenemedi',
+        );
+      }
+    }
+  }
+
+  /// Server'daki aktif oturumu bitirir; ardından yeni Pomodoro başlatılabilir.
+  Future<void> endBlockedSession() async {
+    if (state is! StudySessionReady) return;
+    final current = _ready;
+    if (current.isMutating) return;
+
+    if (current.session != null && current.phase != PomodoroPhase.idle) {
+      await finish();
+      return;
+    }
+
+    state = current.copyWith(isMutating: true, clearError: true);
+    try {
+      final active = current.blockedActiveSession ?? await _repository.getActive();
+      if (active != null) {
+        await _finish();
+      }
+      _ticker?.cancel();
+      await _notifications.cancelAll();
+      await _syncPomodoroWidget(isActive: false);
+      state = StudySessionReady.idle(
+        preset: PomodoroPreset(
+          focusMinutes: current.focusMinutes,
+          breakMinutes: current.breakMinutes,
+          label: '${current.focusMinutes} / ${current.breakMinutes}',
+        ),
+        isChronometer: current.isChronometer,
+      ).copyWith(
+        subject: current.subject,
+        topic: current.topic,
+        subjectCode: current.subjectCode,
+        topicCode: current.topicCode,
+        studyPlanId: current.studyPlanId,
+        clearBlockedActive: true,
+        clearError: true,
+      );
+      await _syncLiveNotification(force: true);
+      onSessionCompleted?.call();
+    } on AppException catch (e) {
+      state = current.copyWith(isMutating: false, errorMessage: e.message);
+    } catch (_) {
+      state = current.copyWith(
+        isMutating: false,
+        errorMessage: 'Oturum bitirilemedi',
       );
     }
   }
@@ -525,6 +698,7 @@ class StudySessionNotifier extends StateNotifier<StudySessionState> {
         subject: current.subject,
         topic: current.topic,
         studyPlanId: current.studyPlanId,
+        clearBlockedActive: true,
       );
       await _syncLiveNotification(force: true);
       onSessionCompleted?.call();

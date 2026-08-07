@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -48,6 +50,10 @@ class _PomodoroScreenState extends ConsumerState<PomodoroScreen> {
               topic: widget.topicName ?? topic,
             );
       }
+      // Server'da kalan aktif oturumu ekrana bağla (orphan 409 önleme).
+      unawaited(
+        ref.read(studySessionProvider.notifier).restoreActiveSession(),
+      );
     });
   }
 
@@ -233,6 +239,15 @@ class _PomodoroBody extends StatelessWidget {
                 onCustomSelected: () => _showCustomDialog(context),
               ),
             const SizedBox(height: 28),
+            if (state.phase == PomodoroPhase.idle &&
+                state.hasBlockedActiveSession) ...[
+              _ActiveSessionCard(
+                state: state,
+                onResume: notifier.resumeBlockedSession,
+                onEnd: notifier.endBlockedSession,
+              ),
+              const SizedBox(height: 20),
+            ],
             PomodoroControls(
               state: state,
               onStart: notifier.start,
@@ -242,7 +257,8 @@ class _PomodoroBody extends StatelessWidget {
               onBreak: notifier.takeBreak,
               onEndBreak: notifier.endServerBreak,
             ),
-            if (state.errorMessage != null) ...[
+            if (state.errorMessage != null &&
+                !state.hasBlockedActiveSession) ...[
               const SizedBox(height: 16),
               Text(
                 state.errorMessage!,
@@ -262,6 +278,79 @@ class _PomodoroBody extends StatelessWidget {
               const TodaySummaryCard(),
               const _PomodoroStudyPlanSection(),
             ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ActiveSessionCard extends StatelessWidget {
+  const _ActiveSessionCard({
+    required this.state,
+    required this.onResume,
+    required this.onEnd,
+  });
+
+  final StudySessionReady state;
+  final VoidCallback onResume;
+  final VoidCallback onEnd;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final busy = state.isMutating;
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Active Session',
+              style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              state.blockedSessionTitle,
+              style: theme.textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'State: ${state.blockedSessionStateLabel}',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+            ),
+            Text(
+              'Elapsed: ${state.blockedElapsedLabel}  ·  Remaining: ${state.blockedRemainingLabel}',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: busy ? null : onResume,
+                    icon: const Icon(Icons.play_arrow_rounded),
+                    label: const Text('Resume'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: busy ? null : onEnd,
+                    icon: const Icon(Icons.stop_rounded),
+                    label: const Text('End Session'),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

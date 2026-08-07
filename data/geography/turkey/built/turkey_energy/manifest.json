@@ -16,8 +16,2445 @@
   },
   "layers": [
     {
-      "id": "hes",
+      "id": "basemap",
       "z_index": 0,
+      "min_lod": 0.5,
+      "nodes": [
+        {
+          "id": "turkey_energy_v1::basemap_province::adana",
+          "name": {
+            "tr": "Adana",
+            "en": "Adana"
+          },
+          "bounding_box": [
+            476.22,
+            283.1,
+            563.66,
+            425.47
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Adana"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "adana"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::adiyaman",
+          "name": {
+            "tr": "Adıyaman",
+            "en": "Adıyaman"
+          },
+          "bounding_box": [
+            611.1,
+            300.51,
+            704.94,
+            361.33
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Adıyaman"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "adiyaman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::afyonkarahisar",
+          "name": {
+            "tr": "Afyonkarahisar",
+            "en": "Afyonkarahisar"
+          },
+          "bounding_box": [
+            213.53,
+            222.68,
+            318.39,
+            335.2
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Afyonkarahisar"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "afyonkarahisar"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::agri",
+          "name": {
+            "tr": "Ağrı",
+            "en": "Ağrı"
+          },
+          "bounding_box": [
+            859.24,
+            169.23,
+            974.18,
+            240.95
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ağrı"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "agri"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::amasya",
+          "name": {
+            "tr": "Amasya",
+            "en": "Amasya"
+          },
+          "bounding_box": [
+            488.47,
+            89.31,
+            562.71,
+            155.83
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Amasya"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "amasya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::ankara",
+          "name": {
+            "tr": "Ankara",
+            "en": "Ankara"
+          },
+          "bounding_box": [
+            275.59,
+            117.84,
+            433.17,
+            270.54
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ankara"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "ankara"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::antalya",
+          "name": {
+            "tr": "Antalya",
+            "en": "Antalya"
+          },
+          "bounding_box": [
+            192.63,
+            360.05,
+            367.08,
+            458.43
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Antalya"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "antalya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::artvin",
+          "name": {
+            "tr": "Artvin",
+            "en": "Artvin"
+          },
+          "bounding_box": [
+            801.14,
+            57.14,
+            876.06,
+            128.27
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Artvin"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "artvin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::aydin",
+          "name": {
+            "tr": "Aydın",
+            "en": "Aydın"
+          },
+          "bounding_box": [
+            77.07,
+            309.33,
+            173.25,
+            366.59
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Aydın"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "aydin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::balikesir",
+          "name": {
+            "tr": "Balıkesir",
+            "en": "Balıkesir"
+          },
+          "bounding_box": [
+            56.35,
+            130.82,
+            177.61,
+            240.54
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Balıkesir"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "balikesir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bilecik",
+          "name": {
+            "tr": "Bilecik",
+            "en": "Bilecik"
+          },
+          "bounding_box": [
+            214.21,
+            130.59,
+            268.04,
+            193.32
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bilecik"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "bilecik"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bingol",
+          "name": {
+            "tr": "Bingöl",
+            "en": "Bingöl"
+          },
+          "bounding_box": [
+            744.09,
+            201.92,
+            808.95,
+            282.48
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bingöl"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "bingol"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bitlis",
+          "name": {
+            "tr": "Bitlis",
+            "en": "Bitlis"
+          },
+          "bounding_box": [
+            821.65,
+            236.64,
+            907.59,
+            316.54
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bitlis"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "bitlis"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bolu",
+          "name": {
+            "tr": "Bolu",
+            "en": "Bolu"
+          },
+          "bounding_box": [
+            261.33,
+            92.85,
+            361.03,
+            159.48
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bolu"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bolu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::burdur",
+          "name": {
+            "tr": "Burdur",
+            "en": "Burdur"
+          },
+          "bounding_box": [
+            199.37,
+            329.36,
+            277.74,
+            397.37
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Burdur"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "burdur"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bursa",
+          "name": {
+            "tr": "Bursa",
+            "en": "Bursa"
+          },
+          "bounding_box": [
+            134.54,
+            124.55,
+            227.77,
+            203.55
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bursa"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "bursa"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::canakkale",
+          "name": {
+            "tr": "Çanakkale",
+            "en": "Çanakkale"
+          },
+          "bounding_box": [
+            8.47,
+            110.62,
+            106.7,
+            210.25
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çanakkale"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "canakkale"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::cankiri",
+          "name": {
+            "tr": "Çankırı",
+            "en": "Çankırı"
+          },
+          "bounding_box": [
+            359.04,
+            88.94,
+            444.07,
+            150.59
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çankırı"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "cankiri"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::corum",
+          "name": {
+            "tr": "Çorum",
+            "en": "Çorum"
+          },
+          "bounding_box": [
+            434.13,
+            73.37,
+            510.87,
+            176.87
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Çorum"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "corum"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::denizli",
+          "name": {
+            "tr": "Denizli",
+            "en": "Denizli"
+          },
+          "bounding_box": [
+            156.44,
+            284.0,
+            232.91,
+            400.15
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Denizli"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "denizli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::diyarbakir",
+          "name": {
+            "tr": "Diyarbakır",
+            "en": "Diyarbakır"
+          },
+          "bounding_box": [
+            698.04,
+            263.96,
+            817.1,
+            350.3
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Diyarbakır"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "diyarbakir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::edirne",
+          "name": {
+            "tr": "Edirne",
+            "en": "Edirne"
+          },
+          "bounding_box": [
+            27.26,
+            21.73,
+            76.92,
+            126.25
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Edirne"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "edirne"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::elazig",
+          "name": {
+            "tr": "Elazığ",
+            "en": "Elazığ"
+          },
+          "bounding_box": [
+            658.93,
+            226.95,
+            763.99,
+            294.72
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Elazığ"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "elazig"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::erzincan",
+          "name": {
+            "tr": "Erzincan",
+            "en": "Erzincan"
+          },
+          "bounding_box": [
+            658.93,
+            164.69,
+            779.05,
+            243.35
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Erzincan"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "erzincan"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::erzurum",
+          "name": {
+            "tr": "Erzurum",
+            "en": "Erzurum"
+          },
+          "bounding_box": [
+            756.14,
+            97.26,
+            875.28,
+            231.71
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Erzurum"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "erzurum"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::eskisehir",
+          "name": {
+            "tr": "Eskişehir",
+            "en": "Eskişehir"
+          },
+          "bounding_box": [
+            230.8,
+            157.15,
+            333.92,
+            238.01
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Eskişehir"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "eskisehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::gaziantep",
+          "name": {
+            "tr": "Gaziantep",
+            "en": "Gaziantep"
+          },
+          "bounding_box": [
+            561.16,
+            351.1,
+            643.67,
+            416.83
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Gaziantep"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "gaziantep"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::giresun",
+          "name": {
+            "tr": "Giresun",
+            "en": "Giresun"
+          },
+          "bounding_box": [
+            641.47,
+            90.14,
+            701.47,
+            166.28
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Giresun"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "giresun"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::gumushane",
+          "name": {
+            "tr": "Gümüşhane",
+            "en": "Gümüşhane"
+          },
+          "bounding_box": [
+            684.6,
+            112.58,
+            749.13,
+            179.19
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Gümüşhane"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "gumushane"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::hakkari",
+          "name": {
+            "tr": "Hakkâri",
+            "en": "Hakkâri"
+          },
+          "bounding_box": [
+            919.82,
+            334.6,
+            991.48,
+            393.82
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Hakkâri"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "hakkari"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::hatay",
+          "name": {
+            "tr": "Hatay",
+            "en": "Hatay"
+          },
+          "bounding_box": [
+            527.2,
+            389.5,
+            574.6,
+            478.86
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Hatay"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "hatay"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::isparta",
+          "name": {
+            "tr": "Isparta",
+            "en": "Isparta"
+          },
+          "bounding_box": [
+            230.92,
+            279.39,
+            313.68,
+            366.07
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Isparta"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "isparta"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::mersin",
+          "name": {
+            "tr": "Mersin",
+            "en": "Mersin"
+          },
+          "bounding_box": [
+            362.36,
+            362.14,
+            490.76,
+            464.09
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Mersin"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "mersin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::istanbul",
+          "name": {
+            "tr": "İstanbul",
+            "en": "İstanbul"
+          },
+          "bounding_box": [
+            131.15,
+            55.68,
+            224.77,
+            107.93
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İstanbul"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "istanbul"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::izmir",
+          "name": {
+            "tr": "İzmir",
+            "en": "İzmir"
+          },
+          "bounding_box": [
+            37.51,
+            212.57,
+            156.92,
+            325.57
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "İzmir"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "izmir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kars",
+          "name": {
+            "tr": "Kars",
+            "en": "Kars"
+          },
+          "bounding_box": [
+            853.24,
+            81.06,
+            935.9,
+            175.93
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kars"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "kars"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kastamonu",
+          "name": {
+            "tr": "Kastamonu",
+            "en": "Kastamonu"
+          },
+          "bounding_box": [
+            368.26,
+            20.65,
+            466.63,
+            107.01
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kastamonu"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "kastamonu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kayseri",
+          "name": {
+            "tr": "Kayseri",
+            "en": "Kayseri"
+          },
+          "bounding_box": [
+            482.46,
+            221.58,
+            586.92,
+            323.48
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kayseri"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kayseri"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kirklareli",
+          "name": {
+            "tr": "Kırklareli",
+            "en": "Kırklareli"
+          },
+          "bounding_box": [
+            70.86,
+            14.37,
+            135.88,
+            79.67
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırklareli"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "kirklareli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kirsehir",
+          "name": {
+            "tr": "Kırşehir",
+            "en": "Kırşehir"
+          },
+          "bounding_box": [
+            411.69,
+            184.0,
+            474.59,
+            258.93
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırşehir"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kirsehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kocaeli",
+          "name": {
+            "tr": "Kocaeli",
+            "en": "Kocaeli"
+          },
+          "bounding_box": [
+            192.53,
+            79.93,
+            250.12,
+            128.85
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kocaeli"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "kocaeli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::konya",
+          "name": {
+            "tr": "Konya",
+            "en": "Konya"
+          },
+          "bounding_box": [
+            294.58,
+            223.25,
+            462.26,
+            409.76
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Konya"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "konya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kutahya",
+          "name": {
+            "tr": "Kütahya",
+            "en": "Kütahya"
+          },
+          "bounding_box": [
+            162.12,
+            175.42,
+            254.02,
+            265.13
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kütahya"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "kutahya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::malatya",
+          "name": {
+            "tr": "Malatya",
+            "en": "Malatya"
+          },
+          "bounding_box": [
+            599.74,
+            233.47,
+            699.6,
+            331.67
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Malatya"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "malatya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::manisa",
+          "name": {
+            "tr": "Manisa",
+            "en": "Manisa"
+          },
+          "bounding_box": [
+            83.31,
+            213.13,
+            181.36,
+            310.21
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Manisa"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "manisa"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kahramanmaras",
+          "name": {
+            "tr": "Kahramanmaraş",
+            "en": "Kahramanmaraş"
+          },
+          "bounding_box": [
+            549.37,
+            271.13,
+            629.43,
+            375.33
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kahramanmaraş"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "kahramanmaras"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::mardin",
+          "name": {
+            "tr": "Mardin",
+            "en": "Mardin"
+          },
+          "bounding_box": [
+            737.51,
+            333.22,
+            843.97,
+            397.58
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Mardin"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "mardin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::mugla",
+          "name": {
+            "tr": "Muğla",
+            "en": "Muğla"
+          },
+          "bounding_box": [
+            88.48,
+            348.04,
+            214.2,
+            443.01
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Muğla"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "mugla"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::mus",
+          "name": {
+            "tr": "Muş",
+            "en": "Muş"
+          },
+          "bounding_box": [
+            802.9,
+            207.8,
+            885.59,
+            278.72
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Muş"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "mus"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::nevsehir",
+          "name": {
+            "tr": "Nevşehir",
+            "en": "Nevşehir"
+          },
+          "bounding_box": [
+            446.49,
+            207.76,
+            490.77,
+            291.54
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Nevşehir"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "nevsehir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::nigde",
+          "name": {
+            "tr": "Niğde",
+            "en": "Niğde"
+          },
+          "bounding_box": [
+            442.34,
+            285.13,
+            503.19,
+            365.59
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Niğde"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "nigde"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::ordu",
+          "name": {
+            "tr": "Ordu",
+            "en": "Ordu"
+          },
+          "bounding_box": [
+            573.78,
+            85.06,
+            649.01,
+            145.5
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ordu"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "ordu"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::rize",
+          "name": {
+            "tr": "Rize",
+            "en": "Rize"
+          },
+          "bounding_box": [
+            760.76,
+            74.22,
+            816.61,
+            130.31
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Rize"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "rize"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::sakarya",
+          "name": {
+            "tr": "Sakarya",
+            "en": "Sakarya"
+          },
+          "bounding_box": [
+            226.92,
+            82.78,
+            283.91,
+            145.09
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sakarya"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "sakarya"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::samsun",
+          "name": {
+            "tr": "Samsun",
+            "en": "Samsun"
+          },
+          "bounding_box": [
+            481.65,
+            41.7,
+            597.57,
+            107.6
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Samsun"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "samsun"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::siirt",
+          "name": {
+            "tr": "Siirt",
+            "en": "Siirt"
+          },
+          "bounding_box": [
+            815.96,
+            301.52,
+            899.44,
+            341.03
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Siirt"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "siirt"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::sinop",
+          "name": {
+            "tr": "Sinop",
+            "en": "Sinop"
+          },
+          "bounding_box": [
+            447.46,
+            14.92,
+            512.77,
+            81.54
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sinop"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "sinop"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::sivas",
+          "name": {
+            "tr": "Sivas",
+            "en": "Sivas"
+          },
+          "bounding_box": [
+            528.85,
+            132.28,
+            680.7,
+            274.84
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Sivas"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "sivas"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::tekirdag",
+          "name": {
+            "tr": "Tekirdağ",
+            "en": "Tekirdağ"
+          },
+          "bounding_box": [
+            63.12,
+            53.13,
+            140.09,
+            126.23
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Tekirdağ"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "tekirdag"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::tokat",
+          "name": {
+            "tr": "Tokat",
+            "en": "Tokat"
+          },
+          "bounding_box": [
+            513.44,
+            103.43,
+            622.97,
+            173.84
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Tokat"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "tokat"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::trabzon",
+          "name": {
+            "tr": "Trabzon",
+            "en": "Trabzon"
+          },
+          "bounding_box": [
+            698.36,
+            88.05,
+            769.84,
+            132.87
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Trabzon"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "trabzon"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::tunceli",
+          "name": {
+            "tr": "Tunceli",
+            "en": "Tunceli"
+          },
+          "bounding_box": [
+            678.3,
+            202.59,
+            771.45,
+            262.22
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Tunceli"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "tunceli"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::sanliurfa",
+          "name": {
+            "tr": "Şanlıurfa",
+            "en": "Şanlıurfa"
+          },
+          "bounding_box": [
+            632.33,
+            315.27,
+            756.68,
+            416.12
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Şanlıurfa"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "sanliurfa"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::usak",
+          "name": {
+            "tr": "Uşak",
+            "en": "Uşak"
+          },
+          "bounding_box": [
+            170.53,
+            251.82,
+            225.35,
+            303.38
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Uşak"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ege"
+            ],
+            "province_codes": [
+              "usak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::van",
+          "name": {
+            "tr": "Van",
+            "en": "Van"
+          },
+          "bounding_box": [
+            881.43,
+            214.02,
+            978.19,
+            345.03
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Van"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "van"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::yozgat",
+          "name": {
+            "tr": "Yozgat",
+            "en": "Yozgat"
+          },
+          "bounding_box": [
+            438.68,
+            152.94,
+            546.5,
+            243.27
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yozgat"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "yozgat"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::zonguldak",
+          "name": {
+            "tr": "Zonguldak",
+            "en": "Zonguldak"
+          },
+          "bounding_box": [
+            299.39,
+            54.43,
+            351.49,
+            94.64
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Zonguldak"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "zonguldak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::aksaray",
+          "name": {
+            "tr": "Aksaray",
+            "en": "Aksaray"
+          },
+          "bounding_box": [
+            396.93,
+            243.09,
+            456.13,
+            322.52
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Aksaray"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "aksaray"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bayburt",
+          "name": {
+            "tr": "Bayburt",
+            "en": "Bayburt"
+          },
+          "bounding_box": [
+            727.72,
+            130.31,
+            784.5,
+            174.94
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bayburt"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bayburt"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::karaman",
+          "name": {
+            "tr": "Karaman",
+            "en": "Karaman"
+          },
+          "bounding_box": [
+            356.74,
+            346.48,
+            446.03,
+            433.38
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karaman"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "karaman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kirikkale",
+          "name": {
+            "tr": "Kırıkkale",
+            "en": "Kırıkkale"
+          },
+          "bounding_box": [
+            396.58,
+            148.82,
+            446.08,
+            231.79
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kırıkkale"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "ic_anadolu"
+            ],
+            "province_codes": [
+              "kirikkale"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::batman",
+          "name": {
+            "tr": "Batman",
+            "en": "Batman"
+          },
+          "bounding_box": [
+            796.57,
+            277.48,
+            839.69,
+            350.44
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Batman"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "batman"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::sirnak",
+          "name": {
+            "tr": "Şırnak",
+            "en": "Şırnak"
+          },
+          "bounding_box": [
+            832.77,
+            326.56,
+            923.13,
+            383.32
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Şırnak"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "sirnak"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::bartin",
+          "name": {
+            "tr": "Bartın",
+            "en": "Bartın"
+          },
+          "bounding_box": [
+            334.64,
+            34.38,
+            380.8,
+            78.39
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Bartın"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "bartin"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::ardahan",
+          "name": {
+            "tr": "Ardahan",
+            "en": "Ardahan"
+          },
+          "bounding_box": [
+            863.12,
+            51.84,
+            911.91,
+            122.58
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Ardahan"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "ardahan"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::igdir",
+          "name": {
+            "tr": "Iğdır",
+            "en": "Iğdır"
+          },
+          "bounding_box": [
+            912.47,
+            153.7,
+            990.78,
+            197.52
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Iğdır"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "dogu_anadolu"
+            ],
+            "province_codes": [
+              "igdir"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::yalova",
+          "name": {
+            "tr": "Yalova",
+            "en": "Yalova"
+          },
+          "bounding_box": [
+            168.21,
+            118.0,
+            202.19,
+            136.19
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Yalova"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "marmara"
+            ],
+            "province_codes": [
+              "yalova"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::karabuk",
+          "name": {
+            "tr": "Karabük",
+            "en": "Karabük"
+          },
+          "bounding_box": [
+            338.05,
+            55.09,
+            388.57,
+            107.87
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Karabük"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "karabuk"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::kilis",
+          "name": {
+            "tr": "Kilis",
+            "en": "Kilis"
+          },
+          "bounding_box": [
+            578.56,
+            390.61,
+            615.82,
+            419.18
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Kilis"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "guneydogu_anadolu"
+            ],
+            "province_codes": [
+              "kilis"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::osmaniye",
+          "name": {
+            "tr": "Osmaniye",
+            "en": "Osmaniye"
+          },
+          "bounding_box": [
+            530.91,
+            343.29,
+            575.83,
+            394.83
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Osmaniye"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "akdeniz"
+            ],
+            "province_codes": [
+              "osmaniye"
+            ]
+          }
+        },
+        {
+          "id": "turkey_energy_v1::basemap_province::duzce",
+          "name": {
+            "tr": "Düzce",
+            "en": "Düzce"
+          },
+          "bounding_box": [
+            275.54,
+            85.97,
+            320.92,
+            122.08
+          ],
+          "attributes": {
+            "layer_type": "basemap_province",
+            "feature_class": "basemap",
+            "confusable_with": [],
+            "qie_aliases": [
+              "Düzce"
+            ],
+            "evidence_topic_hints": [
+              "basemap"
+            ],
+            "region_codes": [
+              "karadeniz"
+            ],
+            "province_codes": [
+              "duzce"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hes",
+      "z_index": 1,
       "min_lod": 1.2,
       "nodes": [
         {
@@ -72,7 +2509,7 @@
     },
     {
       "id": "res",
-      "z_index": 1,
+      "z_index": 2,
       "min_lod": 1.2,
       "nodes": [
         {
@@ -127,7 +2564,7 @@
     },
     {
       "id": "ges",
-      "z_index": 2,
+      "z_index": 3,
       "min_lod": 1.2,
       "nodes": [
         {
@@ -158,7 +2595,7 @@
     },
     {
       "id": "jes",
-      "z_index": 3,
+      "z_index": 4,
       "min_lod": 1.2,
       "nodes": [
         {
@@ -189,7 +2626,7 @@
     },
     {
       "id": "thermal",
-      "z_index": 4,
+      "z_index": 5,
       "min_lod": 1.2,
       "nodes": [
         {
@@ -220,7 +2657,7 @@
     },
     {
       "id": "nuclear",
-      "z_index": 5,
+      "z_index": 6,
       "min_lod": 1.2,
       "nodes": [
         {

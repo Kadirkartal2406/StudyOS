@@ -37,6 +37,9 @@ final class StudySessionReady extends StudySessionState {
     this.topicCode,
     this.studyPlanId,
     this.errorMessage,
+    this.blockedActiveSession,
+    this.blockedElapsedSeconds = 0,
+    this.blockedRemainingSeconds = 0,
   });
 
   final int focusMinutes;
@@ -59,6 +62,42 @@ final class StudySessionReady extends StudySessionState {
   final String? topicCode;
   final String? studyPlanId;
   final String? errorMessage;
+  /// Server'da aktif oturum var ama yerel faz hâlâ idle (409 sonrası).
+  final StudySessionEntity? blockedActiveSession;
+  final int blockedElapsedSeconds;
+  final int blockedRemainingSeconds;
+
+  bool get hasBlockedActiveSession => blockedActiveSession != null;
+
+  String get blockedSessionTitle {
+    final s = blockedActiveSession;
+    if (s == null) return 'Aktif oturum';
+    final subject = s.planSubject ?? s.subjectCode;
+    final topic = s.planTitle ?? s.topicCode;
+    if (subject != null && subject.isNotEmpty) {
+      if (topic != null && topic.isNotEmpty) return '$subject · $topic';
+      return subject;
+    }
+    if (topic != null && topic.isNotEmpty) return topic;
+    return s.mode == 'chronometer' ? 'Kronometre' : 'Pomodoro';
+  }
+
+  String get blockedSessionStateLabel {
+    final s = blockedActiveSession;
+    if (s == null) return '';
+    if (s.status == StudySessionStatus.paused) return 'Paused';
+    if (s.isBreak) return 'Break';
+    return 'Focus';
+  }
+
+  String get blockedElapsedLabel => _mmss(blockedElapsedSeconds);
+  String get blockedRemainingLabel => _mmss(blockedRemainingSeconds);
+
+  static String _mmss(int total) {
+    final m = total ~/ 60;
+    final s = total % 60;
+    return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
+  }
 
   int get totalSeconds {
     if (phase == PomodoroPhase.breakTime) {
@@ -142,9 +181,13 @@ final class StudySessionReady extends StudySessionState {
     String? topicCode,
     String? studyPlanId,
     String? errorMessage,
+    StudySessionEntity? blockedActiveSession,
+    int? blockedElapsedSeconds,
+    int? blockedRemainingSeconds,
     bool clearSession = false,
     bool clearError = false,
     bool clearSavedFocus = false,
+    bool clearBlockedActive = false,
   }) {
     return StudySessionReady(
       focusMinutes: focusMinutes ?? this.focusMinutes,
@@ -168,6 +211,15 @@ final class StudySessionReady extends StudySessionState {
       topicCode: topicCode ?? this.topicCode,
       studyPlanId: studyPlanId ?? this.studyPlanId,
       errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
+      blockedActiveSession: clearBlockedActive
+          ? null
+          : (blockedActiveSession ?? this.blockedActiveSession),
+      blockedElapsedSeconds: clearBlockedActive
+          ? 0
+          : (blockedElapsedSeconds ?? this.blockedElapsedSeconds),
+      blockedRemainingSeconds: clearBlockedActive
+          ? 0
+          : (blockedRemainingSeconds ?? this.blockedRemainingSeconds),
     );
   }
 

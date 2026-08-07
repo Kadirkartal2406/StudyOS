@@ -59,7 +59,11 @@ class _EAEVectorCanvasWidgetState
 
   void _onTransformationChanged() {
     final scale = _transformationController.value.getMaxScaleOnAxis();
-    ref.read(eaeRenderNotifierProvider.notifier).updateScale(scale);
+    Future.microtask(() {
+      if (mounted) {
+        ref.read(eaeRenderNotifierProvider.notifier).updateScale(scale);
+      }
+    });
   }
 
   void _parseSvgPaths() {

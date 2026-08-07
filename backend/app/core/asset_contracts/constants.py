@@ -57,6 +57,8 @@ GEOGRAPHY_LAYER_TYPES = frozenset(
         "subregion",
         "province",
         "province_center",
+        # thematic underlay (province polygons behind point/line layers)
+        "basemap_province",
         # physical
         "mountain",
         "mountain_range",

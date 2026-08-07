@@ -288,6 +288,126 @@ def load_province_geojson() -> dict[str, dict[str, Any]]:
     return result
 
 
+def provinces_in_region(*region_slugs: str) -> list[str]:
+    """Return catalog province slugs belonging to one or more geographic regions."""
+    wanted = set(region_slugs)
+    return [slug for slug, _tr, region, _lon, _lat in PROVINCES if region in wanted]
+
+
+def union_province_paths(
+    slugs: list[str],
+    geo: dict[str, dict[str, Any]] | None = None,
+    *,
+    tolerance_deg: float = 0.012,
+) -> tuple[str, list[float]]:
+    """
+    Build a MultiPolygon-style SVG path by concatenating province outlines.
+    Returns (path_d, bbox). Empty path if no geometry found.
+    """
+    geo = geo if geo is not None else load_province_geojson()
+    parts: list[str] = []
+    for slug in slugs:
+        geometry = geo.get(slug)
+        if not geometry:
+            continue
+        path_d = geojson_to_svg_path(geometry, tolerance_deg=tolerance_deg)
+        if path_d:
+            parts.append(path_d)
+    if not parts:
+        return "", [0.0, 0.0, 0.0, 0.0]
+    combined = " ".join(parts)
+    return combined, _bbox_from_path_d(combined)
+
+
+def feature_path_from_provinces(
+    slugs: list[str] | None,
+    lon: float,
+    lat: float,
+    w: float,
+    h: float,
+    geo: dict[str, dict[str, Any]],
+    *,
+    as_point: bool = False,
+    radius: float = 6.0,
+    tolerance_deg: float = 0.012,
+) -> tuple[str, list[float]]:
+    """Prefer union of province GeoJSON polygons; fall back to rect/circle at centroid."""
+    if slugs:
+        path_d, bbox = union_province_paths(
+            slugs, geo, tolerance_deg=tolerance_deg
+        )
+        if path_d:
+            return path_d, bbox
+    x, y = project_lon_lat(lon, lat)
+    if as_point:
+        return circle_path(x, y, radius), bbox_wh(x, y, radius * 2, radius * 2)
+    return rect_path(x, y, w, h), bbox_wh(x, y, w, h)
+
+
+def densify_lonlat(
+    coords: list[tuple[float, float]], steps: int = 10
+) -> list[tuple[float, float]]:
+    """Insert interpolated lon/lat samples so rivers/faults/roads are denser polylines."""
+    if len(coords) < 2 or steps < 2:
+        return list(coords)
+    out: list[tuple[float, float]] = []
+    for i in range(len(coords) - 1):
+        lon0, lat0 = coords[i]
+        lon1, lat1 = coords[i + 1]
+        for s in range(steps):
+            t = s / steps
+            out.append((lon0 + (lon1 - lon0) * t, lat0 + (lat1 - lat0) * t))
+    out.append(coords[-1])
+    return out
+
+
+def ellipse_path(cx: float, cy: float, rx: float, ry: float) -> str:
+    """Approximate ellipse with four cubic Bézier curves (SVG-path friendly)."""
+    k = 0.5522847498
+    return (
+        f"M{cx - rx:.2f} {cy:.2f} "
+        f"C{cx - rx:.2f} {cy - k * ry:.2f} {cx - k * rx:.2f} {cy - ry:.2f} {cx:.2f} {cy - ry:.2f} "
+        f"C{cx + k * rx:.2f} {cy - ry:.2f} {cx + rx:.2f} {cy - k * ry:.2f} {cx + rx:.2f} {cy:.2f} "
+        f"C{cx + rx:.2f} {cy + k * ry:.2f} {cx + k * rx:.2f} {cy + ry:.2f} {cx:.2f} {cy + ry:.2f} "
+        f"C{cx - k * rx:.2f} {cy + ry:.2f} {cx - rx:.2f} {cy + k * ry:.2f} {cx - rx:.2f} {cy:.2f} Z"
+    )
+
+
+def make_basemap_layer(
+    prefix: str,
+    geo: dict[str, dict[str, Any]],
+    *,
+    z_index: int = 0,
+    min_lod: float = 0.5,
+) -> dict[str, Any]:
+    """
+    Underlay of all 81 province polygons so point/line thematic maps still show
+    real Turkey geometry (unique node IDs per package via prefix).
+    """
+    nodes: list[dict[str, Any]] = []
+    for slug, name, region, lon, lat in PROVINCES:
+        path_d, bbox = feature_path_from_provinces(
+            [slug], lon, lat, 28, 22, geo, tolerance_deg=0.014
+        )
+        nodes.append(
+            make_node(
+                nid(prefix, "basemap_province", slug),
+                name,
+                name,
+                bbox,
+                geo_attrs(
+                    "basemap_province",
+                    "basemap",
+                    aliases=[name],
+                    hints=["basemap"],
+                    region_codes=[region],
+                    province_codes=[slug],
+                ),
+                path_d,
+            )
+        )
+    return {"id": "basemap", "z_index": z_index, "min_lod": min_lod, "nodes": nodes}
+
 
 def geo_attrs(
     layer_type: str,
@@ -378,30 +498,50 @@ def adjacency_catalog() -> dict[str, Any]:
 def build_admin_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_admin_v1"
     layers: list[dict[str, Any]] = []
+    province_geojson = load_province_geojson()
 
-    # country
-    cx, cy = project_lon_lat(35.0, 39.0)
+    # country = union of all provinces
+    country_path, country_bbox = union_province_paths(
+        [p[0] for p in PROVINCES], province_geojson, tolerance_deg=0.02
+    )
+    if not country_path:
+        cx, cy = project_lon_lat(35.0, 39.0)
+        country_path, country_bbox = rect_path(cx, cy, 900, 400), bbox_wh(cx, cy, 900, 400)
     country = make_node(
         nid(prefix, "country", "turkiye"),
         "Türkiye",
         "Turkey",
-        bbox_wh(cx, cy, 900, 400),
-        geo_attrs("country", "sovereign_state", aliases=["Türkiye", "Turkey"], hints=["turkiye_cografyasi"]),
-        rect_path(cx, cy, 900, 400),
+        country_bbox,
+        geo_attrs(
+            "country",
+            "sovereign_state",
+            aliases=["Türkiye", "Turkey"],
+            hints=["turkiye_cografyasi"],
+        ),
+        country_path,
     )
     layers.append({"id": "country", "z_index": 0, "min_lod": 0.5, "nodes": [country]})
 
-    # regions
+    # regions = union of member provinces
     region_nodes = []
     for r in REGIONS:
         x, y = project_lon_lat(r["lon"], r["lat"])
         node_id = nid(prefix, "region", r["slug"])
+        path_d, bbox = feature_path_from_provinces(
+            provinces_in_region(r["slug"]),
+            r["lon"],
+            r["lat"],
+            160,
+            100,
+            province_geojson,
+            tolerance_deg=0.014,
+        )
         region_nodes.append(
             make_node(
                 node_id,
                 r["tr"],
                 r["en"],
-                bbox_wh(x, y, 160, 100),
+                bbox,
                 geo_attrs(
                     "region",
                     "geographic_region",
@@ -410,31 +550,76 @@ def build_admin_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                     hints=["bolgeler"],
                     region_codes=[r["slug"]],
                 ),
-                rect_path(x, y, 160, 100),
+                path_d,
             )
         )
     layers.append({"id": "regions", "z_index": 1, "min_lod": 0.8, "nodes": region_nodes})
 
-    # subregions (pedagogical samples)
+    # subregions — pedagogical samples mapped onto related provinces
     subregions = [
-        ("trakya", "Trakya", "Thrace", "marmara", 26.8, 41.3),
-        ("canakkale_bogazi_cevre", "Çanakkale Boğazı Çevresi", "Dardanelles Area", "marmara", 26.4, 40.2),
-        ("ic_bati_anadolu", "İç Batı Anadolu", "Inner West Anatolia", "ege", 29.5, 38.8),
-        ("toroslar", "Toroslar", "Taurus Belt", "akdeniz", 33.0, 37.0),
-        ("orta_karadeniz", "Orta Karadeniz", "Central Black Sea", "karadeniz", 36.5, 41.0),
-        ("yukari_firat", "Yukarı Fırat", "Upper Euphrates", "dogu_anadolu", 39.5, 39.2),
-        ("gap_bolgesi", "GAP Bölgesi", "GAP Region", "guneydogu_anadolu", 39.5, 37.4),
+        ("trakya", "Trakya", "Thrace", "marmara", ["edirne", "kirklareli", "tekirdag"]),
+        (
+            "canakkale_bogazi_cevre",
+            "Çanakkale Boğazı Çevresi",
+            "Dardanelles Area",
+            "marmara",
+            ["canakkale"],
+        ),
+        (
+            "ic_bati_anadolu",
+            "İç Batı Anadolu",
+            "Inner West Anatolia",
+            "ege",
+            ["kutahya", "afyonkarahisar", "usak"],
+        ),
+        (
+            "toroslar",
+            "Toroslar",
+            "Taurus Belt",
+            "akdeniz",
+            ["antalya", "mersin", "adana", "isparta", "burdur"],
+        ),
+        (
+            "orta_karadeniz",
+            "Orta Karadeniz",
+            "Central Black Sea",
+            "karadeniz",
+            ["samsun", "ordu", "tokat", "amasya"],
+        ),
+        (
+            "yukari_firat",
+            "Yukarı Fırat",
+            "Upper Euphrates",
+            "dogu_anadolu",
+            ["erzurum", "erzincan", "elazig", "tunceli"],
+        ),
+        (
+            "gap_bolgesi",
+            "GAP Bölgesi",
+            "GAP Region",
+            "guneydogu_anadolu",
+            provinces_in_region("guneydogu_anadolu"),
+        ),
     ]
     sub_nodes = []
-    for slug, tr, en, region, lon, lat in subregions:
-        x, y = project_lon_lat(lon, lat)
+    for slug, tr, en, region, member_slugs in subregions:
+        lon = next(r["lon"] for r in REGIONS if r["slug"] == region)
+        lat = next(r["lat"] for r in REGIONS if r["slug"] == region)
+        # refine lon/lat from first member centroid when possible
+        for p in PROVINCES:
+            if p[0] == member_slugs[0]:
+                lon, lat = p[3], p[4]
+                break
         node_id = nid(prefix, "subregion", slug)
+        path_d, bbox = feature_path_from_provinces(
+            member_slugs, lon, lat, 90, 55, province_geojson
+        )
         sub_nodes.append(
             make_node(
                 node_id,
                 tr,
                 en,
-                bbox_wh(x, y, 90, 55),
+                bbox,
                 geo_attrs(
                     "subregion",
                     "geographic_subregion",
@@ -442,34 +627,26 @@ def build_admin_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                     hints=["alt_bolgeler"],
                     region_codes=[region],
                 ),
-                rect_path(x, y, 90, 55),
+                path_d,
             )
         )
-    # LOD fix: subregions visible after slight zoom
     layers.append({"id": "subregions", "z_index": 2, "min_lod": 1.2, "nodes": sub_nodes})
 
-    # provinces — use real GeoJSON boundaries when available
-    province_geojson = load_province_geojson()
+    # provinces — real GeoJSON boundaries
     prov_nodes = []
     center_nodes = []
     for slug, name, region, lon, lat in PROVINCES:
         cx, cy = project_lon_lat(lon, lat)
         node_id = nid(prefix, "province", slug)
         conf = cmap.get(node_id, [])
-        # confusable nearby province by region
         if not conf:
             peers = [p for p in PROVINCES if p[2] == region and p[0] != slug]
             if peers:
                 conf = [nid(prefix, "province", peers[0][0])]
 
-        # Prefer GeoJSON polygon; fall back to rect if not found
-        geo = province_geojson.get(slug)
-        if geo:
-            path_d = geojson_to_svg_path(geo, tolerance_deg=0.008)
-            prov_bbox = _bbox_from_path_d(path_d) if path_d else bbox_wh(cx, cy, 28, 22)
-        else:
-            path_d = rect_path(cx, cy, 28, 22)
-            prov_bbox = bbox_wh(cx, cy, 28, 22)
+        path_d, prov_bbox = feature_path_from_provinces(
+            [slug], lon, lat, 28, 22, province_geojson, tolerance_deg=0.008
+        )
 
         prov_nodes.append(
             make_node(
@@ -508,7 +685,6 @@ def build_admin_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 circle_path(cx, cy, 4),
             )
         )
-    # LOD fix: provinces visible at default scale=1.0, centers appear on zoom
     layers.append({"id": "provinces", "z_index": 3, "min_lod": 0.8, "nodes": prov_nodes})
     layers.append({"id": "province_centers", "z_index": 4, "min_lod": 2.0, "nodes": center_nodes})
 
@@ -523,47 +699,121 @@ def build_admin_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_physical_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_physical_v1"
+    geo = load_province_geojson()
+    # (layer, slug, tr, en, lon, lat, w, h, province_slugs|None, as_point)
     features = [
-        ("mountain_range", "toroslar", "Toroslar", "Taurus Mountains", 33.0, 37.0, 200, 40),
-        ("mountain_range", "kuzey_anadolu_daglari", "Kuzey Anadolu Dağları", "Northern Anatolian Mts", 36.0, 41.0, 280, 30),
-        ("mountain", "agri_dagi", "Ağrı Dağı", "Mount Ararat", 44.3, 39.7, 30, 30),
-        ("peak", "agri_zirve", "Ağrı Zirvesi", "Ararat Peak", 44.3, 39.7, 12, 12),
-        ("plain", "gediz", "Gediz Ovası", "Gediz Plain", 27.5, 38.6, 50, 30),
-        ("plain", "buyuk_menderes", "Büyük Menderes Ovası", "Buyuk Menderes Plain", 27.8, 37.8, 55, 28),
-        ("plain", "cukurova", "Çukurova", "Cukurova Plain", 35.3, 36.9, 70, 35),
-        ("plateau", "anadolu_platosu", "Anadolu Platosu", "Anatolian Plateau", 33.5, 39.0, 180, 100),
-        ("valley", "firat_vadisi", "Fırat Vadisi", "Euphrates Valley", 39.0, 38.5, 40, 80),
-        ("strait", "istanbul_bogazi", "İstanbul Boğazı", "Bosphorus", 29.05, 41.1, 18, 40),
-        ("strait", "canakkale_bogazi", "Çanakkale Boğazı", "Dardanelles", 26.4, 40.2, 18, 35),
-        ("peninsula", "gelibolu", "Gelibolu Yarımadası", "Gallipoli Peninsula", 26.4, 40.35, 25, 40),
-        ("cape", "baba_burnu", "Baba Burnu", "Cape Baba", 26.05, 39.48, 12, 12),
-        ("gulf", "izmir_korfezi", "İzmir Körfezi", "Gulf of Izmir", 26.9, 38.45, 40, 25),
-        ("bay", "antalya_korfezi", "Antalya Körfezi", "Gulf of Antalya", 30.7, 36.7, 45, 25),
-        ("island", "gokceada", "Gökçeada", "Gokceada", 25.9, 40.2, 18, 14),
-        ("island", "bozcaada", "Bozcaada", "Bozcaada", 26.04, 39.83, 14, 12),
+        (
+            "mountain_range",
+            "toroslar",
+            "Toroslar",
+            "Taurus Mountains",
+            33.0,
+            37.0,
+            200,
+            40,
+            ["antalya", "mersin", "adana", "kahramanmaras", "osmaniye", "isparta", "burdur", "mugla"],
+            False,
+        ),
+        (
+            "mountain_range",
+            "kuzey_anadolu_daglari",
+            "Kuzey Anadolu Dağları",
+            "Northern Anatolian Mts",
+            36.0,
+            41.0,
+            280,
+            30,
+            provinces_in_region("karadeniz"),
+            False,
+        ),
+        ("mountain", "agri_dagi", "Ağrı Dağı", "Mount Ararat", 44.3, 39.7, 30, 30, ["agri", "igdir"], False),
+        ("peak", "agri_zirve", "Ağrı Zirvesi", "Ararat Peak", 44.3, 39.7, 12, 12, None, True),
+        ("plain", "gediz", "Gediz Ovası", "Gediz Plain", 27.5, 38.6, 50, 30, ["manisa", "izmir"], False),
+        (
+            "plain",
+            "buyuk_menderes",
+            "Büyük Menderes Ovası",
+            "Buyuk Menderes Plain",
+            27.8,
+            37.8,
+            55,
+            28,
+            ["aydin", "denizli"],
+            False,
+        ),
+        (
+            "plain",
+            "cukurova",
+            "Çukurova",
+            "Cukurova Plain",
+            35.3,
+            36.9,
+            70,
+            35,
+            ["adana", "mersin", "osmaniye"],
+            False,
+        ),
+        (
+            "plateau",
+            "anadolu_platosu",
+            "Anadolu Platosu",
+            "Anatolian Plateau",
+            33.5,
+            39.0,
+            180,
+            100,
+            provinces_in_region("ic_anadolu"),
+            False,
+        ),
+        (
+            "valley",
+            "firat_vadisi",
+            "Fırat Vadisi",
+            "Euphrates Valley",
+            39.0,
+            38.5,
+            40,
+            80,
+            ["elazig", "malatya", "erzurum", "sanliurfa"],
+            False,
+        ),
+        ("strait", "istanbul_bogazi", "İstanbul Boğazı", "Bosphorus", 29.05, 41.1, 18, 40, ["istanbul"], False),
+        ("strait", "canakkale_bogazi", "Çanakkale Boğazı", "Dardanelles", 26.4, 40.2, 18, 35, ["canakkale"], False),
+        ("peninsula", "gelibolu", "Gelibolu Yarımadası", "Gallipoli Peninsula", 26.4, 40.35, 25, 40, ["canakkale"], False),
+        ("cape", "baba_burnu", "Baba Burnu", "Cape Baba", 26.05, 39.48, 12, 12, None, True),
+        ("gulf", "izmir_korfezi", "İzmir Körfezi", "Gulf of Izmir", 26.9, 38.45, 40, 25, ["izmir"], False),
+        ("bay", "antalya_korfezi", "Antalya Körfezi", "Gulf of Antalya", 30.7, 36.7, 45, 25, ["antalya"], False),
+        ("island", "gokceada", "Gökçeada", "Gokceada", 25.9, 40.2, 18, 14, None, True),
+        ("island", "bozcaada", "Bozcaada", "Bozcaada", 26.04, 39.83, 14, 12, None, True),
     ]
     by_layer: dict[str, list] = {}
-    for layer, slug, tr, en, lon, lat, w, h in features:
-        x, y = project_lon_lat(lon, lat)
+    for layer, slug, tr, en, lon, lat, w, h, pslugs, as_point in features:
         node_id = nid(prefix, layer, slug)
+        path_d, bbox = feature_path_from_provinces(
+            pslugs, lon, lat, w, h, geo, as_point=as_point, radius=5 if layer == "peak" else 6
+        )
         node = make_node(
             node_id,
             tr,
             en,
-            bbox_wh(x, y, w, h),
+            bbox,
             geo_attrs(
                 layer,
                 layer,
                 confusable=cmap.get(node_id, []),
                 aliases=[tr],
                 hints=["fiziki_cografya"],
+                province_codes=pslugs,
             ),
-            rect_path(x, y, w, h) if layer != "peak" else circle_path(x, y, 5),
+            path_d,
         )
         by_layer.setdefault(layer, []).append(node)
     layers = [
-        {"id": k, "z_index": i, "min_lod": 1.0 if k != "peak" else 2.0, "nodes": v}
-        for i, (k, v) in enumerate(by_layer.items())
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        *[
+            {"id": k, "z_index": i + 1, "min_lod": 1.0 if k != "peak" else 2.0, "nodes": v}
+            for i, (k, v) in enumerate(by_layer.items())
+        ],
     ]
     return _package(
         "turkey_physical",
@@ -576,6 +826,7 @@ def build_physical_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_hydro_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_hydro_v1"
+    geo = load_province_geojson()
     rivers = [
         ("kizilirmak", "Kızılırmak", "Kizilirmak", [(34.0, 41.2), (34.5, 40.5), (35.0, 39.5), (36.0, 39.0), (36.5, 41.3)]),
         ("sakarya", "Sakarya", "Sakarya", [(30.5, 39.5), (30.6, 40.2), (30.4, 40.8), (30.3, 41.1)]),
@@ -589,10 +840,10 @@ def build_hydro_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
         ("ceyhan", "Ceyhan", "Ceyhan", [(36.0, 37.8), (35.8, 37.2), (35.5, 36.8)]),
     ]
     lakes = [
-        ("van", "Van Gölü", "Lake Van", 43.3, 38.6, 45, 30),
-        ("tuz", "Tuz Gölü", "Lake Tuz", 33.4, 38.7, 40, 28),
-        ("beysehir", "Beyşehir Gölü", "Lake Beysehir", 31.5, 37.7, 28, 22),
-        ("egirdir", "Eğirdir Gölü", "Lake Egirdir", 30.85, 37.85, 22, 30),
+        ("van", "Van Gölü", "Lake Van", 43.3, 38.6, 45, 30, ["van"]),
+        ("tuz", "Tuz Gölü", "Lake Tuz", 33.4, 38.7, 40, 28, ["aksaray", "konya", "ankara"]),
+        ("beysehir", "Beyşehir Gölü", "Lake Beysehir", 31.5, 37.7, 28, 22, ["konya", "isparta"]),
+        ("egirdir", "Eğirdir Gölü", "Lake Egirdir", 30.85, 37.85, 22, 30, ["isparta"]),
     ]
     dams = [
         ("ataturk", "Atatürk Barajı", "Ataturk Dam", 38.5, 37.5, True),
@@ -601,14 +852,36 @@ def build_hydro_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
         ("hirfanli", "Hirfanlı Barajı", "Hirfanli Dam", 33.7, 39.2, False),
     ]
     basins = [
-        ("kizilirmak_havzasi", "Kızılırmak Havzası", "Kizilirmak Basin", 35.0, 40.0),
-        ("firat_dicle_havzasi", "Fırat-Dicle Havzası", "Euphrates-Tigris Basin", 40.0, 38.0),
-        ("marmara_havzasi", "Marmara Havzası", "Marmara Basin", 28.5, 40.8),
+        (
+            "kizilirmak_havzasi",
+            "Kızılırmak Havzası",
+            "Kizilirmak Basin",
+            35.0,
+            40.0,
+            ["sivas", "kayseri", "yozgat", "cankiri", "corum", "samsun"],
+        ),
+        (
+            "firat_dicle_havzasi",
+            "Fırat-Dicle Havzası",
+            "Euphrates-Tigris Basin",
+            40.0,
+            38.0,
+            provinces_in_region("dogu_anadolu", "guneydogu_anadolu"),
+        ),
+        (
+            "marmara_havzasi",
+            "Marmara Havzası",
+            "Marmara Basin",
+            28.5,
+            40.8,
+            provinces_in_region("marmara"),
+        ),
     ]
 
     river_nodes = []
     for slug, tr, en, coords in rivers:
-        pts = [project_lon_lat(lo, la) for lo, la in coords]
+        dense = densify_lonlat(coords, steps=12)
+        pts = [project_lon_lat(lo, la) for lo, la in dense]
         xs = [p[0] for p in pts]
         ys = [p[1] for p in pts]
         node_id = nid(prefix, "river", slug)
@@ -628,34 +901,52 @@ def build_hydro_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 line_path(pts),
             )
         )
-    # tributaries
+    trib_pts = densify_lonlat([(34.2, 39.8), (34.8, 40.2)], steps=10)
     trib = make_node(
         nid(prefix, "tributary", "delice"),
         "Delice",
         "Delice",
         bbox_wh(*project_lon_lat(34.5, 40.0), 40, 20),
-        geo_attrs("tributary", "tributary", aliases=["Delice"], hints=["kollar"], province_codes=["yozgat"]),
-        line_path([project_lon_lat(34.2, 39.8), project_lon_lat(34.8, 40.2)]),
+        geo_attrs(
+            "tributary",
+            "tributary",
+            aliases=["Delice"],
+            hints=["kollar"],
+            province_codes=["yozgat"],
+        ),
+        line_path([project_lon_lat(lo, la) for lo, la in trib_pts]),
     )
 
     lake_nodes = []
-    for slug, tr, en, lon, lat, w, h in lakes:
+    for slug, tr, en, lon, lat, w, h, pslugs in lakes:
         x, y = project_lon_lat(lon, lat)
+        # Prefer host province outline; lake marker as ellipse on top of that bbox center
+        host_path, host_bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
+        # Use ellipse for the lake node itself (readable water body), sized from host bbox
+        if host_path and host_bbox[2] > host_bbox[0]:
+            rx = max(12.0, (host_bbox[2] - host_bbox[0]) * 0.22)
+            ry = max(10.0, (host_bbox[3] - host_bbox[1]) * 0.18)
+            path_d = ellipse_path(x, y, rx, ry)
+            bbox = [x - rx, y - ry, x + rx, y + ry]
+        else:
+            path_d = ellipse_path(x, y, w / 2, h / 2)
+            bbox = bbox_wh(x, y, w, h)
         node_id = nid(prefix, "lake", slug)
         lake_nodes.append(
             make_node(
                 node_id,
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
+                bbox,
                 geo_attrs(
                     "lake",
                     "lake",
                     confusable=cmap.get(node_id, []),
                     aliases=[tr],
                     hints=["goller"],
+                    province_codes=pslugs,
                 ),
-                rect_path(x, y, w, h),
+                path_d,
             )
         )
 
@@ -698,27 +989,34 @@ def build_hydro_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     )
 
     basin_nodes = []
-    for slug, tr, en, lon, lat in basins:
-        x, y = project_lon_lat(lon, lat)
+    for slug, tr, en, lon, lat, pslugs in basins:
+        path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, 120, 80, geo)
         basin_nodes.append(
             make_node(
                 nid(prefix, "basin", slug),
                 tr,
                 en,
-                bbox_wh(x, y, 120, 80),
-                geo_attrs("basin", "drainage_basin", aliases=[tr], hints=["havzalar"]),
-                rect_path(x, y, 120, 80),
+                bbox,
+                geo_attrs(
+                    "basin",
+                    "drainage_basin",
+                    aliases=[tr],
+                    hints=["havzalar"],
+                    province_codes=pslugs,
+                ),
+                path_d,
             )
         )
 
     layers = [
-        {"id": "basins", "z_index": 0, "min_lod": 0.8, "nodes": basin_nodes},
-        {"id": "rivers", "z_index": 1, "min_lod": 1.0, "nodes": river_nodes},
-        {"id": "tributaries", "z_index": 2, "min_lod": 1.8, "nodes": [trib]},
-        {"id": "lakes", "z_index": 3, "min_lod": 1.0, "nodes": lake_nodes},
-        {"id": "dams", "z_index": 4, "min_lod": 1.5, "nodes": dam_nodes},
-        {"id": "waterfalls", "z_index": 5, "min_lod": 2.0, "nodes": [waterfall]},
-        {"id": "springs", "z_index": 6, "min_lod": 2.0, "nodes": [spring]},
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        {"id": "basins", "z_index": 1, "min_lod": 0.8, "nodes": basin_nodes},
+        {"id": "rivers", "z_index": 2, "min_lod": 1.0, "nodes": river_nodes},
+        {"id": "tributaries", "z_index": 3, "min_lod": 1.8, "nodes": [trib]},
+        {"id": "lakes", "z_index": 4, "min_lod": 1.0, "nodes": lake_nodes},
+        {"id": "dams", "z_index": 5, "min_lod": 1.5, "nodes": dam_nodes},
+        {"id": "waterfalls", "z_index": 6, "min_lod": 2.0, "nodes": [waterfall]},
+        {"id": "springs", "z_index": 7, "min_lod": 2.0, "nodes": [spring]},
     ]
     return _package(
         "turkey_hydrography",
@@ -735,28 +1033,36 @@ def _zone_package(
     title: dict[str, str],
     tags: list[str],
     layer_type: str,
-    zones: list[tuple[str, str, str, float, float, float, float]],
+    zones: list[tuple],
     cmap: dict[str, list[str]],
     hint: str,
 ) -> dict[str, Any]:
+    """zones: (slug, tr, en, lon, lat, w, h[, province_slugs])."""
+    geo = load_province_geojson()
     nodes = []
-    for slug, tr, en, lon, lat, w, h in zones:
-        x, y = project_lon_lat(lon, lat)
+    for row in zones:
+        if len(row) == 8:
+            slug, tr, en, lon, lat, w, h, pslugs = row
+        else:
+            slug, tr, en, lon, lat, w, h = row
+            pslugs = None
         node_id = nid(prefix, layer_type, slug)
+        path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
         nodes.append(
             make_node(
                 node_id,
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
+                bbox,
                 geo_attrs(
                     layer_type,
                     layer_type,
                     confusable=cmap.get(node_id, []),
                     aliases=[tr],
                     hints=[hint],
+                    province_codes=pslugs,
                 ),
-                rect_path(x, y, w, h),
+                path_d,
             )
         )
     return _package(
@@ -764,55 +1070,114 @@ def _zone_package(
         prefix,
         title,
         tags,
-        [{"id": layer_type + "s", "z_index": 0, "min_lod": 0.8, "nodes": nodes}],
+        [
+            make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+            {"id": layer_type + "s", "z_index": 1, "min_lod": 0.8, "nodes": nodes},
+        ],
     )
 
 
 def build_climate_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_climate_v1"
+    geo = load_province_geojson()
     climate = [
-        ("karadeniz", "Karadeniz İklimi", "Black Sea Climate", 36.0, 41.0, 220, 60),
-        ("akdeniz", "Akdeniz İklimi", "Mediterranean Climate", 32.0, 36.9, 260, 55),
-        ("karasal", "Karasal İklim", "Continental Climate", 34.0, 39.2, 280, 120),
-        ("marmara_gecis", "Marmara Geçiş İklimi", "Marmara Transitional", 28.5, 40.8, 120, 70),
+        ("karadeniz", "Karadeniz İklimi", "Black Sea Climate", 36.0, 41.0, 220, 60, provinces_in_region("karadeniz")),
+        ("akdeniz", "Akdeniz İklimi", "Mediterranean Climate", 32.0, 36.9, 260, 55, provinces_in_region("akdeniz")),
+        (
+            "karasal",
+            "Karasal İklim",
+            "Continental Climate",
+            34.0,
+            39.2,
+            280,
+            120,
+            provinces_in_region("ic_anadolu", "dogu_anadolu"),
+        ),
+        (
+            "marmara_gecis",
+            "Marmara Geçiş İklimi",
+            "Marmara Transitional",
+            28.5,
+            40.8,
+            120,
+            70,
+            provinces_in_region("marmara"),
+        ),
     ]
     precip = [
-        ("yuksek_yagis_karadeniz", "Yüksek Yağış — Karadeniz", "High Precip Black Sea", 39.0, 41.0, 160, 40),
-        ("dusuk_yagis_ic_anadolu", "Düşük Yağış — İç Anadolu", "Low Precip Central", 33.5, 39.0, 160, 90),
+        (
+            "yuksek_yagis_karadeniz",
+            "Yüksek Yağış — Karadeniz",
+            "High Precip Black Sea",
+            39.0,
+            41.0,
+            160,
+            40,
+            provinces_in_region("karadeniz"),
+        ),
+        (
+            "dusuk_yagis_ic_anadolu",
+            "Düşük Yağış — İç Anadolu",
+            "Low Precip Central",
+            33.5,
+            39.0,
+            160,
+            90,
+            provinces_in_region("ic_anadolu"),
+        ),
     ]
     temp = [
-        ("sicak_akdeniz", "Sıcak — Akdeniz", "Warm Mediterranean", 32.0, 36.9, 200, 45),
-        ("soguk_dogu", "Soğuk — Doğu Anadolu", "Cold East", 41.0, 39.5, 160, 90),
+        (
+            "sicak_akdeniz",
+            "Sıcak — Akdeniz",
+            "Warm Mediterranean",
+            32.0,
+            36.9,
+            200,
+            45,
+            provinces_in_region("akdeniz"),
+        ),
+        (
+            "soguk_dogu",
+            "Soğuk — Doğu Anadolu",
+            "Cold East",
+            41.0,
+            39.5,
+            160,
+            90,
+            provinces_in_region("dogu_anadolu"),
+        ),
     ]
     wind = [
-        ("poyraz", "Poyraz", "Poyraz Wind", 29.0, 41.0, 60, 40),
-        ("lodos", "Lodos", "Lodos Wind", 28.0, 39.0, 60, 40),
+        ("poyraz", "Poyraz", "Poyraz Wind", 29.0, 41.0, 60, 40, provinces_in_region("marmara")),
+        ("lodos", "Lodos", "Lodos Wind", 28.0, 39.0, 60, 40, provinces_in_region("ege", "marmara")),
     ]
-    layers = []
+    layers = [make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5)]
     for layer_type, items, z, lod in [
-        ("climate_zone", climate, 0, 0.8),
-        ("precip_zone", precip, 1, 1.2),
-        ("temp_zone", temp, 2, 1.2),
-        ("wind_system", wind, 3, 1.5),
+        ("climate_zone", climate, 1, 0.8),
+        ("precip_zone", precip, 2, 1.2),
+        ("temp_zone", temp, 3, 1.2),
+        ("wind_system", wind, 4, 1.5),
     ]:
         nodes = []
-        for slug, tr, en, lon, lat, w, h in items:
-            x, y = project_lon_lat(lon, lat)
+        for slug, tr, en, lon, lat, w, h, pslugs in items:
             node_id = nid(prefix, layer_type, slug)
+            path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
             nodes.append(
                 make_node(
                     node_id,
                     tr,
                     en,
-                    bbox_wh(x, y, w, h),
+                    bbox,
                     geo_attrs(
                         layer_type,
                         layer_type,
                         confusable=cmap.get(node_id, []),
                         aliases=[tr],
                         hints=["iklim"],
+                        province_codes=pslugs,
                     ),
-                    rect_path(x, y, w, h),
+                    path_d,
                 )
             )
         layers.append({"id": layer_type + "s", "z_index": z, "min_lod": lod, "nodes": nodes})
@@ -826,29 +1191,50 @@ def build_climate_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 
 def build_vegetation_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
+    geo = load_province_geojson()
     zones = [
-        ("forest", "karadeniz_ormani", "Karadeniz Ormanları", "Black Sea Forests", 37.0, 41.0, 200, 50),
-        ("maquis", "akdeniz_maki", "Akdeniz Makisi", "Mediterranean Maquis", 32.0, 36.9, 220, 45),
-        ("steppe", "ic_anadolu_bozkir", "İç Anadolu Bozkırı", "Central Anatolian Steppe", 33.5, 39.0, 200, 100),
-        ("meadow", "yayla_cayirlari", "Yayla Çayırları", "Alpine Meadows", 41.0, 40.5, 100, 50),
-        ("endemic_zone", "toros_endemik", "Toros Endemik Bölgesi", "Taurus Endemic Zone", 33.0, 37.0, 120, 40),
+        ("forest", "karadeniz_ormani", "Karadeniz Ormanları", "Black Sea Forests", 37.0, 41.0, 200, 50, provinces_in_region("karadeniz")),
+        ("maquis", "akdeniz_maki", "Akdeniz Makisi", "Mediterranean Maquis", 32.0, 36.9, 220, 45, provinces_in_region("akdeniz")),
+        ("steppe", "ic_anadolu_bozkir", "İç Anadolu Bozkırı", "Central Anatolian Steppe", 33.5, 39.0, 200, 100, provinces_in_region("ic_anadolu")),
+        ("meadow", "yayla_cayirlari", "Yayla Çayırları", "Alpine Meadows", 41.0, 40.5, 100, 50, provinces_in_region("dogu_anadolu")),
+        (
+            "endemic_zone",
+            "toros_endemik",
+            "Toros Endemik Bölgesi",
+            "Taurus Endemic Zone",
+            33.0,
+            37.0,
+            120,
+            40,
+            ["antalya", "mersin", "adana", "isparta", "burdur"],
+        ),
     ]
     by_layer: dict[str, list] = {}
     prefix = "turkey_vegetation_v1"
-    for layer, slug, tr, en, lon, lat, w, h in zones:
-        x, y = project_lon_lat(lon, lat)
+    for layer, slug, tr, en, lon, lat, w, h, pslugs in zones:
         node_id = nid(prefix, layer, slug)
+        path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
         by_layer.setdefault(layer, []).append(
             make_node(
                 node_id,
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
-                geo_attrs(layer, layer, confusable=cmap.get(node_id, []), aliases=[tr], hints=["bitki_ortusu"]),
-                rect_path(x, y, w, h),
+                bbox,
+                geo_attrs(
+                    layer,
+                    layer,
+                    confusable=cmap.get(node_id, []),
+                    aliases=[tr],
+                    hints=["bitki_ortusu"],
+                    province_codes=pslugs,
+                ),
+                path_d,
             )
         )
-    layers = [{"id": k, "z_index": i, "min_lod": 0.9, "nodes": v} for i, (k, v) in enumerate(by_layer.items())]
+    layers = [
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        *[{"id": k, "z_index": i + 1, "min_lod": 0.9, "nodes": v} for i, (k, v) in enumerate(by_layer.items())],
+    ]
     return _package(
         "turkey_vegetation",
         prefix,
@@ -860,30 +1246,41 @@ def build_vegetation_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_agriculture_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_agriculture_v1"
+    geo = load_province_geojson()
     items = [
-        ("crop_region", "bugday_ic_anadolu", "Buğday — İç Anadolu", "Wheat Central Anatolia", 33.5, 39.0, 160, 90),
-        ("crop_region", "pamuk_cukurova", "Pamuk — Çukurova", "Cotton Cukurova", 35.3, 36.9, 70, 35),
-        ("crop_region", "findik_karadeniz", "Fındık — Karadeniz", "Hazelnut Black Sea", 38.0, 41.0, 160, 40),
-        ("crop_region", "cay_dogu_karadeniz", "Çay — Doğu Karadeniz", "Tea East Black Sea", 40.5, 41.0, 80, 35),
-        ("irrigation_area", "gap_sulama", "GAP Sulama Alanları", "GAP Irrigation", 39.5, 37.4, 140, 70),
-        ("livestock_region", "koyunculuk_ic_anadolu", "Koyunculuk — İç Anadolu", "Sheep Central", 34.0, 39.0, 140, 80),
-        ("livestock_region", "buyukbas_marmara", "Büyükbaş — Marmara", "Cattle Marmara", 28.5, 40.8, 100, 60),
+        ("crop_region", "bugday_ic_anadolu", "Buğday — İç Anadolu", "Wheat Central Anatolia", 33.5, 39.0, 160, 90, provinces_in_region("ic_anadolu")),
+        ("crop_region", "pamuk_cukurova", "Pamuk — Çukurova", "Cotton Cukurova", 35.3, 36.9, 70, 35, ["adana", "mersin", "osmaniye", "hatay"]),
+        ("crop_region", "findik_karadeniz", "Fındık — Karadeniz", "Hazelnut Black Sea", 38.0, 41.0, 160, 40, ["ordu", "giresun", "trabzon", "rize", "samsun"]),
+        ("crop_region", "cay_dogu_karadeniz", "Çay — Doğu Karadeniz", "Tea East Black Sea", 40.5, 41.0, 80, 35, ["rize", "trabzon", "artvin"]),
+        ("irrigation_area", "gap_sulama", "GAP Sulama Alanları", "GAP Irrigation", 39.5, 37.4, 140, 70, provinces_in_region("guneydogu_anadolu")),
+        ("livestock_region", "koyunculuk_ic_anadolu", "Koyunculuk — İç Anadolu", "Sheep Central", 34.0, 39.0, 140, 80, provinces_in_region("ic_anadolu")),
+        ("livestock_region", "buyukbas_marmara", "Büyükbaş — Marmara", "Cattle Marmara", 28.5, 40.8, 100, 60, provinces_in_region("marmara")),
     ]
     by_layer: dict[str, list] = {}
-    for layer, slug, tr, en, lon, lat, w, h in items:
-        x, y = project_lon_lat(lon, lat)
+    for layer, slug, tr, en, lon, lat, w, h, pslugs in items:
         node_id = nid(prefix, layer, slug)
+        path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
         by_layer.setdefault(layer, []).append(
             make_node(
                 node_id,
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
-                geo_attrs(layer, layer, confusable=cmap.get(node_id, []), aliases=[tr], hints=["tarim"]),
-                rect_path(x, y, w, h),
+                bbox,
+                geo_attrs(
+                    layer,
+                    layer,
+                    confusable=cmap.get(node_id, []),
+                    aliases=[tr],
+                    hints=["tarim"],
+                    province_codes=pslugs,
+                ),
+                path_d,
             )
         )
-    layers = [{"id": k, "z_index": i, "min_lod": 1.0, "nodes": v} for i, (k, v) in enumerate(by_layer.items())]
+    layers = [
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        *[{"id": k, "z_index": i + 1, "min_lod": 1.0, "nodes": v} for i, (k, v) in enumerate(by_layer.items())],
+    ]
     return _package(
         "turkey_agriculture",
         prefix,
@@ -895,6 +1292,7 @@ def build_agriculture_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_minerals_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_minerals_v1"
+    geo = load_province_geojson()
     deposits = [
         ("bor_eskisehir", "Bor — Eskişehir", "Boron Eskisehir", 30.5, 39.8, "eskisehir"),
         ("bor_kutahya", "Bor — Kütahya", "Boron Kutahya", 29.9, 39.4, "kutahya"),
@@ -935,23 +1333,16 @@ def build_minerals_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
         prefix,
         {"tr": "Türkiye Maden Haritası", "en": "Turkey Minerals Map"},
         ["cografya", "madenler", "bor", "komur"],
-        [{"id": "mineral_deposits", "z_index": 0, "min_lod": 1.0, "nodes": nodes}],
+        [
+            make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+            {"id": "mineral_deposits", "z_index": 1, "min_lod": 1.0, "nodes": nodes},
+        ],
     )
 
 
 def build_energy_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_energy_v1"
-    plants = [
-        ("hes", "ataturk_hes", "Atatürk HES", "Ataturk HEP", 38.5, 37.5),
-        ("hes", "keban_hes", "Keban HES", "Keban HEP", 38.8, 38.8),
-        ("res", "canakkale_res", "Çanakkale RES", "Canakkale Wind", 26.5, 40.1),
-        ("res", "izmir_res", "İzmir RES", "Izmir Wind", 27.0, 38.5),
-        ("ges", "karapinar_ges", "Karapınar GES", "Karapinar Solar", 33.6, 37.7),
-        ("jes", "buyuk_menderes_jes", "Büyük Menderes JES", "Buyuk Menderes Geo", 28.5, 37.9),
-        ("thermal", " Soma_termik", "Soma Termik", "Soma Thermal", 27.6, 39.2),
-        ("nuclear", "akkuyu_nukleer", "Akkuyu Nükleer", "Akkuyu Nuclear", 33.5, 36.1),
-    ]
-    # fix thermal slug
+    geo = load_province_geojson()
     plants = [
         ("hes", "ataturk_hes", "Atatürk HES", "Ataturk HEP", 38.5, 37.5),
         ("hes", "keban_hes", "Keban HES", "Keban HEP", 38.8, 38.8),
@@ -976,7 +1367,10 @@ def build_energy_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 circle_path(x, y, 6),
             )
         )
-    layers = [{"id": k, "z_index": i, "min_lod": 1.2, "nodes": v} for i, (k, v) in enumerate(by_layer.items())]
+    layers = [
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        *[{"id": k, "z_index": i + 1, "min_lod": 1.2, "nodes": v} for i, (k, v) in enumerate(by_layer.items())],
+    ]
     return _package(
         "turkey_energy",
         prefix,
@@ -988,30 +1382,50 @@ def build_energy_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_population_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_population_v1"
+    geo = load_province_geojson()
     items = [
-        ("density_zone", "yogun_marmara", "Yoğun Nüfus — Marmara", "Dense Marmara", 28.8, 40.9, 100, 70),
-        ("density_zone", "seyrek_dogu", "Seyrek Nüfus — Doğu", "Sparse East", 41.5, 39.5, 140, 90),
-        ("metro_area", "istanbul_metro", "İstanbul Metropol", "Istanbul Metro", 28.98, 41.01, 50, 35),
-        ("metro_area", "ankara_metro", "Ankara Metropol", "Ankara Metro", 32.85, 39.93, 40, 30),
-        ("major_city", "izmir_kent", "İzmir", "Izmir", 27.14, 38.42, 16, 16),
-        ("major_city", "bursa_kent", "Bursa", "Bursa", 29.06, 40.19, 16, 16),
-        ("major_city", "antalya_kent", "Antalya", "Antalya", 30.71, 36.90, 16, 16),
+        ("density_zone", "yogun_marmara", "Yoğun Nüfus — Marmara", "Dense Marmara", 28.8, 40.9, 100, 70, provinces_in_region("marmara")),
+        ("density_zone", "seyrek_dogu", "Seyrek Nüfus — Doğu", "Sparse East", 41.5, 39.5, 140, 90, provinces_in_region("dogu_anadolu")),
+        ("metro_area", "istanbul_metro", "İstanbul Metropol", "Istanbul Metro", 28.98, 41.01, 50, 35, ["istanbul"]),
+        ("metro_area", "ankara_metro", "Ankara Metropol", "Ankara Metro", 32.85, 39.93, 40, 30, ["ankara"]),
+        ("major_city", "izmir_kent", "İzmir", "Izmir", 27.14, 38.42, 16, 16, None),
+        ("major_city", "bursa_kent", "Bursa", "Bursa", 29.06, 40.19, 16, 16, None),
+        ("major_city", "antalya_kent", "Antalya", "Antalya", 30.71, 36.90, 16, 16, None),
     ]
     by_layer: dict[str, list] = {}
-    for layer, slug, tr, en, lon, lat, w, h in items:
-        x, y = project_lon_lat(lon, lat)
+    for layer, slug, tr, en, lon, lat, w, h, pslugs in items:
         node_id = nid(prefix, layer, slug)
+        path_d, bbox = feature_path_from_provinces(
+            pslugs,
+            lon,
+            lat,
+            w,
+            h,
+            geo,
+            as_point=(layer == "major_city"),
+            radius=6,
+        )
         by_layer.setdefault(layer, []).append(
             make_node(
                 node_id,
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
-                geo_attrs(layer, layer, confusable=cmap.get(node_id, []), aliases=[tr], hints=["nufus"]),
-                rect_path(x, y, w, h) if layer != "major_city" else circle_path(x, y, 6),
+                bbox,
+                geo_attrs(
+                    layer,
+                    layer,
+                    confusable=cmap.get(node_id, []),
+                    aliases=[tr],
+                    hints=["nufus"],
+                    province_codes=pslugs,
+                ),
+                path_d,
             )
         )
-    layers = [{"id": k, "z_index": i, "min_lod": 1.0, "nodes": v} for i, (k, v) in enumerate(by_layer.items())]
+    layers = [
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        *[{"id": k, "z_index": i + 1, "min_lod": 1.0, "nodes": v} for i, (k, v) in enumerate(by_layer.items())],
+    ]
     return _package(
         "turkey_population",
         prefix,
@@ -1023,6 +1437,7 @@ def build_population_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_transport_v1"
+    geo = load_province_geojson()
     highways = [
         ("o4", "O-4 Anadolu Otoyolu", "O-4 Anatolian Highway", [(29.0, 40.8), (30.5, 40.7), (32.5, 39.9)]),
         ("o3", "O-3 Avrupa Otoyolu", "O-3 European Highway", [(26.6, 41.5), (28.5, 41.0)]),
@@ -1040,10 +1455,10 @@ def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
         ("esb", "Esenboğa", "Esenboga Airport", 33.0, 40.13),
         ("ayt", "Antalya Havalimanı", "Antalya Airport", 30.79, 36.90),
     ]
-    layers = []
+    layers = [make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5)]
     hw_nodes = []
     for slug, tr, en, coords in highways:
-        pts = [project_lon_lat(a, b) for a, b in coords]
+        pts = [project_lon_lat(a, b) for a, b in densify_lonlat(coords, steps=14)]
         xs, ys = [p[0] for p in pts], [p[1] for p in pts]
         node_id = nid(prefix, "highway", slug)
         hw_nodes.append(
@@ -1056,11 +1471,11 @@ def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 line_path(pts),
             )
         )
-    layers.append({"id": "highways", "z_index": 0, "min_lod": 1.0, "nodes": hw_nodes})
+    layers.append({"id": "highways", "z_index": 1, "min_lod": 1.0, "nodes": hw_nodes})
 
     rail_nodes = []
     for slug, tr, en, coords in railways:
-        pts = [project_lon_lat(a, b) for a, b in coords]
+        pts = [project_lon_lat(a, b) for a, b in densify_lonlat(coords, steps=14)]
         xs, ys = [p[0] for p in pts], [p[1] for p in pts]
         rail_nodes.append(
             make_node(
@@ -1072,7 +1487,7 @@ def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 line_path(pts),
             )
         )
-    layers.append({"id": "railways", "z_index": 1, "min_lod": 1.2, "nodes": rail_nodes})
+    layers.append({"id": "railways", "z_index": 2, "min_lod": 1.2, "nodes": rail_nodes})
 
     port_nodes = []
     for slug, tr, en, lon, lat in ports:
@@ -1087,7 +1502,7 @@ def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 circle_path(x, y, 5),
             )
         )
-    layers.append({"id": "ports", "z_index": 2, "min_lod": 1.5, "nodes": port_nodes})
+    layers.append({"id": "ports", "z_index": 3, "min_lod": 1.5, "nodes": port_nodes})
 
     ap_nodes = []
     for slug, tr, en, lon, lat in airports:
@@ -1102,7 +1517,7 @@ def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 circle_path(x, y, 5),
             )
         )
-    layers.append({"id": "airports", "z_index": 3, "min_lod": 1.5, "nodes": ap_nodes})
+    layers.append({"id": "airports", "z_index": 4, "min_lod": 1.5, "nodes": ap_nodes})
 
     return _package(
         "turkey_transport",
@@ -1115,6 +1530,7 @@ def build_transport_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_tourism_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_tourism_v1"
+    geo = load_province_geojson()
     items = [
         ("unesco", "cappadocia", "Kapadokya", "Cappadocia", 34.8, 38.6),
         ("unesco", "pamukkale", "Pamukkale", "Pamukkale", 29.1, 37.9),
@@ -1139,7 +1555,10 @@ def build_tourism_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 circle_path(x, y, 6),
             )
         )
-    layers = [{"id": k, "z_index": i, "min_lod": 1.2, "nodes": v} for i, (k, v) in enumerate(by_layer.items())]
+    layers = [
+        make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5),
+        *[{"id": k, "z_index": i + 1, "min_lod": 1.2, "nodes": v} for i, (k, v) in enumerate(by_layer.items())],
+    ]
     return _package(
         "turkey_tourism",
         prefix,
@@ -1151,23 +1570,24 @@ def build_tourism_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
 
 def build_hazards_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
     prefix = "turkey_hazards_v1"
+    geo = load_province_geojson()
     faults = [
         ("kuzey_anadolu", "Kuzey Anadolu Fay Hattı", "North Anatolian Fault", [(27.0, 40.7), (30.0, 40.8), (33.0, 40.9), (36.0, 40.7), (40.0, 40.5)]),
         ("dogu_anadolu", "Doğu Anadolu Fay Hattı", "East Anatolian Fault", [(36.5, 37.5), (38.0, 38.0), (40.0, 38.8), (41.5, 39.5)]),
     ]
     eq_zones = [
-        ("birinci_derece", "1. Derece Deprem Bölgesi", "Highest Seismic Zone", 29.0, 40.8, 160, 70),
-        ("dogu_yuksek_risk", "Doğu Yüksek Risk", "East High Risk", 40.5, 39.0, 140, 90),
+        ("birinci_derece", "1. Derece Deprem Bölgesi", "Highest Seismic Zone", 29.0, 40.8, 160, 70, provinces_in_region("marmara", "ege")),
+        ("dogu_yuksek_risk", "Doğu Yüksek Risk", "East High Risk", 40.5, 39.0, 140, 90, provinces_in_region("dogu_anadolu")),
     ]
     other = [
-        ("landslide", "karadeniz_heyelan", "Karadeniz Heyelan Bölgesi", "Black Sea Landslide", 38.0, 41.0, 120, 40),
-        ("flood", "cakurova_sel", "Çukurova Sel Riski", "Cukurova Flood", 35.3, 36.9, 70, 35),
-        ("avalanche", "dogu_cig", "Doğu Anadolu Çığ Bölgesi", "East Avalanche", 41.5, 39.8, 100, 60),
+        ("landslide", "karadeniz_heyelan", "Karadeniz Heyelan Bölgesi", "Black Sea Landslide", 38.0, 41.0, 120, 40, provinces_in_region("karadeniz")),
+        ("flood", "cakurova_sel", "Çukurova Sel Riski", "Cukurova Flood", 35.3, 36.9, 70, 35, ["adana", "mersin"]),
+        ("avalanche", "dogu_cig", "Doğu Anadolu Çığ Bölgesi", "East Avalanche", 41.5, 39.8, 100, 60, provinces_in_region("dogu_anadolu")),
     ]
-    layers = []
+    layers = [make_basemap_layer(prefix, geo, z_index=0, min_lod=0.5)]
     fault_nodes = []
     for slug, tr, en, coords in faults:
-        pts = [project_lon_lat(a, b) for a, b in coords]
+        pts = [project_lon_lat(a, b) for a, b in densify_lonlat(coords, steps=12)]
         xs, ys = [p[0] for p in pts], [p[1] for p in pts]
         node_id = nid(prefix, "fault", slug)
         fault_nodes.append(
@@ -1186,37 +1606,49 @@ def build_hazards_package(cmap: dict[str, list[str]]) -> dict[str, Any]:
                 line_path(pts),
             )
         )
-    layers.append({"id": "faults", "z_index": 0, "min_lod": 1.0, "nodes": fault_nodes})
+    layers.append({"id": "faults", "z_index": 1, "min_lod": 1.0, "nodes": fault_nodes})
 
     eq_nodes = []
-    for slug, tr, en, lon, lat, w, h in eq_zones:
-        x, y = project_lon_lat(lon, lat)
+    for slug, tr, en, lon, lat, w, h, pslugs in eq_zones:
+        path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
         eq_nodes.append(
             make_node(
                 nid(prefix, "earthquake_zone", slug),
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
-                geo_attrs("earthquake_zone", "earthquake_zone", aliases=[tr], hints=["afet", "deprem"]),
-                rect_path(x, y, w, h),
+                bbox,
+                geo_attrs(
+                    "earthquake_zone",
+                    "earthquake_zone",
+                    aliases=[tr],
+                    hints=["afet", "deprem"],
+                    province_codes=pslugs,
+                ),
+                path_d,
             )
         )
-    layers.append({"id": "earthquake_zones", "z_index": 1, "min_lod": 0.9, "nodes": eq_nodes})
+    layers.append({"id": "earthquake_zones", "z_index": 2, "min_lod": 0.9, "nodes": eq_nodes})
 
     by_layer: dict[str, list] = {}
-    for layer, slug, tr, en, lon, lat, w, h in other:
-        x, y = project_lon_lat(lon, lat)
+    for layer, slug, tr, en, lon, lat, w, h, pslugs in other:
+        path_d, bbox = feature_path_from_provinces(pslugs, lon, lat, w, h, geo)
         by_layer.setdefault(layer, []).append(
             make_node(
                 nid(prefix, layer, slug),
                 tr,
                 en,
-                bbox_wh(x, y, w, h),
-                geo_attrs(layer, layer, aliases=[tr], hints=["afet"]),
-                rect_path(x, y, w, h),
+                bbox,
+                geo_attrs(
+                    layer,
+                    layer,
+                    aliases=[tr],
+                    hints=["afet"],
+                    province_codes=pslugs,
+                ),
+                path_d,
             )
         )
-    for i, (k, v) in enumerate(by_layer.items(), start=2):
+    for i, (k, v) in enumerate(by_layer.items(), start=3):
         layers.append({"id": k + "s", "z_index": i, "min_lod": 1.2, "nodes": v})
 
     return _package(
