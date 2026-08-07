@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.base import get_db
-from app.core.auth import get_current_user
+from app.core.dependencies import get_current_user
 from app.schemas.workspace import (
     WorkspaceCreate, WorkspaceUpdate, WorkspaceRead,
     AnnotationLayerCreate, AnnotationLayerRead
