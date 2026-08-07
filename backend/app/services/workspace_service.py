@@ -9,13 +9,12 @@ from app.models.topic_evidence import TopicEvidence, EvidenceCategory, EvidenceH
 from app.schemas.workspace import (
     WorkspaceCreate, WorkspaceUpdate, AnnotationLayerCreate, AnnotationLayerUpdate
 )
-from app.services.evidence_engine import EvidenceEngine
-
+from app.services.evidence_service import EvidenceService
 
 class WorkspaceService:
     def __init__(self, db: AsyncSession):
         self.db = db
-        self.evidence_engine = EvidenceEngine(db)
+        self.evidence_service = EvidenceService(db)
 
     async def get_user_workspaces(self, user_id: uuid.UUID) -> List[StudyWorkspace]:
         stmt = select(StudyWorkspace).where(
@@ -99,7 +98,7 @@ class WorkspaceService:
 
     async def _log_evidence(self, user_id: uuid.UUID, subject_code: str, topic_code: str, action: str):
         # A simple evidence logging logic
-        await self.evidence_engine.register_observation(
+        await self.evidence_service.register_observation(
             user_id=user_id,
             subject_code=subject_code,
             topic_code=topic_code,
