@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/widgets/app_bottom_nav_bar.dart';
-import '../../study_plan/presentation/providers/study_plan_provider.dart';
-import '../../study_plan/presentation/providers/study_plan_state.dart';
-import '../../study_plan/presentation/widgets/study_card.dart';
+import '../../../study_plan/presentation/providers/study_plan_provider.dart';
+import '../../../study_plan/presentation/providers/study_plan_state.dart';
+import '../../../study_plan/presentation/widgets/study_card.dart';
 import '../../../subjects/presentation/widgets/subject_code_chip.dart';
 import '../providers/study_session_provider.dart';
 import '../providers/study_session_state.dart';

@@ -127,7 +127,7 @@ class _TodayLoadedView extends ConsumerWidget {
             profile?.primaryExamType ??
             dashboard.activeExamType ??
             '');
-    final branch = (profile?.activeBranch ?? profile?.primaryBranch ?? '');
+    final branch = (profile?.activeExamType ?? profile?.primaryExamType ?? '');
     
     String exam = examRaw.toUpperCase();
     if (exam == 'KPSS' && branch.isNotEmpty) {
