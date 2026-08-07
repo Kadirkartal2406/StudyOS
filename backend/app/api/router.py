@@ -36,6 +36,7 @@ from app.api.v1 import (
     study_sessions,
     topic_quiz,
     users,
+    workspaces,
 )
 
 api_router = APIRouter()
@@ -100,3 +101,6 @@ api_router.include_router(beta_ops.router, prefix="/beta", tags=["beta"])
 # Sprint 35 — Educational Asset Engine (EAE)
 api_router.include_router(assets.router, prefix="/assets", tags=["assets"])
 
+
+# Workspace Engine
+api_router.include_router(workspaces.router, prefix="/workspaces", tags=["workspaces"])

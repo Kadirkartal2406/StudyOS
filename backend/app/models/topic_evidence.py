@@ -64,6 +64,7 @@ class EvidenceSourceType(StrEnum):
     MANUAL = "manual"
     AI_QUESTION = "ai_question"  # AI tarafından üretilen soru yanıtlandı
     ASSESSMENT = "assessment"  # Sprint 18 — kalibrasyon / daily / branch
+    WORKSPACE_INTERACTION = "workspace_interaction"  # Digital Notebook / PDF çalışma
 
 
 class TopicEvidence(Base):

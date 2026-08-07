@@ -183,3 +183,5 @@ __all__ = [
     "UserStatus",
 ]
 
+
+from app.models.workspace import StudyWorkspace, AnnotationLayer

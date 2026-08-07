@@ -36,6 +36,8 @@ class ActivityEventType(StrEnum):
     REVISION_REVIEWED = "revision_reviewed"
     REVISION_COMPLETED = "revision_completed"
     ACHIEVEMENT_UNLOCKED = "achievement_unlocked"
+    WORKSPACE_CREATED = "workspace_created"
+    WORKSPACE_UPDATED = "workspace_updated"
 
 
 class Activity(Base):
