@@ -924,10 +924,11 @@ async def admin_trigger_trial_exam_generation(
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[dict]:
     """Manually trigger the midnight trial exam generation pipeline."""
-    from app.services.trial_exam_scheduler import generate_trial_exams_for_today
+    from app.services.trial_exam_scheduler import generate_trial_exams_for_date
     import asyncio
+    from datetime import datetime
     
     # Run in background to avoid blocking the HTTP response
-    asyncio.create_task(generate_trial_exams_for_today(db))
+    asyncio.create_task(generate_trial_exams_for_date(datetime.now().date()))
     return SuccessResponse(data={"message": "Trial exam generation started in background."})
 
