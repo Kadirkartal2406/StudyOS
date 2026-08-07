@@ -77,6 +77,7 @@ async def lifespan(app: FastAPI):
 
     if midnight_scheduler_enabled():
         from app.services.booklet_scheduler import midnight_booklet_loop
+        from app.services.scoring_scheduler import scoring_loop
         from app.services.smart_question_pool_scheduler import (
             midnight_question_pool_loop,
         )
@@ -84,6 +85,11 @@ async def lifespan(app: FastAPI):
         background_tasks.append(
             asyncio.create_task(
                 midnight_booklet_loop(), name="midnight_booklet_loop"
+            )
+        )
+        background_tasks.append(
+            asyncio.create_task(
+                scoring_loop(), name="scoring_loop"
             )
         )
         background_tasks.append(

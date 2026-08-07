@@ -1,6 +1,6 @@
 """
-Sprint 18 — Assessment Engine models (LOS §11 Sense layer).
-Decision / Living Plan üretmez; Evidence üretir.
+Sprint 18 â Assessment Engine models (LOS Â§11 Sense layer).
+Decision / Living Plan Ã¼retmez; Evidence Ã¼retir.
 """
 
 from __future__ import annotations
@@ -40,7 +40,7 @@ class AssessmentSessionStatus(StrEnum):
 
 
 class AssessmentSession(Base):
-    """Tek assessment oturumu — Topic Quiz generation'a köprü."""
+    """Tek assessment oturumu â Topic Quiz generation'a kÃ¶prÃ¼."""
 
     __tablename__ = "assessment_sessions"
 
@@ -62,7 +62,7 @@ class AssessmentSession(Base):
     difficulty: Mapped[str] = mapped_column(String(20), nullable=False, default="medium")
     requested_count: Mapped[int] = mapped_column(Integer, nullable=False, default=5)
     challenge_date: Mapped[date | None] = mapped_column(Date, nullable=True, index=True)
-    # Sprint 23 — full daily booklet
+    # Sprint 23 â full daily booklet
     is_booklet: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     section_plan: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     generation_progress: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
@@ -73,7 +73,7 @@ class AssessmentSession(Base):
         nullable=True,
         index=True,
     )
-    # Sprint 25 — adaptive calibration / QIE session metadata (internal)
+    # Sprint 25 â adaptive calibration / QIE session metadata (internal)
     qie_meta: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     correct_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
     wrong_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
@@ -103,7 +103,7 @@ class AssessmentSession(Base):
 
 
 class AssessmentQuestion(Base):
-    """Assessment sorusu — quiz item kopyası / mirror (submit snapshot)."""
+    """Assessment sorusu â quiz item kopyasÄ± / mirror (submit snapshot)."""
 
     __tablename__ = "assessment_questions"
 
@@ -123,13 +123,13 @@ class AssessmentQuestion(Base):
     choices: Mapped[dict] = mapped_column(JSONB, nullable=False)
     correct_key: Mapped[str] = mapped_column(String(1), nullable=False)
     explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
-    # Sprint 23 M23.7 — lazy wrong-answer explain cache (JSON text)
+    # Sprint 23 M23.7 â lazy wrong-answer explain cache (JSON text)
     wrong_explain: Mapped[str | None] = mapped_column(Text, nullable=True)
     selected_key: Mapped[str | None] = mapped_column(String(1), nullable=True)
     is_correct: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
     subject_code: Mapped[str | None] = mapped_column(String(100), nullable=True)
     topic_code: Mapped[str | None] = mapped_column(String(200), nullable=True)
-    # Sprint 25 — internal QIE card
+    # Sprint 25 â internal QIE card
     qie_card: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     # Sprint 26 / EAE interaction
     eae_interaction: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
@@ -140,7 +140,7 @@ class AssessmentQuestion(Base):
 
 
 class SharedDailyBooklet(Base):
-    """Sınav + gün (+ opsiyonel branch) için ortak kitapçık — kullanıcı başına üretilmez."""
+    """SÄ±nav + gÃ¼n (+ opsiyonel branch) iÃ§in ortak kitapÃ§Ä±k â kullanÄ±cÄ± baÅÄ±na Ã¼retilmez."""
 
     __tablename__ = "shared_daily_booklets"
     __table_args__ = (
@@ -165,6 +165,7 @@ class SharedDailyBooklet(Base):
     requested_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     section_plan: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     generation_progress: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    is_finalized: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
@@ -185,7 +186,7 @@ class SharedDailyBooklet(Base):
 
 
 class SharedDailyBookletQuestion(Base):
-    """Ortak günlük kitapçık sorusu."""
+    """Ortak gÃ¼nlÃ¼k kitapÃ§Ä±k sorusu."""
 
     __tablename__ = "shared_daily_booklet_questions"
 
@@ -213,7 +214,7 @@ class SharedDailyBookletQuestion(Base):
 
 
 class DailyChallenge(Base):
-    """Kullanıcı + sınav + gün için oturum kaydı (ortak kitapçıktan klon)."""
+    """KullanÄ±cÄ± + sÄ±nav + gÃ¼n iÃ§in oturum kaydÄ± (ortak kitapÃ§Ä±ktan klon)."""
 
     __tablename__ = "daily_challenges"
     __table_args__ = (
@@ -245,14 +246,14 @@ class DailyChallenge(Base):
         ForeignKey("assessment_sessions.id", ondelete="SET NULL"),
         nullable=True,
     )
-    title: Mapped[str] = mapped_column(String(200), nullable=False, default="Günün Denemesi")
+    title: Mapped[str] = mapped_column(String(200), nullable=False, default="GÃ¼nÃ¼n Denemesi")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )
 
 
 class DailyChallengeScore(Base):
-    """Günün denemesi skorları — sosyal sıralama (Sprint 22)."""
+    """GÃ¼nÃ¼n denemesi skorlarÄ± â sosyal sÄ±ralama (Sprint 22)."""
 
     __tablename__ = "daily_challenge_scores"
     __table_args__ = (
@@ -282,13 +283,17 @@ class DailyChallengeScore(Base):
     accuracy: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     duration_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    studyos_score: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    studyos_rank: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    is_official: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    osym_estimations: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )
 
 
 class EstimatedScoreSnapshot(Base):
-    """İstatistiksel tahmini puan / sıralama — gerçek ÖSYM değil."""
+    """Ä°statistiksel tahmini puan / sÄ±ralama â gerÃ§ek ÃSYM deÄil."""
 
     __tablename__ = "estimated_score_snapshots"
 
@@ -307,6 +312,59 @@ class EstimatedScoreSnapshot(Base):
     weakest_subject: Mapped[str | None] = mapped_column(String(200), nullable=True)
     commentary: Mapped[str | None] = mapped_column(Text, nullable=True)
     metadata_: Mapped[dict] = mapped_column("metadata", JSONB, nullable=False, default=dict)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
+    )
+
+
+class DailyChallengeStatistics(Base):
+    """Günün denemesi için saat 22:30\'da finalize edilen resmi istatistikler."""
+
+    __tablename__ = "daily_challenge_statistics"
+    __table_args__ = (
+        UniqueConstraint(
+            "exam_type",
+            "challenge_date",
+            name="uq_daily_challenge_statistics_exam_date",
+        ),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    exam_type: Mapped[str] = mapped_column(String(40), nullable=False, index=True)
+    challenge_date: Mapped[date] = mapped_column(Date, nullable=False, index=True)
+    participant_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    subject_averages: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    subject_std_devs: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    score_mean: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    score_std_dev: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
+    )
+
+
+class OsymCoefficients(Base):
+    """Geçmiş yıllara ait ÖSYM puan formülü katsayıları."""
+
+    __tablename__ = "osym_coefficients"
+    __table_args__ = (
+        UniqueConstraint(
+            "exam_type",
+            "year",
+            name="uq_osym_coefficients_exam_year",
+        ),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    exam_type: Mapped[str] = mapped_column(String(40), nullable=False, index=True)
+    year: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
+    base_point: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    subject_weights: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    subject_means: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
+    subject_std_devs: Mapped[dict] = mapped_column(JSONB, nullable=False, default=dict)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )

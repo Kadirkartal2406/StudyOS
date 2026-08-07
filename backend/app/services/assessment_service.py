@@ -1895,21 +1895,70 @@ class AssessmentService:
         row.score = score_val
         row.duration_seconds = duration
         row.nickname = nickname
+
+        from app.services.scoring_engine import ScoringEngine
+        from app.models.assessment import SharedDailyBooklet
+        from datetime import timezone, timedelta, time
+
+        se = ScoringEngine(self.db)
+        
+        stmt = select(SharedDailyBooklet).where(
+            SharedDailyBooklet.challenge_date == session.challenge_date,
+            SharedDailyBooklet.exam_type == session.exam_type
+        )
+        booklet = (await self.db.execute(stmt)).scalars().first()
+        
+        now_tr = datetime.now(timezone(timedelta(hours=3)))
+        past_deadline = now_tr.time() >= time(21, 59)
+        
+        is_late = False
+        if booklet and booklet.is_finalized:
+            is_late = True
+        elif session.challenge_date and session.challenge_date < now_tr.date():
+            is_late = True
+        elif session.challenge_date == now_tr.date() and past_deadline:
+            is_late = True
+            
+        row.osym_estimations = await se.compute_osym_estimations(session)
+        
+        if is_late:
+            await se.compute_estimated_score(session, row)
+        else:
+            row.is_official = True
+            row.studyos_score = 0.0 # Will be computed at 22:30
+            row.studyos_rank = None
+
         await self.db.flush()
 
     async def daily_history(self, user_id: uuid.UUID) -> list[DailyHistoryItemRead]:
         challenges = await self.repo.list_daily_history(user_id)
         res = []
         for c in challenges:
-            # Score not implemented yet, using placeholder or correct/total if available
             score = None
             status = "pending"
+            studyos_score = None
+            studyos_rank = None
+            is_official = None
+            osym_estimations = None
+            
             if c.session_id:
                 s = await self.repo.get_session(c.session_id, user_id)
                 if s:
                     status = s.status
                     if s.accuracy is not None:
                         score = float(s.accuracy)
+                
+                # Fetch scoring details
+                stmt = select(DailyChallengeScore).where(
+                    DailyChallengeScore.session_id == c.session_id
+                )
+                score_row = (await self.db.execute(stmt)).scalars().first()
+                if score_row:
+                    studyos_score = score_row.studyos_score
+                    studyos_rank = score_row.studyos_rank
+                    is_official = score_row.is_official
+                    osym_estimations = score_row.osym_estimations
+
             res.append(
                 DailyHistoryItemRead(
                     id=c.id,
@@ -1917,6 +1966,10 @@ class AssessmentService:
                     challenge_date=c.challenge_date,
                     status=status,
                     score=score,
+                    studyos_score=studyos_score,
+                    studyos_rank=studyos_rank,
+                    is_official=is_official,
+                    osym_estimations=osym_estimations,
                     session_id=c.session_id,
                 )
             )

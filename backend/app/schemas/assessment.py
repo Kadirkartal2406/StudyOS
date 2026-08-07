@@ -70,9 +70,15 @@ class AssessmentSessionRead(BaseModel):
     blank_count: int | None = None
     accuracy: float | None = None
     commentary: str | None = None
+    error_message: str | None = None
     is_booklet: bool = False
     section_plan: dict = Field(default_factory=dict)
     generation_progress: int = 0
+    submitted_at: datetime | None = None
+    studyos_score: float | None = None
+    studyos_rank: int | None = None
+    is_official: bool | None = None
+    osym_estimations: dict | None = None
     questions: list[AssessmentQuestionPublic] = Field(default_factory=list)
     created_at: datetime
 
@@ -192,6 +198,10 @@ class DailyHistoryItemRead(BaseModel):
     challenge_date: date
     status: str
     score: float | None = None
+    studyos_score: float | None = None
+    studyos_rank: int | None = None
+    is_official: bool | None = None
+    osym_estimations: dict | None = None
     session_id: uuid.UUID | None = None
 
 

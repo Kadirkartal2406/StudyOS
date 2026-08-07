@@ -589,8 +589,94 @@ class _ResultsViewState extends ConsumerState<_ResultsView> {
         ),
         const SizedBox(height: 8),
         Text(result.commentary),
-        if (result.net != null) ...[
+        
+        if (result.session.studyosScore != null) ...[
+          const SizedBox(height: 16),
+          if (result.session.isOfficial == false)
+            Container(
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.only(bottom: 12),
+              decoration: BoxDecoration(
+                color: Colors.orange.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Text(
+                'Bu sonuç tahminidir. Denemeyi saat 21:59\\'dan sonra çözdüğünüz için resmi sıralamaya dahil edilmediniz.',
+                style: TextStyle(color: Colors.orange, fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text('StudyOS Puanı', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      const SizedBox(height: 4),
+                      Text(
+                        result.session.studyosScore!.toStringAsFixed(1),
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.purple.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text('Sıralama', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                      const SizedBox(height: 4),
+                      Text(
+                        result.session.studyosRank != null ? '#${result.session.studyosRank}' : '--',
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.purple),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+
+        if (result.session.osymEstimations != null && result.session.osymEstimations!.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Text(
+            'ÖSYM Tahmini Puanları',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 8),
+          ...result.session.osymEstimations!.entries.map((e) {
+            final data = e.value as Map<String, dynamic>? ?? {};
+            final s = data['score'] as num?;
+            final r = data['rank'] as int?;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('YKS ${e.key}'),
+                  Text('${s?.toStringAsFixed(2) ?? "--"} Puan ${r != null ? "(#$r)" : ""}'),
+                ],
+              ),
+            );
+          }),
+        ],
+
+        if (result.net != null) ...[
+          const SizedBox(height: 16),
           Text(
             'Net: ${result.net!.toStringAsFixed(2)}'
             '${result.scoreFormula != null ? ' · ${result.scoreFormula}' : ''}',

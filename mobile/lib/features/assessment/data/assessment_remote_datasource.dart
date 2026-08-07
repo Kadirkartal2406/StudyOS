@@ -72,6 +72,10 @@ class AssessmentSessionEntity {
     this.requestedCount,
     this.generationProgress = 0,
     this.sectionPlan,
+    this.studyosScore,
+    this.studyosRank,
+    this.isOfficial,
+    this.osymEstimations,
   });
 
   final String id;
@@ -90,6 +94,10 @@ class AssessmentSessionEntity {
   final int? requestedCount;
   final int generationProgress;
   final Map<String, dynamic>? sectionPlan;
+  final num? studyosScore;
+  final int? studyosRank;
+  final bool? isOfficial;
+  final Map<String, dynamic>? osymEstimations;
   final List<AssessmentQuestionItem> questions;
 
   factory AssessmentSessionEntity.fromJson(Map<String, dynamic> json) {
@@ -120,6 +128,10 @@ class AssessmentSessionEntity {
           : (planRaw is Map
               ? planRaw.map((k, v) => MapEntry(k.toString(), v))
               : null),
+      studyosScore: json['studyos_score'] as num?,
+      studyosRank: json['studyos_rank'] as int?,
+      isOfficial: json['is_official'] as bool?,
+      osymEstimations: json['osym_estimations'] as Map<String, dynamic>?,
       questions: questions,
     );
   }
