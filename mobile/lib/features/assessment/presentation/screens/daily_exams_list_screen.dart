@@ -150,7 +150,7 @@ class _DailyExamsListScreenState extends ConsumerState<DailyExamsListScreen> {
                                 } else {
                                   final sessionId = item['session_id'];
                                   if (sessionId != null) {
-                                    context.push('/assessment/session/$sessionId');
+                                    context.push('/assessment/daily/$sessionId');
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Bu deneme başlatılmamış')),

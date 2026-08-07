@@ -10,7 +10,8 @@ import '../utils/pdf_download.dart';
 
 /// Sprint 23 — Günün Denemesi kitapçık hub (çöz / PDF / optik).
 class DailyChallengeSubjectsScreen extends ConsumerStatefulWidget {
-  const DailyChallengeSubjectsScreen({super.key});
+  final String? sessionId;
+  const DailyChallengeSubjectsScreen({super.key, this.sessionId});
 
   @override
   ConsumerState<DailyChallengeSubjectsScreen> createState() =>
@@ -51,6 +52,10 @@ class _DailyChallengeSubjectsScreenState
         _examType = data['exam_type'] as String?;
         _loading = false;
       });
+      // If a specific sessionId is provided, ensure we use it.
+      if (widget.sessionId != null && _daily != null) {
+        _daily!['session_id'] = widget.sessionId;
+      }
     } on AppException catch (e) {
       if (!mounted) return;
       setState(() {
@@ -68,6 +73,11 @@ class _DailyChallengeSubjectsScreenState
 
   Future<AssessmentSessionEntity?> _ensureSession({bool waitUntilReady = false}) async {
     final ds = ref.read(assessmentDatasourceProvider);
+    // Use provided sessionId if we're rendering a past exam
+    if (widget.sessionId != null) {
+      final session = await ds.sessionStatus(widget.sessionId!);
+      return session;
+    }
     final session = await ds.startDaily();
     if (!waitUntilReady) return session;
     if (session.status == 'ready' && session.questions.isNotEmpty) {

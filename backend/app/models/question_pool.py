@@ -19,6 +19,7 @@ class QuestionPoolCard(Base):
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
+    pool_type: Mapped[str] = mapped_column(String(20), default="general", index=True)
     fingerprint: Mapped[str] = mapped_column(String(64), unique=True, index=True)
     content_hash: Mapped[str] = mapped_column(String(64), index=True)
     exam: Mapped[str] = mapped_column(String(32), index=True)

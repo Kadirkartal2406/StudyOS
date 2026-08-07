@@ -191,6 +191,146 @@ class _AssessmentSessionScreenState
     }
   }
 
+  void _showQuestionNavigator() {
+    if (_session == null) return;
+    
+    // Group questions by subject
+    final subjects = <String, List<int>>{};
+    for (var i = 0; i < _session!.questions.length; i++) {
+      final q = _session!.questions[i];
+      final subj = q.subjectName ?? 'Genel';
+      subjects.putIfAbsent(subj, () => []).add(i);
+    }
+    
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.6,
+          minChildSize: 0.4,
+          maxChildSize: 0.9,
+          builder: (_, controller) {
+            final totalCount = _session!.questions.length;
+            final answeredCount = _answers.keys.length;
+            final emptyCount = totalCount - answeredCount;
+            
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Deneme İstatistikleri',
+                        style: Theme.of(ctx).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _StatChip(label: 'Toplam', count: totalCount, color: Colors.blue),
+                          _StatChip(label: 'Çözülen', count: answeredCount, color: Colors.green),
+                          _StatChip(label: 'Boş', count: emptyCount, color: Colors.orange),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
+                Expanded(
+                  child: ListView.builder(
+                    controller: controller,
+                    itemCount: subjects.length,
+                    itemBuilder: (context, index) {
+                      final subj = subjects.keys.elementAt(index);
+                      final indices = subjects[subj]!;
+                      
+                      int subjAnswered = 0;
+                      for (final i in indices) {
+                        final qId = _session!.questions[i].id;
+                        if (_answers.containsKey(qId) && _answers[qId] != null) {
+                          subjAnswered++;
+                        }
+                      }
+                      
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  subj,
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                                Text(
+                                  '$subjAnswered / ${indices.length} Çözüldü',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: indices.map((idx) {
+                                final isCurrent = idx == _index;
+                                final isAnswered = _answers.containsKey(_session!.questions[idx].id) && 
+                                                  _answers[_session!.questions[idx].id] != null;
+                                
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pop(ctx);
+                                    setState(() => _index = idx);
+                                  },
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: isCurrent 
+                                          ? Theme.of(context).colorScheme.primary 
+                                          : (isAnswered ? Colors.green.withOpacity(0.2) : Theme.of(context).colorScheme.surfaceContainerHighest),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: isCurrent ? null : Border.all(
+                                        color: isAnswered ? Colors.green : Colors.transparent,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      '${idx + 1}',
+                                      style: TextStyle(
+                                        color: isCurrent 
+                                            ? Theme.of(context).colorScheme.onPrimary 
+                                            : (isAnswered ? Colors.green[700] : null),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
   String get _title {
     final s = _session;
     if (s == null) return 'Assessment';
@@ -257,6 +397,11 @@ class _AssessmentSessionScreenState
           },
         ),
         actions: [
+            IconButton(
+              tooltip: 'Sorular & İstatistikler',
+              icon: const Icon(Icons.grid_view_outlined),
+              onPressed: _showQuestionNavigator,
+            ),
           if (showMath)
             IconButton(
               tooltip: 'Hesap makinesi',
@@ -831,3 +976,23 @@ class _ResultsViewState extends ConsumerState<_ResultsView> {
     );
   }
 }
+
+ c l a s s   _ S t a t C h i p   e x t e n d s   S t a t e l e s s W i d g e t   { 
+     f i n a l   S t r i n g   l a b e l ; 
+     f i n a l   i n t   c o u n t ; 
+     f i n a l   C o l o r   c o l o r ; 
+     c o n s t   _ S t a t C h i p ( { r e q u i r e d   t h i s . l a b e l ,   r e q u i r e d   t h i s . c o u n t ,   r e q u i r e d   t h i s . c o l o r } ) ; 
+ 
+     @ o v e r r i d e 
+     W i d g e t   b u i l d ( B u i l d C o n t e x t   c o n t e x t )   { 
+         r e t u r n   C o l u m n ( 
+             m a i n A x i s S i z e :   M a i n A x i s S i z e . m i n , 
+             c h i l d r e n :   [ 
+                 T e x t ( c o u n t . t o S t r i n g ( ) ,   s t y l e :   T e x t S t y l e ( f o n t S i z e :   2 4 ,   f o n t W e i g h t :   F o n t W e i g h t . b o l d ,   c o l o r :   c o l o r ) ) , 
+                 T e x t ( l a b e l ,   s t y l e :   T e x t S t y l e ( f o n t S i z e :   1 2 ,   c o l o r :   C o l o r s . g r e y [ 7 0 0 ] ) ) , 
+             ] , 
+         ) ; 
+     } 
+ } 
+  
+ 

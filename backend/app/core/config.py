@@ -58,6 +58,9 @@ class Settings(BaseSettings):
     DATABASE_POOL_SIZE: int = 5
     DATABASE_MAX_OVERFLOW: int = 10
 
+    # ── APIs ──────────────────────────────────────────────────
+    DENEME_API_KEY: str = ""
+
     # ── JWT ───────────────────────────────────────────────────
     JWT_SECRET_KEY: str = "change-me-in-production"
     JWT_ALGORITHM: str = "HS256"

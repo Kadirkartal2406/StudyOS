@@ -124,6 +124,7 @@ class QuestionPoolService:
         exclude_stems: list[str] | None = None,
         limit: int = 10,
         target_asset_id: uuid.UUID | None = None,
+        pool_type: str = "general",
     ) -> list[QuestionPoolCard]:
         canonical_exam = normalize_exam_code(exam)
         q = (
@@ -133,6 +134,7 @@ class QuestionPoolService:
                 QuestionPoolCard.subject_code == subject_code,
                 QuestionPoolCard.topic_code == topic_code,
                 QuestionPoolCard.difficulty_band == (difficulty_band or "medium"),
+                QuestionPoolCard.pool_type == pool_type,
             )
         )
         if target_asset_id:
@@ -171,6 +173,7 @@ class QuestionPoolService:
         skill: str = "",
         target_asset_id: uuid.UUID | None = None,
         correct_node_id: str | None = None,
+        pool_type: str = "general",
     ) -> QuestionPoolCard:
         if isinstance(card, QuestionCard):
             stem = card.stem
@@ -216,15 +219,16 @@ class QuestionPoolService:
             exam=canonical_exam,
             subject_code=subject_code,
             topic_code=topic_code,
-            difficulty_band=difficulty_band or "medium",
-            skill=skill or "",
+            difficulty_band=(difficulty_band or "medium"),
+            skill=skill,
             stem=stem,
             choices=choices,
             correct_key=correct_key,
             explanation=explanation,
-            qie_card=qie_card or {},
+            qie_card=qie_card,
             target_asset_id=target_asset_id,
             correct_node_id=correct_node_id,
+            pool_type=pool_type,
             use_count=0,
             created_at=datetime.now(UTC),
         )

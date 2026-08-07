@@ -88,6 +88,7 @@ class QieOrchestrator:
                 difficulty_band=ctx.difficulty_band,
                 exclude_stems=existing,
                 limit=1,
+                pool_type=ctx.pool_type,
             )
             if reused:
                 metrics.record_pool_hit()
@@ -266,16 +267,7 @@ class QieOrchestrator:
 
         for card in produced:
             try:
-                fp = fingerprint_for_plan(card.plan, ctx)
-                await pool.put_card(
-                    fingerprint=fp,
-                    card=card,
-                    exam=ctx.exam,
-                    subject_code=ctx.subject_code,
-                    topic_code=ctx.topic_code,
-                    difficulty_band=ctx.difficulty_band,
-                    skill=card.plan.skill,
-                )
+                await pool.put_card(card=card, ctx=ctx, pool_type=ctx.pool_type)
             except Exception as e:
                 logger.debug("pool put skipped: %s", e)
             if card.stem not in {c.stem for c in accepted}:

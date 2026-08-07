@@ -819,6 +819,7 @@ class AssessmentService:
             difficulty_band=difficulty or "medium",
             existing_stems=list(existing_stems or []),
             kind="daily_booklet",
+            pool_type="trial",
         )
         cards, _, _ = await QieOrchestrator(self.db).generate_batch(ctx)
         from app.services.ai.quiz_quality_gate import ValidatedQuizItem

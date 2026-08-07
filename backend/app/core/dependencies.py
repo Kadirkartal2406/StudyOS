@@ -5,9 +5,10 @@ JWT doğrulama ve mevcut kullanıcı (current user) bağımlılığı.
 
 import uuid
 
-from fastapi import Depends
+from fastapi import Depends, Header, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.core.config import settings
 
 from app.core.exceptions import AuthenticationError, AuthorizationError
 from app.core.security import decode_access_token
@@ -63,3 +64,10 @@ async def require_system_admin(
     if str(user.role) != UserRole.SYSTEM_ADMIN:
         raise AuthorizationError("Bu işlem yalnızca sistem yöneticisi içindir")
     return user
+
+async def verify_deneme_api_key(x_deneme_api_key: str | None = Header(None)) -> None:
+    """Verifies that the provided X-Deneme-Api-Key header matches the configured key."""
+    if not settings.DENEME_API_KEY:
+        raise HTTPException(status_code=500, detail="TRIAL_EXAM_API_KEY is not configured on the server")
+    if x_deneme_api_key != settings.DENEME_API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid X-Deneme-Api-Key")
