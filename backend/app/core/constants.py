@@ -6,6 +6,37 @@ değerler burada toplanır. Bkz. docs/project/ai-rules.md §3.2.4
 
 from datetime import date
 
+# ── Canonical exam identifier ─────────────────────────────────
+# All subsystems (pool fingerprint, pool DB, booklet, assessment,
+# topic quiz, scheduler, inventory) must call normalize_exam_code()
+# before using an exam string as a key/bucket identifier.
+#
+# Canonical map:
+#   yks  → tyt   (YKS is the umbrella; TYT subjects dominate the shared pool)
+#   ayt  → tyt   (AYT shares the same pool bucket convention as TYT)
+#
+# "tyt" is the dominant key already used by:
+#   - booklet scheduler _WARM_EXAMS
+#   - exam_style seed primary entry
+#   - subject_catalog_seed TYT_SUBJECT_CODES
+#   - stock targets (tyt rows are the primary entries)
+#
+# All other exam types (kpss, lgs, ales, yds, …) are returned as-is.
+_EXAM_ALIASES: dict[str, str] = {
+    "yks": "tyt",
+    "ayt": "tyt",
+}
+
+
+def normalize_exam_code(exam: str) -> str:
+    """Return the canonical pool/fingerprint exam key for *exam*.
+
+    Strips whitespace, lower-cases, and resolves known aliases.
+    Safe to call multiple times (idempotent).
+    """
+    key = (exam or "").strip().lower()
+    return _EXAM_ALIASES.get(key, key)
+
 # ── Dashboard ─────────────────────────────────────────────────
 # Student profili (Sprint-3.0) yoksa veya günlük hedef boşsa varsayılan.
 DEFAULT_DAILY_STUDY_GOAL_MINUTES = 120

@@ -1,10 +1,10 @@
-"""M33 — Smart Question Pool Manager & inventory.
+﻿"""M33 â€” Smart Question Pool Manager & inventory.
 
-Bu modül:
-- Config tabanlı minimum/target stok hedeflerini uygular
-- Eksik topic'leri üretir ve question_pool_cards'a ekler
+Bu modÃ¼l:
+- Config tabanlÄ± minimum/target stok hedeflerini uygular
+- Eksik topic'leri Ã¼retir ve question_pool_cards'a ekler
 - Inventory metriklerini hesaplar
-- Distributed lock ile aynı topic'in iki kez üretilmesini engeller
+- Distributed lock ile aynÄ± topic'in iki kez Ã¼retilmesini engeller
 """
 
 from __future__ import annotations
@@ -23,6 +23,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.exceptions import ValidationError
 from app.core.config import settings
+from app.core.constants import normalize_exam_code
 from app.core.question_pool_stock_config import (
     QuestionPoolStockTarget,
     load_question_pool_stock_targets,
@@ -66,9 +67,9 @@ def _inventory_status(*, current: int, minimum: int, target: int) -> str:
 
 
 def _quality_from_card(row: QuestionPoolCard) -> float | None:
-    """qie_card JSONB içinden kalite/difficulty skorlarını çıkarır.
+    """qie_card JSONB iÃ§inden kalite/difficulty skorlarÄ±nÄ± Ã§Ä±karÄ±r.
 
-    Not: M32 kodunda qie_card alanı dolmayabiliyor; bu yüzden fallback var.
+    Not: M32 kodunda qie_card alanÄ± dolmayabiliyor; bu yÃ¼zden fallback var.
     """
     qie = row.qie_card or {}
     # Prefer persisted shape (quality_score/difficulty_score)
@@ -96,7 +97,7 @@ def _difficulty_from_card(row: QuestionPoolCard) -> float | None:
 
 
 class QuestionPoolInventoryService:
-    """Config'teki topic'ler için inventory snapshot hesaplar."""
+    """Config'teki topic'ler iÃ§in inventory snapshot hesaplar."""
 
     async def resolve_target_codes(
         self, db: AsyncSession, target: QuestionPoolStockTarget
@@ -137,7 +138,7 @@ class QuestionPoolInventoryService:
         found_topic = None
 
         if subj is None:
-            # Fallback 1: If subject_name is actually a topic name in this exam (e.g. "Problemler", "Türev")
+            # Fallback 1: If subject_name is actually a topic name in this exam (e.g. "Problemler", "TÃ¼rev")
             topic_stmt = (
                 select(EiTopic)
                 .join(EiSubject, EiTopic.subject_code == EiSubject.code)
@@ -218,7 +219,7 @@ class QuestionPoolInventoryService:
                         )
                     ).label("last_used"),
                 )
-                .where(QuestionPoolCard.exam == key.exam)
+                .where(QuestionPoolCard.exam == normalize_exam_code(key.exam))
                 .where(QuestionPoolCard.subject_code == key.subject_code)
                 .where(QuestionPoolCard.topic_code == key.topic_code)
                 .where(QuestionPoolCard.difficulty_band == key.difficulty_band)
@@ -230,7 +231,7 @@ class QuestionPoolInventoryService:
 
             q_rows = (
                 select(QuestionPoolCard)
-                .where(QuestionPoolCard.exam == key.exam)
+                .where(QuestionPoolCard.exam == normalize_exam_code(key.exam))
                 .where(QuestionPoolCard.subject_code == key.subject_code)
                 .where(QuestionPoolCard.topic_code == key.topic_code)
                 .where(QuestionPoolCard.difficulty_band == key.difficulty_band)
@@ -282,7 +283,7 @@ class QuestionPoolInventoryService:
 
 
 class QuestionPoolManagerService:
-    """Konfigürasyondaki minimum hedefleri korur."""
+    """KonfigÃ¼rasyondaki minimum hedefleri korur."""
 
     def __init__(self) -> None:
         self.inventory_service = QuestionPoolInventoryService()
@@ -291,7 +292,7 @@ class QuestionPoolManagerService:
         stmt = (
             select(func.count())
             .select_from(QuestionPoolCard)
-            .where(QuestionPoolCard.exam == key.exam)
+            .where(QuestionPoolCard.exam == normalize_exam_code(key.exam))
             .where(QuestionPoolCard.subject_code == key.subject_code)
             .where(QuestionPoolCard.topic_code == key.topic_code)
             .where(QuestionPoolCard.difficulty_band == key.difficulty_band)
@@ -328,7 +329,7 @@ class QuestionPoolManagerService:
     async def _read_cost_events_between(
         self, *, start_utc: datetime, end_utc: datetime, kind: str
     ) -> list[dict[str, Any]]:
-        """data/ai_cost/events_YYYY-MM-DD.jsonl üzerinden best-effort okur."""
+        """data/ai_cost/events_YYYY-MM-DD.jsonl Ã¼zerinden best-effort okur."""
         # cost_logger default root: backend/data/ai_cost
         # Use same convention to locate files.
         # This may fail in production if filesystem is ephemeral.
@@ -368,7 +369,7 @@ class QuestionPoolManagerService:
         topic_name: str | None = None,
         max_batches: int = 30,
     ) -> dict[str, Any]:
-        """Bir topic için current < minimum ise hedefe kadar üretir."""
+        """Bir topic iÃ§in current < minimum ise hedefe kadar Ã¼retir."""
         current = await self._count_topic(db, key)
         if current >= minimum:
             return {
@@ -438,7 +439,7 @@ class QuestionPoolManagerService:
                 remaining = planned - accepted_total
                 batch_n = min(remaining, 10)
                 ctx = GenerateContext(
-                    exam=key.exam,
+                    exam=normalize_exam_code(key.exam),
                     subject_code=key.subject_code,
                     subject_name=subject_name or key.subject_code,
                     topic_code=key.topic_code,
@@ -460,7 +461,7 @@ class QuestionPoolManagerService:
                         await pool_svc.put_card(
                             fingerprint=fp,
                             card=c,
-                            exam=key.exam,
+                            exam=normalize_exam_code(key.exam),
                             subject_code=key.subject_code,
                             topic_code=key.topic_code,
                             difficulty_band=key.difficulty_band,
@@ -512,7 +513,7 @@ class QuestionPoolManagerService:
         # Best-effort quality average from the latest cards.
         q_rows = (
             select(QuestionPoolCard)
-            .where(QuestionPoolCard.exam == key.exam)
+            .where(QuestionPoolCard.exam == normalize_exam_code(key.exam))
             .where(QuestionPoolCard.subject_code == key.subject_code)
             .where(QuestionPoolCard.topic_code == key.topic_code)
             .where(QuestionPoolCard.difficulty_band == key.difficulty_band)
@@ -530,7 +531,7 @@ class QuestionPoolManagerService:
         # Persist generation history
         hist = QuestionPoolGenerationHistory(
             timestamp=start,
-            exam=key.exam,
+            exam=normalize_exam_code(key.exam),
             subject_code=key.subject_code,
             topic_code=key.topic_code,
             difficulty_band=key.difficulty_band,
@@ -567,7 +568,7 @@ class QuestionPoolManagerService:
         dry_run: bool,
         max_batches: int = 30,
     ) -> dict[str, Any]:
-        """Manual admin fill: belirli topic için istenen count kadar üretmeye çalışır."""
+        """Manual admin fill: belirli topic iÃ§in istenen count kadar Ã¼retmeye Ã§alÄ±ÅŸÄ±r."""
         if count <= 0:
             raise ValidationError("count must be positive")
 
@@ -617,7 +618,7 @@ class QuestionPoolManagerService:
                 remaining = count - accepted_total
                 batch_n = min(remaining, 10)
                 ctx = GenerateContext(
-                    exam=key.exam,
+                    exam=normalize_exam_code(key.exam),
                     subject_code=key.subject_code,
                     subject_name=key.subject_code,
                     topic_code=key.topic_code,
@@ -636,7 +637,7 @@ class QuestionPoolManagerService:
                         await pool_svc.put_card(
                             fingerprint=fp,
                             card=c,
-                            exam=key.exam,
+                            exam=normalize_exam_code(key.exam),
                             subject_code=key.subject_code,
                             topic_code=key.topic_code,
                             difficulty_band=key.difficulty_band,
@@ -651,7 +652,7 @@ class QuestionPoolManagerService:
                 if cards and batch_added == 0:
                     # Built cards but none inserted (unexpected); avoid burning more Gemini
                     logger.warning(
-                        "fill_topic_amount: batch built=%s added=0 topic=%s — stopping early",
+                        "fill_topic_amount: batch built=%s added=0 topic=%s â€” stopping early",
                         len(cards),
                         key.topic_code,
                     )
@@ -683,7 +684,7 @@ class QuestionPoolManagerService:
         # Quality average from latest cards
         q_rows = (
             select(QuestionPoolCard)
-            .where(QuestionPoolCard.exam == key.exam)
+            .where(QuestionPoolCard.exam == normalize_exam_code(key.exam))
             .where(QuestionPoolCard.subject_code == key.subject_code)
             .where(QuestionPoolCard.topic_code == key.topic_code)
             .where(QuestionPoolCard.difficulty_band == key.difficulty_band)
@@ -700,7 +701,7 @@ class QuestionPoolManagerService:
 
         hist = QuestionPoolGenerationHistory(
             timestamp=start,
-            exam=key.exam,
+            exam=normalize_exam_code(key.exam),
             subject_code=key.subject_code,
             topic_code=key.topic_code,
             difficulty_band=key.difficulty_band,
@@ -737,7 +738,7 @@ class QuestionPoolManagerService:
         primary = (settings.AI_PROVIDER or "null").strip().lower()
         if primary in ("", "null", "none") and not dry_run:
             # In this mode batch_generate yields invalid payloads and makes no progress.
-            logger.warning("M33: AI_PROVIDER is null — skipping fill_missing (non-dry_run).")
+            logger.warning("M33: AI_PROVIDER is null â€” skipping fill_missing (non-dry_run).")
             return {"planned": 0, "accepted": 0, "items": [], "skipped": True, "reason": "AI_PROVIDER is null"}
 
         from app.services.question_production.cost_gate import check_can_generate

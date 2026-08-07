@@ -10,6 +10,7 @@ from datetime import UTC, date, datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.constants import normalize_exam_code
 from app.core.exceptions import NotFoundError, ValidationError
 from sqlalchemy import select
 
@@ -398,35 +399,14 @@ class AssessmentService:
         if shared is not None:
             return shared
 
-        # Eğer ortak havuzdan session gelmediyse (veya havuzda soru kalmadıysa)
-        # canlı Gemini üretimi yapmak yerine 0 soruluk boş bir kalibrasyon session'u oluştur.
-        # Böylece uygulama soru gösteremez, "ileride sorular üretilince" devreye girer.
-        session = AssessmentSession(
-            user_id=user_id,
-            exam_type=exam,
-            kind=AssessmentKind.INITIAL_CALIBRATION,
-            subject_code=sub,
-            topic_code=top,
-            subject_name=sn,
-            topic_name=tn,
-            status=AssessmentSessionStatus.READY,
-            difficulty=data.difficulty or "medium",
-            requested_count=count,
-            challenge_date=None,
-            quiz_generation_id=None,
-            qie_meta={
-                "adaptive": False,
-                "total_count": count,
-                "initial_batch": 0,
-                "phase": "complete",
-                "planned_skills": [],
-                "remaining_skills": [],
-                "note": "Havuzda yeterli soru bulunamadı. Arka plan üretimi bekleniyor."
-            },
+        # No shared booklet available and no live AI fallback here.
+        # Returning a READY session with zero questions would create an inconsistent
+        # state that the mobile app interprets as a successful (empty) exam.
+        # Raise explicitly so the caller gets a clean error instead.
+        raise ValidationError(
+            "Şu an seviye testi soruları hazır değil — lütfen birkaç dakika sonra tekrar dene",
+            field="subject_code",
         )
-        self.db.add(session)
-        await self.db.flush()
-        return self._to_read(session)
 
     async def continue_adaptive_calibration(
         self,
@@ -576,6 +556,8 @@ class AssessmentService:
         if not qs:
             return None
         picked = qs[:count]
+        if not picked:
+            return None
 
         session = AssessmentSession(
             user_id=user_id,
@@ -615,7 +597,10 @@ class AssessmentService:
             )
         await self.db.flush()
         loaded = await self.repo.get_session(session.id, user_id)
-        return self._to_read(loaded or session)
+        # Guard: session must have at least one question before returning READY
+        if loaded is None or not (loaded.questions or []):
+            return None
+        return self._to_read(loaded)
 
     async def _build_section_plan(
         self, user_id: uuid.UUID, exam: str
@@ -818,16 +803,17 @@ class AssessmentService:
         count: int,
         difficulty: str,
         subject_code: str | None = None,
+        topic_code: str | None = None,
         existing_stems: list[str] | None = None,
     ) -> list:
         """QIE chunk — planner + style + difficulty + similarity + quality gate."""
         from app.services.qie import GenerateContext, QieOrchestrator
 
         ctx = GenerateContext(
-            exam=(exam_type or "kpss").lower(),
+            exam=normalize_exam_code(exam_type or "kpss"),
             subject_code=subject_code or "general",
             subject_name=subject_name,
-            topic_code=subject_code or "general",
+            topic_code=topic_code or subject_code or "general",
             topic_name=topic_name,
             count=count,
             difficulty_band=difficulty or "medium",
@@ -1078,6 +1064,7 @@ class AssessmentService:
                             count=n,
                             difficulty=booklet.difficulty or "medium",
                             subject_code=subject_code or None,
+                            topic_code=topic_code or None,
                             existing_stems=accepted_stems,
                         )
                         if not items:

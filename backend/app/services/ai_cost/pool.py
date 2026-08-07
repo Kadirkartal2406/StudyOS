@@ -12,6 +12,7 @@ from typing import Any
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.constants import normalize_exam_code
 from app.models.question_pool import QuestionPoolCard
 from app.services.qie.types import GenerateContext, QuestionCard, QuestionPlan
 
@@ -32,7 +33,7 @@ def pool_fingerprint(
 ) -> str:
     raw = "|".join(
         [
-            (exam or "").lower().strip(),
+            normalize_exam_code(exam or ""),
             (subject_code or "").lower().strip(),
             (topic_code or "").lower().strip(),
             (difficulty_band or "medium").lower().strip(),
@@ -124,10 +125,11 @@ class QuestionPoolService:
         limit: int = 10,
         target_asset_id: uuid.UUID | None = None,
     ) -> list[QuestionPoolCard]:
+        canonical_exam = normalize_exam_code(exam)
         q = (
             select(QuestionPoolCard)
             .where(
-                QuestionPoolCard.exam == (exam or "").lower(),
+                QuestionPoolCard.exam == canonical_exam,
                 QuestionPoolCard.subject_code == subject_code,
                 QuestionPoolCard.topic_code == topic_code,
                 QuestionPoolCard.difficulty_band == (difficulty_band or "medium"),
@@ -135,7 +137,7 @@ class QuestionPoolService:
         )
         if target_asset_id:
             q = q.where(QuestionPoolCard.target_asset_id == target_asset_id)
-            
+
         q = (
             q.order_by(QuestionPoolCard.use_count.asc(), QuestionPoolCard.created_at.asc())
             .limit(limit)
@@ -206,11 +208,12 @@ class QuestionPoolService:
         if existing is not None:
             return existing
 
+        canonical_exam = normalize_exam_code(exam)
         row = QuestionPoolCard(
             id=uuid.uuid4(),
             fingerprint=content_fp,
             content_hash=ch,
-            exam=(exam or "").lower(),
+            exam=canonical_exam,
             subject_code=subject_code,
             topic_code=topic_code,
             difficulty_band=difficulty_band or "medium",
@@ -231,7 +234,7 @@ class QuestionPoolService:
             "pool put: inserted id=%s topic=%s exam=%s",
             row.id,
             topic_code,
-            exam,
+            canonical_exam,
         )
         return row
 

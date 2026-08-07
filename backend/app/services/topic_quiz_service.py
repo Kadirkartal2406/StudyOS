@@ -12,6 +12,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.core.constants import normalize_exam_code
 from app.core.exceptions import NotFoundError, ValidationError
 from app.models.topic_quiz import (
     QuizGenerationStatus,
@@ -82,7 +83,7 @@ class TopicQuizService:
 
         pref = await NotificationSettingsService(self.db).get_or_create(user_id)
         ctx = GenerateContext(
-            exam=(exam_type or "kpss").lower(),
+            exam=normalize_exam_code(exam_type or "kpss"),
             subject_code=sub,
             subject_name=sub_name,
             topic_code=top,

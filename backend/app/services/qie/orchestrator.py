@@ -77,14 +77,24 @@ class QieOrchestrator:
         existing = list(ctx.existing_stems)
 
         for plan in plans:
-            fp = fingerprint_for_plan(plan, ctx)
-            hit = await pool.get_by_fingerprint(fp)
-            if hit and hit.stem and hit.stem not in existing:
+            # Primary retrieval: topic-based, ranked by usage count + recency.
+            # Slot-fingerprint lookup is intentionally omitted: put_card stores
+            # cards under content_fp = sha256(slot|content_hash), not the bare
+            # slot fingerprint, so get_by_fingerprint(slot_fp) always misses.
+            reused = await pool.get_unused_for_topic(
+                exam=ctx.exam,
+                subject_code=ctx.subject_code,
+                topic_code=ctx.topic_code,
+                difficulty_band=ctx.difficulty_band,
+                exclude_stems=existing,
+                limit=1,
+            )
+            if reused:
                 metrics.record_pool_hit()
-                card = pool.to_question_card(hit, plan)
+                card = pool.to_question_card(reused[0], plan)
                 accepted.append(card)
                 existing.append(card.stem)
-                await pool.mark_used(hit.id)
+                await pool.mark_used(reused[0].id)
                 get_cost_logger().record(
                     AiCostEvent(
                         timestamp=__import__("datetime")
@@ -100,24 +110,8 @@ class QieOrchestrator:
                     )
                 )
             else:
-                # topic-level reuse (different index fingerprint miss)
-                reused = await pool.get_unused_for_topic(
-                    exam=ctx.exam,
-                    subject_code=ctx.subject_code,
-                    topic_code=ctx.topic_code,
-                    difficulty_band=ctx.difficulty_band,
-                    exclude_stems=existing,
-                    limit=1,
-                )
-                if reused:
-                    metrics.record_pool_hit()
-                    card = pool.to_question_card(reused[0], plan)
-                    accepted.append(card)
-                    existing.append(card.stem)
-                    await pool.mark_used(reused[0].id)
-                else:
-                    metrics.record_pool_miss()
-                    remaining.append(plan)
+                metrics.record_pool_miss()
+                remaining.append(plan)
 
         if not remaining:
             _, fingerprint = build_qie_messages(plans, style_dna=dna)
