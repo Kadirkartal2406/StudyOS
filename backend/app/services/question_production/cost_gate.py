@@ -17,13 +17,7 @@ _ASSUMED_COMPLETION_TOKENS = 400
 
 
 def _batch_size_from_ratio(ratio: float) -> int:
-    """Map remaining/limit budget ratio → suggested batch size (capped at 50)."""
-    if ratio >= 0.5:
-        return 50
-    if ratio >= 0.25:
-        return 20
-    if ratio >= 0.10:
-        return 10
+    """Map remaining/limit budget ratio → suggested batch size (capped at 5)."""
     return 5
 
 

@@ -294,7 +294,7 @@ class ProductionController:
                 "cache_reuse": True,
             }
 
-        batch_n = min(5, max(1, suggest_batch_size()), 20)
+        batch_n = min(5, max(1, suggest_batch_size()), 5)
         ctx = GenerateContext(
             exam=exam.lower(),
             subject_code=subject_code,
@@ -403,7 +403,7 @@ class ProductionController:
                 "progress": tracker.get().to_dict(),
             }
 
-        gate = check_can_generate(planned_count=min(planned, 20))
+        gate = check_can_generate(planned_count=min(planned, 5))
         if not gate.can_generate:
             tracker.update(status="failed")
             return {
@@ -620,12 +620,12 @@ class ProductionController:
                 tracker.update(status="stopped")
                 break
 
-            gate = check_can_generate(planned_count=min(remaining, 20))
+            gate = check_can_generate(planned_count=min(remaining, 5))
             if not gate.can_generate:
                 tracker.update(status="failed")
                 break
 
-            batch_n = min(remaining, suggest_batch_size(), 20)
+            batch_n = min(remaining, suggest_batch_size(), 5)
             if batch_n < 1:
                 tracker.update(status="failed")
                 break
