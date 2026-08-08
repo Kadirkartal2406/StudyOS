@@ -10,10 +10,30 @@ from app.models.assessment import AssessmentSession
 from app.services.booklet_pdf_eae_renderer import BookletPdfEaeRenderer
 
 _FONT_CANDIDATES = (
+    Path(__file__).resolve().parents[1] / "assets" / "fonts" / "arial.ttf",
     Path(__file__).resolve().parents[1] / "assets" / "fonts" / "DejaVuSans.ttf",
     Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
     Path("C:/Windows/Fonts/arial.ttf"),
 )
+
+import re
+
+def _clean_math_text(text: str) -> str:
+    if not text:
+        return ""
+    text = text.replace("$", "")
+    text = text.replace(r"\cdot", "·")
+    text = text.replace(r"\ge", "≥")
+    text = text.replace(r"\le", "≤")
+    text = text.replace(r"\neq", "≠")
+    text = text.replace(r"\mathbb{Q}", "Q")
+    text = text.replace(r"\in", "∈")
+    # \frac{A}{B} -> A/B
+    text = re.sub(r"\\frac\{([^}]+)\}\{([^}]+)\}", r"\1/\2", text)
+    text = re.sub(r"\\left\(", "(", text)
+    text = re.sub(r"\\right\)", ")", text)
+    text = text.replace("\n", " ")
+    return text
 
 
 def _register_font() -> str:
@@ -87,7 +107,7 @@ def build_booklet_pdf(session: AssessmentSession) -> bytes:
             y -= 16
             c.setFont(font, 10)
 
-        stem = (q.stem or "").replace("\n", " ")
+        stem = _clean_math_text(q.stem)
         c.drawString(margin, y, f"{q.ord_index + 1}. {stem[:140]}")
         y -= 14
         if len(stem) > 140:
@@ -99,7 +119,8 @@ def build_booklet_pdf(session: AssessmentSession) -> bytes:
             if key not in choices:
                 continue
             ensure(16)
-            text = f"  {key}) {str(choices[key])[:110]}"
+            choice_text = _clean_math_text(str(choices[key]))
+            text = f"  {key}) {choice_text[:110]}"
             c.drawString(margin + 6, y, text)
             y -= 13
 
