@@ -102,7 +102,7 @@ async def assessment_session_pdf(
     packager = BundlePackager()
 
     for q in session.questions:
-        q_meta = q.metadata_ or {}
+        q_meta = q.qie_card or {}
         if isinstance(q_meta, dict) and "target_asset_id" in q_meta and "eae_svg_content" not in q_meta:
             try:
                 asset = await registry.get_asset_by_uri(q_meta["target_asset_id"])
@@ -114,7 +114,7 @@ async def assessment_session_pdf(
                         # We mutate it in memory. Since we don't db.commit(), it's fine.
                         new_meta = dict(q_meta)
                         new_meta["eae_svg_content"] = unpacked.get("svg_content")
-                        q.metadata_ = new_meta
+                        q.qie_card = new_meta
             except Exception:
                 pass
 
