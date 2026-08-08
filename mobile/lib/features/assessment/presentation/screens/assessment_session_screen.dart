@@ -977,22 +977,21 @@ class _ResultsViewState extends ConsumerState<_ResultsView> {
   }
 }
 
- c l a s s   _ S t a t C h i p   e x t e n d s   S t a t e l e s s W i d g e t   { 
-     f i n a l   S t r i n g   l a b e l ; 
-     f i n a l   i n t   c o u n t ; 
-     f i n a l   C o l o r   c o l o r ; 
-     c o n s t   _ S t a t C h i p ( { r e q u i r e d   t h i s . l a b e l ,   r e q u i r e d   t h i s . c o u n t ,   r e q u i r e d   t h i s . c o l o r } ) ; 
- 
-     @ o v e r r i d e 
-     W i d g e t   b u i l d ( B u i l d C o n t e x t   c o n t e x t )   { 
-         r e t u r n   C o l u m n ( 
-             m a i n A x i s S i z e :   M a i n A x i s S i z e . m i n , 
-             c h i l d r e n :   [ 
-                 T e x t ( c o u n t . t o S t r i n g ( ) ,   s t y l e :   T e x t S t y l e ( f o n t S i z e :   2 4 ,   f o n t W e i g h t :   F o n t W e i g h t . b o l d ,   c o l o r :   c o l o r ) ) , 
-                 T e x t ( l a b e l ,   s t y l e :   T e x t S t y l e ( f o n t S i z e :   1 2 ,   c o l o r :   C o l o r s . g r e y [ 7 0 0 ] ) ) , 
-             ] , 
-         ) ; 
-     } 
- } 
-  
- 
+class _StatChip extends StatelessWidget {
+  final String label;
+  final int count;
+  final Color color;
+  const _StatChip({required this.label, required this.count, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(count.toString(), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)),
+        Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+      ],
+    );
+  }
+}
+

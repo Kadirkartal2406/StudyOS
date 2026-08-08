@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../asset_contracts/asset_manifest_contract.dart';
+import 'providers/eae_render_provider.dart';
 
 class EAEVectorCanvasPainter extends CustomPainter {
   final EAEAssetManifestContract manifest;

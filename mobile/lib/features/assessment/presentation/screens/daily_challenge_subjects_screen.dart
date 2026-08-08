@@ -75,7 +75,7 @@ class _DailyChallengeSubjectsScreenState
     final ds = ref.read(assessmentDatasourceProvider);
     // Use provided sessionId if we're rendering a past exam
     if (widget.sessionId != null) {
-      final session = await ds.sessionStatus(widget.sessionId!);
+      final session = await ds.getSession(widget.sessionId!);
       return session;
     }
     final session = await ds.startDaily();
