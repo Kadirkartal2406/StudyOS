@@ -1067,6 +1067,7 @@ class AssessmentService:
                             subject_code=subject_code or None,
                             topic_code=topic_code or None,
                             existing_stems=accepted_stems,
+                            context={"api_key_override": settings.DENEME_API_KEY} if settings.DENEME_API_KEY else None
                         )
                         if not items:
                             strikes += 1
@@ -1112,6 +1113,10 @@ class AssessmentService:
                             continue
                         booklet.generation_progress = produced
                         await self.db.flush()
+                        
+                        # Gemini Free Tier limit is 15 RPM (1 request per 4 seconds)
+                        import asyncio
+                        await asyncio.sleep(4.0)
 
             if expected_total and produced < expected_total:
                 raise ValidationError(

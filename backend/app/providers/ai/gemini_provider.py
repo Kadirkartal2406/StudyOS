@@ -71,7 +71,12 @@ class GeminiProvider(AIProvider):
 
         return ordered[: 1 + max_fallbacks]
 
-    def _get_api_keys(self) -> list[str]:
+    def _get_api_keys(self, override: str | None = None) -> list[str]:
+        if override:
+            cleaned = override.strip()
+            if cleaned and not cleaned.startswith("<MagicMock"):
+                return [cleaned]
+                
         raw_keys = [
             str(getattr(settings, "GEMINI_API_KEY", "") or ""),
             str(getattr(settings, "GEMINI_API_KEY_2", "") or ""),
@@ -87,7 +92,9 @@ class GeminiProvider(AIProvider):
 
     async def generate(self, request: GenerateRequest) -> str:
         global _current_key_index
-        keys = self._get_api_keys()
+        ctx = request.context or {}
+        api_key_override = ctx.get("api_key_override")
+        keys = self._get_api_keys(override=api_key_override)
 
         if not keys:
             raise AIUnavailableError("Gemini API anahtarı yapılandırılmamış")
@@ -101,8 +108,6 @@ class GeminiProvider(AIProvider):
 
         if not contents:
             raise AIProviderError("Gemini için mesaj listesi boş")
-
-        ctx = request.context or {}
 
         max_tokens = int(
             ctx.get("max_output_tokens") or settings.AI_MAX_TOKENS

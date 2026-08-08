@@ -7,7 +7,18 @@ import logging
 from datetime import datetime, timedelta, timezone
 
 from app.services.booklet_generation import run_shared_booklet_generation
-from app.services.booklet_generation import _WARM_EXAMS
+
+_ALL_EXAMS: tuple[tuple[str, str | None], ...] = (
+    ("kpss", None),
+    ("tyt", None),
+    ("lgs", None),
+    ("ales", None),
+    ("dgs", None),
+    ("ayt", "sayisal"),
+    ("ayt", "esit_agirlik"),
+    ("ayt", "sozel"),
+    ("ayt", "dil"),
+)
 
 logger = logging.getLogger("studyos.trial_exam_scheduler")
 
@@ -24,7 +35,7 @@ def seconds_until_next_0300() -> float:
         nxt += timedelta(days=1)
     return max(1.0, (nxt - now).total_seconds())
 
-async def generate_trial_exams_for_date(challenge_date) -> bool:
+async def generate_trial_exams_for_date(challenge_date, target_exam: str | None = None) -> bool:
     """Belirli gün için tüm deneme (trial exam) pack'lerini üretir."""
     from app.database.base import AsyncSessionLocal
     from app.services.assessment_service import AssessmentService
@@ -32,7 +43,8 @@ async def generate_trial_exams_for_date(challenge_date) -> bool:
     all_ready = True
     async with AsyncSessionLocal() as db:
         svc = AssessmentService(db)
-        for exam, branch in _WARM_EXAMS:
+        target_exams = [e for e in _ALL_EXAMS if target_exam is None or e[0] == target_exam.lower()]
+        for exam, branch in target_exams:
             try:
                 booklet = await svc.ensure_shared_booklet(
                     exam,

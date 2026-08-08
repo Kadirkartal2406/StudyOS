@@ -75,7 +75,17 @@
       <section id="tab-question-pool" class="tab" hidden>
         <div class="toolbar">
           <button id="qp-run-scheduler-btn" style="background:#3b82f6;">▶ Gece Üretimini Tetikle (Manuel)</button>
-          <button id="qp-trigger-trial-exams-btn" style="background:#8b5cf6; margin-left: 8px;">▶ Deneme Üretimini Tetikle</button>
+          
+          <select id="qp-trial-exam-select" style="margin-left: 8px; padding: 4px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+            <option value="">Tüm Sınavlar</option>
+            <option value="kpss">KPSS</option>
+            <option value="tyt">TYT</option>
+            <option value="ayt">AYT</option>
+            <option value="lgs">LGS</option>
+            <option value="ales">ALES</option>
+            <option value="dgs">DGS</option>
+          </select>
+          <button id="qp-trigger-trial-exams-btn" style="background:#8b5cf6; margin-left: 8px;">▶ Seçili Denemeyi Üret</button>
           
           <!-- Gizlenen Geliştirici Butonları -->
           <button id="qp-fill-missing-btn" style="display:none;">Fill missing</button>

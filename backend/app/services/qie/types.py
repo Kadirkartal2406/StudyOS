@@ -183,3 +183,4 @@ class GenerateContext:
     early_accuracy: float | None = None  # 0–1 for adaptive
     kind: str = "topic_quiz"  # topic_quiz | daily_booklet | calibration
     pool_type: str = "general"
+    api_key_override: str | None = None

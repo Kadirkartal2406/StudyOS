@@ -401,11 +401,14 @@ $("qp-run-scheduler-btn").addEventListener("click", async () => {
 $("qp-trigger-trial-exams-btn").addEventListener("click", async () => {
   if (!confirm("Deneme üretimini (Trial Exams) şimdi tetiklemek istediğinize emin misiniz?")) return;
   try {
+    const exam = $("qp-trial-exam-select").value;
+    const url = exam ? `/admin/trial-exams/trigger?exam=${exam}` : "/admin/trial-exams/trigger";
+    
     $("qp-last-result").textContent = "Deneme üretimi tetikleniyor...";
-    const res = await api("/admin/trial-exams/trigger", { method: "POST" });
-    $("qp-last-result").textContent = `Deneme Üretimi OK: ${res.data.message || 'Başlatıldı'}`;
+    const res = await api(url, { method: "POST" });
+    $("qp-last-result").textContent = `Deneme üretimi OK: ${res.data.message || 'Başlatıldı'}`;
   } catch (err) {
-    $("qp-last-result").textContent = `Deneme Üretimi hata: ${err.message}`;
+    $("qp-last-result").textContent = `Deneme üretimi hata: ${err.message}`;
   }
 });
 

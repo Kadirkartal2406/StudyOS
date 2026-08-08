@@ -920,6 +920,7 @@ async def admin_question_pool_create_card(
     response_model=SuccessResponse[dict],
 )
 async def admin_trigger_trial_exam_generation(
+    exam: str | None = Query(default=None),
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[dict]:
@@ -929,6 +930,6 @@ async def admin_trigger_trial_exam_generation(
     from datetime import datetime
     
     # Run in background to avoid blocking the HTTP response
-    asyncio.create_task(generate_trial_exams_for_date(datetime.now().date()))
-    return SuccessResponse(data={"message": "Trial exam generation started in background."})
+    asyncio.create_task(generate_trial_exams_for_date(datetime.now().date(), target_exam=exam))
+    return SuccessResponse(data={"message": f"Trial exam generation started for {exam or 'all exams'}."})
 

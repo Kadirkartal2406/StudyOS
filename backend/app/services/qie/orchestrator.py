@@ -310,6 +310,7 @@ class QieOrchestrator:
                             "count": len(use_plans),
                             "attempt": attempt,
                             "qie": True,
+                            "api_key_override": ctx.api_key_override,
                         },
                     ),
                     preferred=ctx.preferred_provider,
