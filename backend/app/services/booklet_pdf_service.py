@@ -107,22 +107,29 @@ def build_booklet_pdf(session: AssessmentSession) -> bytes:
             y -= 16
             c.setFont(font, 10)
 
+        import textwrap
+        
         stem = _clean_math_text(q.stem)
-        c.drawString(margin, y, f"{q.ord_index + 1}. {stem[:140]}")
-        y -= 14
-        if len(stem) > 140:
-            c.drawString(margin + 10, y, stem[140:280])
+        # Format the stem as a paragraph with word wrapping
+        stem_lines = textwrap.wrap(f"{q.ord_index + 1}. {stem}", width=105)
+        for idx, line in enumerate(stem_lines):
+            ensure(14)
+            indent = margin + 12 if idx > 0 else margin
+            c.drawString(indent, y, line)
             y -= 14
 
         choices = dict(q.choices or {})
         for key in ("A", "B", "C", "D", "E"):
             if key not in choices:
                 continue
-            ensure(16)
             choice_text = _clean_math_text(str(choices[key]))
-            text = f"  {key}) {choice_text[:110]}"
-            c.drawString(margin + 6, y, text)
-            y -= 13
+            # Format choices with word wrapping
+            choice_lines = textwrap.wrap(f"{key}) {choice_text}", width=100)
+            for idx, line in enumerate(choice_lines):
+                ensure(14)
+                indent = margin + 18 if idx > 0 else margin + 6
+                c.drawString(indent, y, line)
+                y -= 13
 
         # EAE Sprint 5+1 — Render SVG visual asset as native ReportLab vector drawing
         q_meta = dict(q.metadata_ or {}) if hasattr(q, "metadata_") else {}
