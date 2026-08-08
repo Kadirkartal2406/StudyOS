@@ -441,13 +441,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (_, __) => const DailyChallengeSubjectsScreen(),
             routes: [
               GoRoute(
-                path: ':sessionId',
-                name: 'assessment-daily-past',
-                builder: (_, state) => DailyChallengeSubjectsScreen(
-                  sessionId: state.pathParameters['sessionId'],
-                ),
-              ),
-              GoRoute(
                 path: 'history',
                 name: 'assessment-daily-history',
                 builder: (_, __) => const DailyExamsListScreen(),
@@ -474,6 +467,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                   final sid = state.uri.queryParameters['session_id'] ?? '';
                   return DailyOpticalScreen(sessionId: sid);
                 },
+              ),
+              GoRoute(
+                path: ':sessionId',
+                name: 'assessment-daily-past',
+                builder: (_, state) => DailyChallengeSubjectsScreen(
+                  sessionId: state.pathParameters['sessionId'],
+                ),
               ),
             ],
           ),
