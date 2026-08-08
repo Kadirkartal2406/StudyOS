@@ -805,6 +805,7 @@ class AssessmentService:
         subject_code: str | None = None,
         topic_code: str | None = None,
         existing_stems: list[str] | None = None,
+        api_key_override: str | None = None,
     ) -> list:
         """QIE chunk — planner + style + difficulty + similarity + quality gate."""
         from app.services.qie import GenerateContext, QieOrchestrator
@@ -820,6 +821,7 @@ class AssessmentService:
             existing_stems=list(existing_stems or []),
             kind="daily_booklet",
             pool_type="trial",
+            api_key_override=api_key_override,
         )
         cards, _, _ = await QieOrchestrator(self.db).generate_batch(ctx)
         from app.services.ai.quiz_quality_gate import ValidatedQuizItem
@@ -1067,7 +1069,7 @@ class AssessmentService:
                             subject_code=subject_code or None,
                             topic_code=topic_code or None,
                             existing_stems=accepted_stems,
-                            context={"api_key_override": settings.DENEME_API_KEY} if settings.DENEME_API_KEY else None
+                            api_key_override=settings.DENEME_API_KEY or None,
                         )
                         if not items:
                             strikes += 1

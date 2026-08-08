@@ -32,5 +32,5 @@ async def get_trial_exam_history(
     from app.services.assessment_service import AssessmentService
     svc = AssessmentService(db)
     # Re-using the same historical assessment endpoint format but we know they are ready.
-    history = await svc.get_daily_history(current_user.id)
+    history = await svc.daily_history(current_user.id)
     return history
