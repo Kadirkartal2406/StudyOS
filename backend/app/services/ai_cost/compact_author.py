@@ -24,7 +24,12 @@ from app.services.question_author.types import (
 logger = logging.getLogger("studyos.ai_cost.compact")
 
 
-def _messages(plan: QuestionPlan, author_plan: dict[str, Any]) -> list[ChatMessageDTO]:
+def _messages(
+    plan: QuestionPlan,
+    author_plan: dict[str, Any],
+    *,
+    measurement_contract_block: str | None = None,
+) -> list[ChatMessageDTO]:
     system = """Sen StudyOS sınav sorusu yazarısın. Tek JSON üret:
 {
   "stem": "...",
@@ -39,8 +44,10 @@ Writer+Distractor+Naturalizer birleşik çıktı — ek meta/etiket yazma."""
         f"Skill={plan.skill} Bloom={plan.bloom} Difficulty={plan.difficulty}\n"
         f"ChoiceCount={plan.choice_count} Reasoning={plan.reasoning_type}\n"
         f"AuthorPlan={json.dumps(author_plan, ensure_ascii=False)}\n"
-        "Yalnızca JSON."
     )
+    if measurement_contract_block:
+        user += f"{measurement_contract_block}\n"
+    user += "Yalnızca JSON."
     return [
         ChatMessageDTO(role="system", content=system),
         ChatMessageDTO(role="user", content=user),
@@ -53,16 +60,26 @@ async def author_one_compact(
     preferred: str | None = None,
     model: str | None = None,
     data_root: Any = None,
+    measurement_contract_block: str | None = None,
 ) -> AuthoredQuestion:
     from pathlib import Path
 
     root = Path(data_root) if data_root else None
     ap = await build_author_plan(
-        plan, data_root=root, preferred=preferred, model=model, use_llm=False
+        plan,
+        data_root=root,
+        preferred=preferred,
+        model=model,
+        use_llm=False,
+        measurement_contract_block=measurement_contract_block,
     )
     result = await generate_with_fallback(
         GenerateRequest(
-            messages=_messages(plan, ap.to_dict()),
+            messages=_messages(
+                plan,
+                ap.to_dict(),
+                measurement_contract_block=measurement_contract_block,
+            ),
             context={
                 "kind": "author_compact",
                 "exam": plan.exam,
@@ -136,13 +153,22 @@ async def author_batch_compact(
     plans: list[QuestionPlan],
     *,
     ctx: GenerateContext | None = None,
+    measurement_contract_block: str | None = None,
 ) -> list[AuthoredQuestion]:
     preferred = ctx.preferred_provider if ctx else None
     model = ctx.preferred_model if ctx else None
+    block = measurement_contract_block
+    if block is None and ctx is not None:
+        block = getattr(ctx, "measurement_contract_block", None)
     out: list[AuthoredQuestion] = []
     for plan in plans:
         try:
-            q = await author_one_compact(plan, preferred=preferred, model=model)
+            q = await author_one_compact(
+                plan,
+                preferred=preferred,
+                model=model,
+                measurement_contract_block=block,
+            )
             if not q.rejected:
                 out.append(q)
         except Exception as e:

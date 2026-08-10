@@ -111,6 +111,10 @@ class Settings(BaseSettings):
     QUESTION_PRODUCTION_EST_COST_PER_QUESTION_USD: float = 0.002
     # Compact author: Writer+Distractor+Naturalizer tek LLM (Review/VSSE aynı)
     ENABLE_COMPACT_AUTHOR: bool = True
+    # Soft measurement side-channel (default OFF — existing behavior unchanged)
+    # off | shadow | soft_review
+    MEASUREMENT_MODE: str = "off"
+    MEASUREMENT_CONTRACT_MAX_REGEN: int = 1
 
     # ── Knowledge Layer (Sprint 19) ───────────────────────────
     # notebooklm | local  — domain servisleri provider'dan bağımsız

@@ -8,73 +8,96 @@ from dataclasses import dataclass
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.constants import REVISION_EXAM_MIN_QUESTIONS
+from app.core.exam_identity import canonicalize_exam_type
+from app.services.exam_catalog.distributions import (
+    EXAM_TOTALS,
+    SUBJECT_QUOTAS,
+    resolve_quota_key,
+)
 
-# Display-name → official booklet question count
-_SUBJECT_CAPACITY: dict[str, dict[str, int]] = {
-    "kpss": {
-        "türkçe": 30,
-        "matematik": 30,
-        "tarih": 27,
-        "coğrafya": 18,
-        "cografya": 18,
-        "vatandaşlık": 9,
-        "vatandaslik": 9,
-        "güncel": 6,
-        "guncel": 6,
-        "güncel bilgiler": 6,
-    },
-    "ags": {
-        "türkçe": 30,
-        "matematik": 30,
-        "tarih": 27,
-        "coğrafya": 18,
-        "cografya": 18,
-        "vatandaşlık": 9,
-        "güncel": 6,
-    },
-    "tyt": {
-        "türkçe": 40,
-        "matematik": 30,
-        "geometri": 10,
-        "fizik": 7,
-        "kimya": 7,
-        "biyoloji": 6,
-        "tarih": 5,
-        "coğrafya": 5,
-        "cografya": 5,
-        "felsefe": 5,
-        "din": 5,
-    },
-    "lgs": {
-        "türkçe": 20,
-        "matematik": 20,
-        "fen": 20,
-        "fen bilimleri": 20,
-        "inkılap": 10,
-        "inkilap": 10,
-        "t.c. inkılap tarihi": 10,
-        "din": 10,
-        "din kültürü": 10,
-        "ingilizce": 10,
-    },
-    "ales": {"sayısal": 50, "sayisal": 50, "sözel": 50, "sozel": 50},
-    "dgs": {"sayısal": 60, "sayisal": 60, "sözel": 60, "sozel": 60},
-    "ayt": {
-        "matematik": 30,
-        "geometri": 10,
-        "fizik": 14,
-        "kimya": 13,
-        "biyoloji": 13,
-        "edebiyat": 24,
-        "tarih": 21,
-        "coğrafya": 17,
-        "felsefe": 12,
-        "din": 6,
-        "ingilizce": 80,
-        "yabancı dil": 80,
-        "türkçe": 40,
-    },
-}
+# Display-name → official booklet question count (derived from SUBJECT_QUOTAS)
+def _display_capacity_table() -> dict[str, dict[str, int]]:
+    """Build name-keyed capacity tables from SSOT subject quotas."""
+    name_by_code = {
+        "kpss_turkce": "türkçe",
+        "kpss_matematik": "matematik",
+        "kpss_tarih": "tarih",
+        "kpss_cografya": "coğrafya",
+        "kpss_vatandaslik": "vatandaşlık",
+        "kpss_guncel": "güncel",
+        "tyt_turkce": "türkçe",
+        "tyt_matematik": "matematik",
+        "tyt_geometri": "geometri",
+        "tyt_fizik": "fizik",
+        "tyt_kimya": "kimya",
+        "tyt_biyoloji": "biyoloji",
+        "tyt_tarih": "tarih",
+        "tyt_cografya": "coğrafya",
+        "tyt_felsefe": "felsefe",
+        "tyt_din": "din",
+        "ayt_matematik": "matematik",
+        "ayt_geometri": "geometri",
+        "ayt_fizik": "fizik",
+        "ayt_kimya": "kimya",
+        "ayt_biyoloji": "biyoloji",
+        "ayt_edebiyat": "edebiyat",
+        "ayt_tarih_1": "tarih",
+        "ayt_cografya_1": "coğrafya",
+        "ayt_tarih_2": "tarih",
+        "ayt_cografya_2": "coğrafya",
+        "ayt_felsefe": "felsefe",
+        "ayt_din": "din",
+        "ydt_ingilizce": "ingilizce",
+        "lgs_turkce": "türkçe",
+        "lgs_matematik": "matematik",
+        "lgs_fen": "fen",
+        "lgs_inkilap": "inkılap",
+        "lgs_din": "din",
+        "lgs_ingilizce": "ingilizce",
+        "ags_turkce": "türkçe",
+        "ags_matematik": "matematik",
+        "ales_sayisal": "sayısal",
+        "ales_sozel": "sözel",
+        "dgs_sayisal": "sayısal",
+        "dgs_sozel": "sözel",
+        "yds_ingilizce": "ingilizce",
+        "yokdil_ingilizce": "ingilizce",
+    }
+    out: dict[str, dict[str, int]] = {}
+    for exam_key, quotas in SUBJECT_QUOTAS.items():
+        table: dict[str, int] = {}
+        for code, n in quotas.items():
+            nm = name_by_code.get(code, code)
+            table[nm] = table.get(nm, 0) + int(n)
+            # ASCII aliases
+            ascii_nm = (
+                nm.replace("ı", "i")
+                .replace("ğ", "g")
+                .replace("ü", "u")
+                .replace("ş", "s")
+                .replace("ö", "o")
+                .replace("ç", "c")
+            )
+            if ascii_nm != nm:
+                table[ascii_nm] = table.get(ascii_nm, 0) + int(n)
+        if exam_key.startswith("kpss_"):
+            out.setdefault("kpss", {}).update(table)
+        out[exam_key] = table
+    # Convenience aliases
+    if "kpss" in out:
+        out["kpss"]["güncel bilgiler"] = out["kpss"].get("güncel", 6)
+    if "lgs" in out:
+        out["lgs"]["fen bilimleri"] = out["lgs"].get("fen", 20)
+        out["lgs"]["din kültürü"] = out["lgs"].get("din", 10)
+    return out
+
+
+_SUBJECT_CAPACITY: dict[str, dict[str, int]] = _display_capacity_table()
+
+
+def _capacity_exam_key(exam_type: str | None) -> str:
+    exam = canonicalize_exam_type(exam_type or "kpss", None)
+    return resolve_quota_key(exam, None)
 
 
 def official_subject_question_count(
@@ -84,42 +107,46 @@ def official_subject_question_count(
     fallback: int = 30,
 ) -> int:
     """Official booklet capacity for a subject display name."""
-    exam = (exam_type or "kpss").strip().lower()
+    exam = _capacity_exam_key(exam_type)
+
+    if exam in {"yds_ingilizce", "ydt_ingilizce", "yokdil_ingilizce"} or exam.startswith("yokdil_"):
+        return 80
+
     key = (subject_name or "").strip().casefold()
-    for prefix in ("tyt ", "ayt "):
+    for prefix in ("tyt ", "ayt ", "ags ", "lgs "):
         if key.startswith(prefix):
             key = key[len(prefix) :]
-    table = _SUBJECT_CAPACITY.get(exam) or _SUBJECT_CAPACITY.get("kpss", {})
+    table = _SUBJECT_CAPACITY.get(exam) or {}
     if key in table:
         return int(table[key])
-    if exam == "yks":
-        for alt in ("tyt", "ayt"):
+    if exam_type and str(exam_type).strip().lower() == "yks":
+        for alt in ("tyt", "ayt_sayisal", "ayt"):
             t = _SUBJECT_CAPACITY.get(alt, {})
             if key in t:
                 return int(t[key])
+    if not table and str(exam).startswith("ayt"):
+        table = _SUBJECT_CAPACITY.get("ayt_sayisal", {})
+        if key in table:
+            return int(table[key])
+    if not table:
+        table = _SUBJECT_CAPACITY.get("kpss", {})
+        if key in table:
+            return int(table[key])
     return max(1, int(fallback))
 
 
-# Canonical booklet totals (aliases in _SUBJECT_CAPACITY must not double-count).
-_EXAM_TOTAL_QUESTIONS: dict[str, int] = {
-    "kpss": 120,
-    "ags": 120,
-    "tyt": 120,
-    "lgs": 90,
-    "ales": 100,
-    "dgs": 120,
-    "ayt": 160,  # rough upper bound across tracks; per-subject caps still apply
-}
-
-
 def exam_total_question_count(exam_type: str | None) -> int:
-    exam = (exam_type or "kpss").strip().lower()
+    exam = canonicalize_exam_type(exam_type or "kpss", None)
+    key = resolve_quota_key(exam, None)
+    if key in EXAM_TOTALS:
+        return EXAM_TOTALS[key]
+    if exam.startswith("kpss_"):
+        return 120
+    if exam in {"yds_ingilizce", "ydt_ingilizce"} or exam.startswith("yokdil"):
+        return 80
     if exam == "yks":
         return exam_total_question_count("tyt") + 80
-    if exam in _EXAM_TOTAL_QUESTIONS:
-        return _EXAM_TOTAL_QUESTIONS[exam]
-    table = _SUBJECT_CAPACITY.get(exam) or _SUBJECT_CAPACITY.get("kpss", {})
-    # Collapse ASCII/diacritic aliases: keep max capacity per normalized stem
+    table = _SUBJECT_CAPACITY.get(key) or _SUBJECT_CAPACITY.get("kpss", {})
     by_stem: dict[str, int] = {}
     for name, cap in table.items():
         stem = (

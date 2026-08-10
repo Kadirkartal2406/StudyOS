@@ -18,16 +18,23 @@ from app.database.base import Base
 
 
 class ExamType(StrEnum):
-    """Sınav türü — gelecek AI / çok sınav desteği için genişletilebilir."""
+    """Sınav türü — canonical variants (see app.core.exam_identity)."""
 
+    KPSS_LISANS = "kpss_lisans"
+    KPSS_ONLISANS = "kpss_onlisans"
+    KPSS_ORTAOGRETIM = "kpss_ortaogretim"
     TYT = "tyt"
-    AYT = "ayt"
-    YKS = "yks"
+    AYT_SAYISAL = "ayt_sayisal"
+    AYT_EA = "ayt_ea"
+    AYT_SOZEL = "ayt_sozel"
+    YDT_INGILIZCE = "ydt_ingilizce"
+    YKS = "yks"  # umbrella: TYT + AYT/YDT branch
+    AGS = "ags"
     LGS = "lgs"
-    KPSS = "kpss"
     ALES = "ales"
     DGS = "dgs"
-    YDS = "yds"
+    YDS_INGILIZCE = "yds_ingilizce"
+    YOKDIL_INGILIZCE = "yokdil_ingilizce"
     CUSTOM = "custom"
 
 

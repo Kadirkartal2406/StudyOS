@@ -47,7 +47,7 @@ async def test_topic_catalog_sync_and_list(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                     branch="sayisal",
                 )
@@ -75,7 +75,7 @@ async def test_subject_hub_includes_topics(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                     branch="sayisal",
                 )

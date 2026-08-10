@@ -36,7 +36,7 @@ async def test_subject_hub_detail_by_code(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                     target_net=90,
                     target_university="ODTÜ",

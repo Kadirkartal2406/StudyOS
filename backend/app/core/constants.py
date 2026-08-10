@@ -11,31 +11,32 @@ from datetime import date
 # topic quiz, scheduler, inventory) must call normalize_exam_code()
 # before using an exam string as a key/bucket identifier.
 #
-# Canonical map:
-#   yks  → tyt   (YKS is the umbrella; TYT subjects dominate the shared pool)
-#   ayt  → tyt   (AYT shares the same pool bucket convention as TYT)
+# DO NOT collapse distinct exams into one pool bucket:
+#   - ayt ↛ tyt, yks ↛ tyt
+#   - yds ↛ yokdil ↛ ydt
+#   - kpss variants stay separated when fully resolved
 #
-# "tyt" is the dominant key already used by:
-#   - booklet scheduler _WARM_EXAMS
-#   - exam_style seed primary entry
-#   - subject_catalog_seed TYT_SUBJECT_CODES
-#   - stock targets (tyt rows are the primary entries)
-#
-# All other exam types (kpss, lgs, ales, yds, …) are returned as-is.
-_EXAM_ALIASES: dict[str, str] = {
-    "yks": "tyt",
-    "ayt": "tyt",
-}
+# Prefer app.core.exam_identity.pool_exam_key(exam, branch) when branch
+# is known (e.g. shared booklet fill).
+from app.core.exam_identity import canonicalize_exam_type, pool_exam_key
 
 
-def normalize_exam_code(exam: str) -> str:
+def normalize_exam_code(exam: str, branch: str | None = None) -> str:
     """Return the canonical pool/fingerprint exam key for *exam*.
 
-    Strips whitespace, lower-cases, and resolves known aliases.
-    Safe to call multiple times (idempotent).
+    Strips whitespace, lower-cases, and resolves known parent aliases
+    without merging unrelated exams. Idempotent.
     """
+    if branch:
+        return pool_exam_key(exam, branch)
     key = (exam or "").strip().lower()
-    return _EXAM_ALIASES.get(key, key)
+    # Parent-only keys stay as catalog parents when branch unknown —
+    # except unambiguous English singles.
+    if key in {"yds", "yokdil", "ydt"}:
+        return canonicalize_exam_type(key, None)
+    if key in {"kpss", "ayt", "yks", "tyt", "lgs", "ags", "ales", "dgs"}:
+        return key
+    return canonicalize_exam_type(key, None)
 
 # ── Dashboard ─────────────────────────────────────────────────
 # Student profili (Sprint-3.0) yoksa veya günlük hedef boşsa varsayılan.
@@ -110,36 +111,45 @@ AI_CONTEXT_EXAMS = 5
 # ── Adaptive Planner (Sprint-2.7) ─────────────────────────────
 # Legacy generic fallback — ASLA doğrudan kullanma; exam-aware helper kullan.
 PLANNER_FALLBACK_SUBJECTS = ("Matematik", "Türkçe", "Fen", "Sosyal")
+_KPSS_PLANNER_SUBJECTS = (
+    "Türkçe",
+    "Matematik",
+    "Tarih",
+    "Coğrafya",
+    "Vatandaşlık",
+    "Güncel Bilgiler",
+)
+_TYT_PLANNER_SUBJECTS = (
+    "Türkçe",
+    "Matematik",
+    "Geometri",
+    "Fizik",
+    "Kimya",
+    "Biyoloji",
+    "Tarih",
+    "Coğrafya",
+    "Felsefe",
+    "Din Kültürü",
+)
 PLANNER_FALLBACK_BY_EXAM: dict[str, tuple[str, ...]] = {
-    "kpss": (
-        "Türkçe",
-        "Matematik",
-        "Tarih",
-        "Coğrafya",
-        "Vatandaşlık",
-        "Güncel Bilgiler",
-    ),
-    "yks": (
-        "Türkçe",
-        "Matematik",
-        "Geometri",
-        "Fizik",
-        "Kimya",
-        "Biyoloji",
-        "Tarih",
-        "Coğrafya",
-    ),
-    "tyt": (
-        "Türkçe",
-        "Matematik",
-        "Geometri",
-        "Fizik",
-        "Kimya",
-        "Biyoloji",
-        "Tarih",
-        "Coğrafya",
-    ),
+    "kpss": _KPSS_PLANNER_SUBJECTS,
+    "kpss_lisans": _KPSS_PLANNER_SUBJECTS,
+    "kpss_onlisans": _KPSS_PLANNER_SUBJECTS,
+    "kpss_ortaogretim": _KPSS_PLANNER_SUBJECTS,
+    "yks": _TYT_PLANNER_SUBJECTS,
+    "tyt": _TYT_PLANNER_SUBJECTS,
     "ayt": ("Matematik", "Geometri", "Fizik", "Kimya", "Biyoloji"),
+    "ayt_sayisal": ("Matematik", "Geometri", "Fizik", "Kimya", "Biyoloji"),
+    "ayt_ea": ("Matematik", "Geometri", "Edebiyat", "Tarih", "Coğrafya"),
+    "ayt_sozel": ("Edebiyat", "Tarih", "Coğrafya", "Felsefe", "Din"),
+    "ydt": ("İngilizce",),
+    "ydt_ingilizce": ("İngilizce",),
+    "yds": ("İngilizce",),
+    "yds_ingilizce": ("İngilizce",),
+    "yokdil": ("İngilizce",),
+    "yokdil_ingilizce": ("İngilizce",),
+    # Official AGS booklets (parsed): Türkçe 40 + Matematik 40
+    "ags": ("Türkçe", "Matematik"),
     "lgs": (
         "Türkçe",
         "Matematik",
@@ -148,17 +158,17 @@ PLANNER_FALLBACK_BY_EXAM: dict[str, tuple[str, ...]] = {
         "Din Kültürü",
         "İngilizce",
     ),
-    "ales": ("Sözel", "Sayısal"),
-    "yds": ("Kelime", "Gramer", "Okuma", "Çeviri"),
-    "dgs": ("Türkçe", "Matematik"),
-    "ags": (
-        "Türkçe",
-        "Matematik",
-        "Tarih",
-        "Coğrafya",
-        "Vatandaşlık",
-        "Güncel Bilgiler",
-    ),
+    "lgs_sayisal": ("Matematik", "Fen Bilimleri"),
+    "lgs_sozel": ("Türkçe", "İnkılap Tarihi", "Din Kültürü", "İngilizce"),
+    "ales": ("Sayısal", "Sözel"),
+    "ales_sayisal": ("Sayısal",),
+    "ales_sozel": ("Sözel",),
+    "dgs": ("Sayısal", "Sözel"),
+    "dgs_sayisal": ("Sayısal",),
+    "dgs_sozel": ("Sözel",),
+    "yokdil_fen": ("İngilizce",),
+    "yokdil_saglik": ("İngilizce",),
+    "yokdil_sosyal": ("İngilizce",),
 }
 PLANNER_MIN_MINUTES_PER_BLOCK = 30
 PLANNER_QUESTIONS_PER_HOUR = 40

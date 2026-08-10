@@ -104,6 +104,9 @@ QUESTION PLANS (değiştirilemez):
 Exam={plans[0].exam} Subject={plans[0].subject_name} Topic={plans[0].topic_name}
 Tam {len(plans)} soru üret. Hiçbir planı atlama veya birleştirme.
 """
+    soft_block = style_dna.get("measurement_soft_block")
+    if soft_block:
+        user = f"{user}\n{soft_block}\n"
 
     messages = [
         {"role": "system", "content": system},

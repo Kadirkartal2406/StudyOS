@@ -13,6 +13,7 @@ from collections import defaultdict
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.exam_identity import catalog_exam_and_branch
 from app.services.ai.exam_question_blueprint import (
     BlueprintSection,
     ExamBlueprint,
@@ -27,6 +28,44 @@ def _legacy_or_code(subject) -> str:
 
 def _topic_legacy_or_code(topic) -> str:
     return (topic.legacy_topic_code or topic.code or "").strip()
+
+
+def _flatten_packs(packs: list) -> list:
+    flat: list = []
+    stack = list(packs or [])
+    while stack:
+        p = stack.pop()
+        flat.append(p)
+        stack.extend(p.children or [])
+    return flat
+
+
+def _filter_packs_for_exam(flat_packs: list, exam_type: str, branch: str | None) -> list:
+    """Filter packs by branch_key; TYT uses pack code when branch is None."""
+    et = (exam_type or "").strip().lower()
+    br = (branch or "").strip().lower() or None
+    catalog_root, cat_br = catalog_exam_and_branch(et, br)
+    br = cat_br if cat_br is not None else br
+
+    if et == "tyt" or (catalog_root == "yks" and et == "tyt"):
+        tyt_only = [p for p in flat_packs if (p.code or "").lower() == "tyt"]
+        return tyt_only or flat_packs
+
+    if br:
+        branched = [p for p in flat_packs if (p.branch_key or "").lower() == br]
+        if branched:
+            return branched
+        # YDT English: pack code ydt_ingilizce under ydt parent
+        if br in {"en", "dil"}:
+            en_packs = [
+                p
+                for p in flat_packs
+                if (p.code or "").lower() in {"ydt_ingilizce", "ydt"}
+                or (p.branch_key or "").lower() in {"en", "dil"}
+            ]
+            if en_packs:
+                return en_packs
+    return flat_packs
 
 
 async def build_ei_blueprint(
@@ -44,27 +83,17 @@ async def build_ei_blueprint(
     if not exam:
         return None
 
+    catalog_root, cat_br = catalog_exam_and_branch(exam, branch)
     svc = ExamCatalogService(db)
     try:
         await svc.ensure_synced()
-        tree = await svc.get_exam_tree(exam)
+        tree = await svc.get_exam_tree(catalog_root)
     except Exception:
         return None
 
-    packs = list(tree.packs or [])
-    # children flatten
-    flat_packs = []
-    stack = list(packs)
-    while stack:
-        p = stack.pop()
-        flat_packs.append(p)
-        stack.extend(p.children or [])
-
-    br = (branch or "").strip().lower() or None
-    if br:
-        branched = [p for p in flat_packs if (p.branch_key or "").lower() == br]
-        if branched:
-            flat_packs = branched
+    flat_packs = _filter_packs_for_exam(
+        _flatten_packs(list(tree.packs or [])), exam, branch or cat_br
+    )
 
     # subject_code → (name, total_avg_q, topics sorted by importance)
     subject_totals: dict[str, float] = defaultdict(float)
@@ -115,35 +144,29 @@ async def build_section_plan_from_ei(
     Full section plan from EI: subjects + topic allocation by importance × avg_q.
 
     Returns None if catalog empty → caller uses legacy path.
+    Section *counts* come from official hard blueprint when available.
     """
     exam = (exam_type or "").strip().lower()
+    catalog_root, cat_br = catalog_exam_and_branch(exam, branch)
     svc = ExamCatalogService(db)
     try:
         await svc.ensure_synced()
-        tree = await svc.get_exam_tree(exam)
+        tree = await svc.get_exam_tree(catalog_root)
     except Exception:
         return None
 
-    packs = list(tree.packs or [])
-    flat_packs = []
-    stack = list(packs)
-    while stack:
-        p = stack.pop()
-        flat_packs.append(p)
-        stack.extend(p.children or [])
+    flat_packs = _filter_packs_for_exam(
+        _flatten_packs(list(tree.packs or [])), exam, branch or cat_br
+    )
 
-    br = (branch or "").strip().lower() or None
-    if br:
-        branched = [p for p in flat_packs if (p.branch_key or "").lower() == br]
-        if branched:
-            flat_packs = branched
-
-    # Prefer EI blueprint counts; fallback hard-coded for section sizes
-    ei_bp = await build_ei_blueprint(db, exam, branch)
+    # Prefer official hard-coded section sizes; EI drives topic mix only.
+    # Estimated topic avg_q sums must not silently override booklet quotas.
     hard_bp = get_exam_blueprint(exam, branch)
-    count_by_subject = {
-        s.subject_code: s.count for s in (ei_bp or hard_bp).sections
-    }
+    ei_bp = await build_ei_blueprint(db, exam, branch)
+    count_by_subject = {s.subject_code: s.count for s in hard_bp.sections}
+    if ei_bp is not None:
+        for s in ei_bp.sections:
+            count_by_subject.setdefault(s.subject_code, s.count)
 
     sections: list[dict] = []
     total = 0
@@ -153,7 +176,10 @@ async def build_section_plan_from_ei(
         for subj in sorted(pack.subjects or [], key=lambda s: s.display_order):
             if not subj.is_active:
                 continue
-            sc = _legacy_or_code(subj)
+            # Prefer native subject code for blueprint match; fall back to legacy
+            native = (subj.code or "").strip()
+            legacy = (subj.legacy_subject_code or "").strip()
+            sc = native or legacy
             if not sc or sc in seen:
                 continue
             seen.add(sc)
@@ -170,9 +196,18 @@ async def build_section_plan_from_ei(
                     * float(t.average_question_count or 1.0),
                 )
                 weights.append(w)
-            target = count_by_subject.get(
-                sc,
-                max(1, int(round(sum(float(t.average_question_count or 0) for t in topics)))),
+            target = (
+                count_by_subject.get(native)
+                or count_by_subject.get(legacy)
+                or count_by_subject.get(sc)
+                or max(
+                    1,
+                    int(
+                        round(
+                            sum(float(t.average_question_count or 0) for t in topics)
+                        )
+                    ),
+                )
             )
             target = max(1, min(int(target), 80))
 

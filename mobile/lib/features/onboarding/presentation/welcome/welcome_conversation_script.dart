@@ -154,7 +154,9 @@ class WelcomeConversationScript {
 
   bool needsYksBranch(String? exam) =>
       exam == 'yks' || exam == 'ayt' || exam == 'tyt';
-  bool needsKpssBranch(String? exam) => exam == 'kpss' || exam == 'ags';
+  bool needsKpssBranch(String? exam) => exam == 'kpss';
+  bool needsLgsBranch(String? exam) => exam == 'lgs';
+  bool needsYokdilField(String? exam) => exam == 'yokdil';
 
   String _examLabel(String? exam) => (exam ?? 'sınav').toUpperCase();
 
@@ -189,8 +191,9 @@ class WelcomeConversationScript {
             ChatChoice(id: 'ayt', label: 'Sadece AYT'),
             ChatChoice(id: 'lgs', label: 'LGS'),
             ChatChoice(id: 'ales', label: 'ALES'),
-            ChatChoice(id: 'yds', label: 'YDS'),
             ChatChoice(id: 'dgs', label: 'DGS'),
+            ChatChoice(id: 'yds', label: 'YDS İngilizce'),
+            ChatChoice(id: 'yokdil', label: 'YÖKDİL İngilizce'),
             ChatChoice(id: 'ags', label: 'AGS'),
           ],
         );
@@ -206,6 +209,31 @@ class WelcomeConversationScript {
               ChatChoice(id: 'ea', label: 'Eşit Ağırlık'),
               ChatChoice(id: 'sozel', label: 'Sözel'),
               ChatChoice(id: 'dil', label: 'Dil'),
+            ],
+          );
+        }
+        if (needsLgsBranch(a.examType)) {
+          return const ChatBubble(
+            fromAi: true,
+            text:
+                'LGS’de hangi oturumu takip ediyorsun?\n\n'
+                'Sayısal ve sözel kitapçıklarının dersleri farklıdır.',
+            choices: [
+              ChatChoice(id: 'sayisal', label: 'Sayısal'),
+              ChatChoice(id: 'sozel', label: 'Sözel'),
+            ],
+          );
+        }
+        if (needsYokdilField(a.examType)) {
+          return const ChatBubble(
+            fromAi: true,
+            text:
+                'YÖKDİL’de hangi alan kitapçığını kullanıyorsun?\n\n'
+                'Fen, Sağlık ve Sosyal alanları ayrı tutulur.',
+            choices: [
+              ChatChoice(id: 'fen', label: 'Fen Bilimleri'),
+              ChatChoice(id: 'saglik', label: 'Sağlık Bilimleri'),
+              ChatChoice(id: 'sosyal', label: 'Sosyal Bilimler'),
             ],
           );
         }
@@ -379,7 +407,10 @@ class WelcomeConversationScript {
       case WelcomeStep.intro:
         return WelcomeStep.exam;
       case WelcomeStep.exam:
-        if (needsYksBranch(a.examType) || needsKpssBranch(a.examType)) {
+        if (needsYksBranch(a.examType) ||
+            needsKpssBranch(a.examType) ||
+            needsLgsBranch(a.examType) ||
+            needsYokdilField(a.examType)) {
           return WelcomeStep.branch;
         }
         return WelcomeStep.education;

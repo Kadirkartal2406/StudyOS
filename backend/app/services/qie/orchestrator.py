@@ -35,6 +35,43 @@ from app.services.qie.types import (
 logger = logging.getLogger("studyos.qie")
 
 
+def _apply_measurement_to_card(
+    card: QuestionCard,
+    *,
+    contract,
+    retry_count: int = 0,
+) -> tuple[QuestionCard, bool, bool]:
+    """Attach measurement_meta. Returns (card, accept_into_batch, should_regen)."""
+    from app.services.ai.measurement_integration import (
+        allow_autopool_from_meta,
+        apply_soft_measurement,
+        measurement_meta_payload,
+    )
+    from app.services.ai_cost.measurement_flags import measurement_mode, measurement_soft_review
+
+    score, decision = apply_soft_measurement(
+        stem=card.stem,
+        choices=card.choices,
+        quality_passed=True,
+        contract=contract,
+        retry_count=retry_count,
+        subject=card.plan.subject_code,
+        topic=card.plan.topic_code,
+    )
+    card.measurement_meta = measurement_meta_payload(score, decision)
+    if measurement_mode() == "off":
+        return card, True, False
+    if decision.should_regen and measurement_soft_review():
+        return card, False, True
+    if measurement_soft_review() and not allow_autopool_from_meta(card.measurement_meta):
+        logger.info(
+            "measurement_review_hold plan_index=%s — excluding from accepted",
+            card.plan.index,
+        )
+        return card, False, False
+    return card, True, False
+
+
 class QieOrchestrator:
     def __init__(self, db: AsyncSession, *, use_question_author: bool = True) -> None:
         self.db = db
@@ -65,6 +102,21 @@ class QieOrchestrator:
             dna = {**dna, **ctx.style_override}
         if ctx.choice_count:
             dna["choice_count"] = ctx.choice_count
+
+        from app.services.ai.measurement_integration import (
+            inject_measurement_into_style,
+            load_contract_for_context,
+            prompt_block_from_contract,
+        )
+
+        measurement_contract = load_contract_for_context(
+            exam=ctx.exam,
+            subject_code=ctx.subject_code,
+            topic_code=ctx.topic_code,
+        )
+        measurement_block = prompt_block_from_contract(measurement_contract)
+        ctx.measurement_contract_block = measurement_block
+        dna = inject_measurement_into_style(dna, measurement_contract)
 
         plans = self.planner.plan_batch(ctx, style=dna)
         if not plans:
@@ -139,13 +191,20 @@ class QieOrchestrator:
             # Prefer compact author (1 LLM / question) when enabled
             if self.use_question_author and compact_author_enabled():
                 try:
-                    from app.services.ai_cost.compact_author import author_batch_compact
+                    from app.services.ai_cost.compact_author import (
+                        author_batch_compact,
+                        author_one_compact,
+                    )
                     from app.services.question_review import QuestionReviewEngine
                     from app.services.question_virtual_student import VirtualStudentEngine
 
                     metrics.record_compact()
                     metrics.record_author()
-                    authored = await author_batch_compact(remaining, ctx=ctx)
+                    authored = await author_batch_compact(
+                        remaining,
+                        ctx=ctx,
+                        measurement_contract_block=measurement_block,
+                    )
                     local_accepted: list[QuestionCard] = []
                     stems = list(existing)
                     opts: list[dict[str, str]] = []
@@ -225,6 +284,64 @@ class QieOrchestrator:
                             provider=aq.provider,
                             model=aq.model,
                         )
+                        retry = 0
+                        card, accept, need_regen = _apply_measurement_to_card(
+                            card, contract=measurement_contract, retry_count=retry
+                        )
+                        if need_regen:
+                            try:
+                                aq_r = await author_one_compact(
+                                    plan,
+                                    preferred=ctx.preferred_provider,
+                                    model=ctx.preferred_model,
+                                    measurement_contract_block=measurement_block,
+                                )
+                                item_r = ValidatedQuizItem(
+                                    stem=aq_r.stem,
+                                    choices=dict(aq_r.choices),
+                                    correct_key=aq_r.correct_key,
+                                    explanation=aq_r.explanation,
+                                )
+                                diff_r = analyze_for_plan(item_r, plan, style=dna)
+                                if diff_r.score >= MIN_DIFFICULTY_SCORE:
+                                    quality_r = score_quality(
+                                        item_r,
+                                        plan,
+                                        difficulty_score=diff_r.score,
+                                        existing_stems=stems,
+                                        style_dna=dna,
+                                    )
+                                    if passes_quality_gate(quality_r) and not is_similar_question(
+                                        item_r, existing_stems=stems, existing_option_sets=opts
+                                    ):
+                                        card = build_card(
+                                            item_r,
+                                            plan,
+                                            difficulty_score=diff_r.score,
+                                            quality=quality_r,
+                                            style_score=quality_r.style,
+                                            provider=aq_r.provider,
+                                            model=aq_r.model,
+                                        )
+                                        retry = 1
+                                        card, accept, _ = _apply_measurement_to_card(
+                                            card,
+                                            contract=measurement_contract,
+                                            retry_count=retry,
+                                        )
+                                    else:
+                                        accept = False
+                                else:
+                                    accept = False
+                            except Exception as e:
+                                logger.info("measurement compact regen failed: %s", e)
+                                card, accept, _ = _apply_measurement_to_card(
+                                    card,
+                                    contract=measurement_contract,
+                                    retry_count=1,
+                                )
+                        if not accept:
+                            continue
                         local_accepted.append(card)
                         stems.append(card.stem)
                         opts.append(card.choices)
@@ -245,7 +362,10 @@ class QieOrchestrator:
                 try:
                     metrics.record_author()
                     cards, fingerprint, last = await self._generate_via_author(
-                        ctx, plans=remaining, dna=dna
+                        ctx,
+                        plans=remaining,
+                        dna=dna,
+                        measurement_contract=measurement_contract,
                     )
                     if cards:
                         return cards, fingerprint, last
@@ -258,7 +378,11 @@ class QieOrchestrator:
                     )
 
             return await self._generate_via_legacy_llm(
-                ctx, plans=remaining, dna=dna, existing=existing
+                ctx,
+                plans=remaining,
+                dna=dna,
+                existing=existing,
+                measurement_contract=measurement_contract,
             )
 
         produced, fingerprint, last_result = await get_deduplicator().do(
@@ -266,6 +390,17 @@ class QieOrchestrator:
         )
 
         for card in produced:
+            from app.services.ai.measurement_integration import allow_autopool_from_meta
+            from app.services.ai_cost.measurement_flags import measurement_soft_review
+
+            if measurement_soft_review() and not allow_autopool_from_meta(
+                getattr(card, "measurement_meta", None)
+            ):
+                logger.info(
+                    "skip pool put for measurement_review_hold plan_index=%s",
+                    card.plan.index,
+                )
+                continue
             try:
                 await pool.put_card(card=card, ctx=ctx, pool_type=ctx.pool_type)
             except Exception as e:
@@ -283,6 +418,7 @@ class QieOrchestrator:
         plans: list[QuestionPlan],
         dna: dict[str, Any],
         existing: list[str],
+        measurement_contract: Any = None,
     ) -> tuple[list[QuestionCard], str, GenerateResult | None]:
         messages, fingerprint = build_qie_messages(plans, style_dna=dna)
         accepted: list[QuestionCard] = []
@@ -327,6 +463,7 @@ class QieOrchestrator:
                 dna=dna,
                 existing_stems=existing_stems,
                 existing_opts=existing_opts,
+                measurement_contract=measurement_contract,
             )
             for card in cards:
                 if any(c.plan.index == card.plan.index for c in accepted):
@@ -347,6 +484,7 @@ class QieOrchestrator:
         *,
         plans: list[QuestionPlan],
         dna: dict[str, Any],
+        measurement_contract: Any = None,
     ) -> tuple[list[QuestionCard], str, GenerateResult | None]:
         from app.services.question_author import QuestionAuthorEngine
         from app.services.question_review import QuestionReviewEngine
@@ -494,6 +632,61 @@ class QieOrchestrator:
             setattr(card, "author_meta", aq.internal_metadata())
             setattr(card, "review_meta", review.internal_metadata())
             setattr(card, "vsse_meta", vsse.internal_metadata())
+            card, accept, need_regen = _apply_measurement_to_card(
+                card, contract=measurement_contract, retry_count=0
+            )
+            if need_regen:
+                try:
+                    aq_r = await author.author_one(
+                        plan,
+                        preferred=ctx.preferred_provider,
+                        model=ctx.preferred_model,
+                        calibration=ctx.kind == "calibration",
+                    )
+                    if not aq_r.rejected:
+                        item_r = ValidatedQuizItem(
+                            stem=aq_r.stem,
+                            choices=dict(aq_r.choices),
+                            correct_key=aq_r.correct_key,
+                            explanation=aq_r.explanation,
+                        )
+                        diff_r = analyze_for_plan(item_r, plan, style=dna)
+                        if diff_r.score >= MIN_DIFFICULTY_SCORE:
+                            quality_r = score_quality(
+                                item_r,
+                                plan,
+                                difficulty_score=diff_r.score,
+                                existing_stems=existing,
+                                style_dna=dna,
+                            )
+                            if passes_quality_gate(quality_r):
+                                card = build_card(
+                                    item_r,
+                                    plan,
+                                    difficulty_score=diff_r.score,
+                                    quality=quality_r,
+                                    style_score=quality_r.style,
+                                    provider=aq_r.provider,
+                                    model=aq_r.model,
+                                )
+                                card, accept, _ = _apply_measurement_to_card(
+                                    card,
+                                    contract=measurement_contract,
+                                    retry_count=1,
+                                )
+                            else:
+                                accept = False
+                        else:
+                            accept = False
+                    else:
+                        accept = False
+                except Exception as e:
+                    logger.info("measurement author regen failed: %s", e)
+                    card, accept, _ = _apply_measurement_to_card(
+                        card, contract=measurement_contract, retry_count=1
+                    )
+            if not accept:
+                continue
             accepted.append(card)
             existing.append(card.stem)
             existing_opts.append(card.choices)
@@ -517,6 +710,7 @@ class QieOrchestrator:
         dna: dict[str, Any],
         existing_stems: list[str],
         existing_opts: list[dict[str, str]],
+        measurement_contract: Any = None,
     ) -> list[QuestionCard]:
         try:
             payload = extract_json_payload(result.text)
@@ -601,17 +795,21 @@ class QieOrchestrator:
                 existing_option_sets=existing_opts,
             ):
                 continue
-            out.append(
-                build_card(
-                    item,
-                    plan,
-                    difficulty_score=diff.score,
-                    quality=quality,
-                    style_score=quality.style,
-                    provider=result.provider,
-                    model=result.model,
-                )
+            card = build_card(
+                item,
+                plan,
+                difficulty_score=diff.score,
+                quality=quality,
+                style_score=quality.style,
+                provider=result.provider,
+                model=result.model,
             )
+            card, accept, _ = _apply_measurement_to_card(
+                card, contract=measurement_contract, retry_count=0
+            )
+            if not accept:
+                continue
+            out.append(card)
         return out
 
     def _match_plan(

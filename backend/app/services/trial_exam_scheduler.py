@@ -9,15 +9,27 @@ from datetime import datetime, timedelta, timezone
 from app.services.booklet_generation import run_shared_booklet_generation
 
 _ALL_EXAMS: tuple[tuple[str, str | None], ...] = (
-    ("kpss", None),
+    ("kpss", "lisans"),
+    ("kpss", "onlisans"),
+    ("kpss", "ortaogretim"),
     ("tyt", None),
-    ("lgs", None),
-    ("ales", None),
-    ("dgs", None),
     ("ayt", "sayisal"),
-    ("ayt", "esit_agirlik"),
+    ("ayt", "ea"),
     ("ayt", "sozel"),
-    ("ayt", "dil"),
+    # YDT is not a top-level EI exam; identity layer maps ydt→yks catalog + en pack.
+    # Blueprint for exam=ydt stays 80 (not TYT+YDT).
+    ("ydt", "en"),
+    ("lgs", "sayisal"),
+    ("lgs", "sozel"),
+    ("ags", None),
+    ("ales", "sayisal"),
+    ("ales", "sozel"),
+    ("dgs", "sayisal"),
+    ("dgs", "sozel"),
+    ("yds", "en"),
+    ("yokdil", "fen"),
+    ("yokdil", "saglik"),
+    ("yokdil", "sosyal"),
 )
 
 logger = logging.getLogger("studyos.trial_exam_scheduler")

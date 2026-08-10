@@ -91,3 +91,9 @@ def test_kpss_lisans_pack() -> None:
         "kpss_vatandaslik",
         "kpss_guncel",
     } <= subjects
+
+
+def test_ags_official_turkce_matematik() -> None:
+    ags = next(e for e in build_exam_intelligence_seed() if e["code"] == "ags")
+    subjects = {s["code"] for s in ags["packs"][0]["subjects"]}
+    assert subjects == {"ags_turkce", "ags_matematik"}

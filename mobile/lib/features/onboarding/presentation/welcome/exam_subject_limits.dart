@@ -36,7 +36,15 @@ ExamScoreLimits scoreLimitsFor(String? exam, [String? branch]) {
       targetDivisions: 60,
     );
   }
-  if (e == 'ales' || e == 'yds' || e == 'yokdil') {
+  if (e == 'ags') {
+    return const ExamScoreLimits(
+      targetMin: 10,
+      targetMax: 80,
+      scoreWord: 'net',
+      targetDivisions: 70,
+    );
+  }
+  if (e == 'ales' || e == 'yds' || e == 'yds_ingilizce' || e == 'yokdil' || e == 'yokdil_ingilizce' || e == 'ydt' || e == 'ydt_ingilizce') {
     return const ExamScoreLimits(
       targetMin: 40,
       targetMax: 100,
@@ -96,12 +104,20 @@ List<SubjectNetLimit> subjectLimitsFor(String? exam, [String? branch]) {
   final e = (exam ?? 'kpss').toLowerCase();
   final b = (branch ?? '').toLowerCase();
 
-  if (e == 'yds' || e == 'yokdil') {
+  if (e == 'yds' || e == 'yds_ingilizce' || e == 'yokdil' || e == 'yokdil_ingilizce') {
     return const [
-      SubjectNetLimit(id: 'Kelime', label: 'Kelime', maxQuestions: 25),
-      SubjectNetLimit(id: 'Gramer', label: 'Gramer', maxQuestions: 25),
-      SubjectNetLimit(id: 'Okuma', label: 'Okuma / Cloze', maxQuestions: 30),
-      SubjectNetLimit(id: 'Çeviri', label: 'Çeviri', maxQuestions: 20),
+      SubjectNetLimit(id: 'İngilizce', label: 'İngilizce', maxQuestions: 80),
+    ];
+  }
+  if (e == 'ydt' || e == 'ydt_ingilizce') {
+    return const [
+      SubjectNetLimit(id: 'İngilizce', label: 'İngilizce', maxQuestions: 80),
+    ];
+  }
+  if (e == 'ags') {
+    return const [
+      SubjectNetLimit(id: 'Türkçe', label: 'Türkçe', maxQuestions: 40),
+      SubjectNetLimit(id: 'Matematik', label: 'Matematik', maxQuestions: 40),
     ];
   }
   if (e == 'ales') {
@@ -117,6 +133,20 @@ List<SubjectNetLimit> subjectLimitsFor(String? exam, [String? branch]) {
     ];
   }
   if (e == 'lgs') {
+    if (b == 'sayisal') {
+      return const [
+        SubjectNetLimit(id: 'Matematik', label: 'Matematik', maxQuestions: 20),
+        SubjectNetLimit(id: 'Fen', label: 'Fen Bilimleri', maxQuestions: 20),
+      ];
+    }
+    if (b == 'sozel') {
+      return const [
+        SubjectNetLimit(id: 'Türkçe', label: 'Türkçe', maxQuestions: 20),
+        SubjectNetLimit(id: 'İnkılap', label: 'T.C. İnkılap Tarihi', maxQuestions: 10),
+        SubjectNetLimit(id: 'Din', label: 'Din Kültürü', maxQuestions: 10),
+        SubjectNetLimit(id: 'İngilizce', label: 'İngilizce', maxQuestions: 10),
+      ];
+    }
     return const [
       SubjectNetLimit(id: 'Türkçe', label: 'Türkçe', maxQuestions: 20),
       SubjectNetLimit(id: 'Matematik', label: 'Matematik', maxQuestions: 20),
@@ -140,8 +170,9 @@ List<SubjectNetLimit> subjectLimitsFor(String? exam, [String? branch]) {
       SubjectNetLimit(id: 'Din', label: 'Din', maxQuestions: 5),
     ];
   }
-  if (e == 'ayt' || e == 'yks') {
-    final ayt = switch (b) {
+  if (e == 'ayt' || e == 'ayt_sayisal' || e == 'ayt_ea' || e == 'ayt_sozel' || e == 'yks') {
+    final aytBranch = e.startsWith('ayt_') ? e.substring(4) : b;
+    final ayt = switch (aytBranch) {
       'ea' => const [
           SubjectNetLimit(id: 'Matematik', label: 'Matematik', maxQuestions: 30),
           SubjectNetLimit(id: 'Geometri', label: 'Geometri', maxQuestions: 10),
@@ -156,9 +187,8 @@ List<SubjectNetLimit> subjectLimitsFor(String? exam, [String? branch]) {
           SubjectNetLimit(id: 'Felsefe', label: 'Felsefe', maxQuestions: 12),
           SubjectNetLimit(id: 'Din', label: 'Din', maxQuestions: 6),
         ],
-      'dil' => const [
-          SubjectNetLimit(id: 'İngilizce', label: 'Yabancı Dil', maxQuestions: 80),
-          SubjectNetLimit(id: 'Türkçe', label: 'Türkçe', maxQuestions: 40),
+      'dil' || 'en' => const [
+          SubjectNetLimit(id: 'İngilizce', label: 'YDT İngilizce', maxQuestions: 80),
         ],
       _ => const [
           SubjectNetLimit(id: 'Matematik', label: 'Matematik', maxQuestions: 30),
@@ -169,16 +199,17 @@ List<SubjectNetLimit> subjectLimitsFor(String? exam, [String? branch]) {
         ],
     };
     if (e == 'yks') {
-      // TYT çekirdek + AYT alanı
+      // TYT çekirdek + AYT/YDT alanı
       return [
         const SubjectNetLimit(id: 'Türkçe', label: 'TYT Türkçe', maxQuestions: 40),
         const SubjectNetLimit(id: 'TYT Matematik', label: 'TYT Matematik', maxQuestions: 30),
+        const SubjectNetLimit(id: 'Geometri', label: 'TYT Geometri', maxQuestions: 10),
         ...ayt,
       ];
     }
     return ayt;
   }
-  // KPSS / AGS
+  // KPSS variants
   return const [
     SubjectNetLimit(id: 'Türkçe', label: 'Türkçe', maxQuestions: 30),
     SubjectNetLimit(id: 'Matematik', label: 'Matematik', maxQuestions: 30),

@@ -5,16 +5,29 @@ StudyOS — Learning Profile / Onboarding şemaları (Sprint-3.0)
 from __future__ import annotations
 
 from datetime import date, datetime
+from typing import Annotated, Any
 from uuid import UUID
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, BeforeValidator, Field, field_validator, model_validator
 
+from app.core.exam_identity import canonicalize_exam_type, coerce_exam_payload
 from app.models.learning_profile import BaselineLevel, JourneyStage
 from app.models.question_record import ExamType
 
 
+def _coerce_exam_type(v: Any) -> Any:
+    if isinstance(v, ExamType):
+        return v
+    if isinstance(v, str):
+        return canonicalize_exam_type(v, None)
+    return v
+
+
+CoercedExamType = Annotated[ExamType, BeforeValidator(_coerce_exam_type)]
+
+
 class ExamTargetCreate(BaseModel):
-    exam_type: ExamType
+    exam_type: CoercedExamType
     is_primary: bool = False
     weight: float = Field(default=1.0, gt=0, le=10)
     target_net: float | None = Field(default=None, gt=0, le=200)
@@ -25,6 +38,10 @@ class ExamTargetCreate(BaseModel):
     branch: str | None = Field(default=None, max_length=100)
     exam_date: date | None = None
 
+    @model_validator(mode="before")
+    @classmethod
+    def _fold_parent_branch(cls, data: Any) -> Any:
+        return coerce_exam_payload(data)
 
 class ExamTargetUpdate(BaseModel):
     is_primary: bool | None = None
@@ -54,6 +71,14 @@ class ExamTargetRead(BaseModel):
     created_at: datetime
 
     model_config = {"from_attributes": True}
+
+    @model_validator(mode="before")
+    @classmethod
+    def _coerce_stored(cls, data: Any) -> Any:
+        # Legacy DB rows may still store parent codes (kpss, yds, …)
+        if hasattr(data, "exam_type"):
+            return data
+        return coerce_exam_payload(data) if isinstance(data, dict) else data
 
 
 class SubjectCatalogRead(BaseModel):
@@ -132,8 +157,12 @@ class LearningProfileRead(BaseModel):
 class ActiveExamUpdate(BaseModel):
     """Sprint-3.1.A — Active Exam değiştir (Primary'ye dokunmaz)."""
 
-    exam_type: ExamType
+    exam_type: CoercedExamType
 
+    @model_validator(mode="before")
+    @classmethod
+    def _fold_parent_branch(cls, data: Any) -> Any:
+        return coerce_exam_payload(data)
 
 class LearningProfileUpdate(BaseModel):
     daily_study_minutes: int | None = Field(default=None, ge=15, le=720)
@@ -154,7 +183,7 @@ class LearningProfileUpdate(BaseModel):
 
 
 class OnboardingExamTargetInput(BaseModel):
-    exam_type: ExamType
+    exam_type: CoercedExamType
     is_primary: bool = False
     target_net: float | None = Field(default=None, gt=0, le=200)
     target_score: float | None = None
@@ -165,6 +194,10 @@ class OnboardingExamTargetInput(BaseModel):
     exam_date: date | None = None
     weight: float = 1.0
 
+    @model_validator(mode="before")
+    @classmethod
+    def _fold_parent_branch(cls, data: Any) -> Any:
+        return coerce_exam_payload(data)
 
 class OnboardingCompleteRequest(BaseModel):
     """D1 — tek complete payload (wizard adımları istemci tarafında)."""

@@ -69,8 +69,28 @@ async def build_author_plan(
     preferred: str | None = None,
     model: str | None = None,
     use_llm: bool = True,
+    measurement_contract_block: str | None = None,
 ) -> AuthorPlan:
     style = _load_style_contract(qie_plan.exam, qie_plan.topic_code, data_root)
+    if measurement_contract_block:
+        style = {**style, "measurement_soft_block": measurement_contract_block}
+    else:
+        try:
+            from app.services.ai.measurement_integration import (
+                load_contract_for_context,
+                prompt_block_from_contract,
+            )
+
+            contract = load_contract_for_context(
+                exam=qie_plan.exam,
+                subject_code=qie_plan.subject_code,
+                topic_code=qie_plan.topic_code,
+            )
+            block = prompt_block_from_contract(contract)
+            if block:
+                style = {**style, "measurement_soft_block": block}
+        except Exception:
+            pass
     base = _heuristic_plan(qie_plan, style)
     if not use_llm:
         return base

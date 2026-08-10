@@ -66,7 +66,7 @@ async def test_catalog_sync_and_yks_sayisal_seed(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                     branch="sayisal",
                     target_net=90,
@@ -103,7 +103,7 @@ async def test_kpss_seeds_ders_subjects(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.KPSS,
+                    exam_type=ExamType.KPSS_LISANS,
                     is_primary=True,
                     branch="lisans",
                 )
@@ -132,7 +132,7 @@ async def test_yks_without_branch_seeds_tyt_only(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                 )
             ],

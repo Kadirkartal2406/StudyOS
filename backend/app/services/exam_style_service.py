@@ -34,7 +34,8 @@ class ExamStyleService:
         code = (exam_code or "").strip().lower()
         if not code:
             return None
-        # yks → prefer tyt style if yks missing detail
+        
+        # Try exact match first
         result = await self.db.execute(
             select(ExamStyleProfile).where(
                 ExamStyleProfile.exam_code == code,
@@ -42,14 +43,36 @@ class ExamStyleService:
             )
         )
         profile = result.scalar_one_or_none()
-        if profile is None and code == "yks":
-            result = await self.db.execute(
-                select(ExamStyleProfile).where(
-                    ExamStyleProfile.exam_code == "tyt",
-                    ExamStyleProfile.is_active.is_(True),
+        
+        # Fallbacks for variants to base exam styles
+        if profile is None:
+            base_code = code
+            if code.startswith("kpss_"):
+                base_code = "kpss"
+            elif code.startswith("ayt_"):
+                base_code = "ayt"
+            elif code.startswith("yds_"):
+                base_code = "yds"
+            elif code.startswith("yokdil_"):
+                base_code = "yokdil"
+            elif code.startswith("ydt_"):
+                base_code = "ydt"
+            elif code.startswith("ales_"):
+                base_code = "ales"
+            elif code.startswith("dgs_"):
+                base_code = "dgs"
+            elif code == "yks":
+                base_code = "tyt"
+                
+            if base_code != code:
+                result = await self.db.execute(
+                    select(ExamStyleProfile).where(
+                        ExamStyleProfile.exam_code == base_code,
+                        ExamStyleProfile.is_active.is_(True),
+                    )
                 )
-            )
-            profile = result.scalar_one_or_none()
+                profile = result.scalar_one_or_none()
+                
         return profile
 
     async def get_stat(
@@ -60,6 +83,8 @@ class ExamStyleService:
         skill_type: str | None = None,
     ) -> ExamStyleStat | None:
         code = (exam_code or "").strip().lower()
+        
+        # First try exact
         q = select(ExamStyleStat).where(ExamStyleStat.exam_code == code)
         if subject_code:
             q = q.where(ExamStyleStat.subject_code == subject_code)
@@ -67,7 +92,37 @@ class ExamStyleService:
             q = q.where(ExamStyleStat.skill_type == skill_type)
         q = q.limit(1)
         result = await self.db.execute(q)
-        return result.scalar_one_or_none()
+        stat = result.scalar_one_or_none()
+        
+        # Fallback to base
+        if stat is None:
+            base_code = code
+            if code.startswith("kpss_"):
+                base_code = "kpss"
+            elif code.startswith("ayt_"):
+                base_code = "ayt"
+            elif code.startswith("yds_"):
+                base_code = "yds"
+            elif code.startswith("yokdil_"):
+                base_code = "yokdil"
+            elif code.startswith("ydt_"):
+                base_code = "ydt"
+            elif code.startswith("ales_"):
+                base_code = "ales"
+            elif code.startswith("dgs_"):
+                base_code = "dgs"
+                
+            if base_code != code:
+                q = select(ExamStyleStat).where(ExamStyleStat.exam_code == base_code)
+                if subject_code:
+                    q = q.where(ExamStyleStat.subject_code == subject_code)
+                if skill_type:
+                    q = q.where(ExamStyleStat.skill_type == skill_type)
+                q = q.limit(1)
+                result = await self.db.execute(q)
+                stat = result.scalar_one_or_none()
+                
+        return stat
 
     def profile_to_prompt_dict(
         self,

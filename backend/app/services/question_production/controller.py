@@ -15,6 +15,8 @@ from app.services.ai_cost.batch_generate import generate_batch_one_call
 from app.services.ai_cost.cost_logger import estimate_cost
 from app.services.ai_cost.pool import QuestionPoolService, fingerprint_for_plan
 from app.services.qie.types import GenerateContext, QualityBreakdown, QuestionCard, QuestionPlan
+from app.services.ai.measurement_integration import allow_autopool_from_meta
+from app.services.ai_cost.measurement_flags import measurement_soft_review
 from app.services.question_intelligence.pipeline import evaluate_question
 from app.services.question_pool_manager import QuestionPoolInventoryService
 from app.services.question_production.cost_gate import check_can_generate, suggest_batch_size
@@ -81,6 +83,12 @@ def _preview_from_pool_row(row: Any, eval_result: dict[str, Any]) -> dict[str, A
 def _preview_from_card(card: QuestionCard, eval_result: dict[str, Any]) -> dict[str, Any]:
     q = eval_result.get("question") or {}
     plan_dict = card.plan.to_dict() if hasattr(card.plan, "to_dict") else {}
+    scores = _score_dict(eval_result)
+    meta = getattr(card, "measurement_meta", None) or {}
+    if meta:
+        scores["measurement_meta"] = meta
+        scores["measurement_final_action"] = meta.get("final_action")
+        scores["measurement_status"] = meta.get("measurement_status")
     return {
         "source": "generated",
         "exam": getattr(card.plan, "exam", "") or "",
@@ -91,13 +99,13 @@ def _preview_from_card(card: QuestionCard, eval_result: dict[str, Any]) -> dict[
         "choices": dict(q.get("choices") or card.choices or {}),
         "correct_key": str(q.get("correct_key") or card.correct_key or "A"),
         "explanation": q.get("explanation", card.explanation),
-        "scores": _score_dict(eval_result),
+        "scores": scores,
         "accepted": bool(eval_result.get("accepted")),
         "plan": plan_dict,
         "provider": card.provider,
         "model": card.model,
+        "measurement_meta": meta or None,
     }
-
 
 def _record_gemini_if_real(result: Any) -> bool:
     if result is None:
@@ -767,6 +775,23 @@ class ProductionController:
                         current_index=generated,
                     )
                     logger.info("[PIPELINE] 7. Card REJECTED | reject_reason=%s", preview.get("scores", {}).get("reject_reason"))
+                    continue
+
+                # Soft measurement hold: quality may PASS but do not autopool.
+                meta = getattr(card, "measurement_meta", None) or preview.get("measurement_meta") or {}
+                if measurement_soft_review() and not allow_autopool_from_meta(meta):
+                    preview["accepted"] = False
+                    preview["measurement_hold"] = True
+                    scores = dict(preview.get("scores") or {})
+                    scores["reject_reason"] = "measurement_review_hold"
+                    scores["quality_reject"] = False
+                    preview["scores"] = scores
+                    remaining = max(0, remaining - 1)
+                    tracker.update(remaining=remaining, current_index=generated)
+                    logger.info(
+                        "[PIPELINE] 7b. measurement_review_hold (not Quality REJECT) | status=%s",
+                        meta.get("measurement_status"),
+                    )
                     continue
 
                 if save and approval_mode == "auto":

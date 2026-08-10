@@ -20,6 +20,7 @@ from app.core.constants import (
     PLANNER_QUESTIONS_PER_HOUR,
     REVISION_EXAM_MIN_QUESTIONS,
 )
+from app.core.exam_identity import planner_exam_key
 from app.models.memory import MemoryCategory
 from app.models.study_resource import ResourceType
 from app.schemas.planner import PlannerGenerateRequest
@@ -47,9 +48,7 @@ def _week_monday(d: date) -> date:
 
 
 def _fallback_subjects_for_exam(exam: str | None) -> tuple[str, ...]:
-    key = (exam or "").strip().lower()
-    if hasattr(exam, "value"):
-        key = str(getattr(exam, "value", exam)).strip().lower()
+    key = planner_exam_key(exam)
     return PLANNER_FALLBACK_BY_EXAM.get(key) or PLANNER_FALLBACK_BY_EXAM.get(
         "kpss", PLANNER_FALLBACK_SUBJECTS
     )

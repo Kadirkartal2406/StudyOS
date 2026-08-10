@@ -1,35 +1,82 @@
-/// Sınav türü enum — backend ExamType ile senkron.
+/// Sınav türü enum — backend ExamType / exam_identity ile senkron.
 enum ExamType {
+  kpssLisans,
+  kpssOnlisans,
+  kpssOrtaogretim,
   tyt,
-  ayt,
+  aytSayisal,
+  aytEa,
+  aytSozel,
+  ydtIngilizce,
   yks,
+  ags,
   lgs,
-  kpss,
   ales,
   dgs,
-  yds,
-  custom;
+  ydsIngilizce,
+  yokdilIngilizce,
+  custom,
 
-  String get apiValue => name;
+  // Legacy aliases kept for older local caches / question records
+  ayt,
+  kpss,
+  yds;
+
+  String get apiValue => switch (this) {
+        ExamType.kpssLisans => 'kpss_lisans',
+        ExamType.kpssOnlisans => 'kpss_onlisans',
+        ExamType.kpssOrtaogretim => 'kpss_ortaogretim',
+        ExamType.tyt => 'tyt',
+        ExamType.aytSayisal => 'ayt_sayisal',
+        ExamType.aytEa => 'ayt_ea',
+        ExamType.aytSozel => 'ayt_sozel',
+        ExamType.ydtIngilizce => 'ydt_ingilizce',
+        ExamType.yks => 'yks',
+        ExamType.ags => 'ags',
+        ExamType.lgs => 'lgs',
+        ExamType.ales => 'ales',
+        ExamType.dgs => 'dgs',
+        ExamType.ydsIngilizce => 'yds_ingilizce',
+        ExamType.yokdilIngilizce => 'yokdil_ingilizce',
+        ExamType.custom => 'custom',
+        ExamType.ayt => 'ayt',
+        ExamType.kpss => 'kpss',
+        ExamType.yds => 'yds',
+      };
 
   static ExamType? fromApi(String? value) {
     if (value == null) return null;
+    final v = value.trim().toLowerCase();
     for (final e in ExamType.values) {
-      if (e.name == value) return e;
+      if (e.apiValue == v) return e;
     }
-    return null;
+    return switch (v) {
+      'yokdil' => ExamType.yokdilIngilizce,
+      'ydt' => ExamType.ydtIngilizce,
+      _ => null,
+    };
   }
 
   String get label => switch (this) {
+        ExamType.kpssLisans => 'KPSS Lisans',
+        ExamType.kpssOnlisans => 'KPSS Önlisans',
+        ExamType.kpssOrtaogretim => 'KPSS Ortaöğretim',
         ExamType.tyt => 'TYT',
-        ExamType.ayt => 'AYT',
+        ExamType.aytSayisal => 'AYT Sayısal',
+        ExamType.aytEa => 'AYT Eşit Ağırlık',
+        ExamType.aytSozel => 'AYT Sözel',
+        ExamType.ydtIngilizce => 'YDT İngilizce',
         ExamType.yks => 'YKS',
+        ExamType.ags => 'AGS',
         ExamType.lgs => 'LGS',
-        ExamType.kpss => 'KPSS',
         ExamType.ales => 'ALES',
         ExamType.dgs => 'DGS',
-        ExamType.yds => 'YDS',
+        ExamType.ydsIngilizce => 'YDS İngilizce',
+        ExamType.yokdilIngilizce => 'YÖKDİL İngilizce',
         ExamType.custom => 'Özel',
+        ExamType.ayt => 'AYT',
+        ExamType.kpss => 'KPSS',
+        ExamType.yds => 'YDS',
       };
 }
 

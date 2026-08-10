@@ -129,12 +129,12 @@ class QuestionCard:
     prompt_version: str = PROMPT_VERSION
     plan_version: str = PLAN_VERSION
     question_version: str = "1"
-    question_version: str = "1"
     provider: str | None = None
     model: str | None = None
     target_asset_id: str | None = None
     correct_node_id: str | None = None
     eae_interaction: dict[str, Any] | None = None
+    measurement_meta: dict[str, Any] | None = None
 
     def to_persist_dict(self) -> dict[str, Any]:
         return {
@@ -159,6 +159,7 @@ class QuestionCard:
             "target_asset_id": self.target_asset_id,
             "correct_node_id": self.correct_node_id,
             "eae_interaction": self.eae_interaction,
+            "measurement_meta": self.measurement_meta,
         }
 
 
@@ -184,3 +185,4 @@ class GenerateContext:
     kind: str = "topic_quiz"  # topic_quiz | daily_booklet | calibration
     pool_type: str = "general"
     api_key_override: str | None = None
+    measurement_contract_block: str | None = None

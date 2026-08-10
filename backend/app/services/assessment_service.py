@@ -806,12 +806,13 @@ class AssessmentService:
         topic_code: str | None = None,
         existing_stems: list[str] | None = None,
         api_key_override: str | None = None,
+        branch: str | None = None,
     ) -> list:
         """QIE chunk — planner + style + difficulty + similarity + quality gate."""
         from app.services.qie import GenerateContext, QieOrchestrator
 
         ctx = GenerateContext(
-            exam=normalize_exam_code(exam_type or "kpss"),
+            exam=normalize_exam_code(exam_type or "kpss", branch),
             subject_code=subject_code or "general",
             subject_name=subject_name,
             topic_code=topic_code or subject_code or "general",
@@ -1070,6 +1071,7 @@ class AssessmentService:
                             topic_code=topic_code or None,
                             existing_stems=accepted_stems,
                             api_key_override=settings.DENEME_API_KEY or None,
+                            branch=booklet.branch_key or None,
                         )
                         if not items:
                             strikes += 1

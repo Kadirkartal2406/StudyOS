@@ -79,6 +79,11 @@ Reading time≈{author_plan.get("reading_duration_sec")} sn
 Paragraph≈{author_plan.get("paragraph_length")} kelime
 Trap={author_plan.get("trap_type")}
 """
+    block = None
+    if isinstance(style, dict):
+        block = style.get("measurement_soft_block")
+    if block:
+        user = f"{user}\n{block}\n"
     return [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
 

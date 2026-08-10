@@ -83,7 +83,7 @@ async def test_onboarding_complete_seeds_subjects(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                     target_net=95,
                     target_university="ODTÜ",
@@ -128,12 +128,12 @@ async def test_active_exam_set_and_primary_unchanged(db_session: AsyncSession):
         OnboardingCompleteRequest(
             exam_targets=[
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YKS,
+                    exam_type=ExamType.TYT,
                     is_primary=True,
                     target_net=95,
                 ),
                 OnboardingExamTargetInput(
-                    exam_type=ExamType.YDS,
+                    exam_type=ExamType.YDS_INGILIZCE,
                     is_primary=False,
                     target_score=80,
                 ),
@@ -145,15 +145,15 @@ async def test_active_exam_set_and_primary_unchanged(db_session: AsyncSession):
         ),
     )
     profile = await svc.get_profile(user.id)
-    assert profile.primary_exam_type == "yks"
-    assert profile.active_exam_type == "yks"
+    assert profile.primary_exam_type == "tyt"
+    assert profile.active_exam_type == "tyt"
 
-    updated = await svc.set_active_exam(user.id, ExamType.YDS)
-    assert updated.active_exam_type == "yds"
-    assert updated.primary_exam_type == "yks"
+    updated = await svc.set_active_exam(user.id, ExamType.YDS_INGILIZCE)
+    assert updated.active_exam_type == "yds_ingilizce"
+    assert updated.primary_exam_type == "tyt"
     primaries = [t for t in updated.exam_targets if t.is_primary]
     assert len(primaries) == 1
-    assert primaries[0].exam_type == ExamType.YKS
+    assert primaries[0].exam_type == ExamType.TYT
 
 
 def _register(email: str) -> dict:
@@ -209,6 +209,9 @@ async def test_learning_profile_api(client: AsyncClient):
     assert len(body["subjects"]) >= 5
     assert body["primary_exam_type"] == "yks"
     assert body["active_exam_type"] == "yks"
+    stored_types = {t["exam_type"] for t in body["exam_targets"]}
+    assert "yks" in stored_types
+    assert "yds_ingilizce" in stored_types
 
     me = await client.get("/api/v1/learning-profile/me", headers=headers)
     assert me.status_code == 200
@@ -221,7 +224,7 @@ async def test_learning_profile_api(client: AsyncClient):
         json={"exam_type": "yds"},
     )
     assert active.status_code == 200, active.text
-    assert active.json()["data"]["active_exam_type"] == "yds"
+    assert active.json()["data"]["active_exam_type"] == "yds_ingilizce"
     assert active.json()["data"]["primary_exam_type"] == "yks"
 
     bad = await client.patch(
@@ -236,7 +239,7 @@ async def test_learning_profile_api(client: AsyncClient):
     dash_body = dash.json()["data"]
     assert "journey_progress" in dash_body
     assert dash_body["journey_progress"]["journey_stage"]
-    assert dash_body["active_exam_type"] == "yds"
+    assert dash_body["active_exam_type"] == "yds_ingilizce"
     assert dash_body["primary_exam_type"] == "yks"
 
     dash_override = await client.get(
