@@ -78,8 +78,25 @@ dev_dependencies:
 
   # ── Test ──────────────────────────────────────────────────
   mocktail: ^1.0.4
+  flutter_launcher_icons: ^0.14.3
   # integration_test:
   #   sdk: flutter
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  web:
+    generate: true
+    image_path: assets/icons/app_icon.png
+    background_color: "#0F766E"
+    theme_color: "#0F766E"
+  windows:
+    generate: true
+    image_path: assets/icons/app_icon.png
+    icon_size: 256
+  image_path: assets/icons/app_icon.png
+  adaptive_icon_background: "#0F766E"
+  adaptive_icon_foreground: assets/icons/app_icon.png
 
 flutter:
   uses-material-design: true

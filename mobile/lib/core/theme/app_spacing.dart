@@ -1,6 +1,6 @@
 import 'package:flutter/painting.dart';
 
-/// Sprint 16 — Design tokens: spacing scale.
+/// StudyOS spacing scale — generous section rhythm for editorial layouts.
 class AppSpacing {
   AppSpacing._();
 
@@ -11,12 +11,20 @@ class AppSpacing {
   static const double lg = 24;
   static const double xl = 32;
   static const double xxl = 48;
+  static const double section = 40;
 
   static const EdgeInsets page = EdgeInsets.all(md);
   static const EdgeInsets pageWide = EdgeInsets.symmetric(
     horizontal: md,
     vertical: lg,
   );
+
+  /// Home / editorial screens — more breathing room.
+  static const EdgeInsets pageEditorial = EdgeInsets.symmetric(
+    horizontal: md,
+    vertical: xl,
+  );
+
   static const EdgeInsets card = EdgeInsets.all(md);
   static const EdgeInsets cardComfortable = EdgeInsets.all(lg);
 }

@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class ThemePreferences {
   const ThemePreferences({
     this.mode = ThemeMode.system,
-    this.accent = const Color(0xFF0D9488),
+    this.accent = const Color(0xFF0F766E),
   });
 
   final ThemeMode mode;
@@ -17,13 +17,27 @@ class ThemePreferences {
         accent: accent ?? this.accent,
       );
 
+  /// Design-system palette from Glass / Floating + Icon System sheets.
   static const accentOptions = <Color>[
-    Color(0xFF0D9488), // teal
-    Color(0xFF2563EB), // blue
-    Color(0xFF7C3AED), // purple
-    Color(0xFFEA580C), // orange
-    Color(0xFFDC2626), // red
-    Color(0xFF16A34A), // green
+    Color(0xFF0F766E), // Primary teal
+    Color(0xFF14B8A6), // Secondary teal
+    Color(0xFF3B82F6), // Info blue
+    Color(0xFF22C55E), // Success green
+    Color(0xFFF59E0B), // Warning amber
+    Color(0xFFEF4444), // Danger red
+    Color(0xFF8B5CF6), // Popular / violet
+    Color(0xFF0EA5E9), // Sky accent
+  ];
+
+  static const accentLabels = <String>[
+    'Primary',
+    'Secondary',
+    'Info',
+    'Success',
+    'Warning',
+    'Danger',
+    'Violet',
+    'Sky',
   ];
 }
 

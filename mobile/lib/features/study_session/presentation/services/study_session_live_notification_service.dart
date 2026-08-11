@@ -108,7 +108,11 @@ class StudySessionLiveNotificationService {
 
   Future<void> clear() async {
     if (kIsWeb) return;
-    await _notifications.cancel(notificationId);
+    try {
+      await _notifications.cancel(notificationId);
+    } catch (_) {
+      // Plugin uninitialized in tests / unsupported hosts.
+    }
   }
 
   Future<void> syncFromEngine({

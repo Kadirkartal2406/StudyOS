@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/errors/app_exception.dart';
 import '../../../../shared/widgets/app_bottom_nav_bar.dart';
+import '../../../../shared/widgets/ds.dart' hide StudyCard;
 import '../../../study_session/presentation/providers/study_session_provider.dart';
 import '../../../subjects/presentation/widgets/subject_code_chip.dart';
 import '../../domain/entities/study_plan_entity.dart';
@@ -29,8 +30,12 @@ class StudyPlanScreen extends ConsumerWidget {
     final code = subjectCode;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('Bugünkü bloklar'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: const Text('Planım'),
         actions: [
           if (code != null && code.isNotEmpty)
             Padding(
@@ -60,12 +65,14 @@ class StudyPlanScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        child: switch (state) {
-          StudyPlanInitial() || StudyPlanLoading() => const _LoadingView(),
-          StudyPlanLoaded() => _LoadedView(state: state),
-          StudyPlanError(:final message) => _ErrorView(message: message),
-        },
+      body: StudyGlassAtmosphere(
+        child: SafeArea(
+          child: switch (state) {
+            StudyPlanInitial() || StudyPlanLoading() => const _LoadingView(),
+            StudyPlanLoaded() => _LoadedView(state: state),
+            StudyPlanError(:final message) => _ErrorView(message: message),
+          },
+        ),
       ),
       bottomNavigationBar: const AppBottomNavBar(currentIndex: 3),
     );

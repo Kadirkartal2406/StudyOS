@@ -35,8 +35,9 @@ class SectionHeader extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
+                      letterSpacing: -0.2,
                     ),
               ),
               if (subtitle != null && subtitle!.isNotEmpty) ...[

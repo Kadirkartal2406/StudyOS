@@ -1,7 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'dart:async';
 
-/// Canlı sınav geri sayımı: ay · gün · saat · dk · sn.
+import 'package:flutter/material.dart';
+
+import '../../../../core/theme/app_spacing.dart';
+
+/// Canlı sınav geri sayımı — tipografi odaklı, sakin.
 class ExamCountdownBanner extends StatefulWidget {
   const ExamCountdownBanner({
     super.key,
@@ -16,21 +19,19 @@ class ExamCountdownBanner extends StatefulWidget {
   State<ExamCountdownBanner> createState() => _ExamCountdownBannerState();
 }
 
-class _ExamCountdownBannerState extends State<ExamCountdownBanner>
-    with SingleTickerProviderStateMixin {
-  late final Ticker _ticker;
+class _ExamCountdownBannerState extends State<ExamCountdownBanner> {
+  Timer? _timer;
   Duration _left = Duration.zero;
 
   @override
   void initState() {
     super.initState();
     _tick();
-    _ticker = createTicker((_) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
       final next = _compute();
       if (next != _left) setState(() => _left = next);
-    })
-      ..start();
+    });
   }
 
   @override
@@ -41,7 +42,7 @@ class _ExamCountdownBannerState extends State<ExamCountdownBanner>
 
   @override
   void dispose() {
-    _ticker.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -52,7 +53,7 @@ class _ExamCountdownBannerState extends State<ExamCountdownBanner>
       widget.examDate.year,
       widget.examDate.month,
       widget.examDate.day,
-      10, // sınav sabahı varsayılan
+      10,
     );
     final d = end.difference(DateTime.now());
     return d.isNegative ? Duration.zero : d;
@@ -61,6 +62,7 @@ class _ExamCountdownBannerState extends State<ExamCountdownBanner>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
     final totalDays = _left.inDays;
     final months = totalDays ~/ 30;
     final days = totalDays % 30;
@@ -70,65 +72,32 @@ class _ExamCountdownBannerState extends State<ExamCountdownBanner>
 
     String two(int n) => n.toString().padLeft(2, '0');
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: scheme.primaryContainer.withValues(alpha: 0.55),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '${widget.examLabel} sınavına kalan',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: scheme.onPrimaryContainer,
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              if (months > 0) _chip(context, '$months', 'ay'),
-              _chip(context, '$days', 'gün'),
-              _chip(context, two(hours), 'saat'),
-              _chip(context, two(mins), 'dk'),
-              _chip(context, two(secs), 'sn'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+    final parts = <String>[
+      if (months > 0) '$months ay',
+      '$days gün',
+      '${two(hours)}:${two(mins)}:${two(secs)}',
+    ];
 
-  Widget _chip(BuildContext context, String value, String unit) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: scheme.surface,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          Text(
-            value,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  fontFeatures: const [FontFeature.tabularFigures()],
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${widget.examLabel} sınavına kalan',
+          style: text.labelLarge?.copyWith(
+            color: scheme.onSurfaceVariant,
+            fontWeight: FontWeight.w600,
           ),
-          Text(
-            unit,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        Text(
+          parts.join('  ·  '),
+          style: text.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.2,
+            fontFeatures: const [FontFeature.tabularFigures()],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

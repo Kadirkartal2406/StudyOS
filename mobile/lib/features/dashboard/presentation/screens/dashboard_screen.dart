@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../shared/widgets/app_bottom_nav_bar.dart';
 import '../../../../shared/widgets/ds.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../../auth/presentation/providers/auth_state.dart';
-import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
 import '../../../study_session/presentation/widgets/live_study_session_card.dart';
-import '../../../study_session/presentation/widgets/today_summary_card.dart';
 import '../../domain/entities/dashboard_entity.dart';
 import '../providers/dashboard_provider.dart';
 import '../providers/dashboard_state.dart';
-import '../widgets/exam_countdown_banner.dart';
+import '../widgets/home_derslerim_card.dart';
+import '../widgets/home_glass_greeting.dart';
+import '../widgets/home_hedeflerim_card.dart';
+import '../widgets/home_start_hero.dart';
+import '../widgets/home_testler_card.dart';
 import '../widgets/notification_bell.dart';
-import '../widgets/today_next_action_card.dart';
-import '../../../onboarding/presentation/welcome/exam_calendar.dart';
 
-/// RC3 — Bugün first fold: karşılama · kalan gün · sıradaki iş · bloklar.
+/// Bugün — Glass / Floating Home (D reference). No hero photo.
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
 
@@ -27,31 +28,38 @@ class DashboardScreen extends ConsumerWidget {
     final dashboardState = ref.watch(dashboardProvider);
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('Bugün'),
-        actions: [
-          const NotificationBell(),
-          IconButton(
-            icon: const CircleAvatar(
-              radius: 14,
-              child: Icon(Icons.person, size: 18),
-            ),
-            tooltip: 'Profil',
-            onPressed: () => context.push('/profile'),
-          ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: const SizedBox.shrink(),
+        actions: const [
+          NotificationBell(),
+          SizedBox(width: AppSpacing.xs),
         ],
       ),
-      body: SafeArea(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 280),
-          child: switch (dashboardState) {
-            DashboardInitial() || DashboardLoading() =>
-              const _TodayLoadingView(key: ValueKey('loading')),
-            DashboardLoaded(:final dashboard) =>
-              _TodayLoadedView(key: const ValueKey('loaded'), dashboard: dashboard),
-            DashboardError(:final message) =>
-              _TodayErrorView(key: const ValueKey('error'), message: message),
-          },
+      body: StudyGlassAtmosphere(
+        child: SafeArea(
+          top: false,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 280),
+            child: KeyedSubtree(
+              key: ValueKey<String>(switch (dashboardState) {
+                DashboardInitial() || DashboardLoading() => 'loading',
+                DashboardLoaded() => 'loaded',
+                DashboardError() => 'error',
+              }),
+              child: switch (dashboardState) {
+                DashboardInitial() || DashboardLoading() =>
+                  const _TodayLoadingView(),
+                DashboardLoaded(:final dashboard) =>
+                  _TodayLoadedView(dashboard: dashboard),
+                DashboardError(:final message) =>
+                  _TodayErrorView(message: message),
+              },
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: const AppBottomNavBar(currentIndex: 0),
@@ -60,25 +68,43 @@ class DashboardScreen extends ConsumerWidget {
 }
 
 class _TodayLoadingView extends StatelessWidget {
-  const _TodayLoadingView({super.key});
+  const _TodayLoadingView();
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: AppSpacing.pageWide,
-      children: const [
-        SkeletonCard(height: 72),
-        SizedBox(height: AppSpacing.md),
-        SkeletonCard(height: 140),
-        SizedBox(height: AppSpacing.md),
-        SkeletonCard(height: 120),
-      ],
+    final width = MediaQuery.sizeOf(context).width;
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: EditorialPage.maxContentWidth(width),
+        ),
+        child: ListView(
+          padding: EdgeInsets.only(
+            left: EditorialPage.horizontalPadding(width).left,
+            right: EditorialPage.horizontalPadding(width).right,
+            top: AppSpacing.sm,
+            bottom: AppSpacing.xxl,
+          ),
+          children: const [
+            SkeletonCard(height: 72),
+            SizedBox(height: AppSpacing.lg),
+            SkeletonCard(height: 56),
+            SizedBox(height: AppSpacing.md),
+            SkeletonCard(height: 72),
+            SizedBox(height: AppSpacing.xl),
+            SkeletonCard(height: 220),
+            SizedBox(height: AppSpacing.lg),
+            SkeletonCard(height: 200),
+          ],
+        ),
+      ),
     );
   }
 }
 
 class _TodayErrorView extends ConsumerWidget {
-  const _TodayErrorView({super.key, required this.message});
+  const _TodayErrorView({required this.message});
 
   final String message;
 
@@ -100,134 +126,55 @@ class _TodayErrorView extends ConsumerWidget {
 }
 
 class _TodayLoadedView extends ConsumerWidget {
-  const _TodayLoadedView({super.key, required this.dashboard});
+  const _TodayLoadedView({required this.dashboard});
 
   final DashboardEntity dashboard;
 
-  String _greeting(String name) {
-    final h = DateTime.now().hour;
-    final hi = h < 12
-        ? 'Günaydın'
-        : h < 18
-            ? 'İyi günler'
-            : 'İyi akşamlar';
-    return name.isEmpty ? hi : '$hi $name';
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final action = dashboard.nextAction;
     final auth = ref.watch(authProvider);
     final name = switch (auth) {
       AuthAuthenticated(:final user) => user.firstName,
-      _ => '',
+      _ => dashboard.firstName,
     };
-    final profile = ref.watch(learningProfileProvider).valueOrNull;
-    final examRaw = (profile?.activeExamType ??
-            profile?.primaryExamType ??
-            dashboard.activeExamType ??
-            '');
-    final branch = (profile?.activeExamType ?? profile?.primaryExamType ?? '');
-    
-    String exam = examRaw.toUpperCase();
-    if (exam == 'KPSS' && branch.isNotEmpty) {
-      final bl = branch.toLowerCase();
-      if (bl.contains('onlisans') || bl.contains('önlisans')) {
-        exam = 'KPSS ÖNLİSANS';
-      } else if (bl.contains('orta') || bl.contains('lise')) {
-        exam = 'KPSS ORTAÖĞRETİM';
-      } else if (bl.contains('lisans')) {
-        exam = 'KPSS LİSANS';
-      }
-    }
 
-    final daysLeft = dashboard.journeyDaysRemaining;
-    final examDate = dashboard.journeyExamDate ??
-        dashboard.primaryTarget?.examDate ??
-        dashboard.activeTarget?.examDate ??
-        (examRaw.isNotEmpty ? nextExamDate(examRaw.toLowerCase(), branch: branch.toLowerCase()) : null);
-    final coachLine = (dashboard.coachToday?.headline.isNotEmpty == true
-            ? dashboard.coachToday!.headline
-            : dashboard.coachToday?.body) ??
-        dashboard.todayJourneyLine;
+    final width = MediaQuery.sizeOf(context).width;
+    final hPad = EditorialPage.horizontalPadding(width);
 
     return RefreshIndicator(
       onRefresh: () => ref.read(dashboardProvider.notifier).retry(),
-      child: Center(
+      child: Align(
+        alignment: Alignment.topCenter,
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 640),
+          constraints: BoxConstraints(
+            maxWidth: EditorialPage.maxContentWidth(width),
+          ),
           child: ListView(
-            padding: AppSpacing.pageWide,
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.only(
+              left: hPad.left,
+              right: hPad.right,
+              top: AppSpacing.xs,
+              bottom: AppSpacing.xxl,
+            ),
             children: [
-              Text(
-                _greeting(name),
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+              HomeGlassGreeting(
+                firstName: name,
+                onAvatarTap: () => context.push('/profile'),
               ),
-              if (exam.isNotEmpty && examDate != null) ...[
-                const SizedBox(height: 10),
-                ExamCountdownBanner(examLabel: exam, examDate: examDate),
-              ] else if (exam.isNotEmpty) ...[
-                const SizedBox(height: 6),
-                Text(
-                  daysLeft != null && daysLeft > 0
-                      ? '$exam · $daysLeft gün kaldı'
-                      : exam,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                ),
-              ],
-              if (coachLine != null && coachLine.trim().isNotEmpty) ...[
-                const SizedBox(height: AppSpacing.md),
-                Text(
-                  coachLine.trim(),
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        height: 1.35,
-                      ),
-                ),
-              ],
               const SizedBox(height: AppSpacing.lg),
-              Card(
-                margin: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)),
-                ),
-                child: ListTile(
-                  leading: const Icon(Icons.stars_rounded, size: 32, color: Colors.amber),
-                  title: const Text('Günün Denemesi', style: TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: const Text('Her sabah 10:00\'da yenilenir'),
-                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                  onTap: () => context.push('/assessment/daily/history'),
-                ),
+              HomeStartHero(
+                dashboard: dashboard,
+                action: dashboard.nextAction,
               ),
+              const SizedBox(height: AppSpacing.section),
+              HomeDerslerimCard(dashboard: dashboard),
+              const SizedBox(height: AppSpacing.lg),
+              HomeTestlerCard(dashboard: dashboard),
+              const SizedBox(height: AppSpacing.lg),
+              HomeHedeflerimCard(dashboard: dashboard),
               const SizedBox(height: AppSpacing.lg),
               const LiveStudySessionCard(),
-              if (action != null)
-                TodayNextActionCard(action: action)
-              else
-                StudyCard(
-                  child: Text(
-                    'Bugün için sıradaki iş henüz netleşmedi. Yenilemeyi dene.',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-              const SizedBox(height: AppSpacing.lg),
-              Text(
-                'Bugünkü bloklar',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              const TodaySummaryCard(),
-              const SizedBox(height: AppSpacing.xl),
-              TextButton(
-                onPressed: () => context.push('/journey'),
-                child: const Text('Yolculuğumu gör'),
-              ),
             ],
           ),
         ),

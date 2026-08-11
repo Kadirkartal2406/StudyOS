@@ -78,6 +78,84 @@ async def test_overview_after_session(db_session: AsyncSession) -> None:
 
 
 @pytest.mark.asyncio
+async def test_unbound_pomodoro_counts_with_active_exam(
+    db_session: AsyncSession,
+) -> None:
+    """Serbest (subject_code=NULL) oturumlar aktif sınav scope'unda da Hedeflerim'e yazılır."""
+    from app.models.question_record import ExamType
+    from app.models.study_session import StudySession, StudySessionStatus
+    from app.schemas.learning_profile import (
+        BaselineLevel,
+        OnboardingCompleteRequest,
+        OnboardingExamTargetInput,
+    )
+    from app.services.dashboard_service import DashboardService
+    from app.services.learning_profile_service import LearningProfileService
+
+    user = await _make_user(db_session)
+    await LearningProfileService(db_session).complete_onboarding(
+        user.id,
+        OnboardingCompleteRequest(
+            exam_targets=[
+                OnboardingExamTargetInput(
+                    exam_type=ExamType.TYT,
+                    is_primary=True,
+                    target_net=90,
+                )
+            ],
+            available_days=[0, 1, 2, 3, 4],
+            available_hours=3,
+            daily_study_minutes=120,
+            baseline_level=BaselineLevel.BEGINNER,
+            baseline_reason="test",
+        ),
+    )
+
+    # Direkt completed session — süre hesabına bağlı kalmadan
+    from datetime import UTC, datetime
+
+    session = StudySession(
+        user_id=user.id,
+        planned_duration_minutes=25,
+        actual_duration_minutes=25,
+        break_duration_minutes=5,
+        completed_questions=0,
+        completed_topics=0,
+        status=StudySessionStatus.COMPLETED,
+        subject_code=None,
+        topic_code=None,
+        started_at=datetime.now(UTC),
+        ended_at=datetime.now(UTC),
+    )
+    db_session.add(session)
+    await db_session.flush()
+
+    overview = await StatisticsService(db_session).get_overview(user.id)
+    assert overview.today_study_minutes == 25
+    assert overview.total_pomodoros == 1
+
+    dash = await DashboardService(db_session).get_dashboard(user)
+    assert dash.today_study_minutes == 25
+    assert dash.daily_progress_percentage > 0
+
+
+def test_subject_scope_filter_includes_null_subject() -> None:
+    from sqlalchemy.dialects import postgresql
+
+    from app.repositories.statistics_repository import StatisticsRepository
+
+    clause = StatisticsRepository._subject_scope_filter({"matematik"})
+    sql = str(
+        clause.compile(
+            dialect=postgresql.dialect(),
+            compile_kwargs={"literal_binds": True},
+        )
+    ).lower()
+    assert "is null" in sql
+    assert "matematik" in sql
+
+
+@pytest.mark.asyncio
 async def test_subject_distribution_uses_plan(db_session: AsyncSession) -> None:
     user = await _make_user(db_session)
     plan = await StudyPlanService(db_session).create_plan(

@@ -6,100 +6,92 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/errors/dio_exception_mapper.dart';
 import '../../../../core/network/dio_client.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/study_glass_button.dart';
 import '../../domain/entities/dashboard_entity.dart';
 
-/// Alignment Sprint-1 — tek Primary Action (Decision Projection render).
-/// İkinci CTA yoktur. Flutter karar vermez.
+/// Tek Primary Action — tipografi + Glass CTA.
+/// Decision / deepLink / explain API davranışı aynı.
 class TodayNextActionCard extends ConsumerWidget {
   const TodayNextActionCard({super.key, required this.action});
 
   final NextActionEntity action;
 
   IconData get _actionIcon => switch (action.actionType) {
-        'revision' => Icons.replay,
-        'study_plan' => Icons.menu_book,
-        'focus' => Icons.play_circle,
-        _ => Icons.play_circle,
+        'revision' => Icons.replay_rounded,
+        'study_plan' => Icons.menu_book_rounded,
+        'focus' => Icons.play_arrow_rounded,
+        _ => Icons.play_arrow_rounded,
       };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
     final isObserving = action.confidenceTone == 'low';
 
-    return Card(
-      elevation: 0,
-      color: colorScheme.primaryContainer.withValues(alpha: 0.35),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                Icon(_actionIcon, size: 20, color: colorScheme.primary),
-                const SizedBox(width: 8),
-                Text(
-                  'Şimdi yap',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: colorScheme.primary,
-                        fontWeight: FontWeight.w700,
-                      ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              action.title,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
-            ),
-            if (action.subtitle != null && action.subtitle!.isNotEmpty) ...[
-              const SizedBox(height: 6),
-              Text(
-                action.subtitle!,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-              ),
-            ],
-            const SizedBox(height: 12),
-            Text(
-              action.reason,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-            ),
-            if (isObserving) ...[
-              const SizedBox(height: 8),
-              Text(
-                'Gözlem modu — kesin teşhis yok',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: colorScheme.tertiary,
-                    ),
-              ),
-            ],
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () => context.push(action.deepLinkHint),
-                    child: Text(action.ctaLabel),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                // Sprint 12 — "Neden?" butonu
-                OutlinedButton(
-                  onPressed: () => _showExplanation(context, ref),
-                  child: const Text('Neden?'),
-                ),
-              ],
-            ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Şimdi yap',
+          style: text.labelLarge?.copyWith(
+            color: colorScheme.primary,
+            fontWeight: FontWeight.w700,
+          ),
         ),
-      ),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          action.title,
+          style: text.headlineMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+            height: 1.2,
+            letterSpacing: -0.3,
+          ),
+        ),
+        if (action.subtitle != null && action.subtitle!.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            action.subtitle!,
+            style: text.titleMedium?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          action.reason,
+          style: text.bodyLarge?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+            height: 1.45,
+          ),
+        ),
+        if (isObserving) ...[
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            'Gözlem modu — kesin teşhis yok',
+            style: text.labelMedium?.copyWith(
+              color: colorScheme.tertiary,
+            ),
+          ),
+        ],
+        const SizedBox(height: AppSpacing.lg),
+        StudyGlassButton(
+          label: action.ctaLabel,
+          leadingIcon: _actionIcon,
+          size: StudyGlassSize.large,
+          onPressed: () => context.push(action.deepLinkHint),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        Align(
+          alignment: Alignment.center,
+          child: TextButton(
+            onPressed: () => _showExplanation(context, ref),
+            child: const Text('Neden?'),
+          ),
+        ),
+      ],
     );
   }
 
@@ -135,7 +127,7 @@ class TodayNextActionCard extends ConsumerWidget {
         context: context,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         builder: (ctx) => Padding(
           padding: EdgeInsets.fromLTRB(
@@ -163,12 +155,11 @@ class TodayNextActionCard extends ConsumerWidget {
               const SizedBox(height: 16),
               Text(explanation.isEmpty ? 'Açıklama üretilemedi.' : explanation),
               const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () => Navigator.of(ctx).pop(),
-                  child: const Text('Tamam'),
-                ),
+              StudyGlassButton(
+                label: 'Tamam',
+                leadingIcon: Icons.check_rounded,
+                showTrailing: false,
+                onPressed: () => Navigator.of(ctx).pop(),
               ),
             ],
           ),

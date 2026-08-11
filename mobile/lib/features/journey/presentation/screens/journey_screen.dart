@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../shared/widgets/app_bottom_nav_bar.dart';
 import '../../../../shared/widgets/ds.dart';
@@ -24,7 +25,13 @@ class JourneyScreen extends ConsumerWidget {
     final profileAsync = ref.watch(learningProfileProvider);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? AppColors.backgroundDark
+          : AppColors.background,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         title: const Text('Yolculuğum'),
         actions: const [ActiveExamSwitcher()],
       ),

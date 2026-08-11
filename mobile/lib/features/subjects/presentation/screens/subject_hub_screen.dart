@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_empty_state.dart';
 import '../../../../core/widgets/app_error_view.dart';
 import '../../../../core/widgets/app_loading_skeleton.dart';
@@ -125,17 +126,17 @@ class _SubjectAiPriorityCard extends StatelessWidget {
     final topicCode = ai.code;
 
     return Material(
-      color: colorScheme.primaryContainer.withValues(alpha: 0.3),
-      borderRadius: BorderRadius.circular(16),
+      color: AppColors.primarySoft,
+      borderRadius: BorderRadius.circular(20),
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         onTap: topicCode == null || topicCode.isEmpty
             ? null
             : () => context.push(
                   '/subjects/$subjectCode/topics/$topicCode',
                 ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -144,30 +145,36 @@ class _SubjectAiPriorityCard extends StatelessWidget {
                   Icon(Icons.auto_awesome, color: colorScheme.primary, size: 20),
                   const SizedBox(width: 8),
                   Text(
-                    'Öncelikli Konu',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    'Öncelikli konu',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           color: colorScheme.primary,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                   ),
                   const Spacer(),
                   if (topicCode != null && topicCode.isNotEmpty)
-                    Icon(Icons.chevron_right, color: colorScheme.primary),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: colorScheme.primary,
+                      size: 18,
+                    ),
                 ],
               ),
               const SizedBox(height: 12),
               Text(
                 ai.recommendation ?? 'Bugün Çalış: ${ai.code}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.2,
                     ),
               ),
               if (ai.reason != null) ...[
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Text(
                   ai.reason!,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
+                        height: 1.4,
                       ),
                 ),
               ],

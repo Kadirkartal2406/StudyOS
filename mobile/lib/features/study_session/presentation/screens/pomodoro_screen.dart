@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/widgets/app_bottom_nav_bar.dart';
+import '../../../../shared/widgets/ds.dart' hide StudyCard;
 import '../../../study_plan/presentation/providers/study_plan_provider.dart';
 import '../../../study_plan/presentation/providers/study_plan_state.dart';
 import '../../../study_plan/presentation/widgets/study_card.dart';
@@ -64,8 +65,12 @@ class _PomodoroScreenState extends ConsumerState<PomodoroScreen> {
     final code = widget.subjectCode;
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('Pomodoro'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: const Text('Odak'),
         centerTitle: true,
         actions: [
           if (code != null && code.isNotEmpty)
@@ -76,32 +81,34 @@ class _PomodoroScreenState extends ConsumerState<PomodoroScreen> {
         ],
       ),
       bottomNavigationBar: const AppBottomNavBar(currentIndex: 2),
-      body: switch (state) {
-        StudySessionInitial() => const Center(
-            child: CircularProgressIndicator(),
-          ),
-        StudySessionError(:final message) => Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(message, textAlign: TextAlign.center),
-                  const SizedBox(height: 16),
-                  FilledButton(
-                    onPressed: () =>
-                        ref.invalidate(studySessionProvider),
-                    child: const Text('Yeniden Dene'),
-                  ),
-                ],
+      body: StudyGlassAtmosphere(
+        child: switch (state) {
+          StudySessionInitial() => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          StudySessionError(:final message) => Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(message, textAlign: TextAlign.center),
+                    const SizedBox(height: 16),
+                    FilledButton(
+                      onPressed: () =>
+                          ref.invalidate(studySessionProvider),
+                      child: const Text('Yeniden Dene'),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        StudySessionReady() => _PomodoroBody(
-            state: state,
-            notifier: notifier,
-          ),
-      },
+          StudySessionReady() => _PomodoroBody(
+              state: state,
+              notifier: notifier,
+            ),
+        },
+      ),
     );
   }
 }

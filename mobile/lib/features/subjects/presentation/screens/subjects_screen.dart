@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/app_bottom_nav_bar.dart';
+import '../../../../shared/widgets/ds.dart';
+import '../../../dashboard/presentation/widgets/active_exam_switcher.dart';
 import '../../../onboarding/domain/entities/learning_profile_entity.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
-import '../../../dashboard/presentation/widgets/active_exam_switcher.dart';
 import '../../domain/subject_display_title.dart';
-import '../../../../shared/widgets/app_bottom_nav_bar.dart';
 
 /// Active Exam scoped list → Subject Learning Container (subject_code).
-/// Alignment Sprint-2: Subject work center değil; Topic seçimine giriş.
 class SubjectsScreen extends ConsumerWidget {
   const SubjectsScreen({super.key});
 
@@ -19,37 +20,39 @@ class SubjectsScreen extends ConsumerWidget {
     final async = ref.watch(learningProfileProvider);
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         title: const Text('Derslerim'),
         actions: [
           const ActiveExamSwitcher(),
           IconButton(
             tooltip: 'Yenile',
             onPressed: () => invalidateLearningProfile(ref),
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(StudyIcons.refresh),
           ),
         ],
       ),
       bottomNavigationBar: const AppBottomNavBar(currentIndex: 1),
-      body: async.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Dersler yüklenemedi: $e'),
-                const SizedBox(height: 12),
-                FilledButton(
-                  onPressed: () => invalidateLearningProfile(ref),
-                  child: const Text('Tekrar Dene'),
-                ),
-              ],
+      body: StudyGlassAtmosphere(
+        child: async.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, _) => Center(
+            child: Padding(
+              padding: AppSpacing.pageWide,
+              child: EmptyState(
+                icon: Icons.wifi_off_rounded,
+                title: 'Dersler yüklenemedi',
+                message: '$e',
+                ctaLabel: 'Tekrar Dene',
+                onCta: () => invalidateLearningProfile(ref),
+              ),
             ),
           ),
+          data: (profile) => _SubjectsBody(profile: profile),
         ),
-        data: (profile) => _SubjectsBody(profile: profile),
       ),
     );
   }
@@ -60,32 +63,34 @@ class _SubjectsBody extends StatelessWidget {
 
   final LearningProfileEntity profile;
 
+  static const _accents = [
+    AppColors.primary,
+    AppColors.info,
+    AppColors.warning,
+    AppColors.success,
+    Color(0xFF8B5CF6),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final primary = profile.primaryExamType;
     final subjects = profile.activeSubjects;
+    final width = MediaQuery.sizeOf(context).width;
+    final hPad = EditorialPage.horizontalPadding(width);
+    final text = Theme.of(context).textTheme;
 
     if (subjects.isEmpty) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.menu_book_outlined,
-                size: 48,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                primary == null
-                    ? 'Önce bir sınav seç (Kurulum)'
-                    : 'Bu sınav için henüz ders yok',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ],
+          padding: AppSpacing.pageWide,
+          child: EmptyState(
+            icon: StudyIcons.subjects,
+            title: primary == null
+                ? 'Önce bir sınav seç'
+                : 'Bu sınav için henüz ders yok',
+            message: primary == null
+                ? 'Kurulumdan sınavını belirle.'
+                : 'Active sınav için ders listesi boş.',
           ),
         ),
       );
@@ -102,97 +107,123 @@ class _SubjectsBody extends StatelessWidget {
         return a.compareTo(b);
       });
 
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        if (primary != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Text(
-              'Sınav: ${primary.toUpperCase()} · ${subjects.length} ders',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-            ),
+    var accentIndex = 0;
+
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: EditorialPage.maxContentWidth(width),
+        ),
+        child: ListView(
+          padding: EdgeInsets.only(
+            left: hPad.left,
+            right: hPad.right,
+            top: AppSpacing.lg,
+            bottom: AppSpacing.xxl,
           ),
-        for (final key in keys) ...[
-          if (key != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 4),
-              child: Text(
-                key.toUpperCase(),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Derslerim',
+                    style: text.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.4,
+                    ),
+                  ),
+                ),
+                if (primary != null)
+                  Text(
+                    primary.toUpperCase(),
+                    style: text.labelLarge?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w700,
                     ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              '${subjects.length} ders',
+              style: text.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
-          for (final s in grouped[key]!) _SubjectMetricCard(subject: s),
-        ],
-      ],
+            const SizedBox(height: AppSpacing.lg),
+            for (final key in keys) ...[
+              if (key != null) ...[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: AppSpacing.md,
+                    bottom: AppSpacing.xs,
+                    left: AppSpacing.xxs,
+                  ),
+                  child: Text(
+                    key.toUpperCase(),
+                    style: text.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                ),
+              ],
+              StudyFloatingCard(
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+                child: Column(
+                  children: [
+                    for (final s in grouped[key]!)
+                      _SubjectListRow(
+                        subject: s,
+                        accent: _accents[accentIndex++ % _accents.length],
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }
 
-class _SubjectMetricCard extends StatelessWidget {
-  const _SubjectMetricCard({required this.subject});
+class _SubjectListRow extends StatelessWidget {
+  const _SubjectListRow({
+    required this.subject,
+    required this.accent,
+  });
 
   final UserSubjectEntity subject;
+  final Color accent;
 
   @override
   Widget build(BuildContext context) {
-    final fmt = DateFormat('dd.MM.yyyy');
-    final progress = (subject.progressPct / 100).clamp(0.0, 1.0);
+    final pct = subject.progressPct.clamp(0, 100);
+    final title = subjectDisplayTitle(
+      subjectCode: subject.subjectCode,
+      subjectName: subject.subjectName,
+      section: subject.section,
+    );
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: InkWell(
-        onTap: () => context.push('/subjects/${subject.subjectCode}'),
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Icon(Icons.book_outlined, size: 22),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      subjectDisplayTitle(
-                        subjectCode: subject.subjectCode,
-                        subjectName: subject.subjectName,
-                        section: subject.section,
-                      ),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                    ),
-                  ),
-                  Text(
-                    'Güven: ${subject.progressPct.toStringAsFixed(0)}%',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  const Icon(Icons.chevron_right, size: 20),
-                ],
-              ),
-              const SizedBox(height: 12),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: progress,
-                  minHeight: 6,
-                ),
-              ),
-            ],
-          ),
-        ),
+    return StudyRow(
+      title: title,
+      subtitle: subject.section?.isNotEmpty == true
+          ? subject.section
+          : subject.subjectCode,
+      leading: StudyIcons.subjects,
+      leadingColor: accent,
+      trailing: Text(
+        '%${pct.toStringAsFixed(0)}',
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: accent,
+            ),
       ),
+      onTap: () => context.push('/subjects/${subject.subjectCode}'),
     );
   }
 }

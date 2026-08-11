@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_radius.dart';
 import '../../core/theme/app_spacing.dart';
 
-/// Sprint 16 — Standard surface card.
+/// Standard surface — borderless by default; optional hairline when needed.
 class StudyCard extends StatelessWidget {
   const StudyCard({
     super.key,
@@ -13,6 +13,7 @@ class StudyCard extends StatelessWidget {
     this.color,
     this.borderColor,
     this.margin,
+    this.bordered = false,
   });
 
   final Widget child;
@@ -21,6 +22,7 @@ class StudyCard extends StatelessWidget {
   final Color? color;
   final Color? borderColor;
   final EdgeInsetsGeometry? margin;
+  final bool bordered;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,13 @@ class StudyCard extends StatelessWidget {
     final card = Material(
       color: color ?? scheme.surface,
       shape: RoundedRectangleBorder(
-        borderRadius: AppRadius.card,
-        side: BorderSide(color: borderColor ?? scheme.outlineVariant),
+        borderRadius: AppRadius.surface,
+        side: bordered
+            ? BorderSide(
+                color: borderColor ??
+                    scheme.outlineVariant.withValues(alpha: 0.55),
+              )
+            : BorderSide.none,
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(

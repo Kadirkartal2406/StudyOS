@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/errors/app_exception.dart';
 import '../../../../core/network/dio_client.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/soft_progress.dart';
+import '../../../../shared/widgets/study_surface.dart';
 import '../../data/datasources/study_session_remote_datasource.dart';
 
 final studySessionTodaySummaryProvider =
@@ -11,7 +14,7 @@ final studySessionTodaySummaryProvider =
   return ds.todaySummary();
 });
 
-/// Günlük uyum paneli — ders dakikası / plan % / hedef gap / mola.
+/// Günlük uyum paneli — sakin progress + tonal surface.
 class TodaySummaryCard extends ConsumerWidget {
   const TodaySummaryCard({super.key});
 
@@ -19,21 +22,19 @@ class TodaySummaryCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(studySessionTodaySummaryProvider);
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
 
     return async.when(
-      loading: () => const Card(
-        child: Padding(
-          padding: EdgeInsets.all(16),
+      loading: () => const StudySurface(
+        child: SizedBox(
+          height: 72,
           child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
         ),
       ),
-      error: (e, _) => Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            e is AppException ? e.message : 'Bugünkü özet yüklenemedi',
-            style: TextStyle(color: theme.colorScheme.error),
-          ),
+      error: (e, _) => StudySurface(
+        child: Text(
+          e is AppException ? e.message : 'Bugünkü özet yüklenemedi',
+          style: TextStyle(color: scheme.error),
         ),
       ),
       data: (data) {
@@ -46,96 +47,116 @@ class TodaySummaryCard extends ConsumerWidget {
         final bySubject = (data['by_subject'] as List<dynamic>? ?? [])
             .whereType<Map>()
             .toList();
+        final progress = (adherence / 100).clamp(0.0, 1.0);
 
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Bugünkü özet',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+        return StudySurface(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bugünkü hedef',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
                 ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 12,
-                  runSpacing: 8,
-                  children: [
-                    _statChip(context, 'Odak', '$focus dk'),
-                    _statChip(
-                      context,
-                      'Plan uyumu',
-                      '%${adherence.toStringAsFixed(0)}',
-                    ),
-                    _statChip(
-                      context,
-                      gap > 0 ? 'Hedefe' : 'Hedef',
-                      gap > 0 ? '$gap dk kaldı' : 'tamam',
-                    ),
-                    _statChip(context, 'Mola', '$breaks dk'),
-                    if (planned > 0)
-                      _statChip(context, 'Planlanan', '$planned dk'),
-                  ],
-                ),
-                if (bySubject.isNotEmpty) ...[
-                  const SizedBox(height: 12),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
                   Text(
-                    'Dersler',
-                    style: theme.textTheme.labelLarge,
+                    '%${adherence.toStringAsFixed(0)}',
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.4,
+                    ),
                   ),
-                  const SizedBox(height: 6),
-                  for (final s in bySubject.take(5))
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              s['subject_label']?.toString() ??
-                                  s['subject_code']?.toString() ??
-                                  '',
-                            ),
-                          ),
-                          Text(
-                            '${s['focus_minutes'] ?? 0} dk'
-                            '${(s['planned_minutes'] as num? ?? 0) > 0 ? ' / ${s['planned_minutes']} plan' : ''}',
-                            style: theme.textTheme.bodySmall,
-                          ),
-                        ],
+                  const SizedBox(width: AppSpacing.xs),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(
+                      'plan uyumu',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: scheme.onSurfaceVariant,
                       ),
                     ),
+                  ),
                 ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              SoftProgress(value: progress),
+              const SizedBox(height: AppSpacing.md),
+              Wrap(
+                spacing: AppSpacing.lg,
+                runSpacing: AppSpacing.sm,
+                children: [
+                  _metric(context, 'Odak', '$focus dk'),
+                  _metric(
+                    context,
+                    gap > 0 ? 'Hedefe' : 'Hedef',
+                    gap > 0 ? '$gap dk kaldı' : 'tamam',
+                  ),
+                  _metric(context, 'Mola', '$breaks dk'),
+                  if (planned > 0) _metric(context, 'Planlanan', '$planned dk'),
+                ],
+              ),
+              if (bySubject.isNotEmpty) ...[
+                const SizedBox(height: AppSpacing.lg),
+                Text(
+                  'Dersler',
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                for (final s in bySubject.take(5))
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            s['subject_label']?.toString() ??
+                                s['subject_code']?.toString() ??
+                                '',
+                            style: theme.textTheme.bodyLarge,
+                          ),
+                        ),
+                        Text(
+                          '${s['focus_minutes'] ?? 0} dk'
+                          '${(s['planned_minutes'] as num? ?? 0) > 0 ? ' / ${s['planned_minutes']} plan' : ''}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
-            ),
+            ],
           ),
         );
       },
     );
   }
 
-  Widget _statChip(BuildContext context, String label, String value) {
-    final cs = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: cs.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: Theme.of(context).textTheme.labelSmall),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
+  Widget _metric(BuildContext context, String label, String value) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
           ),
-        ],
-      ),
+        ),
+        Text(
+          value,
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
     );
   }
 }

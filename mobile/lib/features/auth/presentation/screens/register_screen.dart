@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../providers/auth_provider.dart';
 import '../providers/auth_state.dart';
 import '../widgets/auth_button.dart';
@@ -234,7 +235,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     child: const Text(
                       'Giriş Yap',
                       style: TextStyle(
-                        color: Color(0xFF6C63FF),
+                        color: AppColors.primaryLight,
                         fontWeight: FontWeight.w700,
                       ),
                     ),

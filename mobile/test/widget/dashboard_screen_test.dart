@@ -11,6 +11,9 @@ import 'package:studyos_mobile/features/dashboard/presentation/providers/dashboa
 import 'package:studyos_mobile/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:studyos_mobile/features/onboarding/domain/entities/learning_profile_entity.dart';
 import 'package:studyos_mobile/features/onboarding/presentation/providers/learning_profile_provider.dart';
+import 'package:studyos_mobile/features/study_session/presentation/widgets/today_summary_card.dart';
+import 'package:studyos_mobile/shared/widgets/app_bottom_nav_bar.dart';
+import 'package:studyos_mobile/shared/widgets/study_glass_button.dart';
 
 class _FakeDashboardRepository implements DashboardRepository {
   _FakeDashboardRepository({this.entity, this.error, this.delay = Duration.zero});
@@ -64,6 +67,7 @@ const _sampleDashboard = DashboardEntity(
   journeyStage: 'building',
   journeyDaysRemaining: 120,
   mySubjectNames: ['Matematik', 'Türkçe', 'Geometri'],
+  mySubjectCodes: ['tyt_matematik', 'tyt_turkce', 'tyt_geometri'],
   activeExamType: 'yks',
   primaryExamType: 'yks',
   primaryTarget: DashboardExamTargetEntity(
@@ -136,6 +140,12 @@ Future<void> _pumpToday(
         ),
       ),
       GoRoute(
+        path: '/subjects/:subjectCode',
+        builder: (_, state) => Scaffold(
+          body: Text('subject:${state.pathParameters['subjectCode']}'),
+        ),
+      ),
+      GoRoute(
         path: '/pomodoro',
         builder: (_, __) => const Scaffold(body: Text('pomodoro')),
       ),
@@ -147,6 +157,38 @@ Future<void> _pumpToday(
         path: '/notification-settings',
         builder: (_, __) => const Scaffold(body: Text('settings')),
       ),
+      GoRoute(
+        path: '/profile',
+        builder: (_, __) => const Scaffold(body: Text('profile')),
+      ),
+      GoRoute(
+        path: '/journey',
+        builder: (_, __) => const Scaffold(body: Text('journey')),
+      ),
+      GoRoute(
+        path: '/assessment',
+        builder: (_, __) => const Scaffold(body: Text('assessment')),
+      ),
+      GoRoute(
+        path: '/assessment/daily/history',
+        builder: (_, __) => const Scaffold(body: Text('daily-history')),
+      ),
+      GoRoute(
+        path: '/assessment/daily/start',
+        builder: (_, __) => const Scaffold(body: Text('daily-start')),
+      ),
+      GoRoute(
+        path: '/dashboard',
+        builder: (_, __) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: '/subjects',
+        builder: (_, __) => const Scaffold(body: Text('subjects')),
+      ),
+      GoRoute(
+        path: '/menu',
+        builder: (_, __) => const Scaffold(body: Text('menu')),
+      ),
     ],
   );
 
@@ -157,6 +199,24 @@ Future<void> _pumpToday(
         widgetServiceProvider.overrideWithValue(NoOpWidgetService()),
         platformServiceProvider.overrideWithValue(_FakePlatformService()),
         learningProfileProvider.overrideWith((ref) async => _sampleProfile),
+        studySessionTodaySummaryProvider.overrideWith(
+          (ref) async => <String, dynamic>{
+            'focus_minutes': 45,
+            'break_minutes': 5,
+            'planned_minutes': 120,
+            'plan_adherence_pct': 37.5,
+            'goal_gap_minutes': 75,
+            'by_subject': <Map<String, dynamic>>[],
+          },
+        ),
+        dashboardProvider.overrideWith((ref) {
+          return DashboardNotifier(
+            ref.watch(dashboardRepositoryProvider),
+            ref.watch(widgetServiceProvider),
+            autoLoad: true,
+            shouldAutoUpdateWidget: () => false,
+          );
+        }),
       ],
       child: MaterialApp.router(routerConfig: router),
     ),
@@ -164,7 +224,7 @@ Future<void> _pumpToday(
 }
 
 void main() {
-  testWidgets('Today yüklenirken skeleton gösterir', (tester) async {
+  testWidgets('Bugün yüklenirken skeleton gösterir', (tester) async {
     await _pumpToday(
       tester,
       _FakeDashboardRepository(
@@ -173,45 +233,58 @@ void main() {
       ),
     );
 
-    expect(find.text('Şimdi yap'), findsNothing);
+    expect(find.text('Çalışmaya Başla'), findsNothing);
     await tester.pump(const Duration(milliseconds: 250));
   });
 
-  testWidgets('Today tek Primary Action gösterir; hub kartları yoktur', (
+  testWidgets('Glass Home: greeting, CTA, sections match D reference', (
     tester,
   ) async {
     await _pumpToday(tester, _FakeDashboardRepository(entity: _sampleDashboard));
     await tester.pump();
-    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+    await tester.pump(const Duration(milliseconds: 50));
 
-    expect(find.text('Şimdi yap'), findsOneWidget);
-    expect(find.text('Bu konu üzerinde çalış'), findsOneWidget);
-    expect(find.text('Problemler · 25 dk'), findsOneWidget);
-    expect(find.text('Başla'), findsOneWidget);
-    expect(find.widgetWithText(FilledButton, 'Başla'), findsOneWidget);
+    expect(find.text('Merhaba,'), findsOneWidget);
+    expect(find.text('Kadir 👋'), findsOneWidget);
+    expect(find.text('Bugün ne çalışacaksın?'), findsOneWidget);
+    expect(find.text('Çalışmaya Başla'), findsOneWidget);
+    expect(find.text('Planlanan'), findsOneWidget);
+    expect(find.text('3 Ders'), findsOneWidget);
+    expect(find.text('İlerleme'), findsOneWidget);
+    expect(find.text('Süre'), findsOneWidget);
 
-    expect(find.textContaining('2 çalışma bloğun kaldı'), findsOneWidget);
-    expect(find.textContaining('1 tekrar bekliyor'), findsOneWidget);
-    expect(find.textContaining('YKS'), findsWidgets);
-    expect(find.textContaining('45 / 120 dk'), findsOneWidget);
+    expect(find.text('Derslerim'), findsWidgets);
+    expect(find.text('Derse Devam Et'), findsOneWidget);
+    expect(find.text('Matematik'), findsOneWidget);
 
-    // Demoted Journey Hub / modül kartları
+    expect(find.text('Testler'), findsOneWidget);
+    expect(find.text('Teste Başla'), findsOneWidget);
+    expect(find.text('Günün Denemesi'), findsOneWidget);
+
+    expect(find.text('Hedeflerim'), findsOneWidget);
+    expect(find.text('Hedefleri Gör'), findsOneWidget);
+    expect(find.text('Günlük Hedef\nTamamlandı'), findsOneWidget);
+
+    expect(find.byType(StudyGlassButton), findsWidgets);
+    expect(find.text('Neden?'), findsOneWidget);
+
+    // Old editorial photo / card-wall remnants must stay gone
+    expect(find.text('Şimdi yap'), findsNothing);
+    expect(find.text('Bugünkü ilerleme'), findsNothing);
     expect(find.text('Bugünkü görevler'), findsNothing);
     expect(find.text('AI Coach'), findsNothing);
-    expect(find.text('Dersler'), findsNothing);
-    expect(find.text('Tüm Dersler'), findsNothing);
     expect(find.text('Hızlı İşlemler'), findsNothing);
-    expect(find.text('Sistem Entegrasyonu'), findsNothing);
   });
 
-  testWidgets('Bottom navigation Today etiketini gösterir', (tester) async {
+  testWidgets('Bottom navigation Bugün etiketini gösterir', (tester) async {
     await _pumpToday(tester, _FakeDashboardRepository(entity: _sampleDashboard));
     await tester.pump();
-    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
 
-    final navBar = find.byType(NavigationBar);
+    final navBar = find.byType(AppBottomNavBar);
     expect(navBar, findsOneWidget);
-    for (final label in ['Today', 'Plan', 'Pomodoro', 'İstatistik', 'Profil']) {
+    for (final label in ['Bugün', 'Derslerim', 'Odak', 'Planım', 'Menü']) {
       expect(
         find.descendant(of: navBar, matching: find.text(label)),
         findsOneWidget,
@@ -219,23 +292,26 @@ void main() {
     }
   });
 
-  testWidgets('API hatasında Tekrar Dene çalışır', (tester) async {
+  testWidgets('API hatasında Tekrar dene çalışır', (tester) async {
     final repository = _FakeDashboardRepository(
       error: Exception('sunucu hatası'),
       delay: const Duration(milliseconds: 50),
     );
     await _pumpToday(tester, repository);
-    await tester.pump(const Duration(milliseconds: 100));
-
-    expect(find.text('Today yüklenemedi'), findsOneWidget);
-    expect(find.text('Tekrar Dene'), findsOneWidget);
-    expect(repository.callCount, 1);
-
-    await tester.tap(find.text('Tekrar Dene'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text('Today yüklenemedi'), findsOneWidget);
+    expect(find.text('Bugün yüklenemedi'), findsOneWidget);
+    expect(find.text('Tekrar dene'), findsOneWidget);
+    expect(repository.callCount, 1);
+
+    await tester.tap(find.text('Tekrar dene'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.text('Bugün yüklenemedi'), findsOneWidget);
     expect(repository.callCount, 2);
   });
 }

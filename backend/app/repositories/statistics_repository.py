@@ -7,7 +7,7 @@ Sprint-1.6: QuestionStatistics tablosu kullanılmaz — bkz. Meeting-014.
 import uuid
 from datetime import date, datetime
 
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.constants import STATISTICS_FREE_LABEL
@@ -18,6 +18,15 @@ from app.models.study_session import StudySession, StudySessionStatus
 class StatisticsRepository:
     def __init__(self, db: AsyncSession):
         self.db = db
+
+    @staticmethod
+    def _subject_scope_filter(subject_codes: set[str]):
+        """Active-exam codes OR unbound (null) sessions — 'Serbest' pomodoro counts."""
+        codes = {c.lower() for c in subject_codes}
+        return or_(
+            StudySession.subject_code.is_(None),
+            func.lower(StudySession.subject_code).in_(codes),
+        )
 
     def _completed_filters(
         self,
@@ -35,8 +44,7 @@ class StatisticsRepository:
         if started_to is not None:
             filters.append(StudySession.started_at < started_to)
         if subject_codes:
-            codes = {c.lower() for c in subject_codes}
-            filters.append(func.lower(StudySession.subject_code).in_(codes))
+            filters.append(self._subject_scope_filter(subject_codes))
         return filters
 
     async def aggregate_sessions(
@@ -248,8 +256,7 @@ class StatisticsRepository:
             StudySession.status == StudySessionStatus.COMPLETED,
         ]
         if subject_codes:
-            codes = {c.lower() for c in subject_codes}
-            filters.append(func.lower(StudySession.subject_code).in_(codes))
+            filters.append(self._subject_scope_filter(subject_codes))
         result = await self.db.execute(
             select(day_col)
             .where(*filters)

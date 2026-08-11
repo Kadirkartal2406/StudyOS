@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../providers/auth_provider.dart';
 import '../providers/auth_state.dart';
 import '../widgets/auth_button.dart';
@@ -80,7 +81,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   height: 72,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF6C63FF), Color(0xFF3ECFCF)],
+                      colors: [AppColors.primary, AppColors.primaryLight],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -167,7 +168,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: Text(
                             'Şifremi Unuttum',
                             style: TextStyle(
-                              color: const Color(0xFF6C63FF).withAlpha(220),
+                              color: AppColors.primaryLight.withAlpha(220),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -197,7 +198,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     child: const Text(
                       'Kayıt Ol',
                       style: TextStyle(
-                        color: Color(0xFF6C63FF),
+                        color: AppColors.primaryLight,
                         fontWeight: FontWeight.w700,
                       ),
                     ),

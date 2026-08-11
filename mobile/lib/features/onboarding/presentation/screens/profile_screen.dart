@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../shared/widgets/app_bottom_nav_bar.dart';
+import '../../../../shared/widgets/study_icons.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../../auth/presentation/providers/auth_state.dart';
 import '../../../dashboard/presentation/providers/dashboard_provider.dart';
@@ -39,11 +40,14 @@ class ProfileScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         title: const Text('Profil'),
         actions: [
           IconButton(
             tooltip: 'Ayarlar',
-            icon: const Icon(Icons.settings_outlined),
+            icon: const Icon(StudyIcons.settings),
             onPressed: () => context.push('/settings'),
           ),
         ],

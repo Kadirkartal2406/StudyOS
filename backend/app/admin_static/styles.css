@@ -402,7 +402,7 @@ body {
 }
 
 .muted { color: var(--text-muted); }
-.error { color: #fca5a5; font-size: 0.9rem; }
+.error { color: var(--color-danger); font-size: 0.9rem; }
 
 /* ----------------------------------------------------------
    8. AUTH / LOGIN
@@ -850,8 +850,9 @@ fieldset legend {
 
 @media (max-width: 800px) {
   .app {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   .mobile-bar {
@@ -883,7 +884,11 @@ fieldset legend {
     box-shadow: var(--shadow-glass);
   }
 
-  main { padding: var(--space-4); }
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-4);
+  }
 
   .top { flex-direction: column; gap: var(--space-2); }
   .top-right { align-self: flex-end; }

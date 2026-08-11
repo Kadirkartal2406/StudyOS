@@ -798,7 +798,7 @@ function renderPreviewData(d) {
       <span class="badge">${escapeHtml(d.exam)}</span>
       <span class="muted">${escapeHtml(d.subject_code)} · ${escapeHtml(d.topic_code)} · ${escapeHtml(d.difficulty_band)}</span>
     </div>
-    <div style="background:var(--bg-alt,#f8f8f8);padding:12px;border-radius:8px;margin-bottom:12px;">
+    <div style="background:var(--surface-2);padding:12px;border-radius:8px;margin-bottom:12px;">
       <div style="font-size:14px;line-height:1.6;">${escapeHtml(d.stem)}</div>
       <div style="margin-top:8px;">${choicesHtml}</div>
     </div>
@@ -859,7 +859,7 @@ async function showPreview(cardId) {
         <span class="badge">${escapeHtml(d.exam)}</span>
         <span class="muted">${escapeHtml(d.subject_code)} · ${escapeHtml(d.topic_code)} · ${escapeHtml(d.difficulty_band)}</span>
       </div>
-      <div style="background:var(--bg-alt,#f8f8f8);padding:12px;border-radius:8px;margin-bottom:12px;">
+      <div style="background:var(--surface-2);padding:12px;border-radius:8px;margin-bottom:12px;">
         <div style="font-size:14px;line-height:1.6;">${escapeHtml(d.stem)}</div>
         <div style="margin-top:8px;">${choicesHtml}</div>
       </div>
@@ -994,9 +994,9 @@ function renderLivePreview(previews) {
       <div style="
           margin-bottom:24px;
           padding:16px;
-          border:1px solid #ddd;
+          border:1px solid var(--border-default);
           border-radius:8px;
-          background:#fff;
+          background:var(--surface-1);
       ">
 
         <h4>Soru ${index + 1}</h4>
@@ -1398,19 +1398,26 @@ $("qp-manual-add-btn")?.addEventListener("click", async () => {
       eaeJson = JSON.parse(eaeText);
     }
     
+    const choices = {
+      "A": $("qp-manual-a").value,
+      "B": $("qp-manual-b").value,
+      "C": $("qp-manual-c").value,
+      "D": $("qp-manual-d").value,
+    };
+    const eVal = ($("qp-manual-e")?.value || "").trim();
+    const correctKey = $("qp-manual-correct").value;
+    if (eVal || correctKey === "E") {
+      choices["E"] = eVal || $("qp-manual-e").value;
+    }
+
     const payload = {
       exam: $("qp-manual-exam").value || "kpss",
       subject_code: $("qp-manual-subject").value || "cografya",
       topic_code: $("qp-manual-topic").value || "turkiye-haritasi",
       difficulty_band: $("qp-manual-diff").value || "medium",
       stem: $("qp-manual-stem").value,
-      choices: {
-        "A": $("qp-manual-a").value,
-        "B": $("qp-manual-b").value,
-        "C": $("qp-manual-c").value,
-        "D": $("qp-manual-d").value,
-      },
-      correct_key: $("qp-manual-correct").value,
+      choices,
+      correct_key: correctKey,
       explanation: $("qp-manual-explanation").value || null,
       eae_interaction: eaeJson
     };
@@ -1429,6 +1436,7 @@ $("qp-manual-add-btn")?.addEventListener("click", async () => {
     $("qp-manual-b").value = "";
     $("qp-manual-c").value = "";
     $("qp-manual-d").value = "";
+    if ($("qp-manual-e")) $("qp-manual-e").value = "";
     $("qp-manual-eae").value = "";
     
     await loadQuestionPool();

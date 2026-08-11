@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/errors/app_exception.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/study_question_chrome.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
 import '../../../educational_assets/presentation/components/eae_interactive_canvas.dart';
 import '../../data/topic_quiz_remote_datasource.dart';
@@ -252,50 +255,61 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
 
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-          child: Row(
-            children: [
-              Text(
-                'Soru ${_index + 1} / ${quiz.items.length}',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const Spacer(),
-              Text(
-                'Doğru cevaplar gizli',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-              ),
-            ],
+        StudyQuestionProgress(
+          current: _index + 1,
+          total: quiz.items.length,
+          trailing: Text(
+            'Doğru cevaplar gizli',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
           ),
         ),
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              AppSpacing.sm,
+              AppSpacing.md,
+              AppSpacing.lg,
+            ),
             children: [
               Text(
-                item.stem,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
+                '${_index + 1}.',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w700,
                     ),
               ),
-              const SizedBox(height: 16),
-              if (item.eaeInteraction != null && item.eaeInteraction!['asset_uri'] != null)
+              const SizedBox(height: AppSpacing.xs),
+              Text(
+                item.stem,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: 17,
+                      height: 1.5,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xFFF8FAFC)
+                          : AppColors.textPrimary,
+                    ),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              if (item.eaeInteraction != null &&
+                  item.eaeInteraction!['asset_uri'] != null)
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+                  padding: const EdgeInsets.only(bottom: AppSpacing.lg),
                   child: EAEInteractiveCanvas(
                     targetAssetId: item.eaeInteraction!['asset_uri'] as String,
                     selectedNodeId: _selectedNodes[item.id],
                     onNodeSelected: (nodeId) {
                       setState(() {
                         _selectedNodes[item.id] = nodeId;
-                        // Map node id / label onto A-D choice when possible
                         for (final entry in item.choices.entries) {
                           final text = entry.value;
                           if (text == nodeId ||
                               text.contains(nodeId) ||
-                              nodeId.endsWith('::${text.toLowerCase().replaceAll(' ', '_')}') ||
+                              nodeId.endsWith(
+                                  '::${text.toLowerCase().replaceAll(' ', '_')}') ||
                               nodeId.split('::').last ==
                                   text
                                       .toLowerCase()
@@ -314,55 +328,26 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
                     },
                   ),
                 ),
-              if (item.eaeInteraction == null) ...['A', 'B', 'C', 'D'].map((key) {
-                final text = item.choices[key] ?? '';
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: RadioListTile<String>(
-                    value: key,
-                    groupValue: selected,
-                    onChanged: (v) => setState(() => _answers[item.id] = v),
-                    title: Text('$key) $text'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.outlineVariant,
-                      ),
-                    ),
-                  ),
-                );
-              }),
+              if (item.eaeInteraction == null)
+                ...['A', 'B', 'C', 'D'].map((key) {
+                  final choiceText = item.choices[key] ?? '';
+                  return StudyChoiceOption(
+                    letter: key,
+                    label: choiceText,
+                    selected: selected == key,
+                    onTap: () => setState(() => _answers[item.id] = key),
+                  );
+                }),
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              if (_index > 0)
-                OutlinedButton(
-                  onPressed: () => setState(() => _index -= 1),
-                  child: const Text('Önceki'),
-                ),
-              const Spacer(),
-              if (_index < quiz.items.length - 1)
-                FilledButton(
-                  onPressed: () => setState(() => _index += 1),
-                  child: const Text('Sonraki'),
-                )
-              else
-                FilledButton(
-                  onPressed: _submitting ? null : _submit,
-                  child: _submitting
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Bitir'),
-                ),
-            ],
-          ),
+        StudyQuestionFooter(
+          canGoPrevious: _index > 0,
+          isLast: _index >= quiz.items.length - 1,
+          submitting: _submitting,
+          onPrevious: () => setState(() => _index -= 1),
+          onNext: () => setState(() => _index += 1),
+          onSubmit: _submit,
         ),
       ],
     );

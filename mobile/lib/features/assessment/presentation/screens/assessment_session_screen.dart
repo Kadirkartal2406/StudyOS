@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/errors/app_exception.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/study_question_chrome.dart';
 import '../../../onboarding/presentation/providers/first_run_phase_provider.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
 import '../../data/assessment_remote_datasource.dart';
@@ -510,19 +513,12 @@ class _AssessmentSessionScreenState
 
     final questionPane = Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  'Soru ${_index + 1} / ${session.questions.length}'
-                  '${item.subjectName != null ? ' · ${item.subjectName}' : ''}',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ),
-              if (showMath && !wide)
-                TextButton.icon(
+        StudyQuestionProgress(
+          current: _index + 1,
+          total: session.questions.length,
+          subtitle: item.subjectName,
+          trailing: showMath && !wide
+              ? TextButton.icon(
                   onPressed: () {
                     showModalBottomSheet<void>(
                       context: context,
@@ -538,70 +534,59 @@ class _AssessmentSessionScreenState
                   },
                   icon: const Icon(Icons.draw_outlined, size: 18),
                   label: const Text('Çizim'),
-                ),
-            ],
-          ),
+                )
+              : null,
         ),
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              AppSpacing.sm,
+              AppSpacing.md,
+              AppSpacing.lg,
+            ),
             children: [
               Text(
-                item.stem,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
+                '${_index + 1}.',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w700,
                     ),
               ),
-              const SizedBox(height: 16),
-              ...['A', 'B', 'C', 'D', 'E'].where((k) => item.choices.containsKey(k)).map((key) {
-                final text = item.choices[key] ?? '';
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: RadioListTile<String>(
-                    value: key,
-                    groupValue: selected,
-                    onChanged: (v) => setState(() => _answers[item.id] = v),
-                    title: Text('$key) $text'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.outlineVariant,
-                      ),
+              const SizedBox(height: AppSpacing.xs),
+              Text(
+                item.stem,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: 17,
+                      height: 1.5,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xFFF8FAFC)
+                          : AppColors.textPrimary,
                     ),
-                  ),
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              ...['A', 'B', 'C', 'D', 'E']
+                  .where((k) => item.choices.containsKey(k))
+                  .map((key) {
+                final choiceText = item.choices[key] ?? '';
+                return StudyChoiceOption(
+                  letter: key,
+                  label: choiceText,
+                  selected: selected == key,
+                  onTap: () => setState(() => _answers[item.id] = key),
                 );
               }),
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              if (_index > 0)
-                OutlinedButton(
-                  onPressed: () => setState(() => _index -= 1),
-                  child: const Text('Önceki'),
-                ),
-              const Spacer(),
-              if (_index < session.questions.length - 1)
-                FilledButton(
-                  onPressed: () => setState(() => _index += 1),
-                  child: const Text('Sonraki'),
-                )
-              else
-                FilledButton(
-                  onPressed: _submitting ? null : _submit,
-                  child: _submitting
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Bitir'),
-                ),
-            ],
-          ),
+        StudyQuestionFooter(
+          canGoPrevious: _index > 0,
+          isLast: _index >= session.questions.length - 1,
+          submitting: _submitting,
+          onPrevious: () => setState(() => _index -= 1),
+          onNext: () => setState(() => _index += 1),
+          onSubmit: _submit,
         ),
       ],
     );

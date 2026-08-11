@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../providers/auth_provider.dart';
 import '../providers/auth_state.dart';
 
@@ -71,14 +72,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   height: 100,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF6C63FF), Color(0xFF3ECFCF)],
+                      colors: [AppColors.primary, AppColors.primaryLight],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF6C63FF).withAlpha(100),
+                        color: AppColors.primary.withAlpha(100),
                         blurRadius: 30,
                         spreadRadius: 5,
                       ),
