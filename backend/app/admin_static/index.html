@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,8 +9,8 @@
 <body>
   <div id="login-view" class="auth-wrap">
     <form id="login-form" class="auth-card">
-      <h1>StudyOS Admin</h1>
-      <p class="muted">Sistem yönetimi</p>
+      <div class="auth-brand">StudyOS</div>
+      <p class="muted">Yönetim paneli</p>
       <label>E-posta<input id="login-email" type="email" required autocomplete="username" /></label>
       <label>Şifre<input id="login-password" type="password" required autocomplete="current-password" /></label>
       <button type="submit">Giriş yap</button>
@@ -19,302 +19,413 @@
   </div>
 
   <div id="app-view" class="app" hidden>
-    <aside class="sidebar">
-      <div class="brand">StudyOS Admin</div>
-      <nav>
-        <button data-tab="overview" class="nav active">Özet</button>
-        <button data-tab="users" class="nav">Kullanıcılar</button>
-        <button data-tab="questions" class="nav">Tüm Sorular / Ara</button>
-        <button data-tab="question-pool" class="nav">Soru Envanteri</button>
-        <button data-tab="assets" class="nav">Assets</button>
+    <!-- Mobile topbar (visible < 800px) -->
+    <div class="mobile-bar">
+      <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="sidebar">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+      </button>
+      <div class="mobile-bar-brand">StudyOS</div>
+      <button id="theme-toggle-mobile" class="theme-toggle" aria-label="Tema değiştir">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
+
+    <aside id="sidebar" class="sidebar" role="navigation" aria-label="Ana navigasyon">
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="brand-logo">S</span>
+          <span class="brand-text">StudyOS</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <button data-tab="overview" class="nav active" aria-current="page">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span>Özet</span>
+        </button>
+        <button data-tab="questions" class="nav">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Sorular</span>
+        </button>
+        <button data-tab="question-pool" class="nav">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>Soru Havuzu</span>
+        </button>
+        <button data-tab="assets" class="nav">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Assets</span>
+        </button>
+        <button data-tab="users" class="nav">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Kullanıcılar</span>
+        </button>
       </nav>
-      <button id="logout-btn" class="ghost">Çıkış</button>
+      <div class="sidebar-footer">
+        <button id="theme-toggle-desktop" class="theme-toggle" aria-label="Tema değiştir">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button id="logout-btn" class="nav nav-logout">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Çıkış</span>
+        </button>
+      </div>
     </aside>
+
     <main>
       <header class="top">
-        <h2 id="page-title">Özet</h2>
-        <div id="admin-email" class="muted"></div>
+        <div class="top-left">
+          <h2 id="page-title">Özet</h2>
+          <p id="page-subtitle" class="page-subtitle">Sistem durumu ve aktivite</p>
+        </div>
+        <div class="top-right">
+          <div id="admin-email" class="admin-email muted"></div>
+        </div>
       </header>
 
-      <section id="tab-overview" class="tab">
-        <div id="overview-grid" class="cards"></div>
-      </section>
+      <div class="content-container">
+        <section id="tab-overview" class="tab">
+          <div id="overview-grid" class="dash"></div>
+        </section>
 
-      <section id="tab-users" class="tab" hidden>
-        <div class="toolbar">
-          <input id="user-search" placeholder="E-posta veya isim ara…" />
-          <button id="user-search-btn">Ara</button>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Ad</th><th>E-posta</th><th>Rol</th><th>Durum</th>
-                <th>Plan</th><th>Oturum</th><th>Soru</th><th></th>
-              </tr>
-            </thead>
-            <tbody id="users-body"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="tab-questions" class="tab" hidden>
-        <div class="toolbar">
-          <select id="q-source">
-            <option value="all">Tümü</option>
-            <option value="pool">Havuz</option>
-            <option value="generated">Üretilmiş</option>
-            <option value="record">Kullanıcı kayıtları</option>
-          </select>
-          <input id="q-search" placeholder="Metin / ders / konu…" />
-          <button id="q-search-btn">Ara</button>
-        </div>
-        <div id="questions-list" class="q-list"></div>
-      </section>
-
-      <section id="tab-question-pool" class="tab" hidden>
-        <div class="toolbar">
-          <button id="qp-run-scheduler-btn" style="background:#3b82f6;">▶ Gece Üretimini Tetikle (Manuel)</button>
-          
-          <select id="qp-trial-exam-select" style="margin-left: 8px; padding: 4px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
-            <option value="">Tüm Sınavlar</option>
-            <option value="kpss">KPSS</option>
-            <option value="tyt">TYT</option>
-            <option value="ayt">AYT</option>
-            <option value="lgs">LGS</option>
-            <option value="ales">ALES</option>
-            <option value="dgs">DGS</option>
-          </select>
-          <button id="qp-trigger-trial-exams-btn" style="background:#8b5cf6; margin-left: 8px;">▶ Seçili Denemeyi Üret</button>
-          
-          <!-- Gizlenen Geliştirici Butonları -->
-          <button id="qp-fill-missing-btn" style="display:none;">Fill missing</button>
-          <button id="qp-run-missing-safe-btn" style="display:none;">▶ Run Missing (Safe)</button>
-          <button id="qp-validate-5-btn" style="display:none;">Generate 5 (no save)</button>
-          <button id="qp-stop-gen-btn" class="danger" style="display:none;">⏹ STOP</button>
-          <button id="qp-batch-report-btn" style="display:none;">📊 Batch Report</button>
-          <button id="qp-production-report-btn" style="display:none;">📋 Production Report</button>
-          <label style="display:none;">
-            <input id="qp-dry-run" type="checkbox" /> dry_run
-          </label>
-          <label style="display:none;">
-            Approval
-            <select id="qp-approval-mode">
-              <option value="auto" selected>AUTO</option>
-              <option value="manual">MANUAL</option>
-            </select>
-          </label>
-          <div class="muted" id="qp-last-result" style="margin-left:auto;"></div>
-        </div>
-
-        <!-- Scheduler status -->
-        <div id="qp-scheduler-status" class="muted" style="margin:8px 0;font-size:13px;"></div>
-
-        <!-- M34.5 Live progress + cost gate -->
-        <div id="qp-cost-gate" class="muted" style="margin:8px 0;font-size:13px;"></div>
-        <div id="qp-live-progress" style="margin:8px 0;padding:12px;border:1px solid var(--border,#ddd);border-radius:8px;font-size:13px;">
-          <strong>Live Progress</strong>
-          <div id="qp-live-progress-body" class="muted">Idle</div>
-        </div>
-        <div id="qp-live-preview" style="margin:8px 0;padding:12px;border:1px solid var(--border,#ddd);border-radius:8px;font-size:13px;">
-          <strong>Live Preview</strong>
-          <div id="qp-live-preview-body" class="muted">Henüz soru yok.</div>
-        </div>
-        <div id="qp-pending-box" style="margin:8px 0;padding:12px;border:1px dashed var(--border,#ddd);border-radius:8px;font-size:13px;">
-          <strong>Pending Approval</strong>
-          <div id="qp-pending-body" class="muted">Boş</div>
-        </div>
-
-        <div id="qp-metrics-grid" class="cards"></div>
-
-        <!-- Fill Selected Topic inline form -->
-        <fieldset style="border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:16px;">
-          <legend style="font-weight:600;font-size:14px;color:#3b82f6;">✨ Yapay Zeka ile Hızlı Üretim</legend>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
-            <label style="display:flex;flex-direction:column;font-size:13px;">Sınav (örn: tyt)
-              <input id="qp-fill-exam" placeholder="tyt" style="width:100px;" />
-            </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Ders (örn: tyt_turkce)
-              <input id="qp-fill-subject" placeholder="tyt_turkce" style="width:140px;" />
-            </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Konu Kodu
-              <input id="qp-fill-topic" placeholder="paragraf" style="width:140px;" />
-            </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Zorluk
-              <select id="qp-fill-diff" style="width:90px;">
-                <option value="easy">Kolay</option>
-                <option value="medium" selected>Orta</option>
-                <option value="hard">Zor</option>
-              </select>
-            </label>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Soru Sayısı
-              <input id="qp-fill-count" type="number" value="10" min="1" max="2000" style="width:80px;" />
-            </label>
-            <button id="qp-fill-selected-btn" class="secondary" style="background:#3b82f6;color:white;border:none;">Üretimi Başlat</button>
+        <section id="tab-users" class="tab" hidden>
+          <div class="qs-toolbar">
+            <div class="qs-search-wrap">
+              <svg class="qs-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="user-search" class="qs-search-input" placeholder="Kullanıcı ara — isim veya e-posta…" />
+            </div>
+            <button id="user-search-btn" class="s-btn s-btn-primary">Ara</button>
           </div>
-          <div class="muted" id="qp-fill-selected-result" style="margin-top:6px;font-size:13px;"></div>
-        </fieldset>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ad</th><th>E-posta</th><th>Rol</th><th>Durum</th>
+                  <th>Plan</th><th>Oturum</th><th>Soru</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+        </section>
 
-        <fieldset style="border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:16px;">
-          <legend style="font-weight:600;font-size:14px;">✍️ Elle Soru Ekle (Manuel)</legend>
-          <div style="display:flex;gap:8px;flex-direction:column;">
-            <div style="display:flex;gap:8px;align-items:flex-end;">
-              <label style="display:flex;flex-direction:column;font-size:13px;">Sınav
-                <input id="qp-manual-exam" placeholder="kpss" style="width:80px;" />
+        <section id="tab-questions" class="tab" hidden>
+          <div class="qs-toolbar">
+            <div class="qs-search-wrap">
+              <svg class="qs-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="q-search" class="qs-search-input" placeholder="Soru ara — metin, ders veya konu…" />
+            </div>
+            <select id="q-source" class="qs-filter-select">
+              <option value="all">Tüm Kaynaklar</option>
+              <option value="pool">Havuz</option>
+              <option value="generated">Üretilmiş</option>
+              <option value="record">Kullanıcı Kayıtları</option>
+            </select>
+            <button id="q-search-btn" class="s-btn s-btn-primary">Ara</button>
+          </div>
+          <div id="questions-list" class="qs-tree"></div>
+        </section>
+
+        <section id="tab-question-pool" class="tab" hidden>
+          <!-- Pool Status + Metrics -->
+          <div id="qp-metrics-grid" class="qp-metrics"></div>
+
+          <!-- Scheduler + System -->
+          <div class="qp-status-row">
+            <div id="qp-scheduler-status" class="qp-status-chip muted"></div>
+            <div id="qp-cost-gate" class="qp-status-chip muted"></div>
+            <div class="qp-status-chip muted" id="qp-last-result"></div>
+          </div>
+
+          <!-- Actions toolbar -->
+          <div class="qp-actions">
+            <button id="qp-run-scheduler-btn" class="s-btn s-btn-primary">Scheduler Çalıştır</button>
+            <select id="qp-trial-exam-select">
+              <option value="">Tüm Sınavlar</option>
+              <option value="kpss">KPSS</option>
+              <option value="tyt">TYT</option>
+              <option value="ayt">AYT</option>
+              <option value="lgs">LGS</option>
+              <option value="ales">ALES</option>
+              <option value="dgs">DGS</option>
+            </select>
+            <button id="qp-trigger-trial-exams-btn" class="s-btn s-btn-secondary">Deneme Üret</button>
+            <!-- Hidden dev controls -->
+            <button id="qp-fill-missing-btn" style="display:none;">Fill missing</button>
+            <button id="qp-run-missing-safe-btn" style="display:none;">Run Missing (Safe)</button>
+            <button id="qp-validate-5-btn" style="display:none;">Generate 5 (no save)</button>
+            <button id="qp-stop-gen-btn" class="danger" style="display:none;">STOP</button>
+            <button id="qp-batch-report-btn" style="display:none;">Batch Report</button>
+            <button id="qp-production-report-btn" style="display:none;">Production Report</button>
+            <label style="display:none;"><input id="qp-dry-run" type="checkbox" /> dry_run</label>
+            <label style="display:none;">Approval <select id="qp-approval-mode"><option value="auto" selected>AUTO</option><option value="manual">MANUAL</option></select></label>
+          </div>
+
+          <!-- Live Progress -->
+          <div id="qp-live-progress" class="qp-panel">
+            <div class="qp-panel-header">
+              <span class="qp-panel-title">Üretim Durumu</span>
+            </div>
+            <div id="qp-live-progress-body" class="qp-panel-body muted">Idle</div>
+          </div>
+
+          <!-- Live Preview -->
+          <div id="qp-live-preview" class="qp-panel">
+            <div class="qp-panel-header">
+              <span class="qp-panel-title">Son Üretilen</span>
+            </div>
+            <div id="qp-live-preview-body" class="qp-panel-body muted">Henüz soru yok.</div>
+          </div>
+
+          <!-- Pending Approval -->
+          <div id="qp-pending-box" class="qp-panel qp-panel-attention">
+            <div class="qp-panel-header">
+              <span class="qp-panel-title">Onay Bekleyenler</span>
+            </div>
+            <div id="qp-pending-body" class="qp-panel-body muted">Boş</div>
+          </div>
+
+          <!-- AI Generation Form -->
+          <div class="qp-gen-section">
+            <h3 class="qp-section-title">AI ile Soru Üret</h3>
+            <div class="qp-gen-form">
+              <label class="qp-field">
+                <span class="qp-field-label">Sınav</span>
+                <input id="qp-fill-exam" placeholder="tyt" />
               </label>
-              <label style="display:flex;flex-direction:column;font-size:13px;">Ders Kodu
-                <input id="qp-manual-subject" placeholder="cografya" style="width:120px;" />
+              <label class="qp-field">
+                <span class="qp-field-label">Ders</span>
+                <input id="qp-fill-subject" placeholder="tyt_turkce" />
               </label>
-              <label style="display:flex;flex-direction:column;font-size:13px;">Konu Kodu
-                <input id="qp-manual-topic" placeholder="turkiye-haritasi" style="width:140px;" />
+              <label class="qp-field">
+                <span class="qp-field-label">Konu</span>
+                <input id="qp-fill-topic" placeholder="paragraf" />
               </label>
-              <label style="display:flex;flex-direction:column;font-size:13px;">Zorluk
-                <select id="qp-manual-diff" style="width:90px;">
+              <label class="qp-field qp-field-sm">
+                <span class="qp-field-label">Zorluk</span>
+                <select id="qp-fill-diff">
+                  <option value="easy">Kolay</option>
+                  <option value="medium" selected>Orta</option>
+                  <option value="hard">Zor</option>
+                </select>
+              </label>
+              <label class="qp-field qp-field-sm">
+                <span class="qp-field-label">Adet</span>
+                <input id="qp-fill-count" type="number" value="10" min="1" max="2000" />
+              </label>
+              <div class="qp-field-action">
+                <button id="qp-fill-selected-btn" class="s-btn s-btn-primary">Üretimi Başlat</button>
+              </div>
+            </div>
+            <div class="muted qp-form-result" id="qp-fill-selected-result"></div>
+          </div>
+
+          <!-- Manual Entry Form -->
+          <details class="qp-gen-section">
+            <summary class="qp-section-title qp-section-toggle">Elle Soru Ekle</summary>
+            <div class="qp-gen-form" style="margin-top:var(--space-3);">
+              <label class="qp-field qp-field-sm">
+                <span class="qp-field-label">Sınav</span>
+                <input id="qp-manual-exam" placeholder="kpss" />
+              </label>
+              <label class="qp-field">
+                <span class="qp-field-label">Ders Kodu</span>
+                <input id="qp-manual-subject" placeholder="cografya" />
+              </label>
+              <label class="qp-field">
+                <span class="qp-field-label">Konu Kodu</span>
+                <input id="qp-manual-topic" placeholder="turkiye-haritasi" />
+              </label>
+              <label class="qp-field qp-field-sm">
+                <span class="qp-field-label">Zorluk</span>
+                <select id="qp-manual-diff">
                   <option value="easy">Kolay</option>
                   <option value="medium" selected>Orta</option>
                   <option value="hard">Zor</option>
                 </select>
               </label>
             </div>
-            <label style="display:flex;flex-direction:column;font-size:13px;">Soru Metni (Kök)
-              <textarea id="qp-manual-stem" rows="2" style="width:100%;"></textarea>
+            <label class="qp-field" style="margin-top:var(--space-2);">
+              <span class="qp-field-label">Soru Metni</span>
+              <textarea id="qp-manual-stem" rows="2"></textarea>
             </label>
-            <div style="display:flex;gap:8px;">
-              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">A<input id="qp-manual-a" /></label>
-              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">B<input id="qp-manual-b" /></label>
-              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">C<input id="qp-manual-c" /></label>
-              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">D<input id="qp-manual-d" /></label>
+            <div class="qp-choices-grid">
+              <label class="qp-field"><span class="qp-field-label">A</span><input id="qp-manual-a" /></label>
+              <label class="qp-field"><span class="qp-field-label">B</span><input id="qp-manual-b" /></label>
+              <label class="qp-field"><span class="qp-field-label">C</span><input id="qp-manual-c" /></label>
+              <label class="qp-field"><span class="qp-field-label">D</span><input id="qp-manual-d" /></label>
             </div>
-            <div style="display:flex;gap:8px;align-items:flex-end;">
-              <label style="display:flex;flex-direction:column;font-size:13px;">Doğru Cevap
-                <select id="qp-manual-correct" style="width:90px;">
-                  <option value="A" selected>A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
-                  <option value="D">D</option>
-                  <option value="E">E</option>
+            <div class="qp-gen-form" style="margin-top:var(--space-2);">
+              <label class="qp-field qp-field-sm">
+                <span class="qp-field-label">Doğru Cevap</span>
+                <select id="qp-manual-correct">
+                  <option value="A" selected>A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
                 </select>
               </label>
-              <label style="display:flex;flex-direction:column;font-size:13px;flex:1;">Çözüm Açıklaması (Opsiyonel)
+              <label class="qp-field" style="flex:1;">
+                <span class="qp-field-label">Açıklama (opsiyonel)</span>
                 <input id="qp-manual-explanation" />
               </label>
             </div>
-            <label style="display:flex;flex-direction:column;font-size:13px;">EAE Interaction (JSON, opsiyonel)
-              <textarea id="qp-manual-eae" rows="2" placeholder='{"asset_uri": "studyos://assets/geography/turkey_admin/v1", "expected_node_id": "turkey_admin_v1::province::ankara"}' style="width:100%;font-family:monospace;font-size:12px;"></textarea>
+            <label class="qp-field" style="margin-top:var(--space-2);">
+              <span class="qp-field-label">EAE Interaction (JSON, opsiyonel)</span>
+              <textarea id="qp-manual-eae" rows="2" placeholder='{"asset_uri": "...", "expected_node_id": "..."}' style="font-family:var(--font-mono);font-size:12px;"></textarea>
             </label>
-            <div style="display:flex;justify-content:flex-end;">
-              <button id="qp-manual-add-btn" class="secondary" style="background:#10b981;color:white;border:none;">Soruyu Ekle</button>
+            <div style="display:flex;justify-content:flex-end;margin-top:var(--space-3);">
+              <button id="qp-manual-add-btn" class="s-btn s-btn-primary" style="background:var(--color-success);">Soruyu Ekle</button>
             </div>
-            <div class="muted" id="qp-manual-add-result" style="font-size:13px;"></div>
-          </div>
-        </fieldset>
+            <div class="muted qp-form-result" id="qp-manual-add-result"></div>
+          </details>
 
-        <div class="table-wrap" style="margin-top:16px;">
-          <table>
-            <thead>
-              <tr>
-                <th>Sınav</th>
-                <th>Ders</th>
-                <th>Konu</th>
-                <th>Mevcut</th>
-                <th>Min</th>
-                <th>Hedef</th>
-                <th>Durum</th>
-                <th>Kalite</th>
-                <th>Son Üretim</th>
-                <th>İşlemler</th>
-              </tr>
-            </thead>
-            <tbody id="qp-inventory-body"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="tab-assets" class="tab" hidden>
-        <div class="toolbar">
-          <input id="asset-search" placeholder="Asset ara (q)…" />
-          <select id="asset-domain">
-            <option value="geography" selected>geography</option>
-            <option value="">tümü</option>
-          </select>
-          <button id="asset-search-btn">Ara</button>
-        </div>
-        <div class="row" style="gap:16px;align-items:flex-start;">
-          <div style="flex:1;min-width:260px;">
+          <!-- Inventory -->
+          <div class="qp-inventory-section">
+            <h3 class="qp-section-title">Envanter</h3>
             <div class="table-wrap">
               <table>
                 <thead>
-                  <tr><th>Başlık</th><th>URI</th><th>v</th><th></th></tr>
+                  <tr>
+                    <th>Sınav</th><th>Ders</th><th>Konu</th>
+                    <th>Mevcut</th><th>Min</th><th>Hedef</th>
+                    <th>Durum</th><th>Kalite</th><th>Son Üretim</th><th>İşlemler</th>
+                  </tr>
                 </thead>
-                <tbody id="assets-body"></tbody>
+                <tbody id="qp-inventory-body"></tbody>
               </table>
             </div>
-            <fieldset style="border:1px solid var(--border,#ddd);border-radius:8px;padding:12px;margin-top:12px;">
-              <legend>Compile / Upload</legend>
-              <label>SVG<input id="asset-svg-file" type="file" accept=".svg,image/svg+xml" /></label>
-              <label>Manifest JSON<textarea id="asset-manifest-json" rows="6" style="width:100%;font-family:monospace;font-size:12px;"></textarea></label>
-              <button id="asset-compile-btn">Compile &amp; Register</button>
-              <div id="asset-compile-result" class="muted" style="margin-top:8px;font-size:13px;"></div>
-            </fieldset>
           </div>
-          <div style="flex:1.4;min-width:320px;">
-            <div id="asset-preview-meta" class="muted" style="margin-bottom:8px;">Asset seçin</div>
-            <div id="asset-preview-svg" style="border:1px solid var(--border,#ddd);border-radius:8px;min-height:220px;background:#f8fafc;overflow:auto;"></div>
-            <div class="toolbar" style="margin-top:8px;">
-              <input id="asset-node-search" placeholder="Node ara…" />
+        </section>
+
+        <section id="tab-assets" class="tab" hidden>
+          <!-- Search -->
+          <div class="qs-toolbar">
+            <div class="qs-search-wrap">
+              <svg class="qs-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="asset-search" class="qs-search-input" placeholder="Asset ara…" />
             </div>
-            <div class="table-wrap" style="max-height:280px;overflow:auto;">
-              <table>
-                <thead><tr><th>Node ID</th><th>Ad</th><th></th></tr></thead>
-                <tbody id="asset-nodes-body"></tbody>
-              </table>
-            </div>
-            <fieldset style="border:1px solid var(--border,#ddd);border-radius:8px;padding:12px;margin-top:12px;">
-              <legend>Node metadata</legend>
-              <input type="hidden" id="asset-edit-node-id" />
-              <label>Name (JSON)<textarea id="asset-edit-name" rows="2" style="width:100%;font-family:monospace;font-size:12px;"></textarea></label>
-              <label>Attributes (JSON)<textarea id="asset-edit-attrs" rows="5" style="width:100%;font-family:monospace;font-size:12px;"></textarea></label>
-              <button id="asset-node-save-btn">Kaydet</button>
-              <div id="asset-node-save-result" class="muted" style="margin-top:6px;font-size:13px;"></div>
-            </fieldset>
+            <select id="asset-domain" class="qs-filter-select">
+              <option value="geography" selected>Geography</option>
+              <option value="">Tümü</option>
+            </select>
+            <button id="asset-search-btn" class="s-btn s-btn-primary">Ara</button>
           </div>
-        </div>
-      </section>
+
+          <!-- Split layout -->
+          <div class="ast-layout">
+            <!-- Left: list + compile -->
+            <div class="ast-sidebar">
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Başlık</th><th>URI</th><th>v</th><th></th></tr></thead>
+                  <tbody id="assets-body"></tbody>
+                </table>
+              </div>
+
+              <details class="ast-compile-section">
+                <summary class="qp-section-title qp-section-toggle">Compile / Upload</summary>
+                <div class="ast-compile-form">
+                  <label class="qp-field">
+                    <span class="qp-field-label">SVG Dosyası</span>
+                    <input id="asset-svg-file" type="file" accept=".svg,image/svg+xml" />
+                  </label>
+                  <label class="qp-field">
+                    <span class="qp-field-label">Manifest JSON</span>
+                    <textarea id="asset-manifest-json" rows="5" style="font-family:var(--font-mono);font-size:12px;"></textarea>
+                  </label>
+                  <button id="asset-compile-btn" class="s-btn s-btn-primary">Compile &amp; Register</button>
+                  <div id="asset-compile-result" class="muted qp-form-result"></div>
+                </div>
+              </details>
+            </div>
+
+            <!-- Right: preview + nodes + metadata -->
+            <div class="ast-detail">
+              <div id="asset-preview-meta" class="ast-preview-meta muted">Asset seçin</div>
+              <div id="asset-preview-svg" class="ast-preview-svg"></div>
+
+              <div class="ast-nodes-section">
+                <div class="qs-toolbar" style="margin-bottom:var(--space-2);">
+                  <div class="qs-search-wrap" style="min-width:140px;">
+                    <svg class="qs-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input id="asset-node-search" class="qs-search-input" placeholder="Node ara…" />
+                  </div>
+                </div>
+                <div class="table-wrap ast-nodes-table">
+                  <table>
+                    <thead><tr><th>Node ID</th><th>Ad</th><th></th></tr></thead>
+                    <tbody id="asset-nodes-body"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="ast-meta-editor">
+                <h4 class="qp-section-title">Node Metadata</h4>
+                <input type="hidden" id="asset-edit-node-id" />
+                <label class="qp-field">
+                  <span class="qp-field-label">Name (JSON)</span>
+                  <textarea id="asset-edit-name" rows="2" style="font-family:var(--font-mono);font-size:12px;"></textarea>
+                </label>
+                <label class="qp-field">
+                  <span class="qp-field-label">Attributes (JSON)</span>
+                  <textarea id="asset-edit-attrs" rows="4" style="font-family:var(--font-mono);font-size:12px;"></textarea>
+                </label>
+                <div class="ast-meta-actions">
+                  <button id="asset-node-save-btn" class="s-btn s-btn-primary">Kaydet</button>
+                  <span id="asset-node-save-result" class="muted qp-form-result"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
   </div>
 
-  <dialog id="user-dialog">
-    <form method="dialog" id="user-form" class="dialog-body">
-      <h3>Kullanıcı düzenle</h3>
+  <dialog id="user-dialog" class="usr-dialog">
+    <form method="dialog" id="user-form" class="dialog-body usr-dialog-body">
+      <div class="usr-dialog-header">
+        <h3>Kullanıcı Düzenle</h3>
+        <button type="button" id="u-close" class="usr-close-btn" aria-label="Kapat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
       <input type="hidden" id="u-id" />
-      <label>Ad<input id="u-first" required /></label>
-      <label>Soyad<input id="u-last" required /></label>
-      <label>E-posta<input id="u-email" type="email" required /></label>
-      <label>Rol
-        <select id="u-role">
-          <option value="student">student</option>
-          <option value="teacher">teacher</option>
-          <option value="institution_admin">institution_admin</option>
-          <option value="system_admin">system_admin</option>
-        </select>
-      </label>
-      <label>Durum
-        <select id="u-status">
-          <option value="active">active</option>
-          <option value="inactive">inactive</option>
-          <option value="pending_deletion">pending_deletion</option>
-          <option value="anonymized">anonymized</option>
-        </select>
-      </label>
-      <label><input id="u-verified" type="checkbox" /> E-posta doğrulandı</label>
-      <label>Yeni şifre (opsiyonel)<input id="u-password" type="password" minlength="8" /></label>
+      <div class="usr-form-grid">
+        <label class="qp-field"><span class="qp-field-label">Ad</span><input id="u-first" required /></label>
+        <label class="qp-field"><span class="qp-field-label">Soyad</span><input id="u-last" required /></label>
+      </div>
+      <label class="qp-field"><span class="qp-field-label">E-posta</span><input id="u-email" type="email" required /></label>
+      <div class="usr-form-grid">
+        <label class="qp-field">
+          <span class="qp-field-label">Rol</span>
+          <select id="u-role">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="institution_admin">Institution Admin</option>
+            <option value="system_admin">System Admin</option>
+          </select>
+        </label>
+        <label class="qp-field">
+          <span class="qp-field-label">Durum</span>
+          <select id="u-status">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="pending_deletion">Pending Deletion</option>
+            <option value="anonymized">Anonymized</option>
+          </select>
+        </label>
+      </div>
+      <label class="usr-checkbox"><input id="u-verified" type="checkbox" /> E-posta doğrulandı</label>
+      <label class="qp-field"><span class="qp-field-label">Yeni şifre (opsiyonel)</span><input id="u-password" type="password" minlength="8" /></label>
       <p id="user-form-error" class="error" hidden></p>
-      <div class="row">
-        <button type="submit" value="save">Kaydet</button>
-        <button type="button" id="u-export" class="secondary">Veriyi indir</button>
-        <button type="button" id="u-soft-delete" class="danger">Pasife al</button>
-        <button type="button" id="u-hard-delete" class="danger">Kalıcı sil</button>
-        <button type="button" id="u-close" class="ghost">Kapat</button>
+      <div class="usr-actions">
+        <button type="submit" value="save" class="s-btn s-btn-primary">Kaydet</button>
+        <button type="button" id="u-export" class="s-btn s-btn-secondary">Veriyi İndir</button>
+        <div class="usr-actions-spacer"></div>
+        <button type="button" id="u-soft-delete" class="s-btn s-btn-ghost" style="color:var(--color-warning);">Pasife Al</button>
+        <button type="button" id="u-hard-delete" class="s-btn s-btn-danger">Kalıcı Sil</button>
       </div>
     </form>
   </dialog>
@@ -329,6 +440,6 @@
     </div>
   </dialog>
 
-  <script src="/admin/app.js?v=0.23.1-s23p1"></script>
+  <script src="/admin/app.js?v=0.24.0-phase2"></script>
 </body>
 </html>

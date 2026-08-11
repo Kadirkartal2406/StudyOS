@@ -110,23 +110,28 @@ $("logout-btn").addEventListener("click", () => {
   showLogin();
 });
 
+const _tabMeta = {
+  overview:        { title: "Özet",           subtitle: "Sistem durumu ve aktivite" },
+  users:           { title: "Kullanıcılar",   subtitle: "Kullanıcı yönetimi" },
+  questions:       { title: "Sorular",        subtitle: "Tüm sorularda arama" },
+  "question-pool": { title: "Soru Havuzu",    subtitle: "Soru envanteri ve üretim" },
+  assets:          { title: "Assets",         subtitle: "Eğitim içerikleri" },
+};
+
 document.querySelectorAll(".nav").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".nav").forEach((b) => b.classList.remove("active"));
+    if (!btn.dataset.tab) return;
+    document.querySelectorAll(".nav").forEach((b) => {
+      b.classList.remove("active");
+      b.removeAttribute("aria-current");
+    });
     btn.classList.add("active");
+    btn.setAttribute("aria-current", "page");
     const tab = btn.dataset.tab;
-    $("page-title").textContent =
-      tab === "overview"
-        ? "Özet"
-        : tab === "users"
-        ? "Kullanıcılar"
-        : tab === "questions"
-        ? "Sorular"
-        : tab === "question-pool"
-        ? "Question Pool"
-        : tab === "assets"
-        ? "Assets"
-        : "Admin";
+    const meta = _tabMeta[tab] || { title: "Admin", subtitle: "" };
+    $("page-title").textContent = meta.title;
+    const sub = $("page-subtitle");
+    if (sub) sub.textContent = meta.subtitle;
     ["overview", "users", "questions", "question-pool", "assets"].forEach((t) => {
       $(`tab-${t}`).hidden = t !== tab;
     });
@@ -135,6 +140,7 @@ document.querySelectorAll(".nav").forEach((btn) => {
     if (tab === "questions") loadQuestions();
     if (tab === "question-pool") loadQuestionPool();
     if (tab === "assets") loadAssets();
+    closeMobileMenu();
   });
 });
 
@@ -150,19 +156,31 @@ async function loadQuestionPool() {
 
   const metrics = await api("/admin/question-pool/metrics");
   const m = metrics.data;
-  $("qp-metrics-grid").innerHTML = [
-    ["Toplam soru", m.total_questions],
-    ["Healthy", m.healthy_topics],
-    ["Low", m.low_topics],
-    ["Empty", m.empty_topics],
-    ["Bugün üretilen", m.today_generated],
-    ["Dün üretilen", m.yesterday_generated],
-    ["Haftalık üretilen", m.weekly_generated],
-    ["Gemini calls (today)", m.gemini_calls_today],
-    ["Cache hit %", m.cache_hit_pct != null ? m.cache_hit_pct.toFixed(1) + "%" : "—"],
-  ]
-    .map(([l, n]) => `<div class="card"><div class="n">${n || 0}</div><div class="l">${l}</div></div>`)
-    .join("");
+  $("qp-metrics-grid").innerHTML = `
+    <div class="qp-metric-primary">
+      <span class="qp-metric-val">${_fmtNum(m.total_questions)}</span>
+      <span class="qp-metric-lbl">Toplam Soru</span>
+    </div>
+    <div class="qp-metric-primary">
+      <span class="qp-metric-val" style="color:var(--color-success)">${m.healthy_topics || 0}</span>
+      <span class="qp-metric-lbl">Healthy</span>
+    </div>
+    <div class="qp-metric-primary">
+      <span class="qp-metric-val" style="color:var(--color-warning)">${m.low_topics || 0}</span>
+      <span class="qp-metric-lbl">Low</span>
+    </div>
+    <div class="qp-metric-primary">
+      <span class="qp-metric-val" style="color:var(--color-danger)">${m.empty_topics || 0}</span>
+      <span class="qp-metric-lbl">Empty</span>
+    </div>
+    <div class="qp-metric-secondary">
+      <span class="qp-metric-sm-val">${m.today_generated || 0}</span><span class="qp-metric-sm-lbl">bugün</span>
+      <span class="qp-metric-sm-val">${m.yesterday_generated || 0}</span><span class="qp-metric-sm-lbl">dün</span>
+      <span class="qp-metric-sm-val">${m.weekly_generated || 0}</span><span class="qp-metric-sm-lbl">hafta</span>
+      <span class="qp-metric-sm-val">${m.gemini_calls_today || 0}</span><span class="qp-metric-sm-lbl">API</span>
+      <span class="qp-metric-sm-val">${m.cache_hit_pct != null ? m.cache_hit_pct.toFixed(0) + "%" : "—"}</span><span class="qp-metric-sm-lbl">cache</span>
+    </div>
+  `;
 
   const inv = await api("/admin/question-pool/inventory");
   const rows = inv.data || [];
@@ -178,28 +196,26 @@ async function loadQuestionPool() {
   let html = "";
   for (const [exam, exData] of Object.entries(grouped)) {
     const eCls = "ex-" + escapeHtml(exam).replace(/\W/g, "_");
-    html += `<tr style="background:#f1f5f9; cursor:pointer;" onclick="document.querySelectorAll('.${eCls}').forEach(el=>el.hidden=!el.hidden)">
-      <td colspan="10" style="padding:12px 16px;">
-        <strong style="color:#0f172a; font-size:15px;">Sınav: ${escapeHtml(exam).toUpperCase()}</strong> 
-        <span style="color:#64748b; margin-left:8px;">(${exData.total} Soru)</span>
-        <span style="float:right; font-size:12px; color:#3b82f6;">Genişlet / Daralt 🔽</span>
+    html += `<tr class="inv-exam-row" onclick="document.querySelectorAll('.${eCls}').forEach(el=>el.hidden=!el.hidden)">
+      <td colspan="10">
+        <strong>${escapeHtml(exam).toUpperCase()}</strong>
+        <span class="inv-count">${exData.total} soru</span>
       </td>
     </tr>`;
     for (const [subj, subData] of Object.entries(exData.subjects)) {
       const sCls = eCls + "-sub-" + escapeHtml(subj).replace(/\W/g, "_");
-      html += `<tr class="${eCls}" style="background:#f8fafc; cursor:pointer;" hidden onclick="document.querySelectorAll('.${sCls}').forEach(el=>el.hidden=!el.hidden)">
-        <td colspan="10" style="padding:10px 16px 10px 32px; border-left:4px solid #cbd5e1;">
-          <strong style="color:#334155; font-size:14px;">Ders: ${escapeHtml(subj)}</strong> 
-          <span style="color:#64748b; margin-left:8px;">(${subData.total} Soru)</span>
-          <span style="float:right; font-size:12px; color:#3b82f6;">Konuları Göster 🔽</span>
+      html += `<tr class="${eCls} inv-subj-row" hidden onclick="document.querySelectorAll('.${sCls}').forEach(el=>el.hidden=!el.hidden)">
+        <td colspan="10">
+          <span class="inv-subj-name">${escapeHtml(subj)}</span>
+          <span class="inv-count">${subData.total} soru</span>
         </td>
       </tr>`;
       for (const r of subData.topics) {
         const suggested = Math.max(0, (r.target || 0) - (r.current || 0));
         const disable = suggested <= 0;
-        html += `<tr class="${eCls} ${sCls}" hidden>
-          <td style="padding-left:40px; color:#94a3b8;">${escapeHtml(r.exam)}</td>
-          <td style="color:#64748b;">${escapeHtml(r.subject_code)}</td>
+        html += `<tr class="${eCls} ${sCls} inv-topic-row" hidden>
+          <td class="inv-topic-exam">${escapeHtml(r.exam)}</td>
+          <td class="inv-topic-subj">${escapeHtml(r.subject_code)}</td>
           <td><strong>${escapeHtml(r.topic_code)}</strong></td>
           <td>${r.current}</td>
           <td>${r.minimum}</td>
@@ -208,15 +224,15 @@ async function loadQuestionPool() {
           <td>${r.quality === null || r.quality === undefined ? "-" : r.quality.toFixed(1)}</td>
           <td>${r.last_generated ? new Date(r.last_generated).toLocaleString() : "-"}</td>
           <td>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button ${disable ? "disabled" : ""} class="secondary qp-topup-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-                Eksikleri Üret
+            <div class="inv-actions">
+              <button ${disable ? "disabled" : ""} class="s-btn s-btn-secondary qp-topup-btn" data-planned="${suggested}" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+                Üret
               </button>
-              <button class="danger qp-delete-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
-                Sil
-              </button>
-              <button class="secondary qp-preview-topic-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+              <button class="s-btn s-btn-ghost qp-preview-topic-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
                 Önizle
+              </button>
+              <button class="s-btn s-btn-danger qp-delete-btn" data-exam="${escapeAttr(r.exam)}" data-subject="${escapeAttr(r.subject_code)}" data-topic="${escapeAttr(r.topic_code)}" data-diff="${escapeAttr(r.difficulty_band)}">
+                Sil
               </button>
             </div>
           </td>
@@ -439,29 +455,100 @@ $("qp-fill-selected-btn").addEventListener("click", async () => {
   }
 });
 
+function _fmtNum(n) {
+  if (n == null) return "0";
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+  if (n >= 10000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+  return String(n);
+}
+
 async function loadOverview() {
   const body = await api("/admin/overview");
   const d = body.data;
-  const entries = [
-    ["Kullanıcı", d.users_total],
-    ["Aktif", d.users_active],
-    ["Admin", d.users_admin],
-    ["Çalışma planı", d.study_plans],
-    ["Oturum", d.study_sessions],
-    ["Soru kaydı", d.question_records],
-    ["AI soru", d.generated_questions],
-    ["Havuz kartı", d.pool_cards],
-    ["Deneme", d.exams],
-    ["Hedef", d.goals],
-    ["Sohbet", d.conversations],
-    ["Beta geri bildirim", d.beta_feedback],
-  ];
-  $("overview-grid").innerHTML = entries
-    .map(
-      ([l, n]) =>
-        `<div class="card"><div class="n">${n}</div><div class="l">${l}</div></div>`
-    )
-    .join("");
+
+  $("overview-grid").innerHTML = `
+    <div class="dash-hero">
+      <div class="dash-hero-primary">
+        <div class="dash-metric-lg">
+          <span class="dash-metric-value">${_fmtNum(d.users_total)}</span>
+          <span class="dash-metric-label">Toplam Kullanıcı</span>
+        </div>
+        <div class="dash-metric-lg">
+          <span class="dash-metric-value">${_fmtNum(d.pool_cards)}</span>
+          <span class="dash-metric-label">Havuz Kartı</span>
+        </div>
+        <div class="dash-metric-lg">
+          <span class="dash-metric-value">${_fmtNum(d.study_sessions)}</span>
+          <span class="dash-metric-label">Oturum</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-section">
+        <h3 class="dash-section-title">Kullanıcılar</h3>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.users_active)}</span>
+            <span class="dash-stat-label">Aktif</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.users_admin)}</span>
+            <span class="dash-stat-label">Admin</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.study_plans)}</span>
+            <span class="dash-stat-label">Çalışma Planı</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-section">
+        <h3 class="dash-section-title">Sorular</h3>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.generated_questions)}</span>
+            <span class="dash-stat-label">AI Üretimi</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.question_records)}</span>
+            <span class="dash-stat-label">Soru Kaydı</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-section">
+        <h3 class="dash-section-title">Platform</h3>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.exams)}</span>
+            <span class="dash-stat-label">Deneme</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.goals)}</span>
+            <span class="dash-stat-label">Hedef</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.conversations)}</span>
+            <span class="dash-stat-label">Sohbet</span>
+          </div>
+          <div class="dash-stat">
+            <span class="dash-stat-value">${_fmtNum(d.beta_feedback)}</span>
+            <span class="dash-stat-label">Geri Bildirim</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function _roleBadge(role) {
+  const cls = role === "system_admin" ? "s-badge-primary" : "s-badge-neutral";
+  return `<span class="s-badge ${cls}">${escapeHtml(role)}</span>`;
+}
+function _statusBadge(status) {
+  const map = { active: "s-badge-success", inactive: "s-badge-neutral", pending_deletion: "s-badge-warning", anonymized: "s-badge-neutral" };
+  return `<span class="s-badge ${map[status] || "s-badge-neutral"}">${escapeHtml(status)}</span>`;
 }
 
 async function loadUsers(q = "") {
@@ -472,14 +559,14 @@ async function loadUsers(q = "") {
   $("users-body").innerHTML = rows
     .map(
       (u) => `<tr>
-      <td>${escapeHtml(u.first_name)} ${escapeHtml(u.last_name)}</td>
-      <td>${escapeHtml(u.email)}</td>
-      <td>${escapeHtml(u.role)}</td>
-      <td>${escapeHtml(u.status)}</td>
+      <td><strong>${escapeHtml(u.first_name)} ${escapeHtml(u.last_name)}</strong></td>
+      <td class="usr-email">${escapeHtml(u.email)}</td>
+      <td>${_roleBadge(u.role)}</td>
+      <td>${_statusBadge(u.status)}</td>
       <td>${u.study_plans}</td>
       <td>${u.study_sessions}</td>
       <td>${u.question_records}</td>
-      <td><button data-id="${u.id}" class="secondary open-user">Detay</button></td>
+      <td><button data-id="${u.id}" class="s-btn s-btn-ghost open-user">Detay</button></td>
     </tr>`
     )
     .join("");
@@ -593,24 +680,28 @@ async function loadQuestions() {
   let html = "";
   for (const [exam, subjects] of Object.entries(grouped)) {
     const examCls = "qe-" + escapeHtml(exam).replace(/\W/g, "_");
-    html += `<div style="margin-bottom:8px; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
-      <div style="background:#f1f5f9; padding:12px; cursor:pointer; font-weight:600;" onclick="document.querySelectorAll('.${examCls}').forEach(el=>el.hidden=!el.hidden)">
-        📂 Sınav: ${escapeHtml(exam).toUpperCase()} 
-        <span style="float:right; font-size:12px; font-weight:normal; color:#3b82f6;">Genişlet / Daralt 🔽</span>
+    const examCount = Object.values(subjects).reduce((s, arr) => s + arr.length, 0);
+    html += `<div class="qs-group">
+      <div class="qs-exam-row" onclick="document.querySelectorAll('.${examCls}').forEach(el=>el.hidden=!el.hidden)">
+        <svg class="qs-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <strong>${escapeHtml(exam).toUpperCase()}</strong>
+        <span class="qs-count">${examCount}</span>
       </div>`;
     for (const [subj, subItems] of Object.entries(subjects)) {
       const subjCls = examCls + "-qs-" + escapeHtml(subj).replace(/\W/g, "_");
-      html += `<div class="${examCls}" hidden style="background:#f8fafc; border-top:1px solid #e2e8f0; padding:10px 12px 10px 24px; cursor:pointer; font-weight:600; color:#334155;" onclick="document.querySelectorAll('.${subjCls}').forEach(el=>el.hidden=!el.hidden)">
-        📁 Ders: ${escapeHtml(subj)} <span style="font-weight:normal; color:#64748b;">(${subItems.length} Soru)</span>
+      html += `<div class="${examCls} qs-subj-row" hidden onclick="document.querySelectorAll('.${subjCls}').forEach(el=>el.hidden=!el.hidden)">
+        <svg class="qs-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span class="qs-subj-name">${escapeHtml(subj)}</span>
+        <span class="qs-count">${subItems.length}</span>
       </div>`;
       for (const it of subItems) {
-        html += `<div class="${examCls} ${subjCls} q-item" hidden style="margin:0; border-top:1px solid #e2e8f0; border-radius:0; border-left:4px solid #cbd5e1; margin-left:16px;">
-          <div class="meta">
+        html += `<div class="${examCls} ${subjCls} qs-q-row" hidden>
+          <div class="qs-q-meta">
             <span class="badge">${escapeHtml(it.source)}</span>
-            ${it.topic ? escapeHtml(it.topic) : ""}
-            ${it.difficulty ? " · " + escapeHtml(it.difficulty) : ""}
+            ${it.topic ? `<span>${escapeHtml(it.topic)}</span>` : ""}
+            ${it.difficulty ? `<span class="qs-q-diff">${escapeHtml(it.difficulty)}</span>` : ""}
           </div>
-          <div>${escapeHtml(it.stem || "")}</div>
+          <div class="qs-q-stem">${escapeHtml(it.stem || "")}</div>
         </div>`;
       }
     }
@@ -618,19 +709,19 @@ async function loadQuestions() {
   }
 
   for (const it of ungrouped) {
-    html += `<div class="q-item">
-      <div class="meta">
+    html += `<div class="qs-q-row qs-q-ungrouped">
+      <div class="qs-q-meta">
         <span class="badge">${escapeHtml(it.source)}</span>
-        ${it.exam ? escapeHtml(it.exam) + " · " : ""}
-        ${escapeHtml(it.subject || "")}
-        ${it.topic ? " · " + escapeHtml(it.topic) : ""}
-        ${it.difficulty ? " · " + escapeHtml(it.difficulty) : ""}
+        ${it.exam ? `<span>${escapeHtml(it.exam)}</span>` : ""}
+        ${it.subject ? `<span>${escapeHtml(it.subject)}</span>` : ""}
+        ${it.topic ? `<span>${escapeHtml(it.topic)}</span>` : ""}
+        ${it.difficulty ? `<span class="qs-q-diff">${escapeHtml(it.difficulty)}</span>` : ""}
       </div>
-      <div>${escapeHtml(it.stem || "")}</div>
+      <div class="qs-q-stem">${escapeHtml(it.stem || "")}</div>
     </div>`;
   }
 
-  $("questions-list").innerHTML = items.length ? html : `<p class="muted">Soru bulunamadı.</p>`;
+  $("questions-list").innerHTML = items.length ? html : `<p class="qs-empty">Soru bulunamadı.</p>`;
 }
 
 $("q-search-btn").addEventListener("click", loadQuestions);
@@ -1103,9 +1194,9 @@ async function loadAssets() {
         const title = a.title?.tr || a.title?.en || a.asset_id;
         return `<tr>
           <td>${title}</td>
-          <td style="font-size:11px;">${a.asset_id}</td>
+          <td class="muted" style="font:var(--text-caption);">${a.asset_id}</td>
           <td>${a.version}</td>
-          <td><button data-asset-id="${a.id}" class="secondary asset-open-btn">Aç</button></td>
+          <td><button data-asset-id="${a.id}" class="s-btn s-btn-secondary asset-open-btn">Aç</button></td>
         </tr>`;
       })
       .join("");
@@ -1168,11 +1259,11 @@ function renderAssetNodes() {
   $("asset-nodes-body").innerHTML = filtered
     .map(
       (n) => `<tr>
-      <td style="font-size:11px;">${n.node_id}</td>
+      <td class="muted" style="font:var(--text-caption);">${n.node_id}</td>
       <td>${n.name?.tr || n.name?.en || ""}</td>
-      <td>
-        <button class="ghost asset-hl-btn" data-node="${n.node_id}">Highlight</button>
-        <button class="secondary asset-edit-btn" data-node="${n.node_id}">Düzenle</button>
+      <td style="display:flex;gap:var(--space-1);">
+        <button class="s-btn s-btn-secondary asset-hl-btn" data-node="${n.node_id}">Highlight</button>
+        <button class="s-btn s-btn-secondary asset-edit-btn" data-node="${n.node_id}">Düzenle</button>
       </td>
     </tr>`
     )
@@ -1313,6 +1404,61 @@ $("qp-manual-add-btn")?.addEventListener("click", async () => {
     btn.disabled = false;
   }
 });
+
+// ── Theme toggle ─────────────────────────────────────────────
+const THEME_KEY = "studyos_admin_theme";
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  applyTheme(current === "dark" ? "light" : "dark");
+}
+
+(function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  applyTheme(saved || "dark");
+})();
+
+document.querySelectorAll(".theme-toggle").forEach((btn) => {
+  btn.addEventListener("click", toggleTheme);
+});
+
+// ── Mobile menu ──────────────────────────────────────────────
+function openMobileMenu() {
+  const sidebar = $("sidebar");
+  const overlay = $("sidebar-overlay");
+  const btn = $("mobile-menu-btn");
+  if (!sidebar) return;
+  sidebar.classList.add("open");
+  if (overlay) { overlay.hidden = false; requestAnimationFrame(() => overlay.classList.add("visible")); }
+  if (btn) btn.setAttribute("aria-expanded", "true");
+}
+
+function closeMobileMenu() {
+  const sidebar = $("sidebar");
+  const overlay = $("sidebar-overlay");
+  const btn = $("mobile-menu-btn");
+  if (!sidebar) return;
+  sidebar.classList.remove("open");
+  if (overlay) { overlay.classList.remove("visible"); setTimeout(() => { overlay.hidden = true; }, 250); }
+  if (btn) btn.setAttribute("aria-expanded", "false");
+}
+
+if ($("mobile-menu-btn")) {
+  $("mobile-menu-btn").addEventListener("click", () => {
+    const sidebar = $("sidebar");
+    if (sidebar && sidebar.classList.contains("open")) closeMobileMenu();
+    else openMobileMenu();
+  });
+}
+
+if ($("sidebar-overlay")) {
+  $("sidebar-overlay").addEventListener("click", closeMobileMenu);
+}
 
 // boot
 (async function boot() {
