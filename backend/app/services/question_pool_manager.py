@@ -28,6 +28,15 @@ from app.core.question_pool_stock_config import (
     QuestionPoolStockTarget,
     load_question_pool_stock_targets,
 )
+from app.services.question_pool_inventory_catalog import (
+    DEFAULT_BAND,
+    DEFAULT_MINIMUM,
+    DEFAULT_TARGET,
+    InventoryCatalogSlot,
+    iter_catalog_inventory_slots,
+    normalize_stock_exam_key,
+    pool_count_exam_keys,
+)
 from app.database.base import get_db
 from app.models.exam_intelligence import EiSubject, EiTopic
 from app.models.question_pool import QuestionPoolCard
@@ -195,6 +204,104 @@ class QuestionPoolInventoryService:
         return TopicKey(exam=exam, subject_code=subj.code, topic_code=found_topic.code, difficulty_band=difficulty_band)
 
     async def snapshot(self, db: AsyncSession) -> list[dict[str, Any]]:
+        """Build inventory from catalog SSOT; stock targets override min/target only."""
+        stock_lookup: dict[tuple[str, str, str, str], QuestionPoolStockTarget] = {}
+        for t in load_question_pool_stock_targets():
+            if not t.subject_code or not t.topic_code:
+                continue
+            canon = normalize_stock_exam_key(t.exam, t.subject_code)
+            band = (t.difficulty_band or DEFAULT_BAND).strip().lower()
+            stock_lookup[(canon, t.subject_code, t.topic_code, band)] = t
+
+        catalog_slots: list[InventoryCatalogSlot] = list(iter_catalog_inventory_slots())
+        if not catalog_slots:
+            # Fallback: legacy stock-target-only path
+            return await self._snapshot_from_stock_targets(db)
+
+        rows: list[dict[str, Any]] = []
+        for slot in catalog_slots:
+            band = slot.difficulty_band
+            stock = stock_lookup.get((slot.exam, slot.subject_code, slot.topic_code, band))
+            minimum = int(stock.minimum) if stock else DEFAULT_MINIMUM
+            target = int(stock.target) if stock else DEFAULT_TARGET
+
+            count_keys = pool_count_exam_keys(slot.exam, slot.subject_code)
+            exam_filters = [normalize_exam_code(k) for k in count_keys]
+
+            base_q = (
+                select(
+                    func.count().label("cnt"),
+                    func.max(QuestionPoolCard.created_at).label("last_generated"),
+                    func.max(
+                        case(
+                            (QuestionPoolCard.use_count > 0, QuestionPoolCard.created_at),
+                            else_=None,
+                        )
+                    ).label("last_used"),
+                )
+                .where(QuestionPoolCard.exam.in_(exam_filters))
+                .where(QuestionPoolCard.subject_code == slot.subject_code)
+                .where(QuestionPoolCard.topic_code == slot.topic_code)
+                .where(QuestionPoolCard.difficulty_band == band)
+            )
+            agg = (await db.execute(base_q)).first()
+            current = int(agg.cnt or 0) if agg else 0
+            last_generated = agg.last_generated if agg else None
+            last_used = agg.last_used if agg else None
+
+            q_rows = (
+                select(QuestionPoolCard)
+                .where(QuestionPoolCard.exam.in_(exam_filters))
+                .where(QuestionPoolCard.subject_code == slot.subject_code)
+                .where(QuestionPoolCard.topic_code == slot.topic_code)
+                .where(QuestionPoolCard.difficulty_band == band)
+                .order_by(QuestionPoolCard.created_at.desc())
+                .limit(200)
+            )
+            pool_rows = (await db.execute(q_rows)).scalars().all()
+
+            q_values: list[float] = []
+            d_values: list[float] = []
+            for r in pool_rows:
+                qv = _quality_from_card(r)
+                if qv is not None:
+                    q_values.append(qv)
+                dv = _difficulty_from_card(r)
+                if dv is not None:
+                    d_values.append(dv)
+
+            average_quality = float(sum(q_values) / len(q_values)) if q_values else None
+            average_difficulty = float(sum(d_values) / len(d_values)) if d_values else None
+
+            status = _inventory_status(current=current, minimum=minimum, target=target)
+
+            rows.append(
+                {
+                    "exam": slot.exam,
+                    "exam_label": slot.exam_label,
+                    "subject_code": slot.subject_code,
+                    "subject_name": slot.subject_name,
+                    "topic_code": slot.topic_code,
+                    "topic_name": slot.topic_name,
+                    "difficulty_band": band,
+                    "current": current,
+                    "minimum": minimum,
+                    "target": target,
+                    "status": status,
+                    "quality": average_quality,
+                    "average_difficulty": average_difficulty,
+                    "last_generated": last_generated,
+                    "last_used": last_used,
+                    "last_review": None,
+                    "average_quality": average_quality,
+                    "average_difficulty_value": average_difficulty,
+                }
+            )
+
+        return rows
+
+    async def _snapshot_from_stock_targets(self, db: AsyncSession) -> list[dict[str, Any]]:
+        """Legacy fallback when catalog seed yields no slots."""
         targets = load_question_pool_stock_targets()
         resolved: list[tuple[QuestionPoolStockTarget, TopicKey]] = []
         for t in targets:

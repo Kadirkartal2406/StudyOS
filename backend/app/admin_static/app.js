@@ -184,39 +184,74 @@ async function loadQuestionPool() {
 
   const inv = await api("/admin/question-pool/inventory");
   const rows = inv.data || [];
+
+  const EXAM_ORDER = [
+    "tyt", "ayt_sayisal", "ayt_ea", "ayt_sozel", "ydt_ingilizce",
+    "kpss_lisans", "kpss_onlisans", "kpss_ortaogretim",
+    "lgs_sayisal", "lgs_sozel", "ags", "ales", "dgs",
+    "yds_ingilizce", "yokdil_fen", "yokdil_saglik", "yokdil_sosyal",
+  ];
+  const examRank = (e) => {
+    const i = EXAM_ORDER.indexOf(e);
+    return i >= 0 ? i : 999;
+  };
+
   const grouped = {};
   for (const r of rows) {
-    if (!grouped[r.exam]) grouped[r.exam] = { total: 0, subjects: {} };
-    grouped[r.exam].total += (r.current || 0);
-    if (!grouped[r.exam].subjects[r.subject_code]) grouped[r.exam].subjects[r.subject_code] = { total: 0, topics: [] };
-    grouped[r.exam].subjects[r.subject_code].total += (r.current || 0);
-    grouped[r.exam].subjects[r.subject_code].topics.push(r);
+    const examKey = r.exam;
+    if (examKey === "yks") continue; // legacy umbrella — not a pool identity
+    if (!grouped[examKey]) {
+      grouped[examKey] = {
+        label: r.exam_label || examKey.toUpperCase(),
+        total: 0,
+        subjects: {},
+      };
+    }
+    grouped[examKey].total += (r.current || 0);
+    const subjKey = r.subject_code;
+    if (!grouped[examKey].subjects[subjKey]) {
+      grouped[examKey].subjects[subjKey] = {
+        label: r.subject_name || subjKey,
+        total: 0,
+        topics: [],
+      };
+    }
+    grouped[examKey].subjects[subjKey].total += (r.current || 0);
+    grouped[examKey].subjects[subjKey].topics.push(r);
   }
 
+  const sortedExams = Object.entries(grouped).sort(
+    (a, b) => examRank(a[0]) - examRank(b[0]) || a[1].label.localeCompare(b[1].label, "tr")
+  );
+
   let html = "";
-  for (const [exam, exData] of Object.entries(grouped)) {
+  for (const [exam, exData] of sortedExams) {
     const eCls = "ex-" + escapeHtml(exam).replace(/\W/g, "_");
     html += `<tr class="inv-exam-row" onclick="document.querySelectorAll('.${eCls}').forEach(el=>el.hidden=!el.hidden)">
       <td colspan="10">
-        <strong>${escapeHtml(exam).toUpperCase()}</strong>
+        <strong>${escapeHtml(exData.label)}</strong>
         <span class="inv-count">${exData.total} soru</span>
       </td>
     </tr>`;
-    for (const [subj, subData] of Object.entries(exData.subjects)) {
+    const sortedSubjects = Object.entries(exData.subjects).sort(
+      (a, b) => a[1].label.localeCompare(b[1].label, "tr")
+    );
+    for (const [subj, subData] of sortedSubjects) {
       const sCls = eCls + "-sub-" + escapeHtml(subj).replace(/\W/g, "_");
-      html += `<tr class="${eCls} inv-subj-row" hidden onclick="document.querySelectorAll('.${sCls}').forEach(el=>el.hidden=!el.hidden)">
+      html += `<tr class="${eCls} inv-subj-row" hidden onclick="event.stopPropagation();document.querySelectorAll('.${sCls}').forEach(el=>el.hidden=!el.hidden)">
         <td colspan="10">
-          <span class="inv-subj-name">${escapeHtml(subj)}</span>
+          <span class="inv-subj-name">${escapeHtml(subData.label)}</span>
           <span class="inv-count">${subData.total} soru</span>
         </td>
       </tr>`;
       for (const r of subData.topics) {
         const suggested = Math.max(0, (r.target || 0) - (r.current || 0));
         const disable = suggested <= 0;
+        const topicLabel = r.topic_name || r.topic_code;
         html += `<tr class="${eCls} ${sCls} inv-topic-row" hidden>
-          <td class="inv-topic-exam">${escapeHtml(r.exam)}</td>
-          <td class="inv-topic-subj">${escapeHtml(r.subject_code)}</td>
-          <td><strong>${escapeHtml(r.topic_code)}</strong></td>
+          <td class="inv-topic-exam muted">${escapeHtml(exData.label)}</td>
+          <td class="inv-topic-subj">${escapeHtml(subData.label)}</td>
+          <td><strong>${escapeHtml(topicLabel)}</strong></td>
           <td>${r.current}</td>
           <td>${r.minimum}</td>
           <td>${r.target}</td>

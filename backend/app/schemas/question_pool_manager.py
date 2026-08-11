@@ -52,6 +52,11 @@ class QuestionPoolInventoryRow(BaseModel):
     average_difficulty: float | None = None
     last_generated: datetime | None = None
 
+    # Display helpers (optional; backward compatible)
+    exam_label: str | None = None
+    subject_name: str | None = None
+    topic_name: str | None = None
+
 
 class QuestionPoolMetrics(BaseModel):
     total_questions: int
