@@ -92,3 +92,27 @@ data/ai_cost/
 data/uploads/
 test.dart
 test2.dart
+
+# ── Local SQLite databases ───────────────────
+*.db
+
+# ── Local analysis / measurement artifacts ───
+data/analysis/
+
+# ── Local export / scratch files ─────────────
+backend/canli_sorular.csv
+backend/analyze_db.py
+backend/export_questions.py
+backend/export_sync.py
+
+# ── Local measurement / generation scripts ───
+backend/scripts/_*.py
+backend/scripts/analyze_*.py
+backend/scripts/build_*.py
+backend/scripts/extract_*.py
+backend/scripts/run_*.py
+
+# ── Validation temp scripts ──────────────────
+_val*.py
+_test*.py
+_validate*.py

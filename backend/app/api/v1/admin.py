@@ -13,7 +13,7 @@ from sqlalchemy import select
 from app.core.dependencies import require_system_admin
 from app.database.base import get_db
 from app.models.user import User
-from app.schemas.admin import AdminOverview, AdminUserListItem, AdminUserUpdate
+from app.schemas.admin import AdminOverview, AdminUserListItem, AdminUserUpdate, QuestionPoolCardCreate
 from app.schemas.common import PaginatedResponse, PaginationMeta, SuccessResponse
 from app.schemas.question_pool_manager import (
     QuestionPoolFillMissingRequest,
@@ -883,7 +883,7 @@ async def admin_question_pool_create_card(
         explanation=body.explanation,
         plan=plan,
         difficulty_score=70,
-        quality=QualityBreakdown(total=100),
+        quality=QualityBreakdown(style=100, difficulty=100, similarity=100, grammar=100, option_balance=100, distractor_quality=100, blueprint_match=100, reading_time=100, exam_feel=100),
         provider="manual",
     )
     
