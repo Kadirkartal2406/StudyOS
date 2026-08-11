@@ -10,6 +10,7 @@ from datetime import UTC, date, datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.exam_identity import canonicalize_exam_type
 from app.core.exceptions import ConflictError, NotFoundError, ValidationError
 from app.models.activity import ActivityEventType
 from app.models.planner_draft import PlannerDraft, PlannerDraftStatus
@@ -35,6 +36,13 @@ from app.services.ai.adaptive_planner_engine import AdaptivePlannerEngine
 from app.services.notification_settings_service import NotificationSettingsService
 
 
+def _coerce_exam_type(raw: ExamType | str | None) -> ExamType:
+    """Legacy drafts may store parent codes (kpss, yds, …)."""
+    if isinstance(raw, ExamType):
+        return raw
+    return ExamType(canonicalize_exam_type(str(raw or "")))
+
+
 class PlannerService:
     def __init__(self, db: AsyncSession):
         self.db = db
@@ -58,7 +66,7 @@ class PlannerService:
 
         if defaults:
             if target_exam is None:
-                target_exam = ExamType(defaults["target_exam"])
+                target_exam = _coerce_exam_type(defaults["target_exam"])
             if target_net is None:
                 target_net = float(defaults["target_net"])
             if available_days is None:
@@ -102,7 +110,7 @@ class PlannerService:
             id=draft.id,
             user_id=draft.user_id,
             status=draft.status,
-            target_exam=ExamType(draft.target_exam),
+            target_exam=_coerce_exam_type(draft.target_exam),
             target_net=float(draft.target_net),
             available_days=list(draft.available_days or []),
             available_hours=float(draft.available_hours),
