@@ -907,14 +907,29 @@ class AssessmentService:
                 if need <= 0:
                     continue
                 
-                # Güncel üretilmiş havuzdan deterministik olarak en eski / ilk soruları çek
+                # Deneme üretimi trial pool + branch-aware exam key kullanır
                 cards = await pool_svc.get_unused_for_topic(
-                    exam=booklet.exam_type,
+                    exam=normalize_exam_code(
+                        booklet.exam_type, booklet.branch_key or None
+                    ),
                     subject_code=subject_code,
                     topic_code=topic_code,
                     difficulty_band=booklet.difficulty or "medium",
                     limit=need,
+                    pool_type="trial",
                 )
+                if len(cards) < need:
+                    extra = await pool_svc.get_unused_for_topic(
+                        exam=normalize_exam_code(
+                            booklet.exam_type, booklet.branch_key or None
+                        ),
+                        subject_code=subject_code,
+                        topic_code=topic_code,
+                        difficulty_band=booklet.difficulty or "medium",
+                        limit=need - len(cards),
+                        pool_type="general",
+                    )
+                    cards = list(cards) + list(extra)
                 
                 for card in cards:
                     self.db.add(

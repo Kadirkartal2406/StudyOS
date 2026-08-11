@@ -402,9 +402,18 @@ class QieOrchestrator:
                 )
                 continue
             try:
-                await pool.put_card(card=card, ctx=ctx, pool_type=ctx.pool_type)
+                await pool.put_card(
+                    fingerprint=fingerprint_for_plan(card.plan, ctx),
+                    card=card,
+                    exam=ctx.exam,
+                    subject_code=card.plan.subject_code or ctx.subject_code,
+                    topic_code=card.plan.topic_code or ctx.topic_code,
+                    difficulty_band=ctx.difficulty_band,
+                    skill=card.plan.skill or "",
+                    pool_type=ctx.pool_type,
+                )
             except Exception as e:
-                logger.debug("pool put skipped: %s", e)
+                logger.warning("pool put skipped: %s", e)
             if card.stem not in {c.stem for c in accepted}:
                 accepted.append(card)
 
