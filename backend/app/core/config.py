@@ -35,6 +35,45 @@ def database_url_for_alembic(url: str) -> str:
     return u
 
 
+def _normalize_origin_list(values: Any) -> list[str]:
+    """Strip, drop empties/wildcards, preserve order (dedupe)."""
+    out: list[str] = []
+    seen: set[str] = set()
+    for raw in values:
+        origin = str(raw).strip().rstrip("/")
+        if not origin or origin == "*":
+            continue
+        if origin in seen:
+            continue
+        seen.add(origin)
+        out.append(origin)
+    return out
+
+
+# Flutter Web loopback — rastgele port (chrome/web-server).
+LOCALHOST_ORIGIN_REGEX = r"https?://(localhost|127\.0\.0\.1)(:\d+)?"
+
+
+def build_cors_middleware_kwargs(
+    allowed_origins: list[str] | None,
+    *,
+    allow_localhost: bool = True,
+) -> dict[str, Any]:
+    """CORS kwargs for FastAPI — never uses wildcard '*'."""
+    origins = _normalize_origin_list(allowed_origins or [])
+    kwargs: dict[str, Any] = {
+        "allow_origins": origins,
+        "allow_credentials": True,
+        "allow_methods": ["*"],
+        # Authorization / PDF / özel header'lar
+        "allow_headers": ["*"],
+        "expose_headers": ["Content-Disposition", "Content-Type"],
+    }
+    if allow_localhost:
+        kwargs["allow_origin_regex"] = LOCALHOST_ORIGIN_REGEX
+    return kwargs
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -151,12 +190,15 @@ class Settings(BaseSettings):
     SENTRY_DSN: str = ""
 
     # ── CORS ──────────────────────────────────────────────────
-    # Env: "*", "https://a.com,https://b.com" veya JSON '["https://a.com"]'
+    # Env: "https://a.com,https://b.com" veya JSON '["https://a.com"]'
+    # "*" desteklenmez (credentials + Flutter Web kırılır); yok sayılır.
     ALLOWED_ORIGINS: list[str] = [
         "http://localhost:3000",
         "http://localhost:8080",
         "http://localhost:5173",
     ]
+    # Flutter Web rastgele localhost portu (örn. :57780) — yalnızca loopback.
+    CORS_ALLOW_LOCALHOST: bool = True
 
     # ── Rate Limiting ─────────────────────────────────────────
     RATE_LIMIT_PER_MINUTE: int = 60
@@ -180,11 +222,14 @@ class Settings(BaseSettings):
         if v is None or v == "":
             return default
         if isinstance(v, (list, tuple, set)):
-            return [str(x).strip() for x in v if str(x).strip()]
+            return _normalize_origin_list(v)
         if isinstance(v, str):
             s = v.strip()
-            if not s or s == "*":
-                return ["*"]
+            if not s:
+                return default
+            if s == "*":
+                # Wildcard yasak — boş liste; localhost regex ayrıca eklenir.
+                return []
             if s.startswith("["):
                 import json
 
@@ -193,14 +238,13 @@ class Settings(BaseSettings):
                 except json.JSONDecodeError as exc:
                     raise ValueError(
                         "ALLOWED_ORIGINS JSON dizi olmalı, örn. "
-                        '[\"*\"] veya [\"https://app.example.com\"]'
+                        '[\"https://app.example.com\"]'
                     ) from exc
                 if not isinstance(parsed, list):
                     raise ValueError("ALLOWED_ORIGINS JSON bir dizi olmalı")
-                return [str(x).strip() for x in parsed if str(x).strip()] or ["*"]
-            return [p.strip() for p in s.split(",") if p.strip()] or default
+                return _normalize_origin_list(parsed)
+            return _normalize_origin_list(s.split(",")) or default
         return default
-
     @model_validator(mode="after")
     def _empty_s3_endpoint(self) -> Settings:
         if self.AWS_S3_ENDPOINT_URL is not None and self.AWS_S3_ENDPOINT_URL.strip() == "":

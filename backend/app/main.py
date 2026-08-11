@@ -12,7 +12,7 @@ from fastapi.responses import JSONResponse
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from app.core.config import settings
+from app.core.config import build_cors_middleware_kwargs, settings
 from app.core.exceptions import StudyOSException, studyos_exception_to_http
 from app.core.secrets_guard import enforce_or_exit
 from app.core.sentry import capture_exception, init_sentry
@@ -235,25 +235,17 @@ def create_application() -> FastAPI:
         )
 
     # ── CORS ──────────────────────────────────────────────────
-    origins = list(settings.ALLOWED_ORIGINS or [])
-    allow_all = origins == ["*"]
-    cors_kwargs: dict = {
-        "allow_origins": ["*"] if allow_all else origins,
-        # "*" ile credentials birlikte kullanılamaz
-        "allow_credentials": not allow_all,
-        "allow_methods": ["*"],
-        # PDF / bytes istekleri için Accept ve özel header'lara izin
-        "allow_headers": ["*"],
-        "expose_headers": ["Content-Disposition", "Content-Type"],
-    }
-    # Flutter Web bazen localhost'un rastgele bir portundan çalışır (örn:
-    # http://localhost:xxxx). Bu yüzden development/beta/prod fark etmeksizin
-    # localhost için regex ile izin veriyoruz.
-    if not allow_all:
-        cors_kwargs["allow_origin_regex"] = (
-            r"https?://(localhost|127\.0\.0\.1)(:\d+)?|"
-            r"https://.*\.onrender\.com"
+    # Wildcard "*" kullanılmaz (credentials + Flutter Web kırılır).
+    # Production origin'leri ALLOWED_ORIGINS'ten; localhost regex ayrı.
+    if any(o.strip() == "*" for o in (settings.ALLOWED_ORIGINS or [])):
+        logger.warning(
+            "ALLOWED_ORIGINS contains '*'; wildcard ignored. "
+            "Set explicit origins; localhost is allowed via CORS_ALLOW_LOCALHOST."
         )
+    cors_kwargs = build_cors_middleware_kwargs(
+        settings.ALLOWED_ORIGINS,
+        allow_localhost=settings.CORS_ALLOW_LOCALHOST,
+    )
     application.add_middleware(CORSMiddleware, **cors_kwargs)
 
     # ── Routers ───────────────────────────────────────────────

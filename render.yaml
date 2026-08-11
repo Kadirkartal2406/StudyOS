@@ -54,6 +54,10 @@ services:
       - key: PUBLIC_APP_URL
         sync: false
       - key: ALLOWED_ORIGINS
-        value: '["*"]'
+        # Wildcard yasak. Production web origin'lerini buraya ekleyin.
+        # Flutter Web localhost portları CORS_ALLOW_LOCALHOST ile açılır.
+        value: '[]'
+      - key: CORS_ALLOW_LOCALHOST
+        value: "true"
       - key: AWS_S3_ENDPOINT_URL
         value: ""
