@@ -120,10 +120,38 @@ class _DailyChallengeSubjectsScreenState
       final bytes = await ref
           .read(assessmentDatasourceProvider)
           .downloadSessionPdf(session.id);
-      final path = await savePdfBytes(bytes, 'gunun-denemesi.pdf');
+      final exam = (_examType ?? '').trim();
+      final challengeDate = parseChallengeDate(_daily?['challenge_date']);
+      final saved = await saveDailyBookletPdf(
+        bytes: bytes,
+        examType: exam.isEmpty ? 'Deneme' : exam,
+        challengeDate: challengeDate,
+      );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('PDF indirildi: $path')),
+        SnackBar(
+          content: Text(
+            saved.sharedViaSheet
+                ? '✓ Deneme indirildi — paylaşım menüsünden Dosyalar’a kaydedebilirsin'
+                : '✓ Deneme indirildi',
+          ),
+          action: saved.canOpen && !saved.sharedViaSheet
+              ? SnackBarAction(
+                  label: 'PDF\'yi Aç',
+                  onPressed: () async {
+                    try {
+                      await openSavedPdf(saved);
+                    } catch (e) {
+                      if (!mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('PDF açılamadı: $e')),
+                      );
+                    }
+                  },
+                )
+              : null,
+          duration: const Duration(seconds: 5),
+        ),
       );
       await _load();
     } on AppException catch (e) {
