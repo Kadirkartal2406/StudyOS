@@ -43,6 +43,15 @@ def verify_answer(question: dict[str, Any]) -> dict[str, Any]:
         flags.append("non_unique_options")
         score = min(score, 55)
 
+    try:
+        from app.services.correctness.option_equivalence import find_equivalent_option_pairs
+
+        for ka, kb, _layer in find_equivalent_option_pairs(choices):
+            flags.append(f"equivalent:{ka}/{kb}")
+            score = min(score, 40)
+    except Exception:
+        pass
+
     return {
         "score": max(0, min(100, score)),
         "flags": flags,

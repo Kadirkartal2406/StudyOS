@@ -49,6 +49,9 @@ dependencies = [
 
     # ── Official Exam Intelligence (M27) — heuristic PDF stats only ──
     "pypdf>=5.0",
+
+    # ── Correctness gate (Phase 1) — conservative math equivalence ──
+    "sympy>=1.12",
 ]
 
 [project.optional-dependencies]

@@ -1,15 +1,33 @@
 """P5 — Multi-Stage Exam Review (6 stages)."""
 from __future__ import annotations
+
+import re
 from typing import Any
+
 from app.services.question_intelligence.types import MultiStageReviewResult
 from app.services.question_intelligence.exam_feel_v2 import detect_exam_feel_v2
 from app.services.question_intelligence.option_balance import analyze_option_balance
 from app.services.question_intelligence.distractor_quality_v2 import analyze_distractor_quality_v2
 
+# Standard Roman numerals (I, V, II, III, IV, VI, …) — valid ÖSYM choice text
+_ROMAN_NUMERAL_RE = re.compile(
+    r"^(?=[IVXLCDM])M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$",
+    re.IGNORECASE,
+)
+
+
+def _choice_is_empty(value: Any) -> bool:
+    """True only for genuinely empty options; Roman numerals (I, V, …) are content."""
+    text = str(value or "").strip()
+    if not text:
+        return True
+    if _ROMAN_NUMERAL_RE.fullmatch(text):
+        return False
+    return len(text) < 2
+
 
 def _stage_language(question: dict[str, Any]) -> int:
     """Stage 1: Language quality check."""
-    import re
     stem = str(question.get("stem") or "")
     choices = question.get("choices") or {}
     all_text = stem + " " + " ".join(str(v) for v in choices.values())
@@ -36,8 +54,8 @@ def _stage_language(question: dict[str, Any]) -> int:
     if len(stem.strip()) < 15:
         score -= 20
     
-    # Check options have content
-    empty_opts = sum(1 for v in choices.values() if len(str(v).strip()) < 2)
+    # Check options have content (Roman I/V/II/… count as non-empty)
+    empty_opts = sum(1 for v in choices.values() if _choice_is_empty(v))
     score -= empty_opts * 15
     
     return max(0, min(100, score))

@@ -125,6 +125,7 @@ class QuestionPoolService:
         limit: int = 10,
         target_asset_id: uuid.UUID | None = None,
         pool_type: str = "general",
+        max_fetch: int | None = None,
     ) -> list[QuestionPoolCard]:
         canonical_exam = normalize_exam_code(exam)
         q = (
@@ -140,15 +141,19 @@ class QuestionPoolService:
         if target_asset_id:
             q = q.where(QuestionPoolCard.target_asset_id == target_asset_id)
 
+        fetch_n = max_fetch if max_fetch is not None else max(limit * 8, 24)
         q = (
             q.order_by(QuestionPoolCard.use_count.asc(), QuestionPoolCard.created_at.asc())
-            .limit(limit)
+            .limit(fetch_n)
         )
         rows = list((await self.db.execute(q)).scalars().all())
+        from app.services.correctness.apply import pool_row_is_quarantined
+
+        rows = [r for r in rows if not pool_row_is_quarantined(r)]
         if not exclude_stems:
-            return rows
+            return rows[:limit]
         blocked = {s.strip().lower() for s in exclude_stems if s}
-        return [r for r in rows if (r.stem or "").strip().lower() not in blocked]
+        return [r for r in rows if (r.stem or "").strip().lower() not in blocked][:limit]
 
     async def get_by_asset_id(
         self, target_asset_id: uuid.UUID, limit: int = 10
@@ -180,13 +185,22 @@ class QuestionPoolService:
             choices = dict(card.choices)
             correct_key = card.correct_key
             explanation = card.explanation
-            qie_card = card.to_dict() if hasattr(card, "to_dict") else {}
+            qie_card = card.to_persist_dict()
         else:
             stem = str(card.get("stem") or "")
             choices = {str(k): str(v) for k, v in (card.get("choices") or {}).items()}
             correct_key = str(card.get("correct_key") or "A").upper()
             explanation = card.get("explanation")
             qie_card = dict(card.get("qie_card") or card)
+
+        corr_meta = qie_card.get("correctness") if isinstance(qie_card, dict) else None
+        if isinstance(corr_meta, dict) and str(corr_meta.get("verdict") or "").lower() == "fail":
+            logger.warning(
+                "pool put refused: correctness fail topic=%s stem=%s...",
+                topic_code,
+                (stem or "")[:40],
+            )
+            raise ValueError("correctness_fail_not_pooled")
 
         ch = card_content_hash(stem, choices, correct_key)
 
@@ -242,6 +256,36 @@ class QuestionPoolService:
         )
         return row
 
+    async def update_correctness_metadata(
+        self, row: QuestionPoolCard, meta: dict[str, Any]
+    ) -> None:
+        qie = dict(row.qie_card or {})
+        qie["correctness"] = dict(meta or {})
+        row.qie_card = qie
+        await self.db.flush()
+
+    async def mark_quarantined(
+        self, row: QuestionPoolCard, *, reason: str | None = None
+    ) -> None:
+        from app.services.correctness.constants import CORRECTNESS_VERSION
+
+        qie = dict(row.qie_card or {})
+        corr = dict(qie.get("correctness") or {})
+        corr["version"] = corr.get("version") or CORRECTNESS_VERSION
+        corr["verdict"] = "fail"
+        corr["quarantined"] = True
+        if reason:
+            corr["reason"] = reason
+        qie["correctness"] = corr
+        row.qie_card = qie
+        await self.db.flush()
+        logger.info(
+            "pool quarantine id=%s topic=%s reason=%s",
+            row.id,
+            row.topic_code,
+            reason or "-",
+        )
+
     async def mark_used(self, card_id: uuid.UUID) -> None:
         await self.db.execute(
             update(QuestionPoolCard)
@@ -269,6 +313,7 @@ class QuestionPoolService:
             difficulty_score = int(qie.get("difficulty_score") or plan.difficulty or 70)
         except (ValueError, TypeError):
             difficulty_score = 70
+        corr = qie.get("correctness") if isinstance(qie.get("correctness"), dict) else None
         return QuestionCard(
             stem=row.stem,
             choices=dict(row.choices or {}),
@@ -281,4 +326,104 @@ class QuestionPoolService:
             prompt_version=str(qie.get("prompt_version") or "pool_v1"),
             provider=str(qie.get("provider") or "pool"),
             model=qie.get("model"),
+            correctness_meta=corr,
         )
+
+    async def try_serve_row(
+        self, row: QuestionPoolCard, plan: QuestionPlan
+    ) -> QuestionCard | None:
+        """Serve-time correctness. None → skip/quarantine (caller falls back to fresh).
+
+        Does not run M34. Does not increment use_count.
+        """
+        from app.services.correctness.apply import (
+            attach_correctness_meta,
+            evaluate_pool_row_correctness,
+            pool_row_can_skip_recheck,
+            pool_row_is_quarantined,
+        )
+
+        if pool_row_is_quarantined(row):
+            return None
+        if pool_row_can_skip_recheck(row):
+            return self.to_question_card(row, plan)
+
+        corr = evaluate_pool_row_correctness(row, mode="serve")
+        if not corr.passed:
+            await self.mark_quarantined(row, reason=corr.reason)
+            return None
+        await self.update_correctness_metadata(row, corr.to_metadata())
+        card = self.to_question_card(row, plan)
+        attach_correctness_meta(card, corr)
+        return card
+
+    def _plan_for_pool_row(
+        self,
+        row: QuestionPoolCard,
+        *,
+        exam: str,
+        subject_code: str,
+        topic_code: str,
+    ) -> QuestionPlan:
+        return QuestionPlan(
+            exam=str(getattr(row, "exam", None) or exam),
+            subject_code=str(getattr(row, "subject_code", None) or subject_code),
+            subject_name=str(getattr(row, "subject_code", None) or subject_code),
+            topic_code=str(getattr(row, "topic_code", None) or topic_code),
+            topic_name=str(getattr(row, "topic_code", None) or topic_code),
+            skill=str(getattr(row, "skill", None) or ""),
+        )
+
+    async def serve_unused_for_topic(
+        self,
+        *,
+        exam: str,
+        subject_code: str,
+        topic_code: str,
+        difficulty_band: str,
+        exclude_stems: list[str] | None = None,
+        limit: int = 10,
+        target_asset_id: uuid.UUID | None = None,
+        pool_type: str = "general",
+        mark_used: bool = True,
+    ) -> list[QuestionCard]:
+        """Booklet/pool-hit serve: candidates → correctness → skip FAIL → use_count on serve.
+
+        Does not change get_unused_for_topic's default contract. One FAIL candidate
+        does not discard later PASS/UNSUPPORTED rows in the same topic batch.
+        """
+        if limit <= 0:
+            return []
+        fetch_n = max(int(limit) * 8, 24)
+        candidates = await self.get_unused_for_topic(
+            exam=exam,
+            subject_code=subject_code,
+            topic_code=topic_code,
+            difficulty_band=difficulty_band,
+            exclude_stems=exclude_stems,
+            limit=fetch_n,
+            target_asset_id=target_asset_id,
+            pool_type=pool_type,
+            max_fetch=fetch_n,
+        )
+        served: list[QuestionCard] = []
+        blocked = {s.strip().lower() for s in (exclude_stems or []) if s}
+        for row in candidates:
+            if len(served) >= limit:
+                break
+            stem_l = (getattr(row, "stem", None) or "").strip().lower()
+            if stem_l and stem_l in blocked:
+                continue
+            plan = self._plan_for_pool_row(
+                row, exam=exam, subject_code=subject_code, topic_code=topic_code
+            )
+            card = await self.try_serve_row(row, plan)
+            if card is None:
+                continue
+            if mark_used:
+                await self.mark_used(row.id)
+            served.append(card)
+            if stem_l:
+                blocked.add(stem_l)
+        return served
+

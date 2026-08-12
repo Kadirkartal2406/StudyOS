@@ -906,12 +906,13 @@ class AssessmentService:
                 need = int(topic.get("count") or 0)
                 if need <= 0:
                     continue
-                
+
                 # Deneme üretimi trial pool + branch-aware exam key kullanır
-                cards = await pool_svc.get_unused_for_topic(
-                    exam=normalize_exam_code(
-                        booklet.exam_type, booklet.branch_key or None
-                    ),
+                exam_key = normalize_exam_code(
+                    booklet.exam_type, booklet.branch_key or None
+                )
+                cards = await pool_svc.serve_unused_for_topic(
+                    exam=exam_key,
                     subject_code=subject_code,
                     topic_code=topic_code,
                     difficulty_band=booklet.difficulty or "medium",
@@ -919,18 +920,17 @@ class AssessmentService:
                     pool_type="trial",
                 )
                 if len(cards) < need:
-                    extra = await pool_svc.get_unused_for_topic(
-                        exam=normalize_exam_code(
-                            booklet.exam_type, booklet.branch_key or None
-                        ),
+                    extra = await pool_svc.serve_unused_for_topic(
+                        exam=exam_key,
                         subject_code=subject_code,
                         topic_code=topic_code,
                         difficulty_band=booklet.difficulty or "medium",
                         limit=need - len(cards),
                         pool_type="general",
+                        exclude_stems=[c.stem for c in cards],
                     )
                     cards = list(cards) + list(extra)
-                
+
                 for card in cards:
                     self.db.add(
                         SharedDailyBookletQuestion(

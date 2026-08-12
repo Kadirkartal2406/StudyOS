@@ -6,13 +6,9 @@ import json
 import logging
 from typing import Any
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.providers.ai.base import ChatMessageDTO, GenerateRequest, generate_with_fallback
-from app.services.ai.quiz_quality_gate import (
-    ValidatedQuizItem,
-    extract_json_payload,
-    validate_quiz_payload,
-)
-from app.services.ai_cost.metrics import get_metrics
 from app.services.ai.measurement_integration import (
     allow_autopool_from_meta,
     apply_soft_measurement,
@@ -21,11 +17,18 @@ from app.services.ai.measurement_integration import (
     measurement_meta_payload,
     prompt_block_from_contract,
 )
+from app.services.ai.quiz_quality_gate import (
+    ValidatedQuizItem,
+    extract_json_payload,
+    validate_quiz_payload,
+)
 from app.services.ai_cost.measurement_flags import (
     measurement_enabled,
     measurement_max_regen,
     measurement_soft_review,
 )
+from app.services.ai_cost.metrics import get_metrics
+from app.services.correctness.apply import attach_correctness_meta, evaluate_item_correctness
 from app.services.qie.difficulty_analyzer import analyze_for_plan
 from app.services.qie.planner import QuestionPlanner
 from app.services.qie.quality_gate_v2 import passes_quality_gate, score_quality
@@ -38,7 +41,6 @@ from app.services.qie.types import (
     QuestionCard,
     QuestionPlan,
 )
-from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = logging.getLogger("studyos.ai_cost.batch")
 
@@ -224,6 +226,53 @@ async def generate_batch_one_call(
                 plan = plan_by_i.get(hint, plan)
             except Exception:
                 pass
+
+        corr = evaluate_item_correctness(item, plan)
+        if not corr.passed:
+            logger.info(
+                "[PIPELINE] 4b. Card skipped: correctness reject_reason=%s",
+                corr.reason,
+            )
+            continue
+
+        from app.services.question_intelligence.pipeline import (
+            evaluate_question as m34_evaluate_question,
+        )
+
+        qdict = {
+            "stem": item.stem,
+            "choices": item.choices,
+            "correct_key": item.correct_key,
+            "explanation": item.explanation,
+        }
+        m34 = m34_evaluate_question(
+            qdict,
+            plan.to_dict(),
+            dna,
+            existing_stems=existing,
+            allow_repair=True,
+        )
+        if not m34.get("accepted"):
+            logger.info(
+                "[PIPELINE] 4b. Card skipped: M34 reject_reason=%s",
+                m34.get("reject_reason"),
+            )
+            continue
+        q2 = m34.get("question") or qdict
+        item = ValidatedQuizItem(
+            stem=str(q2.get("stem") or ""),
+            choices=dict(q2.get("choices") or {}),
+            correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
+            explanation=q2.get("explanation"),
+        )
+        corr = evaluate_item_correctness(item, plan, log_pass=False)
+        if not corr.passed:
+            logger.info(
+                "[PIPELINE] 4b. Card skipped: correctness after M34 reject_reason=%s",
+                corr.reason,
+            )
+            continue
+
         if is_similar_question(item, existing_stems=existing, existing_option_sets=existing_opts):
             stem_text = getattr(item, "stem", "") or ""
             logger.info("[PIPELINE] 4b. Card skipped: similar question stem=%s...", stem_text[:30])
@@ -262,6 +311,7 @@ async def generate_batch_one_call(
             provider=result.provider,
             model=result.model,
         )
+        attach_correctness_meta(card, corr)
         # Soft measurement side-channel (default OFF). Batch path: if soft_review
         # wants regen, mark hold after max_regen budget (no infinite loop).
         retry = 0
@@ -307,15 +357,18 @@ async def generate_batch_one_call(
                         style_dna=dna,
                     )
                     if passes_quality_gate(quality2):
-                        card = build_card(
-                            item2,
-                            plan,
-                            difficulty_score=diff2.score,
-                            quality=quality2,
-                            style_score=quality2.style,
-                            provider=aq.provider or result.provider,
-                            model=aq.model or result.model,
-                        )
+                        corr2 = evaluate_item_correctness(item2, plan)
+                        if corr2.passed:
+                            card = build_card(
+                                item2,
+                                plan,
+                                difficulty_score=diff2.score,
+                                quality=quality2,
+                                style_score=quality2.style,
+                                provider=aq.provider or result.provider,
+                                model=aq.model or result.model,
+                            )
+                            attach_correctness_meta(card, corr2)
                 score, decision = apply_soft_measurement(
                     stem=card.stem,
                     choices=card.choices,

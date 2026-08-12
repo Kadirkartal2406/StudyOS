@@ -41,6 +41,8 @@ class QuestionPlan:
     index: int = 0
     target_asset_id: str | None = None
     available_nodes: list[str] | None = None
+    requires_asset: bool | None = None
+    requires_passage: bool | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -69,6 +71,8 @@ class QuestionPlan:
             "plan_version": PLAN_VERSION,
             "target_asset_id": self.target_asset_id,
             "available_nodes": self.available_nodes,
+            "requires_asset": self.requires_asset,
+            "requires_passage": self.requires_passage,
         }
 
 
@@ -135,6 +139,7 @@ class QuestionCard:
     correct_node_id: str | None = None
     eae_interaction: dict[str, Any] | None = None
     measurement_meta: dict[str, Any] | None = None
+    correctness_meta: dict[str, Any] | None = None
 
     def to_persist_dict(self) -> dict[str, Any]:
         return {
@@ -160,6 +165,7 @@ class QuestionCard:
             "correct_node_id": self.correct_node_id,
             "eae_interaction": self.eae_interaction,
             "measurement_meta": self.measurement_meta,
+            "correctness": self.correctness_meta,
         }
 
 

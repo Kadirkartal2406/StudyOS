@@ -17,6 +17,10 @@ from app.services.ai.quiz_quality_gate import (
     extract_json_payload,
     validate_quiz_payload,
 )
+from app.services.correctness.apply import (
+    attach_correctness_meta,
+    evaluate_item_correctness,
+)
 from app.services.qie.difficulty_analyzer import analyze_for_plan
 from app.services.qie.planner import QuestionPlanner
 from app.services.qie.prompt_builder_v3 import build_qie_messages
@@ -70,6 +74,31 @@ def _apply_measurement_to_card(
         )
         return card, False, False
     return card, True, False
+
+
+def _correctness_or_reject(
+    item: ValidatedQuizItem, plan: QuestionPlan, *, log_pass: bool = True
+):
+    """Shared gate. None → hard reject (FAIL). Result → PASS or UNSUPPORTED."""
+    corr = evaluate_item_correctness(item, plan, log_pass=log_pass)
+    if not corr.passed:
+        return None
+    return corr
+
+
+def _item_from_m34(m34: dict[str, Any], item: ValidatedQuizItem) -> ValidatedQuizItem:
+    q2 = m34.get("question") or {
+        "stem": item.stem,
+        "choices": item.choices,
+        "correct_key": item.correct_key,
+        "explanation": item.explanation,
+    }
+    return ValidatedQuizItem(
+        stem=str(q2.get("stem") or ""),
+        choices=dict(q2.get("choices") or {}),
+        correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
+        explanation=q2.get("explanation"),
+    )
 
 
 class QieOrchestrator:
@@ -143,10 +172,14 @@ class QieOrchestrator:
                 pool_type=ctx.pool_type,
             )
             if reused:
+                served = await pool.try_serve_row(reused[0], plan)
+                if served is None:
+                    metrics.record_pool_miss()
+                    remaining.append(plan)
+                    continue
                 metrics.record_pool_hit()
-                card = pool.to_question_card(reused[0], plan)
-                accepted.append(card)
-                existing.append(card.stem)
+                accepted.append(served)
+                existing.append(served.stem)
                 await pool.mark_used(reused[0].id)
                 get_cost_logger().record(
                     AiCostEvent(
@@ -214,6 +247,15 @@ class QieOrchestrator:
                     plan_by_index = {p.index: p for p in remaining}
                     for aq in authored:
                         plan = plan_by_index.get(aq.author_plan.qie_plan_index) or remaining[0]
+                        item = ValidatedQuizItem(
+                            stem=aq.stem,
+                            choices=dict(aq.choices),
+                            correct_key=aq.correct_key,
+                            explanation=aq.explanation,
+                        )
+                        corr = _correctness_or_reject(item, plan)
+                        if corr is None:
+                            continue
                         review = reviewer.review(
                             aq, recent_stems=stems, recent_correct_keys=keys, rewrite_used=0
                         )
@@ -222,12 +264,6 @@ class QieOrchestrator:
                         vsse = VirtualStudentEngine().simulate(aq, review_bounce_used=0)
                         if not vsse.passed:
                             continue
-                        item = ValidatedQuizItem(
-                            stem=aq.stem,
-                            choices=dict(aq.choices),
-                            correct_key=aq.correct_key,
-                            explanation=aq.explanation,
-                        )
 
                         # NEW: M34 question intelligence layer (Blueprint/ExamFeel/etc)
                         from app.services.question_intelligence.pipeline import (
@@ -249,13 +285,10 @@ class QieOrchestrator:
                         )
                         if not m34.get("accepted"):
                             continue
-                        q2 = m34.get("question") or qdict
-                        item = ValidatedQuizItem(
-                            stem=str(q2.get("stem") or ""),
-                            choices=dict(q2.get("choices") or {}),
-                            correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
-                            explanation=q2.get("explanation"),
-                        )
+                        item = _item_from_m34(m34, item)
+                        corr = _correctness_or_reject(item, plan, log_pass=False)
+                        if corr is None:
+                            continue
 
                         diff = analyze_for_plan(item, plan, style=dna)
                         if diff.score < MIN_DIFFICULTY_SCORE:
@@ -284,6 +317,7 @@ class QieOrchestrator:
                             provider=aq.provider,
                             model=aq.model,
                         )
+                        attach_correctness_meta(card, corr)
                         retry = 0
                         card, accept, need_regen = _apply_measurement_to_card(
                             card, contract=measurement_contract, retry_count=retry
@@ -302,37 +336,42 @@ class QieOrchestrator:
                                     correct_key=aq_r.correct_key,
                                     explanation=aq_r.explanation,
                                 )
-                                diff_r = analyze_for_plan(item_r, plan, style=dna)
-                                if diff_r.score >= MIN_DIFFICULTY_SCORE:
-                                    quality_r = score_quality(
-                                        item_r,
-                                        plan,
-                                        difficulty_score=diff_r.score,
-                                        existing_stems=stems,
-                                        style_dna=dna,
-                                    )
-                                    if passes_quality_gate(quality_r) and not is_similar_question(
-                                        item_r, existing_stems=stems, existing_option_sets=opts
-                                    ):
-                                        card = build_card(
+                                corr_r = _correctness_or_reject(item_r, plan)
+                                if corr_r is None:
+                                    accept = False
+                                else:
+                                    diff_r = analyze_for_plan(item_r, plan, style=dna)
+                                    if diff_r.score >= MIN_DIFFICULTY_SCORE:
+                                        quality_r = score_quality(
                                             item_r,
                                             plan,
                                             difficulty_score=diff_r.score,
-                                            quality=quality_r,
-                                            style_score=quality_r.style,
-                                            provider=aq_r.provider,
-                                            model=aq_r.model,
+                                            existing_stems=stems,
+                                            style_dna=dna,
                                         )
-                                        retry = 1
-                                        card, accept, _ = _apply_measurement_to_card(
-                                            card,
-                                            contract=measurement_contract,
-                                            retry_count=retry,
-                                        )
+                                        if passes_quality_gate(quality_r) and not is_similar_question(
+                                            item_r, existing_stems=stems, existing_option_sets=opts
+                                        ):
+                                            card = build_card(
+                                                item_r,
+                                                plan,
+                                                difficulty_score=diff_r.score,
+                                                quality=quality_r,
+                                                style_score=quality_r.style,
+                                                provider=aq_r.provider,
+                                                model=aq_r.model,
+                                            )
+                                            attach_correctness_meta(card, corr_r)
+                                            retry = 1
+                                            card, accept, _ = _apply_measurement_to_card(
+                                                card,
+                                                contract=measurement_contract,
+                                                retry_count=retry,
+                                            )
+                                        else:
+                                            accept = False
                                     else:
                                         accept = False
-                                else:
-                                    accept = False
                             except Exception as e:
                                 logger.info("measurement compact regen failed: %s", e)
                                 card, accept, _ = _apply_measurement_to_card(
@@ -511,6 +550,15 @@ class QieOrchestrator:
         for aq in authored:
             plan = plan_by_index.get(aq.author_plan.qie_plan_index) or plans[0]
 
+            item0 = ValidatedQuizItem(
+                stem=aq.stem,
+                choices=dict(aq.choices),
+                correct_key=aq.correct_key,
+                explanation=aq.explanation,
+            )
+            if _correctness_or_reject(item0, plan) is None:
+                continue
+
             # M30 chief editor — never generates; may request one Author rewrite
             review = reviewer.review(
                 aq,
@@ -577,6 +625,9 @@ class QieOrchestrator:
                 correct_key=aq.correct_key,
                 explanation=aq.explanation,
             )
+            corr = _correctness_or_reject(item, plan)
+            if corr is None:
+                continue
 
             # NEW: M34 question intelligence layer (Blueprint/ExamFeel/etc)
             from app.services.question_intelligence.pipeline import (
@@ -598,13 +649,10 @@ class QieOrchestrator:
             )
             if not m34.get("accepted"):
                 continue
-            q2 = m34.get("question") or qdict
-            item = ValidatedQuizItem(
-                stem=str(q2.get("stem") or ""),
-                choices=dict(q2.get("choices") or {}),
-                correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
-                explanation=q2.get("explanation"),
-            )
+            item = _item_from_m34(m34, item)
+            corr = _correctness_or_reject(item, plan, log_pass=False)
+            if corr is None:
+                continue
 
             diff = analyze_for_plan(item, plan, style=dna)
             if diff.score < MIN_DIFFICULTY_SCORE:
@@ -638,6 +686,7 @@ class QieOrchestrator:
                 provider=aq.provider,
                 model=aq.model,
             )
+            attach_correctness_meta(card, corr)
             setattr(card, "author_meta", aq.internal_metadata())
             setattr(card, "review_meta", review.internal_metadata())
             setattr(card, "vsse_meta", vsse.internal_metadata())
@@ -659,34 +708,39 @@ class QieOrchestrator:
                             correct_key=aq_r.correct_key,
                             explanation=aq_r.explanation,
                         )
-                        diff_r = analyze_for_plan(item_r, plan, style=dna)
-                        if diff_r.score >= MIN_DIFFICULTY_SCORE:
-                            quality_r = score_quality(
-                                item_r,
-                                plan,
-                                difficulty_score=diff_r.score,
-                                existing_stems=existing,
-                                style_dna=dna,
-                            )
-                            if passes_quality_gate(quality_r):
-                                card = build_card(
+                        corr_r = _correctness_or_reject(item_r, plan)
+                        if corr_r is None:
+                            accept = False
+                        else:
+                            diff_r = analyze_for_plan(item_r, plan, style=dna)
+                            if diff_r.score >= MIN_DIFFICULTY_SCORE:
+                                quality_r = score_quality(
                                     item_r,
                                     plan,
                                     difficulty_score=diff_r.score,
-                                    quality=quality_r,
-                                    style_score=quality_r.style,
-                                    provider=aq_r.provider,
-                                    model=aq_r.model,
+                                    existing_stems=existing,
+                                    style_dna=dna,
                                 )
-                                card, accept, _ = _apply_measurement_to_card(
-                                    card,
-                                    contract=measurement_contract,
-                                    retry_count=1,
-                                )
+                                if passes_quality_gate(quality_r):
+                                    card = build_card(
+                                        item_r,
+                                        plan,
+                                        difficulty_score=diff_r.score,
+                                        quality=quality_r,
+                                        style_score=quality_r.style,
+                                        provider=aq_r.provider,
+                                        model=aq_r.model,
+                                    )
+                                    attach_correctness_meta(card, corr_r)
+                                    card, accept, _ = _apply_measurement_to_card(
+                                        card,
+                                        contract=measurement_contract,
+                                        retry_count=1,
+                                    )
+                                else:
+                                    accept = False
                             else:
                                 accept = False
-                        else:
-                            accept = False
                     else:
                         accept = False
                 except Exception as e:
@@ -756,6 +810,10 @@ class QieOrchestrator:
             if plan is None:
                 continue
 
+            corr = _correctness_or_reject(item, plan)
+            if corr is None:
+                continue
+
             # NEW: M34 question intelligence layer (Blueprint/ExamFeel/etc)
             from app.services.question_intelligence.pipeline import (
                 evaluate_question as m34_evaluate_question,
@@ -776,13 +834,10 @@ class QieOrchestrator:
             )
             if not m34.get("accepted"):
                 continue
-            q2 = m34.get("question") or qdict
-            item = ValidatedQuizItem(
-                stem=str(q2.get("stem") or ""),
-                choices=dict(q2.get("choices") or {}),
-                correct_key=str(q2.get("correct_key") or item.correct_key).upper(),
-                explanation=q2.get("explanation"),
-            )
+            item = _item_from_m34(m34, item)
+            corr = _correctness_or_reject(item, plan, log_pass=False)
+            if corr is None:
+                continue
 
             diff = analyze_for_plan(item, plan, style=dna)
             if diff.score < MIN_DIFFICULTY_SCORE:
@@ -813,6 +868,7 @@ class QieOrchestrator:
                 provider=result.provider,
                 model=result.model,
             )
+            attach_correctness_meta(card, corr)
             card, accept, _ = _apply_measurement_to_card(
                 card, contract=measurement_contract, retry_count=0
             )
