@@ -33,6 +33,26 @@ from app.services.qie import GenerateContext, QieOrchestrator
 from app.services.qie.types import QuestionPlan
 
 
+def _resolve_item_asset_uri(it: object) -> str | None:
+    """Extract asset_uri from an item, tolerating None values everywhere."""
+    row_eae = getattr(it, "eae_interaction", None)
+    if row_eae and isinstance(row_eae, dict):
+        return row_eae.get("asset_uri")
+    qie = getattr(it, "qie_card", None) or {}
+    eae = qie.get("eae_interaction") or {}
+    return eae.get("asset_uri") or qie.get("target_asset_id") or None
+
+
+def _resolve_item_correct_node(it: object) -> str | None:
+    """Extract correct_node_id from an item, tolerating None values everywhere."""
+    row_eae = getattr(it, "eae_interaction", None)
+    if row_eae and isinstance(row_eae, dict):
+        return row_eae.get("expected_node_id")
+    qie = getattr(it, "qie_card", None) or {}
+    eae = qie.get("eae_interaction") or {}
+    return eae.get("expected_node_id") or qie.get("correct_node_id") or None
+
+
 class TopicQuizService:
     def __init__(self, db: AsyncSession):
         self.db = db
@@ -273,8 +293,8 @@ class TopicQuizService:
                 explanation=it.explanation,
                 selected_key=it.selected_key,
                 is_correct=it.is_correct,
-                target_asset_id=it.eae_interaction.get("asset_uri") if it.eae_interaction else (it.qie_card.get("eae_interaction", {}).get("asset_uri") or it.qie_card.get("target_asset_id")),
-                correct_node_id=it.eae_interaction.get("expected_node_id") if it.eae_interaction else (it.qie_card.get("eae_interaction", {}).get("expected_node_id") or it.qie_card.get("correct_node_id")),
+                target_asset_id=_resolve_item_asset_uri(it),
+                correct_node_id=_resolve_item_correct_node(it),
             )
             for it in gen.items
         ]
@@ -310,7 +330,7 @@ class TopicQuizService:
                 ord_index=it.ord_index,
                 stem=it.stem,
                 choices=dict(it.choices),
-                target_asset_id=it.eae_interaction.get("asset_uri") if it.eae_interaction else (it.qie_card.get("eae_interaction", {}).get("asset_uri") or it.qie_card.get("target_asset_id")),
+                eae_interaction=getattr(it, "eae_interaction", None),
             )
             for it in (gen.items or [])
         ]
