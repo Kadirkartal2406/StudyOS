@@ -171,3 +171,4 @@ class GenerateContext:
     style_override: dict[str, Any] | None = None
     early_accuracy: float | None = None  # 0–1 for adaptive
     kind: str = "topic_quiz"  # topic_quiz | daily_booklet | calibration
+    persist_pool: bool = True  # False → defer pool.put until caller confirms success

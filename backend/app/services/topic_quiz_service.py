@@ -97,6 +97,7 @@ class TopicQuizService:
             preferred_model=pref.ai_preferred_model,
             plans=plans,
             kind=kind,
+            persist_pool=False,
         )
 
         try:
@@ -112,9 +113,9 @@ class TopicQuizService:
             from app.services.deduplication_service import get_user_seen_stem_hashes, compute_stem_hash
             seen_hashes = await get_user_seen_stem_hashes(self.db, user_id)
             if cards and seen_hashes:
-                unseen = [c for c in cards if compute_stem_hash(c.stem) not in seen_hashes]
-                if unseen:
-                    cards = unseen
+                cards = [
+                    c for c in cards if compute_stem_hash(c.stem) not in seen_hashes
+                ]
 
             if not cards:
                 # 3-Tier Fallback: Try fetching pre-generated pool cards from QuestionPoolCard
@@ -190,6 +191,7 @@ class TopicQuizService:
             gen.status = QuizGenerationStatus.READY
             gen.error_message = None
             await self.db.flush()
+            await self._persist_new_cards_to_pool(ctx, cards)
             return await self.get(user_id, gen.id)
         except ValidationError:
             raise
@@ -271,6 +273,31 @@ class TopicQuizService:
             accuracy_pct=accuracy,
             review_items=review,
         )
+
+    async def _persist_new_cards_to_pool(
+        self, ctx: GenerateContext, cards: list[QuestionCard]
+    ) -> None:
+        """Persist freshly generated QIE cards to the pool after quiz is READY."""
+        from app.services.ai_cost.pool import QuestionPoolService, fingerprint_for_plan
+
+        pool = QuestionPoolService(self.db)
+        for card in cards:
+            plan = getattr(card, "plan", None)
+            if plan is None:
+                continue
+            try:
+                fp = fingerprint_for_plan(plan, ctx)
+                await pool.put_card(
+                    fingerprint=fp,
+                    card=card,
+                    exam=ctx.exam,
+                    subject_code=ctx.subject_code,
+                    topic_code=ctx.topic_code,
+                    difficulty_band=ctx.difficulty_band,
+                    skill=plan.skill,
+                )
+            except Exception:
+                pass
 
     async def _load(
         self, user_id: uuid.UUID, generation_id: uuid.UUID

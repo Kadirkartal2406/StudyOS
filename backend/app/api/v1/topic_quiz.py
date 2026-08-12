@@ -11,7 +11,6 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.dependencies import get_current_user
-from app.core.exceptions import ValidationError
 from app.database.base import get_db
 from app.models.user import User
 from app.schemas.common import SuccessResponse
@@ -57,13 +56,9 @@ async def generate_topic_quiz(
     db: AsyncSession = Depends(get_db),
 ) -> SuccessResponse[QuizGenerationRead]:
     """Intent → LLM → Quality Gate → READY quiz (doğru cevaplar gizli)."""
-    try:
-        data = await TopicQuizService(db).generate(
-            current_user.id, subject_code, topic_code, body
-        )
-    except ValidationError:
-        await db.commit()
-        raise
+    data = await TopicQuizService(db).generate(
+        current_user.id, subject_code, topic_code, body
+    )
     await db.commit()
     return SuccessResponse(
         data=data,
