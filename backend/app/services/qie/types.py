@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from app.core.constants import TOPIC_QUIZ_DEFAULT_COUNT
+
 
 PROMPT_VERSION = "qie_v3"
 PLAN_VERSION = "qie_plan_v1"
@@ -176,7 +178,7 @@ class GenerateContext:
     subject_name: str
     topic_code: str
     topic_name: str
-    count: int = 5
+    count: int = TOPIC_QUIZ_DEFAULT_COUNT
     difficulty_band: str = "medium"  # easy|medium|hard
     user_id: Any = None
     preferred_provider: str | None = None

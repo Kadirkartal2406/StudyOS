@@ -7,6 +7,7 @@ from app.services.qie.skill_profiles import (
     LANGUAGE_SKILLS,
     LANGUAGE_STEMS,
     get_skill_profile,
+    paragraph_length_for_stem,
     skill_pool_for_context,
     stem_cycle_for_profile,
 )
@@ -119,6 +120,11 @@ class QuestionPlanner:
                 preferred=preferred_dist,
             )
             forbidden_patterns.append(distractor)
+            para_len = paragraph_length_for_stem(
+                stem_type=stem_type,
+                para_avg=para_avg,
+                is_reading_topic=is_reading_topic,
+            )
             plans.append(
                 QuestionPlan(
                     exam=ctx.exam,
@@ -130,7 +136,7 @@ class QuestionPlanner:
                     difficulty=difficulty,
                     bloom=_bloom_for(difficulty),
                     reasoning_type=_reasoning_type(stem_type),
-                    paragraph_length=para_avg,
+                    paragraph_length=para_len,
                     reading_time_sec=reading,
                     stem_type=stem_type,
                     distractor_pattern=distractor,

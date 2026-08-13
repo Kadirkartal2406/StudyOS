@@ -300,3 +300,30 @@ def test_context_fields_preserved_on_plans():
         assert p.choice_count == 5
         assert p.skill
         assert p.stem_type
+
+
+def test_factual_recall_caps_paragraph_length_not_reading():
+    plans = _plan(
+        exam="kpss_lisans",
+        subject_code="kpss_tarih",
+        subject_name="Tarih",
+        topic_code="kpss_tarih__osmanli",
+        topic_name="Osmanlı",
+        count=1,
+        style={"choice_count": 5, "paragraph_length_avg": 150},
+    )
+    assert plans[0].stem_type == "factual_recall"
+    assert plans[0].paragraph_length <= 50
+
+
+def test_turkce_paragraf_keeps_long_paragraph_length():
+    plans = _plan(
+        exam="tyt",
+        subject_code="tyt_turkce",
+        subject_name="Türkçe",
+        topic_code="tyt_turkce__paragraf",
+        topic_name="Paragraf",
+        count=1,
+        style={"choice_count": 5, "paragraph_length_avg": 180},
+    )
+    assert plans[0].paragraph_length >= 80

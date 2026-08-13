@@ -5,6 +5,7 @@ Sprint 25 — generation delegated to Question Intelligence Engine (QIE).
 
 from __future__ import annotations
 
+import logging
 import uuid
 from datetime import UTC, datetime
 
@@ -12,7 +13,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.core.constants import normalize_exam_code
+from app.core.constants import TOPIC_QUIZ_RECENT_STEM_LIMIT, normalize_exam_code
 from app.core.exceptions import NotFoundError, ValidationError
 from app.models.topic_quiz import (
     QuizGenerationStatus,
@@ -31,6 +32,8 @@ from app.schemas.topic_quiz import (
 from app.services.notification_settings_service import NotificationSettingsService
 from app.services.qie import GenerateContext, QieOrchestrator
 from app.services.qie.types import QuestionPlan
+
+logger = logging.getLogger("studyos.topic_quiz")
 
 
 def _resolve_item_asset_uri(it: object) -> str | None:
@@ -101,6 +104,7 @@ class TopicQuizService:
         self.db.add(gen)
         await self.db.flush()
 
+        recent_stems = await self._recent_stems_for_topic(user_id, top)
         pref = await NotificationSettingsService(self.db).get_or_create(user_id)
         ctx = GenerateContext(
             exam=normalize_exam_code(exam_type or "kpss"),
@@ -113,8 +117,19 @@ class TopicQuizService:
             user_id=user_id,
             preferred_provider=pref.ai_preferred_provider,
             preferred_model=pref.ai_preferred_model,
+            existing_stems=recent_stems,
             plans=plans,
             kind=kind,
+        )
+        logger.info(
+            "topic_quiz new_generation generation_id=%s exam=%s subject=%s topic=%s "
+            "count=%s replay=false recent_stems=%s",
+            gen.id,
+            ctx.exam,
+            sub,
+            top,
+            data.count,
+            len(recent_stems),
         )
 
         try:
@@ -154,6 +169,15 @@ class TopicQuizService:
             gen.status = QuizGenerationStatus.READY
             gen.error_message = None
             await self.db.flush()
+            logger.info(
+                "topic_quiz ready generation_id=%s exam=%s subject=%s topic=%s "
+                "items=%s replay=false",
+                gen.id,
+                ctx.exam,
+                sub,
+                top,
+                len(cards),
+            )
             return await self.get(user_id, gen.id)
         except ValidationError:
             raise
@@ -168,7 +192,58 @@ class TopicQuizService:
 
     async def get(self, user_id: uuid.UUID, generation_id: uuid.UUID) -> QuizGenerationRead:
         gen = await self._load(user_id, generation_id)
+        logger.info(
+            "topic_quiz load generation_id=%s exam=%s subject=%s topic=%s status=%s",
+            gen.id,
+            gen.exam_type,
+            gen.subject_code,
+            gen.topic_code,
+            gen.status,
+        )
         return self._to_read(gen)
+
+    async def _recent_stems_for_topic(
+        self,
+        user_id: uuid.UUID,
+        topic_code: str,
+        *,
+        limit: int = TOPIC_QUIZ_RECENT_STEM_LIMIT,
+    ) -> list[str]:
+        """Stems recently shown to this user on this topic (READY + SUBMITTED).
+
+        Used only as pool/author exclude_stems. Does not delete history.
+        """
+        if not hasattr(self.db, "execute"):
+            return []
+        stmt = (
+            select(TopicQuizItem.stem)
+            .join(
+                TopicQuizGeneration,
+                TopicQuizItem.generation_id == TopicQuizGeneration.id,
+            )
+            .where(
+                TopicQuizGeneration.user_id == user_id,
+                TopicQuizGeneration.topic_code == topic_code,
+                TopicQuizGeneration.status.in_(
+                    (QuizGenerationStatus.READY, QuizGenerationStatus.SUBMITTED)
+                ),
+            )
+            .order_by(
+                TopicQuizGeneration.created_at.desc(),
+                TopicQuizItem.ord_index.asc(),
+            )
+            .limit(limit)
+        )
+        rows = (await self.db.execute(stmt)).scalars().all()
+        seen: list[str] = []
+        blocked: set[str] = set()
+        for raw in rows:
+            stem = (raw or "").strip()
+            key = stem.lower()
+            if stem and key not in blocked:
+                blocked.add(key)
+                seen.append(stem)
+        return seen
 
     async def submit(
         self,

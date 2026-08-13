@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/api_endpoints.dart';
+import '../../../core/constants/app_config.dart';
 import '../../../core/errors/app_exception.dart';
 import '../../../core/errors/dio_exception_mapper.dart';
 import '../../../core/network/dio_client.dart';
@@ -163,7 +164,7 @@ class TopicQuizRemoteDatasource {
   Future<QuizGenerationEntity> generate({
     required String subjectCode,
     required String topicCode,
-    int count = 5,
+    int count = AppConfig.topicQuizDefaultCount,
     String difficulty = 'medium',
     String? examType,
   }) async {

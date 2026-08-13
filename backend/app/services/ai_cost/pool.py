@@ -148,8 +148,28 @@ class QuestionPoolService:
         )
         rows = list((await self.db.execute(q)).scalars().all())
         from app.services.correctness.apply import pool_row_is_quarantined
+        from app.services.qie.skill_profiles import pool_row_compatible
 
         rows = [r for r in rows if not pool_row_is_quarantined(r)]
+        compatible: list[QuestionPoolCard] = []
+        for r in rows:
+            if pool_row_compatible(
+                r,
+                exam=canonical_exam,
+                subject_code=subject_code,
+                topic_code=topic_code,
+            ):
+                compatible.append(r)
+            else:
+                logger.info(
+                    "pool skip domain-incompatible id=%s exam=%s subject=%s topic=%s skill=%s",
+                    getattr(r, "id", None),
+                    canonical_exam,
+                    subject_code,
+                    topic_code,
+                    getattr(r, "skill", None) or "",
+                )
+        rows = compatible
         if not exclude_stems:
             return rows[:limit]
         blocked = {s.strip().lower() for s in exclude_stems if s}
@@ -201,6 +221,31 @@ class QuestionPoolService:
                 (stem or "")[:40],
             )
             raise ValueError("correctness_fail_not_pooled")
+
+        stem_type = ""
+        if isinstance(qie_card, dict):
+            stem_type = str(qie_card.get("stem_type") or "")
+            plan_raw = qie_card.get("plan")
+            if not stem_type and isinstance(plan_raw, dict):
+                stem_type = str(plan_raw.get("stem_type") or "")
+        from app.services.qie.skill_profiles import pool_card_compatible
+
+        if not pool_card_compatible(
+            exam=exam,
+            subject_code=subject_code,
+            topic_code=topic_code,
+            skill=skill,
+            stem_type=stem_type,
+        ):
+            logger.info(
+                "pool put refused: domain_incompatible exam=%s subject=%s topic=%s skill=%s stem_type=%s",
+                exam,
+                subject_code,
+                topic_code,
+                skill,
+                stem_type,
+            )
+            raise ValueError("domain_incompatible_not_pooled")
 
         ch = card_content_hash(stem, choices, correct_key)
 
@@ -344,6 +389,24 @@ class QuestionPoolService:
         )
 
         if pool_row_is_quarantined(row):
+            return None
+        from app.services.qie.skill_profiles import pool_row_compatible
+
+        if not pool_row_compatible(
+            row,
+            exam=getattr(plan, "exam", None),
+            subject_code=getattr(plan, "subject_code", None),
+            topic_code=getattr(plan, "topic_code", None),
+            topic_name=getattr(plan, "topic_name", None),
+        ):
+            logger.info(
+                "pool serve skip domain-incompatible id=%s exam=%s subject=%s topic=%s skill=%s",
+                getattr(row, "id", None),
+                getattr(plan, "exam", None),
+                getattr(plan, "subject_code", None),
+                getattr(plan, "topic_code", None),
+                getattr(row, "skill", None) or "",
+            )
             return None
         if pool_row_can_skip_recheck(row):
             return self.to_question_card(row, plan)

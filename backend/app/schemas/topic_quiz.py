@@ -7,9 +7,11 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field, field_validator
 
+from app.core.constants import TOPIC_QUIZ_DEFAULT_COUNT
+
 
 class QuizGenerateRequest(BaseModel):
-    count: int = Field(default=5, ge=1, le=15)
+    count: int = Field(default=TOPIC_QUIZ_DEFAULT_COUNT, ge=1, le=15)
     difficulty: str = Field(default="medium")  # easy|medium|hard
     exam_type: str | None = None
 

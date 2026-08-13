@@ -157,30 +157,54 @@ class QieOrchestrator:
         remaining: list[QuestionPlan] = []
         existing = list(ctx.existing_stems)
 
+        from app.services.qie.skill_profiles import resolve_domain
+
+        domain = resolve_domain(
+            exam=ctx.exam,
+            subject_code=ctx.subject_code,
+            topic_code=ctx.topic_code,
+            topic_name=ctx.topic_name,
+        )
+
         for plan in plans:
             # Primary retrieval: topic-based, ranked by usage count + recency.
             # Slot-fingerprint lookup is intentionally omitted: put_card stores
             # cards under content_fp = sha256(slot|content_hash), not the bare
             # slot fingerprint, so get_by_fingerprint(slot_fp) always misses.
+            # Fetch several candidates so domain-incompatible / recently-used
+            # cards can be skipped without falling back to Gemini immediately.
             reused = await pool.get_unused_for_topic(
                 exam=ctx.exam,
                 subject_code=ctx.subject_code,
                 topic_code=ctx.topic_code,
                 difficulty_band=ctx.difficulty_band,
                 exclude_stems=existing,
-                limit=1,
+                limit=8,
                 pool_type=ctx.pool_type,
             )
-            if reused:
-                served = await pool.try_serve_row(reused[0], plan)
-                if served is None:
-                    metrics.record_pool_miss()
-                    remaining.append(plan)
-                    continue
+            served = None
+            served_row = None
+            for row in reused:
+                served = await pool.try_serve_row(row, plan)
+                if served is not None:
+                    served_row = row
+                    break
+            if served is not None and served_row is not None:
                 metrics.record_pool_hit()
+                logger.info(
+                    "qie pool hit mode=new_generation exam=%s subject=%s topic=%s "
+                    "skill=%s domain=%s pool_card_id=%s stem=%s",
+                    ctx.exam,
+                    ctx.subject_code,
+                    ctx.topic_code,
+                    plan.skill,
+                    domain,
+                    getattr(served_row, "id", None),
+                    (served.stem or "")[:60],
+                )
                 accepted.append(served)
                 existing.append(served.stem)
-                await pool.mark_used(reused[0].id)
+                await pool.mark_used(served_row.id)
                 get_cost_logger().record(
                     AiCostEvent(
                         timestamp=__import__("datetime")
@@ -197,6 +221,16 @@ class QieOrchestrator:
                 )
             else:
                 metrics.record_pool_miss()
+                logger.info(
+                    "qie pool miss mode=new_generation exam=%s subject=%s topic=%s "
+                    "skill=%s domain=%s candidates=%s",
+                    ctx.exam,
+                    ctx.subject_code,
+                    ctx.topic_code,
+                    plan.skill,
+                    domain,
+                    len(reused),
+                )
                 remaining.append(plan)
 
         if not remaining:

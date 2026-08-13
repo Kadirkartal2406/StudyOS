@@ -23,6 +23,10 @@ class AppConfig {
   /// Uygulama sürümü.
   static const String appVersion = '0.23.0';
 
+  /// Topic quiz "Quiz Üret" item count — keep in sync with
+  /// backend `TOPIC_QUIZ_DEFAULT_COUNT`.
+  static const int topicQuizDefaultCount = 10;
+
   /// API istek zaman aşımı (saniye).
   /// Render free cold-start için 30 sn yetmeyebilir.
   static const int apiTimeoutSeconds = 90;

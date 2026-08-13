@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from typing import Any
 
 # Language-only cycle (Türkçe / dil bilgisi). Must not leak to other domains.
 LANGUAGE_SKILLS: tuple[str, ...] = (
@@ -671,3 +672,234 @@ def stem_cycle_for_profile(profile: SkillProfile) -> list[str]:
 
 def is_language_form_skill(skill: str) -> bool:
     return skill in LANGUAGE_FORM_SKILLS
+
+
+LANGUAGE_DOMAINS: frozenset[str] = frozenset({"turkce", "edebiyat", "english"})
+
+# Language-only stem types that must not appear on non-language pool cards.
+LANGUAGE_FORM_STEMS: frozenset[str] = frozenset(
+    {
+        "vocabulary",
+        "grammar",
+        "main_idea",
+        "supporting_detail",
+        "paragraph_completion",
+        "sentence_ordering",
+        "tone",
+        "cloze",
+        "reading_comprehension",
+        "literary_analysis",
+    }
+)
+
+
+def pool_card_compatible(
+    *,
+    exam: str | None,
+    subject_code: str | None,
+    topic_code: str | None = None,
+    topic_name: str | None = None,
+    skill: str | None = None,
+    stem_type: str | None = None,
+) -> bool:
+    """True if a pool card's skill/stem may be served for this subject/topic.
+
+    Language domains (Türkçe / Edebiyat / English) keep their form skills.
+    Verbal reasoning may use meaning skills (main_idea, sentence_meaning)
+    but never spelling/grammar/vocabulary leftovers.
+    All other domains reject language-form skills and stems.
+    """
+    profile = get_skill_profile(
+        exam=exam,
+        subject_code=subject_code,
+        subject_name=None,
+        topic_code=topic_code,
+        topic_name=topic_name,
+    )
+    skill_s = (skill or "").strip()
+    stem_s = (stem_type or "").strip()
+    if profile.domain in LANGUAGE_DOMAINS:
+        return True
+    if profile.domain == "verbal_reasoning":
+        if skill_s in LANGUAGE_FORM_SKILLS and skill_s not in profile.skills:
+            return False
+        if stem_s in LANGUAGE_FORM_STEMS and stem_s not in profile.stem_types:
+            return False
+        if skill_s and skill_s not in profile.skills and skill_s in LANGUAGE_SKILLS:
+            return False
+        return True
+    if skill_s in LANGUAGE_FORM_SKILLS:
+        return False
+    if stem_s in LANGUAGE_FORM_STEMS:
+        return False
+    if skill_s and skill_s not in profile.skills and skill_s in LANGUAGE_SKILLS:
+        return False
+    return True
+
+
+def pool_row_compatible(
+    row: Any,
+    *,
+    exam: str | None = None,
+    subject_code: str | None = None,
+    topic_code: str | None = None,
+    topic_name: str | None = None,
+) -> bool:
+    qie = getattr(row, "qie_card", None) or {}
+    skill = ""
+    stem_type = ""
+    if isinstance(qie, dict):
+        skill = str(qie.get("skill") or "")
+        stem_type = str(qie.get("stem_type") or "")
+    skill = skill or str(getattr(row, "skill", None) or "")
+    return pool_card_compatible(
+        exam=exam or getattr(row, "exam", None),
+        subject_code=subject_code or getattr(row, "subject_code", None),
+        topic_code=topic_code or getattr(row, "topic_code", None),
+        topic_name=topic_name,
+        skill=skill,
+        stem_type=stem_type,
+    )
+
+
+# Stem types that naturally need a long passage. Do not shorten these.
+LONG_STEM_TYPES: frozenset[str] = frozenset(
+    {
+        "reading_comprehension",
+        "paragraph_completion",
+        "sentence_ordering",
+        "main_idea",
+        "supporting_detail",
+        "cloze",
+        "literary_analysis",
+        "paragraph_analysis",
+    }
+)
+
+# Stem types that should stay short/medium (knowledge / calculation).
+SHORT_STEM_TYPES: frozenset[str] = frozenset(
+    {
+        "factual_recall",
+        "calculation",
+        "equation_solving",
+        "application",
+        "concept_application",
+        "chronology",
+        "theorem_application",
+        "multi_step",
+        "map_data",
+    }
+)
+
+_DOMAIN_INSTRUCTIONS: dict[str, str] = {
+    "tarih": (
+        "Bu soru tarih alanına aittir. Tarih bilgisini ölç. "
+        "İmla, dilbilgisi, kelime bilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "cografya": (
+        "Bu soru coğrafya alanına aittir. Coğrafya bilgisini ölç. "
+        "İmla, dilbilgisi, kelime bilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "matematik": (
+        "Bu soru matematik alanına aittir. Matematiksel problem/akıl yürütme üret. "
+        "Türkçe dilbilgisi, imla, kelime veya paragraf-anlam sorusu üretme. "
+        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır "
+        "(\\\\frac, \\\\sqrt). Düz metne veya Unicode kesire çevirme."
+    ),
+    "geometri": (
+        "Bu soru geometri alanına aittir. Geometrik muhakeme/hesap üret. "
+        "İmla, dilbilgisi, kelime veya paragraf-anlam sorusu üretme. "
+        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır."
+    ),
+    "fizik": (
+        "Bu soru fizik alanına aittir. Fizik kavramı veya hesabı ölç. "
+        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme. "
+        "Formülleri LaTeX olarak yaz; JSON içinde backslash kaçır."
+    ),
+    "kimya": (
+        "Bu soru kimya alanına aittir. Kimya kavramı veya hesabı ölç. "
+        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme."
+    ),
+    "biyoloji": (
+        "Bu soru biyoloji alanına aittir. Biyoloji bilgisini ölç. "
+        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "fen": (
+        "Bu soru fen bilimleri alanına aittir. Fen kavramı veya hesabı ölç. "
+        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme."
+    ),
+    "felsefe": (
+        "Bu soru felsefe alanına aittir. Felsefi kavram/argüman ölç. "
+        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "din": (
+        "Bu soru din kültürü alanına aittir. İlgili kavram/bilgiyi ölç. "
+        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "vatandaslik": (
+        "Bu soru vatandaşlık alanına aittir. Anayasa/devlet bilgisi ölç. "
+        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "guncel": (
+        "Bu soru güncel bilgiler alanına aittir. "
+        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme."
+    ),
+    "quantitative": (
+        "Bu soru sayısal muhakeme alanına aittir. Hesap/problem üret. "
+        "Türkçe dilbilgisi, imla veya paragraf-anlam sorusu üretme. "
+        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır."
+    ),
+    "verbal_reasoning": (
+        "Bu soru sözel muhakeme alanına aittir. Mantık/anlam ilişkisi ölç. "
+        "Yazım/noktalama (imla) sorusu üretme."
+    ),
+    "english": (
+        "This question belongs to an English-language exam. "
+        "Write the stem and choices in English. "
+        "Do not produce Turkish spelling/grammar/paragraph items."
+    ),
+    "turkce": (
+        "Bu soru Türkçe alanına aittir. Dil/anlam becerisini ölç."
+    ),
+    "edebiyat": (
+        "Bu soru edebiyat alanına aittir. Edebi metin/dönem/tür bilgisini ölç."
+    ),
+    "unknown": (
+        "Konuya uygun bir sınav sorusu yaz. "
+        "İmla, dilbilgisi veya konu dışı paragraf-anlam sorusu üretme."
+    ),
+}
+
+
+def domain_prompt_instruction(
+    *,
+    exam: str | None = None,
+    subject_code: str | None = None,
+    subject_name: str | None = None,
+    topic_code: str | None = None,
+    topic_name: str | None = None,
+) -> str:
+    """Short domain constraint for compact prompts. Uses resolver, not a second planner."""
+    domain = resolve_domain(
+        exam=exam,
+        subject_code=subject_code,
+        subject_name=subject_name,
+        topic_code=topic_code,
+        topic_name=topic_name,
+    )
+    return _DOMAIN_INSTRUCTIONS.get(domain, _DOMAIN_INSTRUCTIONS["unknown"])
+
+
+def paragraph_length_for_stem(
+    *,
+    stem_type: str,
+    para_avg: int,
+    is_reading_topic: bool,
+) -> int:
+    """Keep reading stems long; cap knowledge/calc stems. No global shorten."""
+    st = (stem_type or "").strip().lower()
+    if is_reading_topic or st in LONG_STEM_TYPES:
+        return max(40, int(para_avg))
+    if st in SHORT_STEM_TYPES:
+        return min(max(25, int(para_avg)), 50)
+    return max(30, min(int(para_avg), 70))

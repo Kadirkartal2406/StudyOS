@@ -124,6 +124,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
       _loading = true;
       _error = null;
       _result = null;
+      _quiz = null;
       _answers.clear();
       _selectedNodes.clear();
       _index = 0;

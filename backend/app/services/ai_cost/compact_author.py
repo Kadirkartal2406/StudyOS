@@ -12,6 +12,7 @@ from typing import Any
 
 from app.providers.ai.base import ChatMessageDTO, GenerateRequest, generate_with_fallback
 from app.services.ai.quiz_quality_gate import extract_json_payload
+from app.services.qie.skill_profiles import domain_prompt_instruction, resolve_domain
 from app.services.qie.types import GenerateContext, QuestionPlan
 from app.services.question_author.author_planner import build_author_plan
 from app.services.question_author.types import (
@@ -38,11 +39,27 @@ def _messages(
   "explanation": "..."
 }
 Kurallar: ÖSYM üslubu, telifli kopya yok, çeldiriciler güçlü, doğru net.
-Writer+Distractor+Naturalizer birleşik çıktı — ek meta/etiket yazma."""
+Plan alanlarına (Domain, Skill, StemType) uy. Writer+Distractor+Naturalizer birleşik çıktı — ek meta/etiket yazma."""
+    domain = resolve_domain(
+        exam=plan.exam,
+        subject_code=plan.subject_code,
+        subject_name=plan.subject_name,
+        topic_code=plan.topic_code,
+        topic_name=plan.topic_name,
+    )
+    instruction = domain_prompt_instruction(
+        exam=plan.exam,
+        subject_code=plan.subject_code,
+        subject_name=plan.subject_name,
+        topic_code=plan.topic_code,
+        topic_name=plan.topic_name,
+    )
     user = (
         f"Exam={plan.exam} Subject={plan.subject_name} Topic={plan.topic_name}\n"
-        f"Skill={plan.skill} Bloom={plan.bloom} Difficulty={plan.difficulty}\n"
+        f"Domain={domain} Skill={plan.skill} StemType={plan.stem_type}\n"
+        f"Bloom={plan.bloom} Difficulty={plan.difficulty}\n"
         f"ChoiceCount={plan.choice_count} Reasoning={plan.reasoning_type}\n"
+        f"{instruction}\n"
         f"AuthorPlan={json.dumps(author_plan, ensure_ascii=False)}\n"
     )
     if measurement_contract_block:

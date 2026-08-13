@@ -206,3 +206,7 @@ AI_GEMINI_MODEL_FALLBACKS = (
     "gemini-3.1-flash-lite",
     "gemini-2.5-flash-lite",
 )
+
+# Topic quiz — single source of truth for "Quiz Üret" item count.
+TOPIC_QUIZ_DEFAULT_COUNT = 10
+TOPIC_QUIZ_RECENT_STEM_LIMIT = 60
