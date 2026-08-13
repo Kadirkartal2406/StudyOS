@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/errors/app_exception.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/utils/math_display_text.dart';
 import '../../../../core/widgets/app_error_view.dart';
 import '../../../../shared/widgets/study_question_chrome.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
@@ -287,7 +288,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
-                item.stem,
+                mathDisplayText(item.stem),
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontSize: 17,
                       height: 1.5,
@@ -334,7 +335,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
                 ),
               if (item.eaeInteraction == null)
                 ..._choiceKeys(item.choices).map((key) {
-                  final choiceText = item.choices[key] ?? '';
+                  final choiceText = mathDisplayText(item.choices[key]);
                   return StudyChoiceOption(
                     letter: key,
                     label: choiceText,
@@ -399,7 +400,7 @@ class _ResultsView extends StatelessWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          item.stem,
+                          mathDisplayText(item.stem),
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ),
@@ -422,7 +423,7 @@ class _ResultsView extends StatelessWidget {
                   if (item.explanation != null && item.explanation!.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Text(
-                      item.explanation!,
+                      mathDisplayText(item.explanation),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
