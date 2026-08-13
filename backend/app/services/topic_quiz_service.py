@@ -145,18 +145,41 @@ class TopicQuizService:
         )
 
         try:
-            cards, fingerprint, result = await QieOrchestrator(self.db).generate_batch(
-                ctx
-            )
+            orch = QieOrchestrator(self.db)
+            cards, fingerprint, result = await orch.generate_batch(ctx)
+            seen = {(c.stem or "").strip().lower() for c in cards if c.stem}
+            # One refill so the user gets the requested count (default 5).
+            if 0 < len(cards) < data.count:
+                ctx.count = data.count - len(cards)
+                ctx.existing_stems = list(ctx.existing_stems) + [
+                    c.stem for c in cards if c.stem
+                ]
+                ctx.plans = None
+                more, fp2, res2 = await orch.generate_batch(ctx)
+                fingerprint = fp2 or fingerprint
+                if res2 is not None:
+                    result = res2
+                for extra in more:
+                    key = (extra.stem or "").strip().lower()
+                    if key and key in seen:
+                        continue
+                    cards.append(extra)
+                    if key:
+                        seen.add(key)
+                    if len(cards) >= data.count:
+                        break
+            cards = cards[: data.count]
             gen.prompt_fingerprint = fingerprint
             if result is not None:
                 gen.provider = result.provider
                 gen.model = result.model
             gen.raw_item_count = len(cards)
 
-            if not cards:
+            if len(cards) < data.count:
                 gen.status = QuizGenerationStatus.FAILED
-                gen.error_message = "QIE kalite kapısı: geçerli soru yok"
+                gen.error_message = (
+                    f"QIE: {len(cards)}/{data.count} geçerli soru"
+                )
                 await self.db.flush()
                 raise ValidationError(
                     "Soru üretimi başarısız: AI sağlayıcı gerçek soru üretemedi "

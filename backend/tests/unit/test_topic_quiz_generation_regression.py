@@ -454,8 +454,35 @@ def test_h_lgs_choice_count_remains_4() -> None:
     assert not ({p.skill for p in plans} & LANGUAGE_FORM_SKILLS)
 
 
+@pytest.mark.asyncio
+async def test_generate_refills_to_requested_count(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    db = _TrackingDB()
+    svc = TopicQuizService(db)  # type: ignore[arg-type]
+    n = {"i": 0}
+
+    def split_fn(ctx: object) -> list[QuestionCard]:
+        n["i"] += 1
+        if n["i"] == 1:
+            return [_card(_plan(), stem=f"Kısa {i}") for i in range(3)]
+        need = int(getattr(ctx, "count", 2) or 2)
+        return [_card(_plan(), stem=f"Dolgu {i}") for i in range(need)]
+
+    _patch_generate(monkeypatch, svc, split_fn)
+    read = await svc.generate(
+        uuid.uuid4(),
+        "kpss_tarih",
+        "kpss_tarih__osmanli",
+        QuizGenerateRequest(count=5, difficulty="medium", exam_type="kpss"),
+    )
+    assert len(read.items) == 5
+    assert read.valid_item_count == 5
+    assert n["i"] == 2
+
+
 def test_quiz_default_count_is_authoritative() -> None:
-    assert TOPIC_QUIZ_DEFAULT_COUNT == 10
+    assert TOPIC_QUIZ_DEFAULT_COUNT == 5
     assert QuizGenerateRequest().count == TOPIC_QUIZ_DEFAULT_COUNT
     ctx = GenerateContext(
         exam="kpss",

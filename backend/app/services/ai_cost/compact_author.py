@@ -117,7 +117,7 @@ async def author_one_compact(
 
     choices = {str(k): str(v) for k, v in (data.get("choices") or {}).items()}
     correct = str(data.get("correct_key") or "A").upper()
-    if correct not in choices or len(choices) < max(2, plan.choice_count - 1):
+    if correct not in choices or len(choices) < max(2, plan.choice_count):
         raise RuntimeError("compact author incomplete choices")
 
     critic = CriticScores(

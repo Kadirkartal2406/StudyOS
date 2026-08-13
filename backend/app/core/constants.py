@@ -208,5 +208,5 @@ AI_GEMINI_MODEL_FALLBACKS = (
 )
 
 # Topic quiz — single source of truth for "Quiz Üret" item count.
-TOPIC_QUIZ_DEFAULT_COUNT = 10
+TOPIC_QUIZ_DEFAULT_COUNT = 5
 TOPIC_QUIZ_RECENT_STEM_LIMIT = 60

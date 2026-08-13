@@ -120,6 +120,16 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
     return false;
   }
 
+  List<String> _choiceKeys(Map<String, String> choices) {
+    const order = ['A', 'B', 'C', 'D', 'E'];
+    final present = [
+      for (final key in order)
+        if ((choices[key] ?? '').trim().isNotEmpty) key,
+    ];
+    if (present.isNotEmpty) return present;
+    return order;
+  }
+
   Future<void> _generate() async {
     setState(() {
       _loading = true;
@@ -323,7 +333,7 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
                   ),
                 ),
               if (item.eaeInteraction == null)
-                ...['A', 'B', 'C', 'D'].map((key) {
+                ..._choiceKeys(item.choices).map((key) {
                   final choiceText = item.choices[key] ?? '';
                   return StudyChoiceOption(
                     letter: key,

@@ -25,7 +25,7 @@ class AppConfig {
 
   /// Topic quiz "Quiz Üret" item count — keep in sync with
   /// backend `TOPIC_QUIZ_DEFAULT_COUNT`.
-  static const int topicQuizDefaultCount = 10;
+  static const int topicQuizDefaultCount = 5;
 
   /// Quiz generate can run multiple Gemini calls; keep above apiTimeoutSeconds.
   static const int topicQuizGenerateTimeoutSeconds = 180;
