@@ -13,7 +13,12 @@ from app.core.exceptions import (
     AIQuotaExceededError,
     AIUnavailableError,
 )
-from app.providers.ai.base import AIProvider, ChatMessageDTO, GenerateRequest
+from app.providers.ai.base import (
+    AIProvider,
+    ChatMessageDTO,
+    GenerateRequest,
+    sanitize_ai_model,
+)
 from app.providers.ai.http_transport import post_json
 
 logger = logging.getLogger("studyos.ai.gemini")
@@ -46,7 +51,11 @@ _current_key_index = 0
 
 class GeminiProvider(AIProvider):
     def __init__(self, model: str | None = None) -> None:
-        self._model = model or settings.AI_MODEL or AI_DEFAULT_MODELS["gemini"]
+        self._model = (
+            sanitize_ai_model(model)
+            or sanitize_ai_model(settings.AI_MODEL)
+            or AI_DEFAULT_MODELS["gemini"]
+        )
 
     @property
     def provider_name(self) -> str:
@@ -60,7 +69,7 @@ class GeminiProvider(AIProvider):
         ordered: list[str] = []
 
         for name in (self._model, *AI_GEMINI_MODEL_FALLBACKS):
-            n = (name or "").strip()
+            n = sanitize_ai_model(name)
             if n and n not in ordered:
                 ordered.append(n)
 
@@ -202,10 +211,19 @@ class GeminiProvider(AIProvider):
 
                     if (
                         "404" in msg
+                        or "401" in msg
+                        or "403" in msg
                         or "not found" in msg
                         or "no longer" in msg
+                        or "kimlik" in msg
+                        or "unauthorized" in msg
                     ):
                         last_exc = exc
+                        logger.warning(
+                            "gemini model skipped model=%s err=%s",
+                            model,
+                            exc.message,
+                        )
                         continue
 
                     raise

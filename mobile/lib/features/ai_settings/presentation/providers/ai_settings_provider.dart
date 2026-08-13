@@ -64,8 +64,16 @@ class AiSettingsNotifier extends StateNotifier<AiSettingsState> {
     final current = state;
     if (current is! AiSettingsLoaded) return;
     try {
-      final settings =
-          await _remote.updateSettings(preferredModel: model.trim());
+      final trimmed = model.trim();
+      final lowered = trimmed.toLowerCase();
+      final settings = await _remote.updateSettings(
+        preferredModel: (lowered.isEmpty ||
+                lowered == 'template' ||
+                lowered == 'null' ||
+                lowered == 'none')
+            ? ''
+            : trimmed,
+      );
       state = AiSettingsLoaded(settings);
     } on AppException catch (e) {
       state = AiSettingsLoaded(current.settings, errorMessage: e.message);

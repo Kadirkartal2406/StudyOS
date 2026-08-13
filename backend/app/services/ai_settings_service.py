@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.core.constants import AI_DEFAULT_MODELS
 from app.core.exceptions import ValidationError
-from app.providers.ai.base import get_ai_provider
+from app.providers.ai.base import get_ai_provider, sanitize_ai_model
 from app.schemas.ai_settings import AiSettingsRead, AiSettingsUpdate
 from app.services.notification_settings_service import NotificationSettingsService
 
@@ -74,7 +74,7 @@ class AiSettingsService:
         if "preferred_model" in payload:
             model = payload["preferred_model"]
             pref.ai_preferred_model = (
-                model.strip() if isinstance(model, str) and model.strip() else None
+                sanitize_ai_model(model) if isinstance(model, str) else None
             )
         await self.db.flush()
         return await self.get_settings(user_id)

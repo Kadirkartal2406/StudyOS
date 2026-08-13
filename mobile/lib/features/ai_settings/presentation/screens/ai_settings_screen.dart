@@ -25,8 +25,16 @@ class _AiSettingsScreenState extends ConsumerState<AiSettingsScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(aiSettingsProvider);
     if (state is AiSettingsLoaded && !_modelHydrated) {
-      _modelCtrl.text =
+      final raw =
           state.settings.preferredModel ?? state.settings.effectiveModel ?? '';
+      final lowered = raw.trim().toLowerCase();
+      _modelCtrl.text =
+          (lowered.isEmpty ||
+                  lowered == 'template' ||
+                  lowered == 'null' ||
+                  lowered == 'none')
+              ? ''
+              : raw;
       _modelHydrated = true;
     }
 

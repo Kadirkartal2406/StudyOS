@@ -197,9 +197,22 @@ def _normalize_name(name: str | None) -> str:
     return (name or "null").strip().lower()
 
 
+# Null provider / AI settings UI leftovers — never send these to a real LLM.
+_PLACEHOLDER_MODELS = frozenset({"", "template", "null", "none", "default", "n/a"})
+
+
+def sanitize_ai_model(model: str | None) -> str | None:
+    """Drop placeholder model names so Gemini is never called as models/template."""
+    n = (model or "").strip()
+    if not n or n.lower() in _PLACEHOLDER_MODELS:
+        return None
+    return n
+
+
 def create_provider(name: str | None, model: str | None = None) -> AIProvider:
     """İsimden provider örneği; bilinmeyen → Null."""
     n = _normalize_name(name)
+    model = sanitize_ai_model(model)
     if n in ("", "null", "none"):
         return NullAIProvider()
     if n == "gemini":
@@ -233,7 +246,8 @@ def get_ai_provider(
         name = settings.AI_PROVIDER or "null"
     else:
         name = preferred
-    return create_provider(name, model=model or (settings.AI_MODEL or None))
+    resolved = sanitize_ai_model(model) or sanitize_ai_model(settings.AI_MODEL)
+    return create_provider(name, model=resolved)
 
 
 async def generate_with_fallback(

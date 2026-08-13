@@ -47,6 +47,37 @@ def test_get_ai_provider_default_null():
         assert p.provider_name == "null"
 
 
+def test_gemini_ignores_template_placeholder_model():
+    from app.core.constants import AI_DEFAULT_MODELS
+    from app.providers.ai.base import sanitize_ai_model
+
+    assert sanitize_ai_model("template") is None
+    assert sanitize_ai_model("TEMPLATE") is None
+    assert sanitize_ai_model("gemini-3.5-flash-lite") == "gemini-3.5-flash-lite"
+
+    with patch("app.providers.ai.gemini_provider.settings") as s:
+        s.AI_MODEL = ""
+        provider = GeminiProvider(model="template")
+    assert provider.model_name == AI_DEFAULT_MODELS["gemini"]
+    assert "template" not in provider._candidate_models()
+
+
+def test_get_ai_provider_gemini_with_template_model_uses_default():
+    from app.core.constants import AI_DEFAULT_MODELS
+
+    with (
+        patch("app.core.config.settings") as mock_settings,
+        patch("app.providers.ai.gemini_provider.settings") as gemini_settings,
+    ):
+        mock_settings.AI_PROVIDER = "gemini"
+        mock_settings.AI_MODEL = ""
+        gemini_settings.AI_MODEL = ""
+        p = get_ai_provider(preferred="gemini", model="template")
+    assert p.provider_name == "gemini"
+    assert p.model_name == AI_DEFAULT_MODELS["gemini"]
+    assert p.model_name != "template"
+
+
 @pytest.mark.asyncio
 async def test_gemini_generate_parses_response():
     provider = GeminiProvider(model="gemini-2.0-flash")
