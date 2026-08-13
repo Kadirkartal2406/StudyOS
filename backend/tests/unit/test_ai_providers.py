@@ -58,7 +58,9 @@ def test_gemini_ignores_template_placeholder_model():
     with patch("app.providers.ai.gemini_provider.settings") as s:
         s.AI_MODEL = ""
         provider = GeminiProvider(model="template")
+        other = GeminiProvider(model="gpt-4o-mini")
     assert provider.model_name == AI_DEFAULT_MODELS["gemini"]
+    assert other.model_name == AI_DEFAULT_MODELS["gemini"]
     assert "template" not in provider._candidate_models()
 
 

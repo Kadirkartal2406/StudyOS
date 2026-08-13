@@ -173,8 +173,10 @@ async def author_batch_compact(
     ctx: GenerateContext | None = None,
     measurement_contract_block: str | None = None,
 ) -> list[AuthoredQuestion]:
+    from app.providers.ai.base import sanitize_ai_model
+
     preferred = ctx.preferred_provider if ctx else None
-    model = ctx.preferred_model if ctx else None
+    model = sanitize_ai_model(ctx.preferred_model) if ctx else None
     block = measurement_contract_block
     if block is None and ctx is not None:
         block = getattr(ctx, "measurement_contract_block", None)

@@ -19,6 +19,18 @@ from app.providers.ai.base import (
     GenerateRequest,
     sanitize_ai_model,
 )
+
+
+def _sanitize_gemini_model(model: str | None) -> str | None:
+    """Only real Gemini model ids. 'template' / OpenAI names never hit the URL."""
+    n = sanitize_ai_model(model)
+    if n is None:
+        return None
+    leaf = n.split("/")[-1]
+    if not leaf.lower().startswith("gemini"):
+        logger.warning("gemini refusing non-gemini model name=%s", n)
+        return None
+    return leaf
 from app.providers.ai.http_transport import post_json
 
 logger = logging.getLogger("studyos.ai.gemini")
@@ -52,8 +64,8 @@ _current_key_index = 0
 class GeminiProvider(AIProvider):
     def __init__(self, model: str | None = None) -> None:
         self._model = (
-            sanitize_ai_model(model)
-            or sanitize_ai_model(settings.AI_MODEL)
+            _sanitize_gemini_model(model)
+            or _sanitize_gemini_model(settings.AI_MODEL)
             or AI_DEFAULT_MODELS["gemini"]
         )
 
@@ -69,7 +81,7 @@ class GeminiProvider(AIProvider):
         ordered: list[str] = []
 
         for name in (self._model, *AI_GEMINI_MODEL_FALLBACKS):
-            n = sanitize_ai_model(name)
+            n = _sanitize_gemini_model(name)
             if n and n not in ordered:
                 ordered.append(n)
 

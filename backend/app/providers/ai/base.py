@@ -363,6 +363,9 @@ async def generate_with_fallback(
         if kind.startswith("author_") or kind.startswith("review_") or kind in (
             "batch_generate",
             "author_compact",
+            "topic_quiz",
+            "qie",
+            "calibration",
         ):
             raise
         if isinstance(exc, AIQuotaExceededError) and (

@@ -14,7 +14,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.core.constants import TOPIC_QUIZ_RECENT_STEM_LIMIT, normalize_exam_code
-from app.core.exceptions import NotFoundError, ValidationError
+from app.core.exceptions import AIProviderError, NotFoundError, ValidationError
+from app.providers.ai.base import sanitize_ai_model
 from app.models.topic_quiz import (
     QuizGenerationStatus,
     TopicQuizGeneration,
@@ -106,6 +107,15 @@ class TopicQuizService:
 
         recent_stems = await self._recent_stems_for_topic(user_id, top)
         pref = await NotificationSettingsService(self.db).get_or_create(user_id)
+        resolved_model = sanitize_ai_model(pref.ai_preferred_model)
+        if pref.ai_preferred_model and resolved_model is None:
+            logger.info(
+                "topic_quiz drop placeholder preferred_model=%s user=%s",
+                pref.ai_preferred_model,
+                user_id,
+            )
+            pref.ai_preferred_model = None
+            await self.db.flush()
         ctx = GenerateContext(
             exam=normalize_exam_code(exam_type or "kpss"),
             subject_code=sub,
@@ -116,20 +126,22 @@ class TopicQuizService:
             difficulty_band=data.difficulty or "medium",
             user_id=user_id,
             preferred_provider=pref.ai_preferred_provider,
-            preferred_model=pref.ai_preferred_model,
+            preferred_model=resolved_model,
             existing_stems=recent_stems,
             plans=plans,
             kind=kind,
         )
         logger.info(
             "topic_quiz new_generation generation_id=%s exam=%s subject=%s topic=%s "
-            "count=%s replay=false recent_stems=%s",
+            "count=%s replay=false recent_stems=%s provider=%s model=%s",
             gen.id,
             ctx.exam,
             sub,
             top,
             data.count,
             len(recent_stems),
+            pref.ai_preferred_provider,
+            resolved_model or "default",
         )
 
         try:
@@ -180,6 +192,11 @@ class TopicQuizService:
             )
             return await self.get(user_id, gen.id)
         except ValidationError:
+            raise
+        except AIProviderError as e:
+            gen.status = QuizGenerationStatus.FAILED
+            gen.error_message = str(e)[:400]
+            await self.db.flush()
             raise
         except Exception as e:
             gen.status = QuizGenerationStatus.FAILED
