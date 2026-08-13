@@ -3,7 +3,19 @@
 from __future__ import annotations
 
 from app.services.qie.distractor_model import pick_distractor
+from app.services.qie.skill_profiles import (
+    LANGUAGE_SKILLS,
+    LANGUAGE_STEMS,
+    get_skill_profile,
+    skill_pool_for_context,
+    stem_cycle_for_profile,
+)
 from app.services.qie.types import GenerateContext, QuestionPlan
+
+# Re-exported for backward compatibility. LANGUAGE_* are Türkçe-only —
+# do NOT use as cross-domain defaults (see skill_profiles.get_skill_profile).
+_SKILL_DEFAULTS = list(LANGUAGE_SKILLS)
+_STEM_CYCLE = list(LANGUAGE_STEMS)
 
 _BLOOM_BY_DIFFICULTY = [
     (40, "understand"),
@@ -13,35 +25,24 @@ _BLOOM_BY_DIFFICULTY = [
     (101, "create"),
 ]
 
-_STEM_CYCLE = [
-    "inference",
-    "main_idea",
-    "supporting_detail",
-    "comparison",
-    "sentence_ordering",
-    "paragraph_completion",
-    "vocabulary",
-    "grammar",
-    "cause_effect",
-    "tone",
-]
-
-_SKILL_DEFAULTS = [
-    "vocabulary",
-    "sentence_meaning",
-    "main_idea",
-    "supporting_idea",
-    "paragraph_completion",
-    "sentence_ordering",
-    "coherence",
-    "grammar",
-    "spelling",
-    "punctuation",
-    "logic",
-    "mixed_reasoning",
-]
-
 _DIFF_BAND = {"easy": 45, "medium": 70, "hard": 85}
+
+_REASONING_STEMS = frozenset(
+    {
+        "inference",
+        "cause_effect",
+        "logical_reasoning",
+        "problem_solving",
+        "application",
+        "calculation",
+        "interpretation",
+        "comparison",
+        "analysis",
+        "argument_analysis",
+        "data_interpretation",
+        "multi_step",
+    }
+)
 
 
 def _bloom_for(difficulty: int) -> str:
@@ -56,6 +57,14 @@ def _difficulty_for_band(band: str, index: int, count: int) -> int:
     # slight spread within batch
     spread = ((index * 7) % 15) - 7
     return max(25, min(95, base + spread))
+
+
+def _reasoning_type(stem_type: str) -> str:
+    if stem_type in _REASONING_STEMS:
+        return stem_type if stem_type in ("inference", "cause_effect") else (
+            "inference" if stem_type in ("interpretation", "analysis", "argument_analysis") else stem_type
+        )
+    return "inference"
 
 
 class QuestionPlanner:
@@ -77,18 +86,33 @@ class QuestionPlanner:
         reading = int(style.get("reading_time_sec_avg") or style.get("reading_time") or default_read)
         preferred_dist = list(style.get("distractor_patterns") or style.get("distractor_types") or [])
 
+        profile = get_skill_profile(
+            exam=ctx.exam,
+            subject_code=ctx.subject_code,
+            subject_name=ctx.subject_name,
+            topic_code=ctx.topic_code,
+            topic_name=ctx.topic_name,
+        )
+        skill_pool = skill_pool_for_context(
+            profile,
+            style,
+            topic_code=ctx.topic_code,
+            topic_name=ctx.topic_name,
+        )
+        stem_cycle = stem_cycle_for_profile(profile)
+
         forbidden_patterns = list(ctx.recent_patterns)
         used_skills = list(ctx.recent_skills)
         plans: list[QuestionPlan] = []
 
         for i in range(max(1, ctx.count)):
-            skill = self._next_skill(i, used_skills, style)
+            skill = self._next_from_pool(i, used_skills, skill_pool)
             used_skills.append(skill)
             difficulty = _difficulty_for_band(ctx.difficulty_band, i, ctx.count)
-            stem_type = _STEM_CYCLE[i % len(_STEM_CYCLE)]
+            stem_type = stem_cycle[i % len(stem_cycle)]
             # Avoid recent stem/skill collisions when forbidden
             if stem_type in forbidden_patterns:
-                stem_type = _STEM_CYCLE[(i + 3) % len(_STEM_CYCLE)]
+                stem_type = stem_cycle[(i + 3) % len(stem_cycle)]
             distractor = pick_distractor(
                 index=i,
                 forbidden=forbidden_patterns,
@@ -105,7 +129,7 @@ class QuestionPlanner:
                     skill=skill,
                     difficulty=difficulty,
                     bloom=_bloom_for(difficulty),
-                    reasoning_type=stem_type if stem_type in ("inference", "cause_effect") else "inference",
+                    reasoning_type=_reasoning_type(stem_type),
                     paragraph_length=para_avg,
                     reading_time_sec=reading,
                     stem_type=stem_type,
@@ -119,11 +143,17 @@ class QuestionPlanner:
             )
         return plans
 
-    def _next_skill(self, index: int, used: list[str], style: dict) -> str:
-        dist = style.get("skill_distribution") or {}
-        pool = list(dist.keys()) if isinstance(dist, dict) and dist else list(_SKILL_DEFAULTS)
+    def _next_from_pool(self, index: int, used: list[str], pool: list[str]) -> str:
+        if not pool:
+            pool = ["problem_solving", "logical_reasoning", "analysis"]
         for offset in range(len(pool)):
             cand = pool[(index + offset) % len(pool)]
             if cand not in used:
                 return cand
         return pool[index % len(pool)]
+
+    # Backward-compatible alias (Türkçe DNA path only — prefer plan_batch).
+    def _next_skill(self, index: int, used: list[str], style: dict) -> str:
+        profile = get_skill_profile(subject_code="turkce", subject_name="Türkçe")
+        pool = skill_pool_for_context(profile, style)
+        return self._next_from_pool(index, used, pool)
