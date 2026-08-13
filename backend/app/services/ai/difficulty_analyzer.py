@@ -68,6 +68,7 @@ def analyze_question_difficulty(
         k in (topic_name or "").lower()
         for k in ("paragraf", "anlam", "okuma", "reading", "clozer", "passage", "metin")
     ) or (style.get("reasoning_type") or "") in ("paragraph_inference", "paragraph_reading")
+    band = (style.get("difficulty") or "").lower()
 
     if want_long:
         if n >= min(35, pmin):
@@ -80,12 +81,41 @@ def analyze_question_difficulty(
             score -= 10
             reasons.append("paragraph_too_short")
     else:
-        if 12 <= n <= 120:
+        # Non-reading / STEM: length ≠ difficulty. Prefer compact solvable stems.
+        if 8 <= n <= 90:
             score += 10
             reasons.append("stem_length_ok")
         elif n < 8:
             score -= 15
             reasons.append("stem_too_short")
+        elif n > 140:
+            score -= 8
+            reasons.append("stem_padded_long")
+
+        # Light reasoning-load proxies (not length)
+        low_stem = stem.lower()
+        step_markers = sum(
+            1
+            for m in (
+                "adım",
+                "önce",
+                "sonra",
+                "buna göre",
+                "kaçtır",
+                "hesapla",
+                "bulunuz",
+                "ise",
+            )
+            if m in low_stem
+        )
+        digit_hits = len(re.findall(r"\d", stem))
+        if band in ("high", "zor", "hard"):
+            if step_markers >= 1 or digit_hits >= 2:
+                score += 8
+                reasons.append("reasoning_load_signal")
+            elif n < 25 and digit_hits == 0:
+                score -= 6
+                reasons.append("hard_band_too_thin")
 
     # Option balance
     lens = [len(_words(str(v))) for v in choices.values()]
@@ -136,8 +166,7 @@ def analyze_question_difficulty(
         score -= 25
         reasons.append("dangling_reference")
 
-    # Style difficulty preference
-    band = (style.get("difficulty") or "").lower()
+    # Style difficulty preference (reading passages only)
     if band in ("high", "zor", "hard") and n < 20 and want_long:
         score -= 10
         reasons.append("too_easy_for_high_band")

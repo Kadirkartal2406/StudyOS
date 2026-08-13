@@ -79,9 +79,29 @@ def _apply_measurement_to_card(
 def _correctness_or_reject(
     item: ValidatedQuizItem, plan: QuestionPlan, *, log_pass: bool = True
 ):
-    """Shared gate. None → hard reject (FAIL). Result → PASS or UNSUPPORTED."""
+    """Shared gate. None → hard reject.
+
+    FAIL → reject.
+    PASS → accept.
+    UNSUPPORTED → accept for non-STEM; reject for STEM (mat/geo/fen/…).
+    Gate semantics (passed=True on unsupported) are unchanged; policy is here.
+    """
+    from app.services.correctness.constants import requires_verified_correctness
+    from app.services.correctness.types import CorrectnessVerdict
+
     corr = evaluate_item_correctness(item, plan, log_pass=log_pass)
     if not corr.passed:
+        return None
+    if (
+        corr.verdict == CorrectnessVerdict.UNSUPPORTED
+        and requires_verified_correctness(plan=plan)
+    ):
+        logger.info(
+            "[CORRECTNESS] STEM_UNSUPPORTED_REJECT exam=%s subject=%s topic=%s",
+            plan.exam,
+            plan.subject_code,
+            plan.topic_code,
+        )
         return None
     return corr
 

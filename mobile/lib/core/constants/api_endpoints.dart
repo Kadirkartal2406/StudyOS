@@ -199,6 +199,15 @@ class ApiEndpoints {
   static String topicQuizHistory(String subjectCode, String topicCode) =>
       '/topic-quiz/subjects/$subjectCode/topics/$topicCode/history';
 
+  // ── Topic Test Catalog (published weekly tests) ─────────
+  static const String topicTestsCatalog = '/topic-tests/catalog';
+  static String topicTestStart(String testId) =>
+      '/topic-tests/tests/$testId/start';
+  static String topicTestAttempt(String attemptId) =>
+      '/topic-tests/attempts/$attemptId';
+  static String topicTestSubmit(String attemptId) =>
+      '/topic-tests/attempts/$attemptId/submit';
+
   // ── Assessment Engine (Sprint-18) ───────────────────────
   static const String assessment = '/assessment';
   static const String assessmentStart = '/assessment/start';

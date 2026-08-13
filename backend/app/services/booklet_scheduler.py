@@ -1,4 +1,4 @@
-"""Daily shared booklet scheduler — her gün 10:00 (Europe/Istanbul) Gemini üretimi."""
+"""Daily shared booklet scheduler — her gün 04:00 (Europe/Istanbul) Gemini üretimi."""
 
 from __future__ import annotations
 
@@ -24,12 +24,17 @@ def _now_istanbul() -> datetime:
     return datetime.now(_TZ)
 
 
-def seconds_until_next_1000() -> float:
+def seconds_until_next_0400() -> float:
     now = _now_istanbul()
-    nxt = now.replace(hour=10, minute=0, second=0, microsecond=0)
+    nxt = now.replace(hour=4, minute=0, second=0, microsecond=0)
     if nxt <= now:
         nxt += timedelta(days=1)
     return max(1.0, (nxt - now).total_seconds())
+
+
+# Back-compat aliases
+seconds_until_next_1000 = seconds_until_next_0400
+seconds_until_next_0300 = seconds_until_next_0400
 
 
 async def generate_booklets_for_date(challenge_date) -> bool:
@@ -91,9 +96,9 @@ async def generate_until_complete(challenge_date) -> None:
         if done:
             logger.info("Booklet packs ready for %s", challenge_date)
             return
-        remaining = seconds_until_next_1000()
+        remaining = seconds_until_next_0400()
         if remaining <= _RESUME_INTERVAL_SECONDS:
-            # Gün bitiyor — yeni günün job'ı devralır
+            # Sonraki 04:00 job'ı devralır
             return
         logger.info(
             "Booklet packs incomplete for %s — retrying in %.0f s",
@@ -104,7 +109,7 @@ async def generate_until_complete(challenge_date) -> None:
 
 
 async def midnight_booklet_loop() -> None:
-    """Sürekli: her gece 00:00'da o günün Gemini pack'lerini üret."""
+    """Sürekli: her gece 04:00'da o günün Gemini pack'lerini üret."""
     from app.services.ai_cost.flags import (
         auto_booklet_enabled,
         catchup_enabled,
@@ -128,9 +133,9 @@ async def midnight_booklet_loop() -> None:
         logger.exception("Booklet catch-up failed")
 
     while True:
-        wait_s = seconds_until_next_1000()
+        wait_s = seconds_until_next_0400()
         logger.info(
-            "Next booklet generation in %.0f seconds (Istanbul 10:00)", wait_s
+            "Next booklet generation in %.0f seconds (Istanbul 04:00)", wait_s
         )
         await asyncio.sleep(wait_s)
         if not midnight_scheduler_enabled() or not auto_booklet_enabled():
@@ -138,7 +143,7 @@ async def midnight_booklet_loop() -> None:
             return
         try:
             day = _now_istanbul().date()
-            logger.info("Midnight booklet generation for %s", day)
+            logger.info("04:00 booklet generation for %s", day)
             await generate_until_complete(day)
         except Exception:
             logger.exception("Midnight booklet generation crashed")

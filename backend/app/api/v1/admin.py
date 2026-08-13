@@ -77,6 +77,133 @@ async def admin_question_pool_scheduler_status(
     )
 
 
+@router.get(
+    "/topic-tests/status",
+    response_model=SuccessResponse[dict],
+)
+async def admin_topic_tests_status(
+    exam: str | None = Query(None),
+    week_id: str | None = Query(None),
+    limit_topics: int = Query(200, ge=1, le=1000),
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    """Topic Test Catalog monitoring — no Gemini."""
+    from app.services.topic_test_admin_service import TopicTestAdminService
+
+    data = await TopicTestAdminService(db).status(
+        exam=exam, week_id=week_id, limit_topics=limit_topics
+    )
+    return SuccessResponse(data=data, message="OK")
+
+
+@router.get(
+    "/topic-tests",
+    response_model=SuccessResponse[dict],
+)
+async def admin_topic_tests_list(
+    exam: str | None = Query(None),
+    week_id: str | None = Query(None),
+    status: str | None = Query(None),
+    difficulty: str | None = Query(None),
+    limit: int = Query(100, ge=1, le=500),
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    from app.services.topic_test_admin_service import TopicTestAdminService
+
+    rows = await TopicTestAdminService(db).list_tests(
+        exam=exam,
+        week_id=week_id,
+        status=status,
+        difficulty=difficulty,
+        limit=limit,
+    )
+    return SuccessResponse(data={"tests": rows, "count": len(rows)}, message="OK")
+
+
+@router.get(
+    "/topic-tests/{test_id}",
+    response_model=SuccessResponse[dict],
+)
+async def admin_topic_test_detail(
+    test_id: uuid.UUID,
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    from app.core.exceptions import NotFoundError
+    from app.services.topic_test_admin_service import TopicTestAdminService
+
+    data = await TopicTestAdminService(db).test_detail(test_id)
+    if data is None:
+        raise NotFoundError("Topic test bulunamadı")
+    return SuccessResponse(data=data, message="OK")
+
+
+@router.post(
+    "/topic-tests/release-topic",
+    response_model=SuccessResponse[dict],
+)
+async def admin_topic_tests_release_topic(
+    body: dict,
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    """Idempotent release for ONE topic (3 difficulties). No full-catalog seed."""
+    from app.schemas.topic_test import TopicTestReleaseRequest
+    from app.services.topic_test_release_service import TopicTestReleaseService
+
+    req = TopicTestReleaseRequest(
+        exam=str(body.get("exam") or ""),
+        subject_code=str(body.get("subject_code") or ""),
+        topic_code=str(body.get("topic_code") or ""),
+        week_id=(str(body["week_id"]) if body.get("week_id") else None),
+        subject_name=(str(body["subject_name"]) if body.get("subject_name") else None),
+        topic_name=(str(body["topic_name"]) if body.get("topic_name") else None),
+        dry_run=bool(body.get("dry_run") or False),
+        fill_pool_if_short=bool(body.get("fill_pool_if_short", True)),
+    )
+    if not req.exam or not req.subject_code or not req.topic_code:
+        from app.core.exceptions import ValidationError
+
+        raise ValidationError("exam, subject_code, topic_code zorunlu")
+    result = await TopicTestReleaseService(db).release_topic_week(req)
+    await db.commit()
+    return SuccessResponse(data=result.model_dump(), message="OK")
+
+
+@router.post(
+    "/topic-tests/retry-failed",
+    response_model=SuccessResponse[dict],
+)
+async def admin_topic_tests_retry_failed(
+    body: dict,
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    """Retry one failed/draft (exam, subject, topic, week) — idempotent."""
+    from app.schemas.topic_test import TopicTestReleaseRequest
+    from app.services.topic_test_release_service import TopicTestReleaseService
+
+    req = TopicTestReleaseRequest(
+        exam=str(body.get("exam") or ""),
+        subject_code=str(body.get("subject_code") or ""),
+        topic_code=str(body.get("topic_code") or ""),
+        week_id=(str(body["week_id"]) if body.get("week_id") else None),
+        subject_name=(str(body["subject_name"]) if body.get("subject_name") else None),
+        topic_name=(str(body["topic_name"]) if body.get("topic_name") else None),
+        dry_run=False,
+        fill_pool_if_short=bool(body.get("fill_pool_if_short", True)),
+    )
+    if not req.exam or not req.subject_code or not req.topic_code:
+        from app.core.exceptions import ValidationError
+
+        raise ValidationError("exam, subject_code, topic_code zorunlu")
+    result = await TopicTestReleaseService(db).release_topic_week(req)
+    await db.commit()
+    return SuccessResponse(data=result.model_dump(), message="OK")
+
+
 @router.get("/overview", response_model=SuccessResponse[AdminOverview])
 async def admin_overview(
     db: AsyncSession = Depends(get_db),

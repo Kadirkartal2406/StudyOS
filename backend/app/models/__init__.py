@@ -56,6 +56,12 @@ from app.models.topic_evidence import (
     TopicEvidence,
 )
 from app.models.topic_quiz import TopicQuizGeneration, TopicQuizItem
+from app.models.topic_test import (
+    TopicTest,
+    TopicTestAttempt,
+    TopicTestAttemptAnswer,
+    TopicTestItem,
+)
 from app.models.assessment import (
     AssessmentKind,
     AssessmentQuestion,
@@ -152,6 +158,10 @@ __all__ = [
     "GeneratedQuestion",
     "TopicQuizGeneration",
     "TopicQuizItem",
+    "TopicTest",
+    "TopicTestAttempt",
+    "TopicTestAttemptAnswer",
+    "TopicTestItem",
     "AssessmentKind",
     "AssessmentQuestion",
     "AssessmentSession",

@@ -1937,7 +1937,7 @@ class AssessmentService:
             await se.compute_estimated_score(session, row)
         else:
             row.is_official = True
-            row.studyos_score = 0.0 # Will be computed at 22:30
+            row.studyos_score = 0.0  # Will be computed at 22:30
             row.studyos_rank = None
 
         await self.db.flush()

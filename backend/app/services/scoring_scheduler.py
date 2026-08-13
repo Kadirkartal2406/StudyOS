@@ -35,7 +35,9 @@ async def finalize_scores_for_today() -> None:
             try:
                 await scoring_engine.finalize_daily_challenge(today, exam)
             except Exception:
-                logger.exception("Failed to finalize daily challenge for %s on %s", exam, today)
+                logger.exception(
+                    "Failed to finalize daily challenge for %s on %s", exam, today
+                )
                 await db.rollback()
 
 
@@ -55,7 +57,7 @@ async def scoring_loop() -> None:
         if not midnight_scheduler_enabled():
             logger.info("Scoring scheduler disabled mid-loop — exiting")
             return
-            
+
         try:
             logger.info("Finalizing scores for today")
             await finalize_scores_for_today()

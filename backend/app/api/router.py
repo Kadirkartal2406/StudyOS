@@ -35,6 +35,7 @@ from app.api.v1 import (
     study_plans,
     study_sessions,
     topic_quiz,
+    topic_tests,
     trial_exams,
     users,
     workspaces,
@@ -91,6 +92,7 @@ api_router.include_router(evidence.router, prefix="/evidence", tags=["evidence"]
 api_router.include_router(notifications.router, prefix="/notifications", tags=["notifications"])
 # Sprint 14 — Topic Quiz Generation
 api_router.include_router(topic_quiz.router, prefix="/topic-quiz", tags=["topic-quiz"])
+api_router.include_router(topic_tests.router, prefix="/topic-tests", tags=["topic-tests"])
 # Sprint 18 — Assessment Engine & Daily Challenge
 api_router.include_router(assessment.router, prefix="/assessment", tags=["assessment"])
 api_router.include_router(trial_exams.router, prefix="/trial-exams", tags=["trial-exams"])

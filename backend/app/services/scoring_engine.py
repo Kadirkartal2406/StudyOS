@@ -48,7 +48,7 @@ class ScoringEngine:
             logger.info(f"No pending booklet to finalize for {exam_type} on {challenge_date}.")
             return
 
-        # Fetch official scores (submitted before finalization)
+        # Fetch official scores (submitted before finalization).
         # In reality, this runs at 22:30, so any score in the DB now is official.
         score_stmt = select(DailyChallengeScore).where(
             DailyChallengeScore.challenge_date == challenge_date,

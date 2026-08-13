@@ -415,6 +415,21 @@ class QuestionPoolService:
         if not corr.passed:
             await self.mark_quarantined(row, reason=corr.reason)
             return None
+        from app.services.correctness.constants import requires_verified_correctness
+        from app.services.correctness.types import CorrectnessVerdict
+
+        if (
+            corr.verdict == CorrectnessVerdict.UNSUPPORTED
+            and requires_verified_correctness(plan=plan)
+        ):
+            logger.info(
+                "pool serve skip stem_unsupported id=%s exam=%s subject=%s topic=%s",
+                getattr(row, "id", None),
+                getattr(plan, "exam", None),
+                getattr(plan, "subject_code", None),
+                getattr(plan, "topic_code", None),
+            )
+            return None
         await self.update_correctness_metadata(row, corr.to_metadata())
         card = self.to_question_card(row, plan)
         attach_correctness_meta(card, corr)

@@ -115,6 +115,7 @@ const _tabMeta = {
   users:           { title: "Kullanıcılar",   subtitle: "Kullanıcı yönetimi" },
   questions:       { title: "Sorular",        subtitle: "Tüm sorularda arama" },
   "question-pool": { title: "Soru Havuzu",    subtitle: "Soru envanteri ve üretim" },
+  "topic-tests":   { title: "Konu Testleri",  subtitle: "Catalog release / monitoring" },
   assets:          { title: "Assets",         subtitle: "Eğitim içerikleri" },
 };
 
@@ -132,17 +133,143 @@ document.querySelectorAll(".nav").forEach((btn) => {
     $("page-title").textContent = meta.title;
     const sub = $("page-subtitle");
     if (sub) sub.textContent = meta.subtitle;
-    ["overview", "users", "questions", "question-pool", "assets"].forEach((t) => {
+    ["overview", "users", "questions", "question-pool", "topic-tests", "assets"].forEach((t) => {
       $(`tab-${t}`).hidden = t !== tab;
     });
     if (tab === "overview") loadOverview();
     if (tab === "users") loadUsers();
     if (tab === "questions") loadQuestions();
     if (tab === "question-pool") loadQuestionPool();
+    if (tab === "topic-tests") loadTopicTests();
     if (tab === "assets") loadAssets();
     closeMobileMenu();
   });
 });
+
+function _ttStatusBadge(st) {
+  if (st === "published") return "✅ published";
+  if (st === "failed") return "❌ failed";
+  if (st === "draft") return "📝 draft";
+  return "⬜ missing";
+}
+
+async function loadTopicTests() {
+  const week = ($("tt-week").value || "").trim();
+  const exam = ($("tt-exam").value || "").trim();
+  const qs = new URLSearchParams();
+  if (week) qs.set("week_id", week);
+  if (exam) qs.set("exam", exam);
+  qs.set("limit_topics", "250");
+  const res = await api(`/admin/topic-tests/status?${qs.toString()}`);
+  const d = res.data || {};
+  if (!$("tt-week").value && d.current_week) $("tt-week").value = d.current_week;
+  if (!$("tt-rel-week").value && d.current_week) $("tt-rel-week").placeholder = d.current_week;
+
+  $("tt-metrics-grid").innerHTML = `
+    <div class="stat"><div class="stat-label">Hafta</div><div class="stat-value">${d.current_week || "—"}</div></div>
+    <div class="stat"><div class="stat-label">Topic</div><div class="stat-value">${d.total_topics ?? "—"}</div></div>
+    <div class="stat"><div class="stat-label">Published</div><div class="stat-value">${d.published_tests ?? 0}</div></div>
+    <div class="stat"><div class="stat-label">Draft</div><div class="stat-value">${d.draft_tests ?? 0}</div></div>
+    <div class="stat"><div class="stat-label">Failed</div><div class="stat-value">${d.failed_tests ?? 0}</div></div>
+    <div class="stat"><div class="stat-label">Missing</div><div class="stat-value">${d.missing_tests ?? 0}</div></div>
+    <div class="stat"><div class="stat-label">Easy</div><div class="stat-value">${d.easy_published ?? 0}</div></div>
+    <div class="stat"><div class="stat-label">Medium</div><div class="stat-value">${d.medium_published ?? 0}</div></div>
+    <div class="stat"><div class="stat-label">Hard</div><div class="stat-value">${d.hard_published ?? 0}</div></div>
+  `;
+  const wp = d.weekly_progress || {};
+  const err = d.last_error;
+  $("tt-weekly-meta").textContent =
+    `Progress: ${wp.published ?? 0}/${wp.expected ?? 0} (${wp.pct ?? 0}%) | ` +
+    `Son publish: ${d.last_release_at ? new Date(d.last_release_at).toLocaleString() : "—"} | ` +
+    `Son hata: ${err ? `${err.exam}/${err.subject_code}/${err.topic_code} ${err.difficulty}` : "—"}`;
+
+  const body = $("tt-topics-body");
+  body.innerHTML = "";
+  (d.topics || []).forEach((row) => {
+    const tr = document.createElement("tr");
+    const ids = row.test_ids || {};
+    tr.innerHTML = `
+      <td>${row.exam || ""}</td>
+      <td>${row.subject_name || row.subject_code || ""}</td>
+      <td>${row.topic_name || row.topic_code || ""}</td>
+      <td>${_ttStatusBadge(row.easy)}</td>
+      <td>${_ttStatusBadge(row.medium)}</td>
+      <td>${_ttStatusBadge(row.hard)}</td>
+      <td></td>
+    `;
+    const td = tr.lastElementChild;
+    ["easy", "medium", "hard"].forEach((diff) => {
+      if (!ids[diff]) return;
+      const b = document.createElement("button");
+      b.className = "s-btn";
+      b.style.marginRight = "4px";
+      b.textContent = diff[0].toUpperCase();
+      b.title = `Detay ${diff}`;
+      b.onclick = () => loadTopicTestDetail(ids[diff]);
+      td.appendChild(b);
+    });
+    const seed = document.createElement("button");
+    seed.className = "s-btn";
+    seed.textContent = "Release";
+    seed.onclick = () => {
+      $("tt-rel-exam").value = row.exam || "";
+      $("tt-rel-subject").value = row.subject_code || "";
+      $("tt-rel-topic").value = row.topic_code || "";
+      $("tt-rel-week").value = d.current_week || "";
+    };
+    td.appendChild(seed);
+    body.appendChild(tr);
+  });
+}
+
+async function loadTopicTestDetail(testId) {
+  const res = await api(`/admin/topic-tests/${testId}`);
+  const t = res.data || {};
+  const items = (t.items || [])
+    .map(
+      (it) =>
+        `<tr><td>${it.ord_index}</td><td style="font-family:var(--font-mono);font-size:11px;">${it.pool_card_id}</td>` +
+        `<td>${it.skill || "—"}</td><td>${it.correctness_verdict || "—"}</td>` +
+        `<td style="font-family:var(--font-mono);font-size:11px;">${(it.content_hash || "").slice(0, 12)}</td>` +
+        `<td>${(it.stem_preview || "").replace(/</g, "&lt;")}</td></tr>`
+    )
+    .join("");
+  $("tt-detail").innerHTML = `
+    <div><strong>${t.exam}</strong> / ${t.subject_code} / ${t.topic_code} — ${t.week_id} ${t.difficulty} (${t.status})</div>
+    <div class="muted">questions=${t.question_count} ordinal=${t.ordinal} published_at=${t.published_at || "—"}</div>
+    <div class="table-wrap" style="margin-top:8px;"><table>
+      <thead><tr><th>#</th><th>pool_card</th><th>skill</th><th>correctness</th><th>hash</th><th>stem</th></tr></thead>
+      <tbody>${items || "<tr><td colspan=6>item yok</td></tr>"}</tbody>
+    </table></div>
+  `;
+}
+
+$("tt-refresh-btn")?.addEventListener("click", () => loadTopicTests().catch(alert));
+
+async function _ttRelease(path) {
+  const body = {
+    exam: ($("tt-rel-exam").value || "").trim(),
+    subject_code: ($("tt-rel-subject").value || "").trim(),
+    topic_code: ($("tt-rel-topic").value || "").trim(),
+    week_id: ($("tt-rel-week").value || "").trim() || null,
+    fill_pool_if_short: true,
+  };
+  $("tt-action-result").textContent = "Çalışıyor…";
+  try {
+    const res = await api(path, { method: "POST", body: JSON.stringify(body) });
+    $("tt-action-result").textContent = JSON.stringify(res.data || res, null, 2);
+    await loadTopicTests();
+  } catch (err) {
+    $("tt-action-result").textContent = err.message || String(err);
+  }
+}
+
+$("tt-release-btn")?.addEventListener("click", () =>
+  _ttRelease("/admin/topic-tests/release-topic")
+);
+$("tt-retry-btn")?.addEventListener("click", () =>
+  _ttRelease("/admin/topic-tests/retry-failed")
+);
 
 async function loadQuestionPool() {
   // Scheduler status

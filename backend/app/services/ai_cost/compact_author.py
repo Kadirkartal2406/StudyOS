@@ -13,6 +13,10 @@ from typing import Any
 
 from app.providers.ai.base import ChatMessageDTO, GenerateRequest, generate_with_fallback
 from app.services.ai.quiz_quality_gate import extract_json_payload
+from app.services.qie.planner import (
+    band_for_difficulty_score,
+    difficulty_contract_for_band,
+)
 from app.services.qie.skill_profiles import domain_prompt_instruction, resolve_domain
 from app.services.qie.types import GenerateContext, QuestionPlan
 from app.services.question_author.author_planner import build_author_plan
@@ -32,6 +36,7 @@ def _messages(
     *,
     measurement_contract_block: str | None = None,
 ) -> list[ChatMessageDTO]:
+    """Build the exact Gemini messages for Soru Üret compact path (1 call / question)."""
     system = """Sen StudyOS sınav sorusu yazarısın. Tek JSON üret:
 {
   "stem": "...",
@@ -39,8 +44,12 @@ def _messages(
   "correct_key": "A",
   "explanation": "..."
 }
-Kurallar: ÖSYM üslubu, telifli kopya yok, çeldiriciler güçlü, doğru net.
-Plan alanlarına (Domain, Skill, StemType) uy. Writer+Distractor+Naturalizer birleşik çıktı — ek meta/etiket yazma."""
+Kurallar:
+1) ÖSYM üslubu; telifli gerçek soru kopyalama YASAK; çeldiriciler güçlü; tek doğru net.
+2) Domain, Skill, StemType, Bloom, DifficultyBand zorunlu sözleşmedir — değiştirme.
+3) Zorluk = bilişsel yük / adım sayısı / çeldirici yakınlığı. Soruyu yalnızca UZATARAK zorlaştırma YASAK. Kısa tutarak kolaylaştırma da YASAK.
+4) DifficultyContract satırına birebir uy.
+5) Writer+Distractor+Naturalizer birleşik çıktı — ek meta/etiket/skill yazma; yalnızca soru JSON'u."""
     domain = resolve_domain(
         exam=plan.exam,
         subject_code=plan.subject_code,
@@ -55,10 +64,14 @@ Plan alanlarına (Domain, Skill, StemType) uy. Writer+Distractor+Naturalizer bir
         topic_code=plan.topic_code,
         topic_name=plan.topic_name,
     )
+    band = band_for_difficulty_score(int(plan.difficulty or 68))
+    contract = difficulty_contract_for_band(band)
     user = (
         f"Exam={plan.exam} Subject={plan.subject_name} Topic={plan.topic_name}\n"
         f"Domain={domain} Skill={plan.skill} StemType={plan.stem_type}\n"
-        f"Bloom={plan.bloom} Difficulty={plan.difficulty}\n"
+        f"Bloom={plan.bloom} DifficultyScore={plan.difficulty} "
+        f"DifficultyBand={band}\n"
+        f"DifficultyContract={contract}\n"
         f"ChoiceCount={plan.choice_count} Reasoning={plan.reasoning_type}\n"
         f"{instruction}\n"
         f"AuthorPlan={json.dumps(author_plan, ensure_ascii=False)}\n"
@@ -91,29 +104,48 @@ async def author_one_compact(
         use_llm=False,
         measurement_contract_block=measurement_contract_block,
     )
-    result = await generate_with_fallback(
-        GenerateRequest(
-            messages=_messages(
-                plan,
-                ap.to_dict(),
-                measurement_contract_block=measurement_contract_block,
-            ),
-            context={
-                "kind": "author_compact",
-                "exam": plan.exam,
-                "topic_code": plan.topic_code,
-                "max_output_tokens": 2048,
-            },
-        ),
-        preferred=preferred,
-        model=model,
+    messages = _messages(
+        plan,
+        ap.to_dict(),
+        measurement_contract_block=measurement_contract_block,
     )
-    try:
-        data = extract_json_payload(result.text)
-    except Exception:
-        data = None
+    request = GenerateRequest(
+        messages=messages,
+        context={
+            "kind": "author_compact",
+            "exam": plan.exam,
+            "topic_code": plan.topic_code,
+            "max_output_tokens": 2048,
+        },
+    )
+    # Max 1 automatic retry on JSON/extraction failure only (no infinite loop).
+    result = None
+    data: dict[str, Any] | None = None
+    last_err: str | None = None
+    for attempt in range(2):
+        result = await generate_with_fallback(
+            request,
+            preferred=preferred,
+            model=model,
+        )
+        try:
+            data = extract_json_payload(result.text)
+        except Exception as exc:
+            data = None
+            last_err = str(exc)
+        if isinstance(data, dict) and data.get("stem"):
+            break
+        last_err = last_err or "unusable JSON"
+        if attempt == 0:
+            logger.warning(
+                "compact author JSON retry index=%s topic=%s",
+                plan.index,
+                plan.topic_code,
+            )
     if not isinstance(data, dict) or not data.get("stem"):
-        raise RuntimeError("compact author returned unusable JSON")
+        raise RuntimeError(
+            f"compact author returned unusable JSON after retry ({last_err})"
+        )
 
     choices = {str(k): str(v) for k, v in (data.get("choices") or {}).items()}
     correct = str(data.get("correct_key") or "A").upper()

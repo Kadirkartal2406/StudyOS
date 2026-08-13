@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/app_config.dart';
 import '../../../../core/errors/app_exception.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -12,8 +13,8 @@ import '../../../onboarding/presentation/providers/learning_profile_provider.dar
 import '../../../educational_assets/presentation/components/eae_interactive_canvas.dart';
 import '../../data/topic_quiz_remote_datasource.dart';
 
-/// Sprint 14 — Topic Quiz Session (Secondary tool).
-/// Soru Kaydı formu değil; üretilmiş quiz çözümü + Evidence.
+/// AI-generated topic quiz session (from Menü → Soru Üret).
+/// Not used for published Topic Test Catalog (those use TopicTestSessionScreen).
 class QuizSessionScreen extends ConsumerStatefulWidget {
   const QuizSessionScreen({
     super.key,
@@ -21,12 +22,21 @@ class QuizSessionScreen extends ConsumerStatefulWidget {
     required this.topicCode,
     this.topicName,
     this.generationId,
+    this.count,
+    this.difficulty,
+    this.examType,
+    this.allowGenerate = false,
   });
 
   final String subjectCode;
   final String topicCode;
   final String? topicName;
   final String? generationId;
+  final int? count;
+  final String? difficulty;
+  final String? examType;
+  /// When true (explicit), may call Gemini generate. Topic pages must leave false.
+  final bool allowGenerate;
 
   @override
   ConsumerState<QuizSessionScreen> createState() => _QuizSessionScreenState();
@@ -52,8 +62,16 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
     final existing = widget.generationId;
     if (existing != null && existing.isNotEmpty) {
       await _loadExisting(existing);
-    } else {
+    } else if (widget.allowGenerate) {
       await _generate();
+    } else {
+      if (!mounted) return;
+      setState(() {
+        _loading = false;
+        _error =
+            'Soru üretmek için Menü → Soru Üret kullan. '
+            'Hazır testler için Konu Testleri’ne git.';
+      });
     }
   }
 
@@ -76,13 +94,21 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
           _quiz = null;
           _loading = false;
           _error =
-              'Bu quiz daha önce gönderildi. Yeni quiz üretmek için tekrar dene.';
+              'Bu quiz daha önce gönderildi. Yeni üretim için Menü → Soru Üret.';
         });
         return;
       }
       if (_looksLikeAuthorStub(quiz)) {
-        // Eski offline stub kayıtlarını yeniden açma — taze üretim yap
-        await _generate();
+        if (widget.allowGenerate) {
+          await _generate();
+          return;
+        }
+        if (!mounted) return;
+        setState(() {
+          _quiz = null;
+          _loading = false;
+          _error = 'Bu kayıt geçersiz. Menü → Soru Üret ile yeni soru üret.';
+        });
         return;
       }
       setState(() {
@@ -142,11 +168,13 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
       _index = 0;
     });
     try {
-      final examType =
+      final examType = widget.examType ??
           ref.read(learningProfileProvider).valueOrNull?.activeExamType;
       final quiz = await ref.read(topicQuizDatasourceProvider).generate(
             subjectCode: widget.subjectCode,
             topicCode: widget.topicCode,
+            count: widget.count ?? AppConfig.topicQuizDefaultCount,
+            difficulty: widget.difficulty ?? 'medium',
             examType: examType,
           );
       if (!mounted) return;
@@ -205,6 +233,14 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
     }
   }
 
+  void _retryOrSoruUret() {
+    if (widget.allowGenerate) {
+      _generate();
+      return;
+    }
+    context.push('/soru-uret');
+  }
+
   @override
   Widget build(BuildContext context) {
     final title = widget.topicName ?? _quiz?.topicName ?? widget.topicCode;
@@ -242,17 +278,17 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
     if (_error != null) {
       return AppErrorView(
         message: _error!,
-        onRetry: _generate,
+        onRetry: _retryOrSoruUret,
       );
     }
     if (_result != null) {
-      return _ResultsView(result: _result!, onRetry: _generate);
+      return _ResultsView(result: _result!, onRetry: _retryOrSoruUret);
     }
     final quiz = _quiz;
     if (quiz == null || quiz.items.isEmpty) {
       return AppErrorView(
-        message: 'Gösterilecek soru yok. Yeni quiz üret.',
-        onRetry: _generate,
+        message: 'Gösterilecek soru yok. Menü → Soru Üret ile yeni üret.',
+        onRetry: _retryOrSoruUret,
       );
     }
     final item = quiz.items[_index.clamp(0, quiz.items.length - 1)];
@@ -433,7 +469,7 @@ class _ResultsView extends StatelessWidget {
           );
         }),
         const SizedBox(height: 8),
-        FilledButton(onPressed: onRetry, child: const Text('Yeni quiz üret')),
+        FilledButton(onPressed: onRetry, child: const Text('Soru Üret’e git')),
       ],
     );
   }

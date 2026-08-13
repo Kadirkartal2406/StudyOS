@@ -54,6 +54,10 @@
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           <span>Soru Havuzu</span>
         </button>
+        <button data-tab="topic-tests" class="nav">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          <span>Konu Testleri</span>
+        </button>
         <button data-tab="assets" class="nav">
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           <span>Assets</span>
@@ -297,6 +301,54 @@
               </table>
             </div>
           </div>
+        </section>
+
+        <section id="tab-topic-tests" class="tab" hidden>
+          <div class="qs-toolbar">
+            <label class="qp-field qp-field-sm">
+              <span class="qp-field-label">Hafta</span>
+              <input id="tt-week" placeholder="2026-W33" />
+            </label>
+            <label class="qp-field qp-field-sm">
+              <span class="qp-field-label">Sınav</span>
+              <input id="tt-exam" placeholder="kpss_lisans" />
+            </label>
+            <button id="tt-refresh-btn" class="s-btn s-btn-primary">Yenile</button>
+          </div>
+          <div id="tt-metrics-grid" class="dash"></div>
+          <p id="tt-weekly-meta" class="muted" style="margin:var(--space-3) 0;"></p>
+
+          <div class="qp-gen-section" style="margin-bottom:var(--space-4);">
+            <h3 class="qp-section-title">Tek konu release / retry (idempotent)</h3>
+            <p class="muted" style="margin-bottom:var(--space-2);">Full catalog seed yok — yalnızca seçili konu. Gemini sadece pool eksikse çağrılır.</p>
+            <div class="qp-gen-form">
+              <label class="qp-field qp-field-sm"><span class="qp-field-label">Exam</span><input id="tt-rel-exam" placeholder="kpss_lisans" /></label>
+              <label class="qp-field"><span class="qp-field-label">Subject</span><input id="tt-rel-subject" placeholder="tarih" /></label>
+              <label class="qp-field"><span class="qp-field-label">Topic</span><input id="tt-rel-topic" placeholder="osmanli" /></label>
+              <label class="qp-field qp-field-sm"><span class="qp-field-label">Week</span><input id="tt-rel-week" placeholder="boş = current" /></label>
+              <div class="qp-field-action">
+                <button id="tt-release-btn" class="s-btn s-btn-primary">Release topic</button>
+                <button id="tt-retry-btn" class="s-btn">Retry failed</button>
+              </div>
+            </div>
+            <div id="tt-action-result" class="muted qp-form-result"></div>
+          </div>
+
+          <h3 class="qp-section-title">Topic coverage (eksikler önce)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Exam</th><th>Subject</th><th>Topic</th>
+                  <th>Easy</th><th>Medium</th><th>Hard</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="tt-topics-body"></tbody>
+            </table>
+          </div>
+
+          <h3 class="qp-section-title" style="margin-top:var(--space-4);">Test detay</h3>
+          <div id="tt-detail" class="muted">Satırdan bir test seçin.</div>
         </section>
 
         <section id="tab-assets" class="tab" hidden>

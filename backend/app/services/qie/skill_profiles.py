@@ -803,30 +803,45 @@ _DOMAIN_INSTRUCTIONS: dict[str, str] = {
     "matematik": (
         "Bu soru matematik alanına aittir. Matematiksel problem/akıl yürütme üret. "
         "Türkçe dilbilgisi, imla, kelime veya paragraf-anlam sorusu üretme. "
-        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır "
-        "(\\\\frac, \\\\sqrt). Düz metne veya Unicode kesire çevirme."
+        "Soruyu matematik problemi olarak yaz; gereksiz hikâye/paragraf anlatımı kullanma. "
+        "Gerekliyse LaTeX kullan; JSON içinde backslash kaçır (\\\\frac, \\\\sqrt). "
+        "Düz metne veya Unicode kesire çevirme. Hesaplar tutarlı olsun; tek doğru cevap. "
+        "Çeldiriciler tipik işlem/işaret/formül hatalarına dayansın. "
+        "Çok adımlı sorularda her adım çözülebilir olsun. "
+        "Zorluğu metin uzunluğuyla değil işlem/akıl yürütme yüküyle artır."
     ),
     "geometri": (
         "Bu soru geometri alanına aittir. Geometrik muhakeme/hesap üret. "
         "İmla, dilbilgisi, kelime veya paragraf-anlam sorusu üretme. "
-        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır."
+        "Şekil/kenar/açı verilerini net ver; gereksiz paragraf anlatımı yok. "
+        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır. "
+        "Tek doğru cevap; çeldiriciler tipik geometri hatalarına dayansın. "
+        "Zorluğu uzun metinle değil muhakeme adımlarıyla artır."
     ),
     "fizik": (
         "Bu soru fizik alanına aittir. Fizik kavramı veya hesabı ölç. "
         "İmla, dilbilgisi veya paragraf-anlam sorusu üretme. "
-        "Formülleri LaTeX olarak yaz; JSON içinde backslash kaçır."
+        "Gerekli büyüklük/birimleri ver; formülleri LaTeX olarak yaz; JSON içinde backslash kaçır. "
+        "Hesap tutarlı olsun; tek doğru cevap; çeldiriciler birim/formül hatalarına dayansın. "
+        "Zorluğu uzun anlatımla değil fiziksel muhakeme ile artır."
     ),
     "kimya": (
         "Bu soru kimya alanına aittir. Kimya kavramı veya hesabı ölç. "
-        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme."
+        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme. "
+        "Formül/denklem/stokiyometri net olsun; tek doğru cevap. "
+        "Çeldiriciler tipik mol/oran/işaret hatalarına dayansın. "
+        "Gereksiz hikâye anlatımı yok."
     ),
     "biyoloji": (
         "Bu soru biyoloji alanına aittir. Biyoloji bilgisini ölç. "
-        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme."
+        "İmla, dilbilgisi veya genel paragraf-anlam sorusu üretme. "
+        "Kavram/süreç/ilişki sor; gereksiz edebi paragraf üretme. "
+        "Tek doğru cevap; çeldiriciler yakın ama yanlış biyolojik ifadeler olsun."
     ),
     "fen": (
         "Bu soru fen bilimleri alanına aittir. Fen kavramı veya hesabı ölç. "
-        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme."
+        "İmla, dilbilgisi veya paragraf-anlam sorusu üretme. "
+        "Gerekiyorsa LaTeX kullan; tek doğru cevap; gereksiz hikâye yok."
     ),
     "felsefe": (
         "Bu soru felsefe alanına aittir. Felsefi kavram/argüman ölç. "
@@ -847,7 +862,10 @@ _DOMAIN_INSTRUCTIONS: dict[str, str] = {
     "quantitative": (
         "Bu soru sayısal muhakeme alanına aittir. Hesap/problem üret. "
         "Türkçe dilbilgisi, imla veya paragraf-anlam sorusu üretme. "
-        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır."
+        "Kısa problem kökü kullan; gereksiz paragraf anlatımı yok. "
+        "Matematiksel ifadeleri LaTeX olarak yaz; JSON içinde backslash kaçır. "
+        "Hesap tutarlı; tek doğru cevap; çeldiriciler işlem hatalarına dayansın. "
+        "Zorluğu uzun metinle değil adım sayısıyla artır."
     ),
     "verbal_reasoning": (
         "Bu soru sözel muhakeme alanına aittir. Mantık/anlam ilişkisi ölç. "

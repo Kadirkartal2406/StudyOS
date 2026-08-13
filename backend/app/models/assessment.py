@@ -318,7 +318,7 @@ class EstimatedScoreSnapshot(Base):
 
 
 class DailyChallengeStatistics(Base):
-    """Günün denemesi için saat 22:30\'da finalize edilen resmi istatistikler."""
+    """Günün denemesi için saat 22:30'da finalize edilen resmi istatistikler."""
 
     __tablename__ = "daily_challenge_statistics"
     __table_args__ = (

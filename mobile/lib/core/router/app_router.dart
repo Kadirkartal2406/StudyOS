@@ -73,6 +73,9 @@ import '../../features/subjects/presentation/screens/subject_hub_screen.dart';
 import '../../features/subjects/presentation/screens/subjects_screen.dart';
 import '../../features/subjects/presentation/screens/topic_work_surface_screen.dart';
 import '../../features/topic_quiz/presentation/screens/quiz_session_screen.dart';
+import '../../features/topic_quiz/presentation/screens/soru_uret_screen.dart';
+import '../../features/topic_quiz/presentation/screens/topic_test_catalog_screen.dart';
+import '../../features/topic_quiz/presentation/screens/topic_test_session_screen.dart';
 
 /// Auth + onboarding hard gate için router notifier.
 /// AuthState / Learning Profile değişince GoRouter yeniden değerlendirilir.
@@ -426,6 +429,41 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             topicCode: topic,
             topicName: state.uri.queryParameters['topic_name'],
             generationId: state.uri.queryParameters['generation_id'],
+            count: int.tryParse(state.uri.queryParameters['count'] ?? ''),
+            difficulty: state.uri.queryParameters['difficulty'],
+            examType: state.uri.queryParameters['exam'],
+            allowGenerate: state.uri.queryParameters['generate'] == '1',
+          );
+        },
+      ),
+      GoRoute(
+        path: '/soru-uret',
+        name: 'soru-uret',
+        builder: (_, __) => const SoruUretScreen(),
+      ),
+      GoRoute(
+        path: '/topic-tests',
+        name: 'topic-tests',
+        builder: (_, state) {
+          final subject = state.uri.queryParameters['subject_code'] ?? '';
+          final topic = state.uri.queryParameters['topic_code'] ?? '';
+          return TopicTestCatalogScreen(
+            subjectCode: subject,
+            topicCode: topic,
+            topicName: state.uri.queryParameters['topic_name'],
+            exam: state.uri.queryParameters['exam'],
+          );
+        },
+      ),
+      GoRoute(
+        path: '/topic-test-session',
+        name: 'topic-test-session',
+        builder: (_, state) {
+          return TopicTestSessionScreen(
+            testId: state.uri.queryParameters['test_id'] ?? '',
+            subjectCode: state.uri.queryParameters['subject_code'],
+            topicCode: state.uri.queryParameters['topic_code'],
+            topicName: state.uri.queryParameters['topic_name'],
           );
         },
       ),

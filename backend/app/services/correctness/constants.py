@@ -63,6 +63,49 @@ def is_correctness_current(version: str | None) -> bool:
     return (version or "").strip() == CORRECTNESS_VERSION
 
 
+# Domains where UNSUPPORTED must not reach the user (Soru Üret / pool serve).
+# Verbal domains keep gate pass-through; do not list them here.
+STEM_VERIFIED_DOMAINS: frozenset[str] = frozenset(
+    {
+        "matematik",
+        "geometri",
+        "fizik",
+        "kimya",
+        "biyoloji",
+        "fen",
+        "quantitative",
+    }
+)
+
+
+def requires_verified_correctness(
+    *,
+    exam: str | None = None,
+    subject_code: str | None = None,
+    subject_name: str | None = None,
+    topic_code: str | None = None,
+    topic_name: str | None = None,
+    plan: object | None = None,
+) -> bool:
+    """True when correctness must be PASS (not merely UNSUPPORTED) to accept/serve."""
+    from app.services.qie.skill_profiles import resolve_domain
+
+    if plan is not None:
+        exam = getattr(plan, "exam", None) or exam
+        subject_code = getattr(plan, "subject_code", None) or subject_code
+        subject_name = getattr(plan, "subject_name", None) or subject_name
+        topic_code = getattr(plan, "topic_code", None) or topic_code
+        topic_name = getattr(plan, "topic_name", None) or topic_name
+    domain = resolve_domain(
+        exam=exam,
+        subject_code=subject_code,
+        subject_name=subject_name,
+        topic_code=topic_code,
+        topic_name=topic_name,
+    )
+    return domain in STEM_VERIFIED_DOMAINS
+
+
 # Phase 2 integrity — separate from Phase 1 pool-skip version.
 INTEGRITY_VERSION = "integrity_v1"
 INTEGRITY_CHECKS: tuple[str, ...] = (

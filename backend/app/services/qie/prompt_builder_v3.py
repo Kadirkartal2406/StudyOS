@@ -10,6 +10,7 @@ import json
 from typing import Any
 
 from app.services.qie.distractor_model import distractor_contract
+from app.services.qie.planner import band_for_difficulty_score, difficulty_contract_for_band
 from app.services.qie.types import PROMPT_VERSION, QuestionPlan
 
 
@@ -51,6 +52,11 @@ def build_qie_messages(
         if k in style_dna or style_dna.get(k) is not None
     }
 
+    bands = {band_for_difficulty_score(int(p.difficulty)) for p in plans}
+    band_lines = "\n".join(
+        f"- {b.upper()}: {difficulty_contract_for_band(b)}" for b in sorted(bands)
+    )
+
     system = f"""Sen StudyOS Question Intelligence Engine yazıcısısın.
 Rolün: verilen Question Plan ve Exam Style DNA'ya birebir uyan çoktan seçmeli sorular YAZMAK.
 KARAR VERMEYECEKSİN. skill, bloom, difficulty, distractor_pattern, stem_type alanlarını DEĞİŞTİRMEYECEKSİN.
@@ -63,15 +69,18 @@ KURALLAR:
 4) Distractor'lar plan.distractor_pattern sözleşmesine göre üretilecek.
 5) Paragraf/stem uzunluğu plan.paragraph_length (kelime) hedefine yakın olsun.
 6) Seçenek uzunlukları dengeli (option_balance={plans[0].option_balance}).
-7) Çıktı SADECE JSON:
+7) Zorluk bilişsel yük ile sağlanır; soruyu yalnızca uzatarak zorlaştırma YASAK.
+8) Bu batch için zorluk sözleşmesi:
+{band_lines}
+9) Çıktı SADECE JSON:
 {{"questions":[{{"stem":"...","choices":{{{", ".join(f'"{k}":"..."' for k in keys)}}},"correct_key":"{keys[0]}","explanation":"...","plan_index":0}}]}}
-8) plan_index, plans dizisindeki index ile eşleşmeli.
-9) Kullanıcıya veya meta olarak skill/bloom yazma; sadece soru metni.
+10) plan_index, plans dizisindeki index ile eşleşmeli.
+11) Kullanıcıya veya meta olarak skill/bloom yazma; sadece soru metni.
 """
 
     has_eae = any(p.target_asset_id for p in plans)
     if has_eae:
-        system += """10) EAE MAP BAĞLANTISI: Eğer planda `target_asset_id` ve `available_nodes` verilmişse, bu soru interaktif bir harita (EAE) sorusudur. 
+        system += """12) EAE MAP BAĞLANTISI: Eğer planda `target_asset_id` ve `available_nodes` verilmişse, bu soru interaktif bir harita (EAE) sorusudur. 
 `available_nodes` listesinden bir node'u seçip, o node ile ilgili ("Haritada işaretli il hangisidir?", "Hangi nehir..." vb.) bir soru yaz.
 Seçtiğin node'u JSON içerisinde `eae_interaction` objesi olarak belirt.
 Örnek JSON eklemesi: 
@@ -80,9 +89,10 @@ Seçtiğin node'u JSON içerisinde `eae_interaction` objesi olarak belirt.
 
     plan_lines = []
     for p in plans:
+        band = band_for_difficulty_score(int(p.difficulty))
         line = (
             f"- index={p.index} skill={p.skill} bloom={p.bloom} "
-            f"difficulty={p.difficulty} stem_type={p.stem_type} "
+            f"difficulty={p.difficulty} band={band} stem_type={p.stem_type} "
             f"paragraph_words≈{p.paragraph_length} reading_sec={p.reading_time_sec} "
             f"distractor={p.distractor_pattern} "
             f"({distractor_contract(p.distractor_pattern)}) "

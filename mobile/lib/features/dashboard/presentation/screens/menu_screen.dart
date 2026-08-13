@@ -232,6 +232,13 @@ class _MenuScreenState extends ConsumerState<MenuScreen> {
                 ),
                 _menuTile(
                   context,
+                  title: 'Soru Üret',
+                  icon: StudyIcons.quiz,
+                  color: const Color(0xFF0EA5E9),
+                  onTap: () => context.push('/soru-uret'),
+                ),
+                _menuTile(
+                  context,
                   title: 'Notlarım',
                   icon: StudyIcons.memory,
                   color: const Color(0xFFEAB308),

@@ -26,7 +26,7 @@ _BLOOM_BY_DIFFICULTY = [
     (101, "create"),
 ]
 
-_DIFF_BAND = {"easy": 45, "medium": 70, "hard": 85}
+_DIFF_BAND = {"easy": 38, "medium": 68, "hard": 88}
 
 _REASONING_STEMS = frozenset(
     {
@@ -45,6 +45,37 @@ _REASONING_STEMS = frozenset(
     }
 )
 
+# Cognitive contract per band — injected into prompts so LLM does not
+# fake difficulty by merely lengthening the stem.
+_DIFFICULTY_CONTRACT = {
+    "easy": (
+        "EASY — düşük reasoning yükü; doğrudan / sınırlı çıkarım; az işlem; "
+        "açık bilgi veya tek adım; çeldiriciler bariz hatalı; "
+        "soruyu uzatarak zorlaştırma YASAK; bilerek kısa tutarak 'kolaymış gibi' yapma da YASAK."
+    ),
+    "medium": (
+        "MEDIUM — orta reasoning; 1–2 adımlı düşünme/uygulama; makul çeldiriciler; "
+        "aşırı koşul yığını YASAK; zorluğu metin uzunluğuyla şişirme YASAK."
+    ),
+    "hard": (
+        "HARD — yüksek reasoning; çok adımlı düşünme; güçlü/yakın çeldiriciler; "
+        "birden fazla bilgiyi/koşulu ilişkilendirme; gereksiz karmaşıklık yok; "
+        "SADECE metni uzatarak zorlaştırma YASAK."
+    ),
+}
+
+
+def difficulty_contract_for_band(band: str) -> str:
+    return _DIFFICULTY_CONTRACT.get((band or "medium").lower(), _DIFFICULTY_CONTRACT["medium"])
+
+
+def band_for_difficulty_score(score: int) -> str:
+    if score < 55:
+        return "easy"
+    if score < 78:
+        return "medium"
+    return "hard"
+
 
 def _bloom_for(difficulty: int) -> str:
     for lim, bloom in _BLOOM_BY_DIFFICULTY:
@@ -54,10 +85,16 @@ def _bloom_for(difficulty: int) -> str:
 
 
 def _difficulty_for_band(band: str, index: int, count: int) -> int:
-    base = _DIFF_BAND.get((band or "medium").lower(), 70)
-    # slight spread within batch
+    base = _DIFF_BAND.get((band or "medium").lower(), 68)
+    # Keep spread inside the band so easy never drifts into hard.
+    if (band or "").lower() == "easy":
+        spread = ((index * 5) % 9) - 4  # ~34–42
+        return max(28, min(50, base + spread))
+    if (band or "").lower() == "hard":
+        spread = ((index * 5) % 9) - 4  # ~84–92
+        return max(80, min(95, base + spread))
     spread = ((index * 7) % 15) - 7
-    return max(25, min(95, base + spread))
+    return max(55, min(78, base + spread))
 
 
 def _reasoning_type(stem_type: str) -> str:

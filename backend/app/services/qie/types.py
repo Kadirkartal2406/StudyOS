@@ -8,7 +8,7 @@ from typing import Any
 from app.core.constants import TOPIC_QUIZ_DEFAULT_COUNT
 
 
-PROMPT_VERSION = "qie_v3"
+PROMPT_VERSION = "qie_v3_diff1"
 PLAN_VERSION = "qie_plan_v1"
 MIN_DIFFICULTY_SCORE = 70
 MIN_QUALITY_SCORE = 85

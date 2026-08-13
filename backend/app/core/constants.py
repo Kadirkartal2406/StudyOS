@@ -207,6 +207,12 @@ AI_GEMINI_MODEL_FALLBACKS = (
     "gemini-2.5-flash-lite",
 )
 
-# Topic quiz — single source of truth for "Quiz Üret" item count.
+# Topic quiz — single source of truth for legacy "Quiz Üret" item count.
 TOPIC_QUIZ_DEFAULT_COUNT = 5
 TOPIC_QUIZ_RECENT_STEM_LIMIT = 60
+
+# Topic Test Catalog — published weekly tests (Gemini-free start).
+TOPIC_TEST_QUESTION_COUNT = 10
+TOPIC_TEST_DIFFICULTIES = ("easy", "medium", "hard")
+TOPIC_TEST_WEEKLY_PER_TOPIC = 3  # one per difficulty
+

@@ -7,6 +7,7 @@ import '../../../../core/network/dio_client.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/utils/confidence_label.dart';
 import '../../../../shared/widgets/ds.dart';
+import '../../../topic_quiz/presentation/widgets/topic_tests_section.dart';
 import '../../domain/entities/topic_notebook_entity.dart';
 import '../../domain/entities/topic_work_surface_entity.dart';
 import '../providers/topic_notebook_provider.dart';
@@ -223,10 +224,24 @@ class _WorkSurfaceBody extends StatelessWidget {
           ),
 
         const SizedBox(height: AppSpacing.xl),
-        const SectionHeader(title: 'Quizler', icon: Icons.quiz_outlined),
+        TopicTestsSection(
+          subjectCode: state.subjectCode,
+          topicCode: state.topicCode,
+          topicName: state.topicName,
+        ),
+
+        const SizedBox(height: AppSpacing.xl),
+        const SectionHeader(
+          title: 'Quiz geçmişi',
+          icon: Icons.history_outlined,
+        ),
         const SizedBox(height: AppSpacing.sm),
-        if (surface.quizHistory.isNotEmpty)
-          ...surface.quizHistory.map((qItem) {
+        if (surface.quizHistory
+            .where((q) => q.status.toLowerCase() == 'submitted')
+            .isNotEmpty)
+          ...surface.quizHistory
+              .where((qItem) => qItem.status.toLowerCase() == 'submitted')
+              .map((qItem) {
             final score = qItem.accuracyPct == null
                 ? qItem.status
                 : '%${qItem.accuracyPct!.round()}';
@@ -234,23 +249,19 @@ class _WorkSurfaceBody extends StatelessWidget {
               title: '${qItem.questionCount} Soru',
               subtitle: '$score · ${qItem.relativeLabel}',
               onTap: () {
-                // READY stub/eski üretimleri yeniden açma — taze üret.
-                // Submitted kayıtlar generation_id ile açılır.
-                final submitted = qItem.status.toLowerCase() == 'submitted';
-                final path = submitted
-                    ? '/quiz-session?$q&generation_id=${qItem.id}'
-                    : '/quiz-session?$q';
-                context.push(path);
+                context.push(
+                  '/quiz-session?$q&generation_id=${qItem.id}',
+                );
               },
             );
           })
         else
-          EmptyState(
-            icon: Icons.quiz_outlined,
-            title: 'Henüz quiz çözmedin',
-            message: 'İlk quizini çözerek sistemi seni tanımaya başlat.',
-            ctaLabel: 'Soru üret',
-            onCta: () => context.push('/quiz-session?$q'),
+          const EmptyState(
+            icon: Icons.history_outlined,
+            title: 'Henüz quiz geçmişi yok',
+            message:
+                'AI ile ürettiğin quizler burada görünür. '
+                'Üretim için Menü → Soru Üret.',
           ),
 
         const SizedBox(height: AppSpacing.xl),
@@ -303,9 +314,9 @@ class _WorkSurfaceBody extends StatelessWidget {
               onPressed: () => context.go('/pomodoro?$q'),
             ),
             TonalButton(
-              label: 'Quiz',
-              icon: Icons.quiz_outlined,
-              onPressed: () => context.push('/quiz-session?$q'),
+              label: 'Konu Testleri',
+              icon: Icons.fact_check_outlined,
+              onPressed: () => context.push('/topic-tests?$q'),
             ),
             TonalButton(
               label: 'Soru Kaydı',
@@ -329,6 +340,7 @@ class _WorkSurfaceBody extends StatelessWidget {
         _AiPanel(
           subjectCode: surface.learningState.subjectCode,
           topicCode: surface.learningState.topicCode,
+          topicName: surface.learningState.topicName,
         ),
         const SizedBox(height: AppSpacing.xl),
       ],
@@ -365,15 +377,24 @@ class _WorkSurfaceBody extends StatelessWidget {
 }
 
 class _AiPanel extends ConsumerWidget {
-  const _AiPanel({required this.subjectCode, required this.topicCode});
+  const _AiPanel({
+    required this.subjectCode,
+    required this.topicCode,
+    required this.topicName,
+  });
 
   final String subjectCode;
   final String topicCode;
+  final String topicName;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final key = (subjectCode: subjectCode, topicCode: topicCode);
     final notebookAsync = ref.watch(topicNotebookProvider(key));
+    final q =
+        'subject_code=${Uri.encodeComponent(subjectCode)}'
+        '&topic_code=${Uri.encodeComponent(topicCode)}'
+        '&topic_name=${Uri.encodeComponent(topicName)}';
 
     return notebookAsync.when(
       loading: () => const SizedBox.shrink(),
@@ -454,14 +475,11 @@ class _AiPanel extends ConsumerWidget {
                     topicCode,
                   ),
                 ),
-              if (notebook.quizAvailable)
-                TonalButton(
-                  label: 'Quiz (${notebook.quizDifficulty})',
-                  icon: Icons.quiz_outlined,
-                  onPressed: () => context.push(
-                    '/quiz-session?subject_code=$subjectCode&topic_code=$topicCode',
-                  ),
-                ),
+              TonalButton(
+                label: 'Konu Testleri',
+                icon: Icons.fact_check_outlined,
+                onPressed: () => context.push('/topic-tests?$q'),
+              ),
             ],
           ),
         ],
