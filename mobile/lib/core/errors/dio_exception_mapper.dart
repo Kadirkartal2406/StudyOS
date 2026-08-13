@@ -42,7 +42,9 @@ AppException dioExceptionToAppException(DioException e) {
             message: serverMessage ?? 'AI sağlayıcı kullanılamıyor',
             code: serverCode ?? 'AI_UNAVAILABLE',
           ),
-        int s when s >= 500 => const ServerException(),
+        int s when s >= 500 => ServerException(
+            message: serverMessage ?? 'Sunucu hatası, lütfen tekrar deneyin',
+          ),
         _ => UnknownException(message: serverMessage ?? 'Bilinmeyen hata'),
       };
     case DioExceptionType.cancel:

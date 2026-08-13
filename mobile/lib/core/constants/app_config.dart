@@ -27,6 +27,9 @@ class AppConfig {
   /// backend `TOPIC_QUIZ_DEFAULT_COUNT`.
   static const int topicQuizDefaultCount = 10;
 
+  /// Quiz generate can run multiple Gemini calls; keep above apiTimeoutSeconds.
+  static const int topicQuizGenerateTimeoutSeconds = 180;
+
   /// API istek zaman aşımı (saniye).
   /// Render free cold-start için 30 sn yetmeyebilir.
   static const int apiTimeoutSeconds = 90;

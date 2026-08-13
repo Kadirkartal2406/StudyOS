@@ -7,6 +7,16 @@ import '../../../core/errors/app_exception.dart';
 import '../../../core/errors/dio_exception_mapper.dart';
 import '../../../core/network/dio_client.dart';
 
+Map<String, dynamic>? _asStringKeyedMap(Object? raw) {
+  if (raw is Map<String, dynamic>) return raw;
+  if (raw is Map) {
+    return {
+      for (final e in raw.entries) '${e.key}': e.value,
+    };
+  }
+  return null;
+}
+
 class QuizChoiceItem {
   const QuizChoiceItem({
     required this.id,
@@ -35,7 +45,7 @@ class QuizChoiceItem {
       ordIndex: json['ord_index'] as int? ?? 0,
       stem: json['stem'] as String? ?? '',
       choices: choices,
-      eaeInteraction: json['eae_interaction'] as Map<String, dynamic>?,
+      eaeInteraction: _asStringKeyedMap(json['eae_interaction']),
     );
   }
 }
@@ -120,7 +130,7 @@ class QuizReviewItem {
       explanation: json['explanation'] as String?,
       selectedKey: json['selected_key'] as String?,
       isCorrect: json['is_correct'] as bool?,
-      eaeInteraction: json['eae_interaction'] as Map<String, dynamic>?,
+      eaeInteraction: _asStringKeyedMap(json['eae_interaction']),
     );
   }
 }
@@ -176,14 +186,39 @@ class TopicQuizRemoteDatasource {
           'difficulty': difficulty,
           if (examType != null && examType.isNotEmpty) 'exam_type': examType,
         },
+        options: Options(
+          sendTimeout: const Duration(seconds: 30),
+          receiveTimeout: Duration(
+            seconds: AppConfig.topicQuizGenerateTimeoutSeconds,
+          ),
+        ),
       );
       final data = response.data?['data'];
       if (data is! Map<String, dynamic>) {
         throw const UnknownException(message: 'Geçersiz quiz üretim yanıtı');
       }
-      return QuizGenerationEntity.fromJson(data);
+      final quiz = QuizGenerationEntity.fromJson(data);
+      if (quiz.items.isEmpty) {
+        throw const UnknownException(
+          message: 'Soru üretilemedi. Tekrar dene.',
+        );
+      }
+      return quiz;
+    } on AppException {
+      rethrow;
     } on DioException catch (e) {
-      throw dioExceptionToAppException(e);
+      final mapped = dioExceptionToAppException(e);
+      if (mapped is NetworkException &&
+          (e.type == DioExceptionType.receiveTimeout ||
+              e.type == DioExceptionType.connectionTimeout)) {
+        throw const NetworkException(
+          message:
+              'Soru üretimi zaman aşımına uğradı. Tekrar dene.',
+        );
+      }
+      throw mapped;
+    } catch (_) {
+      throw const UnknownException(message: 'Soru üretilemedi. Tekrar dene.');
     }
   }
 

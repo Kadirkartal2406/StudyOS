@@ -6,6 +6,7 @@ shaped objects that still flow through frozen Review + VSSE gates.
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 from typing import Any
@@ -177,17 +178,22 @@ async def author_batch_compact(
     block = measurement_contract_block
     if block is None and ctx is not None:
         block = getattr(ctx, "measurement_contract_block", None)
-    out: list[AuthoredQuestion] = []
-    for plan in plans:
-        try:
-            q = await author_one_compact(
-                plan,
-                preferred=preferred,
-                model=model,
-                measurement_contract_block=block,
-            )
-            if not q.rejected:
-                out.append(q)
-        except Exception as e:
-            logger.warning("compact author failed index=%s: %s", plan.index, e)
-    return out
+    sem = asyncio.Semaphore(4)
+
+    async def _one(plan: QuestionPlan) -> AuthoredQuestion | None:
+        async with sem:
+            try:
+                q = await author_one_compact(
+                    plan,
+                    preferred=preferred,
+                    model=model,
+                    measurement_contract_block=block,
+                )
+                if not q.rejected:
+                    return q
+            except Exception as e:
+                logger.warning("compact author failed index=%s: %s", plan.index, e)
+            return None
+
+    results = await asyncio.gather(*[_one(plan) for plan in plans])
+    return [q for q in results if q is not None]

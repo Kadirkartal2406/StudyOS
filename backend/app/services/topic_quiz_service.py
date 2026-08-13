@@ -215,26 +215,34 @@ class TopicQuizService:
         """
         if not hasattr(self.db, "execute"):
             return []
-        stmt = (
-            select(TopicQuizItem.stem)
-            .join(
-                TopicQuizGeneration,
-                TopicQuizItem.generation_id == TopicQuizGeneration.id,
+        try:
+            stmt = (
+                select(TopicQuizItem.stem)
+                .join(
+                    TopicQuizGeneration,
+                    TopicQuizItem.generation_id == TopicQuizGeneration.id,
+                )
+                .where(
+                    TopicQuizGeneration.user_id == user_id,
+                    TopicQuizGeneration.topic_code == topic_code,
+                    TopicQuizGeneration.status.in_(
+                        (QuizGenerationStatus.READY, QuizGenerationStatus.SUBMITTED)
+                    ),
+                )
+                .order_by(
+                    TopicQuizGeneration.created_at.desc(),
+                    TopicQuizItem.ord_index.asc(),
+                )
+                .limit(limit)
             )
-            .where(
-                TopicQuizGeneration.user_id == user_id,
-                TopicQuizGeneration.topic_code == topic_code,
-                TopicQuizGeneration.status.in_(
-                    (QuizGenerationStatus.READY, QuizGenerationStatus.SUBMITTED)
-                ),
+            rows = (await self.db.execute(stmt)).scalars().all()
+        except Exception:
+            logger.exception(
+                "topic_quiz recent_stems failed user=%s topic=%s",
+                user_id,
+                topic_code,
             )
-            .order_by(
-                TopicQuizGeneration.created_at.desc(),
-                TopicQuizItem.ord_index.asc(),
-            )
-            .limit(limit)
-        )
-        rows = (await self.db.execute(stmt)).scalars().all()
+            return []
         seen: list[str] = []
         blocked: set[str] = set()
         for raw in rows:

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/errors/app_exception.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/widgets/app_error_view.dart';
 import '../../../../shared/widgets/study_question_chrome.dart';
 import '../../../onboarding/presentation/providers/learning_profile_provider.dart';
 import '../../../educational_assets/presentation/components/eae_interactive_canvas.dart';
@@ -69,9 +70,9 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
           await ref.read(topicQuizDatasourceProvider).get(generationId);
       if (!mounted) return;
       if (quiz.status == 'submitted') {
-        // Submitted quiz: items hide answers; show generate option via retry
+        if (!mounted) return;
         setState(() {
-          _quiz = quiz;
+          _quiz = null;
           _loading = false;
           _error =
               'Bu quiz daha önce gönderildi. Yeni quiz üretmek için tekrar dene.';
@@ -228,18 +229,9 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
       );
     }
     if (_error != null) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(_error!, textAlign: TextAlign.center),
-              const SizedBox(height: 16),
-              FilledButton(onPressed: _generate, child: const Text('Tekrar dene')),
-            ],
-          ),
-        ),
+      return AppErrorView(
+        message: _error!,
+        onRetry: _generate,
       );
     }
     if (_result != null) {
@@ -247,8 +239,9 @@ class _QuizSessionScreenState extends ConsumerState<QuizSessionScreen> {
     }
     final quiz = _quiz;
     if (quiz == null || quiz.items.isEmpty) {
-      return Center(
-        child: FilledButton(onPressed: _generate, child: const Text('Soru üret')),
+      return AppErrorView(
+        message: 'Gösterilecek soru yok. Yeni quiz üret.',
+        onRetry: _generate,
       );
     }
     final item = quiz.items[_index.clamp(0, quiz.items.length - 1)];
