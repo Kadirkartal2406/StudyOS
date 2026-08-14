@@ -96,6 +96,8 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://studyos:studyos@localhost:5432/studyos_dev"
     DATABASE_POOL_SIZE: int = 5
     DATABASE_MAX_OVERFLOW: int = 10
+    # Recycle before Neon/PgBouncer idle disconnect (seconds). 0 = disabled.
+    DATABASE_POOL_RECYCLE: int = 280
 
     # ── APIs ──────────────────────────────────────────────────
     DENEME_API_KEY: str = ""
