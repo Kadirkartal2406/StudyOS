@@ -489,6 +489,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 builder: (_, state) => AssessmentSessionScreen(
                   bootstrap: 'daily',
                   subjectCode: state.uri.queryParameters['subject_code'],
+                  bookletExam: state.uri.queryParameters['booklet_exam'],
                 ),
               ),
               GoRoute(

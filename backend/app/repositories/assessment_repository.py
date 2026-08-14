@@ -135,6 +135,20 @@ class AssessmentRepository(BaseRepository[AssessmentSession]):
         )
         return list(result.scalars().all())
 
+    async def list_shared_booklets(
+        self, challenge_date: date
+    ) -> list[SharedDailyBooklet]:
+        result = await self.db.execute(
+            select(SharedDailyBooklet)
+            .options(selectinload(SharedDailyBooklet.questions))
+            .where(SharedDailyBooklet.challenge_date == challenge_date)
+            .order_by(
+                SharedDailyBooklet.exam_type,
+                SharedDailyBooklet.branch_key,
+            )
+        )
+        return list(result.scalars().all())
+
     async def get_shared_booklet(
         self,
         exam_type: str,

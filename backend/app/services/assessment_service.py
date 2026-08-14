@@ -11,6 +11,7 @@ from datetime import UTC, date, datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.constants import normalize_exam_code
+from app.core.exam_identity import DailyBookletSlot, daily_booklet_slots
 from app.core.exceptions import NotFoundError, ValidationError
 from sqlalchemy import select
 
@@ -677,6 +678,18 @@ class AssessmentService:
     def _branch_key(self, branch: str | None) -> str:
         return (branch or "").strip().lower()
 
+    async def _slots_for_user(
+        self, user_id: uuid.UUID, active_exam: str
+    ) -> tuple[DailyBookletSlot, ...]:
+        targets = await self.profile.repo.list_exam_targets(user_id)
+        target = next((t for t in targets if str(t.exam_type) == active_exam), None)
+        if target is None:
+            target = next(
+                (t for t in targets if str(t.exam_type).lower() == "yks"), None
+            )
+        branch = target.branch if target else None
+        return daily_booklet_slots(active_exam, branch)
+
     def _shared_pack_usable(self, booklet: SharedDailyBooklet | None) -> bool:
         if booklet is None:
             return False
@@ -911,24 +924,39 @@ class AssessmentService:
                 exam_key = normalize_exam_code(
                     booklet.exam_type, booklet.branch_key or None
                 )
-                cards = await pool_svc.serve_unused_for_topic(
-                    exam=exam_key,
-                    subject_code=subject_code,
-                    topic_code=topic_code,
-                    difficulty_band=booklet.difficulty or "medium",
-                    limit=need,
-                    pool_type="trial",
-                )
-                if len(cards) < need:
-                    extra = await pool_svc.serve_unused_for_topic(
+                from app.services.topic_catalog_resolver import topic_codes_for_dual_read
+
+                topic_keys = list(topic_codes_for_dual_read(topic_code) or (topic_code,))
+                cards: list = []
+                for tcode in topic_keys:
+                    if len(cards) >= need:
+                        break
+                    batch = await pool_svc.serve_unused_for_topic(
                         exam=exam_key,
                         subject_code=subject_code,
-                        topic_code=topic_code,
+                        topic_code=tcode,
                         difficulty_band=booklet.difficulty or "medium",
                         limit=need - len(cards),
-                        pool_type="general",
+                        pool_type="trial",
                         exclude_stems=[c.stem for c in cards],
                     )
+                    cards = list(cards) + list(batch)
+                if len(cards) < need:
+                    extra: list = []
+                    for tcode in topic_keys:
+                        if len(cards) + len(extra) >= need:
+                            break
+                        extra_batch = await pool_svc.serve_unused_for_topic(
+                            exam=exam_key,
+                            subject_code=subject_code,
+                            topic_code=tcode,
+                            difficulty_band=booklet.difficulty or "medium",
+                            limit=need - len(cards) - len(extra),
+                            pool_type="general",
+                            exclude_stems=[c.stem for c in cards]
+                            + [c.stem for c in extra],
+                        )
+                        extra = list(extra) + list(extra_batch)
                     cards = list(cards) + list(extra)
 
                 for card in cards:
@@ -951,10 +979,14 @@ class AssessmentService:
         booklet.section_plan = plan_meta
         booklet.requested_count = ord_index
         booklet.generation_progress = ord_index
-        booklet.status = "ready"
-        booklet.error_message = (
-            "Yerel havuzdan dolduruldu."
-        )
+        if ord_index <= 0:
+            booklet.status = "pending"
+            booklet.error_message = (
+                "Havuzda bu plan için soru yok — pack boş ready sayılmaz"
+            )
+        else:
+            booklet.status = "ready"
+            booklet.error_message = "Yerel havuzdan dolduruldu."
         await self.db.flush()
         refreshed = await self.repo.get_shared_booklet_by_id(booklet.id)
         return refreshed or booklet
@@ -1183,7 +1215,7 @@ class AssessmentService:
             kind=AssessmentKind.DAILY_CHALLENGE,
             subject_code=BOOKLET_SUBJECT_CODE,
             topic_code=None,
-            subject_name="Günün Denemesi",
+            subject_name=f"Günün {(booklet.exam_type or '').upper()} Denemesi",
             topic_name=None,
             status=AssessmentSessionStatus.READY,
             difficulty=booklet.difficulty or "medium",
@@ -1222,11 +1254,30 @@ class AssessmentService:
         data: AssessmentStartRequest,
     ) -> AssessmentSessionRead:
         """Ortak günlük kitapçıktan kullanıcı oturumu klonla."""
+        slots = await self._slots_for_user(user_id, exam)
+        if not slots:
+            raise ValidationError("Bu sınav için günlük deneme yok")
+        wanted = (data.booklet_exam or "").strip().lower()
+        slot = next((s for s in slots if s.exam == wanted), None) if wanted else slots[0]
+        if slot is None:
+            raise ValidationError(
+                "Bu deneme aktif sınavın için geçerli değil",
+                field="booklet_exam",
+            )
+        return await self._start_daily_slot(user_id, slot, today, data)
+
+    async def _start_daily_slot(
+        self,
+        user_id: uuid.UUID,
+        slot: DailyBookletSlot,
+        today: date,
+        data: AssessmentStartRequest,
+    ) -> AssessmentSessionRead:
         from app.services.ai.exam_question_blueprint import BOOKLET_SUBJECT_CODE
 
-        targets = await self.profile.repo.list_exam_targets(user_id)
-        target = next((t for t in targets if str(t.exam_type) == exam), None)
-        branch = target.branch if target else None
+        exam = slot.exam
+        branch = slot.branch
+        title_base = f"Günün {slot.label} Denemesi"
 
         existing = await self.repo.get_daily_challenge(user_id, exam, today)
         if existing and existing.session_id:
@@ -1246,12 +1297,10 @@ class AssessmentService:
                 if ver == BOOKLET_CONTENT_VERSION and gen in ("gemini", "bank", "mixed"):
                     return self._to_read(session)
 
-        # Kullanıcı isteğinde sync/AI üretimi yok — gece job + catch-up üretir
         booklet = await self._resolve_ready_shared_booklet(
             exam, today, branch=branch
         )
         if booklet is None or not self._shared_pack_usable(booklet):
-            # Branş pack yoksa oluşturmayı dene; yine hazır değilse fallback zaten yok
             created = await self.ensure_shared_booklet(
                 exam,
                 today,
@@ -1268,10 +1317,12 @@ class AssessmentService:
             if booklet
             else None
         )
-        gemini_ready = self._shared_pack_usable(booklet)
+        pack_ready = self._shared_pack_usable(booklet)
 
-        if gemini_ready:
+        if pack_ready:
             session = await self._clone_shared_to_user(user_id, booklet)
+            session.subject_name = title_base
+            title = f"{title_base} — {session.requested_count} soru"
             if existing is None:
                 self.db.add(
                     DailyChallenge(
@@ -1281,18 +1332,18 @@ class AssessmentService:
                         subject_code=BOOKLET_SUBJECT_CODE,
                         status="available",
                         session_id=session.id,
-                        title=f"Günün Denemesi — {session.requested_count} soru",
+                        title=title,
                     )
                 )
             else:
                 existing.session_id = session.id
                 existing.subject_code = BOOKLET_SUBJECT_CODE
                 existing.status = "available"
-                existing.title = f"Günün Denemesi — {session.requested_count} soru"
+                existing.title = title
             await self.db.flush()
             return self._to_read(session)
 
-        # Pack henüz Gemini ile hazır değil — soru yok
+        pending_title = f"{title_base} henüz hazır değil (gece üretimi)"
         if (
             existing
             and existing.session_id
@@ -1313,7 +1364,7 @@ class AssessmentService:
             exam_type=exam,
             kind=AssessmentKind.DAILY_CHALLENGE,
             subject_code=BOOKLET_SUBJECT_CODE,
-            subject_name="Günün Denemesi",
+            subject_name=title_base,
             status=AssessmentSessionStatus.PENDING,
             difficulty=data.difficulty or "medium",
             requested_count=(booklet.requested_count if booklet else 0) or 0,
@@ -1333,13 +1384,13 @@ class AssessmentService:
                     subject_code=BOOKLET_SUBJECT_CODE,
                     status="generating",
                     session_id=pending.id,
-                    title="Günün denemesi henüz hazır değil (gece Gemini üretimi)",
+                    title=pending_title,
                 )
             )
         else:
             existing.session_id = pending.id
             existing.status = "generating"
-            existing.title = "Günün denemesi henüz hazır değil (gece Gemini üretimi)"
+            existing.title = pending_title
         await self.db.flush()
         return self._to_read(pending)
 
@@ -1351,11 +1402,13 @@ class AssessmentService:
     ) -> AssessmentSession:
         """Legacy per-user fill — prefer shared pack when possible."""
         if session.challenge_date and session.is_booklet:
-            targets = await self.profile.repo.list_exam_targets(session.user_id)
-            target = next(
-                (t for t in targets if str(t.exam_type) == session.exam_type), None
-            )
-            branch = target.branch if target else None
+            try:
+                active = await self._active_exam(session.user_id)
+                slots = await self._slots_for_user(session.user_id, active)
+            except Exception:
+                slots = ()
+            slot = next((s for s in slots if s.exam == session.exam_type), None)
+            branch = slot.branch if slot else None
             booklet = await self.ensure_shared_booklet(
                 session.exam_type,
                 session.challenge_date,
@@ -1677,16 +1730,17 @@ class AssessmentService:
         ]
         return by_subject, by_topic
 
-    async def daily_bundle(self, user_id: uuid.UUID) -> DailyChallengeBundle:
-        """Today feed card — booklet hub."""
+    async def _daily_item_for_slot(
+        self,
+        user_id: uuid.UUID,
+        slot: DailyBookletSlot,
+        today: date,
+    ) -> DailyChallengeRead:
         from app.services.ai.exam_question_blueprint import BOOKLET_SUBJECT_CODE
 
-        exam = await self._active_exam(user_id)
-        today = datetime.now(UTC).date()
-        targets = await self.profile.repo.list_exam_targets(user_id)
-        target = next((t for t in targets if str(t.exam_type) == exam), None)
-        branch = target.branch if target else None
-
+        exam = slot.exam
+        branch = slot.branch
+        label = slot.label
         dc = await self.repo.get_daily_challenge(user_id, exam, today)
         session = None
         preview_total: int | None = None
@@ -1697,7 +1751,6 @@ class AssessmentService:
             exam, today, branch=branch
         )
         if shared is None:
-            # Pack yoksa arka planda üret; GET'i yavaşlatma
             try:
                 await self.ensure_shared_booklet(
                     exam, today, branch=branch, fill_now=False
@@ -1711,38 +1764,37 @@ class AssessmentService:
         if session and session.status == AssessmentSessionStatus.SUBMITTED:
             status = "completed"
             title = (
-                f"Günün Denemesi tamamlandı "
+                f"Günün {label} Denemesi tamamlandı "
                 f"({session.correct_count or 0}/{session.requested_count})"
             )
         elif session and session.status == AssessmentSessionStatus.READY:
             status = "available"
-            title = f"Günün Denemesi — {session.requested_count} soru"
+            title = f"Günün {label} Denemesi — {session.requested_count} soru"
         elif self._shared_pack_usable(shared):
             status = "available"
             preview_total = shared.requested_count
-            title = f"Günün Denemesi — {preview_total} soru"
+            title = f"Günün {label} Denemesi — {preview_total} soru"
         elif shared and shared.status in ("pending", "failed"):
-            # Branş pending ama default ready olabilir — yukarıda resolve denendi
             status = "generating"
             if "kota" in (shared.error_message or "").lower():
-                title = "AI kotası doldu — üretim daha sonra devam edecek"
+                title = f"{label}: AI kotası doldu — üretim daha sonra devam edecek"
             else:
                 title = (
-                    "Günün denemesi hazırlanıyor "
+                    f"Günün {label} denemesi hazırlanıyor "
                     f"({shared.generation_progress or 0}/{shared.requested_count})"
                 )
             preview_total = shared.requested_count
         else:
             try:
                 _, preview_total = await self._build_section_plan_for_exam(exam, branch)
-                title = "Günün denemesi henüz hazır değil (gece Gemini)"
+                title = f"Günün {label} denemesi henüz hazır değil"
             except Exception:
                 preview_total = None
-                title = "Günün Denemesi"
+                title = f"Günün {label} Denemesi"
             status = "generating"
             session = None
 
-        daily_read = DailyChallengeRead(
+        return DailyChallengeRead(
             id=dc.id if dc else uuid.uuid4(),
             exam_type=exam,
             challenge_date=today,
@@ -1751,7 +1803,7 @@ class AssessmentService:
             session_id=session.id if session else None,
             subject_code=BOOKLET_SUBJECT_CODE,
             topic_code=None,
-            deep_link_hint="/assessment/daily",
+            deep_link_hint=f"/assessment/daily?booklet_exam={exam}",
             requested_count=(
                 session.requested_count
                 if session
@@ -1773,6 +1825,15 @@ class AssessmentService:
             ),
             is_booklet=True,
         )
+
+    async def daily_bundle(self, user_id: uuid.UUID) -> DailyChallengeBundle:
+        """Today feed — one booklet per published pack (YKS → TYT + AYT)."""
+        exam = await self._active_exam(user_id)
+        today = datetime.now(UTC).date()
+        slots = await self._slots_for_user(user_id, exam)
+        dailies: list[DailyChallengeRead] = []
+        for slot in slots:
+            dailies.append(await self._daily_item_for_slot(user_id, slot, today))
 
         exam_subjects = await self._exam_subject_codes(user_id, exam)
         branches: list[BranchChallengeRead] = []
@@ -1811,7 +1872,8 @@ class AssessmentService:
         return DailyChallengeBundle(
             exam_type=exam,
             challenge_date=today,
-            daily=daily_read,
+            daily=dailies[0] if dailies else None,
+            dailies=dailies,
             branches=branches,
         )
 

@@ -582,11 +582,32 @@ $("qp-trigger-trial-exams-btn").addEventListener("click", async () => {
     const exam = $("qp-trial-exam-select").value;
     const url = exam ? `/admin/trial-exams/trigger?exam=${exam}` : "/admin/trial-exams/trigger";
     
-    $("qp-last-result").textContent = "Deneme üretimi tetikleniyor...";
+    $("qp-last-result").textContent = "Deneme üretimi kuyruğa alınıyor...";
     const res = await api(url, { method: "POST" });
-    $("qp-last-result").textContent = `Deneme üretimi OK: ${res.data.message || 'Başlatıldı'}`;
+    const n = (res.data.packs || []).length;
+    $("qp-last-result").textContent =
+      `${res.message || "Kuyruğa alındı"} · ${n} pack · ${res.data.date || ""}`;
   } catch (err) {
     $("qp-last-result").textContent = `Deneme üretimi hata: ${err.message}`;
+  }
+});
+
+$("qp-trial-status-btn").addEventListener("click", async () => {
+  try {
+    $("qp-last-result").textContent = "Deneme durumu yükleniyor...";
+    const res = await api("/admin/trial-exams/status");
+    const packs = res.data.packs || [];
+    const ready = packs.filter((p) => p.usable).length;
+    const lines = packs.map(
+      (p) =>
+        `${p.exam}${p.branch ? "/" + p.branch : ""} ${p.status} q=${p.question_count}/${p.requested_count} ${p.generator || ""}`
+    );
+    $("qp-last-result").textContent =
+      `${res.data.date}: ${ready}/${packs.length} kullanılabilir`;
+    $("qp-live-progress-body").textContent =
+      lines.length ? lines.join("\n") : "Bugün henüz pack yok.";
+  } catch (err) {
+    $("qp-last-result").textContent = `Deneme durumu hata: ${err.message}`;
   }
 });
 

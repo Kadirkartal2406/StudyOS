@@ -213,7 +213,7 @@ async def test_booklet_07_empty_pool_keeps_bank_fallback(monkeypatch) -> None:
 
     result = await svc.fill_shared_booklet_from_bank(booklet)
     assert added == []
-    assert result.status == "ready"
+    assert result.status == "pending"
     assert result.requested_count == 0
     assert pool.serve_unused_for_topic.await_count >= 1
 

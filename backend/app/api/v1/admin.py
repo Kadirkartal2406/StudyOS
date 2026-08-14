@@ -7,7 +7,7 @@ import uuid
 from fastapi import APIRouter, Depends, Query
 from fastapi.responses import Response
 from sqlalchemy.ext.asyncio import AsyncSession
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 
 from sqlalchemy import select
 from app.core.dependencies import require_system_admin
@@ -1048,15 +1048,75 @@ async def admin_question_pool_create_card(
 )
 async def admin_trigger_trial_exam_generation(
     exam: str | None = Query(default=None),
+    _: User = Depends(require_system_admin),
+) -> SuccessResponse[dict]:
+    """Queue midnight trial-exam generation. Does not wait for Gemini."""
+    from app.services.trial_exam_scheduler import (
+        _ALL_EXAMS,
+        _now_istanbul,
+        generate_trial_exams_for_date,
+    )
+    import asyncio
+
+    challenge_date = _now_istanbul().date()
+    queued = [
+        {"exam": e, "branch": b}
+        for e, b in _ALL_EXAMS
+        if exam is None or e == exam.lower()
+    ]
+    asyncio.create_task(
+        generate_trial_exams_for_date(challenge_date, target_exam=exam)
+    )
+    return SuccessResponse(
+        data={
+            "queued": True,
+            "date": str(challenge_date),
+            "packs": queued,
+            "message": (
+                f"{len(queued)} pack kuyruğa alındı ({challenge_date}). "
+                "Bittiğinde /admin/trial-exams/status ile kontrol et."
+            ),
+        },
+        message="Deneme üretimi kuyruğa alındı — henüz tamamlanmadı",
+    )
+
+
+@router.get(
+    "/trial-exams/status",
+    response_model=SuccessResponse[dict],
+)
+async def admin_trial_exam_status(
+    challenge_date: date | None = Query(default=None),
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[dict]:
-    """Manually trigger the midnight trial exam generation pipeline."""
-    from app.services.trial_exam_scheduler import generate_trial_exams_for_date
-    import asyncio
-    from datetime import datetime
-    
-    # Run in background to avoid blocking the HTTP response
-    asyncio.create_task(generate_trial_exams_for_date(datetime.now().date(), target_exam=exam))
-    return SuccessResponse(data={"message": f"Trial exam generation started for {exam or 'all exams'}."})
+    from app.services.assessment_service import AssessmentService
+    from app.services.trial_exam_scheduler import _now_istanbul
+
+    day = challenge_date or _now_istanbul().date()
+    rows = await AssessmentService(db).repo.list_shared_booklets(day)
+    packs = []
+    for b in rows:
+        qcount = len(b.questions or [])
+        gen = str((b.section_plan or {}).get("generator") or "")
+        packs.append(
+            {
+                "id": str(b.id),
+                "exam": b.exam_type,
+                "branch": b.branch_key or "",
+                "status": b.status,
+                "generator": gen,
+                "requested_count": b.requested_count,
+                "question_count": qcount,
+                "generation_progress": b.generation_progress,
+                "usable": bool(
+                    b.status == "ready" and qcount > 0 and gen in ("gemini", "bank", "mixed")
+                ),
+                "error_message": b.error_message,
+            }
+        )
+    return SuccessResponse(
+        data={"date": str(day), "packs": packs, "count": len(packs)},
+        message="OK",
+    )
 

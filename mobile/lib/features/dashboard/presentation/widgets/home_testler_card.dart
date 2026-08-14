@@ -25,10 +25,10 @@ class HomeTestlerCard extends StatelessWidget {
     final items = <_TestItem>[
       const _TestItem(
         title: 'Günün Denemesi',
-        subtitle: 'Her sabah yenilenir · 10 soru',
+        subtitle: 'Her gün yenilenir · tam deneme',
         icon: StudyIcons.exam,
         color: AppColors.info,
-        route: '/assessment/daily/history',
+        route: '/assessment/daily',
       ),
     ];
 
@@ -111,7 +111,7 @@ class HomeTestlerCard extends StatelessWidget {
             leadingIcon: StudyIcons.document,
             variant: StudyGlassVariant.info,
             size: StudyGlassSize.medium,
-            onPressed: () => context.push('/assessment/daily/start'),
+            onPressed: () => context.push('/assessment/daily'),
           ),
         ],
       ),

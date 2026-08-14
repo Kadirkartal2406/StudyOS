@@ -20,7 +20,7 @@ class DailyChallengeSubjectsScreen extends ConsumerStatefulWidget {
 
 class _DailyChallengeSubjectsScreenState
     extends ConsumerState<DailyChallengeSubjectsScreen> {
-  Map<String, dynamic>? _daily;
+  List<Map<String, dynamic>> _dailies = [];
   String? _examType;
   String? _error;
   bool _loading = true;
@@ -32,6 +32,14 @@ class _DailyChallengeSubjectsScreenState
     WidgetsBinding.instance.addPostFrameCallback((_) => _load());
   }
 
+  Map<String, dynamic> _asStringMap(dynamic raw) {
+    if (raw is Map<String, dynamic>) return raw;
+    if (raw is Map) {
+      return raw.map((k, v) => MapEntry(k.toString(), v));
+    }
+    return {};
+  }
+
   Future<void> _load() async {
     setState(() {
       _loading = true;
@@ -40,22 +48,26 @@ class _DailyChallengeSubjectsScreenState
     try {
       final data = await ref.read(assessmentDatasourceProvider).dailyBundle();
       if (!mounted) return;
-      final dailyRaw = data['daily'];
-      Map<String, dynamic>? daily;
-      if (dailyRaw is Map<String, dynamic>) {
-        daily = dailyRaw;
-      } else if (dailyRaw is Map) {
-        daily = dailyRaw.map((k, v) => MapEntry(k.toString(), v));
+      final rawList = data['dailies'];
+      final items = <Map<String, dynamic>>[];
+      if (rawList is List) {
+        for (final row in rawList) {
+          final m = _asStringMap(row);
+          if (m.isNotEmpty) items.add(m);
+        }
+      }
+      if (items.isEmpty) {
+        final daily = _asStringMap(data['daily']);
+        if (daily.isNotEmpty) items.add(daily);
+      }
+      if (widget.sessionId != null && items.isNotEmpty) {
+        items.first['session_id'] = widget.sessionId;
       }
       setState(() {
-        _daily = daily;
+        _dailies = items;
         _examType = data['exam_type'] as String?;
         _loading = false;
       });
-      // If a specific sessionId is provided, ensure we use it.
-      if (widget.sessionId != null && _daily != null) {
-        _daily!['session_id'] = widget.sessionId;
-      }
     } on AppException catch (e) {
       if (!mounted) return;
       setState(() {
@@ -71,31 +83,32 @@ class _DailyChallengeSubjectsScreenState
     }
   }
 
-  Future<AssessmentSessionEntity?> _ensureSession({bool waitUntilReady = false}) async {
+  Future<AssessmentSessionEntity?> _ensureSession(
+    Map<String, dynamic> daily, {
+    bool waitUntilReady = false,
+  }) async {
     final ds = ref.read(assessmentDatasourceProvider);
-    // Use provided sessionId if we're rendering a past exam
     if (widget.sessionId != null) {
-      final session = await ds.getSession(widget.sessionId!);
-      return session;
+      return ds.getSession(widget.sessionId!);
     }
-    final session = await ds.startDaily();
+    final bookletExam = (daily['exam_type'] as String?)?.trim();
+    final session = await ds.startDaily(bookletExam: bookletExam);
     if (!waitUntilReady) return session;
     if (session.status == 'ready' && session.questions.isNotEmpty) {
       return session;
     }
     if (session.status == 'submitted') return session;
-    // Pack yoksa uzun poll yapma — kullanıcıya net mesaj
     throw const UnknownException(
       message:
           'Günün denemesi henüz hazır değil. '
-          'Sorular her gece 00:00’da Gemini ile üretilir.',
+          'Sorular gece üretilir; hazır olunca tekrar dene.',
     );
   }
 
-  Future<void> _solveInApp() async {
+  Future<void> _solveInApp(Map<String, dynamic> daily) async {
     setState(() => _busy = true);
     try {
-      final session = await _ensureSession(waitUntilReady: true);
+      final session = await _ensureSession(daily, waitUntilReady: true);
       if (!mounted || session == null) return;
       context.push('/assessment/session/${session.id}');
     } on AppException catch (e) {
@@ -106,10 +119,10 @@ class _DailyChallengeSubjectsScreenState
     }
   }
 
-  Future<void> _downloadPdf() async {
+  Future<void> _downloadPdf(Map<String, dynamic> daily) async {
     setState(() => _busy = true);
     try {
-      final session = await _ensureSession(waitUntilReady: true);
+      final session = await _ensureSession(daily, waitUntilReady: true);
       if (!mounted || session == null) return;
       if (session.questions.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -120,8 +133,8 @@ class _DailyChallengeSubjectsScreenState
       final bytes = await ref
           .read(assessmentDatasourceProvider)
           .downloadSessionPdf(session.id);
-      final exam = (_examType ?? '').trim();
-      final challengeDate = parseChallengeDate(_daily?['challenge_date']);
+      final exam = (daily['exam_type'] as String? ?? _examType ?? '').trim();
+      final challengeDate = parseChallengeDate(daily['challenge_date']);
       final saved = await saveDailyBookletPdf(
         bytes: bytes,
         examType: exam.isEmpty ? 'Deneme' : exam,
@@ -167,10 +180,10 @@ class _DailyChallengeSubjectsScreenState
     }
   }
 
-  Future<void> _openOptical() async {
+  Future<void> _openOptical(Map<String, dynamic> daily) async {
     setState(() => _busy = true);
     try {
-      final session = await _ensureSession();
+      final session = await _ensureSession(daily, waitUntilReady: true);
       if (!mounted || session == null) return;
       if (session.status == 'submitted') {
         context.push('/assessment/session/${session.id}');
@@ -213,59 +226,31 @@ class _DailyChallengeSubjectsScreenState
   }
 
   Widget _buildBody(BuildContext context) {
-    final title = _daily?['title'] as String? ?? 'Günün Denemesi';
-    final status = _daily?['status'] as String? ?? 'available';
-    final count = _daily?['requested_count'] as int?;
-    final exam = (_examType ?? '').toUpperCase();
-    final completed = status == 'completed';
+    final profileExam = (_examType ?? '').toUpperCase();
+    if (_dailies.isEmpty) {
+      return const Center(child: Text('Bugün yayınlanacak deneme yok.'));
+    }
 
-    return ListView(
+    return RefreshIndicator(
+      onRefresh: _load,
+      child: ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
       padding: AppSpacing.pageWide,
       children: [
-        StudyCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-              ),
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                exam.isEmpty
-                    ? 'Aktif sınavındaki tüm dersler, resmi soru sayılarıyla.'
-                    : '$exam — tüm dersler, resmi soru sayılarıyla'
-                        '${count != null ? ' ($count soru)' : ''}.',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              Text(
-                _statusLabel(status),
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-            ],
+        if (profileExam.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.md),
+            child: Text(
+              profileExam == 'YKS'
+                  ? 'YKS — bugün TYT ve AYT denemeleri ayrı yayınlanır.'
+                  : '$profileExam — resmi soru sayılarıyla günlük deneme.',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ),
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        FilledButton.icon(
-          onPressed: _busy || completed ? null : _solveInApp,
-          icon: const Icon(Icons.play_arrow_rounded),
-          label: Text(completed ? 'Tamamlandı' : 'Uygulamada çöz'),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        FilledButton.tonalIcon(
-          onPressed: _busy ? null : _downloadPdf,
-          icon: const Icon(Icons.picture_as_pdf_outlined),
-          label: const Text('PDF indir'),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        OutlinedButton.icon(
-          onPressed: _busy || completed ? null : _openOptical,
-          icon: const Icon(Icons.grid_on_outlined),
-          label: const Text('Optik ile gir'),
-        ),
+        for (var i = 0; i < _dailies.length; i++) ...[
+          if (i > 0) const SizedBox(height: AppSpacing.md),
+          _buildDailyCard(context, _dailies[i]),
+        ],
         const SizedBox(height: AppSpacing.md),
         Text(
           'PDF’yi indirip kâğıtta çözebilir, sonra optik formla '
@@ -279,6 +264,69 @@ class _DailyChallengeSubjectsScreenState
           label: const Text('Sıralamayı gör'),
         ),
       ],
+      ),
+    );
+  }
+
+  Widget _buildDailyCard(BuildContext context, Map<String, dynamic> daily) {
+    final title = daily['title'] as String? ?? 'Günün Denemesi';
+    final status = daily['status'] as String? ?? 'available';
+    final count = daily['requested_count'] as int?;
+    final exam = (daily['exam_type'] as String? ?? '').toUpperCase();
+    final completed = status == 'completed';
+    final generating = status == 'generating';
+
+    return StudyCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            exam.isEmpty
+                ? 'Resmi soru sayılarıyla tam deneme'
+                : '$exam — resmi soru sayılarıyla'
+                    '${count != null ? ' ($count soru)' : ''}.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _statusLabel(status),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          FilledButton.icon(
+            onPressed: _busy || completed || generating ? null : () => _solveInApp(daily),
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: Text(
+              completed
+                  ? 'Tamamlandı'
+                  : generating
+                      ? 'Hazırlanıyor'
+                      : 'Uygulamada çöz',
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          FilledButton.tonalIcon(
+            onPressed: _busy || generating ? null : () => _downloadPdf(daily),
+            icon: const Icon(Icons.picture_as_pdf_outlined),
+            label: const Text('PDF indir'),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          OutlinedButton.icon(
+            onPressed: _busy || completed || generating
+                ? null
+                : () => _openOptical(daily),
+            icon: const Icon(Icons.grid_on_outlined),
+            label: const Text('Optik ile gir'),
+          ),
+        ],
+      ),
     );
   }
 

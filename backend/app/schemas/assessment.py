@@ -18,6 +18,8 @@ class AssessmentStartRequest(BaseModel):
     difficulty: str = "medium"
     # Sprint 23 — force synthetic questions (tests / offline); ignored in prod unless settings allow
     synthetic: bool = False
+    # Pack key for daily booklet (tyt / ayt / …). Not the umbrella yks code.
+    booklet_exam: str | None = None
 
 
 class AssessmentAnswerItem(BaseModel):
@@ -189,6 +191,7 @@ class DailyChallengeBundle(BaseModel):
     exam_type: str
     challenge_date: date
     daily: DailyChallengeRead | None = None
+    dailies: list[DailyChallengeRead] = Field(default_factory=list)
     branches: list[BranchChallengeRead] = Field(default_factory=list)
 
 

@@ -170,6 +170,10 @@ Future<void> _pumpToday(
         builder: (_, __) => const Scaffold(body: Text('assessment')),
       ),
       GoRoute(
+        path: '/assessment/daily',
+        builder: (_, __) => const Scaffold(body: Text('daily')),
+      ),
+      GoRoute(
         path: '/assessment/daily/history',
         builder: (_, __) => const Scaffold(body: Text('daily-history')),
       ),

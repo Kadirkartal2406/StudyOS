@@ -21,6 +21,7 @@ class AssessmentSessionScreen extends ConsumerStatefulWidget {
     this.sessionId,
     this.bootstrap,
     this.subjectCode,
+    this.bookletExam,
     this.fromSetup = false,
     this.questionCount,
   });
@@ -31,6 +32,8 @@ class AssessmentSessionScreen extends ConsumerStatefulWidget {
   /// `daily` | `branch` | `calibration` — id yoksa start çağırır.
   final String? bootstrap;
   final String? subjectCode;
+  /// Daily pack key (tyt / ayt) when bootstrap is daily.
+  final String? bookletExam;
 
   /// RC3 — ilk kullanım seviye testi; bitince sıradaki derse / preparing.
   final bool fromSetup;
@@ -120,7 +123,7 @@ class _AssessmentSessionScreenState
       final mode = widget.bootstrap ?? 'daily';
       late AssessmentSessionEntity session;
       if (mode == 'daily') {
-        session = await ds.startDaily();
+        session = await ds.startDaily(bookletExam: widget.bookletExam);
       } else if (mode == 'branch') {
         final code = widget.subjectCode;
         if (code == null || code.isEmpty) {
@@ -493,7 +496,7 @@ class _AssessmentSessionScreenState
               Text(
                 session == null
                     ? 'Deneme henüz başlamadı'
-                    : 'Bu oturumda soru yok — yeniden üretilecek',
+                    : 'Günün denemesi henüz hazır değil. Sorular gece üretilir; hazır olunca tekrar dene.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),

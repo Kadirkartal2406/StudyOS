@@ -12,6 +12,7 @@ Trial / booklet APIs often pass (parent, branch). This module bridges both.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any
 
 # Values stored on ExamType / user targets / pool keys when fully resolved.
@@ -217,3 +218,87 @@ def coerce_exam_payload(data: Any) -> Any:
     elif canonical in {"yds_ingilizce", "yokdil_ingilizce"} and not branch:
         out["branch"] = "en"
     return out
+
+
+@dataclass(frozen=True)
+class DailyBookletSlot:
+    """One shared_daily_booklets row the user should see today.
+
+    ``exam`` / ``branch`` match trial_exam_scheduler keys (e.g. ayt + sayisal),
+    not canonical umbrella codes like yks or ayt_sayisal.
+    """
+
+    exam: str
+    branch: str | None
+    label: str
+
+
+def daily_booklet_slots(
+    active_exam: str | None,
+    branch: str | None = None,
+) -> tuple[DailyBookletSlot, ...]:
+    """Map the user's active exam to published daily booklet pack(s).
+
+    YKS (TYT+AYT) gets both a TYT pack and an AYT pack for the chosen field.
+    Language-track YKS (dil/en) gets TYT + YDT instead of AYT.
+    """
+    e = _norm(active_exam)
+    b = _norm(branch) or None
+    if not e:
+        return ()
+
+    if e == "yks":
+        if b in {"dil", "en", "ingilizce"}:
+            return (
+                DailyBookletSlot("tyt", None, "TYT"),
+                DailyBookletSlot("ydt", "en", "YDT"),
+            )
+        ayt_b = b if b in _AYT_BRANCHES else "sayisal"
+        return (
+            DailyBookletSlot("tyt", None, "TYT"),
+            DailyBookletSlot("ayt", ayt_b, "AYT"),
+        )
+
+    if e == "tyt":
+        return (DailyBookletSlot("tyt", None, "TYT"),)
+
+    if e == "ayt" or e.startswith("ayt_"):
+        ayt_b = b if b in _AYT_BRANCHES else (
+            e.removeprefix("ayt_") if e.startswith("ayt_") and e.removeprefix("ayt_") in _AYT_BRANCHES else "sayisal"
+        )
+        return (DailyBookletSlot("ayt", ayt_b, "AYT"),)
+
+    if e in {"ydt", "ydt_ingilizce"}:
+        return (DailyBookletSlot("ydt", "en", "YDT"),)
+
+    if e == "kpss" or e.startswith("kpss_"):
+        kpss_b = b if b in _KPSS_BRANCHES else (
+            e.removeprefix("kpss_") if e.startswith("kpss_") else "lisans"
+        )
+        if kpss_b not in _KPSS_BRANCHES:
+            kpss_b = "lisans"
+        return (DailyBookletSlot("kpss", kpss_b, "KPSS"),)
+
+    if e == "lgs":
+        lgs_b = b if b in {"sayisal", "sozel"} else None
+        return (DailyBookletSlot("lgs", lgs_b, "LGS"),)
+
+    if e == "ales":
+        ales_b = b if b in _ALES_DGS_BRANCHES else "sayisal"
+        return (DailyBookletSlot("ales", ales_b, "ALES"),)
+
+    if e == "dgs":
+        dgs_b = b if b in _ALES_DGS_BRANCHES else "sayisal"
+        return (DailyBookletSlot("dgs", dgs_b, "DGS"),)
+
+    if e in {"yds", "yds_ingilizce"}:
+        return (DailyBookletSlot("yds", "en", "YDS"),)
+
+    if e.startswith("yokdil"):
+        field = b if b in {"fen", "saglik", "sosyal"} else "fen"
+        return (DailyBookletSlot("yokdil", field, "YÖKDİL"),)
+
+    if e == "ags":
+        return (DailyBookletSlot("ags", None, "AGS"),)
+
+    return (DailyBookletSlot(e, b, e.upper()),)

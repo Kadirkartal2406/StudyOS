@@ -439,13 +439,15 @@ class AssessmentRemoteDatasource {
     }
   }
 
-  Future<AssessmentSessionEntity> startDaily({String? subjectCode}) async {
+  Future<AssessmentSessionEntity> startDaily({String? bookletExam}) async {
     try {
       // Ortak günlük pack klonu — kısa timeout yeterli
       final response = await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.dailyChallengeStart,
-        data: const {
+        data: {
           'kind': 'daily_challenge',
+          if (bookletExam != null && bookletExam.isNotEmpty)
+            'booklet_exam': bookletExam,
         },
         options: Options(
           sendTimeout: const Duration(seconds: 30),

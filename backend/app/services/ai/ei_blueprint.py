@@ -27,7 +27,8 @@ def _legacy_or_code(subject) -> str:
 
 
 def _topic_legacy_or_code(topic) -> str:
-    return (topic.legacy_topic_code or topic.code or "").strip()
+    # Native exam_catalog code first (SSOT); legacy only if native missing.
+    return (topic.code or topic.legacy_topic_code or "").strip()
 
 
 def _flatten_packs(packs: list) -> list:
