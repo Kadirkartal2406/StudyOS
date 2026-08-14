@@ -76,6 +76,11 @@ def test_tyt_yks_catalog_exam_alias_does_not_touch_pool_key():
     assert catalog_exam_code_for_read("yds") == "yds"
 
 
+def test_ssot_default_on_aliases_tyt_to_yks():
+    assert settings.TOPIC_CATALOG_SSOT is True
+    assert exam_code_filter_for_list_topics("tyt") == "yks"
+
+
 def test_exam_filter_ssot_off_keeps_raw_tyt(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(settings, "TOPIC_CATALOG_SSOT", False)
     assert exam_code_filter_for_list_topics("tyt") == "tyt"

@@ -30,6 +30,7 @@ from app.services.ai.subject_catalog_seed import (
     SUBJECT_CATALOG_SEED,
     codes_for_exam,
 )
+from app.services.ai.topic_catalog_seed import TOPIC_CATALOG_SEED
 from app.schemas.learning_profile import (
     DashboardSubjectsSummary,
     ExamTargetCreate,
