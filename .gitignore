@@ -116,3 +116,22 @@ backend/scripts/run_*.py
 _val*.py
 _test*.py
 _validate*.py
+backend/_tmp_*
+
+# ── Local Gradle cache (Android distribute) ──
+.gradle-user-home/
+
+# ── Local QA / sample / measurement artifacts ─
+data/qa/
+data/evaluation/
+data/generated_samples/
+backend/scripts/generate_exam_sample_pdfs.py
+backend/tests/unit/test_measurement_*.py
+
+# Local official-exam copies (do not re-add)
+data/official_exams/yds/2020_ingilizce.pdf
+data/official_exams/yds/2021_ingilizce_1.pdf
+data/official_exams/yds/2021_ingilizce_2.pdf
+data/official_exams/yds/2026.pdf
+data/official_exams/yokdil/
+data/official_exams/yökdil/
