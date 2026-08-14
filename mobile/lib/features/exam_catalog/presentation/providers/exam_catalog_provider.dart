@@ -106,10 +106,7 @@ final examCatalogTopicsProvider = FutureProvider.family<
   final rows = await api.listTopics(args.exam, args.subject);
   return rows
       .map((m) {
-        final legacy = m['legacy_topic_code']?.toString();
-        final code = (legacy != null && legacy.isNotEmpty)
-            ? legacy
-            : (m['code'] ?? '').toString();
+        final code = (m['code'] ?? '').toString();
         final name = (m['name'] ?? '').toString();
         return (code: code, name: name);
       })

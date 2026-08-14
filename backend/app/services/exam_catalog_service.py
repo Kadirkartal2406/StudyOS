@@ -11,6 +11,12 @@ from sqlalchemy.orm import selectinload
 
 from app.core.exceptions import NotFoundError
 from app.models.exam_intelligence import EiExam, EiPack, EiSubject, EiTopic
+from app.services.topic_catalog_resolver import (
+    exam_code_filter_for_list_topics,
+    is_blocked_legacy_topic,
+    is_yds_orphan_subject,
+    topic_catalog_ssot_enabled,
+)
 from app.schemas.exam_catalog import (
     EiExamRead,
     EiExamSummary,
@@ -284,11 +290,16 @@ class ExamCatalogService:
         pack_code: str | None = None,
     ) -> list[EiTopicRead]:
         await self.ensure_synced()
+        sub = (subject_code or "").strip()
+        raw_exam = (exam_code or "").strip().lower()
+        if topic_catalog_ssot_enabled() and is_yds_orphan_subject(sub):
+            raise NotFoundError(f"Topic bulunamadı: {exam_code}/{subject_code}")
+        exam_filter = exam_code_filter_for_list_topics(raw_exam)
         q = (
             select(EiTopic)
             .where(
-                EiTopic.exam_code == exam_code.lower(),
-                EiTopic.subject_code == subject_code,
+                EiTopic.exam_code == exam_filter,
+                EiTopic.subject_code == sub,
                 EiTopic.is_active.is_(True),
             )
             .order_by(EiTopic.display_order, EiTopic.name)
@@ -301,7 +312,11 @@ class ExamCatalogService:
             raise NotFoundError(
                 f"Topic bulunamadı: {exam_code}/{subject_code}"
             )
-        return [EiTopicRead.model_validate(t) for t in topics]
+        return [
+            EiTopicRead.model_validate(t)
+            for t in topics
+            if not is_blocked_legacy_topic(t.code)
+        ]
 
     async def get_topic(self, topic_code: str) -> EiTopicRead:
         await self.ensure_synced()

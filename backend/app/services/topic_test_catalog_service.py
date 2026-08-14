@@ -12,6 +12,7 @@ from sqlalchemy.orm import selectinload
 
 from app.core.constants import TOPIC_TEST_QUESTION_COUNT, normalize_exam_code
 from app.core.exceptions import NotFoundError, ValidationError
+from app.services.topic_catalog_resolver import topic_codes_for_dual_read
 from app.models.topic_test import (
     TopicTest,
     TopicTestAttempt,
@@ -83,12 +84,13 @@ class TopicTestCatalogService:
         exam_n = normalize_exam_code(exam)
         sub = subject_code.strip()
         top = topic_code.strip()
+        topic_codes = topic_codes_for_dual_read(top) or (top,)
         q = (
             select(TopicTest)
             .where(
                 _exam_match_clause(exam_n),
                 TopicTest.subject_code == sub,
-                TopicTest.topic_code == top,
+                TopicTest.topic_code.in_(topic_codes),
                 TopicTest.status == TopicTestStatus.PUBLISHED,
             )
             .order_by(TopicTest.week_id.desc(), TopicTest.difficulty.asc())

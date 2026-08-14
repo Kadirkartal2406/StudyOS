@@ -152,6 +152,10 @@ class Settings(BaseSettings):
     QUESTION_PRODUCTION_EST_COST_PER_QUESTION_USD: float = 0.002
     # Compact author: Writer+Distractor+Naturalizer tek LLM (Review/VSSE aynı)
     ENABLE_COMPACT_AUTHOR: bool = True
+    # Faz 1 — exam_catalog SSOT for Derslerim/Soru Üret topic lists (read-only).
+    # Default off: LP TOPIC_CATALOG_SEED + current exam-catalog 404 fallback.
+    # ASCII dual-read on topic_tests is independent of this flag.
+    TOPIC_CATALOG_SSOT: bool = False
     # Soft measurement side-channel (default OFF — existing behavior unchanged)
     # off | shadow | soft_review
     MEASUREMENT_MODE: str = "off"

@@ -30,7 +30,6 @@ from app.services.ai.subject_catalog_seed import (
     SUBJECT_CATALOG_SEED,
     codes_for_exam,
 )
-from app.services.ai.topic_catalog_seed import TOPIC_CATALOG_SEED
 from app.schemas.learning_profile import (
     DashboardSubjectsSummary,
     ExamTargetCreate,
@@ -65,6 +64,12 @@ from app.services.ai.journey_stage_engine import build_stage_reason, evaluate_jo
 from app.services.ai.next_action_engine import build_action_for_topic
 from app.services.statistics_service import StatisticsService
 from app.services.revision_service import RevisionService
+from app.services.exam_catalog_service import ExamCatalogService
+from app.services.topic_catalog_resolver import (
+    canonical_topic_code_for_display,
+    is_blocked_legacy_topic,
+    topic_catalog_ssot_enabled,
+)
 
 
 
@@ -635,7 +640,7 @@ class LearningProfileService:
             exam_summary=exam_summary,
             resources=SubjectHubResources(placeholder=True, available=False),
             flashcards=SubjectHubFlashcards(),
-            topics=await self._hub_topics(code),
+            topics=await self._hub_topics(code, exam_type=active or primary),
             ai=ai,
             active_exam_type=active,
             primary_exam_type=primary,
@@ -869,7 +874,33 @@ class LearningProfileService:
                 return True
         return False
 
-    async def _hub_topics(self, subject_code: str) -> SubjectHubTopics:
+    async def _hub_topics(
+        self, subject_code: str, *, exam_type: str | None = None
+    ) -> SubjectHubTopics:
+        if topic_catalog_ssot_enabled() and exam_type:
+            try:
+                ei_topics = await ExamCatalogService(self.db).list_topics(
+                    exam_type, subject_code
+                )
+                items = [
+                    TopicCatalogRead(
+                        id=t.id,
+                        code=canonical_topic_code_for_display(t.code),
+                        name=t.name,
+                        subject_code=t.subject_code,
+                        sort_order=t.display_order,
+                        difficulty=None,
+                        is_active=t.is_active,
+                    )
+                    for t in ei_topics
+                    if t.code and not is_blocked_legacy_topic(t.code)
+                ]
+                if items:
+                    return SubjectHubTopics(
+                        items=items, count=len(items), available=True
+                    )
+            except Exception:
+                pass
         await self.ensure_topic_catalog_synced()
         rows = await self.repo.list_topics(subject_code=subject_code, active_only=True)
         items = [TopicCatalogRead.model_validate(r) for r in rows]
