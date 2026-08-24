@@ -205,17 +205,22 @@ class GeminiProvider(AIProvider):
                 except AIQuotaExceededError as exc:
                     last_exc = exc
 
+                    retry_after = getattr(exc, "retry_after", None) or 0
                     logger.warning(
-                        "Gemini quota exceeded. key=%s...%s model=%s",
+                        "Gemini quota exceeded. key=%s...%s model=%s retry_after=%.0fs",
                         key[:4],
                         key[-4:],
                         model,
+                        retry_after,
                     )
 
-                    # Bu anahtarın limiti doldu, sistemin kalıcı hafızasındaki (global) sırayı bir sonrakine kaydır
                     _current_key_index = (_current_key_index + 1) % len(keys)
-                    
-                    # Aynı key'in model döngüsünü bırak, sonraki key'e geç
+
+                    if retry_after > 0:
+                        wait = min(retry_after + 1.0, 60.0)
+                        logger.info("Waiting %.0fs before next key (retryDelay)", wait)
+                        await asyncio.sleep(wait)
+
                     break
 
                 except AIProviderError as exc:

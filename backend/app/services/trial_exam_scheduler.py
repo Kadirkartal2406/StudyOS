@@ -9,18 +9,17 @@ from datetime import datetime, timedelta, timezone
 from app.services.booklet_generation import run_shared_booklet_generation
 
 _ALL_EXAMS: tuple[tuple[str, str | None], ...] = (
-    ("kpss", "lisans"),
-    ("kpss", "onlisans"),
-    ("kpss", "ortaogretim"),
+    # High-priority: YKS users get TYT + AYT
     ("tyt", None),
     ("ayt", "sayisal"),
     ("ayt", "ea"),
     ("ayt", "sozel"),
-    # YDT is not a top-level EI exam; identity layer maps ydt→yks catalog + en pack.
-    # Blueprint for exam=ydt stays 80 (not TYT+YDT).
-    ("ydt", "en"),
     ("lgs", "sayisal"),
     ("lgs", "sozel"),
+    ("kpss", "lisans"),
+    ("kpss", "onlisans"),
+    ("kpss", "ortaogretim"),
+    ("ydt", "en"),
     ("ags", None),
     ("ales", "sayisal"),
     ("ales", "sozel"),
@@ -56,7 +55,7 @@ async def generate_trial_exams_for_date(challenge_date, target_exam: str | None 
     async with AsyncSessionLocal() as db:
         svc = AssessmentService(db)
         target_exams = [e for e in _ALL_EXAMS if target_exam is None or e[0] == target_exam.lower()]
-        for exam, branch in target_exams:
+        for i, (exam, branch) in enumerate(target_exams):
             try:
                 booklet = await svc.ensure_shared_booklet(
                     exam,
@@ -75,11 +74,12 @@ async def generate_trial_exams_for_date(challenge_date, target_exam: str | None 
                 booklet_id = booklet.id
                 booklet.status = "pending"
                 await db.commit()
-                # Run generation which will now isolate into pool_type="trial"
                 await run_shared_booklet_generation(booklet_id)
                 refreshed = await svc.repo.get_shared_booklet_by_id(booklet_id)
                 if refreshed is None or refreshed.status != "ready":
                     all_ready = False
+                if i < len(target_exams) - 1:
+                    await asyncio.sleep(5.0)
             except Exception:
                 all_ready = False
                 logger.exception(

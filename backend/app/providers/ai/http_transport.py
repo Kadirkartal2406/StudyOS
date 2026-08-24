@@ -78,14 +78,34 @@ def _safe_error_body(text: str, limit: int = 200) -> str:
     return cleaned
 
 
+def _parse_retry_delay(body: str) -> float | None:
+    """Extract retryDelay seconds from Gemini 429 JSON body."""
+    import json as _json
+    import re as _re
+
+    try:
+        data = _json.loads(body)
+        details = data.get("error", {}).get("details", [])
+        for d in details:
+            if d.get("@type", "").endswith("RetryInfo"):
+                raw = d.get("retryDelay", "")
+                m = _re.search(r"([\d.]+)", str(raw))
+                if m:
+                    return float(m.group(1))
+    except Exception:
+        pass
+    return None
+
+
 def map_http_error(status_code: int, body: str) -> AIProviderError:
     snippet = _safe_error_body(body)
 
     if status_code == 429:
         lowered = body.casefold()
 
-        # DEBUG: Google'ın gerçek cevabını logla
         logger.warning("Gemini raw 429 body: %s", body)
+
+        retry_after = _parse_retry_delay(body)
 
         if any(
             x in lowered
@@ -101,9 +121,13 @@ def map_http_error(status_code: int, body: str) -> AIProviderError:
                 "generative language",
             )
         ):
-            return AIQuotaExceededError("AI kullanım kotası doldu")
+            exc = AIQuotaExceededError("AI kullanım kotası doldu")
+            exc.retry_after = retry_after  # type: ignore[attr-defined]
+            return exc
 
-        return AIRateLimitError("AI hız limiti aşıldı (429)")
+        exc2 = AIRateLimitError("AI hız limiti aşıldı (429)")
+        exc2.retry_after = retry_after  # type: ignore[attr-defined]
+        return exc2
 
     if status_code in (401, 403):
         return AIUnavailableError("AI sağlayıcı kimlik doğrulaması başarısız")
@@ -143,14 +167,19 @@ async def post_json(
                 err = map_http_error(response.status_code, response.text)
                 # 429 / 5xx → retry; diğerleri hemen fırlat
                 if response.status_code in (429, 500, 502, 503, 504) and attempt < retries:
-                    if settings.DEBUG:
-                        logger.debug(
-                            "ai_retry provider=%s status=%s attempt=%s",
-                            provider_label,
-                            response.status_code,
-                            attempt + 1,
-                        )
-                    await asyncio.sleep(0.4 * (attempt + 1))
+                    retry_after = getattr(err, "retry_after", None)
+                    if response.status_code == 429 and retry_after and retry_after > 0:
+                        wait = min(retry_after + 1.0, 60.0)
+                    else:
+                        wait = 2.0 * (attempt + 1)
+                    logger.info(
+                        "ai_retry provider=%s status=%s attempt=%s wait=%.1fs",
+                        provider_label,
+                        response.status_code,
+                        attempt + 1,
+                        wait,
+                    )
+                    await asyncio.sleep(wait)
                     last_exc = err
                     continue
                 raise err

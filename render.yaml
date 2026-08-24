@@ -24,17 +24,17 @@ services:
       - key: DEBUG
         value: "false"
       - key: AI_PROVIDER
-        value: "null"
+        value: "gemini"
       - key: ENABLE_AUTO_BOOKLET
-        value: "false"
+        value: "true"
       - key: ENABLE_BACKGROUND_AI
-        value: "false"
+        value: "true"
       - key: ENABLE_MIDNIGHT_SCHEDULER
-        value: "false"
+        value: "true"
       - key: ENABLE_CATCHUP
-        value: "false"
+        value: "true"
       - key: ENABLE_AI_WARMUP
-        value: "false"
+        value: "true"
       - key: TOPIC_CATALOG_SSOT
         value: "true"
       - key: ASSESSMENT_BOOKLET_SYNTHETIC

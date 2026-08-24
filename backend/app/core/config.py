@@ -132,7 +132,7 @@ class Settings(BaseSettings):
     # B1: primary fail → null (boş bırakılırsa null)
     AI_FALLBACK_PROVIDER: str = "null"
     # M32 — model zinciri: primary + en fazla N fallback
-    AI_GEMINI_MAX_FALLBACKS: int = 1
+    AI_GEMINI_MAX_FALLBACKS: int = 0
     # M32 — günlük Gemini istek bütçesi (0 = limitsiz)
     AI_DAILY_REQUEST_BUDGET: int = 1000
 
