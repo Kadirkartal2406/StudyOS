@@ -242,6 +242,7 @@ class TopicTestReleaseService:
         topic_name: str | None = None,
         dry_run: bool = False,
         fill_pool_if_short: bool = True,
+        assemble_only: bool = False,
     ) -> str:
         exam_n = normalize_exam_code(exam)
         sub = subject_code.strip()
@@ -296,12 +297,14 @@ class TopicTestReleaseService:
                     subject_code=sub,
                     topic_code=top,
                 )
-                if ok and not dry_run:
+                if ok and not dry_run and not assemble_only:
                     existing.status = TopicTestStatus.PUBLISHED
                     existing.published_at = existing.published_at or datetime.now(UTC)
                     existing.question_count = TOPIC_TEST_QUESTION_COUNT
                     await self.db.flush()
                     return "created:published_existing_draft"
+                if ok and not dry_run and assemble_only:
+                    return "skipped:already_assembled"
                 if ok and dry_run:
                     return "created:dry_run"
                 # Invalid draft items → clear and rebuild below
@@ -438,14 +441,23 @@ class TopicTestReleaseService:
                     )
                     card.use_count = int(card.use_count or 0) + 1
 
-                test.status = TopicTestStatus.PUBLISHED
-                test.published_at = datetime.now(UTC)
-                test.question_count = TOPIC_TEST_QUESTION_COUNT
-                if subject_name:
-                    test.subject_name = subject_name
-                if topic_name:
-                    test.topic_name = topic_name
-                await self.db.flush()
+                if assemble_only:
+                    test.status = TopicTestStatus.DRAFT
+                    test.question_count = TOPIC_TEST_QUESTION_COUNT
+                    if subject_name:
+                        test.subject_name = subject_name
+                    if topic_name:
+                        test.topic_name = topic_name
+                    await self.db.flush()
+                else:
+                    test.status = TopicTestStatus.PUBLISHED
+                    test.published_at = datetime.now(UTC)
+                    test.question_count = TOPIC_TEST_QUESTION_COUNT
+                    if subject_name:
+                        test.subject_name = subject_name
+                    if topic_name:
+                        test.topic_name = topic_name
+                    await self.db.flush()
         except IntegrityError as exc:
             logger.warning(
                 "topic_test integrity race exam=%s topic=%s week=%s diff=%s err=%s",
@@ -462,7 +474,8 @@ class TopicTestReleaseService:
             return "failed:integrity_race"
 
         logger.info(
-            "topic_test published id=%s exam=%s topic=%s week=%s diff=%s ordinal=%s",
+            "topic_test %s id=%s exam=%s topic=%s week=%s diff=%s ordinal=%s",
+            "assembled" if assemble_only else "published",
             test.id,
             exam_n,
             top,
@@ -470,7 +483,48 @@ class TopicTestReleaseService:
             diff,
             test.ordinal,
         )
-        return "created:published"
+        return "created:assembled" if assemble_only else "created:published"
+
+    async def publish_ready_drafts(self, week_id: str) -> dict:
+        """Publish DRAFT rows that already have a full valid snapshot."""
+        published = skipped = failed = 0
+        rows = list(
+            (
+                await self.db.execute(
+                    select(TopicTest).where(
+                        TopicTest.week_id == week_id,
+                        TopicTest.status == TopicTestStatus.DRAFT,
+                    )
+                )
+            )
+            .scalars()
+            .all()
+        )
+        for test in rows:
+            outcome = await self.release_or_skip_one(
+                exam=test.exam,
+                subject_code=test.subject_code,
+                topic_code=test.topic_code,
+                week_id=week_id,
+                difficulty=test.difficulty,
+                subject_name=test.subject_name,
+                topic_name=test.topic_name,
+                dry_run=False,
+                fill_pool_if_short=False,
+                assemble_only=False,
+            )
+            if outcome.startswith("created:published"):
+                published += 1
+            elif outcome.startswith("skipped"):
+                skipped += 1
+            else:
+                failed += 1
+        return {
+            "week_id": week_id,
+            "published": published,
+            "skipped": skipped,
+            "failed": failed,
+        }
 
     async def release_topic_week(
         self, body: TopicTestReleaseRequest
@@ -491,6 +545,7 @@ class TopicTestReleaseService:
                 topic_name=body.topic_name,
                 dry_run=body.dry_run,
                 fill_pool_if_short=body.fill_pool_if_short,
+                assemble_only=body.assemble_only,
             )
             tag = f"{diff}:{outcome}"
             if outcome.startswith("created"):

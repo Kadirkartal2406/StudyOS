@@ -13,7 +13,7 @@ from sqlalchemy.orm import selectinload
 from app.core.constants import TOPIC_TEST_DIFFICULTIES, TOPIC_TEST_QUESTION_COUNT
 from app.models.topic_test import TopicTest, TopicTestStatus
 from app.services.question_pool_inventory_catalog import iter_catalog_inventory_slots
-from app.services.topic_test_catalog_service import iso_week_id
+from app.services.topic_test_catalog_service import iso_week_id, production_target_week_id
 
 
 class TopicTestAdminService:
@@ -125,9 +125,21 @@ class TopicTestAdminService:
 
         topics_matrix.sort(key=_score, reverse=True)
 
+        prod_week = production_target_week_id()
+        total_slots = total_topics * len(TOPIC_TEST_DIFFICULTIES)
+
         return {
             "current_week": week,
             "week_id": week,
+            "production_target_week": prod_week,
+            "schedule": {
+                "nightly_hour": "03:00 Europe/Istanbul",
+                "tests_per_night": 164,
+                "production_days": "Mon–Sat assemble (draft)",
+                "sunday": "Gap-fill remaining drafts",
+                "monday": "03:00 publish + start next week batch 1",
+                "total_slots": total_slots,
+            },
             "exam": exam_f,
             "total_topics": total_topics,
             "expected_tests_this_week": expected,

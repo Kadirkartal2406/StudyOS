@@ -81,7 +81,7 @@ async def lifespan(app: FastAPI):
         from app.services.smart_question_pool_scheduler import (
             midnight_question_pool_loop,
         )
-        from app.services.topic_test_weekly_scheduler import topic_test_weekly_loop
+        from app.services.topic_test_weekly_scheduler import topic_test_staggered_loop
         from app.services.trial_exam_scheduler import midnight_trial_exam_loop
 
         background_tasks.append(
@@ -106,7 +106,7 @@ async def lifespan(app: FastAPI):
         )
         background_tasks.append(
             asyncio.create_task(
-                topic_test_weekly_loop(), name="topic_test_weekly_loop"
+                topic_test_staggered_loop(), name="topic_test_staggered_loop"
             )
         )
     else:

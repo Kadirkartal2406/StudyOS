@@ -98,6 +98,7 @@ class TopicTestReleaseRequest(BaseModel):
     topic_name: str | None = None
     dry_run: bool = False
     fill_pool_if_short: bool = True
+    assemble_only: bool = False
 
 
 class TopicTestReleaseResult(BaseModel):

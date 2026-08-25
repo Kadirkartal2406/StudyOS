@@ -570,6 +570,15 @@ button.ghost:hover { background: var(--surface-2); }
   padding: 0 var(--space-3);
 }
 
+.nav-section-label {
+  margin: var(--space-3) var(--space-2) var(--space-1);
+  font: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
 .nav {
   display: flex;
   align-items: center;

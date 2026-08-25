@@ -64,6 +64,28 @@ def iso_week_id(dt: datetime | None = None) -> str:
     return f"{iso.year}-W{iso.week:02d}"
 
 
+def production_target_week_id(dt: datetime | None = None) -> str:
+    """ISO week id for the Monday users will open (production runs the prior Mon–Sat)."""
+    istanbul = timezone(timedelta(hours=3), name="Europe/Istanbul")
+    if dt is None:
+        now = datetime.now(istanbul)
+    elif dt.tzinfo is None:
+        now = dt.replace(tzinfo=UTC).astimezone(istanbul)
+    else:
+        now = dt.astimezone(istanbul)
+
+    wd = now.weekday()  # Mon=0 … Sun=6
+    if wd == 6:
+        target = now + timedelta(days=1)
+    elif wd == 0:
+        target = now + timedelta(days=7)
+    elif wd == 5:
+        target = now + timedelta(days=2)
+    else:
+        target = now + timedelta(days=7 - wd)
+    return iso_week_id(target)
+
+
 def test_title(*, difficulty: str, ordinal: int) -> str:
     label = _DIFF_LABEL.get((difficulty or "").lower(), difficulty)
     return f"{label} Test {ordinal}"

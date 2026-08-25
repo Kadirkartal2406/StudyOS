@@ -115,7 +115,8 @@ const _tabMeta = {
   users:           { title: "Kullanıcılar",   subtitle: "Kullanıcı yönetimi" },
   questions:       { title: "Sorular",        subtitle: "Tüm sorularda arama" },
   "question-pool": { title: "Soru Havuzu",    subtitle: "Soru envanteri ve üretim" },
-  "topic-tests":   { title: "Konu Testleri",  subtitle: "Catalog release / monitoring" },
+  "topic-tests":   { title: "Konu Testleri",  subtitle: "Haftalık katalog — kademeli üretim" },
+  "trial-exams":   { title: "Günün Denemesi", subtitle: "Paylaşımlı deneme pack yönetimi" },
   assets:          { title: "Assets",         subtitle: "Eğitim içerikleri" },
 };
 
@@ -133,7 +134,7 @@ document.querySelectorAll(".nav").forEach((btn) => {
     $("page-title").textContent = meta.title;
     const sub = $("page-subtitle");
     if (sub) sub.textContent = meta.subtitle;
-    ["overview", "users", "questions", "question-pool", "topic-tests", "assets"].forEach((t) => {
+    ["overview", "users", "questions", "question-pool", "topic-tests", "trial-exams", "assets"].forEach((t) => {
       $(`tab-${t}`).hidden = t !== tab;
     });
     if (tab === "overview") loadOverview();
@@ -141,6 +142,7 @@ document.querySelectorAll(".nav").forEach((btn) => {
     if (tab === "questions") loadQuestions();
     if (tab === "question-pool") loadQuestionPool();
     if (tab === "topic-tests") loadTopicTests();
+    if (tab === "trial-exams") loadTrialExams();
     if (tab === "assets") loadAssets();
     closeMobileMenu();
   });
@@ -149,8 +151,13 @@ document.querySelectorAll(".nav").forEach((btn) => {
 function _ttStatusBadge(st) {
   if (st === "published") return "✅ published";
   if (st === "failed") return "❌ failed";
-  if (st === "draft") return "📝 draft";
+  if (st === "draft") return "📝 draft (hazır)";
   return "⬜ missing";
+}
+
+function loadTrialExams() {
+  const el = $("te-result");
+  if (el && !el.textContent) el.textContent = "Deneme üret veya durum kontrol et.";
 }
 
 async function loadTopicTests() {
@@ -162,8 +169,19 @@ async function loadTopicTests() {
   qs.set("limit_topics", "250");
   const res = await api(`/admin/topic-tests/status?${qs.toString()}`);
   const d = res.data || {};
-  if (!$("tt-week").value && d.current_week) $("tt-week").value = d.current_week;
-  if (!$("tt-rel-week").value && d.current_week) $("tt-rel-week").placeholder = d.current_week;
+  if (!$("tt-week").value && d.current_week) $("tt-week").value = d.production_target_week || d.current_week;
+  if (!$("tt-rel-week").value && d.current_week) $("tt-rel-week").placeholder = d.production_target_week || d.current_week;
+
+  const sch = d.schedule || {};
+  $("tt-schedule-body").innerHTML = `
+    <div><strong>Üretim hedefi:</strong> ${d.production_target_week || "—"} (draft, kullanıcı görmez)</div>
+    <div><strong>Görüntülenen hafta:</strong> ${d.current_week || "—"}</div>
+    <div><strong>Gece job:</strong> ${sch.nightly_hour || "03:00"} · ${sch.tests_per_night || 164} test/gece</div>
+    <div><strong>Pzt–Cmt:</strong> ${sch.production_days || "assemble"}</div>
+    <div><strong>Pazar:</strong> ${sch.sunday || "gap-fill"}</div>
+    <div><strong>Pazartesi:</strong> ${sch.monday || "publish"}</div>
+    <div><strong>Toplam slot:</strong> ${sch.total_slots || d.expected_tests_this_week || "—"}</div>
+  `;
 
   $("tt-metrics-grid").innerHTML = `
     <div class="stat"><div class="stat-label">Hafta</div><div class="stat-value">${d.current_week || "—"}</div></div>
@@ -582,19 +600,19 @@ $("qp-trigger-trial-exams-btn").addEventListener("click", async () => {
     const exam = $("qp-trial-exam-select").value;
     const url = exam ? `/admin/trial-exams/trigger?exam=${exam}` : "/admin/trial-exams/trigger";
     
-    $("qp-last-result").textContent = "Deneme üretimi kuyruğa alınıyor...";
+    $("te-result").textContent = "Deneme üretimi kuyruğa alınıyor...";
     const res = await api(url, { method: "POST" });
     const n = (res.data.packs || []).length;
-    $("qp-last-result").textContent =
+    $("te-result").textContent =
       `${res.message || "Kuyruğa alındı"} · ${n} pack · ${res.data.date || ""}`;
   } catch (err) {
-    $("qp-last-result").textContent = `Deneme üretimi hata: ${err.message}`;
+    $("te-result").textContent = `Deneme üretimi hata: ${err.message}`;
   }
 });
 
 $("qp-trial-status-btn").addEventListener("click", async () => {
   try {
-    $("qp-last-result").textContent = "Deneme durumu yükleniyor...";
+    $("te-result").textContent = "Deneme durumu yükleniyor...";
     const res = await api("/admin/trial-exams/status");
     const packs = res.data.packs || [];
     const ready = packs.filter((p) => p.usable).length;
@@ -602,12 +620,11 @@ $("qp-trial-status-btn").addEventListener("click", async () => {
       (p) =>
         `${p.exam}${p.branch ? "/" + p.branch : ""} ${p.status} q=${p.question_count}/${p.requested_count} ${p.generator || ""}`
     );
-    $("qp-last-result").textContent =
-      `${res.data.date}: ${ready}/${packs.length} kullanılabilir`;
-    $("qp-live-progress-body").textContent =
-      lines.length ? lines.join("\n") : "Bugün henüz pack yok.";
+    $("te-result").textContent =
+      `${res.data.date}: ${ready}/${packs.length} kullanılabilir\n` +
+      (lines.length ? lines.join("\n") : "Bugün henüz pack yok.");
   } catch (err) {
-    $("qp-last-result").textContent = `Deneme durumu hata: ${err.message}`;
+    $("te-result").textContent = `Deneme durumu hata: ${err.message}`;
   }
 });
 

@@ -54,9 +54,14 @@
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           <span>Soru Havuzu</span>
         </button>
+        <div class="nav-section-label">Testler</div>
         <button data-tab="topic-tests" class="nav">
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
           <span>Konu Testleri</span>
+        </button>
+        <button data-tab="trial-exams" class="nav">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Günün Denemesi</span>
         </button>
         <button data-tab="assets" class="nav">
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -147,21 +152,6 @@
           <!-- Actions toolbar -->
           <div class="qp-actions">
             <button id="qp-run-scheduler-btn" class="s-btn s-btn-primary">Scheduler Çalıştır</button>
-            <select id="qp-trial-exam-select">
-              <option value="">Tüm Sınavlar</option>
-              <option value="kpss">KPSS</option>
-              <option value="tyt">TYT</option>
-              <option value="ayt">AYT</option>
-              <option value="ydt">YDT</option>
-              <option value="lgs">LGS</option>
-              <option value="ales">ALES</option>
-              <option value="dgs">DGS</option>
-              <option value="ags">AGS</option>
-              <option value="yds">YDS</option>
-              <option value="yokdil">YÖKDİL</option>
-            </select>
-            <button id="qp-trigger-trial-exams-btn" class="s-btn s-btn-secondary">Deneme Üret</button>
-            <button id="qp-trial-status-btn" class="s-btn s-btn-secondary">Deneme Durumu</button>
             <!-- Hidden dev controls -->
             <button id="qp-fill-missing-btn" style="display:none;">Fill missing</button>
             <button id="qp-run-missing-safe-btn" style="display:none;">Run Missing (Safe)</button>
@@ -309,6 +299,10 @@
         </section>
 
         <section id="tab-topic-tests" class="tab" hidden>
+          <div class="qp-panel" style="margin-bottom:var(--space-4);">
+            <div class="qp-panel-header"><span class="qp-panel-title">Haftalık üretim planı</span></div>
+            <div id="tt-schedule-body" class="qp-panel-body muted">Yükleniyor…</div>
+          </div>
           <div class="qs-toolbar">
             <label class="qp-field qp-field-sm">
               <span class="qp-field-label">Hafta</span>
@@ -354,6 +348,31 @@
 
           <h3 class="qp-section-title" style="margin-top:var(--space-4);">Test detay</h3>
           <div id="tt-detail" class="muted">Satırdan bir test seçin.</div>
+        </section>
+
+        <section id="tab-trial-exams" class="tab" hidden>
+          <div class="qp-panel" style="margin-bottom:var(--space-4);">
+            <div class="qp-panel-header"><span class="qp-panel-title">Günün Denemesi — paylaşımlı pack üretimi</span></div>
+            <div class="qp-panel-body muted">Her gece 03:00 trial scheduler; kullanıcılar hazır pack'leri görür.</div>
+          </div>
+          <div class="qp-actions">
+            <select id="qp-trial-exam-select">
+              <option value="">Tüm Sınavlar</option>
+              <option value="kpss">KPSS</option>
+              <option value="tyt">TYT</option>
+              <option value="ayt">AYT</option>
+              <option value="ydt">YDT</option>
+              <option value="lgs">LGS</option>
+              <option value="ales">ALES</option>
+              <option value="dgs">DGS</option>
+              <option value="ags">AGS</option>
+              <option value="yds">YDS</option>
+              <option value="yokdil">YÖKDİL</option>
+            </select>
+            <button id="qp-trigger-trial-exams-btn" class="s-btn s-btn-primary">Deneme Üret</button>
+            <button id="qp-trial-status-btn" class="s-btn s-btn-secondary">Deneme Durumu</button>
+          </div>
+          <div id="te-result" class="muted qp-form-result" style="margin-top:var(--space-3);"></div>
         </section>
 
         <section id="tab-assets" class="tab" hidden>
