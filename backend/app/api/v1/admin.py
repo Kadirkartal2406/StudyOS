@@ -1051,14 +1051,14 @@ async def admin_trigger_trial_exam_generation(
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[dict]:
     """Queue midnight trial-exam generation. Does not wait for Gemini."""
+    from app.core.week_calendar import current_serve_monday, production_target_monday
     from app.services.trial_exam_scheduler import (
         _ALL_EXAMS,
-        _now_istanbul,
         generate_trial_exams_for_date,
     )
     import asyncio
 
-    challenge_date = _now_istanbul().date()
+    challenge_date = production_target_monday()
     queued = [
         {"exam": e, "branch": b}
         for e, b in _ALL_EXAMS
@@ -1071,13 +1071,14 @@ async def admin_trigger_trial_exam_generation(
         data={
             "queued": True,
             "date": str(challenge_date),
+            "week_monday": str(challenge_date),
             "packs": queued,
             "message": (
-                f"{len(queued)} pack kuyruğa alındı ({challenge_date}). "
+                f"{len(queued)} pack kuyruğa alındı (hafta pazartesi={challenge_date}). "
                 "Bittiğinde /admin/trial-exams/status ile kontrol et."
             ),
         },
-        message="Deneme üretimi kuyruğa alındı — henüz tamamlanmadı",
+        message="Haftalık deneme üretimi kuyruğa alındı — henüz tamamlanmadı",
     )
 
 
@@ -1091,9 +1092,9 @@ async def admin_trial_exam_status(
     _: User = Depends(require_system_admin),
 ) -> SuccessResponse[dict]:
     from app.services.assessment_service import AssessmentService
-    from app.services.trial_exam_scheduler import _now_istanbul
+    from app.core.week_calendar import current_serve_monday
 
-    day = challenge_date or _now_istanbul().date()
+    day = challenge_date or current_serve_monday()
     rows = await AssessmentService(db).repo.list_shared_booklets(day)
     packs = []
     for b in rows:
@@ -1116,7 +1117,12 @@ async def admin_trial_exam_status(
             }
         )
     return SuccessResponse(
-        data={"date": str(day), "packs": packs, "count": len(packs)},
+        data={
+            "date": str(day),
+            "week_monday": str(day),
+            "packs": packs,
+            "count": len(packs),
+        },
         message="OK",
     )
 

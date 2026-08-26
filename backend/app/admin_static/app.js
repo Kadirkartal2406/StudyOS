@@ -116,7 +116,7 @@ const _tabMeta = {
   questions:       { title: "Sorular",        subtitle: "Tüm sorularda arama" },
   "question-pool": { title: "Soru Havuzu",    subtitle: "Soru envanteri ve üretim" },
   "topic-tests":   { title: "Konu Testleri",  subtitle: "Haftalık katalog — kademeli üretim" },
-  "trial-exams":   { title: "Günün Denemesi", subtitle: "Paylaşımlı deneme pack yönetimi" },
+  "trial-exams":   { title: "Haftanın Denemesi", subtitle: "Haftalık pack üretimi · Pazartesi yayın" },
   assets:          { title: "Assets",         subtitle: "Eğitim içerikleri" },
 };
 

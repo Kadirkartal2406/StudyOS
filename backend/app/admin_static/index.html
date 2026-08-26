@@ -61,7 +61,7 @@
         </button>
         <button data-tab="trial-exams" class="nav">
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span>Günün Denemesi</span>
+          <span>Haftanın Denemesi</span>
         </button>
         <button data-tab="assets" class="nav">
           <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -352,8 +352,12 @@
 
         <section id="tab-trial-exams" class="tab" hidden>
           <div class="qp-panel" style="margin-bottom:var(--space-4);">
-            <div class="qp-panel-header"><span class="qp-panel-title">Günün Denemesi — paylaşımlı pack üretimi</span></div>
-            <div class="qp-panel-body muted">Her gece 03:00 trial scheduler; kullanıcılar hazır pack'leri görür.</div>
+            <div class="qp-panel-header"><span class="qp-panel-title">Haftanın Denemesi — haftalık pack üretimi</span></div>
+            <div class="qp-panel-body muted">
+              Pzt–Cmt 03:00: ~4 pack/gece (gelecek Pazartesi). Pazar gap-fill.
+              Kullanıcılar o haftanın Pazartesi anahtarlı pack'lerini görür.
+              06:00 havuz dolumu kalan AI bütçesini kullanır.
+            </div>
           </div>
           <div class="qp-actions">
             <select id="qp-trial-exam-select">

@@ -496,7 +496,7 @@ class _AssessmentSessionScreenState
               Text(
                 session == null
                     ? 'Deneme henüz başlamadı'
-                    : 'Günün denemesi henüz hazır değil. Sorular gece üretilir; hazır olunca tekrar dene.',
+                    : 'Haftanın denemesi henüz hazır değil. Pack\'ler hafta boyunca üretilir.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),

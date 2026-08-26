@@ -264,7 +264,9 @@ class AssessmentService:
         if kind not in {k.value for k in AssessmentKind}:
             raise ValidationError("Geçersiz değerlendirme türü")
         exam = await self._active_exam(user_id)
-        today = datetime.now(UTC).date()
+        from app.core.week_calendar import current_serve_monday
+
+        today = current_serve_monday()
 
         if kind in {
             AssessmentKind.DAILY_CHALLENGE,
@@ -1277,7 +1279,7 @@ class AssessmentService:
 
         exam = slot.exam
         branch = slot.branch
-        title_base = f"Günün {slot.label} Denemesi"
+        title_base = f"Haftanın {slot.label} Denemesi"
 
         existing = await self.repo.get_daily_challenge(user_id, exam, today)
         if existing and existing.session_id:
@@ -1343,7 +1345,7 @@ class AssessmentService:
             await self.db.flush()
             return self._to_read(session)
 
-        pending_title = f"{title_base} henüz hazır değil (gece üretimi)"
+        pending_title = f"{title_base} henüz hazır değil (haftalık üretim)"
         if (
             existing
             and existing.session_id
@@ -1827,9 +1829,11 @@ class AssessmentService:
         )
 
     async def daily_bundle(self, user_id: uuid.UUID) -> DailyChallengeBundle:
-        """Today feed — one booklet per published pack (YKS → TYT + AYT)."""
+        """Weekly deneme feed — packs keyed by current week Monday."""
         exam = await self._active_exam(user_id)
-        today = datetime.now(UTC).date()
+        from app.core.week_calendar import current_serve_monday
+
+        today = current_serve_monday()
         slots = await self._slots_for_user(user_id, exam)
         dailies: list[DailyChallengeRead] = []
         for slot in slots:
@@ -1983,14 +1987,22 @@ class AssessmentService:
         booklet = (await self.db.execute(stmt)).scalars().first()
         
         now_tr = datetime.now(timezone(timedelta(hours=3)))
-        past_deadline = now_tr.time() >= time(21, 59)
-        
+        from app.core.week_calendar import current_serve_monday, week_monday
+
+        serve_monday = current_serve_monday(now_tr)
+        pack_monday = (
+            week_monday(session.challenge_date)
+            if session.challenge_date
+            else None
+        )
+        past_deadline = now_tr.time() >= time(21, 59) and now_tr.weekday() == 6
+
         is_late = False
         if booklet and booklet.is_finalized:
             is_late = True
-        elif session.challenge_date and session.challenge_date < now_tr.date():
+        elif pack_monday and pack_monday < serve_monday:
             is_late = True
-        elif session.challenge_date == now_tr.date() and past_deadline:
+        elif pack_monday == serve_monday and past_deadline:
             is_late = True
             
         row.osym_estimations = await se.compute_osym_estimations(session)
@@ -2054,7 +2066,9 @@ class AssessmentService:
         from app.services.ai.exam_question_blueprint import BOOKLET_SUBJECT_CODE
 
         exam = await self._active_exam(user_id)
-        today = datetime.now(UTC).date()
+        from app.core.week_calendar import current_serve_monday
+
+        today = current_serve_monday()
         bundle = await self.daily_bundle(user_id)
         daily = bundle.daily
         status = "available"
@@ -2066,7 +2080,7 @@ class AssessmentService:
         options = [
             DailySubjectOption(
                 subject_code=BOOKLET_SUBJECT_CODE,
-                subject_name=daily.title if daily else "Günün Denemesi",
+                subject_name=daily.title if daily else "Haftanın Denemesi",
                 status=status,
                 session_id=session_id,
                 deep_link_hint="/assessment/daily",
@@ -2090,7 +2104,9 @@ class AssessmentService:
         challenge_date: date | None = None,
     ) -> LeaderboardRead:
         exam = await self._active_exam(user_id)
-        day = challenge_date or datetime.now(UTC).date()
+        from app.core.week_calendar import current_serve_monday
+
+        day = challenge_date or current_serve_monday()
         if subject_code:
             result = await self.db.execute(
                 select(DailyChallengeScore)

@@ -1,8 +1,9 @@
 """Topic Test Catalog — staggered weekly production + Monday publish.
 
-Production window (Europe/Istanbul, 03:00 nightly):
+Production window (Europe/Istanbul, 04:00 nightly — after deneme @03:00):
 - Mon–Sat: assemble up to 164 tests/night for the *upcoming* ISO week (draft only).
-- Sun 03:00: gap-fill remaining tests, then publish all ready drafts.
+- Sun 04:00: gap-fill remaining drafts.
+- Mon 04:00: publish current week + start next week batch 1.
 
 Users only see PUBLISHED tests (Monday onward). Prior Mon–Sat work stays DRAFT.
 
@@ -33,7 +34,7 @@ from app.services.topic_test_release_service import TopicTestReleaseService
 logger = logging.getLogger("studyos.topic_test_weekly_scheduler")
 
 _TZ = timezone(timedelta(hours=3), name="Europe/Istanbul")
-_NIGHT_HOUR = 3
+_NIGHT_HOUR = 4
 _TESTS_PER_NIGHT = 164
 
 
@@ -260,7 +261,7 @@ async def publish_week(week_id: str, *, dry_run: bool = False) -> dict:
 
 
 async def run_nightly_pass(*, dry_run: bool | None = None) -> dict:
-    """Single 03:00 pass — Mon–Sat assemble, Sun gap-fill, Mon publish + next batch."""
+    """Single 04:00 pass — Mon–Sat assemble, Sun gap-fill, Mon publish + next batch."""
     dry = settings.QUESTION_POOL_SCHEDULER_DRY_RUN if dry_run is None else dry_run
     now = _now_istanbul()
     wd = now.weekday()
@@ -268,7 +269,7 @@ async def run_nightly_pass(*, dry_run: bool | None = None) -> dict:
     if wd == 0:
         publish_week_id = iso_week_id(now)
         logger.info(
-            "TopicTest Monday 03:00 — publish %s then batch 1 for next week",
+            "TopicTest Monday 04:00 — publish %s then batch 1 for next week",
             publish_week_id,
         )
         pub = await publish_week(publish_week_id, dry_run=dry)
@@ -281,7 +282,7 @@ async def run_nightly_pass(*, dry_run: bool | None = None) -> dict:
 
     if wd == 6:
         week_id = production_target_week_id(now)
-        logger.info("TopicTest Sunday 03:00 — gap-fill for %s", week_id)
+        logger.info("TopicTest Sunday 04:00 — gap-fill for %s", week_id)
         return await assemble_all_pending(week_id, dry_run=dry)
 
     week_id = production_target_week_id(now)
@@ -312,16 +313,16 @@ async def retry_incomplete_current_week(
 
 
 async def topic_test_staggered_loop() -> None:
-    """Daily 03:00 Istanbul — staggered assemble Mon–Sat, publish Sun."""
+    """Daily 04:00 Istanbul — after deneme (03:00); staggered assemble Mon–Sat, publish Sun/Mon."""
     logger.info(
         "TopicTest staggered scheduler starting "
-        "(%s tests/night Mon–Sat, Sun publish @03:00) dry_run=%s",
+        "(%s tests/night Mon–Sat @04:00, Sun gap-fill, Mon publish) dry_run=%s",
         _TESTS_PER_NIGHT,
         settings.QUESTION_POOL_SCHEDULER_DRY_RUN,
     )
     while True:
         wait_s = seconds_until_next_0300()
-        logger.info("TopicTest: next nightly pass in %.0f seconds (03:00)", wait_s)
+        logger.info("TopicTest: next nightly pass in %.0f seconds (04:00)", wait_s)
         await asyncio.sleep(wait_s)
         try:
             await run_nightly_pass()

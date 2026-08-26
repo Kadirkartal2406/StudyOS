@@ -31,7 +31,7 @@ class HomeDailyExamRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Günün Denemesi',
+                  'Haftanın Denemesi',
                   style: text.titleMedium?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 2),

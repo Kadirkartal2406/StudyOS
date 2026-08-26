@@ -100,8 +100,8 @@ class _DailyChallengeSubjectsScreenState
     if (session.status == 'submitted') return session;
     throw const UnknownException(
       message:
-          'Günün denemesi henüz hazır değil. '
-          'Sorular gece üretilir; hazır olunca tekrar dene.',
+          'Haftanın denemesi henüz hazır değil. '
+          'Pack\'ler hafta boyunca üretilir; Pazartesi hazır olur.',
     );
   }
 
@@ -201,7 +201,7 @@ class _DailyChallengeSubjectsScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Günün Denemesi')),
+      appBar: AppBar(title: const Text('Haftanın Denemesi')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : _error != null
@@ -228,7 +228,7 @@ class _DailyChallengeSubjectsScreenState
   Widget _buildBody(BuildContext context) {
     final profileExam = (_examType ?? '').toUpperCase();
     if (_dailies.isEmpty) {
-      return const Center(child: Text('Bugün yayınlanacak deneme yok.'));
+      return const Center(child: Text('Bu hafta yayınlanacak deneme yok.'));
     }
 
     return RefreshIndicator(

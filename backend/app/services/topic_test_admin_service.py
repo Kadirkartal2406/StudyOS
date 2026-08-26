@@ -133,11 +133,11 @@ class TopicTestAdminService:
             "week_id": week,
             "production_target_week": prod_week,
             "schedule": {
-                "nightly_hour": "03:00 Europe/Istanbul",
+                "nightly_hour": "04:00 Europe/Istanbul (after deneme 03:00)",
                 "tests_per_night": 164,
                 "production_days": "Mon–Sat assemble (draft)",
                 "sunday": "Gap-fill remaining drafts",
-                "monday": "03:00 publish + start next week batch 1",
+                "monday": "04:00 publish + start next week batch 1",
                 "total_slots": total_slots,
             },
             "exam": exam_f,

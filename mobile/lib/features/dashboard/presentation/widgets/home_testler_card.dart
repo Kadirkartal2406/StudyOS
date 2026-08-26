@@ -24,8 +24,8 @@ class HomeTestlerCard extends StatelessWidget {
 
     final items = <_TestItem>[
       const _TestItem(
-        title: 'Günün Denemesi',
-        subtitle: 'Her gün yenilenir · tam deneme',
+        title: 'Haftanın Denemesi',
+        subtitle: 'Her hafta yenilenir · tam deneme',
         icon: StudyIcons.exam,
         color: AppColors.info,
         route: '/assessment/daily',

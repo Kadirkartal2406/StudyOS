@@ -264,7 +264,7 @@ void main() {
 
     expect(find.text('Testler'), findsOneWidget);
     expect(find.text('Teste Başla'), findsOneWidget);
-    expect(find.text('Günün Denemesi'), findsOneWidget);
+    expect(find.text('Haftanın Denemesi'), findsOneWidget);
 
     expect(find.text('Hedeflerim'), findsOneWidget);
     expect(find.text('Hedefleri Gör'), findsOneWidget);

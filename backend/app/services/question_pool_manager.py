@@ -870,6 +870,14 @@ class QuestionPoolManagerService:
 
         results = []
         for t, key in resolved:
+            gate = check_can_generate(planned_count=1)
+            if not gate.can_generate and not dry_run:
+                logger.info(
+                    "M33: stopping fill_missing mid-run — %s remaining=%s",
+                    gate.reason,
+                    gate.daily_remaining,
+                )
+                break
             results.append(
                 await self.fill_topic_to_target(
                     db,

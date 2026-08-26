@@ -133,8 +133,12 @@ class Settings(BaseSettings):
     AI_FALLBACK_PROVIDER: str = "null"
     # M32 — model zinciri: primary + en fazla N fallback
     AI_GEMINI_MAX_FALLBACKS: int = 0
-    # M32 — günlük Gemini istek bütçesi (0 = limitsiz)
-    AI_DAILY_REQUEST_BUDGET: int = 1000
+    # M32 — günlük Gemini istek bütçesi (0 = limitsiz; prod'da 1200–1500 önerilir)
+    AI_DAILY_REQUEST_BUDGET: int = 1200
+    # Haftalık deneme: her gece Mon–Sat üretilecek pack üst sınırı (~19 pack / 6 gece)
+    AI_NIGHTLY_DENEME_PACKS: int = 4
+    # 06:00 havuz dolumu: kalan bütçe bu eşiğin altındaysa skip
+    AI_POOL_FILL_MIN_REMAINING: int = 50
 
     # ── M32 Production readiness / cost flags (dev default: OFF) ──
     ENABLE_AUTO_BOOKLET: bool = False

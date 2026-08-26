@@ -13,14 +13,15 @@ router = APIRouter()
 async def trigger_trial_exam_generation(
     db: AsyncSession = Depends(get_db)
 ) -> dict[str, Any]:
-    """Manually trigger the 03:00 trial exam generation pass for today."""
-    from app.services.trial_exam_scheduler import _now_istanbul
-    
-    challenge_date = _now_istanbul().date()
+    """Manually trigger weekly deneme generation for production target Monday."""
+    from app.core.week_calendar import production_target_monday
+
+    challenge_date = production_target_monday()
     done = await generate_trial_exams_for_date(challenge_date)
     return {
         "status": "success" if done else "incomplete",
-        "date": str(challenge_date)
+        "date": str(challenge_date),
+        "week_monday": str(challenge_date),
     }
 
 @router.get("/history")
